@@ -49,7 +49,6 @@ class Rcno_Reviews_Settings_Definition {
 	 * @return [type] [description]
 	 */
 	static public function get_default_tab_slug() {
-
 		return key( self::get_tabs() );
 	}
 
@@ -88,7 +87,7 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'missing_callback'           => array(
 					'name' => '<strong>' . __( 'Missing Callback', self::$plugin_name ) . '</strong>',
-					'type' => 'non-exisit'
+					'type' => 'non-exist'
 				),
 				'checkbox'                   => array(
 					'name' => __( 'Checkbox', self::$plugin_name ),

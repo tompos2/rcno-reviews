@@ -185,6 +185,18 @@ class Rcno_Reviews {
 		$plugin_meta_box = new Rcno_Reviews_Meta_Box( $this->get_plugin_name() );
 		$this->loader->add_action( 'load-toplevel_page_' . $this->get_plugin_name() , $plugin_meta_box, 'add_meta_boxes' );
 
+		// Load the 'Book Description' metabox on the review post edit screen.
+		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->general_meta, 'rcno_book_description_metabox' );
+
+		// Load the 'ISBN Number' metabox on the review post edit screen.
+		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_isbn, 'rcno_book_isbn_metabox' );
+
+		// Save book review.
+		$this->loader->add_action( 'save_post', $plugin_admin, 'rcno_save_review', 10, 2 );
+
+		// Display error messages in recipe edit screen.
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'rcno_admin_notice_handler' );
+
 	}
 
 	/**

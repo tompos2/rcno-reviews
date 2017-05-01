@@ -84,7 +84,7 @@ class Rcno_Reviews_Settings {
 	*/
 	public function register_settings() {
 
-		if ( false == get_option( 'rcno_reviews_settings' ) ) {
+		if ( false === get_option( 'rcno_reviews_settings' ) ) {
 			add_option( 'rcno_reviews_settings', array(), '', 'yes' );
 		}
 

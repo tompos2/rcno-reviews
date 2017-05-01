@@ -59,13 +59,13 @@ class Rcno_Reviews_Option {
 			return false;
 		}
 
-		// Load the options
+		// Load the options.
 		$plugin_options = get_option( 'rcno_reviews_settings', array() );
 
-		// Update the specified value in the array
+		// Update the specified value in the array.
 		$plugin_options[ $key ] = $value;
 
-		// Save the options back to the DB
+		// Save the options back to the DB.
 		return update_option( 'rcno_reviews_settings', $plugin_options );
 	}
 
@@ -87,13 +87,13 @@ class Rcno_Reviews_Option {
 			return false;
 		}
 
-		// Load the options
+		// Load the options.
 		$plugin_options = get_option( 'rcno_reviews_settings', array() );
 
-		// Delete the specified key
+		// Delete the specified key.
 		unset($plugin_options[ $key ]);
 
-		// Save the options back to the DB
+		// Save the options back to the DB.
 		return update_option( 'rcno_reviews_settings', $plugin_options );
 	}
 }
