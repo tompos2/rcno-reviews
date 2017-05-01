@@ -131,6 +131,8 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-settings-definition.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-settings.php';
 
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-goodreads-api.php';
+
 		$this->loader = new Rcno_Reviews_Loader();
 
 	}

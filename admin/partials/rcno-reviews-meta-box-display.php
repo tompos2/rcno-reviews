@@ -25,3 +25,11 @@
 	<?php submit_button(); ?>
 </form>
 <br class="clear" />
+
+<?php
+
+$gr = new Rcno_GoodReads_API();
+
+var_dump( $gr->collect_bookID_querytext( 'The Raven' ) );
+
+?>
