@@ -12,7 +12,7 @@
 /**
  * @TODO: create and check nonce in core!
  */
-wp_nonce_field( 'rcno_save_review_meta', 'rcno_nonce' );
+
 
 $isbn = get_post_meta( $review->ID, 'rcno_book_isbn', true );
 
@@ -20,5 +20,6 @@ $isbn = get_post_meta( $review->ID, 'rcno_book_isbn', true );
 
 <div class="book-isbn-metabox">
 	<input type="text" name="rcno_book_isbn" id="rcno_book_isbn" size="20" value="<?php echo sanitize_text_field( $isbn ); ?>" />
-	<button href="#" class="button rpr-isbn-fetch" title="">Fetch</button>
+	<button href="#" class="button rcno-isbn-fetch" title="">Fetch</button>
+	<?php wp_nonce_field( 'rcno_save_book_isbn_meta', 'rcno_nonce' ); ?>	
 </div>

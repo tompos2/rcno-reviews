@@ -40,6 +40,7 @@ class Rcno_Admin_General_Meta {
 	 */
 	public function __construct( $version ) {
 		$this->version = $version;
+
 	}
 
 	/**
@@ -78,13 +79,14 @@ class Rcno_Admin_General_Meta {
 
 		// Saving description not only to the post_meta field but also to excerpt and content
 		if ( isset( $data['rcno_book_description'] ) ) {
-			update_post_meta( $review_id, 'rcno_book_description', $data['rcno_book_description'] );
+
+			$book_description = strip_tags( $data['rcno_book_description'] );
+			update_post_meta( $review_id, 'rcno_book_description', $book_description );
 			// Set Excerpt:
-			$review->post_content = $data['rcno_book_description'];
-			$review->post_excerpt = $data['rcno_book_description'];
+			//$review->post_content = $data['rcno_book_description'];
+			//$review->post_excerpt = $data['rcno_book_description'];
 			wp_update_post( $review );
 		}
-
 	}
 
 }

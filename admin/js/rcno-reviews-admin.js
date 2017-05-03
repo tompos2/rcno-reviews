@@ -29,4 +29,49 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+    $(function () {
+        $('.rcno-isbn-fetch').on('click', function (e) {
+            e.preventDefault();
+
+            var gr_isbn = $('#rcno_book_isbn').val();
+            var gr_key = '8bQh2W6yuSRpi9Ejs6xINw';
+            // https://www.goodreads.com/book/isbn/0441172717?key=8bQh2W6yuSRpi9Ejs6xINw
+            var url = 'https://www.goodreads.com/book/isbn/' + gr_isbn + '?key=' + gr_key;
+
+            $.get("http://query.yahooapis.com/v1/public/yql",
+                {
+                    q: "select * from xml where url=\""+url+"\"",
+                    format: "json"
+                },
+                function(grDoc){
+                    console.log(grDoc['query']['results']['GoodreadsResponse']['book']);
+                    var book = grDoc['query']['results']['GoodreadsResponse']['book'];
+                    $('#title').val(book['title']);
+                    $('.wp-editor.rcno_book_description p').replaceWith('<p>' + book['description'] + '</p>');
+
+                }
+            );
+
+/*            $.ajax({
+                url: '/wp-admin/admin-ajax.php',
+                type: 'POST',
+                data: {
+                    action: 'save_post_meta',
+                    review_id: my_script_vars.reviewID,
+                    gr_isbn: gr_isbn
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log('Failed!: ' + data);
+                }
+            });*/
+
+            //$('#save-post').trigger('click');
+
+        })
+
+    });
+
 })( jQuery );

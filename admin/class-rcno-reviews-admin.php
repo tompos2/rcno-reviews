@@ -105,6 +105,7 @@ class Rcno_Reviews_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+		global $post;
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -119,6 +120,9 @@ class Rcno_Reviews_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, false );
+		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
+			'reviewID' => $post->ID
+		) );
 
 	}
 
@@ -155,6 +159,9 @@ class Rcno_Reviews_Admin {
 		$opts['show_in_menu']          = true;
 		$opts['show_in_nav_menu']      = true;
 		$opts['show_ui']               = true;
+		$opts['show_in_rest']          = true;
+		$opts['base_rest']             = $cpt_name;
+		$opts['rest_controller_class'] = 'WP_REST_Posts_Controller';
 		$opts['supports'] = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'revisions', 'comments' );
 		$opts['taxonomies']            = array();
 

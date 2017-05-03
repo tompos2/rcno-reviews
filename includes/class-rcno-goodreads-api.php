@@ -1,585 +1,484 @@
 <?php
 
-
+/**
+ * GoodReads
+ *
+ * PHP wrapper to communicate with GoodReads API.
+ *
+ * @package Nicat\GoodReads
+ */
 class Rcno_GoodReads_API {
 
-	protected $GOODREADS_KEY;
+	/**
+	 * @var string $key GoodReads API key
+	 */
+	protected $key;
 
+	/**
+	 * Main Api URL
+	 */
+	const DOMAIN = 'https://www.goodreads.com/';
+
+	const authorShow = 'author/show/';
+	const authorBooks = 'author/list/';
+	const authorSearch = 'api/author_url/';
+	const isbn = 'book/isbn/';
+	const bookShow = 'book/show/';
+	const search = 'search/index.xml';
+	const listGroups = 'group/list/';
+	const groupMembers = 'group/members/';
+	const findGroup = 'group/search.xml';
+	const groupShow = 'group/show/';
+	const reviews = 'review/show.xml';
+	const reviewOfUser = 'review/show_by_user_and_book.xml';
+	const seriesByAuthor = 'series/list/';
+	const userShow = 'user/show/';
+
+
+	/**
+	 * GoodReads constructor.
+	 *
+	 * @param string $key API KEY
+	 */
 	public function __construct() {
-		$this->GOODREADS_KEY = "8bQh2W6yuSRpi9Ejs6xINw";
+		$this->key = "8bQh2W6yuSRpi9Ejs6xINw"; //@TODO: Get via a menu option.
+		add_action( 'wp_ajax_save_post_meta', array( $this, 'ajax_save_post_meta' ) );
 	}
 
 	/**
-	 * Get search results from goodreads
+	 * Generate URL for Request
 	 *
-	 * @param string $querytext
+	 * @param      $url
+	 * @param null $params
+	 *
+	 * @return string
 	 */
-	public function collect_bookID_querytext( $querytext = "" ) {
+	protected function generateURL( $url, $params = null ) {
+		$url       = self::DOMAIN . $url;
+		$httpQuery = "?format=xml&key=" . $this->key;
 
-		// make config before send.
-		$option = array(
-			'url'            => "https://www.goodreads.com/search/index.xml",
-			'key_var_name'   => "key",
-			'key'            => $this->GOODREADS_KEY,
-			'query_var_name' => "q",
-			'query'          => $querytext
-		);
-
-		$arr = $this->fetch_data( $option );
-
-		$collect_book_id = array();
-
-		if ( $this->isAssoc( $arr['search']['results']['work'] ) ) {
-			// only one work array
-			array_push( $collect_book_id, $arr['search']['results']['work']['best_book']['id'] );
+		if ( is_array( $params ) ) {
+			$query = ( ( ! empty( $params ) ) ? http_build_query( $params, '', '&' ) : '' );
+			$url   .= $httpQuery . "&" . $query;
 		} else {
-			// multiple work array
-			$start = (int) $arr['search']['results-start'] - 1;
-			$end   = (int) $arr['search']['results-end'];
-
-			$search_details = array();
-
-			for ( $idx = $start; $idx < $end; $idx ++ ) {
-
-				$book_id = $arr['search']['results']['work'][ $idx ]['best_book']['id'];
-				array_push( $collect_book_id, $book_id );
-
-				$item_detail = array(
-					'book_title'     => $arr['search']['results']['work'][ $idx ]['best_book']['title'],
-					'book_id'        => $arr['search']['results']['work'][ $idx ]['best_book']['id'],
-					'average_rating' => $arr['search']['results']['work'][ $idx ]['average_rating'],
-					'image_url'      => $arr['search']['results']['work'][ $idx ]['best_book']['image_url'],
-					'author_name'    => $arr['search']['results']['work'][ $idx ]['best_book']['author']['name'],
-					'author_id'      => $arr['search']['results']['work'][ $idx ]['best_book']['author']['id']
-				);
-				array_push( $search_details, $item_detail );
-			}
+			$query = rawurlencode( $params );
+			$url   .= $query . $httpQuery;
 		}
 
+		return $url;
 	}
 
 	/**
+	 * Request via CURL to API URL
 	 *
-	 * @param type $book_id
+	 * @param string $url
 	 *
-	 * @return boolean|array
+	 * @return bool|null|string
+	 * @throws Exception
 	 */
-	public function get_bookDetails_bookID( $book_id = "" ) {
+	protected function curlRequest( $url ) {
 
-		// Return false if book_id is empty
-		if ( empty( $book_id ) ) {
+		try {
+			$response = wp_remote_get( $url );
+
+			if( is_wp_error( $response ) ){
+				return new WP_Error( 'goodreads_api_fetch_failed', __( 'There was an error fetch data from GoodReads' ) );
+			}
+
+			$response = $response['body'];
+			return $response;
+
+		} catch( Exception $e ){
 			return false;
 		}
-		$url = "https://www.goodreads.com/book/show/$book_id";
-
-		$option = array(
-			'url'            => $url,
-			'key_var_name'   => "key",
-			'key'            => $this->GOODREADS_KEY,
-			'query_var_name' => "format",
-			'query'          => "xml",
-		);
-
-		$arr = $this->fetch_data( $option );
-
-		$book_id    = $arr['book']['id'];
-		$book_title = $arr['book']['title'];
-
-		$isbn   = $arr['book']['isbn'];
-		$isbn13 = $arr['book']['isbn13'];
-
-		$imagePriceArray = array( 'maxImage' => "", 'pricelist' => array() );
-		if ( ! empty( $isbn ) ) {
-			$imagePriceArray = $this->get_best_image( $isbn );
-		}
-
-		$image_url = $imagePriceArray['maxImage'];
-		$pricelist = $imagePriceArray['pricelist'];
-
-		$publication_year  = $arr['book']['publication_year'];
-		$publication_month = $arr['book']['publication_month'];
-		$publication_day   = $arr['book']['publication_day'];
-		$publisher         = $arr['book']['publisher'];
-
-		$inlanguage = $arr['book']['language_code'];
-
-		$description = $arr['book']['description'];
-
-		$average_rating = $arr['book']['average_rating'];
-
-		$no_of_page = $arr['book']['num_pages'];
-		$format     = $arr['book']['format'];
-
-		$author = array();
-		if ( $this->isAssoc( $arr['book']['authors']['author'] ) ) {
-			$auth = array(
-				'author_name'           => $arr['book']['authors']['author']['name'],
-				'author_average_rating' => $arr['book']['authors']['author']['average_rating'],
-			);
-			array_push( $author, $auth );
-		} else {
-			$end = count( $arr['book']['authors']['author'] );
-			for ( $idx = 0; $idx < $end; ++ $idx ) {
-				$auth = array(
-					'author_name'           => $arr['book']['authors']['author'][ $idx ]['name'],
-					'author_average_rating' => $arr['book']['authors']['author'][ $idx ]['average_rating'],
-				);
-				array_push( $author, $auth );
-			}
-		}
-
-		$reviewWidget = $arr['book']['reviews_widget'];
-
-		$search_data = array(
-			'book_id'           => $book_id,
-			'book_title'        => $book_title,
-			'isbn'              => $isbn,
-			'isbn13'            => $isbn13,
-			'image_url'         => $image_url,
-			'publication_year'  => $publication_year,
-			'publication_month' => $publication_month,
-			'publication_day'   => $publication_day,
-			'publisher'         => $publisher,
-			'inlanguage'        => $inlanguage,
-			'description'       => $description,
-			'average_rating'    => $average_rating,
-			'no_of_page'        => $no_of_page,
-			'format'            => $format,
-			'author'            => $author,
-			'pricelist'         => $pricelist,
-			'reviewWidget'      => $reviewWidget,
-		);
-
-		return $search_data;
 	}
 
 	/**
-	 * Get details for the author with its author_id
+	 * Convert XML to Object
 	 *
-	 * @param string $author_id
+	 * Used SimpleXMLElement
 	 *
-	 * @return boolean|array
+	 * @param string $xml
+	 *
+	 * @return \SimpleXMLElement
 	 */
-	public function get_authorDetail_authorID( $author_id = "" ) {
-
-		// Return false if book_id is empty
-		if ( empty( $author_id ) ) {
-			return false;
-		}
-		$url = "https://www.goodreads.com/author/show.xml";
-
-		$option = array(
-			'url'            => $url,
-			'key_var_name'   => "key",
-			'key'            => $this->GOODREADS_KEY,
-			'query_var_name' => "id",
-			'query'          => $author_id,
-		);
-
-		$arr = $this->fetch_data( $option );
-
-		$author_name = $arr['author']['name'];
-		$image_url   = $arr['author']['large_image_url'];
-		$gender      = $arr['author']['gender'];
-		$hometown    = $arr['author']['hometown'];
-
-		// collecting books
-		$books = array();
-		# todo : to get other authors.{To reproduce it, run this api again author.show}.
-		if ( $this->isAssoc( $arr['author']['books']['book'] ) ) {
-			$abook = array(
-				'book_id'    => $arr['author']['books']['book']['id'],
-				'book_title' => $arr['author']['books']['book']['title'],
-				'image_url'  => $arr['author']['books']['book']['image_url'],
-
-				'publisher'         => $arr['author']['books']['book']['publisher'],
-				'publication_year'  => $arr['author']['books']['book']['publication_year'],
-				'publication_month' => $arr['author']['books']['book']['publication_month'],
-				'publication_day'   => $arr['author']['books']['book']['publication_day'],
-				'average_rating'    => $arr['author']['books']['book']['average_rating'],
-				'description'       => $arr['author']['books']['book']['description'],
-			);
-			array_push( $books, $abook );
-		} else {
-			$end = count( $arr['author']['books']['book'] );
-			for ( $idx = 0; $idx < $end; $idx ++ ) {
-				$abook = array(
-					'book_id'    => $arr['author']['books']['book'][ $idx ]['id'],
-					'book_title' => $arr['author']['books']['book'][ $idx ]['title'],
-					'image_url'  => $arr['author']['books']['book'][ $idx ]['image_url'],
-
-					'publisher'         => $arr['author']['books']['book'][ $idx ]['publisher'],
-					'publication_year'  => $arr['author']['books']['book'][ $idx ]['publication_year'],
-					'publication_month' => $arr['author']['books']['book'][ $idx ]['publication_month'],
-					'publication_day'   => $arr['author']['books']['book'][ $idx ]['publication_day'],
-					'average_rating'    => $arr['author']['books']['book'][ $idx ]['average_rating'],
-					'description'       => $arr['author']['books']['book'][ $idx ]['description'],
-				);
-				array_push( $books, $abook );
-			}
-		}
-
-		//TODO:  collect user data as array();
-		$author_data = array(
-			'author_name' => $author_name,
-			'image_url'   => $image_url,
-			'gender'      => $gender,
-			'hometown'    => $hometown,
-			'books_array' => $books,
-		);
-
-		return array(
-			'author_data' => $author_data,
-		);
+	public function parseXML( $xml ) {
+		return simplexml_load_string( $xml );
 	}
 
 	/**
-	 * Get description for a book.
+	 * Get object by url and extra params
 	 *
-	 * @param string $author_id
-	 * @param string $book_id
+	 * @param string $url
+	 * @param array  $params
+	 * @param bool   $append
 	 *
-	 * @return boolean|string
+	 * @return \SimpleXMLElement
 	 */
-	public function get_description( $author_id = "", $book_id = "" ) {
-		if ( empty( $author_id ) || empty( $book_id ) ) {
-			return false;
+	protected function getData( $url, $params = [], $append = false ) {
+		/* Generate Url with http query */
+		$url = $this->generateURL( $url, $params, $append );
+
+		/* Get response from api */
+		$xml = $this->curlRequest( $url );
+
+		/* Parse XML to Object */
+		$parsed = $this->parseXML( $xml );
+
+		return $parsed;
+	}
+
+	/**
+	 * Get Author ID By Author Name
+	 *
+	 * @param int $name Author Name
+	 *
+	 * @return int|null
+	 */
+	public function authorIDByName( $name ) {
+		$get = $this->getData( static::authorSearch, $name );
+
+		return $get->author ? (int) $get->author->attributes()[0] : null;
+	}
+
+	/**
+	 * Show Author By ID
+	 *
+	 * @param int $id Author ID
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function authorByID( $id ) {
+		$get = $this->getData( static::authorShow, $id );
+
+		return $get ? $get->author : $get;
+	}
+
+	/**
+	 * Author Books
+	 *
+	 * @param     $id
+	 * @param int $page Page number. Default is 1
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function authorBooks( $id, $page = 1 ) {
+		$params = [
+			'id'   => $id,
+			'page' => $page,
+		];
+		$get    = $this->getData( self::authorBooks, $params );
+
+		return $get ? $get->author : $get;
+	}
+
+	/**
+	 * Get Author By Name
+	 *
+	 * @param string $name Author Name
+	 *
+	 * @return null|\SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function authorByName( $name ) {
+		/* Find author id */
+		$id = $this->authorIDByName( $name );
+
+		if ( ! $id ) {
+			return null;
 		}
 
-		$option = array(
-			'url'            => "https://www.goodreads.com/author/show.xml",
-			'key_var_name'   => "key",
-			'key'            => $this->GOODREADS_KEY,
-			'query_var_name' => "id",
-			'query'          => $author_id,
-		);
+		/* Get Author by ID */
+		$author = $this->authorByID( $id );
 
-		$arr = $this->fetch_data( $option );
-		$end = count( $arr['author']['books']['book'] );
+		return $author;
+	}
 
-		$description = "";
-		for ( $idx = 0; $idx < $end; $idx ++ ) {
-			if ( $arr['author']['books']['book'][ $idx ]['id'] == $book_id ) {
+	/**
+	 * Get Book By ID
+	 *
+	 * @param int|string $id Book id
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function book( $id ) {
+		$get = $this->getData( self::bookShow . $id . ".xml" );
 
-				if ( count( $arr['author']['books']['book'][ $idx ]['description'] ) > 0 ) {
-					$description = $arr['author']['books']['book'][ $idx ]['description'];
+		return $get ? $get->book : $get;
+	}
+
+	/**
+	 * Get Book By ISBN
+	 *
+	 * @param int|string $id ISBN number
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function bookByISBN( $id ) {
+		$get = $this->getData( self::isbn, $id );
+
+		return $get ? $get->book : $get;
+	}
+
+	/**
+	 * Search Book for All filter
+	 *
+	 * @param string $name
+	 * @param array  $searchParams
+	 * @param int    $page
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function searchBook( $name, $searchParams = [], $page = 1 ) {
+		$params = [
+			'q'    => $name,
+			'page' => $page,
+		];
+
+		if ( ! empty( $searchParams ) ) {
+			$params = array_merge( $params, $searchParams );
+		}
+
+		$get = $this->getData( static::search, $params );
+
+		if ( $get ) {
+			$search = $get->search;
+			foreach ( $search->children() as $child ) {
+				if ( strpos( $child->getName(), '-' ) !== false ) {
+					$key            = str_replace( '-', '_', $child->getName() );
+					$search->{$key} = $child;
+					echo( $search->{$child->getName()} );
 				}
 			}
 		}
 
-		return $description;
+		return $get ? $search : $get;
 	}
 
 	/**
-	 * Fetechs API Data
+	 * Search Books by Title
 	 *
-	 * @param  array $option : Parameter required for fetching.
+	 * @param string $name Book Name
+	 * @param int    $page
 	 *
-	 * @return array
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
 	 */
-	public function fetch_data( $option ) {
+	public function searchBookByName( $name, $page = 1 ) {
+		$params = [
+			'search' => [
+				'field' => 'title',
+			],
+		];
 
-		$url = $option['url'];
-
-		// KEY
-		$key_var_name = $option['key_var_name'];
-		$key          = $option['key'];
-
-		// Query
-		$query_var_name = $option['query_var_name'];
-		$query          = $option['query'];
-
-		// query to url friendly code.
-		$query_to_url = rawurlencode( $query );
-
-		// assembling url
-		$url = $url . "?" . $key_var_name . "=" . $key . "&" . $query_var_name . "=" . $query_to_url;
-
-
-		$sxml = wp_remote_get( $url );
-		$sxml = $sxml['body'];
-		if ( ! $sxml ) {
-			echo 'error';
-		}
-
-
-		$arr = "";
-
-		// Whatever be the fetched data, only json is returned
-		// xml to json : I support Json.
-		if ( $this->isJson( $sxml ) ) {
-			$arr = json_decode( $sxml, true );
-		} else {
-			$xml  = simplexml_load_string( $sxml, 'SimpleXMLElement', LIBXML_NOCDATA );
-			$json = json_encode( $xml );
-			$arr  = json_decode( $json, true );
-		}
-
-		return $arr;
+		return $this->searchBook( $name, $params, $page );
 	}
 
 	/**
-	 * Returns all search result's book id max to 118
+	 * Search Books By Author Name
 	 *
-	 * @param string search query
+	 * @param string $title Author Name
+	 * @param int    $page Page number. Default is 1
 	 *
-	 * @return array of book ids
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
 	 */
-	public function collect_bookID( $q = "" ) {
-		if ( empty( $q ) ) {
+	public function searchBookByAuthorName( $title, $page = 1 ) {
+		$params = [
+			'search' => [
+				'field' => 'author',
+			],
+		];
+
+		return $this->searchBook( $title, $params, $page );
+	}
+
+	/**
+	 * Get User groups
+	 *
+	 * @param  int   $id
+	 * @param string $sort One of 'my_activity', 'members', 'last_activity', 'title' ('members' will sort by number of members in the group)
+	 * @param int    $page
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function groupsOfUser( $id, $sort = 'members', $page = 1 ) {
+		$params = [
+			'sort' => $sort,
+			'page' => $page,
+		];
+
+		$get = $this->getData( self::listGroups . $id . '.xml', $params );
+
+		return $get ? $get->groups : $get;
+	}
+
+	/**
+	 * Get Group Members
+	 *
+	 * @param int         $id Group ID
+	 * @param string|bool $search
+	 * @param string|bool $sort One of 'last_online', 'num_comments', 'date_joined', 'num_books', 'first_name'
+	 * @param int         $page Page number. Default is 1
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function groupMembers( $id, $search = false, $sort = false, $page = 1 ) {
+		$params = [
+			'page' => $page,
+		];
+
+		if ( $search ) {
+			$params['search'] = $search;
+		}
+
+		if ( $sort ) {
+			$params['sort'] = $sort;
+		}
+
+		$get = $this->getData( self::groupMembers . $id . '.xml', $params );
+
+		return $get ? $get->group_users : $get;
+	}
+
+	/**
+	 * Find Group
+	 *
+	 * @param string $name Group name
+	 * @param int    $page Page number. Default is 1
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function findGroup( $name, $page = 1 ) {
+		$params = [
+			'q'    => $name,
+			'page' => $page,
+		];
+
+		$get = $this->getData( self::findGroup, $params );
+
+		return $get ? $get->groups : $get;
+	}
+
+	/**
+	 * Get Information about group by ID
+	 *
+	 * @param int    $id Group ID
+	 * @param string $sort Field to sort topics by. One of 'comments_count', 'title', 'updated_at', 'views'
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function group( $id, $sort = 'title' ) {
+		$params = [
+			'sort' => $sort,
+		];
+
+		$get = $this->getData( self::groupShow . $id . 'xml', $params );
+
+		return $get ? $get->group : $get;
+	}
+
+	/**
+	 * Get details of Review by ID
+	 *
+	 * @param int $id Review ID
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function review( $id ) {
+		$params = [
+			'id' => $id,
+		];
+		$get    = $this->getData( self::reviews, $params );
+
+		return $get ? $get->review : $get;
+	}
+
+	/**
+	 * User review on given Book
+	 *
+	 * @param int $userId User ID
+	 * @param int $bookId Book ID
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function userReviewByBook( $userId, $bookId ) {
+		$params = [
+			'user_id' => $userId,
+			'book_id' => $bookId,
+		];
+		$get    = $this->getData( self::reviewOfUser, $params );
+
+		return $get ? $get->review : $get;
+	}
+
+	/**
+	 * Get Series of Author by ID
+	 *
+	 * @param int $id Author ID
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function seriesByAuthor( $id ) {
+		$get = $this->getData( self::seriesByAuthor . $id . '.xml' );
+
+		return $get ? $get->series_works : $get;
+	}
+
+	/**
+	 * User information by User ID
+	 *
+	 * @param integer $id User id
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function userInfoByID( $id ) {
+		$params = [
+			'id' => $id,
+		];
+		$get    = $this->getData( self::userShow, $params );
+
+		return $get ? $get->user : $get;
+	}
+
+	/**
+	 * User information by Username
+	 *
+	 * @param string $username Username
+	 *
+	 * @return \SimpleXMLElement|\SimpleXMLElement[]
+	 */
+	public function userInfoByUsername( $username ) {
+		$params = [
+			'username' => $username,
+		];
+		$get    = $this->getData( self::userShow, $params );
+
+		return $get ? $get->user : $get;
+	}
+
+	public function ajax_save_post_meta(){
+
+		$review_id = (int) $_POST['review_id'];
+		$gr_isbn   = (int) $_POST['gr_isbn'];
+
+		$book            = $this->bookByISBN( $gr_isbn );
+		$gr_description  = (string) $book->description;
+
+		if( '' === $gr_description ){
 			return false;
 		}
 
-		$bookID_bucket = array();
-		$count         = 1;
-		$q             = urlencode( $q );
-		$x             = 0;
-		while ( true ) {
-			$q = $q . "&page=$count";
-
-			$option = array(
-				'url'            => "https://www.goodreads.com/search/index.xml",
-				'key_var_name'   => "key",
-				'key'            => $this->GOODREADS_KEY,
-				'query_var_name' => "q",
-				'query'          => $q,
-			);
-
-			$arr           = $this->fetch_data( $option );
-			$present_start = intval( $arr['search']['results-start'] );
-			$present_end   = intval( $arr['search']['results-end'] );
-			$total_results = intval( $arr['search']['total-results'] );
-			$count         = $count + 1;
-			$final         = $present_end - ( $present_start - 1 );
-
-			// echo "start = $present_start | end = $present_end  | final = $total_results <br>";
-
-			for ( $index = 0; $index < $final && ( $index + $present_start < $total_results ); $index ++ ) {
-				array_push( $bookID_bucket, $arr['search']['results']['work'][ $index ]['best_book']['id'] );
-				$x ++;
-			}
-			if ( $x > 20 ) {
-				break;
-			}
-			if ( $total_results == ( $present_start + $index ) ) {
-				break;
-			}
+		if ( update_post_meta( $review_id, 'rcno_book_description', strip_tags( $gr_description ) ) ){
+			$success = 1;
 		}
 
-		return $bookID_bucket;
-	}
-
-	/**
-	 * Returns size of image on server without downloading it.
-	 *
-	 * @param  string $url
-	 *
-	 * @return float      size of file(url)
-	 */
-/*	public function retrieve_remote_file_size( $url ) {
-		$ch = curl_init( $url );
-
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $ch, CURLOPT_HEADER, true );
-		curl_setopt( $ch, CURLOPT_NOBODY, true );
-
-		$data = curl_exec( $ch );
-		$size = curl_getinfo( $ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD );
-
-		curl_close( $ch );
-
-		return $size;
-	}*/
-
-	/**
-	 * Get better size of image for a book
-	 *
-	 * @param  string $isbn
-	 *
-	 * @return string       url
-	 */
-	public function get_best_image( $isbn = "" ) {
-
-		if ( empty( $isbn ) ) {
-			return false;
-		}
-		$isbn = urlencode( $isbn );
-
-		$url = "http://api.dataweave.in/v1/book_search/searchByIsbn/";
-
-		$option = array(
-			'url'            => $url,
-			'key_var_name'   => "api_key",
-			'key'            => "DATA_WEAVE_API_KEYS",
-			'query_var_name' => "isbn",
-			'query'          => $isbn,
-		);
-
-		$arr = $this->fetch_data( $option );
-
-
-		$count = (int) $arr['count'];
-
-		$maxSize   = 0;
-		$maxImage  = "";
-		$pricelist = array();
-		for ( $idx = 0; $idx < $count; $idx ++ ) {
-			$temp = array(
-				'source' => $arr['data'][ $idx ]['source'],
-				'price'  => $arr['data'][ $idx ]['price'],
-			);
-			array_push( $pricelist, $temp );
-			$x = (int) $this->retrieve_remote_file_size( $arr['data'][ $idx ]['thumbnail'] );
-			if ( $x > $maxSize ) {
-				$maxImage = $arr['data'][ $idx ]['thumbnail'];
-				$maxSize  = $x;
-			}
-		}
-		$data = array(
-			'maxImage'  => $maxImage,
-			'pricelist' => $pricelist,
-		);
-
-		return $data;
-	}
-
-	/**
-	 * checks whether input string is json or not
-	 *
-	 * @param  string $string : Data fetched from API Server
-	 *
-	 * @return boolean         TRUE/FALSE
-	 */
-	public function isJson( $string ) {
-		json_decode( $string );
-
-		return ( json_last_error() == JSON_ERROR_NONE );
-	}
-
-	/**
-	 * Checks whether an array is associative or can be index with number
-	 *
-	 * @param array $arr
-	 *
-	 * @return boolean
-	 */
-	public function isAssoc( $arr ) {
-		return array_keys( $arr ) !== range( 0, count( $arr ) - 1 );
-	}
-
-	/**
-	 * Get books details based on ISBN
-	 *
-	 * @param string $isbn
-	 *
-	 * @return boolean|array
-	 */
-	public function get_bookDetails_isbn( $isbn = "" ) {
-		if ( '' === $isbn ) {
-			return false;
+		if ( update_post_meta( $review_id, 'rcno_book_isbn', $gr_isbn ) ){
+			$success = 1;
 		}
 
-		$isbn = urlencode( $isbn );
-
-		$option = array(
-			'url'            => "https://www.goodreads.com/book/isbn",
-			'key_var_name'   => "key",
-			'key'            => $this->GOODREADS_KEY,
-			'query_var_name' => "isbn",
-			'query'          => $isbn,
-		);
-
-
-		$arr = $this->fetch_data( $option );
-
-		$author_id   = "";
-		$author_name = "";
-
-		if ( $this->isAssoc( $arr['book']['authors']['author'] ) ) {
-			// one author
-			$author_id   = $arr['book']['authors']['author']['id'];
-			$author_name = $arr['book']['authors']['author']['name'];
+		if( $success ) {
+			wp_send_json_success();
 		} else {
-			// Multiple authors : Store the first lucky one. :P
-			$author_id   = $arr['book']['authors']['author'][0]['id'];
-			$author_name = $arr['book']['authors']['author'][0]['name'];
+			wp_send_json_error();
 		}
 
-		$data = array(
-			'isbn'              => $arr['book']['isbn'],
-			'isbn13'            => $arr['book']['isbn13'],
-			'publication_year'  => $arr['book']['publication_year'],
-			'publication_month' => $arr['book']['publication_month'],
-			'publication_day'   => $arr['book']['publication_day'],
-			'publisher'         => $arr['book']['publisher'],
-			'average_rating'    => $arr['book']['average_rating'],
-			'book_id'           => $arr['book']['id'],
-			'book_title'        => $arr['book']['title'],
-			'book_description'  => $arr['book']['description'],
-			'author_id'         => $author_id,
-			'author_name'       => $author_name,
-			'language_code'     => $arr['book']['language_code'],
-			'no_of_pages'       => $arr['book']['num_pages'],
-			'format'            => $arr['book']['format'],
-			'goodreads_url'     => $arr['book']['url'],
-		);
-
-		return $data;
 	}
-
-	/**
-	 * Get search results from goodreads
-	 *
-	 * @param string $querytext
-	 */
-	public function get_search_results( $querytext = "" ) {
-
-		// make config before send.
-		$option = array(
-			'url'            => "https://www.goodreads.com/search/index.xml",
-			'key_var_name'   => "key",
-			'key'            => $this->GOODREADS_KEY,
-			'query_var_name' => "q",
-			'query'          => $querytext
-		);
-		$arr    = $this->fetch_data( $option );
-
-		$search_details = array();
-
-		if ( $this->isAssoc( $arr ['search'] ['results'] ['work'] ) ) {
-
-			$item_detail = array(
-				'book_title'     => $arr ['search'] ['results'] ['work'] ['best_book'] ['title'],
-				'book_id'        => $arr ['search'] ['results'] ['work'] ['best_book'] ['id'],
-				'average_rating' => $arr ['search'] ['results'] ['work'] ['average_rating'],
-				'image_url'      => $arr ['search'] ['results'] ['work'] ['best_book'] ['image_url'],
-				'author_name'    => $arr ['search'] ['results'] ['work'] ['best_book'] ['author'] ['name'],
-				'author_id'      => $arr ['search'] ['results'] ['work'] ['best_book'] ['author'] ['id']
-			);
-			array_push( $search_details, $item_detail );
-		} else {
-			// multiple work array
-			$start = (int) $arr ['search'] ['results-start'] - 1;
-			$end   = (int) $arr ['search'] ['results-end'];
-
-			for ( $idx = $start; $idx < $end; $idx ++ ) {
-
-				$item_detail = array(
-					'book_title'     => $arr ['search'] ['results'] ['work'] [ $idx ] ['best_book'] ['title'],
-					'book_id'        => $arr ['search'] ['results'] ['work'] [ $idx ] ['best_book'] ['id'],
-					'average_rating' => $arr ['search'] ['results'] ['work'] [ $idx ] ['average_rating'],
-					'image_url'      => $arr ['search'] ['results'] ['work'] [ $idx ] ['best_book'] ['image_url'],
-					'author_name'    => $arr ['search'] ['results'] ['work'] [ $idx ] ['best_book'] ['author'] ['name'],
-					'author_id'      => $arr ['search'] ['results'] ['work'] [ $idx ] ['best_book'] ['author'] ['id']
-				);
-				array_push( $search_details, $item_detail );
-			}
-		}
-		$data = array(
-			'search_details' => $search_details,
-		);
-
-		return $data;
-	}
-
 }
