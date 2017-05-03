@@ -38,7 +38,7 @@
             // https://www.goodreads.com/book/isbn/0441172717?key=8bQh2W6yuSRpi9Ejs6xINw
             var url = 'https://www.goodreads.com/book/isbn/' + gr_isbn + '?key=' + gr_key;
 
-            $.get("http://query.yahooapis.com/v1/public/yql",
+            /*$.get("http://query.yahooapis.com/v1/public/yql",
                 {
                     q: "select * from xml where url=\""+url+"\"",
                     format: "json"
@@ -50,7 +50,34 @@
                     $('.wp-editor.rcno_book_description p').replaceWith('<p>' + book['description'] + '</p>');
 
                 }
-            );
+            );*/
+
+            $.ajax({
+                url: 'http://query.yahooapis.com/v1/public/yql',
+                type: 'GET',
+                data: {
+                    q: "select * from xml where url=\""+url+"\"",
+                    format: 'json'
+                },
+                beforeSend: function(){
+                    $('.rcno-ajax-loading').show();
+                },
+                complete: function(){
+                    console.log('Complete');
+                    $('.rcno-ajax-loading').hide();
+                },
+                success: function(grDoc){
+                    console.log(grDoc['query']['results']);
+                    var book = grDoc['query']['results'];
+                    //console.log(book['GoodreadsResponse']);
+
+                    if (book['error']) {
+                        console.log(book['error']);
+                    } else {
+                        $('#title').val( book['GoodreadsResponse']['book']['title'] );
+                    }
+                }
+            });
 
 /*            $.ajax({
                 url: '/wp-admin/admin-ajax.php',
