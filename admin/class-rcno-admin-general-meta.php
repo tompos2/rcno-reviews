@@ -66,6 +66,8 @@ class Rcno_Admin_General_Meta {
 			'textarea_rows' => 8,
 		);
 		$options['media_buttons'] = false;
+		$options['teeny'] = true;
+		$options['quicktags'] = false;
 
 		wp_editor( $description, 'rcno_book_description', $options );
 	}

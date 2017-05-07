@@ -75,9 +75,9 @@ class Rcno_Admin_ISBN {
 	public function rcno_save_book_isbn_metadata( $review_id, $data, $review = null ) {
 
 			// if this fails, check_admin_referer() will automatically print a "failed" page and die.
-	if ( ! empty( $_POST ) && check_admin_referer( 'rcno_save_book_isbn_meta', 'rcno_nonce' ) ) { //@TODO: Check nonce before saving.
+/*	if ( ! empty( $_POST ) && check_admin_referer( 'rcno_save_book_isbn_meta', 'rcno_nonce' ) ) { //@TODO: Check nonce before saving.
 		wp_die('Stop!');
-	}
+	}*/
 
 		// Saving description not only to the post_meta field but also to excerpt and content
 		if ( isset( $data['rcno_book_isbn'] ) ) {

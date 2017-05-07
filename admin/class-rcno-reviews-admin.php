@@ -118,11 +118,17 @@ class Rcno_Reviews_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		$screen = get_current_screen();
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, false );
-		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
-			'reviewID' => $post->ID
-		) );
+
+		if ( 'rcno_review' === $screen->id ) {
+			wp_localize_script( $this->plugin_name, 'my_script_vars', array(
+				'reviewID' => $post->ID
+			) );
+		}
+
+		
 
 	}
 
@@ -162,7 +168,7 @@ class Rcno_Reviews_Admin {
 		$opts['show_in_rest']          = true;
 		$opts['base_rest']             = $cpt_name;
 		$opts['rest_controller_class'] = 'WP_REST_Posts_Controller';
-		$opts['supports'] = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'revisions', 'comments' );
+		$opts['supports'] = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments' );
 		$opts['taxonomies']            = array();
 
 		$opts['capabilities']['delete_others_posts']    = "delete_others_{$cap_type}s";
@@ -370,7 +376,7 @@ class Rcno_Reviews_Admin {
 
 			// Verify if this is an auto save routine. If it is our form has not been submitted, so we don't want to do anything.
 			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-				$errors = "There was an error doing autosave";
+				$errors = 'There was an error doing autosave';
 			}
 
 			//Verify the nonces for the metaboxes @TODO: Check what should be the correct nonce here.
@@ -380,7 +386,7 @@ class Rcno_Reviews_Admin {
 
 			// Check user permissions
 			if ( ! current_user_can( 'edit_post', $review_id ) ) {
-				$errors = "There was an error saving the review. Insufficient administrator rights.";
+				$errors = 'There was an error saving the review. Insufficient administrator rights.';
 			}
 
 			//If we have an error update the error_option and return
