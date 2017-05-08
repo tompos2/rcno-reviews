@@ -172,6 +172,9 @@ class Rcno_Reviews {
 		// Creates the book review custom post type.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_review_posttype' );
 
+		// Creates the book review custom taxonomy.
+		$this->loader->add_action( 'init', $plugin_admin, 'rcno_custom_taxonomy' );
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

@@ -63,6 +63,7 @@ class Rcno_Reviews_Settings_Definition {
 		$tabs                = array();
 		$tabs['default_tab'] = __( 'Default Tab', self::$plugin_name );
 		$tabs['second_tab']  = __( 'Second Tab', self::$plugin_name );
+		$tabs['taxonomy_tab']  = __( 'Taxonomies', self::$plugin_name );
 
 		return apply_filters( 'rcno_reviews_settings_tabs', $tabs );
 	}
@@ -196,6 +197,91 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'You can extend me via hooks and filters.', self::$plugin_name ),
 					'type' => 'text'
 				)
+			),
+			// Begin taxonomies tab.
+			'taxonomy_tab' => array(
+				'taxonomy_tab_header'       => array(
+					'name' => '<strong>' . __( 'Review Taxonomies', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_taxonomy_selection_header' => array(
+					'name' => '<h2 class="section-heading">' . __( 'Taxonomies', self::$plugin_name ) . '</h2>',
+					'type' => 'header'
+				),
+				'rcno_taxonomy_selection'        => array(
+					'name'    => __( 'Taxonomy Selection', self::$plugin_name ),
+					'desc'    => __( 'Custom Taxonomy Selection with 3 options', self::$plugin_name ),
+					'options' => array(
+						'author'    => __( 'Author', self::$plugin_name ),
+						'genre'     => __( 'Genre', self::$plugin_name ),
+						'series'    => __( 'Series', self::$plugin_name ),
+					),
+					'type'    => 'multicheck'
+				),
+				// Book Review Author Taxonomy.
+				'rcno_author_header'            => array(
+					'name' => '<h2 class="section-heading">' . __( 'Author', self::$plugin_name ) . '</h2>',
+					'type' => 'header'
+				),
+				'rcno_author_slug'              => array(
+					'name' => __( 'Slug', self::$plugin_name ),
+					'desc' => __( 'Place the slug of the author taxonomy here.', self::$plugin_name ),
+					'std'  => 'author',
+					'type' => 'text'
+				),
+				'rcno_author_hierarchical'                   => array(
+					'name' => __( 'Hierarchical', self::$plugin_name ),
+					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_author_show'                   => array(
+					'name' => __( 'Show in table', self::$plugin_name ),
+					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				// Book Review Genre Taxonomy.
+				'rcno_genre_header'            => array(
+					'name' => '<h2 class="section-heading">' . __( 'Genre', self::$plugin_name ) . '</h2>',
+					'type' => 'header'
+				),
+				'rcno_genre_slug'              => array(
+					'name' => __( 'Slug', self::$plugin_name ),
+					'desc' => __( 'Place the slug of the genre taxonomy here.', self::$plugin_name ),
+					'std'  => 'genre',
+					'type' => 'text'
+				),
+				'rcno_genre_hierarchical'                   => array(
+					'name' => __( 'Hierarchical', self::$plugin_name ),
+					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_genre_show'                   => array(
+					'name' => __( 'Show in table', self::$plugin_name ),
+					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				// Book Review Series Taxonomy.
+				'rcno_series_header'            => array(
+					'name' => '<h2 class="section-heading">' . __( 'Series', self::$plugin_name ) . '</h2>',
+					'type' => 'header'
+				),
+				'rcno_series_slug'              => array(
+					'name' => __( 'Slug', self::$plugin_name ),
+					'desc' => __( 'Place the slug of the series taxonomy here.', self::$plugin_name ),
+					'std'  => 'series',
+					'type' => 'text'
+				),
+				'rcno_series_hierarchical'                   => array(
+					'name' => __( 'Hierarchical', self::$plugin_name ),
+					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_series_show'                   => array(
+					'name' => __( 'Show in table', self::$plugin_name ),
+					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+
 			)
 		);
 

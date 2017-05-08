@@ -25,14 +25,3 @@
 	<?php submit_button(); ?>
 </form>
 <br class="clear" />
-
-<?php
-
-$gr = new Rcno_GoodReads_API();
-$book = $gr->bookByISBN( '1619844419');
-$descrip = (string ) $book->description;
-var_dump( strip_tags( $descrip ) );
-
-var_dump( function_exists( 'ajax_save_post_meta' ) );
-
-?>

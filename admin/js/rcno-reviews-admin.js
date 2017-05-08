@@ -34,6 +34,15 @@
         $('.rcno-isbn-fetch').on('click', function(e) {
             e.preventDefault();
 
+            $.sanitize = function(input) {
+                var output = input
+                    .replace(/<script[^>]*?>.*?<\/script>/gi, '')
+                    .replace(/<[\/\!]*?[^<>]*?>/gi, '')
+                    .replace(/<style[^>]*?>.*?<\/style>/gi, '')
+                    .replace(/<![\s\S]*?--[ \t\n\r]*>/gi, '');
+                return output;
+            };
+
             var gr_ajx_gif = $('.rcno-ajax-loading');
             var gr_isbn = $('#rcno_book_isbn').val();
             var gr_key = '8bQh2W6yuSRpi9Ejs6xINw';
@@ -66,7 +75,15 @@
 
                         tinymce.get('rcno_book_description').setContent(
                             book['GoodreadsResponse']['book']['description']
-                        )
+                        );
+
+                        $('#new-tag-rcno_author').val(book['GoodreadsResponse']['book']['authors']['author']['name']);
+
+                        //$('#new-tag-rcno_genre').val(book['GoodreadsResponse']['book']['authors']['author']['name']);
+
+                        $('#new-tag-rcno_series').val(
+                            $.sanitize(book['GoodreadsResponse']['book']['series_works']['series_work']['series']['title'])
+                        );
                     }
                 }
             });

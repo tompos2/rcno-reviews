@@ -17,3 +17,11 @@
   margin: 4px 4px 0;
   display: none;
  }
+
+.form-table h2.section-heading {
+ font-size: 20px !important;
+ padding: 0 .5em !important;
+ font-weight: 600 !important;
+ border: 1px solid #b5b5b5;
+ background: #efefef;
+}

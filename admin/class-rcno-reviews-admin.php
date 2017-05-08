@@ -219,41 +219,20 @@ class Rcno_Reviews_Admin {
 	 * @uses    register_taxonomy()
 	 * @return  void
 	 */
-	public function rcto_custom_taxonomy() { // @TODO: Complete the custom taxonomy feature.
+	public function rcno_custom_taxonomy() { // @TODO: Complete the custom taxonomy feature.
 
-		//Setting a default for when all options are deselected.
-		// $custom_taxonomies = Rcno_Review_Option::get_option( 'rcno_taxonomy_selection' );
-		$custom_taxonomies = array( 'ingredient' => 'Ingredient' );
+		$taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 
-		//If the 'ingredient' key is not in the array, add it so it is always present.
-		if ( ! in_array( 'ingredient', $custom_taxonomies, true ) ) {
-			//'array_merge' because I want 'Ingredients' as the first taxonomy.
-			$custom_taxonomies = array_merge(
-				array( 'ingredient' => 'Ingredient' ), $custom_taxonomies
-			);
-		}
+		foreach ( $taxonomies as $key => $value ) {
+			$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $key ) );
+			$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $key ) );
+			$tax_name = 'rcno_' . $key;
 
-		$taxonomies = array();
-
-		foreach ( $custom_taxonomies as $slug => $tax ) {
-			$taxonomies[] = array(
-				'tax_settings'  => array(
-					'slug'          => Rcto_Recipes_Option::get_option( "rcto_{$slug}_slug" ),
-					'hierarchy'     => Rcto_Recipes_Option::get_option( "rcto_{$slug}_hierarchical" ),
-					'show_in_table' => Rcto_Recipes_Option::get_option( "rcto_{$slug}_show" ),
-				) );
-		}
-
-		foreach ( $taxonomies as $value ) {
-			$plural   = ucfirst( Rcto_Pluralize_Helper::pluralize( $value['tax_settings']['slug'] ) );
-			$single   = ucfirst( Rcto_Pluralize_Helper::singularize( $value['tax_settings']['slug'] ) );
-			$tax_name = 'rcto_' . $value['tax_settings']['slug'];
-
-			$opts['hierarchical']      = $value['tax_settings']['hierarchy'];
+			$opts['hierarchical']      = false;
 			// $opts['meta_box_cb'] 	   = '';
 			$opts['public']            = true;
 			$opts['query_var']         = $tax_name;
-			$opts['show_admin_column'] = $value['tax_settings']['show_in_table'];
+			$opts['show_admin_column'] = true;
 			$opts['show_in_nav_menus'] = true;
 			$opts['show_tag_cloud']    = true;
 			$opts['show_ui']           = true;
@@ -265,32 +244,32 @@ class Rcno_Reviews_Admin {
 			$opts['capabilities']['edit_terms']   = 'manage_categories';
 			$opts['capabilities']['manage_terms'] = 'manage_categories';
 
-			$opts['labels']['add_new_item']               = esc_html__( "Add New {$single}", 'rcto-recipes' );
-			$opts['labels']['add_or_remove_items']        = esc_html__( "Add or remove {$plural}", 'rcto-recipes' );
-			$opts['labels']['all_items']                  = esc_html__( $plural, 'rcto-recipes' );
-			$opts['labels']['choose_from_most_used']      = esc_html__( "Choose from most used {$plural}", 'rcto-recipes' );
-			$opts['labels']['edit_item']                  = esc_html__( "Edit {$single}", 'rcto-recipes' );
-			$opts['labels']['menu_name']                  = esc_html__( $plural, 'rcto-recipes' );
-			$opts['labels']['name']                       = esc_html__( $plural, 'rcto-recipes' );
-			$opts['labels']['new_item_name']              = esc_html__( "New {$single} Name", 'rcto-recipes' );
-			$opts['labels']['not_found']                  = esc_html__( "No {$plural} Found", 'rcto-recipes' );
-			$opts['labels']['parent_item']                = esc_html__( "Parent {$single}", 'rcto-recipes' );
-			$opts['labels']['parent_item_colon']          = esc_html__( "Parent {$single}:", 'rcto-recipes' );
-			$opts['labels']['popular_items']              = esc_html__( "Popular {$plural}", 'rcto-recipes' );
-			$opts['labels']['search_items']               = esc_html__( "Search {$plural}", 'rcto-recipes' );
-			$opts['labels']['separate_items_with_commas'] = esc_html__( "Separate {$plural} with commas", 'rcto-recipes' );
-			$opts['labels']['singular_name']              = esc_html__( $single, 'rcto-recipes' );
-			$opts['labels']['update_item']                = esc_html__( "Update {$single}", 'rcto-recipes' );
-			$opts['labels']['view_item']                  = esc_html__( "View {$single}", 'rcto-recipes' );
+			$opts['labels']['add_new_item']               = esc_html__( "Add New {$single}", 'rcno-reviews' );
+			$opts['labels']['add_or_remove_items']        = esc_html__( "Add or remove {$plural}", 'rcno-reviews' );
+			$opts['labels']['all_items']                  = esc_html__( $plural, 'rcno-reviews' );
+			$opts['labels']['choose_from_most_used']      = esc_html__( "Choose from most used {$plural}", 'rcno-reviews' );
+			$opts['labels']['edit_item']                  = esc_html__( "Edit {$single}", 'rcno-reviews' );
+			$opts['labels']['menu_name']                  = esc_html__( $plural, 'rcno-reviews' );
+			$opts['labels']['name']                       = esc_html__( $plural, 'rcno-reviews' );
+			$opts['labels']['new_item_name']              = esc_html__( "New {$single} Name", 'rcno-reviews' );
+			$opts['labels']['not_found']                  = esc_html__( "No {$plural} Found", 'rcno-reviews' );
+			$opts['labels']['parent_item']                = esc_html__( "Parent {$single}", 'rcno-reviews' );
+			$opts['labels']['parent_item_colon']          = esc_html__( "Parent {$single}:", 'rcno-reviews' );
+			$opts['labels']['popular_items']              = esc_html__( "Popular {$plural}", 'rcno-reviews' );
+			$opts['labels']['search_items']               = esc_html__( "Search {$plural}", 'rcno-reviews' );
+			$opts['labels']['separate_items_with_commas'] = esc_html__( "Separate {$plural} with commas", 'rcno-reviews' );
+			$opts['labels']['singular_name']              = esc_html__( $single, 'rcno-reviews' );
+			$opts['labels']['update_item']                = esc_html__( "Update {$single}", 'rcno-reviews' );
+			$opts['labels']['view_item']                  = esc_html__( "View {$single}", 'rcno-reviews' );
 
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
-			$opts['rewrite']['slug']         = __( Rcto_Pluralize_Helper::singularize( $value['tax_settings']['slug'] ) );
+			$opts['rewrite']['slug']         = __( Rcno_Pluralize_Helper::singularize( $key ) );
 			$opts['rewrite']['with_front']   = false;
 
-			$opts = apply_filters( 'rcto-recipe-taxonomy-options', $opts );
+			$opts = apply_filters( 'rcno-review-taxonomy-options', $opts );
 
-			register_taxonomy( $tax_name, 'rcto_recipe', $opts );
+			register_taxonomy( $tax_name, 'rcno_review', $opts );
 
 		}
 	}
