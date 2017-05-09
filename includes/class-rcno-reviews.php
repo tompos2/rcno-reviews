@@ -222,6 +222,15 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		// Manipulate the query to include recipes to home page (if set).
+		$this->loader->add_action( 'pre_get_posts', $plugin_public, 'rcno_review_query' );
+
+		// Adds the book review CPT to the RSS Feed.
+		$this->loader->add_action( 'request', $plugin_public, 'rcno_add_reviews_to_rss_feed' );
+
+		// Get the rendered content of a book review and forward it to the theme as the_content().
+		$this->loader->add_filter( 'the_content', $plugin_public, 'rcno_get_review_content' );
+
 	}
 
 	/**
