@@ -46,7 +46,7 @@ class Rcno_Reviews_Admin {
 	 * @since 1.0.0
 	 * @access public
 	 */
-	public $general_meta;
+	public $description_meta;
 
 	/**
 	 * Instance of the ISBN class handling book ISBN number functions.
@@ -68,8 +68,8 @@ class Rcno_Reviews_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		require_once __DIR__ . '/class-rcno-admin-general-meta.php';
-		$this->general_meta = new Rcno_Admin_General_Meta( $this->version );
+		require_once __DIR__ . '/class-rcno-admin-description-meta.php';
+		$this->description_meta = new Rcno_Admin_Description_Meta( $this->version );
 
 		require_once __DIR__ . '/class-rcno-admin-isbn.php';
 		$this->book_isbn = new Rcno_Admin_ISBN( $this->version );
@@ -221,18 +221,36 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_custom_taxonomy() { // @TODO: Complete the custom taxonomy feature.
 
-		$taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 
-		foreach ( $taxonomies as $key => $value ) {
-			$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $key ) );
-			$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $key ) );
-			$tax_name = 'rcno_' . $key;
+		if ( ! in_array( 'author', $custom_taxonomies, true ) ) {
+			//'array_merge' because I want 'Author' as the first taxonomy.
+			$custom_taxonomies = array_merge(
+				array( 'author' => 'Author' ), $custom_taxonomies
+			);
+		}
 
-			$opts['hierarchical']      = false;
+		$taxonomies = array();
+
+		foreach ( $custom_taxonomies as $key => $value ) {
+			$taxonomies[] = array(
+				'tax_settings'  => array(
+					'slug'          => Rcno_Reviews_Option::get_option( "rcno_{$key}_slug" ),
+					'hierarchy'     => Rcno_Reviews_Option::get_option( "rcno_{$key}_hierarchical" ),
+					'show_in_table' => Rcno_Reviews_Option::get_option( "rcno_{$key}_show" ),
+				) );
+		}
+
+		foreach ( $taxonomies as $tax ) {
+			$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
+			$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['slug'] ) );
+			$tax_name = 'rcno_' . $tax['tax_settings']['slug'];
+
+			$opts['hierarchical']      = $tax['tax_settings']['hierarchy'];
 			// $opts['meta_box_cb'] 	   = '';
 			$opts['public']            = true;
 			$opts['query_var']         = $tax_name;
-			$opts['show_admin_column'] = true;
+			$opts['show_admin_column'] = $tax['tax_settings']['show_in_table'];
 			$opts['show_in_nav_menus'] = true;
 			$opts['show_tag_cloud']    = true;
 			$opts['show_ui']           = true;
@@ -264,7 +282,7 @@ class Rcno_Reviews_Admin {
 
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
-			$opts['rewrite']['slug']         = __( Rcno_Pluralize_Helper::singularize( $key ) );
+			$opts['rewrite']['slug']         = __( Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['slug'] ) );
 			$opts['rewrite']['with_front']   = false;
 
 			$opts = apply_filters( 'rcno-review-taxonomy-options', $opts );
@@ -358,31 +376,25 @@ class Rcno_Reviews_Admin {
 				$errors = 'There was an error doing autosave';
 			}
 
-			//Verify the nonces for the metaboxes @TODO: Check what should be the correct nonce here.
-			//if ( isset( $data['rpr_save_recipe_meta_field'] ) && ! wp_verify_nonce( $data['rpr_save_recipe_meta_field'], 'rpr_save_recipe_meta' ) ) {
-			//	$errors = "There was an error saving the recipe. Description nonce not verified";
-			//}
-
-			// Check user permissions
+			// Check user permissions.
 			if ( ! current_user_can( 'edit_post', $review_id ) ) {
 				$errors = 'There was an error saving the review. Insufficient administrator rights.';
 			}
 
-			//If we have an error update the error_option and return
+			//If we have an error update the error_option and return.
 			if ( $errors ) {
 				update_option( 'rcno_admin_errors', $errors );
 
 				return $review_id;
 			}
 
-			if ( null !== $review && $review->post_type === 'rcno_review' ) {
 
-				$this->general_meta->rcno_save_book_review_metadata( $review_id, $data, $review );
-				$this->book_isbn->rcno_save_book_isbn_metadata( $review_id, $data, $review );
+			$this->description_meta->rcno_save_book_description_metadata( $review_id, $data, $review );
+			$this->book_isbn->rcno_save_book_isbn_metadata( $review_id, $data, $review );
 
-				add_action( 'save_post', array( $this, 'rcno_save_review' ) );
+			add_action( 'save_post', array( $this, 'rcno_save_review' ) );
 
-			}
+
 		}
 	}
 

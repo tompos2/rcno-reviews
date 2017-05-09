@@ -20,7 +20,7 @@
  * @subpackage Rcno_Reviews/admin
  * @author     wzyMedia <wzy@outlook.com>
  */
-class Rcno_Admin_General_Meta {
+class Rcno_Admin_Description_Meta {
 
 	/**
 	 * The version of this plugin.
@@ -77,16 +77,14 @@ class Rcno_Admin_General_Meta {
 	 *
 	 * @since 1.0.0
 	 */
-	public function rcno_save_book_review_metadata( $review_id, $data, $review = null ) {
+	public function rcno_save_book_description_metadata( $review_id, $data, $review = null ) {
 
-		// Saving description not only to the post_meta field but also to excerpt and content
+		// Saving description not only to the post_meta field but also to excerpt and content.
 		if ( isset( $data['rcno_book_description'] ) ) {
 
 			$book_description = strip_tags( $data['rcno_book_description'] );
 			update_post_meta( $review_id, 'rcno_book_description', $book_description );
-			// Set Excerpt:
-			//$review->post_content = $data['rcno_book_description'];
-			//$review->post_excerpt = $data['rcno_book_description'];
+
 			wp_update_post( $review );
 		}
 	}

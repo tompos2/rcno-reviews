@@ -220,7 +220,7 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				// Book Review Author Taxonomy.
 				'rcno_author_header'            => array(
-					'name' => '<h2 class="section-heading">' . __( 'Author', self::$plugin_name ) . '</h2>',
+					'name' => '<h2 class="section-heading">' . __( ucfirst( Rcno_Reviews_Option::get_option( 'rcno_author_slug' ) ), self::$plugin_name ) . '</h2>',
 					'type' => 'header'
 				),
 				'rcno_author_slug'              => array(

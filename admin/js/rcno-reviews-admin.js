@@ -30,6 +30,14 @@
      */
 
     $(function() {
+        //$('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]')
+        //    .attr('disabled', 'disabled'); //This taxonomy should never be disabled by users.
+
+        //$('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[genre\\]')
+        //    .attr('disabled', 'disabled'); //This taxonomy should never be disabled by users.
+    });
+
+    $(function() {
 
         $('.rcno-isbn-fetch').on('click', function(e) {
             e.preventDefault();
@@ -82,6 +90,7 @@
                         //$('#new-tag-rcno_genre').val(book['GoodreadsResponse']['book']['authors']['author']['name']);
 
                         $('#new-tag-rcno_series').val(
+                            //@TODO: Check if this exists first.
                             $.sanitize(book['GoodreadsResponse']['book']['series_works']['series_work']['series']['title'])
                         );
                     }

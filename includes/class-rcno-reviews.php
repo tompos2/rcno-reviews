@@ -195,7 +195,7 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'load-toplevel_page_' . $this->get_plugin_name() , $plugin_meta_box, 'add_meta_boxes' );
 
 		// Load the 'Book Description' metabox on the review post edit screen.
-		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->general_meta, 'rcno_book_description_metabox' );
+		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->description_meta, 'rcno_book_description_metabox' );
 
 		// Load the 'ISBN Number' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_isbn, 'rcno_book_isbn_metabox' );
