@@ -22,13 +22,13 @@ class Rcno_Template_Tags {
 
 
 	/**
-	 * Renders the book description. No output if description is empty.
+	 * Renders the book description. An empty string if description is empty.
 	 *
 	 * @since 1.0.0
 	 * @return string
 	 */
 	private function get_the_rcno_book_description() {
-		// Get the review id
+		// Get the review ID.
 		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
 			$review_id = $GLOBALS['review_id'];
 		} else {
@@ -42,7 +42,7 @@ class Rcno_Template_Tags {
 
 		// Render the description only if it is not empty
 		if ( isset( $review['rcno_book_description'] ) ) {
-			if ( strlen( $review['rcno_book_description'][0] ) > 0 ) { // @TODO: This index does not exist.
+			if ( strlen( $review['rcno_book_description'][0] ) > 0 ) {
 				$out .= '<div class="rcno_book_description">';
 				$out .= sanitize_post_field( 'rcno_book_description', $review['rcno_book_description'][0], $review_id );
 				$out .= '</div>';

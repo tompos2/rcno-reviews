@@ -51,6 +51,14 @@
                 return output;
             };
 
+            $.upCase = function(str) {
+                if (str.length) {
+                    return str[0].toUpperCase() + str.slice(1).toLowerCase();
+                } else {
+                    return '';
+                }
+            };
+
             var gr_ajx_gif = $('.rcno-ajax-loading');
             var gr_isbn = $('#rcno_book_isbn').val();
             var gr_key = '8bQh2W6yuSRpi9Ejs6xINw';
@@ -87,33 +95,19 @@
 
                         $('#new-tag-rcno_author').val(book['GoodreadsResponse']['book']['authors']['author']['name']);
 
-                        //$('#new-tag-rcno_genre').val(book['GoodreadsResponse']['book']['authors']['author']['name']);
-
-                        $('#new-tag-rcno_series').val(
-                            //@TODO: Check if this exists first.
-                            $.sanitize(book['GoodreadsResponse']['book']['series_works']['series_work']['series']['title'])
+                        $('#new-tag-rcno_genre').val(
+                            $.upCase(book['GoodreadsResponse']['book']['popular_shelves']['shelf'][0]['name'])
                         );
+
+                        if( typeof book['GoodreadsResponse']['book']['series_works'] !== 'string' ){
+                            $('#new-tag-rcno_series').val(
+                                $.sanitize( book['GoodreadsResponse']['book']['series_works']['series_work']['series']['title'] )
+                            );
+                        }
+
                     }
                 }
             });
-
-            /*            $.ajax({
-                            url: '/wp-admin/admin-ajax.php',
-                            type: 'POST',
-                            data: {
-                                action: 'save_post_meta',
-                                review_id: my_script_vars.reviewID,
-                                gr_isbn: gr_isbn
-                            },
-                            success: function (data) {
-                                console.log(data);
-                            },
-                            error: function (data) {
-                                console.log('Failed!: ' + data);
-                            }
-                        });*/
-
-            //$('#save-post').trigger('click');
 
         })
 
