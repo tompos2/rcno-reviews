@@ -25,3 +25,29 @@
  border: 1px solid #b5b5b5;
  background: #efefef;
 }
+
+.book-general-info-metabox {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;
+}
+
+.publisher-info,
+.publication-date,
+.publication-format,
+.publication-page-count,
+.publication-gr-review {
+ width: 19%;
+ display: inline-block;
+ position: relative;
+ margin: 1em 0 0 0;
+}
+
+.publisher-info input#rcno_book_publisher,
+.publication-date input#rcno_book_pub_date,
+.publication-format input#rcno_book_pub_format,
+.publication-page-count input#rcno_book_page_count,
+.publication-gr-review input#rcno_book_gr_review {
+ width: 100%;
+}
+

@@ -87,25 +87,52 @@
                     if (book['error']) {
                         console.log(book['error']);
                     } else {
-                        $('#title').val(book['GoodreadsResponse']['book']['title']);
+                        $('#title').val(
+                            book['GoodreadsResponse']['book']['title']
+                        );
 
                         tinymce.get('rcno_book_description').setContent(
                             book['GoodreadsResponse']['book']['description']
                         );
 
-                        $('#new-tag-rcno_author').val(book['GoodreadsResponse']['book']['authors']['author']['name']);
+                        $('#new-tag-rcno_author').val(
+                            book['GoodreadsResponse']['book']['authors']['author']['name']
+                        );
 
                         $('#new-tag-rcno_genre').val(
                             $.upCase(book['GoodreadsResponse']['book']['popular_shelves']['shelf'][0]['name'])
                         );
 
-                        if( typeof book['GoodreadsResponse']['book']['series_works'] !== 'string' ){
+                        if( typeof book['GoodreadsResponse']['book']['series_works'] === 'object' ){
                             $('#new-tag-rcno_series').val(
                                 $.sanitize( book['GoodreadsResponse']['book']['series_works']['series_work']['series']['title'] )
                             );
                         }
 
+                        $('#rcno_book_publisher').val(
+                            book['GoodreadsResponse']['book']['publisher']
+                        );
+
+                        $('#rcno_book_pub_date').val(
+                            book['GoodreadsResponse']['book']['publication_month']
+                            + '/' + book['GoodreadsResponse']['book']['publication_day']
+                            + '/' + book['GoodreadsResponse']['book']['publication_year']
+                        );
+
+                        $('#rcno_book_pub_format').val(
+                            book['GoodreadsResponse']['book']['format']
+                        );
+
+                        $('#rcno_book_page_count').val(
+                            book['GoodreadsResponse']['book']['num_pages']
+                        );
+
+                        $('#rcno_book_gr_review').val(
+                            book['GoodreadsResponse']['book']['average_rating']
+                        );
+
                     }
+
                 }
             });
 

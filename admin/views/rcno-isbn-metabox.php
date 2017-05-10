@@ -9,10 +9,6 @@
  * @subpackage Rcno_Reviews/admin/views
  */
 
-/**
- * @TODO: create and check nonce in core!
- */
-
 
 $isbn = get_post_meta( $review->ID, 'rcno_book_isbn', true );
 

@@ -200,6 +200,9 @@ class Rcno_Reviews {
 		// Load the 'ISBN Number' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_isbn, 'rcno_book_isbn_metabox' );
 
+		// Load the 'General Information' metabox on the review post edit screen.
+		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_general_info, 'rcno_book_general_info_metabox' );
+
 		// Save book review.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'rcno_save_review', 10, 2 );
 

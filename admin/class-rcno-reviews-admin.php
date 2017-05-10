@@ -57,6 +57,14 @@ class Rcno_Reviews_Admin {
 	public $book_isbn;
 
 	/**
+	 * Instance of the Rcno_Admin_General_Info class handling general book info functions.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public $book_general_info;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -73,6 +81,9 @@ class Rcno_Reviews_Admin {
 
 		require_once __DIR__ . '/class-rcno-admin-isbn.php';
 		$this->book_isbn = new Rcno_Admin_ISBN( $this->version );
+
+		require_once __DIR__ . '/class-rcno-admin-general-info.php';
+		$this->book_general_info = new Rcno_Admin_General_Info( $this->version );
 
 	}
 
