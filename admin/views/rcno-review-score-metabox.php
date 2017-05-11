@@ -1,89 +1,70 @@
 <?php
 
+$repeatable_fields = get_post_meta( $review->ID, 'repeatable_fields', true );
+wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonce' );
 ?>
 
-<table class="form-table">
-	<tr>
-		<th scope="row">Review Score</th>
-		<td>
-			<input type="checkbox" id="rcno_reviews_score_enable" name="rcno_reviews_score_enable" value="1" checked="checked"><br>
-			<label for="rcno_reviews_score_enable">Check this to enable review system for this post.</label>
-		</td>
-	</tr>
+<script type="text/javascript">
+    jQuery(document).ready(function( $ ){
+        $( '#add-row' ).on('click', function() {
+            var row = $( '.empty-row.screen-reader-text' ).clone(true);
+            row.removeClass( 'empty-row screen-reader-text' );
+            row.insertBefore( '#repeatable-fieldset-one tbody>tr:last' );
+            return false;
+        });
 
-	<tr>
-		<th scope="row">Review Score Position</th>
-		<td>
-			<select id="rcno_reviews_score_position" name="rcno_reviews_score_position">
-				<option value="bottom">Bottom</option>
-				<option value="top" selected="selected">Top</option>
-			</select><br>
-			<label for="rcno_reviews_score_position">Position of review score box in a single review.</label>
-		</td>
-	</tr>
+        $( '.remove-row' ).on('click', function() {
+            $(this).parents('tr').remove();
+            return false;
+        });
+    });
+</script>
 
-	<tr>
-		<th scope="row">Review Criteria</th>
-		<td><?php
-				$rows = array();
+<table id="repeatable-fieldset-one" width="100%">
+    <thead>
+    <tr>
+        <th width="40%">Label</th>
+        <th width="40%">Score</th>
+        <th width="8%"></th>
+    </tr>
+    </thead>
+    <tbody>
+	<?php
 
-				if($meta) {
-					$rows = $meta;
-				}
+	if ( $repeatable_fields ) :
 
-				$c = 0;
-
-				if ( count( $rows ) > 0 ) {
-					foreach( $rows as $row ) {
-						if ( isset( $row['c_label'] ) || isset( $row['score'] ) ) {
-							echo '
-							<p>
-								<label for="' . $field['id'] . '[' . $c .'][c_label]">Label: </label>
-								<input type="text" name="' . $field['id'] . '[' . $c . '][c_label]" value="' . $row['c_label'] . '" />
-								<label for="' . $field['id'] . '[' . $c . '][score]">Score: </label>
-								<input type="text" name="' . $field['id'] . '[' . $c . '][score]" value="' . $row['score'] . '" />
-								<a class="remove button-secondary">Remove</a>
-							</p>';
-							$c = $c + 1;
-						}
-					}
-				}
-				echo '<span id="criteria-placeholder"></span>';
-				echo '<a class="add-criteria button-primary" href="#">Add Criteria</a>';
-				echo '<br /><span style="margin-top: 10px; display: block;" class="description">' . $field['desc'] . '</span>';
+		foreach ( $repeatable_fields as $field ) {
 			?>
-			<script>
-                var $ = jQuery.noConflict();
-                $(document).ready(function() {
-                    var count = <?php echo $c; ?>;
-                    $('.add-criteria').click(function() {
-                        count = count + 1;
+            <tr>
+                <td><input type="text" class="widefat" name="label[]" value="<?php if( $field['label'] !== '' ) echo esc_attr( $field['label'] ); ?>" /></td>
 
-                        $('#criteria-placeholder')
-	                        .append('<p><label for="<?php echo $field['id']; ?>['+count+'][c_label]">Label: </label><input type="text" name="<?php echo $field['id']; ?>['+count+'][c_label]" value="" /><label for="<?php echo $field['id']; ?>['+count+'][score]">Score: </label><input type="text" name="<?php echo $field['id']; ?>['+count+'][score]" value="" /><a class="remove button-secondary">Remove</a></p>');
-                        return false;
-                    });
+                <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" value="<?php if ( $field['score'] !== '' ) echo esc_attr( $field['score'] ); ?>" /></td>
 
-                    $('.remove').live('click', function() {
-                        $(this).parent().remove();
-                    });
-                });
-			</script>
-			<label for="rcno_reviews_score_criteria">Position of review score box in a single review.</label>
-		</td>
-	</tr>
+                <td><a class="button remove-row" href="#">Remove</a></td>
+            </tr>
+			<?php
+		}
+	else :
+		// show a blank one
+		?>
+        <tr>
+            <td><input type="text" class="widefat" name="label[]" /></td>
 
-	<tr>
-		<th scope="row">Review Score Type</th>
-		<td>
-			<select id="rcno_reviews_score_type" name="rcno_reviews_score_type">
-				<option value="number">Letter</option>
-				<option value="letter" selected="selected">Letter</option>
-				<option value="star">Star</option>
-			</select><br>
-			<label for="rcno_reviews_score_type">Select the book review rating type.</label>
-		</td>
-	</tr>
+            <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" /></td>
 
+            <td><a class="button remove-row" href="#">Remove</a></td>
+        </tr>
+	<?php endif; ?>
 
+    <!-- empty hidden one for jQuery -->
+    <tr class="empty-row screen-reader-text">
+        <td><input type="text" class="widefat" name="label[]" /></td>
+
+        <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" /></td>
+
+        <td><a class="button remove-row" href="#">Remove</a></td>
+    </tr>
+    </tbody>
 </table>
+
+<p><a id="add-row" class="button button-primary" href="#">Add Criteria</a></p>

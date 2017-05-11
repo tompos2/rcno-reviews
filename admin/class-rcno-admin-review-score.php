@@ -74,16 +74,25 @@ class Rcno_Admin_Review_Score {
 	 */
 	public function rcno_save_book_review_score_metadata( $review_id, $data, $review = null ) {
 
-		// Saving description not only to the post_meta field but also to excerpt and content.
-		if ( isset( $data['rcno_book_isbn'] ) && wp_verify_nonce( $data['rcno_isbn_nonce'], 'rcno_save_book_isbn_metadata' ) ) {
+		$old = get_post_meta( $review_id, 'repeatable_fields', true);
+		$new = array();
 
-			$book_isbn = sanitize_text_field( $data['rcno_book_isbn'] );
+		$labels = isset( $data['label'] ) ? $data['label'] : array();
+		$scores = isset( $data['score'] ) ? $data['score'] : array();
 
-			update_post_meta( $review_id, 'rcno_book_isbn', $book_isbn );
+		$count = count( $labels );
 
-			wp_update_post( $review );
+		for ( $i = 0; $i < $count; $i++ ) {
+			if ( $labels[$i] !== '' ) {
+				$new[ $i ]['label'] = strip_tags( $labels[ $i ] );
+				$new[ $i ]['score'] = strip_tags( $scores[ $i ] );
+			}
 		}
-
+		if ( ! empty( $new ) && $new !== $old ) {
+			update_post_meta( $review_id, 'repeatable_fields', $new );
+		} elseif ( empty( $new ) && $old ) {
+			delete_post_meta( $review_id, 'repeatable_fields', $old );
+		}
 	}
 
 }

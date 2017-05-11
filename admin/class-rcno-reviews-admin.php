@@ -415,6 +415,7 @@ class Rcno_Reviews_Admin {
 				$this->description_meta->rcno_save_book_description_metadata( $review_id, $data, $review );
 				$this->book_isbn->rcno_save_book_isbn_metadata( $review_id, $data, $review );
 				$this->book_general_info->rcno_save_book_general_info_metadata( $review_id, $data, $review );
+				$this->book_review_score->rcno_save_book_review_score_metadata( $review_id, $data, $review );
 
 				add_action( 'save_post', array( $this, 'rcno_save_review' ) );
 			}
