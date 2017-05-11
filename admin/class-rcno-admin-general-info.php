@@ -74,15 +74,39 @@ class Rcno_Admin_General_Info {
 	 */
 	public function rcno_save_book_general_info_metadata( $review_id, $data, $review = null ) {
 
-		// Saving description not only to the post_meta field but also to excerpt and content.
-		if ( isset( $data['rcno_book_isbn'] ) && wp_verify_nonce( $data['rcno_isbn_nonce'], 'rcno_save_book_isbn_metadata' ) ) {
 
-			$book_isbn = sanitize_text_field( $data['rcno_book_isbn'] );
-
-			update_post_meta( $review_id, 'rcno_book_isbn', $book_isbn );
-
-			wp_update_post( $review );
+		// Saving book publisher post_meta field.
+		if ( isset( $data['rcno_book_publisher'] ) ) { //@TODO: Add book publisher nonce check.
+			$book_publisher = sanitize_text_field( $data['rcno_book_publisher'] );
+			update_post_meta( $review_id, 'rcno_book_publisher', $book_publisher );
 		}
+
+		// Saving book published date post_meta field.
+		if ( isset( $data['rcno_book_pub_date'] ) ) { //@TODO: Add book pub date nonce check.
+			$book_pub_date = sanitize_text_field( $data['rcno_book_pub_date'] );
+			update_post_meta( $review_id, 'rcno_book_pub_date', $book_pub_date );
+		}
+
+		// Saving book published format post_meta field.
+		if ( isset( $data['rcno_book_pub_format'] ) ) { //@TODO: Add book pub format nonce check.
+			$book_pub_format = sanitize_text_field( $data['rcno_book_pub_format'] );
+			update_post_meta( $review_id, 'rcno_book_pub_format', $book_pub_format );
+		}
+
+		// Saving book published format post_meta field.
+		if ( isset( $data['rcno_book_page_count'] ) ) { //@TODO: Add book page count nonce check.
+			$book_page_count = sanitize_text_field( $data['rcno_book_page_count'] );
+			update_post_meta( $review_id, 'rcno_book_page_count', $book_page_count );
+		}
+
+		// Saving book published format post_meta field.
+		if ( isset( $data['rcno_book_gr_review'] ) ) { //@TODO: Add book GR review value nonce check.
+			$book_gr_review = sanitize_text_field( $data['rcno_book_gr_review'] );
+			update_post_meta( $review_id, 'rcno_book_gr_review', $book_gr_review );
+			//
+		}
+
+		wp_update_post( $review );
 
 	}
 

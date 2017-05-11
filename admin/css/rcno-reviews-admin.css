@@ -7,7 +7,6 @@
    background: url(../images/spinner.gif) no-repeat;
   -webkit-background-size: 20px 20px;
   background-size: 20px 20px;
-  display: inline-block;
   float: right;
   vertical-align: middle;
   opacity: .7;
@@ -17,6 +16,18 @@
   margin: 4px 4px 0;
   display: none;
  }
+
+.book-isbn-metabox-error {
+    background: #F44336;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    display: none;
+}
+
+.book-isbn-metabox-error p {
+    padding: 3px;
+}
 
 .form-table h2.section-heading {
  font-size: 20px !important;
@@ -36,7 +47,11 @@
 .publication-date,
 .publication-format,
 .publication-page-count,
-.publication-gr-review {
+.publication-gr-review,
+.publication-gr-id,
+.publication-isbn13,
+.publication-asin,
+.publication-gr-url {
  width: 19%;
  display: inline-block;
  position: relative;

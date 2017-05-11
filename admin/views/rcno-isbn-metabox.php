@@ -18,4 +18,7 @@ $isbn = get_post_meta( $review->ID, 'rcno_book_isbn', true );
 	<input type="text" name="rcno_book_isbn" id="rcno_book_isbn" size="20" value="<?php echo sanitize_text_field( $isbn ); ?>" />
 	<button href="#" class="button rcno-isbn-fetch" title="">Fetch <span class="rcno-ajax-loading"></span></button>
 	<?php wp_nonce_field( 'rcno_save_book_isbn_metadata', 'rcno_isbn_nonce' ); ?>
+    <div class="book-isbn-metabox-error">
+        <p>Your book was not found on GoodReads.</p>
+    </div>
 </div>

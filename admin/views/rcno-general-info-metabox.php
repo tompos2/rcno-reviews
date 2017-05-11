@@ -15,6 +15,10 @@ $pub_date       = get_post_meta( $review->ID, 'rcno_book_pub_date', true );
 $pub_format     = get_post_meta( $review->ID, 'rcno_book_pub_format', true );
 $page_count     = get_post_meta( $review->ID, 'rcno_book_page_count', true );
 $gr_review      = get_post_meta( $review->ID, 'rcno_book_gr_review', true );
+$gr_id          = get_post_meta( $review->ID, 'rcno_book_gr_id', true );
+$isbn13         = get_post_meta( $review->ID, 'rcno_book_isbn13', true );
+$asin           = get_post_meta( $review->ID, 'rcno_book_asin', true );
+$gr_url         = get_post_meta( $review->ID, 'rcno_book_gr_url', true );
 
 ?>
 
@@ -48,6 +52,30 @@ $gr_review      = get_post_meta( $review->ID, 'rcno_book_gr_review', true );
         <label class="rcno_book_gr_review" for="rcno_book_gr_review"><?php _e( 'GoodReads Average', 'rcno-reviews' ) ?></label>
         <input type="text" name="rcno_book_gr_review" id="rcno_book_gr_review" size="20" value="<?php echo sanitize_text_field( $gr_review ); ?>" />
 		<?php wp_nonce_field( 'rcno_save_book_gr_review_metadata', 'rcno_general_gr_review_nonce' ); ?>
+    </div>
+
+    <div class="publication-gr-id">
+        <label class="rcno_book_gr_id" for="rcno_book_gr_id"><?php _e( 'GoodReads ID', 'rcno-reviews' ) ?></label>
+        <input type="text" name="rcno_book_gr_id" id="rcno_book_gr_id" size="20" value="<?php echo sanitize_text_field( $gr_id ); ?>" />
+		<?php wp_nonce_field( 'rcno_save_book_gr_id_metadata', 'rcno_general_gr_id_nonce' ); ?>
+    </div>
+
+    <div class="publication-isbn13">
+        <label class="rcno_book_isbn13" for="rcno_book_isbn13"><?php _e( 'ISBN13', 'rcno-reviews' ) ?></label>
+        <input type="text" name="rcno_book_isbn13" id="rcno_book_isbn13" size="20" value="<?php echo sanitize_text_field( $isbn13 ); ?>" />
+		<?php wp_nonce_field( 'rcno_save_book_isbn13_metadata', 'rcno_general_isbn13_nonce' ); ?>
+    </div>
+
+    <div class="publication-asin">
+        <label class="rcno_book_asin" for="rcno_book_asin"><?php _e( 'ASIN', 'rcno-reviews' ) ?></label>
+        <input type="text" name="rcno_book_asin" id="rcno_book_asin" size="20" value="<?php echo sanitize_text_field( $asin ); ?>" />
+		<?php wp_nonce_field( 'rcno_save_book_asin_metadata', 'rcno_general_asin_nonce' ); ?>
+    </div>
+
+    <div class="publication-gr-url">
+        <label class="rcno_book_gr_url" for="rcno_book_gr_url"><?php _e( 'GoodReads URL', 'rcno-reviews' ) ?></label>
+        <input type="text" name="rcno_book_gr_url" id="rcno_book_gr_url" size="20" value="<?php echo sanitize_text_field( $asin ); ?>" />
+		<?php wp_nonce_field( 'rcno_save_book_gr_url_metadata', 'rcno_general_gr_url_nonce' ); ?>
     </div>
 
 </div>

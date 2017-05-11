@@ -82,11 +82,13 @@
                 success: function(grDoc) {
                     console.log(grDoc['query']['results']);
                     var book = grDoc['query']['results'];
-                    //console.log(book['GoodreadsResponse']);
 
                     if (book['error']) {
-                        console.log(book['error']);
+
+                        $('.book-isbn-metabox-error').show();
+
                     } else {
+
                         $('#title').val(
                             book['GoodreadsResponse']['book']['title']
                         );

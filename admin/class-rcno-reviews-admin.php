@@ -65,6 +65,14 @@ class Rcno_Reviews_Admin {
 	public $book_general_info;
 
 	/**
+	 * Instance of the Rcno_Admin_Review_Score class handling general book info functions.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public $book_review_score;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -84,6 +92,9 @@ class Rcno_Reviews_Admin {
 
 		require_once __DIR__ . '/class-rcno-admin-general-info.php';
 		$this->book_general_info = new Rcno_Admin_General_Info( $this->version );
+
+		require_once __DIR__ . '/class-rcno-admin-review-score.php';
+		$this->book_review_score = new Rcno_Admin_Review_Score( $this->version );
 
 	}
 
@@ -370,42 +381,43 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @param   int $recipe_id post ID of recipe being saved.
 	 * @param   mixed $recipe the recipe post object.
+	 * @see     https://developer.wordpress.org/reference/functions/wp_update_post/#user-contributed-notes
 	 *
 	 * @since   1.0.0
 	 */
 	public function rcno_save_review( $review_id, $review = null ) {
 
-		remove_action( 'save_post', array( $this, 'rcno_save_review' ) );
+		if ( ! wp_is_post_revision( $review_id ) ) { // 'save_post' is fired twice, once for revisions, then to save post.
 
-		$data = $_POST;
+			remove_action( 'save_post', array( $this, 'rcno_save_review' ) );
 
-		if ( null !== $review && $review->post_type === 'rcno_review' ) {
-			$errors = false;
+			$data = $_POST;
 
-			// Verify if this is an auto save routine. If it is our form has not been submitted, so we don't want to do anything.
-			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-				$errors = 'There was an error doing autosave';
+			if ( null !== $review && $review->post_type === 'rcno_review' ) {
+				$errors = false;
+
+				// Verify if this is an auto save routine. If it is our form has not been submitted, so we don't want to do anything.
+				if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+					$errors = 'There was an error doing autosave';
+				}
+
+				// Check user permissions.
+				if ( ! current_user_can( 'edit_post', $review_id ) ) {
+					$errors = 'There was an error saving the review. Insufficient administrator rights.';
+				}
+
+				//If we have an error update the error_option and return.
+				if ( $errors ) {
+					update_option( 'rcno_admin_errors', $errors );
+					return $review_id;
+				}
+
+				$this->description_meta->rcno_save_book_description_metadata( $review_id, $data, $review );
+				$this->book_isbn->rcno_save_book_isbn_metadata( $review_id, $data, $review );
+				$this->book_general_info->rcno_save_book_general_info_metadata( $review_id, $data, $review );
+
+				add_action( 'save_post', array( $this, 'rcno_save_review' ) );
 			}
-
-			// Check user permissions.
-			if ( ! current_user_can( 'edit_post', $review_id ) ) {
-				$errors = 'There was an error saving the review. Insufficient administrator rights.';
-			}
-
-			//If we have an error update the error_option and return.
-			if ( $errors ) {
-				update_option( 'rcno_admin_errors', $errors );
-
-				return $review_id;
-			}
-
-
-			$this->description_meta->rcno_save_book_description_metadata( $review_id, $data, $review );
-			$this->book_isbn->rcno_save_book_isbn_metadata( $review_id, $data, $review );
-
-			add_action( 'save_post', array( $this, 'rcno_save_review' ) );
-
-
 		}
 	}
 
