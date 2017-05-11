@@ -74,7 +74,7 @@ $gr_url         = get_post_meta( $review->ID, 'rcno_book_gr_url', true );
 
     <div class="publication-gr-url">
         <label class="rcno_book_gr_url" for="rcno_book_gr_url"><?php _e( 'GoodReads URL', 'rcno-reviews' ) ?></label>
-        <input type="text" name="rcno_book_gr_url" id="rcno_book_gr_url" size="20" value="<?php echo sanitize_text_field( $asin ); ?>" />
+        <input type="text" name="rcno_book_gr_url" id="rcno_book_gr_url" size="20" value="<?php echo sanitize_text_field( $gr_url ); ?>" />
 		<?php wp_nonce_field( 'rcno_save_book_gr_url_metadata', 'rcno_general_gr_url_nonce' ); ?>
     </div>
 

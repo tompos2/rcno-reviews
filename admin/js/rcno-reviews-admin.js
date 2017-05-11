@@ -133,6 +133,22 @@
                             book['GoodreadsResponse']['book']['average_rating']
                         );
 
+                        $('#rcno_book_gr_id').val(
+                            book['GoodreadsResponse']['book']['id']
+                        );
+
+                        $('#rcno_book_isbn13').val(
+                            book['GoodreadsResponse']['book']['isbn13']
+                        );
+
+                        $('#rcno_book_asin').val(
+                            book['GoodreadsResponse']['book']['asin']
+                        );
+
+                        $('#rcno_book_gr_url').val(
+                            book['GoodreadsResponse']['book']['url']
+                        );
+
                     }
 
                 }
