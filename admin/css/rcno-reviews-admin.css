@@ -66,3 +66,21 @@
  width: 100%;
 }
 
+.review-score-metabox-container {
+    display: flex;
+}
+
+.review-score-rating-enable,
+.review-score-rating-type,
+.review-score-rating-position {
+    margin: 0 0 15px 0;
+}
+
+.review-score-rating-type label,
+.review-score-rating-position label,
+.review-score-rating-enable label {
+    display: block;
+    margin: 0 0 7px;
+    font-weight: 700;
+}
+

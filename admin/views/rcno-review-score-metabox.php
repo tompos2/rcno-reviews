@@ -20,51 +20,85 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
     });
 </script>
 
-<table id="repeatable-fieldset-one" width="100%">
-    <thead>
-    <tr>
-        <th width="40%">Label</th>
-        <th width="40%">Score</th>
-        <th width="8%"></th>
-    </tr>
-    </thead>
-    <tbody>
-	<?php
+<div class="review-score-metabox-container">
 
-	if ( $repeatable_fields ) :
+    <div class="review-score-options" style="width:25%; display:inline-block">
+        <div class="review-score-rating-enable">
+            <label for="rcno_review_score_enable">Enable Rating Box</label>
+            <input type="checkbox" id="rcno_review_score_enable" name="rcno_review_score_enable" value="1" checked="checked">
+        </div>
 
-		foreach ( $repeatable_fields as $field ) {
-			?>
+        <div class="review-score-rating-type">
+            <label for="rcno_review_score_type">Rating Type</label>
+            <select id="rcno_review_score_type" name="rcno_review_score_type">
+                <option value="number">Number</option>
+                <option value="letter" selected="selected">Letter</option>
+                <option value="stars">Stars</option>
+            </select>
+        </div>
+
+        <div class="review-score-rating-position">
+            <label for="rcno_review_score_position">Rating Box Position</label>
+            <select id="rcno_review_score_position" name="rcno_review_score_position">
+                <option value="top">Top</option>
+                <option value="bottom" selected="selected">Bottom</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="review-score-table" style="width:74%; display:inline-block">
+
+    <table id="repeatable-fieldset-one" width="100%">
+
+        <thead>
+        <tr>
+            <th width="40%">Label</th>
+            <th width="40%">Score</th>
+            <th width="8%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+
+        if ( $repeatable_fields ) :
+
+            foreach ( $repeatable_fields as $field ) {
+                ?>
+                <tr>
+                    <td><input type="text" class="widefat" name="label[]" value="<?php if( $field['label'] !== '' ) echo esc_attr( $field['label'] ); ?>" /></td>
+
+                    <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" value="<?php if ( $field['score'] !== '' ) echo esc_attr( $field['score'] ); ?>" /></td>
+
+                    <td><a class="button remove-row" href="#">Remove</a></td>
+                </tr>
+                <?php
+            }
+        else :
+            // show a blank one
+            ?>
             <tr>
-                <td><input type="text" class="widefat" name="label[]" value="<?php if( $field['label'] !== '' ) echo esc_attr( $field['label'] ); ?>" /></td>
+                <td><input type="text" class="widefat" name="label[]" /></td>
 
-                <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" value="<?php if ( $field['score'] !== '' ) echo esc_attr( $field['score'] ); ?>" /></td>
+                <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" /></td>
 
                 <td><a class="button remove-row" href="#">Remove</a></td>
             </tr>
-			<?php
-		}
-	else :
-		// show a blank one
-		?>
-        <tr>
+        <?php endif; ?>
+
+        <!-- empty hidden one for jQuery -->
+        <tr class="empty-row screen-reader-text">
             <td><input type="text" class="widefat" name="label[]" /></td>
 
             <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" /></td>
 
             <td><a class="button remove-row" href="#">Remove</a></td>
         </tr>
-	<?php endif; ?>
+        </tbody>
 
-    <!-- empty hidden one for jQuery -->
-    <tr class="empty-row screen-reader-text">
-        <td><input type="text" class="widefat" name="label[]" /></td>
+    </table>
+        <p style="margin:0;font-size:10px;text-align:right;">Label: The name of criteria - Score: A number value between 0 - 10, in increments of 0.1</p>
+        <p><a id="add-row" class="button button-primary" href="#">Add Criteria</a></p>
 
-        <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" /></td>
+    </div>
 
-        <td><a class="button remove-row" href="#">Remove</a></td>
-    </tr>
-    </tbody>
-</table>
-
-<p><a id="add-row" class="button button-primary" href="#">Add Criteria</a></p>
+</div>
