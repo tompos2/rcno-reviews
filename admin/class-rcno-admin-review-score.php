@@ -74,7 +74,7 @@ class Rcno_Admin_Review_Score {
 	 */
 	public function rcno_save_book_review_score_metadata( $review_id, $data, $review = null ) {
 
-		$old = get_post_meta( $review_id, 'repeatable_fields', true);
+		$old = get_post_meta( $review_id, 'rcno_review_score_criteria', true);
 		$new = array();
 
 		$labels = isset( $data['label'] ) ? $data['label'] : array();
@@ -89,9 +89,19 @@ class Rcno_Admin_Review_Score {
 			}
 		}
 		if ( ! empty( $new ) && $new !== $old ) {
-			update_post_meta( $review_id, 'repeatable_fields', $new );
+			update_post_meta( $review_id, 'rcno_review_score_criteria', $new );
 		} elseif ( empty( $new ) && $old ) {
-			delete_post_meta( $review_id, 'repeatable_fields', $old );
+			delete_post_meta( $review_id, 'rcno_review_score_criteria', $old );
+		}
+
+		if( isset( $data['rcno_review_score_type'] ) ) {
+			$review_score_type = $data['rcno_review_score_type'];
+			update_post_meta( $review_id, 'rcno_review_score_type', $review_score_type );
+		}
+
+		if( isset( $data['rcno_review_score_position'] ) ) {
+			$review_score_position = $data['rcno_review_score_position'];
+			update_post_meta( $review_id, 'rcno_review_score_position', $review_score_position );
 		}
 	}
 

@@ -1,6 +1,9 @@
 <?php
 
-$repeatable_fields = get_post_meta( $review->ID, 'repeatable_fields', true );
+$review_score_criteria = get_post_meta( $review->ID, 'rcno_review_score_criteria', true );
+$review_score_type = get_post_meta( $review->ID, 'rcno_review_score_type', true );
+$review_score_position = get_post_meta( $review->ID, 'rcno_review_score_position', true );
+
 wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonce' );
 ?>
 
@@ -31,17 +34,17 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
         <div class="review-score-rating-type">
             <label for="rcno_review_score_type">Rating Type</label>
             <select id="rcno_review_score_type" name="rcno_review_score_type">
-                <option value="number">Number</option>
-                <option value="letter" selected="selected">Letter</option>
-                <option value="stars">Stars</option>
+                <option value="number" <?php if ($review_score_type === 'number') echo 'selected="selected"'; ?>>Number</option>
+                <option value="letter" <?php if ($review_score_type === 'letter') echo 'selected="selected"'; ?>>Letter Grade</option>
+                <option value="stars" <?php if ($review_score_type === 'stars') echo 'selected="selected"'; ?>>Stars</option>
             </select>
         </div>
 
         <div class="review-score-rating-position">
             <label for="rcno_review_score_position">Rating Box Position</label>
             <select id="rcno_review_score_position" name="rcno_review_score_position">
-                <option value="top">Top</option>
-                <option value="bottom" selected="selected">Bottom</option>
+                <option value="top" <?php if ($review_score_position === 'top') echo 'selected="selected"'; ?>>Top</option>
+                <option value="bottom" <?php if ($review_score_position === 'bottom') echo 'selected="selected"'; ?>>Bottom</option>
             </select>
         </div>
     </div>
@@ -60,9 +63,9 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
         <tbody>
         <?php
 
-        if ( $repeatable_fields ) :
+        if ( $review_score_criteria ) :
 
-            foreach ( $repeatable_fields as $field ) {
+            foreach ( $review_score_criteria as $field ) {
                 ?>
                 <tr>
                     <td><input type="text" class="widefat" name="label[]" value="<?php if( $field['label'] !== '' ) echo esc_attr( $field['label'] ); ?>" /></td>
