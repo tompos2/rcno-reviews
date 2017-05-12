@@ -37,33 +37,41 @@
  background: #efefef;
 }
 
-.book-general-info-metabox {
- display: flex;
- flex-wrap: wrap;
- justify-content: space-between;
+.book-general-info-metaboxes input {
+    width: 100%;
 }
 
-.publisher-info,
-.publication-date,
-.publication-format,
-.publication-page-count,
-.publication-gr-review,
-.publication-gr-id,
-.publication-isbn13,
-.publication-asin,
-.publication-gr-url {
- width: 19%;
- display: inline-block;
- position: relative;
- margin: 1em 0 0 0;
+.book-general-metabox-1,
+.book-general-metabox-2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.publisher-info input#rcno_book_publisher,
-.publication-date input#rcno_book_pub_date,
-.publication-format input#rcno_book_pub_format,
-.publication-page-count input#rcno_book_page_count,
-.publication-gr-review input#rcno_book_gr_review {
- width: 100%;
+.book-general-metabox-1 .publisher-info,
+.book-general-metabox-1 .publication-date,
+.book-general-metabox-1 .publication-format,
+.book-general-metabox-1 .publication-page-count,
+.book-general-metabox-1 .publication-gr-review {
+    flex-basis: 19%;
+    display: inline-block;
+    position: relative;
+    margin: 1em 0 0 0;
+}
+
+.book-general-metabox-2 .publication-gr-id,
+.book-general-metabox-2 .publication-isbn13,
+.book-general-metabox-2 .publication-asin,
+.book-general-metabox-2 .publication-gr-url {
+    flex-basis: 15%;
+    display: inline-block;
+    position: relative;
+    margin: 1em 10px 0 0;
+}
+
+.book-general-metabox-2 .publication-gr-url {
+    flex: 2;
+    margin-right: 0;
 }
 
 .review-score-metabox-container {

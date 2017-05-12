@@ -72,29 +72,28 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string
 	 */
-	static private function rcno_calc_review_score( $num, $type, $star = false ) {
+	static private function rcno_calc_review_score( $num, $type ) {
+
+		$output = '';
 
 		switch ( $type ) :
 
-			case 'star' :
-				if ( ! $star === false ) { //@TODO: Create stars review.
-					if ( $num <= 2 ) {
-						$output = '<span class="badge-star" title="1 star"><i class="fa fa-star"></i><i class="fa fa-star-empty"></i><i class="fa fa-star-empty"></i><i class="fa fa-star-empty"></i><i class="fa fa-star-empty"></i></span>';
-					}
-					if ( $num > 2 && $num <= 4 ) {
-						$output = '<span class="badge-star" title="2 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-empty"></i><i class="fa fa-star-empty"></i><i class="fa fa-star-empty"></i></span>';
-					}
-					if ( $num > 4 && $num <= 6 ) {
-						$output = '<span class="badge-star" title="3 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-empty"></i><i class="fa fa-star-empty"></i></span>';
-					}
-					if ( $num > 6 && $num <= 8 ) {
-						$output = '<span class="badge-star" title="4 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-empty"></i></span>';
-					}
-					if ( $num > 8 && $num <= 10 ) {
-						$output = '<span class="badge-star" title="5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>';
-					}
-				} else {
-					$output = $num;
+			case 'stars' :
+
+				if ( $num <= 2 ) {
+					$output = '<span class="badge-star" title="1 star"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+				}
+				if ( $num > 2 && $num <= 4 ) {
+					$output = '<span class="badge-star" title="2 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+				}
+				if ( $num > 4 && $num <= 6 ) {
+					$output = '<span class="badge-star" title="3 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+				}
+				if ( $num > 6 && $num <= 8 ) {
+					$output = '<span class="badge-star" title="4 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i></span>';
+				}
+				if ( $num > 8 && $num <= 10 ) {
+					$output = '<span class="badge-star" title="5 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i></span>';
 				}
 				break;
 
@@ -127,17 +126,21 @@ class Rcno_Template_Tags {
 
 
 	/**
-	 * Displays the review box on the FE
+	 * Creates the review box for the frontend.
 	 *
 	 * @param      $review_id
-	 * @param bool $echo
 	 *
-	 * @return string
+	 * @return string | null
 	 */
-	static public function rcno_print_review_box( $review_id, $echo = true ) {
+	static private function rcno_the_review_box( $review_id ) {
 
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria       = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
+
+		if ( '' === $rating_criteria  ) {
+			return null; // We are not doing anything if a review score has not been set.
+		}
+
 		$rating_criteria_count = count( $rating_criteria );
 		$review_author         = get_the_author();
 		$review_date           = get_the_date();
@@ -165,7 +168,7 @@ class Rcno_Template_Tags {
 		$output .= '</span>';
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score">';
-		$output .= '<span class="overall">' . self::rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
+		$output .= '<span class="overall">' . self::rcno_calc_review_score( $final_score, $rating_type ) . '</span>';
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
@@ -185,7 +188,7 @@ class Rcno_Template_Tags {
 			$output .= '<span class="score-bar">' . $criteria['label'] . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';
-			$output .= self::rcno_calc_review_score( $criteria['score'], $rating_type, true );
+			$output .= self::rcno_calc_review_score( $criteria['score'], $rating_type );
 			$output .= '</span>';
 			$output .= '</div>';
 			$output .= '</li>';
@@ -195,26 +198,38 @@ class Rcno_Template_Tags {
 
 		$output .= '</div><!-- End #review-box -->';
 
-		if ( $echo === true ) :
-			echo $output;
-		else :
-			return $output;
-		endif;
+		return $output;
+	}
+
+	/**
+	 * Prints the review box on the frontend.
+	 *
+	 * @param $review_id
+	 */
+	static public function rcno_print_review_box( $review_id ) {
+		echo self::rcno_the_review_box( $review_id );
 	}
 
 
+
+
 	/**
-	 * Prints the review badge
+	 * Creates the review badge for the frontend.
 	 *
 	 * @param      $post_id
 	 * @param bool $echo
 	 *
-	 * @return string
+	 * @return string | null
 	 */
-	static public function rcno_print_review_badge( $review_id, $echo = true ) {
+	static private function rcno_the_review_badge( $review_id ) {
 
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria       = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
+
+		if ( '' === $rating_criteria  ) {
+			return null; // We are not doing anything if a review score has not been set.
+		}
+
 		$rating_criteria_count = count( $rating_criteria );
 
 		$output      = '';
@@ -231,14 +246,18 @@ class Rcno_Template_Tags {
 		$final_score = number_format( $final_score, 1, '.', '' );
 
 		$output .= '<div class="rcno-review-badge review-badge-' . $rating_type . '">';
-		$output .= self::rcno_calc_review_score( $final_score, $rating_type, true );
+		$output .= self::rcno_calc_review_score( $final_score, $rating_type );
 		$output .= '</div>';
 
-		if ( $echo === true ) :
-			echo $output;
-		else :
-			return $output;
-		endif;
+		return $output;
+	}
+
+	/**
+	 * Prints the review badge on the frontend.
+	 * @param $review_id
+	 */
+	static public function rcno_print_review_badge( $review_id ){
+		echo self::rcno_the_review_badge( $review_id );
 	}
 
 

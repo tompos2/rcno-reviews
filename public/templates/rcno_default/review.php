@@ -64,4 +64,8 @@ var_dump( __FILE__ );
 		top: 6px;
 	}
 
+    #rcno-review-score-box span.badge-star {
+        color: #FFC107;
+    }
+
 </style>
