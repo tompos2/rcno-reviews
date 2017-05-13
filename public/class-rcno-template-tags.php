@@ -72,29 +72,34 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string
 	 */
-	static private function rcno_calc_review_score( $num, $type ) {
+	static private function rcno_calc_review_score( $num, $type, $stars = false ) {
 
 		$output = '';
 
-		switch ( $type ) :
+		switch ( $type ) {
 
 			case 'stars' :
 
-				if ( $num <= 2 ) {
-					$output = '<span class="badge-star" title="1 star"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+				if ( false !== $stars ) {
+					if ( $num <= 2 ) {
+						$output = '<span class="badge-star" title="1 star"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+					}
+					if ( $num > 2 && $num <= 4 ) {
+						$output = '<span class="badge-star" title="2 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+					}
+					if ( $num > 4 && $num <= 6 ) {
+						$output = '<span class="badge-star" title="3 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+					}
+					if ( $num > 6 && $num <= 8 ) {
+						$output = '<span class="badge-star" title="4 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i></span>';
+					}
+					if ( $num > 8 && $num <= 10 ) {
+						$output = '<span class="badge-star" title="5 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i></span>';
+					}
+				} else {
+					$output = $num;
 				}
-				if ( $num > 2 && $num <= 4 ) {
-					$output = '<span class="badge-star" title="2 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
-				}
-				if ( $num > 4 && $num <= 6 ) {
-					$output = '<span class="badge-star" title="3 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
-				}
-				if ( $num > 6 && $num <= 8 ) {
-					$output = '<span class="badge-star" title="4 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i></span>';
-				}
-				if ( $num > 8 && $num <= 10 ) {
-					$output = '<span class="badge-star" title="5 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i></span>';
-				}
+
 				break;
 
 			case 'letter' :
@@ -118,8 +123,7 @@ class Rcno_Template_Tags {
 			case 'number';
 				$output = $num;
 				break;
-
-		endswitch;
+		}
 
 		return $output;
 	}
@@ -162,13 +166,14 @@ class Rcno_Template_Tags {
 		$output .= '<span class="reviewer" itemprop="reviewer" style="display:none;">' . $review_author . '</span>';
 		$output .= '<time class="dtreviewed" itemprop="dtreviewed" style="display:none;">' . $review_date . '</time>';
 		$output .= '<span class="summary" itemprop="summary" style="display:none;">' . $review_summary . '</span>';
-		$output .= '<span class="rating" style="display: none;" itemprop="rating">' . self::rcno_calc_review_score( $final_score, true ) . '';
-		$output .= '<span itemprop="worst">1</span>';
-		$output .= '<span itemprop="best">10</span>';
+		$output .= '<span class="rating" style="display: none;" itemprop="rating">' . self::rcno_calc_review_score( $final_score, $rating_type, false );
 		$output .= '</span>';
+		$output .= '<span itemprop="worst" style="display: none;">1</span>';
+		$output .= '<span itemprop="best" style="display: none;">10</span>';
+
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score">';
-		$output .= '<span class="overall">' . self::rcno_calc_review_score( $final_score, $rating_type ) . '</span>';
+		$output .= '<span class="overall">' . self::rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
@@ -246,7 +251,7 @@ class Rcno_Template_Tags {
 		$final_score = number_format( $final_score, 1, '.', '' );
 
 		$output .= '<div class="rcno-review-badge review-badge-' . $rating_type . '">';
-		$output .= self::rcno_calc_review_score( $final_score, $rating_type );
+		$output .= self::rcno_calc_review_score( $final_score, $rating_type, true );
 		$output .= '</div>';
 
 		return $output;

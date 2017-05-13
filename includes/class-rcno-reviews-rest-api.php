@@ -2,33 +2,49 @@
 
 class Rcno_Reviews_Rest_API {
 
-	public function __construct() {
-		$this->rcno_register_rest_fields();
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
+
+
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
 	}
+
 
 	public function rcno_register_rest_fields(){
-		add_action( 'rest_api_init', array( $this, 'do_register_rest_fields' ) );
-	}
 
-	public function do_register_rest_fields(){
-		register_rest_field( 'post', 'book_ISBN', array(
+		register_rest_field( 'rcno_review', 'book_ISBN', array(
 			'get_callback' => function() {
-				$book_ISBN = get_post_meta( 14, 'rcno_book_isbn', true );
-				return (int) $book_ISBN;
+				$book_ISBN = get_post_meta( get_post()->ID, 'rcno_book_isbn', true );
+				return (string) $book_ISBN;
 			},
-			'update_callback' => function( $karma, $comment_obj ) {
-				$ret = wp_update_comment( array(
-					'comment_ID'    => $comment_obj->comment_ID,
-					'comment_karma' => $karma
-				) );
+			'update_callback' => function( $meta_value ) { // @TODO: Fix update callback.
+				$ret = update_post_meta( get_post()->ID, 'rcno_book_isbn', $meta_value );
 				if ( false === $ret ) {
-					return new WP_Error( 'rest_comment_karma_failed', __( 'Failed to update comment karma.' ), array( 'status' => 500 ) );
+					return new WP_Error( 'rest_book_ISBN_update_failed', __( 'Failed to update the book ISBN.' ), array( 'status' => 500 ) );
 				}
 				return true;
 			},
 			'schema' => array(
-				'description' => __( 'Comment karma.' ),
-				'type'        => 'integer'
+				'description' => __( 'Book ISBN Number' ),
+				'type'        => 'string'
 			),
 		) );
 	}

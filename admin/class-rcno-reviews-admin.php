@@ -231,10 +231,12 @@ class Rcno_Reviews_Admin {
 		$opts = apply_filters( 'rcno_review_cpt_options', $opts );
 
 		register_post_type( strtolower( $cpt_name ), $opts );
+
+		add_image_size( 'rcno-book-cover-lg', 381, 500 );
 	}
 
 	/**
-	 * Creates a new course taxonomy for the recipe post type
+	 * Creates a new course taxonomy for the book review post type
 	 *
 	 * @since    1.0.0
 	 * @access    public
@@ -313,6 +315,26 @@ class Rcno_Reviews_Admin {
 
 		}
 	}
+
+	/**
+	 * Registers new featured image sizes for the book review post type
+	 *
+	 * @since    1.0.0
+	 * @access    public
+	 * @uses    add_image_size()
+	 * @return  void
+	 */
+	public function rcno_book_cover_sizes(){
+
+		add_image_size( 'rcno-book-cover-lg', 381, 500 );
+
+		add_filter( 'image_size_names_choose', function ( $sizes ){
+			return array_merge( $sizes, array(
+				'rcno-book-cover-lg' => __( 'Book Cover LG', 'rcno-reviews' ),
+			) );
+		} );
+	}
+
 
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
