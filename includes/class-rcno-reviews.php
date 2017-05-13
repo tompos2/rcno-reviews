@@ -264,7 +264,7 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scr' );
-		$this->loader->add_action( 'wp_ajax_rpr_get_results', $plugin_shortcodes, 'rcno_process_ajax_scr' );
+		$this->loader->add_action( 'wp_ajax_rcno_get_results', $plugin_shortcodes, 'rcno_process_ajax_scr' );
 
 		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_button_scl' );
 		$this->loader->add_action( 'in_admin_footer',   $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );

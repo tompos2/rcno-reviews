@@ -4,10 +4,10 @@
  * @since      0.8.0
  * @package    recipepress-reloaded
  * @subpackage recipepress-reloaded/admin
- * @author     Jan Köster <rpr@cbjck.de>
+ * @author     Jan Köster <rcno@cbjck.de>
  */
 
-var rprRecipeSc;
+var rcnoReviewSc;
 
 ( function( $ ) {
     var editor, searchTimer, River, Query,
@@ -15,7 +15,7 @@ var rprRecipeSc;
         rivers = {},
         isTouch = ( 'ontouchend' in document );
 
-    rprRecipeSc = {
+    rcnoReviewSc = {
         timeToTriggerRiver: 150,
         minRiverAJAXDuration: 200,
         riverBottomThreshold: 5,
@@ -24,31 +24,31 @@ var rprRecipeSc;
         textarea: '',
 
         init: function() {
-            inputs.wrap = $('#rpr-modal-wrap-scr');
-            inputs.dialog = $( '#rpr-modal-form-scr' );
-            inputs.backdrop = $( '#rpr-modal-backdrop-scr' );
-            inputs.submit = $( '#rpr-modal-submit-scr' );
-            inputs.close = $( '#rpr-modal-close-scr' );
+            inputs.wrap = $('#rcno-modal-wrap-scr');
+            inputs.dialog = $( '#rcno-modal-form-scr' );
+            inputs.backdrop = $( '#rcno-modal-backdrop-scr' );
+            inputs.submit = $( '#rcno-modal-submit-scr' );
+            inputs.close = $( '#rcno-modal-close-scr' );
             // URL
-            inputs.id = $( '#recipe-id-field' );
-            inputs.nonce = $( '#rpr_ajax_nonce' );
+            inputs.id = $( '#review-id-field' );
+            inputs.nonce = $( '#rcno_ajax_nonce' );
             // Secondary options
-            inputs.title = $( '#recipe-title-field' );
+            inputs.title = $( '#retitle-title-field' );
             // Advanced Options
-            inputs.optlink = $( '#rpr-modal-scr-options-link' );
-            inputs.opticon = $( '#rpr-modal-scr-options-link i' );
-            inputs.optpanel = $( '#rpr-modal-scr-options-panel' );
-            inputs.taxonomy =$( '#recipe-taxonomy' );
+            inputs.optlink = $( '#rcno-modal-scr-options-link' );
+            inputs.opticon = $( '#rcno-modal-scr-options-link i' );
+            inputs.optpanel = $( '#rcno-modal-scr-options-panel' );
+            inputs.taxonomy =$( '#review-taxonomy' );
             inputs.openInNewTab = $( '#link-target-checkbox' );
-            inputs.search = $( '#rpr-search-field' );
-            inputs.excerpt = $( '#rpr-embed-excerpt' );
+            inputs.search = $( '#rcno-search-field' );
+            inputs.excerpt = $( '#rcno-embed-excerpt' );
             inputs.excerpt.prop("checked", false);
-            inputs.nodesc = $( '#rpr-embed-nodesc' );
+            inputs.nodesc = $( '#rcno-embed-nodesc' );
             inputs.nodesc.prop("checked", false);
 
             // Build Rivers
-            rivers.search = new River( $( '#rpr-search-results' ) );
-            rivers.recent = new River( $( '#rpr-most-recent-results' ) );
+            rivers.search = new River( $( '#rcno-search-results' ) );
+            rivers.recent = new River( $( '#rcno-most-recent-results' ) );
             rivers.elements = inputs.dialog.find( '.query-results' );
 
             // Get search notice text
@@ -57,25 +57,25 @@ var rprRecipeSc;
             inputs.queryNoticeTextHint = inputs.queryNotice.find( '.query-notice-hint' );
 
             // Bind event handlers
-            inputs.dialog.keydown( rprRecipeSc.keydown );
-            inputs.dialog.keyup( rprRecipeSc.keyup );
+            inputs.dialog.keydown( rcnoReviewSc.keydown );
+            inputs.dialog.keyup( rcnoReviewSc.keyup );
             inputs.submit.click( function( event ) {
                 event.preventDefault();
-                rprRecipeSc.update();
+                rcnoReviewSc.update();
             });
-            inputs.close.add( inputs.backdrop ).add( '#rpr-modal-cancel-scr a' ).click( function( event ) {
+            inputs.close.add( inputs.backdrop ).add( '#rcno-modal-cancel-scr a' ).click( function( event ) {
                 event.preventDefault();
-                rprRecipeSc.close();
+                rcnoReviewSc.close();
             });
 
-            //Action whe a recipe is selected from the list...
-            rivers.elements.on( 'river-select', rprRecipeSc.updateFields );
+            //Action whe a review is selected from the list...
+            rivers.elements.on( 'river-select', rcnoReviewSc.updateFields );
 
             // Display 'hint' message when search field or 'query-results' box are focused
-            inputs.search.on( 'focus.rprRecipeSc', function() {
+            inputs.search.on( 'focus.rcnoReviewSc', function() {
                 inputs.queryNoticeTextDefault.hide();
                 inputs.queryNoticeTextHint.removeClass( 'screen-reader-text' ).show();
-            } ).on( 'blur.rprRecipeSc', function() {
+            } ).on( 'blur.rcnoReviewSc', function() {
                 inputs.queryNoticeTextDefault.show();
                 inputs.queryNoticeTextHint.addClass( 'screen-reader-text' ).hide();
             } );
@@ -85,21 +85,22 @@ var rprRecipeSc;
 
                 window.clearTimeout( searchTimer );
                 searchTimer = window.setTimeout( function() {
-                    rprRecipeSc.searchInternalLinks.call( self );
+                    rcnoReviewSc.searchInternalLinks.call( self );
                 }, 500 );
             });
 
             /* Button to open dialog */
-            $('body').on('click', '#rpr-add-recipe-button', function(event) {
-                editor_id = jQuery('#rpr-add-recipe-button').attr( "data_editor" );
-                window.rprRecipeSc.open( editor_id );
+            $('body').on('click', '#rcno-add-review-button', function(event) {
+                console.log('Click'); //TODO: Remove me.
+                editor_id = jQuery('#rcno-add-review-button').attr( "data_editor" );
+                window.rcnoReviewSc.open( editor_id );
             });
         },
 
         open: function( editorId ) {
             var ed;
 
-            rprRecipeSc.range = null;
+            rcnoReviewSc.range = null;
 
             if ( editorId ) {
                 window.wpActiveEditor = editorId;
@@ -125,7 +126,7 @@ var rprRecipeSc;
                 }
             }
 
-            if ( ! rprRecipeSc.isMCE() && document.selection ) {
+            if ( ! rcnoReviewSc.isMCE() && document.selection ) {
                 this.textarea.focus();
                 this.range = document.selection.createRange();
             }
@@ -133,8 +134,8 @@ var rprRecipeSc;
             inputs.wrap.show();
             inputs.backdrop.show();
 
-            rprRecipeSc.refresh();
-            $( document ).trigger( 'rprRecipeSc-open', inputs.wrap );
+            rcnoReviewSc.refresh();
+            $( document ).trigger( 'rcnoReviewSc-open', inputs.wrap );
         },
 
         isMCE: function() {
@@ -146,10 +147,10 @@ var rprRecipeSc;
             rivers.search.refresh();
             rivers.recent.refresh();
 
-            if ( rprRecipeSc.isMCE() ) {
-                rprRecipeSc.mceRefresh();
+            if ( rcnoReviewSc.isMCE() ) {
+                rcnoReviewSc.mceRefresh();
             } else {
-                rprRecipeSc.setDefaultValues();
+                rcnoReviewSc.setDefaultValues();
             }
 
             if ( isTouch ) {
@@ -179,21 +180,21 @@ var rprRecipeSc;
                 // Set open in new tab.
                 inputs.openInNewTab.prop( 'checked', ( '_blank' === editor.dom.getAttrib( e, 'target' ) ) );
                 // Update save prompt.
-                inputs.submit.val( rprRecipeScL10n.update );
+                inputs.submit.val( rcnoReviewScL10n.update );
 
                 // If there's no link, set the default values.
             } else {
-                rprRecipeSc.setDefaultValues();
+                rcnoReviewSc.setDefaultValues();
             }
         },
 
         close: function() {
-            if ( ! rprRecipeSc.isMCE() ) {
-                rprRecipeSc.textarea.focus();
+            if ( ! rcnoReviewSc.isMCE() ) {
+                rcnoReviewSc.textarea.focus();
 
-                if ( rprRecipeSc.range ) {
-                    rprRecipeSc.range.moveToBookmark( rprRecipeSc.range.getBookmark() );
-                    rprRecipeSc.range.select();
+                if ( rcnoReviewSc.range ) {
+                    rcnoReviewSc.range.moveToBookmark( rcnoReviewSc.range.getBookmark() );
+                    rcnoReviewSc.range.select();
                 }
             } else {
                 editor.focus();
@@ -201,31 +202,31 @@ var rprRecipeSc;
 
             inputs.backdrop.hide();
             inputs.wrap.hide();
-            $( document ).trigger( 'rprRecipeSc-close', inputs.wrap );
+            $( document ).trigger( 'rcnoReviewSc-close', inputs.wrap );
         },
 
         update: function() {
-            if ( rprRecipeSc.isMCE() )
-                rprRecipeSc.mceUpdate();
+            if ( rcnoReviewSc.isMCE() )
+                rcnoReviewSc.mceUpdate();
             else
-                rprRecipeSc.htmlUpdate();
+                rcnoReviewSc.htmlUpdate();
         },
 
         //Build the shortcode here!
         htmlUpdate: function() {
             var attrs, html, begin, end, cursor, title, selection,
-                textarea = rprRecipeSc.textarea;
+                textarea = rcnoReviewSc.textarea;
 
             if ( ! textarea )
                 return;
 
             var out="[";
 
-            if( inputs.id.val=="" || inputs.title.val==""){
+            if( inputs.id.val == "" || inputs.title.val == "" ){
                 return;
             }
 
-            out+="rpr-recipe";
+            out+="rcno-review";
             out+=" id="+inputs.id.val();
 
             if( inputs.excerpt.prop("checked") == true ){
@@ -238,12 +239,12 @@ var rprRecipeSc;
             out+="]\n";
 
             // Insert shortcode
-            if ( document.selection && rprRecipeSc.range ) {
+            if ( document.selection && rcnoReviewSc.range ) {
                 // IE
                 // Note: If no text is selected, IE will not place the cursor
                 //       inside the closing tag.
                 textarea.focus();
-                rprRecipeSc.range.text = out;
+                rcnoReviewSc.range.text = out;
             } else if ( typeof textarea.selectionStart !== 'undefined' ) {
                 // W3C
                 begin       = textarea.selectionStart;
@@ -256,18 +257,18 @@ var rprRecipeSc;
                 textarea.selectionStart = textarea.selectionEnd = cursor;
             }
 
-            rprRecipeSc.close();
+            rcnoReviewSc.close();
             textarea.focus();
         },
 
         mceUpdate: function() {
             var out="";
 
-            if( inputs.id.val()=="" || inputs.title.val()==""){
+            if( inputs.id.val() == "" || inputs.title.val() =="" ){
                 return;
             }
 
-            out+="[rpr-recipe";
+            out+="[rcno-review";
             out+=" id="+inputs.id.val();
 
             if( inputs.excerpt.prop("checked") === true ){
@@ -278,7 +279,7 @@ var rprRecipeSc;
             }
             out+=" ]<br/>";
 
-            rprRecipeSc.close();
+            rcnoReviewSc.close();
             editor.focus();
 
             tinyMCE.activeEditor.execCommand('mceReplaceContent', false, out);
@@ -296,7 +297,7 @@ var rprRecipeSc;
             inputs.title.val( '' );
 
             // Update save prompt.
-            inputs.submit.val( rprRecipeScL10n.save );
+            inputs.submit.val( rcnoReviewsScL10n.save );
         },
 
         searchInternalLinks: function() {
@@ -308,10 +309,10 @@ var rprRecipeSc;
                 rivers.search.show();
 
                 // Don't search if the keypress didn't change the title.
-                if ( rprRecipeSc.lastSearch == search )
+                if ( rcnoReviewSc.lastSearch == search )
                     return;
 
-                rprRecipeSc.lastSearch = search;
+                rcnoReviewSc.lastSearch = search;
                 waiting = t.parent().find('.spinner').show();
 
                 rivers.search.change( search );
@@ -339,7 +340,7 @@ var rprRecipeSc;
                 key = $.ui.keyCode;
 
             if ( key.ESCAPE === event.keyCode ) {
-                rprRecipeSc.close();
+                rcnoReviewSc.close();
                 event.stopImmediatePropagation();
             } else if ( key.TAB === event.keyCode ) {
                 id = event.target.id;
@@ -365,9 +366,9 @@ var rprRecipeSc;
             }
 
             fn = event.keyCode === key.UP ? 'prev' : 'next';
-            clearInterval( rprRecipeSc.keyInterval );
-            rprRecipeSc[ fn ]();
-            rprRecipeSc.keyInterval = setInterval( rprRecipeSc[ fn ], rprRecipeSc.keySensitivity );
+            clearInterval( rcnoReviewSc.keyInterval );
+            rcnoReviewSc[ fn ]();
+            rcnoReviewSc.keyInterval = setInterval( rcnoReviewSc[ fn ], rcnoReviewSc.keySensitivity );
             event.preventDefault();
         },
 
@@ -375,7 +376,7 @@ var rprRecipeSc;
             var key = $.ui.keyCode;
 
             if ( event.which === key.UP || event.which === key.DOWN ) {
-                clearInterval( rprRecipeSc.keyInterval );
+                clearInterval( rcnoReviewSc.keyInterval );
                 event.preventDefault();
             }
         },
@@ -414,7 +415,7 @@ var rprRecipeSc;
         this.change( search );
         this.refresh();
 
-        $( '#rpr-link .query-results, #rpr-link #link-selector' ).scroll( function() {
+        $( '#rcno-link .query-results, #rcno-link #link-selector' ).scroll( function() {
             self.maybeLoad();
         });
         element.on( 'click', 'li', function( event ) {
@@ -487,8 +488,8 @@ var rprRecipeSc;
         },
         ajax: function( callback ) {
             var self = this,
-                delay = this.query.page == 1 ? 0 : rprRecipeSc.minRiverAJAXDuration,
-                response = rprRecipeSc.delayedCallback( function( results, params ) {
+                delay = this.query.page == 1 ? 0 : rcnoReviewSc.minRiverAJAXDuration,
+                response = rcnoReviewSc.delayedCallback( function( results, params ) {
                     self.process( results, params );
                     if ( callback )
                         callback( results, params );
@@ -511,7 +512,7 @@ var rprRecipeSc;
             if ( ! results ) {
                 if ( firstPage ) {
                     list += '<li class="unselectable no-matches-found"><span class="item-title"><em>' +
-                        rprRecipeScL10n.noMatchesFound + '</em></span></li>';
+                        rcnoReviewsScL10n.noMatchesFound + '</em></span></li>';
                 }
             } else {
                 $.each( results, function() {
@@ -520,8 +521,8 @@ var rprRecipeSc;
                     list += classes ? '<li class="' + classes + '">' : '<li>';
                     list += '<input type="hidden" class="item-id" value="' + this.id + '" />';
                     list += '<span class="item-title">';
-                    list += this.title ? this.title : rprRecipeScL10n.noTitle;
-                    list += '</span><span class="item-info">' + rprRecipeScL10n.recipe + '</span></li>';
+                    list += this.title ? this.title : rcnoReviewsScL10n.noTitle;
+                    list += '</span><span class="item-info">' + rcnoReviewsScL10n.review + '</span></li>';
                     alt = ! alt;
                 });
             }
@@ -533,14 +534,14 @@ var rprRecipeSc;
                 el = this.element,
                 bottom = el.scrollTop() + el.height();
 
-            if ( ! this.query.ready() || bottom < this.contentHeight.height() - rprRecipeSc.riverBottomThreshold )
+            if ( ! this.query.ready() || bottom < this.contentHeight.height() - rcnoReviewSc.riverBottomThreshold )
                 return;
 
             setTimeout(function() {
                 var newTop = el.scrollTop(),
                     newBottom = newTop + el.height();
 
-                if ( ! self.query.ready() || newBottom < self.contentHeight.height() - rprRecipeSc.riverBottomThreshold )
+                if ( ! self.query.ready() || newBottom < self.contentHeight.height() - rcnoReviewSc.riverBottomThreshold )
                     return;
 
                 self.waiting.show();
@@ -549,7 +550,7 @@ var rprRecipeSc;
                 self.ajax( function() {
                     self.waiting.hide();
                 });
-            }, rprRecipeSc.timeToTriggerRiver );
+            }, rcnoReviewSc.timeToTriggerRiver );
         }
     });
 
@@ -568,9 +569,9 @@ var rprRecipeSc;
         ajax: function( callback ) {
             var self = this,
                 query = {
-                    action : 'rpr_get_results',
+                    action : 'rcno_get_results',
                     page : this.page,
-                    'rpr_ajax_nonce' : inputs.nonce.val()
+                    'rcno_ajax_nonce' : inputs.nonce.val()
                 };
 
             if ( this.search )
@@ -587,5 +588,5 @@ var rprRecipeSc;
         }
     });
 
-    $( document ).ready( rprRecipeSc.init );
+    $( document ).ready( rcnoReviewSc.init );
 })( jQuery );

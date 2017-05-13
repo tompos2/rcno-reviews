@@ -110,7 +110,7 @@ class Rcno_Reviews_Shortcodes {
 				$review               = get_post_custom( $review_post->ID );
 				$GLOBALS['review_id'] = $review_post->ID;
 
-				//$taxonomies = get_option('rpr_taxonomies', array());
+				//$taxonomies = get_option('rcno_taxonomies', array());
 
 
 				if ( $options['excerpt'] === 0 ) {
@@ -144,7 +144,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		printf( '<a href="#" id="rpr-add-review-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
+		printf( '<a href="#" id="rcno-add-review-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
 			esc_attr( $editor_id ),
 			esc_attr__( 'Add Review', 'rcno-reviews' ),
 			esc_html__( 'Add Review', 'rcno-reviews' )
@@ -201,7 +201,7 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 */
 	public function rcno_process_ajax_scr() {
-		check_ajax_referer( 'rpr-ajax-nonce', 'rpr_ajax_nonce' );
+		check_ajax_referer( 'rcno-ajax-nonce', 'rcno_ajax_nonce' );
 
 		$args = array();
 
@@ -289,9 +289,9 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __FILE__ ) . '\\../admin/js/rpr_ajax_scl.js', array( 'jquery' ) );
+		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scl.js', array( 'jquery' ) );
 		wp_localize_script( 'rcno_ajax_scl', 'rcno_vars', array(
-				'rcno_ajax_nonce' => wp_create_nonce( 'rpr-ajax-nonce' )
+				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' )
 			)
 		);
 		wp_localize_script( 'rcno_ajax_scl', 'rcnoListingsScL10n', array(
