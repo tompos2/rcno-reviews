@@ -230,7 +230,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @return string $content
 	 */
-	private function rcno_render_review_content( $review_post ) {
+	public function rcno_render_review_content( $review_post ) {
 		// Get the layout's include path
 		$include_path = $this->rcno_get_the_layout() . 'review.php';
 

@@ -73,9 +73,12 @@ class Rcno_Reviews {
 
 		$this->load_dependencies();
 		$this->set_locale();
+
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_rest_hooks();
+
+		$this->define_shortcodes();
 
 	}
 
@@ -124,6 +127,8 @@ class Rcno_Reviews {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public.php';
+
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-shortcodes.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-option.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-callback-helper.php';
@@ -247,6 +252,14 @@ class Rcno_Reviews {
 		$plugin_rest = new Rcno_Reviews_Rest_API( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'rest_api_init', $plugin_rest, 'rcno_register_rest_fields' );
+	}
+
+
+	private function define_shortcodes() {
+
+		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
+
+		add_shortcode( $this->get_plugin_name(), array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
 	}
 
 	/**
