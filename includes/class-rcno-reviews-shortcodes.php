@@ -128,4 +128,178 @@ class Rcno_Reviews_Shortcodes {
 		}
 	}
 
+/**
+************************ SHORTCODE FOR REVIEW *****************************
+*/
+
+	/**
+	 * Add a button for the shortcode dialog above the editor just as "Add Media"
+	 * @param string $editor_id
+	 * @return void
+	 */
+	public function rcno_add_review_button_scr( $editor_id = 'content' ) {
+		global $post_type;
+
+		if ( ! in_array( $post_type, array( 'page', 'post' ), true ) ) {
+			return;
+		}
+
+		printf( '<a href="#" id="rpr-add-review-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
+			esc_attr( $editor_id ),
+			esc_attr__( 'Add Review', 'rcno-reviews' ),
+			esc_html__( 'Add Review', 'rcno-reviews' )
+		);
+	}
+
+	/**
+	 * Function to load the modal overlay in the footer
+	 * @global string $post_type
+	 * @return void
+	 */
+	public function rcno_load_in_admin_footer_scr() {
+		global $post_type;
+
+		if ( ! in_array( $post_type, array( 'page', 'post' ), true ) ) {
+			return;
+		}
+
+		require dirname( __FILE__ ) . '\\../admin/views/rcno-reviews-modal.php';
+
+	}
+
+	/**
+	 * Function to load the scripts needed for the ajax part in shortcode dialog
+	 * @global string $post_type
+	 *
+	 * @param string  $hook
+	 *
+	 * @return void
+	 */
+	public function rcno_load_ajax_scripts_scr( $hook ) {
+		global $post_type;
+
+		// Only load on pages where it is necessary:
+		if ( ! in_array( $post_type, array( 'page', 'post' ), true ) ) {
+			return;
+		}
+
+		wp_enqueue_script( 'rcno_ajax_scr', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scr.js', array( 'jquery' ) );
+		wp_localize_script( 'rcno_ajax_scr', 'rcno_vars', array(
+				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' )
+			)
+		);
+		wp_localize_script( 'rcno_ajax_scr', 'rcnoReviewsScL10n', array(
+			'noTitle' => __( 'No title', 'rcno-reviews' ),
+			'review'  => __( 'Review', 'rcno-reviews' ),
+			'save'    => __( 'Insert', 'rcno-reviews' ),
+			'update'  => __( 'Insert', 'rcno-reviews' ),
+		) );
+	}
+
+	/**
+	 * Process the data from the shortcode include dialog
+	 *
+	 */
+	public function rcno_process_ajax_scr() {
+		check_ajax_referer( 'rpr-ajax-nonce', 'rpr_ajax_nonce' );
+
+		$args = array();
+
+		if ( isset( $_POST['search'] ) ) {
+			$args['s'] = wp_unslash( $_POST['search'] );
+		} else {
+			$args['s'] = '';
+		}
+
+		$args['pagenum'] = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
+
+		$query           = array(
+			'posts_per_page' => 10,
+		);
+		$query['offset'] = $args['pagenum'] > 1 ? $query['posts_per_page'] * ( $args['pagenum'] - 1 ) : 0;
+
+		$reviews = get_posts( array( 's'              => $args['s'],
+		                             'post_type'      => 'rcno_review',
+		                             'posts_per_page' => $query['posts_per_page'],
+		                             'offset'         => $query['offset'],
+		                             'orderby'        => 'post_date'
+		) );
+
+		$json = array();
+
+		foreach ( $reviews as $review ) {
+			array_push( $json, array( 'id' => $review->ID, 'title' => $review->post_title ) );
+		}
+
+		wp_send_json( $json );
+		die();
+	}
+
+
+	/**
+	 *********************** SHORTCODE FOR REVIEW LISTINGS ****************************
+	 */
+	/**
+	 * Add a button for the shortcode dialog above the editor just as "Add Media"
+	 *
+	 * @param string $editor_id
+	 *
+	 * @return string
+	 */
+	public function rcno_add_button_scl( $editor_id = 'content' ) {
+		global $post_type;
+		if ( ! in_array( $post_type, array( 'page' ), true ) ) {
+			return;
+		}
+
+		printf( '<a href="#" id="rcno-add-reviews-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
+			esc_attr( $editor_id ),
+			esc_attr__( 'Add Listing', 'rcno-reviews' ),
+			esc_html__( 'Add Listing', 'rcno-reviews' )
+		);
+	}
+
+	/**
+	 * Function to load the modal overlay in the footer
+	 * @global string $post_type
+	 * @return void
+	 */
+	public function rcno_load_in_admin_footer_scl() {
+		global $post_type;
+		if ( ! in_array( $post_type, array( 'page' ), true ) ) {
+			return;
+		}
+
+		require dirname( __FILE__ ) . '\\../admin/views/rcno-reviews-listings-modal.php';
+	}
+
+	/**
+	 * Function to load the scripts needed for the ajax part in shortcode dialog
+	 * @global string $post_type
+	 *
+	 * @param string  $hook
+	 *
+	 * @return void
+	 */
+	public function rcno_load_ajax_scripts_scl( $hook ) {
+		global $post_type;
+
+		// Only load on pages where it is necessary:
+		if ( ! in_array( $post_type, array( 'page' ), true ) ) {
+			return;
+		}
+
+		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __FILE__ ) . '\\../admin/js/rpr_ajax_scl.js', array( 'jquery' ) );
+		wp_localize_script( 'rcno_ajax_scl', 'rcno_vars', array(
+				'rcno_ajax_nonce' => wp_create_nonce( 'rpr-ajax-nonce' )
+			)
+		);
+		wp_localize_script( 'rcno_ajax_scl', 'rcnoListingsScL10n', array(
+			'noTitle' => __( 'No title', 'rcno-reviews' ),
+			'review'  => __( 'Review', 'rcno-reviews' ),
+			'save'    => __( 'Insert', 'rcno-reviews' ),
+			'update'  => __( 'Insert', 'rcno-reviews' ),
+		) );
+	}
+
 }

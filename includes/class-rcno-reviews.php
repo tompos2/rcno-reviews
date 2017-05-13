@@ -260,6 +260,15 @@ class Rcno_Reviews {
 		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
 
 		add_shortcode( $this->get_plugin_name(), array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
+
+		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_review_button_scr' );
+		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scr' );
+		$this->loader->add_action( 'wp_ajax_rpr_get_results', $plugin_shortcodes, 'rcno_process_ajax_scr' );
+
+		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_button_scl' );
+		$this->loader->add_action( 'in_admin_footer',   $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
+		$this->loader->add_action( 'admin_enqueue_scripts',   $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
 	}
 
 	/**

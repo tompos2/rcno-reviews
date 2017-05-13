@@ -126,7 +126,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts( $hook ) {
 		global $post;
 
 		/**
@@ -140,14 +140,17 @@ class Rcno_Reviews_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		$screen = get_current_screen();
+
+
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, false );
 
-		if ( 'rcno_review' === $screen->id ) {
-			wp_localize_script( $this->plugin_name, 'my_script_vars', array(
-				'reviewID' => $post->ID
-			) );
+		if ( $hook === 'post-new.php' || $hook === 'post.php' ) {
+			if ( 'rcno_review' === $post->post_type ) {
+				wp_localize_script( $this->plugin_name, 'my_script_vars', array(
+					'reviewID' => $post->ID
+				) );
+			}
 		}
 
 		
