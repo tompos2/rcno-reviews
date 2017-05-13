@@ -93,6 +93,12 @@ class Rcno_Admin_General_Info {
 			update_post_meta( $review_id, 'rcno_book_pub_format', $book_pub_format );
 		}
 
+		// Saving book published edition post_meta field.
+		if ( isset( $data['rcno_book_pub_edition'] ) ) { //@TODO: Add book pub format nonce check.
+			$book_pub_edition = sanitize_text_field( $data['rcno_book_pub_edition'] );
+			update_post_meta( $review_id, 'rcno_book_pub_edition', $book_pub_edition );
+		}
+
 		// Saving book published format post_meta field.
 		if ( isset( $data['rcno_book_page_count'] ) ) { //@TODO: Add book page count nonce check.
 			$book_page_count = sanitize_text_field( $data['rcno_book_page_count'] );

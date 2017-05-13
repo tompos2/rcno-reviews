@@ -13,6 +13,7 @@
 $publisher      = get_post_meta( $review->ID, 'rcno_book_publisher', true );
 $pub_date       = get_post_meta( $review->ID, 'rcno_book_pub_date', true );
 $pub_format     = get_post_meta( $review->ID, 'rcno_book_pub_format', true );
+$pub_edition    = get_post_meta( $review->ID, 'rcno_book_pub_edition', true );
 $page_count     = get_post_meta( $review->ID, 'rcno_book_page_count', true );
 $gr_review      = get_post_meta( $review->ID, 'rcno_book_gr_review', true );
 $gr_id          = get_post_meta( $review->ID, 'rcno_book_gr_id', true );
@@ -41,6 +42,12 @@ $gr_url         = get_post_meta( $review->ID, 'rcno_book_gr_url', true );
             <label class="rcno_book_publication_format" for="rcno_book_pub_format"><?php _e( 'Publication Format', 'rcno-reviews' ) ?></label>
             <input type="text" name="rcno_book_pub_format" id="rcno_book_pub_format" size="20" value="<?php echo sanitize_text_field( $pub_format ); ?>" />
             <?php wp_nonce_field( 'rcno_save_book_pub_format_metadata', 'rcno_general_pub_format_nonce' ); ?>
+        </div>
+
+        <div class="publication-edition">
+            <label class="rcno_book_publication_edition" for="rcno_book_pub_edition"><?php _e( 'Edition', 'rcno-reviews' ) ?></label>
+            <input type="text" name="rcno_book_pub_edition" id="rcno_book_pub_edition" size="20" value="<?php echo sanitize_text_field( $pub_edition ); ?>" />
+		    <?php wp_nonce_field( 'rcno_save_book_pub_edition_metadata', 'rcno_general_pub_edition_nonce' ); ?>
         </div>
 
         <div class="publication-page-count">

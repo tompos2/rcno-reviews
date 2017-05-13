@@ -51,9 +51,10 @@
 .book-general-metabox-1 .publisher-info,
 .book-general-metabox-1 .publication-date,
 .book-general-metabox-1 .publication-format,
+.book-general-metabox-1 .publication-edition,
 .book-general-metabox-1 .publication-page-count,
 .book-general-metabox-1 .publication-gr-review {
-    flex-basis: 19%;
+    flex-basis: 16%;
     display: inline-block;
     position: relative;
     margin: 1em 0 0 0;

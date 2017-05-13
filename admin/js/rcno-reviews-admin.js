@@ -125,6 +125,10 @@
                             book['GoodreadsResponse']['book']['format']
                         );
 
+                        $('#rcno_book_pub_edition').val(
+                            book['GoodreadsResponse']['book']['edition_information']
+                        );
+
                         $('#rcno_book_page_count').val(
                             book['GoodreadsResponse']['book']['num_pages']
                         );
