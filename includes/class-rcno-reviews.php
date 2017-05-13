@@ -75,6 +75,7 @@ class Rcno_Reviews {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_rest_hooks();
 
 	}
 
@@ -135,7 +136,6 @@ class Rcno_Reviews {
 		new Rcno_GoodReads_API();
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-rest-api.php';
-		new Rcno_Reviews_Rest_API();
 
 		$this->loader = new Rcno_Reviews_Loader();
 
@@ -174,6 +174,9 @@ class Rcno_Reviews {
 
 		// Creates the book review custom taxonomy.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_custom_taxonomy' );
+
+		// Registers new featured image sizes for the book review post type.
+		$this->loader->add_action( 'init', $plugin_admin, 'rcno_book_cover_sizes' );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -237,6 +240,13 @@ class Rcno_Reviews {
 		// Get the rendered content of a book review and forward it to the theme as the_content().
 		$this->loader->add_filter( 'the_content', $plugin_public, 'rcno_get_review_content' );
 
+	}
+
+	private function define_rest_hooks() {
+
+		$plugin_rest = new Rcno_Reviews_Rest_API( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'rest_api_init', $plugin_rest, 'rcno_register_rest_fields' );
 	}
 
 	/**
