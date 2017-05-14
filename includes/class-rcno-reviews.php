@@ -76,6 +76,9 @@ class Rcno_Reviews {
 
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+
+		$this->define_template_hooks();
+
 		$this->define_rest_hooks();
 
 		$this->define_shortcodes();
@@ -127,6 +130,8 @@ class Rcno_Reviews {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public.php';
+
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-template-tags.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-shortcodes.php';
 
@@ -254,6 +259,11 @@ class Rcno_Reviews {
 		// Get the rendered content of a book review and forward it to the theme as the_content().
 		$this->loader->add_filter( 'the_content', $plugin_public, 'rcno_get_review_content' );
 
+	}
+
+	private function define_template_hooks() {
+		$template_hooks = new Rcno_Template_Tags( $this->get_plugin_name(), $this->get_version() );
+		$template_hooks->include_functions_file();
 	}
 
 	private function define_rest_hooks() {

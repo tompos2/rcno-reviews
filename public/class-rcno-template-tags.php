@@ -20,6 +20,60 @@
  */
 class Rcno_Template_Tags {
 
+	/**
+	 * The unique identifier of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 */
+	protected $plugin_name;
+
+	/**
+	 * The current version of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $version    The current version of the plugin.
+	 */
+	protected $version;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @param      string    $plugin_name       The name of the plugin.
+	 * @param      string    $version    The version of this plugin.
+	 */
+	public function __construct( $plugin_name, $version ) {
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+	}
+
+
+	/**
+	 *  Includes the 'functions file' to be used by the book review template.
+	 */
+	public function include_functions_file () {
+		// Get the layout chosen.
+		$layout = 'rcno_default'; // @TODO: Create settings option for this.
+
+		// Calculate the include path for the layout: Check if a global or local layout should be used.
+		if ( strpos( $layout, 'local') !== false ) {
+			//Local layout
+			$include_path = get_stylesheet_directory() . '/rcno_template/'. preg_replace('/^local\_/', '', $layout ) . '/functions.php';
+		} else {
+			//Global layout
+			$include_path = plugin_dir_path( __FILE__ )  . 'templates/' . $layout . '/functions.php';
+		}
+
+		// Check if the layout file really exists
+		if ( file_exists( $include_path ) ) {
+			// Include the functions.php
+			include_once( $include_path );
+		}
+	}
+
 
 	/**
 	 * Renders the book description. An empty string if description is empty.
@@ -27,13 +81,7 @@ class Rcno_Template_Tags {
 	 * @since 1.0.0
 	 * @return string
 	 */
-	static private function get_the_rcno_book_description() {
-		// Get the review ID.
-		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
-			$review_id = $GLOBALS['review_id'];
-		} else {
-			$review_id = get_post()->ID;
-		}
+	private function get_the_rcno_book_description( $review_id ) {
 
 		$review = get_post_custom( $review_id );
 
@@ -58,8 +106,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 */
-	static public function the_rcno_book_description() {
-		echo self::get_the_rcno_book_description();
+	public function the_rcno_book_description( $review_id ) {
+		echo $this->get_the_rcno_book_description( $review_id );
 	}
 
 
@@ -72,7 +120,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string
 	 */
-	static private function rcno_calc_review_score( $num, $type, $stars = false ) {
+	private function rcno_calc_review_score( $num, $type, $stars = false ) {
 
 		$output = '';
 
@@ -136,7 +184,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string | null
 	 */
-	static private function rcno_the_review_box( $review_id ) {
+	private function rcno_the_review_box( $review_id ) {
 
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria       = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
@@ -166,14 +214,14 @@ class Rcno_Template_Tags {
 		$output .= '<span class="reviewer" itemprop="reviewer" style="display:none;">' . $review_author . '</span>';
 		$output .= '<time class="dtreviewed" itemprop="dtreviewed" style="display:none;">' . $review_date . '</time>';
 		$output .= '<span class="summary" itemprop="summary" style="display:none;">' . $review_summary . '</span>';
-		$output .= '<span class="rating" style="display: none;" itemprop="rating">' . self::rcno_calc_review_score( $final_score, $rating_type, false );
+		$output .= '<span class="rating" style="display: none;" itemprop="rating">' . $this->rcno_calc_review_score( $final_score, $rating_type, false );
 		$output .= '</span>';
 		$output .= '<span itemprop="worst" style="display: none;">1</span>';
 		$output .= '<span itemprop="best" style="display: none;">10</span>';
 
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score">';
-		$output .= '<span class="overall">' . self::rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
+		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
@@ -193,7 +241,7 @@ class Rcno_Template_Tags {
 			$output .= '<span class="score-bar">' . $criteria['label'] . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';
-			$output .= self::rcno_calc_review_score( $criteria['score'], $rating_type );
+			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type );
 			$output .= '</span>';
 			$output .= '</div>';
 			$output .= '</li>';
@@ -211,8 +259,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @param $review_id
 	 */
-	static public function rcno_print_review_box( $review_id ) {
-		echo self::rcno_the_review_box( $review_id );
+	public function rcno_print_review_box( $review_id ) {
+		echo $this->rcno_the_review_box( $review_id );
 	}
 
 
@@ -226,7 +274,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string | null
 	 */
-	static private function rcno_the_review_badge( $review_id ) {
+	private function rcno_the_review_badge( $review_id ) {
 
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria       = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
@@ -251,7 +299,7 @@ class Rcno_Template_Tags {
 		$final_score = number_format( $final_score, 1, '.', '' );
 
 		$output .= '<div class="rcno-review-badge review-badge-' . $rating_type . '">';
-		$output .= self::rcno_calc_review_score( $final_score, $rating_type, true );
+		$output .= $this->rcno_calc_review_score( $final_score, $rating_type, true );
 		$output .= '</div>';
 
 		return $output;
@@ -261,8 +309,8 @@ class Rcno_Template_Tags {
 	 * Prints the review badge on the frontend.
 	 * @param $review_id
 	 */
-	static public function rcno_print_review_badge( $review_id ){
-		echo self::rcno_the_review_badge( $review_id );
+	public function rcno_print_review_badge( $review_id ){
+		echo $this->rcno_the_review_badge( $review_id );
 	}
 
 
