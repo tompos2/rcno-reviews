@@ -38,8 +38,32 @@
     });
 
     $(function() {
-
         $('.rcno-isbn-fetch').on('click', function(e) {
+            e.preventDefault();
+
+            var book_isbn = $('#rcno_book_isbn').val();
+            var google_url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+            var api_url = google_url + book_isbn;
+
+            $.ajax({
+                url: api_url,
+                type: 'GET',
+                success: function (book) {
+                    console.log(book);
+                },
+                error: function () {
+
+                }
+            });
+
+        });
+
+
+    });
+
+    $(function() {
+
+        $('rcno-isbn-fetch').on('click', function(e) {
             e.preventDefault();
 
             $.sanitize = function(input) {
