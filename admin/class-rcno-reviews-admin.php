@@ -172,7 +172,7 @@ class Rcno_Reviews_Admin {
 		$plural   = 'Reviews';
 		$single   = 'Review';
 		$cpt_name = 'rcno_review';
-		$cpt_slug = 'review'; // @TODO: Create an option to select recipe slug.
+		$cpt_slug = 'review'; // @TODO: Create an option to select review slug.
 
 		$opts['can_export']            = true;
 		$opts['capability_type']       = $cap_type;
@@ -404,10 +404,10 @@ class Rcno_Reviews_Admin {
 	}
 
 	/**
-	 * Saves all the data from recipe meta boxes
+	 * Saves all the data from review meta boxes
 	 *
-	 * @param   int $recipe_id post ID of recipe being saved.
-	 * @param   mixed $recipe the recipe post object.
+	 * @param   int $review_id post ID of review being saved.
+	 * @param   mixed $review the review post object.
 	 * @see     https://developer.wordpress.org/reference/functions/wp_update_post/#user-contributed-notes
 	 *
 	 * @since   1.0.0
@@ -463,6 +463,91 @@ class Rcno_Reviews_Admin {
 
 		// Reset the error option for the next error.
 		update_option( 'rcno_admin_errors', false );
+	}
+
+
+	/**
+	 * Adds book reviews to the 'Recent Activity' Dashboard widget
+	 *
+	 * @since 1.0.0
+	 * @param array $query_args
+	 */
+	public function rcno_dashboard_recent_posts_widget( $query_args ) {
+		$query_args =  array_merge( $query_args, array( 'post_type' => array( 'post', 'rcno_review' ) ) );
+		return $query_args;
+	}
+
+
+	/**
+	 * Adds book reviews to the 'At a Glance' Dashboard widget
+	 *
+	 * @since 1.0.0
+	 * @param array $items
+	 */
+	public function rcno_add_reviews_glance_items( $items = array() ) {
+		$num_reviews = wp_count_posts( 'rcno_review' );
+
+		if( $num_reviews ) {
+			$published = intval( $num_reviews->publish );
+			$post_type = get_post_type_object( 'rcno_review' );
+
+			$text = _n( '%s ' . $post_type->labels->singular_name, '%s ' . $post_type->labels->name, $published, 'rcno-reviews' );
+			$text = sprintf( $text, number_format_i18n( $published ) );
+
+			if ( current_user_can( $post_type->cap->edit_posts ) ) {
+				$items[] = sprintf( '<a class="%1$s-count" href="edit.php?post_type=%1$s">%2$s</a>', 'rcno_review', $text ) . "\n";
+			} else {
+				$items[] = sprintf( '<span class="%1$s-count">%2$s</span>', 'rcno_review', $text ) . "\n";
+			}
+		}
+
+		return $items;
+	}
+
+	/**
+	 * Book review update messages.
+	 * See /wp-admin/edit-form-advanced.php
+	 * @param array $messages Existing post update messages.
+	 * @return array Amended post update messages with new review update messages.
+	 */
+	function rcno_updated_review_messages( $messages ) {
+		$post             = get_post();
+		$post_type        = get_post_type( $post );
+		$post_type_object = get_post_type_object( $post_type );
+
+		$messages['rcno_review'] = array(
+			0  => '', // Unused. Messages start at index 1.
+			1  => __( 'Review updated.', 'rcno-reviews' ),
+			2  => __( 'Custom field updated.', 'rcno-reviews' ),
+			3  => __( 'Custom field deleted.', 'rcno-reviews' ),
+			4  => __( 'Review updated.', 'rcno-reviews' ),
+			/* translators: %s: date and time of the revision */
+			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Review restored to revision from %s', 'rcno-reviews' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => __( 'Review published.', 'rcno-reviews' ),
+			7  => __( 'Review saved.', 'rcno-reviews' ),
+			8  => __( 'Review submitted.', 'rcno-reviews' ),
+			9  => sprintf(
+				__( 'Review scheduled for: <strong>%1$s</strong>.', 'rcno-reviews' ),
+				// translators: Publish box date format, see http://php.net/date
+				date_i18n( __( 'M j, Y @ G:i', 'rcno-reviews' ), strtotime( $post->post_date ) )
+			),
+			10 => __( 'Review draft updated.', 'rcno-reviews' )
+		);
+
+		if ( $post_type_object->publicly_queryable && 'rcno_review' === $post_type ) {
+			$permalink = get_permalink( $post->ID );
+
+			$view_link = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View review', 'rcno-reviews' ) );
+			$messages[ $post_type ][1] .= $view_link;
+			$messages[ $post_type ][6] .= $view_link;
+			$messages[ $post_type ][9] .= $view_link;
+
+			$preview_permalink = add_query_arg( 'preview', 'true', $permalink );
+			$preview_link = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview review', 'rcno-reviews' ) );
+			$messages[ $post_type ][8]  .= $preview_link;
+			$messages[ $post_type ][10] .= $preview_link;
+		}
+		return $messages;
 	}
 
 }

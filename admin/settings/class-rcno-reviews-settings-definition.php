@@ -19,7 +19,6 @@
  */
 class Rcno_Reviews_Settings_Definition {
 
-	// @TODO: change plugin-name
 	public static $plugin_name = 'rcno-reviews';
 
 	/**

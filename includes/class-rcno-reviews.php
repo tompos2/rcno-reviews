@@ -220,6 +220,15 @@ class Rcno_Reviews {
 		// Display error messages in recipe edit screen.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'rcno_admin_notice_handler' );
 
+		// Add book reviews to Recent Activity widget
+		$this->loader->add_filter( 'dashboard_recent_posts_query_args', $plugin_admin,  'rcno_dashboard_recent_posts_widget' );
+
+		// Add book reviews to 'At a Glance' widget
+		$this->loader->add_filter( 'dashboard_glance_items', $plugin_admin,  'rcno_add_reviews_glance_items' );
+
+		// Add messages on the book review editor screen
+		$this->loader->add_filter( 'post_updated_messages', $plugin_admin,  'rcno_updated_review_messages' );
+
 	}
 
 	/**
