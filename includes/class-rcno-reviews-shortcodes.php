@@ -252,7 +252,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		printf( '<a href="#" id="rcno-add-reviews-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
+		printf( '<a href="#" id="rcno-add-listings-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
 			esc_attr( $editor_id ),
 			esc_attr__( 'Add Listing', 'rcno-reviews' ),
 			esc_html__( 'Add Listing', 'rcno-reviews' )

@@ -1,19 +1,19 @@
 /**
  * The jquery class handling the shortcode insertion for recipe listings
  *
- * @since      0.8.0
- * @package    recipepress-reloaded
- * @subpackage recipepress-reloaded/admin
- * @author     Jan Köster <rpr@cbjck.de>
+ * @since      1.0.0
+ * @package    Rcno_Reviews
+ * @subpackage Rcno_Reviews/admin
+ * @author     wzyMedia <wzy@outlook.com>
  */
-var rprListingsSc;
+var rcnoListingsSc;
 
 ( function( $ ) {
     var editor,
         inputs = {},
         isTouch = ( 'ontouchend' in document );
 
-    rprListingsSc = {
+    rcnoListingsSc = {
         timeToTriggerRiver: 150,
         minRiverAJAXDuration: 200,
         riverBottomThreshold: 5,
@@ -22,39 +22,40 @@ var rprListingsSc;
         textarea: '',
 
         init: function() {
-            inputs.wrap = $('#rpr-modal-wrap-scl');
-            inputs.dialog = $( '#rpr-modal-form-scl' );
-            inputs.backdrop = $( '#rpr-modal-backdrop-scl' );
-            inputs.submit = $( '#rpr-modal-submit-scl' );
-            inputs.close = $( '#rpr-modal-close-scl' );
+            inputs.wrap = $('#rcno-modal-wrap-scl');
+            inputs.dialog = $( '#rcno-modal-form-scl' );
+            inputs.backdrop = $( '#rcno-modal-backdrop-scl' );
+            inputs.submit = $( '#rcno-modal-submit-scl' );
+            inputs.close = $( '#rcno-modal-close-scl' );
             // URL
-            inputs.id = $( '#recipe-id-field' );
-            inputs.nonce = $( '#rpr_ajax_nonce' );
+            inputs.id = $( '#review-id-field' );
+            inputs.nonce = $( '#rcno_ajax_nonce' );
             // Secondary options
-            inputs.title = $( '#recipe-title-field' );
+            inputs.title = $( '#review-title-field' );
             // Advanced Options
-            inputs.taxonomy =$( '#recipe-taxonomy' );
+            inputs.taxonomy =$( '#review-taxonomy' );
 
             // Bind event handlers
-            inputs.dialog.keydown( rprListingsSc.keydown );
-            inputs.dialog.keyup( rprListingsSc.keyup );
+            inputs.dialog.keydown( rcnoListingsSc.keydown );
+            inputs.dialog.keyup( rcnoListingsSc.keyup );
             inputs.submit.click( function( event ) {
                 event.preventDefault();
-                rprListingsSc.update();
+                rcnoListingsSc.update();
             });
-            inputs.close.add( inputs.backdrop ).add( '#rpr-modal-cancel-scl a' ).click( function( event ) {
+            inputs.close.add( inputs.backdrop ).add( '#rcno-modal-cancel-scl a' ).click( function( event ) {
                 event.preventDefault();
-                rprListingsSc.close();
+                rcnoListingsSc.close();
             });
-            $('body').on('click', '#recipe-taxonomy',  function( event ){
+            $('body').on('click', '#review-taxonomy',  function( event ){
                 event.preventDefault();
-                $('input:radio[name=rpr-modal-scl-mode]')[0].checked = true;
+                $('input:radio[name=rcno-modal-scl-mode]')[0].checked = true;
             });
 
             /* Button to open the modal dialog */
-            $('body').on('click', '#rpr-add-listings-button', function(event) {
-                editor_id = jQuery('#rpr-add-listings-button').attr( "data_editor" );
-                window.rprListingsSc.open( editor_id );
+            $('body').on('click', '#rcno-add-listings-button', function(event) {
+                console.log('Listings');
+                editor_id = jQuery('#rcno-add-listings-button').attr( "data_editor" );
+                window.rcnoListingsSc.open( editor_id );
             });
         },
 
@@ -62,7 +63,7 @@ var rprListingsSc;
             var ed;
 
 
-            rprListingsSc.range = null;
+            rcnoListingsSc.range = null;
 
             if ( editorId ) {
                 window.wpActiveEditor = editorId;
@@ -88,7 +89,7 @@ var rprListingsSc;
                 }
             }
 
-            if ( ! rprListingsSc.isMCE() && document.selection ) {
+            if ( ! rcnoListingsSc.isMCE() && document.selection ) {
                 this.textarea.focus();
                 this.range = document.selection.createRange();
             }
@@ -96,8 +97,8 @@ var rprListingsSc;
             inputs.wrap.show();
             inputs.backdrop.show();
 
-            rprListingsSc.refresh();
-            $( document ).trigger( 'rprListingsSc-open', inputs.wrap );
+            rcnoListingsSc.refresh();
+            $( document ).trigger( 'rcnoListingsSc-open', inputs.wrap );
         },
 
         isMCE: function() {
@@ -109,10 +110,10 @@ var rprListingsSc;
 //		rivers.search.refresh();
 //		rivers.recent.refresh();
 
-            if ( rprListingsSc.isMCE() ) {
-                rprListingsSc.mceRefresh();
+            if ( rcnoListingsSc.isMCE() ) {
+                rcnoListingsSc.mceRefresh();
             } else {
-                rprListingsSc.setDefaultValues();
+                rcnoListingsSc.setDefaultValues();
             }
 
             if ( isTouch ) {
@@ -138,21 +139,21 @@ var rprListingsSc;
                 // Set open in new tab.
                 inputs.openInNewTab.prop( 'checked', ( '_blank' === editor.dom.getAttrib( e, 'target' ) ) );
                 // Update save prompt.
-                inputs.submit.val( rprListingsScL10n.update );
+                inputs.submit.val( rcnoListingsScL10n.update );
 
                 // If there's no link, set the default values.
             } else {
-                rprListingsSc.setDefaultValues();
+                rcnoListingsSc.setDefaultValues();
             }
         },
 
         close: function() {
-            if ( ! rprListingsSc.isMCE() ) {
-                rprListingsSc.textarea.focus();
+            if ( ! rcnoListingsSc.isMCE() ) {
+                rcnoListingsSc.textarea.focus();
 
-                if ( rprListingsSc.range ) {
-                    rprListingsSc.range.moveToBookmark( rprListingsSc.range.getBookmark() );
-                    rprListingsSc.range.select();
+                if ( rcnoListingsSc.range ) {
+                    rcnoListingsSc.range.moveToBookmark( rcnoListingsSc.range.getBookmark() );
+                    rcnoListingsSc.range.select();
                 }
             } else {
                 editor.focus();
@@ -160,34 +161,34 @@ var rprListingsSc;
 
             inputs.backdrop.hide();
             inputs.wrap.hide();
-            $( document ).trigger( 'rprListingsSc-close', inputs.wrap );
+            $( document ).trigger( 'rcnoListingsSc-close', inputs.wrap );
         },
 
         update: function() {
-            if ( rprListingsSc.isMCE() )
-                rprListingsSc.mceUpdate();
+            if ( rcnoListingsSc.isMCE() )
+                rcnoListingsSc.mceUpdate();
             else
-                rprListingsSc.htmlUpdate();
+                rcnoListingsSc.htmlUpdate();
         },
 
         //Build the shortcode here!
         htmlUpdate: function() {
             var attrs, html, begin, end, cursor, title, selection,
-                textarea = rprListingsSc.textarea;
+                textarea = rcnoListingsSc.textarea;
 
             if ( ! textarea )
                 return;
 
             var out="[";
 
-            sel = $( "input[name='rpr-modal-scl-mode']:checked" );
+            sel = $( "input[name='rcno-modal-scl-mode']:checked" );
             switch(sel.val()) {
-                case 'rpr-tax-list':
-                    out+="rpr-tax-list ";
-                    out+="tax=\""+$( "#rpr-modal-form-scl select option:selected" ).val()+"\"";
+                case 'rcno-tax-list':
+                    out+="rcno-tax-list ";
+                    out+="tax=\""+$( "#rcno-modal-form-scl select option:selected" ).val()+"\"";
                     break;
-                case 'rpr-recipe-index':
-                    out+= "rpr-recipe-index";
+                case 'rcno-review-index':
+                    out+= "rcno-review-index";
                     break;
                 default:
                     alert(sel.val());
@@ -198,12 +199,12 @@ var rprListingsSc;
             out+="]\n";
 
             // Insert Shortcode
-            if ( document.selection && rprRecipeSc.range ) {
+            if ( document.selection && rcnoRecipeSc.range ) {
                 // IE
                 // Note: If no text is selected, IE will not place the cursor
                 //       inside the closing tag.
                 textarea.focus();
-                rprRecipeSc.range.text = out;
+                rcnoRecipeSc.range.text = out;
             } else if ( typeof textarea.selectionStart !== 'undefined' ) {
                 // W3C
                 begin       = textarea.selectionStart;
@@ -216,21 +217,21 @@ var rprListingsSc;
                 textarea.selectionStart = textarea.selectionEnd = cursor;
             }
 
-            rprListingsSc.close();
+            rcnoListingsSc.close();
             textarea.focus();
         },
 
         mceUpdate: function() {
             var link;
             var out="[";
-            sel = $( "input[name='rpr-modal-scl-mode']:checked" );
+            sel = $( "input[name='rcno-modal-scl-mode']:checked" );
             switch(sel.val()) {
-                case 'rpr-tax-list':
-                    out+="rpr-tax-list ";
-                    out+="tax=\""+$( "#rpr-modal-form-scl select option:selected" ).val()+"\"";
+                case 'rcno-tax-list':
+                    out+="rcno-tax-list ";
+                    out+="tax=\""+$( "#rcno-modal-form-scl select option:selected" ).val()+"\"";
                     break;
-                case 'rpr-recipe-index':
-                    out+= "rpr-recipe-index";
+                case 'rcno-review-index':
+                    out+= "rcno-review-index";
                     break;
                 default:
                     alert(sel.val());
@@ -239,7 +240,7 @@ var rprListingsSc;
             }
             out+="]<br/>";
 
-            rprListingsSc.close();
+            rcnoListingsSc.close();
             editor.focus();
 
             tinyMCE.activeEditor.execCommand('mceReplaceContent', false, out);
@@ -258,7 +259,7 @@ var rprListingsSc;
             inputs.title.val( '' );
 
             // Update save prompt.
-            inputs.submit.val( rprListingsScL10n.save );
+            inputs.submit.val( rcnoListingsScL10n.save );
         },
 
         keydown: function( event ) {
@@ -266,7 +267,7 @@ var rprListingsSc;
                 key = $.ui.keyCode;
 
             if ( key.ESCAPE === event.keyCode ) {
-                rprListingsSc.close();
+                rcnoListingsSc.close();
                 event.stopImmediatePropagation();
             } else if ( key.TAB === event.keyCode ) {
                 id = event.target.id;
@@ -292,9 +293,9 @@ var rprListingsSc;
             }
 
             fn = event.keyCode === key.UP ? 'prev' : 'next';
-            clearInterval( rprListingsSc.keyInterval );
-            rprListingsSc[ fn ]();
-            rprListingsSc.keyInterval = setInterval( rprListingsSc[ fn ], rprListingsSc.keySensitivity );
+            clearInterval( rcnoListingsSc.keyInterval );
+            rcnoListingsSc[ fn ]();
+            rcnoListingsSc.keyInterval = setInterval( rcnoListingsSc[ fn ], rcnoListingsSc.keySensitivity );
             event.preventDefault();
         },
 
@@ -302,7 +303,7 @@ var rprListingsSc;
             var key = $.ui.keyCode;
 
             if ( event.which === key.UP || event.which === key.DOWN ) {
-                clearInterval( rprListingsSc.keyInterval );
+                clearInterval( rcnoListingsSc.keyInterval );
                 event.preventDefault();
             }
         },
@@ -331,5 +332,5 @@ var rprListingsSc;
         }
 
     };
-    $( document ).ready( rprListingsSc.init );
+    $( document ).ready( rcnoListingsSc.init );
 })( jQuery );

@@ -1,10 +1,10 @@
 /**
  * The jquery class handling the shortcode insertion for recipes
  *
- * @since      0.8.0
- * @package    recipepress-reloaded
- * @subpackage recipepress-reloaded/admin
- * @author     Jan Köster <rcno@cbjck.de>
+ * @since      1.0.0
+ * @package    Rcno_Reviews
+ * @subpackage Rcno_Reviews/admin
+ * @author     wzyMedia <wzy@outlook.com>
  */
 
 var rcnoReviewSc;

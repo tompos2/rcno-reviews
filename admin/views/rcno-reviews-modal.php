@@ -1,11 +1,11 @@
 <?php
 /**
- * The shortcode overlay view (aka the dialog itself) to insert recipe shortcodes.
+ * The shortcode overlay view (aka the dialog itself) to insert book review shortcodes.
  *
  * @since      1.0.0
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/admin
- * @author     Jan Köster <rpr@cbjck.de>
+ * @author     wzyMedia <wzy@outlook.com>
  */
 ?>
 
