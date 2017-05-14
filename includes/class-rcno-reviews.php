@@ -266,7 +266,8 @@ class Rcno_Reviews {
 
 	private function define_shortcodes() {
 
-		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Rcno_Reviews_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version(), $plugin_public );
 
 		add_shortcode( $this->get_plugin_name(), array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
 

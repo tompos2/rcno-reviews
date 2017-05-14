@@ -44,24 +44,22 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      class    $plugin_public;    An instance of the Rcno_Reviews_Public class.
 	 */
-	private $public_methods;
+	private $plugin_public;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since      1.0.0
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
+	 * @param      class    $plugin_public;    An instance of the Rcno_Reviews_Public class.
 	 */
-	public function __construct( $plugin_name, $version ) {
-
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
-		$this->public_methods = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
-
+	public function __construct( $plugin_name, $version, $plugin_public ) {
+		$this->plugin_name 	 = $plugin_name;
+		$this->version 			 = $version;
+		$this->plugin_public = $plugin_public;
 	}
 
 	/**
@@ -115,10 +113,10 @@ class Rcno_Reviews_Shortcodes {
 
 				if ( $options['excerpt'] === 0 ) {
 					// Embed complete review.
-					$output = $this->public_methods->rcno_render_review_content( $review_post );
+					$output = $this->plugin_public->rcno_render_review_content( $review_post );
 				} elseif ( $options['excerpt'] === 1 ) {
 					// Embed excerpt only.
-					//$output = $this->public_methods->rcno_render_review_excerpt( $review_post ); //@TODO: Create this function.
+					//$output = $this->plugin_public->rcno_render_review_excerpt( $review_post ); //@TODO: Create this function.
 				}
 			} else {
 				$output = '';

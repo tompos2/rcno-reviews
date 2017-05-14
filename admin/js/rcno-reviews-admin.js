@@ -38,7 +38,7 @@
     });
 
     $(function() {
-        $('.rcno-isbn-fetch').on('click', function(e) {
+        $('rcno-isbn-fetch').on('click', function(e) {
             e.preventDefault();
 
             var book_isbn = $('#rcno_book_isbn').val();
@@ -63,7 +63,7 @@
 
     $(function() {
 
-        $('rcno-isbn-fetch').on('click', function(e) {
+        $('.rcno-isbn-fetch').on('click', function(e) {
             e.preventDefault();
 
             $.sanitize = function(input) {
