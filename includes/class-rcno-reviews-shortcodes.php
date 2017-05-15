@@ -44,7 +44,7 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      class    $plugin_public;    An instance of the Rcno_Reviews_Public class.
+	 * @class    class  Rcno_Reviews_Public   $plugin_public;    An instance of the Rcno_Reviews_Public class.
 	 */
 	private $plugin_public;
 
@@ -54,7 +54,7 @@ class Rcno_Reviews_Shortcodes {
 	 * @since      1.0.0
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
-	 * @param      class    $plugin_public;    An instance of the Rcno_Reviews_Public class.
+	 * @param      class     Rcno_Reviews_Public  $plugin_public;    An instance of the Rcno_Reviews_Public class.
 	 */
 	public function __construct( $plugin_name, $version, $plugin_public ) {
 		$this->plugin_name 	 = $plugin_name;
@@ -106,7 +106,7 @@ class Rcno_Reviews_Shortcodes {
 			if ( ! is_null( $review_post ) && $review_post->post_type === 'rcno_review' ) {
 				$output               = '';
 				$review               = get_post_custom( $review_post->ID );
-				$GLOBALS['review_id'] = $review_post->ID;
+				$GLOBALS['review_id'] = $review_post->ID; // Set review ID for retrieval in embedded reviews.
 
 				//$taxonomies = get_option('rcno_taxonomies', array());
 

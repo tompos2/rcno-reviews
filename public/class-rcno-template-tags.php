@@ -75,6 +75,92 @@ class Rcno_Template_Tags {
 	}
 
 
+	/** ****************************************************************************
+	 * TAXONOMY RELATED TEMPLATE TAGS
+	 *******************************************************************************/
+
+	private function get_the_rcno_taxonomy_headline( $taxonomy ) {
+
+		// Get the taxonomy.
+		$tax = get_taxonomy( $taxonomy );
+
+		$out = '';
+
+		/**
+		 * Add a H3 heading for embedded recipes or a H2
+		 * heading for a standalone recipe
+		 */
+		if ( $this->is_review_embedded() ) {
+			$out .= '<h3>' . $tax->labels->name . '</h3>';
+		} else {
+			$out .= '<h2>' . $tax->labels->name . '</h2>';
+		}
+
+		return $out;
+	}
+
+	public function the_rcno_taxonomy_headline( $taxonomy ) {
+		echo $this->get_the_rcno_taxonomy_headline( $taxonomy );
+	}
+
+
+	private function get_the_rcno_taxonomy_terms( $taxonomy, $label = false, $sep = '/' ) {
+		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) { //Correctly get ID for embedded reviews.
+			$review_id = $GLOBALS['review_id'];
+		} else {
+			$review_id = get_post()->ID;
+		}
+
+		$out = '';
+
+		$terms = get_the_term_list( $review_id, $taxonomy, '', __( $sep, 'rcno-reviews' ), '' );
+		$tax   = get_taxonomy( $taxonomy );
+
+		if ( false === $tax || false === $terms ) {
+			return null;
+		}
+
+		$prefix = '';
+
+		if ( $label ) {
+			$prefix = $tax->labels->name . ': ';
+		}
+
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			$out .= sprintf(
+				'<span class="rcno-term-list">%1s%2s</span>',
+				$prefix,
+				$terms
+			);
+			$out .= '';
+		}
+
+		return $out;
+	}
+
+	public function the_rcno_taxonomy_terms( $taxonomy, $label = false, $sep = '/' ) {
+		echo $this->get_the_rcno_taxonomy_terms( $taxonomy, $label, $sep );
+	}
+
+
+	private function get_the_rcno_taxonomy_list( $label, $sep ) {
+		$out = '';
+
+		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+
+		foreach ( $custom_taxonomies as $tax_key => $tax_value ) {
+			$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_' . $tax_key, $label, $sep );
+		}
+
+		return $out;
+	}
+
+	public function the_rcno_taxonomy_list( $label, $sep ) {
+		echo $this->get_the_rcno_taxonomy_list( $label, $sep );
+	}
+
+
+
 	/**
 	 * Renders the book description. An empty string if description is empty.
 	 *
@@ -311,6 +397,20 @@ class Rcno_Template_Tags {
 	 */
 	public function rcno_print_review_badge( $review_id ){
 		echo $this->rcno_the_review_badge( $review_id );
+	}
+
+
+	/**
+	 * Check if the review is embedded into a post, page or another custom post type.
+	 *
+	 * @return boolean
+	 */
+	public function is_review_embedded() {
+		if ( get_post_type() !== 'rcno_review' ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 

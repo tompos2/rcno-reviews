@@ -20,7 +20,19 @@ $template->rcno_print_review_box( $review_id );
 
 $template->rcno_print_review_badge( $review_id );
 
-var_dump( __FILE__ );
+$template->the_rcno_taxonomy_headline( 'rcno_author' );
+$template->the_rcno_taxonomy_headline( 'rcno_genre' );
+$template->the_rcno_taxonomy_headline( 'rcno_series' );
+
+$template->the_rcno_taxonomy_terms( 'rcno_author', true );
+echo '<br>';
+$template->the_rcno_taxonomy_terms( 'rcno_genre', true, ' <:> ' );
+echo '<br>';
+$template->the_rcno_taxonomy_terms( 'rcno_series', true, ' <:> ' );
+echo '<br>';
+$template->the_rcno_taxonomy_list( true, '/' );
+
+
 
 ?>
 
