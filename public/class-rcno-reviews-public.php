@@ -105,7 +105,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param type WP_Query object.
+	 * @param object $queryWP_Query object.
 	 */
 	public function rcno_review_query( WP_Query $query ) {
 		// Don't change query on admin page
@@ -207,6 +207,7 @@ class Rcno_Reviews_Public {
 
 			if ( is_single() || true == 'render full review on archive page' ) { // @TODO: Create and option to display full review on archive pages.
 				$content = $this->rcno_render_review_content( $review_post );
+				//$content = $content . $this->rcno_render_review_content( $review_post ); // @TODO: I am not sure about this.
 			} else {
 				// $content = $this->rcno_render_review_excerpt( $review_post ); // @TODO: Create 'rcno_render_review_excerpt' method.
 			}

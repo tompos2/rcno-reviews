@@ -52,7 +52,7 @@ class Rcno_Template_Tags {
 
 
 	/**
-	 *  Includes the 'functions file' to be used by the book review template.
+	 * Includes the 'functions file' to be used by the book review template.
 	 */
 	public function include_functions_file () {
 		// Get the layout chosen.
@@ -99,11 +99,23 @@ class Rcno_Template_Tags {
 		return $out;
 	}
 
+	/**
+	 * Print the taxonomy headline.
+	 *
+	 * @param $taxonomy
+	 */
 	public function the_rcno_taxonomy_headline( $taxonomy ) {
 		echo $this->get_the_rcno_taxonomy_headline( $taxonomy );
 	}
 
 
+	/**
+	 * @param        $taxonomy
+	 * @param bool   $label
+	 * @param string $sep
+	 *
+	 * @return null|string
+	 */
 	private function get_the_rcno_taxonomy_terms( $taxonomy, $label = false, $sep = '/' ) {
 		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) { //Correctly get ID for embedded reviews.
 			$review_id = $GLOBALS['review_id'];
@@ -113,7 +125,7 @@ class Rcno_Template_Tags {
 
 		$out = '';
 
-		$terms = get_the_term_list( $review_id, $taxonomy, '', __( $sep, 'rcno-reviews' ), '' );
+		$terms = get_the_term_list( $review_id, $taxonomy, '<span class="rcno-tax-term">', __( $sep, 'rcno-reviews' ), '</span>' );
 		$tax   = get_taxonomy( $taxonomy );
 
 		if ( false === $tax || false === $terms ) {
@@ -123,12 +135,12 @@ class Rcno_Template_Tags {
 		$prefix = '';
 
 		if ( $label ) {
-			$prefix = $tax->labels->name . ': ';
+			$prefix = '<span class="rcno-tax-name">' . $tax->labels->name . ': ' . '</span>';
 		}
 
 		if ( $terms && ! is_wp_error( $terms ) ) {
 			$out .= sprintf(
-				'<span class="rcno-term-list">%1s%2s</span>',
+				'<div class="rcno-term-list">%1s%2s</div>',
 				$prefix,
 				$terms
 			);
@@ -138,11 +150,24 @@ class Rcno_Template_Tags {
 		return $out;
 	}
 
+	/**
+	 * Print taxonomy terms.
+	 *
+	 * @param        $taxonomy
+	 * @param bool   $label
+	 * @param string $sep
+	 */
 	public function the_rcno_taxonomy_terms( $taxonomy, $label = false, $sep = '/' ) {
 		echo $this->get_the_rcno_taxonomy_terms( $taxonomy, $label, $sep );
 	}
 
 
+	/**
+	 * @param $label
+	 * @param $sep
+	 *
+	 * @return string
+	 */
 	private function get_the_rcno_taxonomy_list( $label, $sep ) {
 		$out = '';
 
@@ -155,11 +180,18 @@ class Rcno_Template_Tags {
 		return $out;
 	}
 
+	/**
+	 * @param $label
+	 * @param $sep
+	 */
 	public function the_rcno_taxonomy_list( $label, $sep ) {
 		echo $this->get_the_rcno_taxonomy_list( $label, $sep );
 	}
 
 
+	/** ****************************************************************************
+	 * REVIEW BOOK DESCRIPTION TEMPLATE TAGS
+	 *******************************************************************************/
 
 	/**
 	 * Renders the book description. An empty string if description is empty.
@@ -190,12 +222,40 @@ class Rcno_Template_Tags {
 	/**
 	 * Outputs the rendered description
 	 *
+	 * @param $review_id
 	 * @since 1.0.0
 	 */
 	public function the_rcno_book_description( $review_id ) {
 		echo $this->get_the_rcno_book_description( $review_id );
 	}
 
+
+	/** ****************************************************************************
+	 * REVIEW BOOK REVIEW CONTENT TEMPLATE TAGS
+	 *******************************************************************************/
+
+	private function get_the_rcno_book_review_content( $review_id ) {
+
+		$review_content = '';
+		$review_content .= '<div class="rcno-book-review-content">';
+		$review_content .= apply_filters( 'the_content', get_post_field( 'post_content', $review_id ) );
+		$review_content .= '</div>';
+
+		return $review_content;
+	}
+
+	/**
+	 * @param $review_id
+	 */
+	public function the_rcno_book_review_content( $review_id ) {
+		echo $this->get_the_rcno_book_review_content( $review_id );
+	}
+
+
+
+	/** ****************************************************************************
+	 * REVIEW BOOK REVIEW SCORE TEMPLATE TAGS
+	 *******************************************************************************/
 
 	/**
 	 * Calculates the review scores
@@ -266,9 +326,9 @@ class Rcno_Template_Tags {
 	/**
 	 * Creates the review box for the frontend.
 	 *
-	 * @param      $review_id
+	 * @param  int  $review_id
 	 *
-	 * @return string | null
+	 * @return string|null
 	 */
 	private function rcno_the_review_box( $review_id ) {
 
@@ -327,7 +387,7 @@ class Rcno_Template_Tags {
 			$output .= '<span class="score-bar">' . $criteria['label'] . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';
-			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type );
+			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type, true );
 			$output .= '</span>';
 			$output .= '</div>';
 			$output .= '</li>';
@@ -358,7 +418,7 @@ class Rcno_Template_Tags {
 	 * @param      $post_id
 	 * @param bool $echo
 	 *
-	 * @return string | null
+	 * @return string|null
 	 */
 	private function rcno_the_review_badge( $review_id ) {
 
@@ -406,7 +466,7 @@ class Rcno_Template_Tags {
 	 * @return boolean
 	 */
 	public function is_review_embedded() {
-		if ( get_post_type() !== 'rcno_review' ) {
+		if ( 'rcno_review' !== get_post_type() ) {
 			return true;
 		} else {
 			return false;

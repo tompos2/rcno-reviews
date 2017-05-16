@@ -411,6 +411,7 @@ class Rcno_Reviews_Admin {
 	 * @see     https://developer.wordpress.org/reference/functions/wp_update_post/#user-contributed-notes
 	 *
 	 * @since   1.0.0
+	 * @return  int|bool
 	 */
 	public function rcno_save_review( $review_id, $review = null ) {
 

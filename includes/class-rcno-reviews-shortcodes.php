@@ -40,15 +40,6 @@ class Rcno_Reviews_Shortcodes {
 	private $version;
 
 	/**
-	 * An instance of the 'Rcno_Reviews_Public' class.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @class    class  Rcno_Reviews_Public   $plugin_public;    An instance of the Rcno_Reviews_Public class.
-	 */
-	private $plugin_public;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
@@ -56,10 +47,9 @@ class Rcno_Reviews_Shortcodes {
 	 * @param      string    $version    The version of this plugin.
 	 * @param      class     Rcno_Reviews_Public  $plugin_public;    An instance of the Rcno_Reviews_Public class.
 	 */
-	public function __construct( $plugin_name, $version, $plugin_public ) {
+	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name 	 = $plugin_name;
 		$this->version 			 = $version;
-		$this->plugin_public = $plugin_public;
 	}
 
 	/**
@@ -70,6 +60,9 @@ class Rcno_Reviews_Shortcodes {
 	 * @return string
 	 */
 	public function rcno_do_review_shortcode( $options ) {
+
+		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
+
 		/**
 		 * Set default values for options not set explicitly.
 		 */
@@ -84,15 +77,15 @@ class Rcno_Reviews_Shortcodes {
 		$review_post = null;
 
 
-		if ( $options['id'] !== 'n/a' ) {
+		if ( 'n/a' !== $options['id'] ) {
 			/**
 			 * Get random post
 			 */
-			if ( $options['id'] === 'random' ) {
+			if ( 'random' === $options['id'] ) {
 
 				$posts = get_posts( array(
 					'post_type' => 'rcno_review',
-					'nopaging' => true
+					'nopaging' => true,
 				));
 
 				$review_post = $posts[ array_rand( $posts ) ];
@@ -111,10 +104,10 @@ class Rcno_Reviews_Shortcodes {
 				//$taxonomies = get_option('rcno_taxonomies', array());
 
 
-				if ( $options['excerpt'] === 0 ) {
+				if ( 0 === $options['excerpt'] ) {
 					// Embed complete review.
-					$output = $this->plugin_public->rcno_render_review_content( $review_post );
-				} elseif ( $options['excerpt'] === 1 ) {
+					$output = $plugin_public->rcno_render_review_content( $review_post );
+				} elseif ( 1 === $options['excerpt'] ) {
 					// Embed excerpt only.
 					//$output = $this->plugin_public->rcno_render_review_excerpt( $review_post ); //@TODO: Create this function.
 				}
@@ -183,7 +176,7 @@ class Rcno_Reviews_Shortcodes {
 
 		wp_enqueue_script( 'rcno_ajax_scr', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scr.js', array( 'jquery' ) );
 		wp_localize_script( 'rcno_ajax_scr', 'rcno_vars', array(
-				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' )
+				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)
 		);
 		wp_localize_script( 'rcno_ajax_scr', 'rcnoReviewsScL10n', array(
@@ -216,12 +209,13 @@ class Rcno_Reviews_Shortcodes {
 		);
 		$query['offset'] = $args['pagenum'] > 1 ? $query['posts_per_page'] * ( $args['pagenum'] - 1 ) : 0;
 
-		$reviews = get_posts( array( 's'              => $args['s'],
+		$reviews = get_posts( array(
+			                           's'              => $args['s'],
 		                             'post_type'      => 'rcno_review',
 		                             'posts_per_page' => $query['posts_per_page'],
 		                             'offset'         => $query['offset'],
-		                             'orderby'        => 'post_date'
-		) );
+		                             'orderby'        => 'post_date',
+        ) );
 
 		$json = array();
 
@@ -282,14 +276,14 @@ class Rcno_Reviews_Shortcodes {
 	public function rcno_load_ajax_scripts_scl( $hook ) {
 		global $post_type;
 
-		// Only load on pages where it is necessary:
+		// Only load on pages where it is necessary.
 		if ( ! in_array( $post_type, array( 'page' ), true ) ) {
 			return;
 		}
 
 		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scl.js', array( 'jquery' ) );
 		wp_localize_script( 'rcno_ajax_scl', 'rcno_vars', array(
-				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' )
+				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)
 		);
 		wp_localize_script( 'rcno_ajax_scl', 'rcnoListingsScL10n', array(
