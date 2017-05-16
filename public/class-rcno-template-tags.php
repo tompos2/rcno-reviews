@@ -367,7 +367,7 @@ class Rcno_Template_Tags {
 
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score">';
-		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
+		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, false ) . '</span>';
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
@@ -387,7 +387,7 @@ class Rcno_Template_Tags {
 			$output .= '<span class="score-bar">' . $criteria['label'] . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';
-			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type, true );
+			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type, false );
 			$output .= '</span>';
 			$output .= '</div>';
 			$output .= '</li>';
@@ -410,9 +410,7 @@ class Rcno_Template_Tags {
 	}
 
 
-
-
-	/**
+  /**
 	 * Creates the review badge for the frontend.
 	 *
 	 * @param      $post_id
@@ -458,6 +456,11 @@ class Rcno_Template_Tags {
 	public function rcno_print_review_badge( $review_id ){
 		echo $this->rcno_the_review_badge( $review_id );
 	}
+
+
+	/** ****************************************************************************
+	 * REVIEW BOOK REVIEW SCHEME DATA TAGS
+	 *******************************************************************************/
 
 
 	/**

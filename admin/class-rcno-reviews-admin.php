@@ -73,6 +73,14 @@ class Rcno_Reviews_Admin {
 	public $book_review_score;
 
 	/**
+	 * Instance of the Rcno_Admin_Review_Rating class handling simple 5 star rating functions.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public $book_review_rating;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -95,6 +103,9 @@ class Rcno_Reviews_Admin {
 
 		require_once __DIR__ . '/class-rcno-admin-review-score.php';
 		$this->book_review_score = new Rcno_Admin_Review_Score( $this->version );
+
+		require_once __DIR__ . '/class-rcno-admin-review-rating.php';
+		$this->book_review_rating = new Rcno_Admin_Review_Rating( $this->version );
 
 	}
 
