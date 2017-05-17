@@ -562,4 +562,17 @@ class Rcno_Reviews_Admin {
 		return $messages;
 	}
 
+
+	/**
+	 * Adds the book reviews post type to AMP.
+	 */
+	public function rcno_add_reviews_cpt_amp() {
+
+		if ( ! defined( 'AMP_QUERY_VAR' ) ) {
+			return; // do not add support if AMP plugin is not detected
+		}
+
+		add_post_type_support( 'rcno_review', AMP_QUERY_VAR );
+	}
+
 }

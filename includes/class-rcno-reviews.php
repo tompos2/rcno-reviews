@@ -188,6 +188,9 @@ class Rcno_Reviews {
 		// Registers new featured image sizes for the book review post type.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_book_cover_sizes' );
 
+		// Adds the book reviews post type to AMP.
+		$this->loader->add_action( 'amp_init', $plugin_admin, 'rcno_add_reviews_cpt_amp' );
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
