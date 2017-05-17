@@ -38,6 +38,9 @@ $template = new Rcno_Template_Tags( $plugin_name, $version ); ?>
 		echo '<br>';
 		$template->the_rcno_taxonomy_list( true, '/' );
 
+		echo $template->get_the_rcno_book_schema_data();
+		echo $template->get_the_rcno_review_schema_data();
+
 	?>
 
 </div>

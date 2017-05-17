@@ -209,7 +209,7 @@ class Rcno_Template_Tags {
 		// Render the description only if it is not empty
 		if ( isset( $review['rcno_book_description'] ) ) {
 			if ( strlen( $review['rcno_book_description'][0] ) > 0 ) {
-				$out .= '<div class="rcno_book_description">';
+				$out .= '<div class="rcno-book-description">';
 				$out .= sanitize_post_field( 'rcno_book_description', $review['rcno_book_description'][0], $review_id );
 				$out .= '</div>';
 			}
@@ -403,7 +403,7 @@ class Rcno_Template_Tags {
 	/**
 	 * Prints the review box on the frontend.
 	 *
-	 * @param $review_id
+	 * @param int $review_id
 	 */
 	public function rcno_print_review_box( $review_id ) {
 		echo $this->rcno_the_review_box( $review_id );
@@ -461,6 +461,105 @@ class Rcno_Template_Tags {
 	/** ****************************************************************************
 	 * REVIEW BOOK REVIEW SCHEME DATA TAGS
 	 *******************************************************************************/
+
+	public function get_the_rcno_book_schema_data() {
+
+		$out = '';
+		$out .= '<script type="application/ld+json">';
+		$out .= '{';
+		$out .= '"@context": "http://schema.org"';
+		$out .= ', "@type": "Book"';
+		$out .= ', "name": "The Catcher in the Rye"';
+		$out .= ', "author": {'; // Begin author
+		$out .= '"@type": "Person"';
+		$out .= ', "name": "J.D. Salinger"';
+		$out .= '}'; // End author
+		$out .= ', "url": "http://www.barnesandnoble.com/store/info/offer/JDSalinger"'; // URL to this review page
+		$out .= ', "datePublished": "2014-03-13T20:00"';
+		$out .= ', "genre": "Fantasy"';
+		$out .= ', "publisher": "O\' Reily"';
+		$out .= ', "workExample": ['; // Begin workExample
+		$out .= '{'; // Begin First example
+		$out .= '"@type": "Book"';
+		$out .= ', "isbn": "031676948"';
+		$out .= ', "bookEdition": "2nd Edition"';
+		$out .= ', "bookFormat": "http://schema.org/Hardcover"';
+		$out .= ', "numberOfPages": 504';
+		$out .= ', "potentialAction": {'; // Begin potentialAction
+		$out .= '"@type": "ReadAction"';
+		$out .= ', "target": {'; // Begin target
+		$out .= '"@type": "EntryPoint"';
+		$out .= ', "urlTemplate": "http://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true"';
+		$out .= ', "actionPlatform": ['; // Begin actionPlatform
+		$out .= '"http://schema.org/DesktopWebPlatform"';
+		$out .= ', "http://schema.org/IOSPlatform"';
+		$out .= ', "http://schema.org/AndroidPlatform"';
+		$out .= ']'; // End actionPlatform
+		$out .= '}'; // End target
+		$out .= '}'; // End potentialAction
+		$out .= '}'; // End First example
+		$out .= ']'; // End workExample
+		$out .= '}';
+		$out .= '</script>';
+
+		return $out;
+	}
+
+	public function get_the_rcno_review_schema_data() {
+
+		$out = '';
+		$out .= '<script type="application/ld+json">';
+		$out .= '{';
+
+		$out .= '"@context": "http://schema.org"';
+		$out .= ', "@type": "Review"';
+
+		$out .= ', "author": {';
+		$out .= '"@type": "Person"';
+		$out .= ', "name": "Lisa Kennedy"';
+		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"';
+		$out .= '}';
+
+		$out .= ', "url": "http://www.localreviews.com/restaurants/1/2/3/daves-steak-house.html"';
+		$out .= ', "datePublished": "2014-03-13T20:00"';
+
+		$out .= ', "publisher": {';
+		$out .= '"@type": "Organization"';
+		$out .= ', "name": "Denver Post"';
+		$out .= ', "sameAs": "http://www.denverpost.com"';
+		$out .= '}';
+
+		$out .= ', "description": "Great old fashioned steaks but the salads are sub par."';
+		$out .= ', "inLanguage": "en"';
+
+		$out .= ', "itemReviewed": {';
+		$out .= '"@type":"Book"';
+		$out .= ', "name": "Harry Potter"';
+		$out .= ', "isbn": "031676948"';
+
+		$out .= ', "author": {';
+		$out .= '"@type": "Person"';
+		$out .= ', "name": "J.D. Salinger"';
+		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"';
+		$out .= '}';
+
+		$out .= ', "datePublished": "2014-03-13"';
+
+		$out .= '}';
+
+		$out .= ', "reviewRating": {';
+		$out .= '"@type":"Rating"';
+		$out .= ', "worstRating": 1';
+		$out .= ', "bestRating": 5';
+		$out .= ', "ratingValue": 3.5';
+		$out .= '}';
+
+
+		$out .= '}';
+		$out .= '</script>';
+
+		return $out;
+	}
 
 
 	/**
