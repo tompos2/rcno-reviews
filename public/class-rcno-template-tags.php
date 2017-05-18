@@ -254,6 +254,48 @@ class Rcno_Template_Tags {
 
 
 	/** ****************************************************************************
+	 * REVIEW BOOK META TEMPLATE TAGS
+	 *******************************************************************************/
+
+	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = 'span' ) {
+
+		$review = get_post_custom( $review_id );
+
+		$meta_keys = array(
+			'book_publisher',
+		);
+
+		$wrappers = array(
+			'span',
+			'div',
+			'p',
+			'h1',
+			'h2',
+			'h3',
+		);
+
+		if ( '' === $meta_key || ! in_array( $meta_key, $meta_keys, true ) || ! in_array( $wrapper, $wrappers, true ) ) {
+			return null;
+		}
+
+		if ( 'book_publisher' === $meta_key ) {
+			if ( isset( $review['rcno_book_publisher'] ) ) {
+				if ( strlen( $review['rcno_book_publisher'][0] ) > 0 ) {
+					$out = '';
+					$out .= '<' . $wrapper . ' ' . 'class="' . 'rcno-' . sanitize_html_class( $meta_key ) . '"' . '>'; //@TODO: Sanitizing the HTML class is not necessary.
+					$out .= sanitize_text_field( $review['rcno_book_publisher'][0] );
+					$out .= '</' . $wrapper . '>';
+					return $out;
+				}
+			}
+		}
+
+		return null;
+	}
+
+
+
+	/** ****************************************************************************
 	 * REVIEW BOOK REVIEW SCORE TEMPLATE TAGS
 	 *******************************************************************************/
 
