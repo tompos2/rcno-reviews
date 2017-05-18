@@ -10,15 +10,23 @@ if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
 $plugin_name = 'rcno-reviews';
 $version = '1.0.0';
 
-do_action( 'before_the_rcno_book_description' );
 
-$template = new Rcno_Template_Tags( $plugin_name, $version ); ?>
+
+$template = new Rcno_Template_Tags( $plugin_name, $version );
+
+var_dump( $template );
+
+?>
+
+
 
 <div class="rcno-book-info">
 
 	<?php
 
 		$template->the_rcno_book_review_content( $review_id );
+
+	    do_action( 'before_the_rcno_book_description' );
 
 		$template->the_rcno_book_description( $review_id );
 

@@ -275,7 +275,7 @@ class Rcno_Reviews_Public {
 		// Check if a global or local layout should be used:
 		if ( false !== strpos( $layout, 'local' ) ) {
 			//Local layout
-			$include_path = get_stylesheet_directory() . '/templates/' . preg_replace( '/^local\_/', '', $layout ) . '/';
+			$include_path = get_stylesheet_directory() . '/rcno-templates/' . preg_replace( '/^local\_/', '', $layout ) . '/';
 		} else {
 			//Global layout
 			$include_path = plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/';
