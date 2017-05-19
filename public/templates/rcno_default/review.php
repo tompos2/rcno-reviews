@@ -38,16 +38,21 @@ var_dump( $template );
 		$template->the_rcno_taxonomy_headline( 'rcno_genre' );
 		$template->the_rcno_taxonomy_headline( 'rcno_series' );*/
 
-		/*$template->the_rcno_taxonomy_terms( 'rcno_author', false );
+		$template->the_rcno_taxonomy_terms( 'rcno_author', false );
 		echo '<br>';
 		$template->the_rcno_taxonomy_terms( 'rcno_genre', true, ' · ' );
 		echo '<br>';
-		$template->the_rcno_taxonomy_terms( 'rcno_series', true, ' · ' );*/
+		$template->the_rcno_taxonomy_terms( 'rcno_series', true, ' · ' );
 		echo '<br>';
-		$template->the_rcno_taxonomy_list( true, '/' );
+		//$template->the_rcno_taxonomy_list( true, '/' );
 
-		echo $template->get_the_rcno_book_schema_data();
-		echo $template->get_the_rcno_review_schema_data();
+		echo $template->get_the_rcno_book_schema_data( $review_id );
+		echo $template->get_the_rcno_review_schema_data( $review_id );
+	    echo '<br>';
+
+	    echo $template->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'h1' );
+	    echo $template->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'h1' );
+	    echo $template->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '' );
 
 	?>
 

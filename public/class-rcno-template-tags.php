@@ -38,12 +38,14 @@ class Rcno_Template_Tags {
 	 */
 	protected $version;
 
+	private $rcno_review_score;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @since 1.0.0
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
@@ -54,22 +56,22 @@ class Rcno_Template_Tags {
 	/**
 	 * Includes the 'functions file' to be used by the book review template.
 	 */
-	public function include_functions_file () {
+	public function include_functions_file() {
 		// Get the layout chosen.
 		$layout = 'rcno_default'; // @TODO: Create settings option for this.
 
 		// Calculate the include path for the layout: Check if a global or local layout should be used.
-		if ( strpos( $layout, 'local') !== false ) {
-			//Local layout
-			$include_path = get_stylesheet_directory() . '/rcno_template/'. preg_replace('/^local\_/', '', $layout ) . '/functions.php';
+		if ( strpos( $layout, 'local' ) !== false ) {
+			// Local layout.
+			$include_path = get_stylesheet_directory() . '/rcno_template/' . preg_replace('/^local\_/', '', $layout ) . '/functions.php';
 		} else {
-			//Global layout
+			// Global layout.
 			$include_path = plugin_dir_path( __FILE__ )  . 'templates/' . $layout . '/functions.php';
 		}
 
-		// Check if the layout file really exists
+		// Check if the layout file really exists.
 		if ( file_exists( $include_path ) ) {
-			// Include the functions.php
+			// Include the functions.php.
 			include_once( $include_path );
 		}
 	}
@@ -257,15 +259,28 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK META TEMPLATE TAGS
 	 *******************************************************************************/
 
-	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = 'span' ) {
+	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '' ) {
 
 		$review = get_post_custom( $review_id );
 
 		$meta_keys = array(
-			'book_publisher',
+			'rcno_book_publisher',
+			'rcno_book_pub_date',
+			'rcno_book_pub_format',
+			'rcno_book_pub_edition',
+			'rcno_book_page_count',
+			'rcno_book_gr_review',
+			'rcno_book_gr_id',
+			'rcno_book_isbn13',
+			'rcno_book_isbn',
+			'rcno_book_asin',
+			'rcno_book_gr_url',
+			'rcno_book_title',
+
 		);
 
 		$wrappers = array(
+			'',
 			'span',
 			'div',
 			'p',
@@ -278,15 +293,26 @@ class Rcno_Template_Tags {
 			return null;
 		}
 
-		if ( 'book_publisher' === $meta_key ) {
-			if ( isset( $review['rcno_book_publisher'] ) ) {
-				if ( strlen( $review['rcno_book_publisher'][0] ) > 0 ) {
-					$out = '';
-					$out .= '<' . $wrapper . ' ' . 'class="' . 'rcno-' . sanitize_html_class( $meta_key ) . '"' . '>'; //@TODO: Sanitizing the HTML class is not necessary.
-					$out .= sanitize_text_field( $review['rcno_book_publisher'][0] );
-					$out .= '</' . $wrapper . '>';
-					return $out;
+		if ( isset( $review[ $meta_key ] ) ) {
+			if ( strlen( $review[ $meta_key ][0] ) > 0 ) {
+				$out = '';
+				if ( '' === $wrapper ) {
+					$out .= '';
+				} else {
+					$out .= '<' . $wrapper . ' ' . 'class="' . sanitize_html_class( $meta_key ) . '"' . '>'; // @TODO: Sanitizing the HTML class is not necessary.
 				}
+
+				$out .= sanitize_text_field( $review[ $meta_key ][0] );
+
+				if ( '' === $wrapper ) {
+					$out .= '';
+				} else {
+					$out .= '</' . $wrapper . '>';
+				}
+
+				return $out;
+			} else {
+				return '';
 			}
 		}
 
@@ -302,9 +328,9 @@ class Rcno_Template_Tags {
 	/**
 	 * Calculates the review scores
 	 *
-	 * @param      $num
-	 * @param      $type
-	 * @param bool $star
+	 * @param               $num
+	 * @param   string      $type
+	 * @param   bool        $stars
 	 *
 	 * @return string
 	 */
@@ -382,10 +408,8 @@ class Rcno_Template_Tags {
 		}
 
 		$rating_criteria_count = count( $rating_criteria );
-		$review_author         = get_the_author();
-		$review_date           = get_the_date();
-		$review_summary        = 'The review summary goes here'; //@TODO: Create review summary.
-		$review_box_title      = 'The review title goes here'; //@TODO: Create review title.
+		$review_summary        = 'The review summary goes here'; // @TODO: Create review summary.
+		$review_box_title      = 'The review title goes here'; // @TODO: Create review title.
 
 		$score_array = array();
 
@@ -397,23 +421,17 @@ class Rcno_Template_Tags {
 		$final_score = $final_score / $rating_criteria_count;
 		$final_score = number_format( $final_score, 1, '.', '' );
 
-		$output = '';
-		$output .= '<div id="rcno-review-score-box" itemscope itemtype="http://data-vocabulary.org/Review">';
-		$output .= '<span class="reviewer" itemprop="reviewer" style="display:none;">' . $review_author . '</span>';
-		$output .= '<time class="dtreviewed" itemprop="dtreviewed" style="display:none;">' . $review_date . '</time>';
-		$output .= '<span class="summary" itemprop="summary" style="display:none;">' . $review_summary . '</span>';
-		$output .= '<span class="rating" style="display: none;" itemprop="rating">' . $this->rcno_calc_review_score( $final_score, $rating_type, false );
-		$output .= '</span>';
-		$output .= '<span itemprop="worst" style="display: none;">1</span>';
-		$output .= '<span itemprop="best" style="display: none;">10</span>';
+		$this->rcno_review_score = $final_score;
 
+		$output = '';
+		$output .= '<div id="rcno-review-score-box">';
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score">';
 		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, false ) . '</span>';
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
-		$output .= '<span itemprop="itemreviewed" class="review-title">' . $review_box_title . '</span>';
+		$output .= '<span class="review-title">' . $review_box_title . '</span>';
 		$output .= '<p>' . $review_summary . '</p>';
 		$output .= '</div>';
 		$output .= '</div>';
@@ -455,8 +473,7 @@ class Rcno_Template_Tags {
   /**
 	 * Creates the review badge for the frontend.
 	 *
-	 * @param      $post_id
-	 * @param bool $echo
+	 * @param   int     $review_id
 	 *
 	 * @return string|null
 	 */
@@ -504,29 +521,29 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK REVIEW SCHEME DATA TAGS
 	 *******************************************************************************/
 
-	public function get_the_rcno_book_schema_data() {
+	public function get_the_rcno_book_schema_data( $review_id ) {
 
 		$out = '';
 		$out .= '<script type="application/ld+json">';
 		$out .= '{';
 		$out .= '"@context": "http://schema.org"';
 		$out .= ', "@type": "Book"';
-		$out .= ', "name": "The Catcher in the Rye"';
+		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title' ) .'"';
 		$out .= ', "author": {'; // Begin author
 		$out .= '"@type": "Person"';
-		$out .= ', "name": "J.D. Salinger"';
+		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_author', false ) ) . '"';
 		$out .= '}'; // End author
-		$out .= ', "url": "http://www.barnesandnoble.com/store/info/offer/JDSalinger"'; // URL to this review page
-		$out .= ', "datePublished": "2014-03-13T20:00"';
-		$out .= ', "genre": "Fantasy"';
-		$out .= ', "publisher": "O\' Reily"';
+		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"'; // URL to this review page
+		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date' ) . '"';
+		$out .= ', "genre": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_genre', false ) ) .'"';
+		$out .= ', "publisher": '. '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher' ) . '"';
 		$out .= ', "workExample": ['; // Begin workExample
 		$out .= '{'; // Begin First example
 		$out .= '"@type": "Book"';
-		$out .= ', "isbn": "031676948"';
-		$out .= ', "bookEdition": "2nd Edition"';
-		$out .= ', "bookFormat": "http://schema.org/Hardcover"';
-		$out .= ', "numberOfPages": 504';
+		$out .= ', "isbn": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn' ) . '"';
+		$out .= ', "bookEdition": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition' ) . '"';
+		$out .= ', "bookFormat": "http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format' ) . '"';
+		$out .= ', "numberOfPages": ' . (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count' );
 		$out .= ', "potentialAction": {'; // Begin potentialAction
 		$out .= '"@type": "ReadAction"';
 		$out .= ', "target": {'; // Begin target
@@ -547,7 +564,7 @@ class Rcno_Template_Tags {
 		return $out;
 	}
 
-	public function get_the_rcno_review_schema_data() {
+	public function get_the_rcno_review_schema_data( $review_id ) {
 
 		$out = '';
 		$out .= '<script type="application/ld+json">';
@@ -558,42 +575,42 @@ class Rcno_Template_Tags {
 
 		$out .= ', "author": {';
 		$out .= '"@type": "Person"';
-		$out .= ', "name": "Lisa Kennedy"';
-		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"';
+		$out .= ', "name": ' . '"' . get_the_author() . '"';
+		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"'; // Social profile for review author.
 		$out .= '}';
 
-		$out .= ', "url": "http://www.localreviews.com/restaurants/1/2/3/daves-steak-house.html"';
-		$out .= ', "datePublished": "2014-03-13T20:00"';
+		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"';
+		$out .= ', "datePublished": ' . '"' . get_the_date( 'F j, Y', $review_id ) . '"';
 
 		$out .= ', "publisher": {';
 		$out .= '"@type": "Organization"';
-		$out .= ', "name": "Denver Post"';
-		$out .= ', "sameAs": "http://www.denverpost.com"';
+		$out .= ', "name": ' . '"' . get_bloginfo( 'name' ) . '"';
+		$out .= ', "sameAs": ' . '"' . get_bloginfo( 'url' ) .'"';
 		$out .= '}';
 
-		$out .= ', "description": "Great old fashioned steaks but the salads are sub par."';
-		$out .= ', "inLanguage": "en"';
+		$out .= ', "description": "Great old fashioned steaks but the salads are sub par."'; // Review excerpt.
+		$out .= ', "inLanguage": ' . '"' . get_bloginfo( 'language' ) . '"';
 
 		$out .= ', "itemReviewed": {';
 		$out .= '"@type":"Book"';
-		$out .= ', "name": "Harry Potter"';
-		$out .= ', "isbn": "031676948"';
+		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title' ) . '"';
+		$out .= ', "isbn": ' . '"'. $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn' ) . '"';
 
 		$out .= ', "author": {';
 		$out .= '"@type": "Person"';
-		$out .= ', "name": "J.D. Salinger"';
-		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"';
+		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_author', false ) ) .'"';
+		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"'; // Social profile for book author.
 		$out .= '}';
 
-		$out .= ', "datePublished": "2014-03-13"';
+		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date' ) . '"';
 
 		$out .= '}';
 
 		$out .= ', "reviewRating": {';
 		$out .= '"@type":"Rating"';
 		$out .= ', "worstRating": 1';
-		$out .= ', "bestRating": 5';
-		$out .= ', "ratingValue": 3.5';
+		$out .= ', "bestRating": 10';
+		$out .= ', "ratingValue": ' . (float) $this->rcno_review_score;
 		$out .= '}';
 
 
