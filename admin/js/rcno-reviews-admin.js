@@ -117,6 +117,10 @@
                             book['GoodreadsResponse']['book']['title']
                         );
 
+                        $('#rcno_book_title').val(
+                            book['GoodreadsResponse']['book']['work']['original_title']
+                        );
+
                         tinymce.get('rcno_book_description').setContent(
                             book['GoodreadsResponse']['book']['description']
                         );

@@ -20,6 +20,7 @@ $gr_id          = get_post_meta( $review->ID, 'rcno_book_gr_id', true );
 $isbn13         = get_post_meta( $review->ID, 'rcno_book_isbn13', true );
 $asin           = get_post_meta( $review->ID, 'rcno_book_asin', true );
 $gr_url         = get_post_meta( $review->ID, 'rcno_book_gr_url', true );
+$book_title     = get_post_meta( $review->ID, 'rcno_book_title', true );
 
 ?>
 
@@ -88,5 +89,8 @@ $gr_url         = get_post_meta( $review->ID, 'rcno_book_gr_url', true );
             <?php wp_nonce_field( 'rcno_save_book_gr_url_metadata', 'rcno_general_gr_url_nonce' ); ?>
         </div>
     </div>
+
+    <input type="hidden" name="rcno_book_title" id="rcno_book_title" value="<?php echo sanitize_text_field( $book_title ); ?>" />
+	<?php wp_nonce_field( 'rcno_save_book_title_metadata', 'rcno_general_title_nonce' ); ?>
 
 </div>

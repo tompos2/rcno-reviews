@@ -75,6 +75,12 @@ class Rcno_Admin_General_Info {
 	public function rcno_save_book_general_info_metadata( $review_id, $data, $review = null ) {
 
 
+		// Saving book title post_meta field.
+		if ( isset( $data['rcno_book_title'] ) ) { //@TODO: Add book title nonce check.
+			$book_title = sanitize_text_field( $data['rcno_book_title'] );
+			update_post_meta( $review_id, 'rcno_book_title', $book_title );
+		}
+
 		// Saving book publisher post_meta field.
 		if ( isset( $data['rcno_book_publisher'] ) ) { //@TODO: Add book publisher nonce check.
 			$book_publisher = sanitize_text_field( $data['rcno_book_publisher'] );
