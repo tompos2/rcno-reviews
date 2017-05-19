@@ -189,7 +189,7 @@ class Rcno_Reviews_Admin {
 		$opts['capability_type']       = $cap_type;
 		$opts['description']           = '';
 		$opts['exclude_from_search']   = false;
-		$opts['has_archive']           = true;
+		$opts['has_archive']           = 'reviews';
 		$opts['hierarchical']          = false;
 		$opts['map_meta_cap']          = true;
 		$opts['menu_icon']             = 'dashicons-book';
@@ -248,7 +248,6 @@ class Rcno_Reviews_Admin {
 
 		register_post_type( strtolower( $cpt_name ), $opts );
 
-		add_image_size( 'rcno-book-cover-lg', 381, 500 );
 	}
 
 	/**
@@ -263,12 +262,12 @@ class Rcno_Reviews_Admin {
 
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 
-		if ( ! in_array( 'author', $custom_taxonomies, true ) ) {
+/*		if ( ! in_array( 'author', $custom_taxonomies, true ) ) {
 			//'array_merge' because I want 'Author' as the first taxonomy.
 			$custom_taxonomies = array_merge(
 				array( 'author' => 'Author' ), $custom_taxonomies
 			);
-		}
+		}*/
 
 		$taxonomies = array();
 
@@ -322,10 +321,12 @@ class Rcno_Reviews_Admin {
 
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
-			$opts['rewrite']['slug']         = __( Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['slug'] ) );
+
+			// Pluralizing the rewrite slug to prevent clash with builtin author taxonomy and author custom taxonomy.
+			$opts['rewrite']['slug']         = __( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
 			$opts['rewrite']['with_front']   = false;
 
-			$opts = apply_filters( 'rcno-review-taxonomy-options', $opts );
+			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );
 
 			register_taxonomy( $tax_name, 'rcno_review', $opts );
 
