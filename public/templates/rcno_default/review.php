@@ -14,6 +14,8 @@ $version = '1.0.0';
 
 $template = new Rcno_Template_Tags( $plugin_name, $version );
 
+$ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
+
 var_dump( $template );
 
 ?>
@@ -53,6 +55,15 @@ var_dump( $template );
 	    echo $template->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'h1' );
 	    echo $template->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'h1' );
 	    echo $template->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '' );
+
+	    //$ratings::the_rating( $review_id );
+
+	    var_dump( $ratings::rcno_rating_info( 'min' ) );
+	    var_dump( $ratings::rcno_rating_info( 'max' ) );
+	    var_dump( $ratings::rcno_rating_info( 'count' ) );
+	    var_dump( $ratings::rcno_rating_info( 'avg' ) );
+
+
 
 	?>
 

@@ -83,6 +83,8 @@ class Rcno_Reviews {
 
 		$this->define_shortcodes();
 
+		$this->define_public_ratings();
+
 	}
 
 	/**
@@ -132,6 +134,8 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-template-tags.php';
+
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public-ratings.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-shortcodes.php';
 
@@ -294,6 +298,24 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_button_scl' );
 		$this->loader->add_action( 'in_admin_footer',   $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
 		$this->loader->add_action( 'admin_enqueue_scripts',   $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
+	}
+
+	private function define_public_ratings() {
+
+		$public_ratings = new Rcno_Reviews_Public_Rating( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'wp_enqueue_scripts', $public_ratings, 'rcno_enqueue_public_ratings_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public_ratings, 'rcno_enqueue_public_ratings_scripts' );
+
+		$this->loader->add_action( 'wp_ajax_nopriv_rcno_rate_review', $public_ratings, 'rcno_rate_review' );
+		$this->loader->add_action( 'wp_ajax_rcno_rate_review', $public_ratings, 'rcno_rate_review' );
+
+		$this->loader->add_action( 'comment_post', $public_ratings, 'rcno_comment_post' );
+
+		$this->loader->add_action( 'comment_form_before_fields', $public_ratings, 'rcno_comment_ratings_form' );
+		$this->loader->add_action( 'comment_form_logged_in_after', $public_ratings, 'rcno_comment_ratings_form' );
+
+		$this->loader->add_filter( 'comment_text', $public_ratings, 'display_comment_rating', 9 );
 	}
 
 	/**
