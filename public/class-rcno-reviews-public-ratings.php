@@ -110,10 +110,7 @@ class Rcno_Reviews_Public_Rating {
 			'comment_ID' => $id,
 		) );*/
 
-		if ( ! update_comment_meta( $id, 'rcno_review_comment_rating', $comment_karma ) ) {
-			die('Dead!');
-		}
-
+		update_comment_meta( $id, 'rcno_review_comment_rating', $comment_karma );
 	}
 
 
@@ -185,27 +182,10 @@ class Rcno_Reviews_Public_Rating {
 			wp_die( __( "I don't know who you are", 'rcno-reviews' ) );
 		}
 
-		$comment_approved = 1;
-
 		if ( $comment_ID > 0 ) {
-			wp_update_comment( array(
-				'comment_post_ID' => $comment_post_ID,
-				'comment_author' => $comment_author,
-				'comment_author_email' => $comment_author_email,
-				'comment_author_url' => $comment_author_url,
-				'comment_karma' => $comment_karma,
-				'comment_approved' => $comment_approved,
-				'comment_ID' => $comment_ID,
-			) );
+			update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );
 		} else {
-			wp_update_comment( array(
-				'comment_post_ID' => $comment_post_ID,
-				'comment_author' => $comment_author,
-				'comment_author_email' => $comment_author_email,
-				'comment_author_url' => $comment_author_url,
-				'comment_karma' => $comment_karma,
-				'comment_approved' => $comment_approved,
-			) );
+			update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );
 		}
 
 		wp_die();
@@ -322,6 +302,14 @@ class Rcno_Reviews_Public_Rating {
 	}
 
 
+	/**
+	 * Does the actual rendering of the star rating.
+	 *
+	 * @param int  $id
+	 * @param bool $is_comment
+	 *
+	 * @return array|string
+	 */
 	public static function rate_calculate( $id = 0, $is_comment = false ) {
 
 		$post_id     = (int) $id > 0 ? $id : get_the_ID();
@@ -329,10 +317,10 @@ class Rcno_Reviews_Public_Rating {
 
 		if ( $is_comment ) {
 			$c            = $GLOBALS['comment'];
-			self::$rating = (int) self::rcno_rating_info( 'avg' );
+			self::$rating = (float) get_comment_meta( $c->comment_ID, 'rcno_review_comment_rating', true );
 			$previous_id  = (int) $c->comment_ID;
 		} else {
-			self::$rating = self::rcno_rating_info( 'avg' );
+			self::$rating = (float) self::rcno_rating_info( 'avg' );
 		}
 
 		self::$rating = number_format( self::$rating, 1, '.', '' );
@@ -362,9 +350,14 @@ class Rcno_Reviews_Public_Rating {
 		$user_meta = array();
 
 		if ( self::rcno_ratings_user_is_known() ) {
-			if ( $is_comment && ( self::$rating === 0 && ( self::rcno_current_user() === $c->comment_author ) ) ) {
-				$classes[] = 'needs-rating';
+			if ( $is_comment ) {
+				if ( (float) self::$rating === 0.0 ) {
+					if ( self::rcno_current_user() === $c->comment_author ) {
+						$classes[] = 'needs-rating';
+					}
+				}
 			}
+
 			$user_meta[] = sprintf( 'data-id="%d"', $post_id );
 			if ( $previous_id > 0 ) {
 				$user_meta[] = sprintf( 'data-comment-id="%d"', $previous_id );
@@ -389,6 +382,7 @@ class Rcno_Reviews_Public_Rating {
 	/**
 	 * Displays the recipe rating
 	 * @param int $id
+	 * @return string
 	 */
 	public static function the_rating( $id = 0 ) {
 		echo self::rate_calculate( $id );
@@ -410,6 +404,10 @@ class Rcno_Reviews_Public_Rating {
 	 * @return string
 	 */
 	public function display_comment_rating( $content ) {
+		if ( ! is_single() ) {
+			return null; // If we are not on a sinple post no need to render comment ratings.
+		}
+
 		$out = '';
 		$out .= self::the_comment_rating();
 		$out .= $content;
