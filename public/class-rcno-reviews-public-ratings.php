@@ -21,10 +21,10 @@
  */
 class Rcno_Reviews_Public_Rating {
 
-	public static $rating;
-	public static $comment_count;
-	public static $min_rating;
-	public static $max_rating;
+	private $rating;
+	private $comment_count;
+	private $min_rating;
+	private $max_rating;
 
 	/**
 	 * The ID of this plugin.
@@ -197,7 +197,7 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @return string
 	 */
-	public static function rcno_current_user() {
+	private function rcno_current_user() {
 		global $current_user;
 		if ( is_user_logged_in() ) {
 			wp_get_current_user();
@@ -214,7 +214,7 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @return bool
 	 */
-	public static function rcno_ratings_user_is_known() {
+	private function rcno_ratings_user_is_known() {
 		return is_user_logged_in() || ! empty( $_COOKIE[ 'comment_author_' . COOKIEHASH ] );
 	}
 
@@ -225,7 +225,7 @@ class Rcno_Reviews_Public_Rating {
 	 * @param string $query
 	 * @return bool|float|int|mixed
 	 */
-	public static function rcno_rating_info( $query ) {
+	public function rcno_rating_info( $query ) {
 
 		// Get the review ID.
 		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
@@ -237,33 +237,33 @@ class Rcno_Reviews_Public_Rating {
 		switch ( $query ) {
 
 			case 'avg':
-				$avg = self::count_ratings_info( $review_id );
+				$avg = $this->count_ratings_info( $review_id );
 				if( null !== $avg ) {
-					return self::$rating = array_sum( $avg ) / count( $avg );
+					return $this->rating = array_sum( $avg ) / count( $avg );
 				}
 				return 0;
 				break;
 
 			case 'count':
-				$count = self::count_ratings_info( $review_id );
+				$count = $this->count_ratings_info( $review_id );
 				if( null !== $count ) {
-					return self::$comment_count = (int) count( $count );
+					return $this->comment_count = (int) count( $count );
 				}
 				return 0;
 				break;
 
 			case 'min':
-				$min = self::count_ratings_info( $review_id );
+				$min = $this->count_ratings_info( $review_id );
 				if( null !== $min ) {
-					return self::$min_rating = (int) min( $min );
+					return $this->min_rating = (int) min( $min );
 				}
 				return 0;
 				break;
 
 			case 'max':
-				$max = self::count_ratings_info( $review_id );
+				$max = $this->count_ratings_info( $review_id );
 				if( null !== $max ) {
-					return self::$max_rating = (int) max( $max );
+					return $this->max_rating = (int) max( $max );
 				}
 				return 0;
 				break;
@@ -280,7 +280,7 @@ class Rcno_Reviews_Public_Rating {
 	 * @param $review_id
 	 * @return array
 	 */
-	private static function count_ratings_info( $review_id ) {
+	private function count_ratings_info( $review_id ) {
 
 		$comments = get_comments( array(
 			'post_id'   => $review_id,
@@ -310,27 +310,27 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @return array|string
 	 */
-	public static function rate_calculate( $id = 0, $is_comment = false ) {
+	public function rate_calculate( $id = 0, $is_comment = false ) {
 
 		$post_id     = (int) $id > 0 ? $id : get_the_ID();
 		$previous_id = 0;
 
 		if ( $is_comment ) {
 			$c            = $GLOBALS['comment'];
-			self::$rating = (float) get_comment_meta( $c->comment_ID, 'rcno_review_comment_rating', true );
+			$this->rating = (float) get_comment_meta( $c->comment_ID, 'rcno_review_comment_rating', true );
 			$previous_id  = (int) $c->comment_ID;
 		} else {
-			self::$rating = (float) self::rcno_rating_info( 'avg' );
+			$this->rating = (float) $this->rcno_rating_info( 'avg' );
 		}
 
-		self::$rating = number_format( self::$rating, 1, '.', '' );
+		$this->rating = number_format( $this->rating, 1, '.', '' );
 
-		if ( self::$rating === 0.0 ) {
+		if ( $this->rating === 0.0 ) {
 			$coerced_rating = 0.0;
-		} elseif ( ( self::$rating * 10 ) % 5 !== 0 ) {
-			$coerced_rating = round( self::$rating * 2.0, 0 ) / 2.0;
+		} elseif ( ( $this->rating * 10 ) % 5 !== 0 ) {
+			$coerced_rating = round( $this->rating * 2.0, 0 ) / 2.0;
 		} else {
-			$coerced_rating = self::$rating;
+			$coerced_rating = $this->rating;
 		}
 
 		$stars   = array( 0, 1, 2, 3, 4, 5, 6 );
@@ -349,10 +349,10 @@ class Rcno_Reviews_Public_Rating {
 
 		$user_meta = array();
 
-		if ( self::rcno_ratings_user_is_known() ) {
+		if ( $this->rcno_ratings_user_is_known() ) {
 			if ( $is_comment ) {
-				if ( (float) self::$rating === 0.0 ) {
-					if ( self::rcno_current_user() === $c->comment_author ) {
+				if ( (float) $this->rating === 0.0 ) {
+					if ( $this->rcno_current_user() === $c->comment_author ) {
 						$classes[] = 'needs-rating';
 					}
 				}
@@ -364,10 +364,10 @@ class Rcno_Reviews_Public_Rating {
 			}
 		}
 
-		if ( self::$rating !== 0.0 ) {
+		if ( $this->rating !== 0.0 ) {
 			$stars[0] = sprintf(
 				'<div class="star-ratings"><ul data-rating="%01.1f" class="%s" %s>',
-				self::$rating,
+				$this->rating,
 				implode( ' ', $classes ),
 				implode( ' ', $user_meta )
 			);
@@ -384,17 +384,17 @@ class Rcno_Reviews_Public_Rating {
 	 * @param int $id
 	 * @return string
 	 */
-	public static function the_rating( $id = 0 ) {
-		echo self::rate_calculate( $id );
+	public function the_rating( $id = 0 ) {
+		echo $this->rate_calculate( $id );
 	}
 
 	/**
 	 * Displays the comment rating
 	 * @return string
 	 */
-	public static function the_comment_rating() {
+	public function the_comment_rating() {
 		global $comment;
-		return self::rate_calculate( $comment->comment_post_ID, true );
+		return $this->rate_calculate( $comment->comment_post_ID, true );
 	}
 
 
@@ -405,11 +405,11 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function display_comment_rating( $content ) {
 		if ( ! is_single() ) {
-			return null; // If we are not on a sinple post no need to render comment ratings.
+			return null; // If we are not on a simple post no need to render comment ratings.
 		}
 
 		$out = '';
-		$out .= self::the_comment_rating();
+		$out .= $this->the_comment_rating();
 		$out .= $content;
 		return $out;
 	}
