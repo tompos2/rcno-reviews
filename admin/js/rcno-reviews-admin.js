@@ -28,13 +28,138 @@
      * Although scripts in the WordPress core, Plugins and Themes may be
      * practising this, we should strive to set a better example in our own work.
      */
+    function renderMediaUploader() {
+
+        var file_frame, image_data;
+
+        /**
+         * If an instance of file_frame already exists, then we can open it
+         * rather than creating a new instance.
+         */
+        if ( undefined !== file_frame ) {
+
+            file_frame.open();
+            return;
+
+        }
+
+        /**
+         * If we're this far, then an instance does not exist, so we need to
+         * create our own.
+         *
+         * Here, use the wp.media library to define the settings of the Media
+         * Uploader. We're opting to use the 'post' frame which is a template
+         * defined in WordPress core and are initializing the file frame
+         * with the 'insert' state.
+         *
+         * We're also not allowing the user to select more than one image.
+         */
+        file_frame = wp.media.frames.file_frame = wp.media({
+            frame:    'post',
+            state:    'insert',
+            multiple: false
+        });
+
+        /**
+         * Setup an event handler for what to do when an image has been
+         * selected.
+         *
+         * Since we're using the 'view' state when initializing
+         * the file_frame, we need to make sure that the handler is attached
+         * to the insert event.
+         */
+        file_frame.on( 'insert', function() {
+
+            // Read the JSON data returned from the Media Uploader.
+            var json = file_frame.state().get('selection').first().toJSON();
+
+            // First, make sure that we have the URL of an image to display.
+            if ( 0 > $.trim( json.url.length ) ) {
+                return;
+            }
+
+            // After that, set the properties of the image and display it.
+            $( '#rcno-reviews-book-cover-container' )
+                .children( 'img' )
+                .attr( 'src', json.url )
+                .attr( 'alt', json.caption )
+                .attr( 'title', json.title )
+                .show()
+                .parent()
+                .removeClass( 'hidden' );
+
+            // Next, hide the anchor responsible for allowing the user to select an image
+            $( '#rcno-add-book-cover' ).hide();
+            $( '#rcno-remove-book-cover' ).parent().removeClass( 'hidden' );
+
+
+            $( '#rcno-reviews-book-cover-src' ).val( json.url );
+            $( '#rcno-reviews-book-cover-title' ).val( json.title );
+            $( '#rcno-reviews-book-cover-alt' ).val( json.alt );
+
+        });
+
+        // Now display the actual file_frame
+        file_frame.open();
+
+    }
+
+    function resetUploadForm( $ ) {
+
+        // First, we'll hide the image
+        $( '#rcno-reviews-book-cover-container' )
+            .children( 'img' )
+            .hide();
+
+        $('#rcno-add-book-cover')
+            .parent()
+            .show();
+
+        // Finally, we add the 'hidden' class back to this anchor's parent
+        $( '#rcno-remove-book-cover' )
+            .addClass( 'hidden' );
+
+    }
+
+    function renderFeaturedImage( $ ) {
+
+        /* If a thumbnail URL has been associated with this image
+         * Then we need to display the image and the reset link.
+         */
+        if ( '' !== $.trim ( $( '#rcno-reviews-book-cover-src' ).val() ) ) {
+
+            $( '#rcno-reviews-book-cover-container' ).removeClass( 'hidden' );
+
+            $( '#rcno-add-book-cover' )
+                .parent()
+                .hide();
+
+            $( '#rcno-remove-book-cover' )
+                .parent()
+                .removeClass( 'hidden' );
+
+        }
+
+    }
 
     $(function() {
-        //$('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]')
-        //    .attr('disabled', 'disabled'); //This taxonomy should never be disabled by users.
 
-        //$('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[genre\\]')
-        //    .attr('disabled', 'disabled'); //This taxonomy should never be disabled by users.
+        renderFeaturedImage( $ );
+
+        $( '#rcno-add-book-cover' ).on( 'click', function( e ) {
+          e.preventDefault();
+
+            // Display the media uploader.
+            renderMediaUploader();
+        });
+
+        $( '#rcno-remove-book-cover' ).on( 'click', function( e ) {
+            e.preventDefault();
+
+            // Remove the image, toggle the anchors.
+            resetUploadForm( $ );
+
+        });
     });
 
     $(function() {

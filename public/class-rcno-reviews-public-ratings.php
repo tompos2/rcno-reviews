@@ -105,11 +105,6 @@ class Rcno_Reviews_Public_Rating {
 			$comment_karma = absint( $comment_karma );
 		}
 
-		/*wp_update_comment( array(
-			'comment_karma' => $comment_karma,
-			'comment_ID' => $id,
-		) );*/
-
 		update_comment_meta( $id, 'rcno_review_comment_rating', $comment_karma );
 	}
 
@@ -117,9 +112,13 @@ class Rcno_Reviews_Public_Rating {
 	/**
 	 * Display the star rating inside the comment form.
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function rcno_comment_ratings_form() {
+		if ( 'rcno_review' !== get_post_type() ) {
+			return false; // Only render on book reviews.
+		}
+
 		$star = '<li class="empty"><span class="l"></span><span class="r"></span></li>';
 		return printf(
 			'<div class="rating-container"><p class="rating-label">%s</p><ul class="rating form-rating">%s</ul></div>',
@@ -182,11 +181,7 @@ class Rcno_Reviews_Public_Rating {
 			wp_die( __( "I don't know who you are", 'rcno-reviews' ) );
 		}
 
-		if ( $comment_ID > 0 ) {
-			update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );
-		} else {
-			update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );
-		}
+		update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );
 
 		wp_die();
 	}

@@ -57,6 +57,14 @@ class Rcno_Reviews_Admin {
 	public $book_isbn;
 
 	/**
+	 * Instance of the Book_Cover class.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public $book_cover;
+
+	/**
 	 * Instance of the Rcno_Admin_General_Info class handling general book info functions.
 	 *
 	 * @since 1.0.0
@@ -97,6 +105,9 @@ class Rcno_Reviews_Admin {
 
 		require_once __DIR__ . '/class-rcno-admin-isbn.php';
 		$this->book_isbn = new Rcno_Admin_ISBN( $this->version );
+
+		require_once __DIR__ . '/class-rcno-admin-book-cover.php';
+		$this->book_cover = new Rcno_Admin_Book_Cover( $this->version, $this->version );
 
 		require_once __DIR__ . '/class-rcno-admin-general-info.php';
 		$this->book_general_info = new Rcno_Admin_General_Info( $this->version );
@@ -154,7 +165,7 @@ class Rcno_Reviews_Admin {
 		 * class.
 		 */
 
-
+		wp_enqueue_media();
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, false );
 
@@ -454,6 +465,7 @@ class Rcno_Reviews_Admin {
 
 				$this->description_meta->rcno_save_book_description_metadata( $review_id, $data, $review );
 				$this->book_isbn->rcno_save_book_isbn_metadata( $review_id, $data, $review );
+				$this->book_cover->rcno_save_book_cover_metadata( $review_id, $data, $review );
 				$this->book_general_info->rcno_save_book_general_info_metadata( $review_id, $data, $review );
 				$this->book_review_score->rcno_save_book_review_score_metadata( $review_id, $data, $review );
 
