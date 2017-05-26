@@ -1,98 +1,20 @@
 <?php
-
-
+    $book_rating = get_post_meta( $review->ID, 'rcno_admin_rating', true );
 ?>
 
-<form>
-  <fieldset>
-    <span class="star-cb-group">
-	  <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
-      <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
-      <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
-      <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
-      <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
-      <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+<div class="rcno-rate">
+    <input type="radio" id="star5" name="rcno_admin_rating" value="5" <?php checked( $book_rating, 5, true ); ?> />
+    <label for="star5" title="5 stars">5 stars</label>
 
-    </span>
-  </fieldset>
-</form>
+    <input type="radio" id="star4" name="rcno_admin_rating" value="4" <?php checked( $book_rating, 4, true ); ?> />
+    <label for="star4" title="4 stars">4 stars</label>
 
-<style>
+    <input type="radio" id="star3" name="rcno_admin_rating" value="3" <?php checked( $book_rating, 3, true ); ?> />
+    <label for="star3" title="3 stars">3 stars</label>
 
-	.star-cb-group {
-		/* remove inline-block whitespace */
-		font-size: 0;
-		/* flip the order so we can use the + and ~ combinators */
-		unicode-bidi: bidi-override;
-		direction: rtl;
-		/* the hidden clearer */
-		/* font-size: 2em; */
-		font-family: Helvetica, arial, sans-serif;
-	}
-	.star-cb-group * {
-		font-size: 1rem;
-	}
-	.star-cb-group > input {
-		display: none;
-	}
-	.star-cb-group > input + label {
-		/* only enough room for the star */
-		display: inline-block;
-		overflow: hidden;
-		text-indent: 9999px;
-		width: 1em;
-		white-space: nowrap;
-		cursor: pointer;
-		height: 25px;
-	}
-	.star-cb-group > input + label:before {
-		display: inline-block;
-		text-indent: -9999px;
-		content: "☆";
-		color: #888;
-	}
-	.star-cb-group > input:checked ~ label:before, .star-cb-group > input + label:hover ~ label:before, .star-cb-group > input + label:hover:before {
-		content: "★";
-		color: #e52;
-		text-shadow: 0 0 1px #333;
-	}
-	.star-cb-group > .star-cb-clear + label {
-		text-indent: -9999px;
-		width: .5em;
-		margin-left: -.5em;
-	}
-	.star-cb-group > .star-cb-clear + label:before {
-		width: .5em;
-	}
-	.star-cb-group:hover > input + label:before {
-		content: "☆";
-		color: #888;
-		text-shadow: none;
-	}
-	.star-cb-group:hover > input + label:hover ~ label:before, .star-cb-group:hover > input + label:hover:before {
-		content: "★";
-		color: #e52;
-		text-shadow: 0 0 1px #333;
-	}
+    <input type="radio" id="star2" name="rcno_admin_rating" value="2" <?php checked( $book_rating, 2, true ); ?> />
+    <label for="star2" title="2 stars">2 stars</label>
 
-	:root {
-		/*font-size: 2em;
-		font-family: Helvetica, arial, sans-serif;*/
-	}
-
-	fieldset {
-		margin: 1em auto;
-	}
-
-	#log {
-		margin: 1em auto;
-		width: 5em;
-		text-align: center;
-		background: transparent;
-	}
-
-	h1 {
-		text-align: center;
-	}
-
-</style>
+    <input type="radio" id="star1" name="rcno_admin_rating" value="1" <?php checked( $book_rating, 1, true ); ?> />
+    <label for="star1" title="1 star">1 star</label>
+</div>

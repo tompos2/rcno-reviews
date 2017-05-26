@@ -74,34 +74,12 @@ class Rcno_Admin_Review_Rating {
 	 */
 	public function rcno_save_book_review_rating_metadata( $review_id, $data, $review = null ) {
 
-		$old = get_post_meta( $review_id, 'rcno_review_score_criteria', true);
-		$new = array();
+		// Saving description not only to the post_meta field but also to excerpt and content.
+		if ( isset( $data['rcno_admin_rating'] ) ) {
 
-		$labels = isset( $data['label'] ) ? $data['label'] : array();
-		$scores = isset( $data['score'] ) ? $data['score'] : array();
+			$book_rating = sanitize_text_field( $data['rcno_admin_rating'] );
 
-		$count = count( $labels );
-
-		for ( $i = 0; $i < $count; $i++ ) {
-			if ( $labels[$i] !== '' ) {
-				$new[ $i ]['label'] = strip_tags( $labels[ $i ] );
-				$new[ $i ]['score'] = strip_tags( $scores[ $i ] );
-			}
-		}
-		if ( ! empty( $new ) && $new !== $old ) {
-			update_post_meta( $review_id, 'rcno_review_score_criteria', $new );
-		} elseif ( empty( $new ) && $old ) {
-			delete_post_meta( $review_id, 'rcno_review_score_criteria', $old );
-		}
-
-		if( isset( $data['rcno_review_score_type'] ) ) {
-			$review_score_type = $data['rcno_review_score_type'];
-			update_post_meta( $review_id, 'rcno_review_score_type', $review_score_type );
-		}
-
-		if( isset( $data['rcno_review_score_position'] ) ) {
-			$review_score_position = $data['rcno_review_score_position'];
-			update_post_meta( $review_id, 'rcno_review_score_position', $review_score_position );
+			update_post_meta( $review_id, 'rcno_admin_rating', $book_rating );
 		}
 	}
 

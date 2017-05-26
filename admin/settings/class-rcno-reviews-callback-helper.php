@@ -164,7 +164,7 @@ class Rcno_Reviews_Callback_Helper {
 		foreach ( $args['options'] as $field_key => $option ) {
 
 			if ( !empty( $old_value ) ) {
-				$checked = checked( $field_key, $old_value,false );
+				$checked = checked( $field_key, $old_value, false );
 			} else {
 				$checked = checked( $args['std'], $field_key, false );
 			}
