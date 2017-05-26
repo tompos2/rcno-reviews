@@ -82,3 +82,27 @@
     padding: 5px;
     display: inline-block;
 }
+
+.rcno-full-book-cover {
+    width: 200px;
+    min-height: 308px;
+    background: rgba(96, 125, 139, 0.36);
+    display: inline-block;
+    float: left;
+    margin: 0 1em 0 0;
+}
+
+.rcno-full-book-details .rcno-full-book-cover img {
+    max-width: 200px;
+}
+
+.rcno-full-book-details {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 1em 0;
+}
+
+.rcno-full-book-description {
+    font-size: 12px;
+    line-height: 1.6;
+}

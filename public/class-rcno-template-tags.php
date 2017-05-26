@@ -76,6 +76,42 @@ class Rcno_Template_Tags {
 		}
 	}
 
+	/** ****************************************************************************
+	 * FULL BOOK DETAILS TEMPLATE TAGS
+	 *******************************************************************************/
+
+	public function get_the_rcno_full_book_details( $review_id ) {
+		$review = get_post_custom( $review_id );
+
+		$out = '';
+		$out .= '<div class="rcno-full-book">'
+		;
+		$out .= '<div class="rcno-full-book-cover">';
+		$out .= $this->get_the_rcno_book_cover( $review_id );
+		$out .= '</div>';
+
+		$out .= '<div class="rcno-full-book-details">';
+		$out .= '<div class="col-1">';
+		$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_author', true );
+		$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_genre', true );
+		$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_series', true );
+		$out .= '</div>';
+		$out .= '<div class="col-2">';
+		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'div', true );
+		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'div', true );
+		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', 'div', true );
+		$out .= '</div>';
+		$out .= '</div>';
+
+		$out .= '<div class="rcno-full-book-description">';
+		$out .= wp_trim_words( $this->get_the_rcno_book_description( $review_id ), 90 );
+		$out .= '</div>';
+
+		$out .= '</div>';
+
+		return $out;
+	}
+
 
 	/** ****************************************************************************
 	 * BOOK COVER TEMPLATE TAGS
@@ -295,23 +331,23 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK META TEMPLATE TAGS
 	 *******************************************************************************/
 
-	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '' ) {
+	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '', $label = true ) {
 
 		$review = get_post_custom( $review_id );
 
 		$meta_keys = array(
-			'rcno_book_publisher',
-			'rcno_book_pub_date',
-			'rcno_book_pub_format',
-			'rcno_book_pub_edition',
-			'rcno_book_page_count',
-			'rcno_book_gr_review',
-			'rcno_book_gr_id',
-			'rcno_book_isbn13',
-			'rcno_book_isbn',
-			'rcno_book_asin',
-			'rcno_book_gr_url',
-			'rcno_book_title',
+			'rcno_book_publisher'   => 'Publisher',
+			'rcno_book_pub_date'    => 'Published Date',
+			'rcno_book_pub_format'  => 'Format',
+			'rcno_book_pub_edition' => 'Edition',
+			'rcno_book_page_count'  => 'Page Count',
+			'rcno_book_gr_review'   => 'Goodreads Rating',
+			'rcno_book_gr_id'       => 'Gr ID',
+			'rcno_book_isbn13'      => 'ISBN13',
+			'rcno_book_isbn'        => 'ISBN',
+			'rcno_book_asin'        => 'ASIN',
+			'rcno_book_gr_url'      => 'Gr URL',
+			'rcno_book_title'       => 'Title',
 
 		);
 
@@ -325,7 +361,7 @@ class Rcno_Template_Tags {
 			'h3',
 		);
 
-		if ( '' === $meta_key || ! in_array( $meta_key, $meta_keys, true ) || ! in_array( $wrapper, $wrappers, true ) ) {
+		if ( '' === $meta_key || ! array_key_exists( $meta_key, $meta_keys ) || ! in_array( $wrapper, $wrappers, true ) ) {
 			return null;
 		}
 
@@ -336,6 +372,10 @@ class Rcno_Template_Tags {
 					$out .= '';
 				} else {
 					$out .= '<' . $wrapper . ' ' . 'class="' . sanitize_html_class( $meta_key ) . '"' . '>'; // @TODO: Sanitizing the HTML class is not necessary.
+				}
+
+				if ( $label ) {
+					$out .= __( $meta_keys[ $meta_key ], 'rcno-reviews' ) . ': ';
 				}
 
 				$out .= sanitize_text_field( $review[ $meta_key ][0] );
