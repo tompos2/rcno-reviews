@@ -78,6 +78,42 @@ class Rcno_Template_Tags {
 
 
 	/** ****************************************************************************
+	 * BOOK COVER TEMPLATE TAGS
+	 *******************************************************************************/
+
+	public function get_the_rcno_book_cover( $review_id ) {
+		$review = get_post_custom( $review_id );
+
+		if ( ! isset( $review['rcno_reviews_book_cover_src'] ) ) {
+			return false;
+		}
+
+		$book_src = $review['rcno_reviews_book_cover_src'][0];
+		$book_title = $review['rcno_reviews_book_cover_title'][0];
+		$book_alt = $review['rcno_reviews_book_cover_alt'][0];
+
+		$out = '';
+		$out .= '<img src="' . $book_src . '" ';
+		$out .= 'title="' . $book_title . '" ';
+		$out .= 'alt="' . $book_alt . '" ';
+		$out .= 'class="rcno-book-cover"';
+		$out .= '>';
+
+		return $out;
+	}
+
+	/**
+	 * Print the book cover.
+	 *
+	 * @param $review_id
+	 */
+	public function the_rcno_book_cover( $review_id ) {
+		echo $this->get_the_rcno_book_cover( $review_id );
+	}
+
+
+
+	/** ****************************************************************************
 	 * TAXONOMY RELATED TEMPLATE TAGS
 	 *******************************************************************************/
 

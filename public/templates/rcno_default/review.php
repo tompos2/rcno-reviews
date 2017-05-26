@@ -40,6 +40,8 @@ var_dump( $template );
 		$template->the_rcno_taxonomy_headline( 'rcno_genre' );
 		$template->the_rcno_taxonomy_headline( 'rcno_series' );*/
 
+		echo $template->get_the_rcno_book_cover( $review_id );
+
 		$template->the_rcno_taxonomy_terms( 'rcno_author', false );
 		echo '<br>';
 		$template->the_rcno_taxonomy_terms( 'rcno_genre', true, ' · ' );
