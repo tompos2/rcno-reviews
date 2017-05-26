@@ -88,6 +88,7 @@ class Rcno_Template_Tags {
 		;
 		$out .= '<div class="rcno-full-book-cover">';
 		$out .= $this->get_the_rcno_book_cover( $review_id );
+		$out .= $this->get_the_rcno_admin_book_rating( $review_id );
 		$out .= '</div>';
 
 		$out .= '<div class="rcno-full-book-details">';
@@ -111,6 +112,57 @@ class Rcno_Template_Tags {
 
 		return $out;
 	}
+
+	/** ****************************************************************************
+	 * ADMIN RATING TEMPLATE TAGS
+	 *******************************************************************************/
+		private function get_the_rcno_admin_book_rating( $review_id ) { // @TODO: Use an SVG to avoid issues with none UTF-8 fonts.
+			$review = get_post_custom( $review_id );
+
+			if ( ! isset( $review['rcno_admin_rating'] ) ) {
+				return false;
+			}
+
+			$book_rating = (int) $review['rcno_admin_rating'][0];
+
+			switch ( $book_rating ) {
+				case 5:
+					return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+							</div>';
+					break;
+
+				case 4;
+					return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+							</div>';
+					break;
+
+				case 3;
+					return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
+							</div>';
+					break;
+
+				case 2;
+					return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
+							</div>';
+					break;
+
+				case 1;
+					return '<div class="rcno-admin-rating">
+							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+							</div>';
+					break;
+
+				default:
+					return '<div class="rcno-admin-rating">
+							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+							</div>';
+			}
+		}
+
 
 
 	/** ****************************************************************************

@@ -45,9 +45,6 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 		//echo '<br>';
 		//$template->the_rcno_taxonomy_list( true, '/' );
 
-
-
-	$ratings->the_rating( $review_id );
 	echo $template->get_the_rcno_full_book_details( $review_id );
 
 
