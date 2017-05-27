@@ -226,7 +226,7 @@ var rcnoReviewSc;
                 return;
             }
 
-            out+="rcno-review";
+            out+="rcno-reviews";
             out+=" id="+inputs.id.val();
 
             if( inputs.excerpt.prop("checked") == true ){
@@ -268,7 +268,7 @@ var rcnoReviewSc;
                 return;
             }
 
-            out+="[rcno-review";
+            out+="[rcno-reviews";
             out+=" id="+inputs.id.val();
 
             if( inputs.excerpt.prop("checked") === true ){

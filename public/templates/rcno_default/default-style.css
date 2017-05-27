@@ -90,6 +90,7 @@
     display: inline-block;
     float: left;
     margin: 0 1em 0 0;
+    position: relative;
 }
 
 .rcno-full-book-details .rcno-full-book-cover img {
@@ -105,4 +106,19 @@
 .rcno-full-book-description {
     font-size: 12px;
     line-height: 1.6;
+}
+
+.rcno-admin-rating span {
+    color: gold;
+    position: relative;
+    font-size: 35px;
+}
+
+.rcno-full-book-cover .rcno-admin-rating {
+    position: absolute;
+    bottom: 0;
+    background: rgba(255, 87, 34, 0.8);
+    width: 100%;
+    text-align: center;
+    line-height: 1;
 }

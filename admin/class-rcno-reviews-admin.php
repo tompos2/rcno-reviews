@@ -273,13 +273,6 @@ class Rcno_Reviews_Admin {
 
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 
-/*		if ( ! in_array( 'author', $custom_taxonomies, true ) ) {
-			//'array_merge' because I want 'Author' as the first taxonomy.
-			$custom_taxonomies = array_merge(
-				array( 'author' => 'Author' ), $custom_taxonomies
-			);
-		}*/
-
 		$taxonomies = array();
 
 		foreach ( $custom_taxonomies as $key => $value ) {

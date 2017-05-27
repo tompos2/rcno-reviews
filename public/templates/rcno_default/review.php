@@ -17,6 +17,12 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 ?>
 
+<?php if ( $template->is_review_embedded() ) : ?>
+    <h2 class="rcno-review-title">
+		<?php echo get_the_title( $review_id ) ?>
+    </h2>
+<?php endif; ?>
+
 
 
 <div class="rcno-book-info">

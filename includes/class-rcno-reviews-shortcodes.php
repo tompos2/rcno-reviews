@@ -109,7 +109,7 @@ class Rcno_Reviews_Shortcodes {
 					$output = $plugin_public->rcno_render_review_content( $review_post );
 				} elseif ( 1 === $options['excerpt'] ) {
 					// Embed excerpt only.
-					//$output = $this->plugin_public->rcno_render_review_excerpt( $review_post ); //@TODO: Create this function.
+					$output = $plugin_public->rcno_render_review_excerpt( $review_post );
 				}
 			} else {
 				$output = '';

@@ -105,7 +105,7 @@ class Rcno_Template_Tags {
 		$out .= '</div>';
 
 		$out .= '<div class="rcno-full-book-description">';
-		$out .= wp_trim_words( $this->get_the_rcno_book_description( $review_id ), 90 );
+		$out .= wp_trim_words( $this->get_the_rcno_book_description( $review_id ), 75 );
 		$out .= '</div>';
 
 		$out .= '</div>';
@@ -389,7 +389,7 @@ class Rcno_Template_Tags {
 
 		$meta_keys = array(
 			'rcno_book_publisher'   => 'Publisher',
-			'rcno_book_pub_date'    => 'Published Date',
+			'rcno_book_pub_date'    => 'Published',
 			'rcno_book_pub_format'  => 'Format',
 			'rcno_book_pub_edition' => 'Edition',
 			'rcno_book_page_count'  => 'Page Count',

@@ -2,18 +2,3 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
-
-.rcno-admin-rating span {
-    color: gold;
-    position: relative;
-    font-size: 35px;
-}
-
-/*
-.rcno-admin-rating > span:before {
-    content: "\2605";
-    position: absolute;
-    left: 0;
-    color: gold;
-    font-size: 35px;
-}*/

@@ -43,9 +43,10 @@ class Rcno_Reviews_Public {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @since 1.0.0
+	 * @version 1.0.0
+	 * @param string $plugin_name       The name of the plugin.
+	 * @param string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -105,10 +106,10 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $queryWP_Query object.
+	 * @param WP_Query $query
 	 */
 	public function rcno_review_query( WP_Query $query ) {
-		// Don't change query on admin page
+		// Don't change query on admin page.
 		if ( is_admin() ) {
 			return;
 		}
@@ -117,7 +118,7 @@ class Rcno_Reviews_Public {
 		if ( ! is_admin() && $query->is_main_query() ) {
 			// Post archive page:
 			if ( is_post_type_archive( 'rcno_review' ) ) {
-				// set post type to only reviews
+				// set post type to only reviews.
 				$query->set( 'post_type', 'rcno_review' );
 
 				return;
@@ -195,32 +196,62 @@ class Rcno_Reviews_Public {
 			return $content;
 		}
 
-		/* Only render specifically if we have a review */
-		if ( get_post_type() === 'rcno_review' ) {
+		// Only render specifically if we have a review.
+		if ( 'rcno_review' === get_post_type() ) {
 			// Remove the filter
 			remove_filter( 'the_content', array( $this, 'rcno_get_review_content' ) );
 
-			// Do the stuff
 			$review_post          = get_post();
 			$review               = get_post_custom( $review_post->ID );
 			$GLOBALS['review_id'] = $review_post->ID;
 
-			if ( is_single() || true == 'render full review on archive page' ) { // @TODO: Create and option to display full review on archive pages.
+			if ( is_single() || false == 'render full review on archive page' ) { // @TODO: Create and option to display full review on archive pages.
 				$content = $this->rcno_render_review_content( $review_post );
-				//$content = $content . $this->rcno_render_review_content( $review_post ); // @TODO: I am not sure about this.
 			} else {
-				// $content = $this->rcno_render_review_excerpt( $review_post ); // @TODO: Create 'rcno_render_review_excerpt' method.
+				$content = $this->rcno_render_review_excerpt( $review_post );
 			}
 
-			// Add the filter again
+			// Add the filter again.
 			add_filter( 'the_content', array( $this, 'rcno_get_review_content' ), 10 );
 
-			// return the rendered content
-			return $content . '$$$';
+			// Return the rendered content.
+			return $content . '$$$'; // @TODO: This 'return' really is not necessary.
 		}
 
 		return $content . '###';
 	}
+
+	/**
+	 * Get the rendered excerpt of a book and forward it to the theme as the_excerpt()
+	 * Same work is done by 'rcno_get_review_content', however some themes specifically include $post->excerpt,
+	 * then content is rendered by this function
+	 *
+	 * @since 1.0.0
+	 * @param string $content
+	 * @return string $content
+	 */
+	public function rcno_get_review_excerpt( $content ) {
+		if ( ! in_the_loop() || ! is_main_query() ) {
+			return $content;
+		}
+
+		// Only render specifically if we have a review.
+		if ( 'rcno_review' === get_post_type() ) {
+
+			remove_filter( 'get_the_excerpt', array( $this, 'rcno_get_review_excerpt' ), 10 );
+
+			$review_post = get_post();
+
+			$content = $this->rcno_render_review_excerpt( $review_post );
+
+			add_filter( 'get_the_excerpt', array( $this, 'rcno_get_review_excerpt' ), 10 );
+
+		} else {
+
+			return $content;
+		}
+	}
+
 
 	/**
 	 * Do the actual rendering using the review.php file provided by the layout
@@ -232,38 +263,84 @@ class Rcno_Reviews_Public {
 	 * @return string $content
 	 */
 	public function rcno_render_review_content( $review_post ) {
-		// Get the layout's include path
+		// Get the layout's include path.
 		$include_path = $this->rcno_get_the_layout() . 'review.php';
 
 		if ( ! file_exists( $include_path ) ) {
-			// If the layout does not provide a review template file, use the default one:
-			// This NEVER should happen, but who knows...
+			// If the layout does not provide a review template file, use the default one
 			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/review.php';
 		}
 
-		// Get the book review data:
+		// Get the book review data.
 		$review = get_post_custom( $review_post->ID );
 		//$content = $this->get_reviews_content($review_post);
 
-		// Start rendering
+		// Start rendering.
 		ob_start();
 
 		// Include the book review template tags.
 		require_once( __DIR__ . '/class-rcno-template-tags.php' ); //@TODO: Create template tags file.
 
 		include( $include_path );
-		// and render the content using that file:
+		// and render the content using that file.
 		$content = ob_get_contents();
 
-		// Finish rendering
+		// Finish rendering.
 		ob_end_clean();
 
-		// return the rendered content:
+		// return the rendered content.
 		return $content;
 	}
 
+
 	/**
-	 * Get the path to the layout file depending on the layout options
+	 * Do the actual rendering using the excerpt.php file provided by the layout
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param object $review_post
+	 *
+	 * @return string $content
+	 */
+	public function rcno_render_review_excerpt( $review_post ) {
+
+		// Return if we are on a single post page.
+		if ( is_single() ) {
+			return false;
+		}
+		// Get the layout's include path.
+		$include_path = $this->rcno_get_the_layout() . 'excerpt.php';
+
+		// Check if the layout file really exists.
+		if ( ! file_exists( $include_path ) ) {
+			// If the layout does not provide an excerpt file, use the default one.
+			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/excerpt.php';
+		}
+
+		// Get the review data.
+		$review = get_post_custom( $review_post->ID );
+		//$content = $this->get_reviews_content($review_post);
+
+		// Start rendering.
+		ob_start();
+
+		require_once( __DIR__ . '/class-rcno-template-tags.php' );
+		// Include the excerpt file.
+		include( $include_path );
+		// and render the content using that file.
+		$content = ob_get_contents();
+
+		// Finish rendering.
+		ob_end_clean();
+
+		// return the rendered content.
+		return $content;
+
+	}
+
+
+	/**
+	 * Get the path to the layout file depending on the layout options.
 	 *
 	 * @since 1.0.0
 	 * @return string
@@ -271,13 +348,13 @@ class Rcno_Reviews_Public {
 	private function rcno_get_the_layout() {
 		// Get the layout chosen:
 		$layout = 'rcno_default'; // @TODO: Create and option to choose the book review template.
-		// calculate the include path for the layout:
-		// Check if a global or local layout should be used:
+		// Calculate the include path for the layout.
+		// Check if a global or local layout should be used.
 		if ( false !== strpos( $layout, 'local' ) ) {
-			//Local layout
+			//Local layout.
 			$include_path = get_stylesheet_directory() . '/rcno-templates/' . preg_replace( '/^local\_/', '', $layout ) . '/';
 		} else {
-			//Global layout
+			//Global layout.
 			$include_path = plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/';
 		}
 
