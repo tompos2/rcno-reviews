@@ -62,7 +62,9 @@ class Rcno_Reviews_Settings_Definition {
 		$tabs                = array();
 		$tabs['default_tab'] = __( 'Default Tab', self::$plugin_name );
 		$tabs['second_tab']  = __( 'Second Tab', self::$plugin_name );
+		$tabs['general_tab']  = __( 'General', self::$plugin_name );
 		$tabs['taxonomy_tab']  = __( 'Taxonomies', self::$plugin_name );
+		$tabs['components_tab']  = __( 'Components', self::$plugin_name );
 
 		return apply_filters( 'rcno_reviews_settings_tabs', $tabs );
 	}
@@ -197,6 +199,41 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'text'
 				)
 			),
+
+			// Begin the General Tab.
+			'general_tab' => array(
+				'general_tab_header'       => array(
+					'name' => '<strong>' . __( 'General Settings', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_review_slug'              => array(
+					'name' => __( 'Slug', self::$plugin_name ),
+					'desc' => __( 'Book reviews will be available at:', self::$plugin_name ) .
+					          ' <i>' . get_site_url() . '/' . '<b>slug</b>' . '/' . 'a-book-review' . '</i>',
+					'std'  => 'review',
+					'type' => 'text'
+				),
+				'rcno_reviews_on_homepage'                   => array(
+					'name' => __( 'Reviews on homepage?', self::$plugin_name ),
+					'desc' => __( 'Should book reviews be shown on homepage?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_reviews_in_rss'                   => array(
+					'name' => __( 'Reviews in RSS?', self::$plugin_name ),
+					'desc' => __( 'Should book reviews be shown in the RSS feed.?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_reviews_archive'      => array(
+					'name'    => __( 'Reviews archive page', self::$plugin_name ),
+					'desc'    => __( 'Show full content or excerpt on archive pages.', self::$plugin_name ),
+					'options' => array(
+						'archive_display_full' => __( 'The entire book review', self::$plugin_name ),
+						'archive_display_excerpt'     => __( 'Only excerpt of the review', self::$plugin_name )
+					),
+					'type'    => 'select'
+				),
+			),
+
 			// Begin taxonomies tab.
 			'taxonomy_tab' => array(
 				'taxonomy_tab_header'       => array(
@@ -281,7 +318,71 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'checkbox'
 				),
 
-			)
+			),
+
+			//Components tab.
+			'components_tab' => array(
+				'components_tab_header'       => array(
+					'name' => '<strong>' . __( 'Book Review Components', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_show_isbn'              => array(
+					'name' => __( 'ISBN number', self::$plugin_name ),
+					'desc' => __( 'Show the ISBN field for book reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_isbn13'            => array(
+					'name' => __( 'ISBN13 number', self::$plugin_name ),
+					'desc' => __( 'Show the ISBN13 field for book reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_asin'              => array(
+					'name' => __( 'ASIN number', self::$plugin_name ),
+					'desc' => __( 'Show the ASIN field for book reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_gr_id'              => array(
+					'name' => __( 'Goodreads ID', self::$plugin_name ),
+					'desc' => __( 'Show the Goodreads book ID field for book reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_gr_url'              => array(
+					'name' => __( 'Goodreads URL', self::$plugin_name ),
+					'desc' => __( 'Show the Goodreads book URL field for book reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_publisher'              => array(
+					'name' => __( 'Publisher', self::$plugin_name ),
+					'desc' => __( 'Show the book publisher for reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_pub_date'              => array(
+					'name' => __( 'Published Date', self::$plugin_name ),
+					'desc' => __( 'Show the book\'s published date for reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_pub_format'              => array(
+					'name' => __( 'Published Format', self::$plugin_name ),
+					'desc' => __( 'Show the book\'s published format for reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_pub_edition'              => array(
+					'name' => __( 'Published Edition', self::$plugin_name ),
+					'desc' => __( 'Show the book\'s published edition for reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_page_count'              => array(
+					'name' => __( 'Page Count', self::$plugin_name ),
+					'desc' => __( 'Show the book\'s page count for reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_gr_rating'              => array(
+					'name' => __( 'Goodreads Rating', self::$plugin_name ),
+					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+			),
+
 		);
 
 		return self::apply_tab_slug_filters( $settings );

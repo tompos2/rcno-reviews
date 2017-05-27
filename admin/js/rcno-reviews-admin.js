@@ -28,6 +28,22 @@
      * Although scripts in the WordPress core, Plugins and Themes may be
      * practising this, we should strive to set a better example in our own work.
      */
+
+    $(function() {
+
+        var author_tax = $( '#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]' );
+
+        // The author taxonomy must always be enabled.
+        if ( author_tax.is( ':checked' ) ) {
+            author_tax.attr( 'disabled', true );
+        }
+
+        // The author taxonomy can't be hierarchical.
+        $( '#rcno_reviews_settings\\[rcno_author_hierarchical\\]' ).attr( 'disabled', true );
+        $( '#rcno_reviews_settings\\[rcno_show_isbn\\]' ).attr( 'disabled', true );
+
+    });
+
     function renderMediaUploader() {
 
         var file_frame, image_data;

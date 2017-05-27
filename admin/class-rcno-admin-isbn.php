@@ -48,6 +48,12 @@ class Rcno_Admin_ISBN {
 	 * @since 1.0.0
 	 */
 	public function rcno_book_isbn_metabox() {
+
+		// Disables the ISBN metabox displaying on review edit screen.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_isbn' ) ) {
+			return false;
+		}
+
 		// Add editor metabox for ISBN number.
 		add_meta_box(
 			'rcno_book_isbn_metabox',
@@ -57,6 +63,7 @@ class Rcno_Admin_ISBN {
 			'side',
 			'high'
 		);
+		return true;
 	}
 
 	/**

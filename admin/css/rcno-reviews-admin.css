@@ -3,6 +3,10 @@
  * included in this file.
  */
 
+#rcno_reviews_settings[rcno_author_hierarchical] {
+
+}
+
  .rcno-ajax-loading {
    background: url(../images/spinner.gif) no-repeat;
   -webkit-background-size: 20px 20px;

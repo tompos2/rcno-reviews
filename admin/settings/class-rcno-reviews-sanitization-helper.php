@@ -177,7 +177,7 @@ class Rcno_Reviews_Sanitization_Helper {
 	 *
 	 * @since 	1.0.0
 	 * @param 	array 		$input 		The field value
-	 * @return 	string 		$input 		Sanitizied value
+	 * @return 	string 		$input 		Sanitized value
 	 */
 	public function sanitize_text_field( $input ) {
 

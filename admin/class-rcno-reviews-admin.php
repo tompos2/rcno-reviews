@@ -190,17 +190,21 @@ class Rcno_Reviews_Admin {
 	 * @return  void
 	 */
 	public function rcno_review_posttype() {
+
 		$cap_type = 'post';
-		$plural   = 'Reviews';
-		$single   = 'Review';
 		$cpt_name = 'rcno_review';
-		$cpt_slug = 'review'; // @TODO: Create an option to select review slug.
+
+		$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug' );
+		$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $cpt_slug ) );
+		$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $cpt_slug ) );
+
+
 
 		$opts['can_export']            = true;
 		$opts['capability_type']       = $cap_type;
 		$opts['description']           = '';
 		$opts['exclude_from_search']   = false;
-		$opts['has_archive']           = 'reviews';
+		$opts['has_archive']           = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
 		$opts['hierarchical']          = false;
 		$opts['map_meta_cap']          = true;
 		$opts['menu_icon']             = 'dashicons-book';
@@ -272,10 +276,10 @@ class Rcno_Reviews_Admin {
 	public function rcno_custom_taxonomy() { // @TODO: Complete the custom taxonomy feature.
 
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
-
+		$keys = array_keys( $custom_taxonomies );
 		$taxonomies = array();
 
-		foreach ( $custom_taxonomies as $key => $value ) {
+		foreach ( $keys as $key ) {
 			$taxonomies[] = array(
 				'tax_settings'  => array(
 					'slug'          => Rcno_Reviews_Option::get_option( "rcno_{$key}_slug" ),

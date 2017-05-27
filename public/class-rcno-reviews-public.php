@@ -123,9 +123,11 @@ class Rcno_Reviews_Public {
 
 				return;
 			}
+
+			$reviews_on_homepage = Rcno_Reviews_Option::get_option( 'rcno_reviews_on_homepage' );
+
 			// Add 'rcno_review' CPT to homepage if set in options.
-			// @TODO: Create an option to add book reviews to homepage.
-			if ( true === true ) {
+			if ( true === (bool) $reviews_on_homepage ) {
 				if ( is_home() || $query->is_home() || $query->is_front_page() ) {
 					$this->rcno_add_review_to_query( $query );
 				}
@@ -173,7 +175,9 @@ class Rcno_Reviews_Public {
 	 */
 	public function rcno_add_reviews_to_rss_feed( array $query ) {
 
-		if ( true === true ) { // @TODO: Create and option to enable/disable book reviews in RSS feed.
+		$reviews_in_rss = Rcno_Reviews_Option::get_option( 'rcno_reviews_in_rss' );
+
+		if ( true === (bool) $reviews_in_rss ) {
 			if ( isset( $query['feed'] ) && ! isset( $query['post_type'] ) ) {
 				$query['post_type'] = array( 'post', 'rcno_review' );
 			}
@@ -204,8 +208,9 @@ class Rcno_Reviews_Public {
 			$review_post          = get_post();
 			$review               = get_post_custom( $review_post->ID );
 			$GLOBALS['review_id'] = $review_post->ID;
+			$archive_display = Rcno_Reviews_Option::get_option( 'rcno_reviews_archive' );
 
-			if ( is_single() || false == 'render full review on archive page' ) { // @TODO: Create and option to display full review on archive pages.
+			if ( is_single() || 'archive_display_full' === $archive_display ) {
 				$content = $this->rcno_render_review_content( $review_post );
 			} else {
 				$content = $this->rcno_render_review_excerpt( $review_post );
@@ -279,7 +284,7 @@ class Rcno_Reviews_Public {
 		ob_start();
 
 		// Include the book review template tags.
-		require_once( __DIR__ . '/class-rcno-template-tags.php' ); //@TODO: Create template tags file.
+		require_once( __DIR__ . '/class-rcno-template-tags.php' );
 
 		include( $include_path );
 		// and render the content using that file.
