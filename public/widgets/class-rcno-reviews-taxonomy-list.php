@@ -142,7 +142,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		// Check and sanitize all inputs.
 		$instance['title']        = strip_tags( $new_instance['title'] );
 		$instance['taxonomy']     = strip_tags( $new_instance['taxonomy'] );
-		$instance['items']        = absint( $new_instance['items'] );
+		$instance['item_count']   = absint( $new_instance['item_count'] );
 		$instance['order_by']     = strip_tags( $new_instance['order_by'] );
 		$instance['order']        = strip_tags( $new_instance['order'] );
 		$instance['show_count']   = boolval( $new_instance['show_count'] );
@@ -164,8 +164,8 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		/* Set up the default form values. */
 		$defaults = array(
 			'title'        => '',
-			'taxonomy'     => 'category',
-			'items'        => 0,
+			'taxonomy'     => 'genre',
+			'item_count'   => 0,
 			'order_by'     => 'name',
 			'order'        => 'ASC',
 			'show_count'   => false,
@@ -180,7 +180,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		/* element options. */
 		$title        = sanitize_text_field( $instance['title'] );
 		$taxonomy     = sanitize_key( $instance['taxonomy'] );
-		$items        = sanitize_text_field( $instance['items'] );
+		$item_count   = sanitize_text_field( $instance['item_count'] );
 		$order_by     = sanitize_key( $instance['order_by'] );
 		$order        = sanitize_sql_orderby( $instance['order'] );
 		$show_count   = isset( $instance['show_count'] ) ? (bool) $instance['show_count'] : false;
@@ -209,11 +209,11 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'items' ); ?>">
+            <label for="<?php echo $this->get_field_id( 'item_count' ); ?>">
 				<?php _e( 'Displayed taxonomy count:', 'rcno-reviews' ); ?>
             </label>
-            <input type="number" class="widefat" id="<?php echo $this->get_field_id( 'items' ); ?>"
-                   name="<?php $this->get_field_name( 'items' ); ?>" value="<?php echo esc_attr( $items ); ?>"
+            <input type="number" class="widefat" id="<?php echo $this->get_field_id( 'item_count' ); ?>"
+                   name="<?php echo $this->get_field_name( 'item_count' ); ?>" value="<?php echo esc_attr( $item_count ); ?>"
                    style="width:50px;" min="1" max="100"/>
         </p>
         <p>
@@ -222,21 +222,21 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
             </label>
             <select id="<?php echo $this->get_field_id( 'order_by' ); ?>"
                     name="<?php echo $this->get_field_name( 'order_by' ); ?>" class="widefat" style="width:100px;">
-                <option value="name" <?php selected( $order_by, 'name', false ) ?> >
+                <option value="name" <?php echo selected( $order_by, 'name', false ) ?> >
 					<?php _e( 'Name', 'rcno-reviews' ); ?>
                 </option>
-                <option value="count" <?php selected( $order_by, 'count', false ); ?> >
+                <option value="count" <?php echo selected( $order_by, 'count', false ); ?> >
 					<?php _e( 'Count', 'rcno-reviews' ); ?>
                 </option>
             </select>
             <label for="<?php echo $this->get_field_id( 'order' ); ?>">
             </label>
-            <select id="<?php $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>"
+            <select id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>"
                     class="widefat" style="width:100px;">'
-                <option value="name" <?php selected( $order, 'asc', false ); ?> >
+                <option value="asc" <?php echo selected( $order, 'asc', false ); ?> >
 					<?php _e( 'ASC', 'rcno-reviews' ); ?>
                 </option>
-                <option value="count" <?php selected( $order, 'desc', false ); ?> >
+                <option value="desc" <?php echo selected( $order, 'desc', false ); ?> >
 					<?php _e( 'DESC', 'rcno-reviews' ); ?>
                 </option>
             </select>
