@@ -18,6 +18,9 @@
  */
 class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 
+    public $widget_options;
+    public $control_options;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -27,14 +30,16 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 	 * @param string $plugin_name The name of the plugin.
 	 * @param string $version The version of this plugin.
 	 */
-	public function __construct(  ) {
+	public function __construct() {
 
 	    $this->set_widget_options();
 
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-tag-cloud',
-			__( 'Rcno Tag Cloud', 'rcno-reviews' )
+			__( 'Rcno Tag Cloud', 'rcno-reviews' ),
+			$this->widget_options,
+			$this->control_options
 		);
 
 	}
@@ -42,25 +47,29 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 	private function set_widget_options() {
 
 		// Set up the widget options.
-		$widget_options = array(
+		$this->widget_options = array(
 			'classname'   => 'tags',
 			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your tags.', 'rcno-reviews' )
 		);
 
 		// Set up the widget control options.
-		$control_options = array(
-			'width'  => 800,
+		$this->control_options = array(
+			'width'  => 325,
 			'height' => 350
 		);
-
     }
 
 	/**
 	 * Register our widget, un-register the builtin widget.
 	 */
 	public function rcno_register_tag_cloud_widget() {
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_tag_cloud_widget' ) ) {
+			return false;
+		}
+
 		register_widget( 'Rcno_Reviews_Tag_Cloud' );
 		unregister_widget( 'WP_Widget_Tag_Cloud' );
+		return true;
     }
 
 	/**
@@ -73,11 +82,6 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 
 		// Set the $args for wp_tag_cloud() to the $instance array.
 		$args = $instance;
-
-		/* Exclude ingredients if necessary */
-		/*if( is_array( $instance['taxonomy'] ) && in_array( 'rcno_ingredient', $instance['taxonomy'] ) ) {
-			$args['exclude'] = $rcno_option['ingredients_exclude_list'];
-		}*/
 
 		// Make sure empty callbacks aren't passed for custom functions.
 		$args['topic_count_text_callback']  = ! empty( $args['topic_count_text_callback'] ) ? $args['topic_count_text_callback'] : 'default_topic_count_text';
@@ -289,25 +293,25 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
                 <label for="<?php echo $this->get_field_id( 'number' ); ?>">
 					<?php _e( "Number:", 'rcno-reviews' ); ?>
                 </label>
-                <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>"
+                <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>"
                        name="<?php echo $this->get_field_name( 'number' ); ?>"
-                       value="<?php echo esc_attr( $instance['number'] ); ?>"/>
+                       value="<?php echo esc_attr( $instance['number'] ); ?>" />
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'largest' ); ?>">
 					<?php _e( "Largest:", 'rcno-reviews' ); ?>
                 </label>
-                <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'largest' ); ?>"
+                <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'largest' ); ?>"
                        name="<?php echo $this->get_field_name( 'largest' ); ?>"
-                       value="<?php echo esc_attr( $instance['largest'] ); ?>"/>
+                       value="<?php echo esc_attr( $instance['largest'] ); ?>" min="5" max="256"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'smallest' ); ?>">
 					<?php _e( "Smallest:", 'rcno-reviews' ); ?>
                 </label>
-                <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'smallest' ); ?>"
+                <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'smallest' ); ?>"
                        name="<?php echo $this->get_field_name( 'smallest' ); ?>"
-                       value="<?php echo esc_attr( $instance['smallest'] ); ?>"/>
+                       value="<?php echo esc_attr( $instance['smallest'] ); ?>" min="1" max="128"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'unit' ); ?>">

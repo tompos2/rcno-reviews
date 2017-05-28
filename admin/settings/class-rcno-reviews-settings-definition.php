@@ -206,19 +206,19 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '<strong>' . __( 'General Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_review_slug'              => array(
+				'rcno_review_slug'           => array(
 					'name' => __( 'Slug', self::$plugin_name ),
 					'desc' => __( 'Book reviews will be available at:', self::$plugin_name ) .
 					          ' <i>' . get_site_url() . '/' . '<b>slug</b>' . '/' . 'a-book-review' . '</i>',
 					'std'  => 'review',
 					'type' => 'text'
 				),
-				'rcno_reviews_on_homepage'                   => array(
+				'rcno_reviews_on_homepage'   => array(
 					'name' => __( 'Reviews on homepage?', self::$plugin_name ),
 					'desc' => __( 'Should book reviews be shown on homepage?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_reviews_in_rss'                   => array(
+				'rcno_reviews_in_rss'       => array(
 					'name' => __( 'Reviews in RSS?', self::$plugin_name ),
 					'desc' => __( 'Should book reviews be shown in the RSS feed.?', self::$plugin_name ),
 					'type' => 'checkbox'
@@ -231,6 +231,16 @@ class Rcno_Reviews_Settings_Definition {
 						'archive_display_excerpt'     => __( 'Only excerpt of the review', self::$plugin_name )
 					),
 					'type'    => 'select'
+				),
+				'rcno_reviews_taxonomy_list_widget'       => array(
+					'name' => __( 'Enable Taxonomy List widget?', self::$plugin_name ),
+					'desc' => __( 'Should we enable the Taxonomy List widget?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_reviews_tag_cloud_widget'       => array(
+					'name' => __( 'Enable Tag Cloud widget?', self::$plugin_name ),
+					'desc' => __( 'Should we enable the Tag Cloud widget?', self::$plugin_name ),
+					'type' => 'checkbox'
 				),
 			),
 

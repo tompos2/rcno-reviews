@@ -18,6 +18,9 @@
  */
 class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 
+	public $widget_options;
+	public $control_options;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -34,7 +37,9 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-taxonomy-list',
-			__( 'Rcno Taxonomy List', 'rcno-reviews' )
+			__( 'Rcno Taxonomy List', 'rcno-reviews' ),
+            $this->widget_options,
+            $this->control_options
 		);
 
 	}
@@ -42,14 +47,14 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	private function set_widget_options() {
 
 		// Set up the widget options.
-		$widget_options = array(
+		$this->widget_options = array(
 			'classname'   => 'taxonomy_list',
-			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your taxonomies.', 'rcno-reviews' )
+			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your book review taxonomies.', 'rcno-reviews' )
 		);
 
 		// Set up the widget control options.
-		$control_options = array(
-			'width'  => 800,
+		$this->control_options = array(
+			'width'  => 325,
 			'height' => 350
 		);
 
