@@ -18,27 +18,22 @@ $version = '1.0.0';
 
 $review = new Rcno_Template_Tags( $plugin_name, $version );
 
-$recipe_title = get_the_title( $review_id );
 ?>
 
 
 <?php
 /**
- * Displaying the recipe title is normally done by the theme as post_title().
+ * Displaying the book review title is normally done by the theme as post_title().
  * However, if the recipe is embedded, we need to do it here.
  */
-
 if ( $review->is_review_embedded() ) { ?>
-	<h2 class="rcno-review-title">
-		<?php echo $recipe_title; ?>
-	</h2>
+	<h2 class="rcno-review-title"><?php echo get_the_title( $review_id ); ?></h2>
 <?php } ?>
 
 <?php
 
 	$review->the_rcno_book_review_content( $review_id );
 
+echo '<!--- Recencio Book Reviews --->';
+
 ?>
-
-
-

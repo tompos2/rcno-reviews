@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  *
@@ -8,6 +9,7 @@
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/includes
  */
+
 /**
  * The get_option functionality of the plugin.
  *
@@ -16,8 +18,6 @@
  * @subpackage Rcno_Reviews/includes
  * @author     wzyMedia <wzy@outlook.com>
  */
-
-
 class Rcno_Reviews_Option {
 
 	/**
@@ -26,6 +26,8 @@ class Rcno_Reviews_Option {
 	 * Looks to see if the specified setting exists, returns default if not.
 	 *
 	 * @since 	1.0.0
+	 * @param string $key
+	 * @param mixed $default
 	 * @return 	mixed 	$value 	Value saved / $default if key if not exist
 	 */
 	static public function get_option( $key, $default = false ) {
@@ -91,7 +93,7 @@ class Rcno_Reviews_Option {
 		$plugin_options = get_option( 'rcno_reviews_settings', array() );
 
 		// Delete the specified key.
-		unset($plugin_options[ $key ]);
+		unset( $plugin_options[ $key ] );
 
 		// Save the options back to the DB.
 		return update_option( 'rcno_reviews_settings', $plugin_options );

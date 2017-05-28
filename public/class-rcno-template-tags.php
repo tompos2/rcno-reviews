@@ -656,22 +656,22 @@ class Rcno_Template_Tags {
 		$out .= '{';
 		$out .= '"@context": "http://schema.org"';
 		$out .= ', "@type": "Book"';
-		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title' ) .'"';
+		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) .'"';
 		$out .= ', "author": {'; // Begin author
 		$out .= '"@type": "Person"';
 		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_author', false ) ) . '"';
 		$out .= '}'; // End author
 		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"'; // URL to this review page
-		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date' ) . '"';
+		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) . '"';
 		$out .= ', "genre": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_genre', false ) ) .'"';
-		$out .= ', "publisher": '. '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher' ) . '"';
+		$out .= ', "publisher": '. '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', '', false ) . '"';
 		$out .= ', "workExample": ['; // Begin workExample
 		$out .= '{'; // Begin First example
 		$out .= '"@type": "Book"';
-		$out .= ', "isbn": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn' ) . '"';
-		$out .= ', "bookEdition": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition' ) . '"';
-		$out .= ', "bookFormat": "http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format' ) . '"';
-		$out .= ', "numberOfPages": ' . (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count' );
+		$out .= ', "isbn": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) . '"';
+		$out .= ', "bookEdition": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ) . '"';
+		$out .= ', "bookFormat": "http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ) . '"';
+		$out .= ', "numberOfPages": ' . (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
 		$out .= ', "potentialAction": {'; // Begin potentialAction
 		$out .= '"@type": "ReadAction"';
 		$out .= ', "target": {'; // Begin target
@@ -716,13 +716,13 @@ class Rcno_Template_Tags {
 		$out .= ', "sameAs": ' . '"' . get_bloginfo( 'url' ) .'"';
 		$out .= '}';
 
-		$out .= ', "description": "Great old fashioned steaks but the salads are sub par."'; // Review excerpt.
+		$out .= ', "description": ' . '"' . substr(wp_strip_all_tags($this->get_the_rcno_book_review_content( $review_id ), true), 0, 199) . '"';
 		$out .= ', "inLanguage": ' . '"' . get_bloginfo( 'language' ) . '"';
 
 		$out .= ', "itemReviewed": {';
 		$out .= '"@type":"Book"';
-		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title' ) . '"';
-		$out .= ', "isbn": ' . '"'. $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn' ) . '"';
+		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) . '"';
+		$out .= ', "isbn": ' . '"'. $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '',false ) . '"';
 
 		$out .= ', "author": {';
 		$out .= '"@type": "Person"';
@@ -730,15 +730,23 @@ class Rcno_Template_Tags {
 		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"'; // Social profile for book author.
 		$out .= '}';
 
-		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date' ) . '"';
+		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) . '"';
 
 		$out .= '}';
 
 		$out .= ', "reviewRating": {';
 		$out .= '"@type":"Rating"';
 		$out .= ', "worstRating": 1';
-		$out .= ', "bestRating": 10';
-		$out .= ', "ratingValue": ' . (float) $this->rcno_review_score;
+		$out .= ', "bestRating": 5';
+		$out .= ', "ratingValue": ' . 3.7;
+		$out .= '}';
+
+		$out .= ', "aggregateRating": {';
+		$out .= '"@type":"AggregateRating"';
+		$out .= ', "worstRating": 1';
+		$out .= ', "bestRating": 5';
+		$out .= ', "ratingValue": ' . 4.5;
+		$out .= ', "reviewCount": ' . 103;
 		$out .= '}';
 
 

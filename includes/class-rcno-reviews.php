@@ -78,6 +78,7 @@ class Rcno_Reviews {
 		$this->define_public_hooks();
 
 		$this->define_template_hooks();
+		$this->define_widget_hooks();
 
 		$this->define_rest_hooks();
 
@@ -139,6 +140,9 @@ class Rcno_Reviews {
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-shortcodes.php';
 
+		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-tag-cloud.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-taxonomy-list.php';
+
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-option.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-callback-helper.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-meta-box.php';
@@ -147,7 +151,7 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-settings.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-goodreads-api.php';
-		new Rcno_GoodReads_API();
+		new Rcno_GoodReads_API(); // @TODO: We can do this better.
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-rest-api.php';
 
@@ -277,6 +281,15 @@ class Rcno_Reviews {
 	private function define_template_hooks() {
 		$template_hooks = new Rcno_Template_Tags( $this->get_plugin_name(), $this->get_version() );
 		$template_hooks->include_functions_file();
+	}
+
+	private function define_widget_hooks() {
+		$tag_cloud = new Rcno_Reviews_Tag_Cloud();
+		$this->loader->add_action( 'widgets_init', $tag_cloud, 'rcno_register_tag_cloud_widget' );
+
+		$taxonomy_list = new Rcno_Reviews_Taxonomy_List();
+		$this->loader->add_action( 'widgets_init', $taxonomy_list, 'rcno_register_taxonomy_list_widget' );
+
 	}
 
 	private function define_rest_hooks() {

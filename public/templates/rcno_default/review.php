@@ -39,19 +39,13 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 		$template->rcno_print_review_badge( $review_id );
 
-		/*$template->the_rcno_taxonomy_headline( 'rcno_author' );
-		$template->the_rcno_taxonomy_headline( 'rcno_genre' );
-		$template->the_rcno_taxonomy_headline( 'rcno_series' );*/
-
-		//$template->the_rcno_taxonomy_terms( 'rcno_author', true );
-		//echo '<br>';
-		//$template->the_rcno_taxonomy_terms( 'rcno_genre', true, ' · ' );
-		//echo '<br>';
-		//$template->the_rcno_taxonomy_terms( 'rcno_series', true, ' · ' );
-		//echo '<br>';
-		//$template->the_rcno_taxonomy_list( true, '/' );
 
 	echo $template->get_the_rcno_full_book_details( $review_id );
+
+	echo $template->get_the_rcno_book_schema_data( $review_id );
+	echo $template->get_the_rcno_review_schema_data( $review_id );
+
+	echo '<!--- Recencio Book Reviews --->';
 
 
 
