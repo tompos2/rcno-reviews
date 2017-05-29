@@ -142,6 +142,8 @@ class Rcno_Reviews {
 
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-tag-cloud.php';
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-taxonomy-list.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-recent-reviews.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-book-slider.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-option.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-callback-helper.php';
@@ -289,6 +291,12 @@ class Rcno_Reviews {
 
 		$taxonomy_list = new Rcno_Reviews_Taxonomy_List();
 		$this->loader->add_action( 'widgets_init', $taxonomy_list, 'rcno_register_taxonomy_list_widget' );
+
+		$recent_reviews = new Rcno_Reviews_Recent_Reviews();
+		$this->loader->add_action( 'widgets_init', $recent_reviews, 'rcno_register_recent_reviews_widget' );
+
+		$book_slider = new Rcno_Reviews_Book_Slider();
+		$this->loader->add_action( 'widgets_init', $book_slider, 'rcno_register_book_slider_widget' );
 
 	}
 

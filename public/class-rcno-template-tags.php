@@ -93,9 +93,9 @@ class Rcno_Template_Tags {
 
 		$out .= '<div class="rcno-full-book-details">';
 		$out .= '<div class="col-1">';
-		$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_author', true );
-		$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_genre', true );
-		$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_series', true );
+		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', true );
+		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', true );
+		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_series', true );
 		$out .= '</div>';
 		$out .= '<div class="col-2">';
 		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'div', true );
@@ -162,6 +162,10 @@ class Rcno_Template_Tags {
 							</div>';
 			}
 		}
+
+	public function the_rcno_admin_book_rating( $review_id ) {
+		echo $this->get_the_rcno_admin_book_rating( $review_id );
+	}
 
 
 
@@ -242,12 +246,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return null|string
 	 */
-	private function get_the_rcno_taxonomy_terms( $taxonomy, $label = false, $sep = '/' ) {
-		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) { //Correctly get ID for embedded reviews.
-			$review_id = $GLOBALS['review_id'];
-		} else {
-			$review_id = get_post()->ID;
-		}
+	private function get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = '/' ) {
 
 		$out = '';
 
@@ -283,8 +282,8 @@ class Rcno_Template_Tags {
 	 * @param bool   $label
 	 * @param string $sep
 	 */
-	public function the_rcno_taxonomy_terms( $taxonomy, $label = false, $sep = '/' ) {
-		echo $this->get_the_rcno_taxonomy_terms( $taxonomy, $label, $sep );
+	public function the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = '/' ) {
+		echo $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label, $sep );
 	}
 
 
@@ -360,7 +359,7 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK REVIEW CONTENT TEMPLATE TAGS
 	 *******************************************************************************/
 
-	private function get_the_rcno_book_review_content( $review_id ) {
+	public function get_the_rcno_book_review_content( $review_id ) {
 
 		$review_content = '';
 		$review_content .= '<div class="rcno-book-review-content">';

@@ -2,3 +2,50 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+.rcno-recent-review {
+    margin: 0 0 20px 0;
+}
+
+.rcno-recent-review h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 600;
+}
+
+.rcno-recent-review .widget-book-details {
+    float: right;
+    width: 215px;
+    overflow: hidden;
+    max-height: 150px;
+}
+
+.rcno-recent-review .widget-book-details p {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.rcno-recent-review .widget-book-cover {
+    max-width: 100px;
+    min-height: 154px;
+    display: inline-block;
+    position: relative;
+}
+
+.rcno-recent-review .widget-book-cover .rcno-admin-rating {
+    position: absolute;
+    bottom: 0;
+}
+
+.rcno-recent-review .widget-book-cover .rcno-admin-rating span {
+    font-size: 24px;
+}
+
+.rcno-book-slides .rcno-admin-rating {
+
+}
+
+.rcno-book-slides img {
+    width: 100%;
+}
