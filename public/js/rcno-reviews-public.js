@@ -29,4 +29,15 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+    $(function() {
+
+    	$('.rcno-book-slider-container.owl-carousel').owlCarousel({
+            items: 1,
+            autoplay:true,
+            autoplayTimeout: 3000,
+			loop: true
+        });
+
+	});
+
 })( jQuery );

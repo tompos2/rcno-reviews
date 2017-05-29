@@ -49,3 +49,19 @@
 .rcno-book-slides img {
     width: 100%;
 }
+
+.rcno-book-slider-container {
+    width: 325px;
+    position: relative;
+}
+
+.rcno-book-slider-container .owl-stage-outer,
+.rcno-book-slider-container .owl-stage {
+    /*width: 325px;*/
+}
+
+.rcno-book-slider-container .owl-stage .owl-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
