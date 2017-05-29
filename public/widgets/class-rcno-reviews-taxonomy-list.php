@@ -105,6 +105,10 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 			echo $before_title . sanitize_text_field( $instance['title'] ) . $after_title;
 		}
 
+		if ( empty( $instance['taxonomy'] ) ) {
+		    return;
+        }
+
 		/**
 		 * Put together the list of terms
 		 */
@@ -127,7 +131,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 			}
 			echo '</ul>';
 		} else {
-			echo '<p class="tag-list tagl-ist-warning">' . __( 'No terms found', 'rcno-reviews' ) . '</p>';
+			echo '<p class="tag-list tag-list-warning">' . __( 'No terms found', 'rcno-reviews' ) . '</p>';
 		}
 
 		/**
@@ -170,10 +174,10 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	 * @since 0.8.0
 	 */
 	function form( $instance ) {
-		/* Set up the default form values. */
+		// Set up the default form values.
 		$defaults = array(
 			'title'        => '',
-			'taxonomy'     => 'genre',
+			'taxonomy'     => 'rcno_genre',
 			'item_count'   => 0,
 			'order_by'     => 'name',
 			'order'        => 'ASC',

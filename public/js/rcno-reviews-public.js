@@ -34,7 +34,7 @@
     	$('.rcno-book-slider-container.owl-carousel').owlCarousel({
             items: 1,
             autoplay:true,
-            autoplayTimeout: 3000,
+            autoplayTimeout: owl_carousel_options.duration * 1000,
 			loop: true
         });
 
