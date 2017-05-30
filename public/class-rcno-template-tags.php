@@ -57,13 +57,14 @@ class Rcno_Template_Tags {
 	 * Includes the 'functions file' to be used by the book review template.
 	 */
 	public function include_functions_file() {
+
 		// Get the layout chosen.
-		$layout = 'rcno_default'; // @TODO: Create settings option for this.
+		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template' );
 
 		// Calculate the include path for the layout: Check if a global or local layout should be used.
-		if ( strpos( $layout, 'local' ) !== false ) {
+		if ( false !== strpos( $layout, 'local' ) ) {
 			// Local layout.
-			$include_path = get_stylesheet_directory() . '/rcno_template/' . preg_replace('/^local\_/', '', $layout ) . '/functions.php';
+			$include_path = get_stylesheet_directory() . '/rcno-templates/' . preg_replace('/^local\_/', '', $layout ) . '/functions.php';
 		} else {
 			// Global layout.
 			$include_path = plugin_dir_path( __FILE__ )  . 'templates/' . $layout . '/functions.php';

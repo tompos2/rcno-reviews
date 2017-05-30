@@ -351,8 +351,9 @@ class Rcno_Reviews_Public {
 	 * @return string
 	 */
 	private function rcno_get_the_layout() {
+
 		// Get the layout chosen:
-		$layout = 'rcno_default'; // @TODO: Create and option to choose the book review template.
+		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template' );
 		// Calculate the include path for the layout.
 		// Check if a global or local layout should be used.
 		if ( false !== strpos( $layout, 'local' ) ) {

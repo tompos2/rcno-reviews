@@ -106,7 +106,12 @@ function layout_list() {
 
 	foreach ($layouts as $layout) {
 		$name = strtolower( str_replace(' ', '_', $layout['title']) );
-		$list[$name] = $layout['screenshot'];
+		$list[$name] = array(
+			'screenshot' => $layout['screenshot'],
+			'title'      => $layout['title'],
+			'author'     => $layout['author'],
+			'version'    => $layout['version'],
+		);
 	}
 
 	return $list;

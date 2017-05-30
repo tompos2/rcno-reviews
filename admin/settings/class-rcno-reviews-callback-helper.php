@@ -238,13 +238,20 @@ class Rcno_Reviews_Callback_Helper {
 			$html .= $this->get_id_attribute( $args['id'] . '][' . $field_key );
 			$html .= ' value="' . $field_key . '" ' . $checked . '/> ';
 
-			$html .= '<label for="rcno_reviews_settings[' . $args['id'] . '][' . $field_key . ']"> ' . '<img src="' . $option . '" class="template-label-image" />' . '</label>';
+			$html .= '<label for="rcno_reviews_settings[' . $args['id'] . '][' . $field_key . ']">';
+			$html .= '<div class="label-container">';
+			$html .= ' <img src="' . $option['screenshot'] . '" class="template-label-image" />';
+			$html .= ' <p>Title: ' . $option['title'] . '</p>';
+			$html .= ' <p>Author: ' . $option['author'] . '</p>';
+			$html .= ' <p>Version: ' . $option['version'] . '</p>';
+			$html .= '</div>';
+			$html .= '</label>';
 			$html .= '<br/>';
 			$html .= '</div>';
 
 		}
 
-		$html .= '<p class="description">' . $args['desc'] . '</p>';
+		//$html .= '<p class="description">' . $args['desc'] . '</p>';
 		echo $html;
 	}
 
