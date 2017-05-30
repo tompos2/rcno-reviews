@@ -184,6 +184,52 @@ class Rcno_Reviews_Callback_Helper {
 	}
 
 	/**
+	 * Template Callback
+	 *
+	 * Renders book review template selection option.
+	 *
+	 * @since 	1.0.0
+	 * @param 	array $args Arguments passed by the setting
+	 * @return 	void
+	 */
+	public function template_callback( $args ) {
+
+		if ( empty( $args['options'] ) ) {
+			printf( __( 'Options for <strong>%s</strong> radio is missing.', $this->plugin_name ), $args['id'] );
+			return;
+		}
+
+		$old_value = Rcno_Reviews_Option::get_option( $args['id'] );
+
+		$html = '';
+
+		foreach ( $args['options'] as $field_key => $option ) {
+
+			if ( !empty( $old_value ) ) {
+				$checked = checked( $field_key, $old_value, false );
+			} else {
+				$checked = checked( $args['std'], $field_key, false );
+			}
+
+			$html .= '<div class="template-options';
+			$html .= $checked ? ' checked' : '';
+			$html .= '">';
+			$html .= '<input type="radio"';
+			$html .= $this->get_name_attribute( $args['id'] );
+			$html .= $this->get_id_attribute( $args['id'] . '][' . $field_key );
+			$html .= ' value="' . $field_key . '" ' . $checked . '/> ';
+
+			$html .= '<label for="rcno_reviews_settings[' . $args['id'] . '][' . $field_key . ']"> ' . '<img src="' . $option . '" class="template-label-image" />' . '</label>';
+			$html .= '<br/>';
+			$html .= '</div>';
+
+		}
+
+		$html .= '<p class="description">' . $args['desc'] . '</p>';
+		echo $html;
+	}
+
+	/**
 	 * Text Callback
 	 *
 	 * Renders text fields.

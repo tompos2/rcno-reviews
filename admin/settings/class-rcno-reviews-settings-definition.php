@@ -420,14 +420,14 @@ class Rcno_Reviews_Settings_Definition {
 			),
 			'templates_tab' => array(
 				'rcno_review_template'                      => array(
-					'name'    => __( 'Radio', self::$plugin_name ),
-					'desc'    => __( 'Radio with 3 options', self::$plugin_name ),
+					'name'    => __( 'Book review template', self::$plugin_name ),
+					'desc'    => __( 'Select how you want your book reviews to look.', self::$plugin_name ),
 					'options' => array(
-						'rcno_default'   => __( 'Rcno Default', self::$plugin_name ),
-						'tang-rufus' => __( "<a href='http://tangrufus.com/'>Tang Rufus' Blog</a> looks great", self::$plugin_name ),
-						'Filter'     => __( 'You can apply filters on this option!', self::$plugin_name )
+						'rcno_default'   => __( 'http://recencio.dev/wp-content/uploads/2017/05/17910124.jpg', self::$plugin_name ),
+						'rcno_2_column' => __( 'http://recencio.dev/wp-content/uploads/2017/05/9329516.jpg', self::$plugin_name ),
+						'rcno_fancy'     => __( 'http://recencio.dev/wp-content/uploads/2017/05/31549513.jpg', self::$plugin_name )
 					),
-					'type'    => 'radio'
+					'type'    => 'template'
 				),
 			),
 

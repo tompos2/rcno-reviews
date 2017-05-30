@@ -150,4 +150,33 @@
     color: #c59b08 !important;
 }
 
+tr.rcno_review_template > td {
+    background: rgba(255, 0, 0, 0.08);
+    display: flex;
+}
+
+tr.rcno_review_template > td .template-options.checked {
+    border: 5px solid red;
+}
+
+tr.rcno_review_template > td .template-options {
+    margin: 0 1em;
+    position: relative;
+}
+
+tr.rcno_review_template > td input[type=radio] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10px;
+}
+
+.rcno_review_template img.template-label-image {
+    width: 150px;
+    height: 255px;
+}
+
 
