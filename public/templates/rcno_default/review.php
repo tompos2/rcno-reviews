@@ -1,4 +1,13 @@
 <?php
+/*
+Author: wzyMedia
+Author Mail: kemory@wzymedia.com
+Author URL: https://wzymedia.com
+Layout Name: Rcno Default
+Version: 1.0.0
+Description: The default layout.
+*/
+
 
 // Get the review ID.
 if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {

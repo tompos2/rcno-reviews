@@ -158,7 +158,6 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-rest-api.php';
 
 		$this->loader = new Rcno_Reviews_Loader();
-
 	}
 
 	/**

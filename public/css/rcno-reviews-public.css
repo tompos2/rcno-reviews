@@ -65,3 +65,8 @@
     width: 100%;
     height: auto;
 }
+
+.owl-stage .owl-item .rcno-admin-rating {
+    position: absolute;
+    bottom: 0;
+}
