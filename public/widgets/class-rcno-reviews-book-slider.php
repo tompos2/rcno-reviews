@@ -76,9 +76,9 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	 * Register our widget, un-register the builtin widget.
 	 */
 	public function rcno_register_book_slider_widget() {
-		/*		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_taxonomy_list_widget' ) ) {
-					return false;
-				}*/
+        if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_book_slider_widget' ) ) {
+            return false;
+        }
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		register_widget( 'Rcno_Reviews_Book_Slider' );

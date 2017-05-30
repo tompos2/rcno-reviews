@@ -64,9 +64,9 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 * Register our widget, un-register the builtin widget.
 	 */
 	public function rcno_register_recent_reviews_widget() {
-/*		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_taxonomy_list_widget' ) ) {
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_recent_reviews_widget' ) ) {
 			return false;
-		}*/
+		}
 		register_widget( 'Rcno_Reviews_Recent_Reviews' );
 		return true;
 	}

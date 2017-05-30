@@ -30,13 +30,15 @@
 	 */
 
     $(function() {
+    	if ( typeof owl_carousel_options !== 'undefined' ) {
 
-    	$('.rcno-book-slider-container.owl-carousel').owlCarousel({
-            items: 1,
-            autoplay:true,
-            autoplayTimeout: owl_carousel_options.duration * 1000,
-			loop: true
-        });
+            $('.rcno-book-slider-container.owl-carousel').owlCarousel({
+                items: 1,
+                autoplay: true,
+                autoplayTimeout: owl_carousel_options.duration * 1000,
+                loop: true
+            });
+        }
 
 	});
 

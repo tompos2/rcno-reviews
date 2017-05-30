@@ -63,7 +63,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 	 * Register our widget, un-register the builtin widget.
 	 */
 	public function rcno_register_tag_cloud_widget() {
-		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_tag_cloud_widget' ) ) {
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_tag_cloud_widget' ) ) {
 			return false;
 		}
 

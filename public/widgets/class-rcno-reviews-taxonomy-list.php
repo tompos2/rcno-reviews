@@ -64,7 +64,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	 * Register our widget, un-register the builtin widget.
 	 */
 	public function rcno_register_taxonomy_list_widget() {
-	    if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_taxonomy_list_widget' ) ) {
+	    if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_taxonomy_list_widget' ) ) {
 	        return false;
         }
 		register_widget( 'Rcno_Reviews_Taxonomy_List' );

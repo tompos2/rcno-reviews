@@ -28,6 +28,25 @@
      * Although scripts in the WordPress core, Plugins and Themes may be
      * practising this, we should strive to set a better example in our own work.
      */
+    $(function () { //@TODO: Check to see if this file upload feature needs sanitation.
+        $('.rcno_reviews_settings_upload_button').click(function (e) {
+            e.preventDefault();
+
+            var custom_uploader = wp.media({
+                title: 'Custom File',
+                button: {
+                    text: 'Upload File'
+                },
+                multiple: false  // Set this to true to allow multiple files to be selected
+            })
+                .on('select', function () {
+                    var attachment = custom_uploader.state().get('selection').first().toJSON();
+                    $('.rcno_reviews_upload_field').val(attachment.url); //@TODO: The classes used in this function need to be dynamic
+
+                })
+                .open();
+        });
+    });
 
     $(function() {
 

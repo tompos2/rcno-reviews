@@ -191,6 +191,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Rich Editor save as HTML markups', self::$plugin_name ),
 					'type' => 'rich_editor'
 				),
+				'upload'                => array(
+					'name' => __( 'Upload', self::$plugin_name ),
+					'desc' => __( 'Upload', self::$plugin_name ),
+					'type' => 'upload'
+				),
 			),
 			'second_tab'  => array(
 				'extend_me' => array(
@@ -232,16 +237,7 @@ class Rcno_Reviews_Settings_Definition {
 					),
 					'type'    => 'select'
 				),
-				'rcno_reviews_taxonomy_list_widget'       => array(
-					'name' => __( 'Enable Taxonomy List widget?', self::$plugin_name ),
-					'desc' => __( 'Should we enable the Taxonomy List widget?', self::$plugin_name ),
-					'type' => 'checkbox'
-				),
-				'rcno_reviews_tag_cloud_widget'       => array(
-					'name' => __( 'Enable Tag Cloud widget?', self::$plugin_name ),
-					'desc' => __( 'Should we enable the Tag Cloud widget?', self::$plugin_name ),
-					'type' => 'checkbox'
-				),
+
 			),
 
 			// Begin taxonomies tab.
@@ -389,6 +385,30 @@ class Rcno_Reviews_Settings_Definition {
 				'rcno_show_gr_rating'              => array(
 					'name' => __( 'Goodreads Rating', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'components_tab_header_1'       => array(
+					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_show_book_slider_widget'              => array(
+					'name' => __( 'Book Slider', self::$plugin_name ),
+					'desc' => __( 'Use the Rcno Book Slider widget?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_recent_reviews_widget'              => array(
+					'name' => __( 'Recent Reviews', self::$plugin_name ),
+					'desc' => __( 'Use the Rcno Recent Reviews widget?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_tag_cloud_widget'              => array(
+					'name' => __( 'Tag Cloud', self::$plugin_name ),
+					'desc' => __( 'Use the Rcno Tag Cloud widget?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_show_taxonomy_list_widget'              => array(
+					'name' => __( 'Taxonomy List', self::$plugin_name ),
+					'desc' => __( 'Use the Rcno Taxonomy List widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
 			),

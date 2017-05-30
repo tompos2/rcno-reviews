@@ -366,7 +366,7 @@ class Rcno_Reviews_Callback_Helper {
 
 		if ( $wp_version >= 3.3 && function_exists( 'wp_editor' ) ) {
 			ob_start();
-			wp_editor( stripslashes( $value ), 'plugin_name_settings_' . $args['id'], array( 'textarea_name' => 'plugin_name_settings[' . $args['id'] . ']' ) );
+			wp_editor( stripslashes( $value ), 'rcno_reviews_settings_' . $args['id'], array( 'textarea_name' => 'rcno_reviews_settings[' . $args['id'] . ']' ) );
 			$html = ob_get_clean();
 		} else {
 			$html = '<textarea' . $this->get_id_and_name_attributes( $args['id'] ) . 'class="' . $args['size'] . '-text" rows="10" >' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
@@ -394,10 +394,10 @@ class Rcno_Reviews_Callback_Helper {
 
 		$html = '<input type="text" ';
 		$html .= $this->get_id_and_name_attributes( $args['id'] );
-		$html .= 'class="' . $args['size'] . '-text ' . 'plugin_name_upload_field" ';
+		$html .= 'class="' . $args['size'] . '-text ' . 'rcno_reviews_upload_field" ';
 		$html .= ' value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 
-		$html .= '<span>&nbsp;<input type="button" class="' .  'plugin_name_settings_upload_button button-secondary" value="' . __( 'Upload File', $this->plugin_name ) . '"/></span>';
+		$html .= '<span>&nbsp;<input type="button" class="' .  'rcno_reviews_settings_upload_button button-secondary" value="' . __( 'Upload File', $this->plugin_name ) . '"/></span><br>';
 
 		$html .= $this->get_label_for( $args['id'], $args['desc'] );
 
