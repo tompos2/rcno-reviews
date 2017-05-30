@@ -21,9 +21,8 @@ class Rcno_Reviews_Settings_Definition {
 
 	public static $plugin_name = 'rcno-reviews';
 
-	public static $layouts = array();
-
 	public function __construct() {
+
 	}
 
 	/**
@@ -64,12 +63,12 @@ class Rcno_Reviews_Settings_Definition {
 	 */
 	static public function get_tabs() {
 
-		$tabs                = array();
-		$tabs['default_tab'] = __( 'Default Tab', self::$plugin_name );
-		$tabs['second_tab']  = __( 'Second Tab', self::$plugin_name );
-		$tabs['general_tab']  = __( 'General', self::$plugin_name );
-		$tabs['taxonomy_tab']  = __( 'Taxonomies', self::$plugin_name );
-		$tabs['components_tab']  = __( 'Components', self::$plugin_name );
+		$tabs                   = array();
+		$tabs['default_tab']    = __( 'Default Tab', self::$plugin_name );
+		$tabs['second_tab']     = __( 'Second Tab', self::$plugin_name );
+		$tabs['general_tab']    = __( 'General', self::$plugin_name );
+		$tabs['taxonomy_tab']   = __( 'Taxonomies', self::$plugin_name );
+		$tabs['components_tab'] = __( 'Components', self::$plugin_name );
 		$tabs['templates_tab']  = __( 'Templates', self::$plugin_name );
 
 		return apply_filters( 'rcno_reviews_settings_tabs', $tabs );
@@ -85,10 +84,12 @@ class Rcno_Reviews_Settings_Definition {
 	 */
 	static public function get_settings() {
 
+		require_once 'class-rcno-reviews-get-templates.php';
+
 		$settings[] = array();
 
 		$settings = array(
-			'default_tab' => array(
+			'default_tab'    => array(
 				'default_tab_settings'       => array(
 					'name' => '<strong>' . __( 'Header', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
@@ -197,13 +198,13 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Rich Editor save as HTML markups', self::$plugin_name ),
 					'type' => 'rich_editor'
 				),
-				'upload'                => array(
+				'upload'                     => array(
 					'name' => __( 'Upload', self::$plugin_name ),
 					'desc' => __( 'Upload', self::$plugin_name ),
 					'type' => 'upload'
 				),
 			),
-			'second_tab'  => array(
+			'second_tab'     => array(
 				'extend_me' => array(
 					'name' => 'Extend me',
 					'desc' => __( 'You can extend me via hooks and filters.', self::$plugin_name ),
@@ -212,12 +213,12 @@ class Rcno_Reviews_Settings_Definition {
 			),
 
 			// Begin the General Tab.
-			'general_tab' => array(
-				'general_tab_header'       => array(
+			'general_tab'    => array(
+				'general_tab_header'            => array(
 					'name' => '<strong>' . __( 'General Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_review_slug'           => array(
+				'rcno_review_slug'              => array(
 					'name' => __( 'Slug', self::$plugin_name ),
 					'desc' => __( 'Book reviews will be available at:', self::$plugin_name ) .
 					          ' <i>' . get_site_url() . '/' . '<b>slug</b>' . '/' . 'a-book-review' . '</i>',
@@ -230,22 +231,22 @@ class Rcno_Reviews_Settings_Definition {
 					 Try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', self::$plugin_name ),
 					'type' => 'instruction'
 				),
-				'rcno_reviews_on_homepage'   => array(
+				'rcno_reviews_on_homepage'      => array(
 					'name' => __( 'Reviews on homepage?', self::$plugin_name ),
 					'desc' => __( 'Should book reviews be shown on homepage?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_reviews_in_rss'       => array(
+				'rcno_reviews_in_rss'           => array(
 					'name' => __( 'Reviews in RSS?', self::$plugin_name ),
 					'desc' => __( 'Should book reviews be shown in the RSS feed.?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_reviews_archive'      => array(
+				'rcno_reviews_archive'          => array(
 					'name'    => __( 'Reviews archive page', self::$plugin_name ),
 					'desc'    => __( 'Show full content or excerpt on archive pages.', self::$plugin_name ),
 					'options' => array(
-						'archive_display_full' => __( 'The entire book review', self::$plugin_name ),
-						'archive_display_excerpt'     => __( 'Only excerpt of the review', self::$plugin_name )
+						'archive_display_full'    => __( 'The entire book review', self::$plugin_name ),
+						'archive_display_excerpt' => __( 'Only excerpt of the review', self::$plugin_name )
 					),
 					'type'    => 'select'
 				),
@@ -253,8 +254,8 @@ class Rcno_Reviews_Settings_Definition {
 			),
 
 			// Begin taxonomies tab.
-			'taxonomy_tab' => array(
-				'taxonomy_tab_header'       => array(
+			'taxonomy_tab'   => array(
+				'taxonomy_tab_header'            => array(
 					'name' => '<strong>' . __( 'Review Taxonomies', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
@@ -266,71 +267,71 @@ class Rcno_Reviews_Settings_Definition {
 					'name'    => __( 'Taxonomy Selection', self::$plugin_name ),
 					'desc'    => __( 'Custom Taxonomy Selection with 3 options', self::$plugin_name ),
 					'options' => array(
-						'author'    => __( 'Author', self::$plugin_name ),
-						'genre'     => __( 'Genre', self::$plugin_name ),
-						'series'    => __( 'Series', self::$plugin_name ),
+						'author' => __( 'Author', self::$plugin_name ),
+						'genre'  => __( 'Genre', self::$plugin_name ),
+						'series' => __( 'Series', self::$plugin_name ),
 					),
 					'type'    => 'multicheck'
 				),
 				// Book Review Author Taxonomy.
-				'rcno_author_header'            => array(
+				'rcno_author_header'             => array(
 					'name' => '<h2 class="section-heading">' . __( ucfirst( Rcno_Reviews_Option::get_option( 'rcno_author_slug' ) ), self::$plugin_name ) . '</h2>',
 					'type' => 'header'
 				),
-				'rcno_author_slug'              => array(
+				'rcno_author_slug'               => array(
 					'name' => __( 'Slug', self::$plugin_name ),
 					'desc' => __( 'Place the slug of the author taxonomy here.', self::$plugin_name ),
 					'std'  => 'author',
 					'type' => 'text'
 				),
-				'rcno_author_hierarchical'                   => array(
+				'rcno_author_hierarchical'       => array(
 					'name' => __( 'Hierarchical', self::$plugin_name ),
 					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_author_show'                   => array(
+				'rcno_author_show'               => array(
 					'name' => __( 'Show in table', self::$plugin_name ),
 					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
 				// Book Review Genre Taxonomy.
-				'rcno_genre_header'            => array(
+				'rcno_genre_header'              => array(
 					'name' => '<h2 class="section-heading">' . __( 'Genre', self::$plugin_name ) . '</h2>',
 					'type' => 'header'
 				),
-				'rcno_genre_slug'              => array(
+				'rcno_genre_slug'                => array(
 					'name' => __( 'Slug', self::$plugin_name ),
 					'desc' => __( 'Place the slug of the genre taxonomy here.', self::$plugin_name ),
 					'std'  => 'genre',
 					'type' => 'text'
 				),
-				'rcno_genre_hierarchical'                   => array(
+				'rcno_genre_hierarchical'        => array(
 					'name' => __( 'Hierarchical', self::$plugin_name ),
 					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_genre_show'                   => array(
+				'rcno_genre_show'                => array(
 					'name' => __( 'Show in table', self::$plugin_name ),
 					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
 				// Book Review Series Taxonomy.
-				'rcno_series_header'            => array(
+				'rcno_series_header'             => array(
 					'name' => '<h2 class="section-heading">' . __( 'Series', self::$plugin_name ) . '</h2>',
 					'type' => 'header'
 				),
-				'rcno_series_slug'              => array(
+				'rcno_series_slug'               => array(
 					'name' => __( 'Slug', self::$plugin_name ),
 					'desc' => __( 'Place the slug of the series taxonomy here.', self::$plugin_name ),
 					'std'  => 'series',
 					'type' => 'text'
 				),
-				'rcno_series_hierarchical'                   => array(
+				'rcno_series_hierarchical'       => array(
 					'name' => __( 'Hierarchical', self::$plugin_name ),
 					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_series_show'                   => array(
+				'rcno_series_show'               => array(
 					'name' => __( 'Show in table', self::$plugin_name ),
 					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
 					'type' => 'checkbox'
@@ -340,36 +341,36 @@ class Rcno_Reviews_Settings_Definition {
 
 			//Components tab.
 			'components_tab' => array(
-				'components_tab_header'       => array(
+				'components_tab_header'           => array(
 					'name' => '<strong>' . __( 'Book Review Components', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_show_isbn'              => array(
+				'rcno_show_isbn'                  => array(
 					'name' => __( 'ISBN number', self::$plugin_name ),
 					'desc' => __( 'Show the ISBN field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_isbn13'            => array(
+				'rcno_show_isbn13'                => array(
 					'name' => __( 'ISBN13 number', self::$plugin_name ),
 					'desc' => __( 'Show the ISBN13 field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_asin'              => array(
+				'rcno_show_asin'                  => array(
 					'name' => __( 'ASIN number', self::$plugin_name ),
 					'desc' => __( 'Show the ASIN field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_gr_id'              => array(
+				'rcno_show_gr_id'                 => array(
 					'name' => __( 'Goodreads ID', self::$plugin_name ),
 					'desc' => __( 'Show the Goodreads book ID field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_gr_url'              => array(
+				'rcno_show_gr_url'                => array(
 					'name' => __( 'Goodreads URL', self::$plugin_name ),
 					'desc' => __( 'Show the Goodreads book URL field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_publisher'              => array(
+				'rcno_show_publisher'             => array(
 					'name' => __( 'Publisher', self::$plugin_name ),
 					'desc' => __( 'Show the book publisher for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
@@ -379,61 +380,57 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Show the book\'s published date for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_pub_format'              => array(
+				'rcno_show_pub_format'            => array(
 					'name' => __( 'Published Format', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s published format for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_pub_edition'              => array(
+				'rcno_show_pub_edition'           => array(
 					'name' => __( 'Published Edition', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s published edition for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_page_count'              => array(
+				'rcno_show_page_count'            => array(
 					'name' => __( 'Page Count', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s page count for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_gr_rating'              => array(
+				'rcno_show_gr_rating'             => array(
 					'name' => __( 'Goodreads Rating', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'components_tab_header_1'       => array(
+				'components_tab_header_1'         => array(
 					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_show_book_slider_widget'              => array(
+				'rcno_show_book_slider_widget'    => array(
 					'name' => __( 'Book Slider', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Book Slider widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_recent_reviews_widget'              => array(
+				'rcno_show_recent_reviews_widget' => array(
 					'name' => __( 'Recent Reviews', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Recent Reviews widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_tag_cloud_widget'              => array(
+				'rcno_show_tag_cloud_widget'      => array(
 					'name' => __( 'Tag Cloud', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Tag Cloud widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_taxonomy_list_widget'              => array(
+				'rcno_show_taxonomy_list_widget'  => array(
 					'name' => __( 'Taxonomy List', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Taxonomy List widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
 			),
-			'templates_tab' => array(
+			'templates_tab'  => array(
 
 				'rcno_review_template' => array(
 					'name'    => __( 'Book review template', self::$plugin_name ),
 					'desc'    => __( 'Select how you want your book reviews to look.', self::$plugin_name ),
-					'options' => array(
-						'rcno_default'   => __( 'http://recencio.dev/wp-content/plugins/rcno-reviews/public/templates/rcno_default/screenshot.png', self::$plugin_name ),
-						'rcno_2_column' => __( 'http://recencio.dev/wp-content/uploads/2017/05/9329516.jpg', self::$plugin_name ),
-						'rcno_fancy'     => __( 'http://recencio.dev/wp-content/uploads/2017/05/31549513.jpg', self::$plugin_name )
-					),
+					'options' => layout_list(),
 					'type'    => 'template'
 				),
 
@@ -443,91 +440,9 @@ class Rcno_Reviews_Settings_Definition {
 
 		);
 
-		self::get_layouts_list();
-
 		return self::apply_tab_slug_filters( $settings );
 	}
 
-	/**
-	 * Create a list of available layouts locally and globally.
-	 */
-	static public function get_layouts_list() { //@TODO: Find a clean way to invoke this, or move it.
-
-		// First create a list of all globally available layouts.
-		$dir_name = WP_PLUGIN_DIR . '/rcno-reviews/public/templates/';
-
-		self::add_layout_to_list( $dir_name );
-
-		// Then also add layouts available locally from the current theme (if applicable).
-		$dir_name = get_stylesheet_directory() . '/rcno-templates/';
-
-		self::add_layout_to_list( $dir_name );
-	}
-
-	static public function add_layout_to_list( $dir_name ) {
-		if ( is_dir( $dir_name ) ) {
-			if ( $handle = opendir( $dir_name ) ) {
-				// Walk through all folders in that directory:
-				while ( false !== ( $file = readdir( $handle ) ) ) {
-					if ( $file !== '.' && $file !== '..' && $file !== '.svn' ) {
-						if ( preg_match( "/plugin/", $dir_name ) ) {
-							$base_url = plugins_url() . '/' . 'rcno-reviews' . '/public/templates/' . $file;
-							$local    = false;
-						} else {
-							$base_url = get_template_directory_uri() . '/rcno-templates/' . $file;
-							$local    = true;
-						}
-
-						self::$layouts[ $file ] = array(
-							'path'  => $dir_name . $file,
-							'url'   => $base_url,
-							'local' => $local
-						);
-
-						self::get_layout_meta( $dir_name, $file );
-					}
-				}
-			}
-		}
-	}
-
-	static public function get_layout_meta( $dir_name, $file ) {
-		// Param parsing inspired by http://stackoverflow.com/questions/11504541/get-comments-in-a-php-file
-		$params   = array();
-		$filename = $dir_name . $file . '/review.php';
-
-		$docComments = array_filter(
-			token_get_all( file_get_contents( $filename ) ),
-			"f_comment"
-		);
-
-		$fileDocComment = array_shift( $docComments );
-
-		$regexp = "/.*\:.*\n/";
-		preg_match_all( $regexp, $fileDocComment[1], $matches );
-
-		foreach ( $matches[0] as $match ) {
-			$param                       = explode( ": ", $match );
-			$params[ trim( $param[0] ) ] = trim( $param[1] );
-		}
-
-		self::$layouts[ $file ]['description'] = $params['Description'];
-		self::$layouts[ $file ]['title']       = $params['Layout Name'];
-		self::$layouts[ $file ]['author']      = $params['Author'];
-		self::$layouts[ $file ]['author_mail'] = $params['Author Mail'];
-		self::$layouts[ $file ]['author_url']  = $params['Author URL'];
-		self::$layouts[ $file ]['version']     = $params['Version'];
-		if ( file_exists( $dir_name . $file . '/logo.png' ) ) {
-			self::$layouts[ $file ]['logo'] = self::$layouts[ $file ]['url'] . '/logo.png';
-		}
-		if ( file_exists( $dir_name . $file . '/screenshot.png' ) ) {
-			self::$layouts[ $file ]['screenshot'] = self::$layouts[ $file ]['url'] . '/screenshot.png';
-		}
-
-	}
-
 }
 
-function f_comment( $entry ){
-	return $entry[0] == T_COMMENT;
-}
+

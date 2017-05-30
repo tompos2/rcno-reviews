@@ -1,0 +1,129 @@
+#rcno-review-score-box {
+    background: #f5f2dd;
+    padding: 10px;
+}
+
+#rcno-review-score-box ul {
+    list-style: none;
+}
+
+#rcno-review-score-box .review-summary {
+    margin: 0 0 1em 0;
+}
+
+#rcno-review-score-box ul li .rcno-review-score-bar-container {
+    height: 40px;
+    background: #ccc;
+    overflow: hidden;
+    margin: 0 0 1em 0;
+    position: relative;
+}
+
+#rcno-review-score-box ul li .review-score-bar {
+    background: green;
+}
+
+#rcno-review-score-box ul li .review-score-bar span.score-bar {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 40px;
+    padding: 0 0 0 10px;
+    text-transform: uppercase;
+}
+
+#rcno-review-score-box ul li .rcno-review-score-bar-container span.right {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    z-index: 9999;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+}
+
+#rcno-review-score-box span.badge-star {
+    color: #FFC107;
+}
+
+#rcno-review-score-box .review-summary .overall-score {
+    width: 120px;
+    height: 120px;
+    background: green;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
+
+#rcno-review-score-box .review-summary .overall-score .overall {
+    color: #fff;
+    font-size: 60px;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    padding: 10px;
+}
+
+#rcno-review-score-box .review-summary .overall-score .overall-text {
+    color: #fff;
+    font-size: 13px;
+    display: block;
+    line-height: 1;
+    bottom: 0;
+    text-transform: uppercase;
+    position: absolute;
+    padding: 10px 7px;
+    background: black;
+    left: 0;
+}
+
+#rcno-review-score-box .review-summary .overall-text {
+    padding: 5px;
+    display: inline-block;
+}
+
+.rcno-full-book .rcno-full-book-cover img.rcno-book-cover {
+    width: 100%; /* Twenty Ten does not do this for some strange reason */
+    height: auto;
+}
+
+.rcno-full-book-cover {
+    width: 200px;
+    min-height: 308px;
+    background: rgba(96, 125, 139, 0.36);
+    display: inline-block;
+    float: left;
+    margin: 0 1em 0 0;
+    position: relative;
+}
+
+.rcno-full-book-details .rcno-full-book-cover img {
+    max-width: 200px;
+}
+
+.rcno-full-book-details {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 1em 0;
+}
+
+.rcno-full-book-description {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.rcno-admin-rating span {
+    color: gold;
+    position: relative;
+    font-size: 35px;
+}
+
+.rcno-full-book-cover .rcno-admin-rating {
+    position: absolute;
+    bottom: 0;
+    background: rgba(255, 87, 34, 0.8);
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+}
