@@ -21,7 +21,7 @@ class Rcno_Reviews_Settings_Definition {
 
 	public static $plugin_name = 'rcno-reviews';
 
-	private $layouts = array();
+	public static $layouts = array();
 
 	public function __construct() {
 	}
@@ -430,7 +430,7 @@ class Rcno_Reviews_Settings_Definition {
 					'name'    => __( 'Book review template', self::$plugin_name ),
 					'desc'    => __( 'Select how you want your book reviews to look.', self::$plugin_name ),
 					'options' => array(
-						'rcno_default'   => __( 'http://recencio.dev/wp-content/uploads/2017/05/17910124.jpg', self::$plugin_name ),
+						'rcno_default'   => __( 'http://recencio.dev/wp-content/plugins/rcno-reviews/public/templates/rcno_default/screenshot.png', self::$plugin_name ),
 						'rcno_2_column' => __( 'http://recencio.dev/wp-content/uploads/2017/05/9329516.jpg', self::$plugin_name ),
 						'rcno_fancy'     => __( 'http://recencio.dev/wp-content/uploads/2017/05/31549513.jpg', self::$plugin_name )
 					),
@@ -443,26 +443,28 @@ class Rcno_Reviews_Settings_Definition {
 
 		);
 
+		self::get_layouts_list();
+
 		return self::apply_tab_slug_filters( $settings );
 	}
 
 	/**
 	 * Create a list of available layouts locally and globally.
 	 */
-	private function get_layouts_list() { //@TODO: Find a clean way to invoke this, or move it.
+	static public function get_layouts_list() { //@TODO: Find a clean way to invoke this, or move it.
 
 		// First create a list of all globally available layouts.
 		$dir_name = WP_PLUGIN_DIR . '/rcno-reviews/public/templates/';
 
-		$this->add_layout_to_list( $dir_name );
+		self::add_layout_to_list( $dir_name );
 
 		// Then also add layouts available locally from the current theme (if applicable).
 		$dir_name = get_stylesheet_directory() . '/rcno-templates/';
 
-		$this->add_layout_to_list( $dir_name );
+		self::add_layout_to_list( $dir_name );
 	}
 
-	private function add_layout_to_list( $dir_name ) {
+	static public function add_layout_to_list( $dir_name ) {
 		if ( is_dir( $dir_name ) ) {
 			if ( $handle = opendir( $dir_name ) ) {
 				// Walk through all folders in that directory:
@@ -476,20 +478,20 @@ class Rcno_Reviews_Settings_Definition {
 							$local    = true;
 						}
 
-						$this->layouts[ $file ] = array(
+						self::$layouts[ $file ] = array(
 							'path'  => $dir_name . $file,
 							'url'   => $base_url,
 							'local' => $local
 						);
 
-						$this->get_layout_meta( $dir_name, $file );
+						self::get_layout_meta( $dir_name, $file );
 					}
 				}
 			}
 		}
 	}
 
-	private function get_layout_meta( $dir_name, $file ) {
+	static public function get_layout_meta( $dir_name, $file ) {
 		// Param parsing inspired by http://stackoverflow.com/questions/11504541/get-comments-in-a-php-file
 		$params   = array();
 		$filename = $dir_name . $file . '/review.php';
@@ -509,17 +511,17 @@ class Rcno_Reviews_Settings_Definition {
 			$params[ trim( $param[0] ) ] = trim( $param[1] );
 		}
 
-		$this->layouts[ $file ]['description'] = $params['Description'];
-		$this->layouts[ $file ]['title']       = $params['Layout Name'];
-		$this->layouts[ $file ]['author']      = $params['Author'];
-		$this->layouts[ $file ]['author_mail'] = $params['Author Mail'];
-		$this->layouts[ $file ]['author_url']  = $params['Author URL'];
-		$this->layouts[ $file ]['version']     = $params['Version'];
+		self::$layouts[ $file ]['description'] = $params['Description'];
+		self::$layouts[ $file ]['title']       = $params['Layout Name'];
+		self::$layouts[ $file ]['author']      = $params['Author'];
+		self::$layouts[ $file ]['author_mail'] = $params['Author Mail'];
+		self::$layouts[ $file ]['author_url']  = $params['Author URL'];
+		self::$layouts[ $file ]['version']     = $params['Version'];
 		if ( file_exists( $dir_name . $file . '/logo.png' ) ) {
-			$this->layouts[ $file ]['logo'] = $this->layouts[ $file ]['url'] . '/logo.png';
+			self::$layouts[ $file ]['logo'] = self::$layouts[ $file ]['url'] . '/logo.png';
 		}
 		if ( file_exists( $dir_name . $file . '/screenshot.png' ) ) {
-			$this->layouts[ $file ]['screenshot'] = $this->layouts[ $file ]['url'] . '/screenshot.png';
+			self::$layouts[ $file ]['screenshot'] = self::$layouts[ $file ]['url'] . '/screenshot.png';
 		}
 
 	}
