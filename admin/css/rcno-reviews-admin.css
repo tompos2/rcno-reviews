@@ -153,6 +153,7 @@
 tr.rcno_review_template > td {
     background: rgba(255, 0, 0, 0.08);
     display: flex;
+    line-height: 0;
 }
 
 tr.rcno_review_template > td .template-options.checked {
@@ -172,11 +173,28 @@ tr.rcno_review_template > td input[type=radio] {
     margin-left: auto;
     margin-right: auto;
     width: 10px;
+    display: none;
 }
 
 .rcno_review_template img.template-label-image {
     width: 150px;
     height: 255px;
+}
+
+tr.rcno_review_slug_instructions {
+    /*color: red;*/
+    font-size: 11px !important;
+    background: rgba(255, 0, 0, 0.04);
+}
+
+tr.rcno_review_slug_instructions > td {
+    padding: 0 10px;
+}
+
+tr.rcno_review_slug_instructions > td > p,
+tr.rcno_review_slug_instructions > th {
+    font-size: 12px !important;
+    color: red;
 }
 
 

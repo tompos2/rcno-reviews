@@ -75,6 +75,25 @@ class Rcno_Reviews_Callback_Helper {
 	}
 
 	/**
+	 * Instructions Callback
+	 *
+	 * Renders the instructions.
+	 *
+	 * @since 	1.0.0
+	 * @param 	array $args Arguments passed by the setting
+	 * @return 	void
+	 */
+	public function instruction_callback( $args ) {
+
+		$html = '';
+		$html .= '<p>';
+		$html .= $args['desc'];
+		$html .= '</p>';
+
+		echo $html;
+	}
+
+	/**
 	 * Checkbox Callback
 	 *
 	 * Renders checkboxes.

@@ -224,6 +224,12 @@ class Rcno_Reviews_Settings_Definition {
 					'std'  => 'review',
 					'type' => 'text'
 				),
+				'rcno_review_slug_instructions' => array(
+					'name' => __( '404s errors', self::$plugin_name ),
+					'desc' => __( 'You\'ve set up everything correctly here but now WordPress is giving you an 404 (not found) error?
+					 Try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', self::$plugin_name ),
+					'type' => 'instruction'
+				),
 				'rcno_reviews_on_homepage'   => array(
 					'name' => __( 'Reviews on homepage?', self::$plugin_name ),
 					'desc' => __( 'Should book reviews be shown on homepage?', self::$plugin_name ),
@@ -419,7 +425,8 @@ class Rcno_Reviews_Settings_Definition {
 				),
 			),
 			'templates_tab' => array(
-				'rcno_review_template'                      => array(
+
+				'rcno_review_template' => array(
 					'name'    => __( 'Book review template', self::$plugin_name ),
 					'desc'    => __( 'Select how you want your book reviews to look.', self::$plugin_name ),
 					'options' => array(
@@ -429,7 +436,10 @@ class Rcno_Reviews_Settings_Definition {
 					),
 					'type'    => 'template'
 				),
-			),
+
+
+			)
+
 
 		);
 

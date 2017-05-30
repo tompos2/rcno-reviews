@@ -48,6 +48,14 @@
         });
     });
 
+    $(function () {
+        $('.rcno_review_template img').click(function (e) {
+            $(this).parent().parent().addClass('checked');
+            //$('.rcno_review_template').removeClass('checked');
+
+        });
+    });
+
     $(function() {
 
         var author_tax = $( '#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]' );
