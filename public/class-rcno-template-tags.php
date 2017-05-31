@@ -1,6 +1,6 @@
 <?php
 /**
- * The methods used to render the recipe components on the frontend.
+ * The methods used to render the review components on the frontend.
  *
  * @link       https://wzymedia.com
  * @since      1.0.0
@@ -10,9 +10,9 @@
  */
 
 /**
- * The methods used to render the recipe components on the frontend.
+ * The methods used to render the review components on the frontend.
  *
- * Defines all the methods used to render the various components of a recipe
+ * Defines all the methods used to render the various components of a review.
  *
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/public
@@ -218,8 +218,8 @@ class Rcno_Template_Tags {
 		$out = '';
 
 		/**
-		 * Add a H3 heading for embedded recipes or a H2
-		 * heading for a standalone recipe
+		 * Add a H3 heading for embedded reviews or a H2
+		 * heading for a standalone review.
 		 */
 		if ( $this->is_review_embedded() ) {
 			$out .= '<h3>' . $tax->labels->name . '</h3>';

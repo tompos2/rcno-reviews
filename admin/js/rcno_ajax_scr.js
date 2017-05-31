@@ -1,5 +1,5 @@
 /**
- * The jquery class handling the shortcode insertion for recipes
+ * The jquery class handling the shortcode insertion for reviews
  *
  * @since      1.0.0
  * @package    Rcno_Reviews

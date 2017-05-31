@@ -24,7 +24,7 @@ $review = new Rcno_Template_Tags( $plugin_name, $version );
 <?php
 /**
  * Displaying the book review title is normally done by the theme as post_title().
- * However, if the recipe is embedded, we need to do it here.
+ * However, if the review is embedded, we need to do it here.
  */
 if ( $review->is_review_embedded() ) { ?>
 	<h2 class="rcno-review-title"><?php echo get_the_title( $review_id ); ?></h2>

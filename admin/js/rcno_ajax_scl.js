@@ -1,5 +1,5 @@
 /**
- * The jquery class handling the shortcode insertion for recipe listings
+ * The jquery class handling the shortcode insertion for review listings
  *
  * @since      1.0.0
  * @package    Rcno_Reviews
@@ -199,12 +199,12 @@ var rcnoListingsSc;
             out+="]\n";
 
             // Insert Shortcode
-            if ( document.selection && rcnoRecipeSc.range ) {
+            if ( document.selection && rcnoListingsSc.range ) {
                 // IE
                 // Note: If no text is selected, IE will not place the cursor
                 //       inside the closing tag.
                 textarea.focus();
-                rcnoRecipeSc.range.text = out;
+                rcnoListingsSc.range.text = out;
             } else if ( typeof textarea.selectionStart !== 'undefined' ) {
                 // W3C
                 begin       = textarea.selectionStart;

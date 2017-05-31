@@ -392,7 +392,7 @@ class Rcno_Reviews_Public {
 
 
 	/**
-	 * Render a list of all recipes alphabetically using the layout's recipe_index.php file
+	 * Render a list of all reviews alphabetically using the layout's reviews_index.php file
 	 *
 	 * @since 1.0.0
 	 * @param mixed $headers

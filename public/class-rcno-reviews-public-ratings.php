@@ -375,7 +375,7 @@ class Rcno_Reviews_Public_Rating {
 	}
 
 	/**
-	 * Displays the recipe rating
+	 * Displays the review rating.
 	 * @param int $id
 	 * @return string
 	 */

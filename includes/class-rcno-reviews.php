@@ -240,7 +240,7 @@ class Rcno_Reviews {
 		// Save book review.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'rcno_save_review', 10, 2 );
 
-		// Display error messages in recipe edit screen.
+		// Display error messages in review edit screen.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'rcno_admin_notice_handler' );
 
 		// Add book reviews to Recent Activity widget
@@ -268,7 +268,7 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		// Manipulate the query to include recipes to home page (if set).
+		// Manipulate the query to include reviews to home page (if set).
 		$this->loader->add_action( 'pre_get_posts', $plugin_public, 'rcno_review_query' );
 
 		// Adds the book review CPT to the RSS Feed.

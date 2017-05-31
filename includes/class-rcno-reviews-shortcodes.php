@@ -121,7 +121,7 @@ class Rcno_Reviews_Shortcodes {
 
 
 	/**
-	 * Do the shortcode 'rpr-taxlist' and render a list of all terms of a given
+	 * Do the shortcode 'rcno-taxlist' and render a list of all terms of a given
 	 * taxonomy
 	 *
 	 * @since 1.0.0
@@ -146,7 +146,7 @@ class Rcno_Reviews_Shortcodes {
 
 
 	/**
-	 * Do the shortcode 'rpr-index' and render a list of all recipes
+	 * Do the shortcode 'rcno-index' and render a list of all reviews
 	 *
 	 * @since 1.0.0
 	 *
