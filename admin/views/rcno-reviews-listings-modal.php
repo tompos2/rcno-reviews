@@ -24,41 +24,17 @@
 					<label for="rcno-modal-scl-mode-tax"><b><?php _e('Embed taxonomy index', 'rcno-reviews'); ?></b></label>
 					<div id="rcno-taxonomy-panel">
 						<label><span><?php _e('Taxonomy', 'rcno-reviews' ); ?></span></label>
-						<select id="recipe-taxonomy">
-							<?php
-							/**
-							 * add builtin taxonomies to the list:
-							 * (Categories and tags are left out as those are global to wp)
-							?>
-							<!--<option value="category" ><?php _e( "Category"); ?></option>
-							<option value="tag" ><?php _e( "Tag"); ?></option>-->
-							<?php
-							if( is_array( AdminPageFramework::getOption( 'rcno_options', array('tax_builtin' ) ) ) ){
-							foreach( AdminPageFramework::getOption( 'rcno_options', array('tax_builtin') ) as $tax ){
-							if( isset( $tax['id'] ) ) {
-							?>
-							<option value="<?php echo $tax['id']; ?>" ><?php echo $tax['singular']; ?></option>
-							<?php
-							}
-							}
-							}
-							/**
-							 * add builtin taxonomies to the list:
-							 */
-						//	if( is_array( AdminPageFramework::getOption( 'rcno_options', array('tax_custom' ) ) ) ){
-						//		foreach( AdminPageFramework::getOption( 'rcno_options', array('tax_custom') ) as $tax ){
-						//			if( isset( $tax['slug'] ) ) {
-						//				?>
-										<option value="<?//php echo $tax['slug']; ?>" ><?//php echo $tax['singular']; ?></option>
-										<?//php
-						//			}
-						//		}
-						//	} ?>
+						<select id="review-taxonomy">
+							<?php if( is_array(  Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) ) ) {
+								foreach( Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) as $key => $val ){ ?>
+										<option value="<?php echo 'rcno_' . $key ?>" ><?php echo $val ?></option>
+								<?php }
+							} ?>
 						</select>
 					</div>
 				</li>
 				<li>
-					<input type="radio" value="rcno-recipe-index" name="rcno-modal-scl-mode" id="rcno-modal-scl-mode-ind"/>
+					<input type="radio" value="rcno-review-index" name="rcno-modal-scl-mode" id="rcno-modal-scl-mode-ind"/>
 					<label for="rcno-modal-scl-mode-ind"><b><?php _e('Embed book review index', 'rcno-reviews'); ?></b></label>
 				</li>
 			</ul>

@@ -187,8 +187,8 @@ var rcnoListingsSc;
                     out+="rcno-tax-list ";
                     out+="tax=\""+$( "#rcno-modal-form-scl select option:selected" ).val()+"\"";
                     break;
-                case 'rcno-review-index':
-                    out+= "rcno-review-index";
+                case 'rcno-reviews-index':
+                    out+= "rcno-reviews-index";
                     break;
                 default:
                     alert(sel.val());
@@ -230,8 +230,8 @@ var rcnoListingsSc;
                     out+="rcno-tax-list ";
                     out+="tax=\""+$( "#rcno-modal-form-scl select option:selected" ).val()+"\"";
                     break;
-                case 'rcno-review-index':
-                    out+= "rcno-review-index";
+                case 'rcno-reviews-index':
+                    out+= "rcno-reviews-index";
                     break;
                 default:
                     alert(sel.val());

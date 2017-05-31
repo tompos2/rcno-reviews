@@ -345,6 +345,53 @@ class Rcno_Reviews_Public {
 
 
 	/**
+	 * Render a list of all terms of a taxonomy using the templates's 'taxonomy.php' file.
+	 *
+	 * @since 1.0.0
+	 * @param string $taxonomy
+	 * @param bool $headers
+	 * @return string $content
+	 */
+	public function rcno_render_taxlist( $taxonomy, $headers = false ) {
+
+		// Create empty output variable.
+		$output = '';
+
+		// Get the layout's include path
+		$include_path = $this->rcno_get_the_layout() . 'taxonomy.php';
+
+		if ( ! file_exists( $include_path ) ) {
+			// If the layout does not provide an taxonomy file, use the default one:
+			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/taxonomy.php';
+		}
+
+		// Set review_post to false for template tags
+		$review_post = false;
+
+		if ( 'n/a' !== $taxonomy && '' !== $taxonomy ) {
+			 // Get the terms of the selected taxonomy.
+			$terms = get_terms( $taxonomy, array( 'orderby' => 'name', 'order' => 'ASC' ) );
+		} else {
+			// Set $terms to false for the layout and it's error messages
+			$terms = false;
+		}
+
+		// Include the taxonomy file.
+		include_once( dirname( __FILE__ ) . '/class-rcno-template-tags.php' );
+		include( $include_path );
+
+		// Render the content using that file.
+		$content = ob_get_contents();
+
+		// Finish rendering.
+		ob_end_clean();
+
+		// Return the rendered content.
+		return $content;
+	}
+
+
+	/**
 	 * Get the path to the layout file depending on the layout options.
 	 *
 	 * @since 1.0.0

@@ -757,6 +757,115 @@ class Rcno_Template_Tags {
 	}
 
 
+	public function get_the_rcno_alphabet_nav_bar( $letters = false ) {
+		// An array with the (complete) alphabet
+		$alphabet = array(
+			'A',
+			'B',
+			'C',
+			'D',
+			'E',
+			'F',
+			'G',
+			'H',
+			'I',
+			'J',
+			'K',
+			'L',
+			'M',
+			'N',
+			'O',
+			'P',
+			'Q',
+			'R',
+			'S',
+			'T',
+			'U',
+			'V',
+			'W',
+			'X',
+			'Y',
+			'Z'
+		);
+
+		$out = '';
+
+		// Start the list:
+		$out .= '<ul class="rcno-alphabet-navigation">';
+
+		foreach ( $alphabet as $a ) {
+			// loop through the alphabet
+			if ( $letters ) {
+				if ( in_array( $a, $letters, true ) ) {
+					// active letter, so we should set a link in the nav menu
+					$out .= '<li class="active"><a href="#' . $a . '">' . $a . '</a></li>';
+				} else {
+					// inactive letter, no link
+					$out .= '<li class="inactive">' . $a . '</li>';
+				}
+			} else {
+				// each letter active
+				$out .= '<li class="active"><a href="#' . $a . '">' . $a . '</a></li>';
+			}
+		}
+
+		// End the list:
+		$out .= '</ul>';
+
+		// return the rendered nav bar
+		return $out;
+	}
+
+	public function the_rcno_alphabet_nav_bar( $letters = false ) {
+		echo $this->get_the_rcno_alphabet_nav_bar( $letters );
+	}
+
+
+	public function rcno_normalize_special_chars( $text ){
+		// Replacement matrix for special characters:
+		$trans = array(
+			'á' => 'a',
+			'à' => 'a',
+			'â' => 'a',
+			'ã' => 'a',
+			'Á' => 'A',
+			'À' => 'A',
+			'Â' => 'A',
+			'Ã' => 'A',
+			'ä' => 'a',
+			'Ä' => 'A',
+			'é' => 'e',
+			'è' => 'e',
+			'ê' => 'e',
+			'ë' => 'e',
+			'É' => 'E',
+			'È' => 'E',
+			'Ê' => 'E',
+			'Ë' => 'E',
+			'í' => 'i',
+			'ì' => 'i',
+			'î' => 'i',
+			'ï' => 'i',
+			'Í' => 'I',
+			'Ì' => 'I',
+			'Î' => 'I',
+			'Ï' => 'I',
+			'ö' => 'o',
+			'Ö' => 'O',
+			'ø' => 'o',
+			'Ø' => 'O',
+			'ü' => 'u',
+			'Ü' => 'U'
+		);
+
+		// Replace special chars
+		$text = str_replace( array_keys( $trans ), array_values( $trans ), $text );
+
+		// return the sanitized text
+		return $text;
+	}
+
+
 	/**
 	 * Check if the review is embedded into a post, page or another custom post type.
 	 *

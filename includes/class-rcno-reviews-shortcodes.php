@@ -119,6 +119,31 @@ class Rcno_Reviews_Shortcodes {
 		}
 	}
 
+
+	/**
+	 * Do the shortcode 'rpr-taxlist' and render a list of all terms of a given
+	 * taxonomy
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param mixed $options
+	 */
+	public function rcno_do_taxlist_shortcode( $options ) {
+
+		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
+
+		 // Set default values for options not set explicitly.
+		$options = shortcode_atts( array(
+			'headers' => 'false',
+			'tax'     => 'n/a',
+		), $options );
+
+		// The actual rendering is done by a special function.
+		$output = $plugin_public->rcno_render_taxlist( $options['tax'], $options['headers'] );
+
+		return do_shortcode( $output );
+	}
+
 /**
 ************************ SHORTCODE FOR REVIEW *****************************
 */
