@@ -34,7 +34,7 @@
 					</div>
 				</li>
 				<li>
-					<input type="radio" value="rcno-review-index" name="rcno-modal-scl-mode" id="rcno-modal-scl-mode-ind"/>
+					<input type="radio" value="rcno-reviews-index" name="rcno-modal-scl-mode" id="rcno-modal-scl-mode-ind"/>
 					<label for="rcno-modal-scl-mode-ind"><b><?php _e('Embed book review index', 'rcno-reviews'); ?></b></label>
 				</li>
 			</ul>

@@ -144,6 +144,29 @@ class Rcno_Reviews_Shortcodes {
 		return do_shortcode( $output );
 	}
 
+
+	/**
+	 * Do the shortcode 'rpr-index' and render a list of all recipes
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param mixed $options
+	 */
+	public function rcno_do_reviews_index_shortcode( $options ) {
+
+		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
+
+		// Set default values for options not set explicitly.
+		$options = shortcode_atts( array(
+			'headers' => 'false',
+		), $options );
+
+		// The actual rendering is done by a special function.
+		$output = $plugin_public->rcno_render_review_index( $options['headers'] );
+
+		return do_shortcode( $output );
+	}
+
 /**
 ************************ SHORTCODE FOR REVIEW *****************************
 */
