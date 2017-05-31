@@ -657,35 +657,35 @@ class Rcno_Template_Tags {
 		$out .= '"@context": "http://schema.org"';
 		$out .= ', "@type": "Book"';
 		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) .'"';
-		$out .= ', "author": {'; // Begin author
+		$out .= ', "author": {'; // Begin author.
 		$out .= '"@type": "Person"';
-		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_author', false ) ) . '"';
-		$out .= '}'; // End author
-		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"'; // URL to this review page
+		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) ) . '"';
+		$out .= '}'; // End author.
+		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"'; // URL to this review page.
 		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) . '"';
-		$out .= ', "genre": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_genre', false ) ) .'"';
+		$out .= ', "genre": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) ) .'"';
 		$out .= ', "publisher": '. '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', '', false ) . '"';
-		$out .= ', "workExample": ['; // Begin workExample
-		$out .= '{'; // Begin First example
+		$out .= ', "workExample": ['; // Begin workExample.
+		$out .= '{'; // Begin First example.
 		$out .= '"@type": "Book"';
 		$out .= ', "isbn": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) . '"';
 		$out .= ', "bookEdition": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ) . '"';
 		$out .= ', "bookFormat": "http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ) . '"';
 		$out .= ', "numberOfPages": ' . (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
-		$out .= ', "potentialAction": {'; // Begin potentialAction
+		$out .= ', "potentialAction": {'; // Begin potentialAction.
 		$out .= '"@type": "ReadAction"';
-		$out .= ', "target": {'; // Begin target
+		$out .= ', "target": {'; // Begin target.
 		$out .= '"@type": "EntryPoint"';
 		$out .= ', "urlTemplate": "http://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true"';
-		$out .= ', "actionPlatform": ['; // Begin actionPlatform
+		$out .= ', "actionPlatform": ['; // Begin actionPlatform.
 		$out .= '"http://schema.org/DesktopWebPlatform"';
 		$out .= ', "http://schema.org/IOSPlatform"';
 		$out .= ', "http://schema.org/AndroidPlatform"';
-		$out .= ']'; // End actionPlatform
-		$out .= '}'; // End target
-		$out .= '}'; // End potentialAction
-		$out .= '}'; // End First example
-		$out .= ']'; // End workExample
+		$out .= ']'; // End actionPlatform.
+		$out .= '}'; // End target.
+		$out .= '}'; // End potentialAction.
+		$out .= '}'; // End First example.
+		$out .= ']'; // End workExample.
 		$out .= '}';
 		$out .= '</script>';
 
@@ -726,7 +726,7 @@ class Rcno_Template_Tags {
 
 		$out .= ', "author": {';
 		$out .= '"@type": "Person"';
-		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( 'rcno_author', false ) ) .'"';
+		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) ) .'"';
 		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"'; // Social profile for book author.
 		$out .= '}';
 
@@ -858,10 +858,10 @@ class Rcno_Template_Tags {
 			'Ü' => 'U'
 		);
 
-		// Replace special chars
+		// Replace special chars.
 		$text = str_replace( array_keys( $trans ), array_values( $trans ), $text );
 
-		// return the sanitized text
+		// Return the sanitized text.
 		return $text;
 	}
 

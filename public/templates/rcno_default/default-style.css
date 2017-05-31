@@ -128,6 +128,15 @@
     line-height: 1;
 }
 
-body {
-    background: red;
+ul.rcno-alphabet-navigation {
+    list-style: none;
+}
+
+ul.rcno-alphabet-navigation li {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+ul.rcno-taxlist li {
+    margin: 0 0 0 2em;
 }
