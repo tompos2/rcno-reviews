@@ -221,7 +221,7 @@ class Rcno_Reviews_Admin {
 		$opts['show_in_rest']          = true;
 		$opts['base_rest']             = $cpt_name;
 		$opts['rest_controller_class'] = 'WP_REST_Posts_Controller';
-		$opts['supports'] = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments' );
+		$opts['supports']              = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments' );
 		$opts['taxonomies']            = array();
 
 		$opts['capabilities']['delete_others_posts']    = "delete_others_{$cap_type}s";

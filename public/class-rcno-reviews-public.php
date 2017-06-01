@@ -219,11 +219,10 @@ class Rcno_Reviews_Public {
 			// Add the filter again.
 			add_filter( 'the_content', array( $this, 'rcno_get_review_content' ), 10 );
 
-			// Return the rendered content.
-			return $content . '$$$'; // @TODO: This 'return' really is not necessary.
 		}
 
-		return $content . '###';
+		// Return the rendered content.
+		return $content;
 	}
 
 	/**

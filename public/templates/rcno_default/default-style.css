@@ -89,12 +89,12 @@
 }
 
 .rcno-full-book-cover {
-    width: 200px;
-    min-height: 308px;
+    width: 35%;
+    min-height: 292px;
     background: rgba(96, 125, 139, 0.36);
     display: inline-block;
     float: left;
-    margin: 0 1em 0 0;
+    margin: 0 10px 0 0;
     position: relative;
 }
 
@@ -105,12 +105,17 @@
 .rcno-full-book-details {
     font-size: 14px;
     line-height: 1.6;
-    margin: 0 0 1em 0;
+    margin: 0 0 15px 0;
+    clear: left;
+    display: inline-block;
 }
 
 .rcno-full-book-description {
     font-size: 12px;
     line-height: 1.6;
+    clear: left;
+    display: inline-block;
+    width: 63%;
 }
 
 .rcno-admin-rating span {
