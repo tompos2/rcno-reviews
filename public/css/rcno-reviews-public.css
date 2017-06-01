@@ -5,6 +5,8 @@
 
 .rcno-recent-review {
     margin: 0 0 20px 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .rcno-recent-review h3 {
@@ -16,9 +18,8 @@
 
 .rcno-recent-review .widget-book-details {
     float: right;
-    width: 62%;
-    overflow: hidden;
-    max-height: 150px;
+    width: 67%;
+
 }
 
 .rcno-recent-review .widget-book-details p {
@@ -27,23 +28,24 @@
 }
 
 .rcno-recent-review .widget-book-cover {
-    max-width: 100px;
-    min-height: 154px;
+    width: 30%;
     display: inline-block;
     position: relative;
 }
 
 .rcno-recent-review .widget-book-cover .rcno-admin-rating {
     position: absolute;
-    bottom: 0;
+    bottom: 3px;
+    text-align: center;
+    width: 100%;
 }
 
 .rcno-recent-review .widget-book-cover .rcno-admin-rating span {
-    font-size: 24px;
+    font-size: 18px;
 }
 
-.rcno-book-slides .rcno-admin-rating {
-
+.rcno-recent-review .widget-book-details p {
+    line-height: 1.2 !important;
 }
 
 .rcno-book-slides img {
@@ -55,10 +57,6 @@
     position: relative;
 }
 
-.rcno-book-slider-container .owl-stage-outer,
-.rcno-book-slider-container .owl-stage {
-    /*width: 325px;*/
-}
 
 .rcno-book-slider-container .owl-stage .owl-item img {
     display: block;

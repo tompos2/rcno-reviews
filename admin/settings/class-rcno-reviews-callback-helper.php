@@ -230,9 +230,9 @@ class Rcno_Reviews_Callback_Helper {
 				$checked = checked( $args['std'], $field_key, false );
 			}
 
-			$html .= '<div class="template-options';
-			$html .= $checked ? ' checked' : '';
-			$html .= '">';
+			$html .= '<div class="template-options">';
+			//$html .= $checked ? ' checked' : '';
+			//$html .= '">';
 			$html .= '<input type="radio"';
 			$html .= $this->get_name_attribute( $args['id'] );
 			$html .= $this->get_id_attribute( $args['id'] . '][' . $field_key );
@@ -240,7 +240,10 @@ class Rcno_Reviews_Callback_Helper {
 
 			$html .= '<label for="rcno_reviews_settings[' . $args['id'] . '][' . $field_key . ']">';
 			$html .= '<div class="label-container">';
-			$html .= ' <img src="' . $option['screenshot'] . '" class="template-label-image" />';
+			$html .= ' <img src="' . $option['screenshot'] . '"';
+			$html .= ' class="template-label-image';
+			$html .= $checked ? ' checked' : '';
+			$html .= '"/>';
 			$html .= ' <p>Title: ' . $option['title'] . '</p>';
 			$html .= ' <p>Author: ' . $option['author'] . '</p>';
 			$html .= ' <p>Version: ' . $option['version'] . '</p>';

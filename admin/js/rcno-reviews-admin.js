@@ -49,10 +49,8 @@
     });
 
     $(function () {
-        $('.rcno_review_template img').click(function (e) {
-            $(this).parent().parent().addClass('checked');
-            //$('.rcno_review_template').removeClass('checked');
-
+        $('.rcno_review_template img').click(function() {
+            $(this).addClass('checked');
         });
     });
 

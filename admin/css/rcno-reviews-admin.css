@@ -151,13 +151,17 @@
 }
 
 tr.rcno_review_template > td {
-    background: rgba(255, 0, 0, 0.08);
     display: flex;
     line-height: 0;
 }
 
-tr.rcno_review_template > td .template-options.checked {
-    border: 5px solid red;
+tr.rcno_review_template > td .template-options img.template-label-image.checked {
+    border: 5px solid #4CAF50;
+    box-sizing: border-box;
+}
+
+tr.rcno_review_template > td .template-options .label-container p {
+    line-height: 1;
 }
 
 tr.rcno_review_template > td .template-options {
@@ -166,13 +170,6 @@ tr.rcno_review_template > td .template-options {
 }
 
 tr.rcno_review_template > td input[type=radio] {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 10px;
     display: none;
 }
 
@@ -182,7 +179,6 @@ tr.rcno_review_template > td input[type=radio] {
 }
 
 tr.rcno_review_slug_instructions {
-    /*color: red;*/
     font-size: 11px !important;
     background: rgba(255, 0, 0, 0.04);
 }
@@ -196,5 +192,3 @@ tr.rcno_review_slug_instructions > th {
     font-size: 12px !important;
     color: red;
 }
-
-
