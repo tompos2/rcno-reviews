@@ -70,6 +70,7 @@ class Rcno_Reviews_Settings_Definition {
 		$tabs['taxonomy_tab']   = __( 'Taxonomies', self::$plugin_name );
 		$tabs['components_tab'] = __( 'Components', self::$plugin_name );
 		$tabs['templates_tab']  = __( 'Templates', self::$plugin_name );
+		$tabs['advanced_tab']   = __( 'Advanced', self::$plugin_name );
 
 		return apply_filters( 'rcno_reviews_settings_tabs', $tabs );
 	}
@@ -434,6 +435,28 @@ class Rcno_Reviews_Settings_Definition {
 					'type'    => 'template'
 				),
 
+			),
+			'advanced_tab'  => array(
+
+				'rcno_goodreads_settings' => array(
+					'name' => '<strong>' . __( 'Goodreads Settings', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_enable_goodreads'   => array(
+					'name' => __( 'Enable Goodreads®', self::$plugin_name ),
+					'desc' => __( 'Enable the external Goodreads® API access.', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_goodreads_key'      => array(
+					'name' => __( 'Goodreads® API Key', self::$plugin_name ),
+					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
+					'type' => 'text'
+				),
+				'rcno_goodreads_secret'   => array(
+					'name' => __( 'Goodreads® API Secret', self::$plugin_name ),
+					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
+					'type' => 'text'
+				),
 
 			)
 
