@@ -116,4 +116,3 @@ function layout_list() {
 
 	return $list;
 }
-
