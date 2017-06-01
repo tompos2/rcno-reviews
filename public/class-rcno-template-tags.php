@@ -184,6 +184,9 @@ class Rcno_Template_Tags {
 		}
 
 		$book_src = $review['rcno_reviews_book_cover_src'][0];
+		if ( '' === $book_src ) {
+			$book_src = Rcno_Reviews_Option::get_option( 'rcno_default_cover', plugin_dir_url( __FILE__ ) . 'images/no-cover.jpg' );
+		}
 		$book_title = $review['rcno_reviews_book_cover_title'][0];
 		$book_alt = $review['rcno_reviews_book_cover_alt'][0];
 

@@ -433,6 +433,11 @@ class Rcno_Reviews_Settings_Definition {
 					'options' => layout_list(),
 					'type'    => 'template'
 				),
+				'rcno_default_cover'                     => array(
+					'name' => __( 'Default Book Cover', self::$plugin_name ),
+					'desc' => __( 'The default image to use when a book cover isn\'t upload', self::$plugin_name ),
+					'type' => 'upload'
+				),
 
 
 			)
