@@ -109,6 +109,8 @@ class Rcno_Template_Tags {
 		$out .= wp_trim_words( $this->get_the_rcno_book_description( $review_id ), 75 );
 		$out .= '</div>';
 
+		$out .= '<div class="clear"></div>';
+
 		$out .= '</div>';
 
 		return $out;

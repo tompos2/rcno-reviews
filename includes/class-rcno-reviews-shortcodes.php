@@ -69,6 +69,7 @@ class Rcno_Reviews_Shortcodes {
 		$options = shortcode_atts( array(
 			'id'      => 'n/a',
 			'excerpt' => 0,
+			'nodesc'  => 0,
 		), $options );
 
 		/**
@@ -101,16 +102,18 @@ class Rcno_Reviews_Shortcodes {
 				$review               = get_post_custom( $review_post->ID );
 				$GLOBALS['review_id'] = $review_post->ID; // Set review ID for retrieval in embedded reviews.
 
-				//$taxonomies = get_option('rcno_taxonomies', array());
-
-
-				if ( 0 === $options['excerpt'] ) {
+				if ( 1 === (int) $options['nodesc'] ) {
+					// Embed without description.
+					$template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+					$output = $template->get_the_rcno_full_book_details( intval( $options['id'] ) );
+				} elseif ( 0 === (int) $options['excerpt'] ) {
 					// Embed complete review.
 					$output = $plugin_public->rcno_render_review_content( $review_post );
-				} elseif ( 1 === $options['excerpt'] ) {
+				} elseif ( 1 === (int) $options['excerpt'] ) {
 					// Embed excerpt only.
 					$output = $plugin_public->rcno_render_review_excerpt( $review_post );
 				}
+
 			} else {
 				$output = '';
 			}

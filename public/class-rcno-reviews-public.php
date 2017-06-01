@@ -308,8 +308,8 @@ class Rcno_Reviews_Public {
 	 */
 	public function rcno_render_review_excerpt( $review_post ) {
 
-		// Return if we are on a single post page.
-		if ( is_single() ) {
+		// Return if we are on a single post page AND post type is 'rcno_review'.
+		if ( is_single() && 'rcno_review' === get_post_type() ) {
 			return false;
 		}
 		// Get the layout's include path.

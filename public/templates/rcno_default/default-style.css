@@ -83,6 +83,10 @@
     display: inline-block;
 }
 
+.rcno-full-book {
+    margin: 0 0 1em 0;
+}
+
 .rcno-full-book .rcno-full-book-cover img.rcno-book-cover {
     width: 100%; /* Twenty Ten does not do this for some strange reason */
     height: auto;
