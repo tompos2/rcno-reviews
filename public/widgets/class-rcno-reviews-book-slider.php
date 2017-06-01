@@ -60,7 +60,10 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 
 	}
 
-    public function enqueue_scripts() {
+	/**
+	 * Enqueue the necessary scripts and styles if the widget is enabled.
+	 */
+	public function enqueue_scripts() {
 	    $widget_settings = $this->get_settings();
 
 		wp_enqueue_style( 'owl-carousel-main', plugin_dir_url( __FILE__ ) . '../css/owl.carousel.min.css', array(), '1.0.0', 'all' );
@@ -73,7 +76,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	}
 
 	/**
-	 * Register our widget, un-register the builtin widget.
+	 * Register our book slider widget and enqueue the relevant scripts.
 	 */
 	public function rcno_register_book_slider_widget() {
         if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_book_slider_widget' ) ) {
@@ -131,16 +134,14 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 			<?php while ( $recent_reviews->have_posts() ) {
 				$recent_reviews->the_post(); ?>
 
-<!--				<div class="rcno-book-slides">-->
-
 					<?php
 						$review_id = get_the_ID();
 						$review = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 					?>
 					<?php //$review->the_rcno_admin_book_rating( $review_id ); ?>
+                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 					<?php $review->the_rcno_book_cover( $review_id ); ?>
-
-<!--				</div>-->
+                </a>
 
 				<?php } ?>
 			</div>
