@@ -1,3 +1,8 @@
+/*
+*   I am being super specific with some CSS selectors
+*   to main consistent style among many WP themes.
+*/
+
 #rcno-review-score-box {
     background: #f5f2dd;
     padding: 10px;
@@ -58,7 +63,7 @@
 
 #rcno-review-score-box .review-summary .overall-score .overall {
     color: #fff;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 800;
     display: block;
     line-height: 1;
@@ -83,18 +88,34 @@
     display: inline-block;
 }
 
+.rcno-review-badge {
+    width: 100px;
+    height: 100px;
+    background: #008000;
+    margin: 1em 0;
+    display: inline-block;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.rcno-full-book {
+    margin: 1em 0;
+}
+
 .rcno-full-book .rcno-full-book-cover img.rcno-book-cover {
     width: 100%; /* Twenty Ten does not do this for some strange reason */
     height: auto;
+    display: block;
 }
 
 .rcno-full-book-cover {
-    width: 200px;
-    min-height: 308px;
+    width: 35%;
     background: rgba(96, 125, 139, 0.36);
     display: inline-block;
     float: left;
-    margin: 0 1em 0 0;
+    margin: 0 10px 0 0;
     position: relative;
 }
 
@@ -106,11 +127,15 @@
     font-size: 14px;
     line-height: 1.6;
     margin: 0 0 1em 0;
+    width: 60%;
+    display: inline-block;
 }
 
 .rcno-full-book-description {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.6;
+    width: 60%;
+    display: inline-block;
 }
 
 .rcno-admin-rating span {
@@ -120,10 +145,51 @@
 }
 
 .rcno-full-book-cover .rcno-admin-rating {
-    position: absolute;
-    bottom: 0;
     background: rgba(255, 87, 34, 0.8);
     width: 100%;
     text-align: center;
     line-height: 1;
+}
+
+.review-content .book-cover-container {
+    position: relative;
+    width: 45%;
+    float: left;
+    margin: 0 15px 0 0;
+    overflow: hidden;
+}
+
+.review-content .book-cover-container .book-cover {
+    position: relative;
+}
+
+.review-content .book-cover-container .book-cover .rcno-admin-rating {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.review-content .book-cover-container .book-info {
+    position: absolute;
+    background: rgba(86, 160, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    padding: 15% 5px;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.review-content .book-cover-container:hover .book-info {
+    transform: translateY(-100%);
+}
+
+.review-content .book-cover-container .book-info p,
+.review-content .book-cover-container .book-info a {
+    color: #fff;
+    margin: 0;
+    text-decoration: none !important;
+    box-shadow: none !important;
 }

@@ -198,8 +198,6 @@ class Rcno_Reviews_Admin {
 		$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $cpt_slug ) );
 		$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $cpt_slug ) );
 
-
-
 		$opts['can_export']            = true;
 		$opts['capability_type']       = $cap_type;
 		$opts['description']           = '';
@@ -340,6 +338,53 @@ class Rcno_Reviews_Admin {
 
 		}
 	}
+
+
+	function rcno_add_help_text( $contextual_help, $screen_id, $screen ) {
+
+		if ( 'rcno_review' === $screen->id ) {
+			$contextual_help =
+				'<p>' . __( 'Things to remember when adding or editing a book review:', 'rcno-reviews' ) . '</p>' .
+				'<ul>' .
+				'<li>' . __( 'Specify the correct genre such as Mystery, or Historic.', 'rcno-reviews' ) . '</li>' .
+				'<li>' . __( 'Specify the correct writer of the book review. Remember that the Author module refers to you, the author of this book review.', 'rcno-reviews' ) . '</li>' .
+				'</ul>' .
+				'<p>' . __( 'If you want to schedule the book review to be published in the future:', 'rcno-reviews' ) . '</p>' .
+				'<ul>' .
+				'<li>' . __( 'Under the Publish module, click on the Edit link next to Publish.', 'rcno-reviews' ) . '</li>' .
+				'<li>' . __( 'Change the date to the date to actual publish this article, then click on Ok.', 'rcno-reviews' ) . '</li>' .
+				'</ul>' .
+				'<span><strong>' . __( 'For more information: ', 'rcno-reviews' ) . '</strong></span>' .
+				'<span>' . __( '<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>', 'rcno-reviews' ) . '</span>';
+		} elseif ( 'edit-book' === $screen->id ) {
+			$contextual_help =
+				'<p>' . __( 'This is the help screen displaying the table of books blah blah blah.', 'rcno-reviews' ) . '</p>';
+		}
+
+		return $contextual_help;
+	}
+
+
+	public function rcno_reviews_help_tab() {
+
+		$screen = get_current_screen();
+
+		// Return early if we're not on the book post type.
+		if ( 'rcno_review' !== $screen->post_type ) {
+			return;
+		}
+
+		// Setup help tab args.
+		$args = array(
+			'id'      => 'rcno_reviews_help',
+			'title'   => 'Reviews Help',
+			'content' => '<h3>Recencio Book Reviews</h3><p>Help content</p>',
+		);
+
+		// Add the help tab.
+		$screen->add_help_tab( $args );
+	}
+
 
 	/**
 	 * Registers new featured image sizes for the book review post type

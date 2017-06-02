@@ -244,9 +244,15 @@ class Rcno_Reviews_Callback_Helper {
 			$html .= ' class="template-label-image';
 			$html .= $checked ? ' checked' : '';
 			$html .= '"/>';
+
+			$html .= '<div class="template-label-info">';
+			$html .= '<div class="template-label-p">';
 			$html .= ' <p>Title: ' . $option['title'] . '</p>';
 			$html .= ' <p>Author: ' . $option['author'] . '</p>';
 			$html .= ' <p>Version: ' . $option['version'] . '</p>';
+			$html .= '</div>';
+			$html .= '</div>';
+
 			$html .= '</div>';
 			$html .= '</label>';
 			$html .= '<br/>';

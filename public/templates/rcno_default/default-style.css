@@ -88,13 +88,14 @@
 }
 
 .rcno-full-book .rcno-full-book-cover img.rcno-book-cover {
-    width: 100%; /* Twenty Ten does not do this for some strange reason */
+    width: 100%;
+    /* Twenty Ten does not do this for some strange reason */
     height: auto;
+    display: block;
 }
 
 .rcno-full-book-cover {
     width: 35%;
-    min-height: 292px;
     background: rgba(96, 125, 139, 0.36);
     display: inline-block;
     float: left;
@@ -109,14 +110,14 @@
 .rcno-full-book-details {
     font-size: 14px;
     line-height: 1.6;
-    margin: 0 0 15px 0;
+    margin: 0 0 10px 0;
     clear: left;
     display: inline-block;
 }
 
 .rcno-full-book-description {
-    font-size: 12px;
-    line-height: 1.6;
+    font-size: .8em;
+    line-height: 1.5;
     clear: left;
     display: inline-block;
     width: 63%;
@@ -129,8 +130,6 @@
 }
 
 .rcno-full-book-cover .rcno-admin-rating {
-    position: absolute;
-    bottom: 0;
     background: rgba(255, 87, 34, 0.8);
     width: 100%;
     text-align: center;

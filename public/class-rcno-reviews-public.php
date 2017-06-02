@@ -173,7 +173,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @return array $query
 	 */
-	public function rcno_add_reviews_to_rss_feed( array $query ) {
+	public function rcno_add_reviews_to_rss_feed( array  $query) {
 
 		$reviews_in_rss = Rcno_Reviews_Option::get_option( 'rcno_reviews_in_rss' );
 

@@ -453,6 +453,9 @@ class Rcno_Template_Tags {
 	}
 
 
+	public function the_rcno_book_meta( $review_id, $meta_key, $wrapper, $label ) {
+		echo $this->get_the_rcno_book_meta( $review_id, $meta_key, $wrapper, $label );
+	}
 
 	/** ****************************************************************************
 	 * REVIEW BOOK REVIEW SCORE TEMPLATE TAGS
@@ -635,7 +638,9 @@ class Rcno_Template_Tags {
 		$final_score = number_format( $final_score, 1, '.', '' );
 
 		$output .= '<div class="rcno-review-badge review-badge-' . $rating_type . '">';
+		$output .= '<div class="score">';
 		$output .= $this->rcno_calc_review_score( $final_score, $rating_type, true );
+		$output .= '</div>';
 		$output .= '</div>';
 
 		return $output;
@@ -826,8 +831,8 @@ class Rcno_Template_Tags {
 	}
 
 
-	public function rcno_normalize_special_chars( $text ){
-		// Replacement matrix for special characters:
+	public function rcno_normalize_special_chars( $text ) { //@TODO: consider using 'remove_accents()'.
+		// Replacement matrix for special characters.
 		$trans = array(
 			'á' => 'a',
 			'à' => 'a',

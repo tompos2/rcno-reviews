@@ -243,14 +243,18 @@ class Rcno_Reviews {
 		// Display error messages in review edit screen.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'rcno_admin_notice_handler' );
 
-		// Add book reviews to Recent Activity widget
+		// Add book reviews to Recent Activity widget.
 		$this->loader->add_filter( 'dashboard_recent_posts_query_args', $plugin_admin,  'rcno_dashboard_recent_posts_widget' );
 
-		// Add book reviews to 'At a Glance' widget
+		// Add book reviews to 'At a Glance' widget.
 		$this->loader->add_filter( 'dashboard_glance_items', $plugin_admin,  'rcno_add_reviews_glance_items' );
 
-		// Add messages on the book review editor screen
+		// Add messages on the book review editor screen.
 		$this->loader->add_filter( 'post_updated_messages', $plugin_admin,  'rcno_updated_review_messages' );
+
+		// Add the help tab to the  review editor screen.
+		$this->loader->add_filter( 'admin_head', $plugin_admin,  'rcno_reviews_help_tab' );
+		$this->loader->add_action( 'contextual_help', $plugin_admin, 'rcno_add_help_text', 10, 3 );
 
 	}
 
