@@ -476,7 +476,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 * @param int $length Excerpt length.
-	 * @return int (Maybe) modified excerpt length.
+	 * @return int modified excerpt length.
 	 */
 	public function rcno_reviews_excerpt_length( $length ) {
 		return (int) Rcno_Reviews_Option::get_option( 'rcno_excerpt_word_count', '55' );
@@ -487,7 +487,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 * @param string $more "Read more" excerpt string.
-	 * @return string (Maybe) modified "read more" excerpt string.
+	 * @return string modified "read more" excerpt string.
 	 */
 	function rcno_reviews_excerpt_more( $more ) {
 		return sprintf( ' <a class="read-more" href="%1$s">%2$s</a>',
