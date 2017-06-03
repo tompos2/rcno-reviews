@@ -194,7 +194,7 @@ class Rcno_Reviews_Admin {
 		$cap_type = 'post';
 		$cpt_name = 'rcno_review';
 
-		$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug' );
+		$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
 		$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $cpt_slug ) );
 		$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $cpt_slug ) );
 
@@ -273,17 +273,18 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_custom_taxonomy() { // @TODO: Complete the custom taxonomy feature.
 
-		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection', array( 'author' => 'Author' ) );
 		$keys = array_keys( $custom_taxonomies );
 		$taxonomies = array();
 
 		foreach ( $keys as $key ) {
 			$taxonomies[] = array(
 				'tax_settings'  => array(
-					'slug'          => Rcno_Reviews_Option::get_option( "rcno_{$key}_slug" ),
-					'hierarchy'     => Rcno_Reviews_Option::get_option( "rcno_{$key}_hierarchical" ),
-					'show_in_table' => Rcno_Reviews_Option::get_option( "rcno_{$key}_show" ),
-				) );
+					'slug'          => Rcno_Reviews_Option::get_option( "rcno_{$key}_slug", 'author' ),
+					'hierarchy'     => Rcno_Reviews_Option::get_option( "rcno_{$key}_hierarchical", false ),
+					'show_in_table' => Rcno_Reviews_Option::get_option( "rcno_{$key}_show", true ),
+				)
+			);
 		}
 
 		foreach ( $taxonomies as $tax ) {
@@ -301,7 +302,6 @@ class Rcno_Reviews_Admin {
 			$opts['show_ui']           = true;
 			$opts['sort']              = '';
 			// $opts['update_count_callback'] 	= '';
-
 			$opts['capabilities']['assign_terms'] = 'edit_posts';
 			$opts['capabilities']['delete_terms'] = 'manage_categories';
 			$opts['capabilities']['edit_terms']   = 'manage_categories';
@@ -340,7 +340,7 @@ class Rcno_Reviews_Admin {
 	}
 
 
-	function rcno_add_help_text( $contextual_help, $screen_id, $screen ) {
+	public function rcno_add_help_text( $contextual_help, $screen_id, $screen ) {
 
 		if ( 'rcno_review' === $screen->id ) {
 			$contextual_help =
@@ -541,7 +541,7 @@ class Rcno_Reviews_Admin {
 	 * @param array $query_args
 	 */
 	public function rcno_dashboard_recent_posts_widget( $query_args ) {
-		$query_args =  array_merge( $query_args, array( 'post_type' => array( 'post', 'rcno_review' ) ) );
+		$query_args = array_merge( $query_args, array( 'post_type' => array( 'post', 'rcno_review' ) ) );
 		return $query_args;
 	}
 
@@ -555,7 +555,7 @@ class Rcno_Reviews_Admin {
 	public function rcno_add_reviews_glance_items( $items = array() ) {
 		$num_reviews = wp_count_posts( 'rcno_review' );
 
-		if( $num_reviews ) {
+		if ( $num_reviews ) {
 			$published = intval( $num_reviews->publish );
 			$post_type = get_post_type_object( 'rcno_review' );
 
@@ -625,7 +625,7 @@ class Rcno_Reviews_Admin {
 	public function rcno_add_reviews_cpt_amp() {
 
 		if ( ! defined( 'AMP_QUERY_VAR' ) ) {
-			return; // do not add support if AMP plugin is not detected
+			return; // Do not add support if AMP plugin is not detected.
 		}
 
 		add_post_type_support( 'rcno_review', AMP_QUERY_VAR );

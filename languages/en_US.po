@@ -1,0 +1,959 @@
+# WordPress Blank Pot
+# Copyright (C) 2014 ...
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Recencio Book Reviews\n"
+"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
+"POT-Creation-Date: 2017-06-02 21:07-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Your Team <translations@example.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-rcno-admin-book-cover.php:65
+msgid "Book Cover"
+msgstr ""
+
+#: admin/class-rcno-admin-description-meta.php:55
+msgid "Book Description"
+msgstr ""
+
+#: admin/class-rcno-admin-general-info.php:54
+msgid "General Information"
+msgstr ""
+
+#: admin/class-rcno-admin-isbn.php:60
+msgid "ISBN Number"
+msgstr ""
+
+#: admin/class-rcno-admin-review-rating.php:54
+msgid "5 Star Rating"
+msgstr ""
+
+#: admin/class-rcno-admin-review-score.php:54
+msgid "Review Score"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:347
+msgid "Things to remember when adding or editing a book review:"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:349
+msgid "Specify the correct genre such as Mystery, or Historic."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:350
+msgid ""
+"Specify the correct writer of the book review. Remember that the Author "
+"module refers to you, the author of this book review."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:352
+msgid "If you want to schedule the book review to be published in the future:"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:354
+msgid "Under the Publish module, click on the Edit link next to Publish."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:355
+msgid ""
+"Change the date to the date to actual publish this article, then click on Ok."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:357
+msgid "For more information: "
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:358
+msgid ""
+"<a href=\"http://wordpress.org/support/\" target=\"_blank\">Support Forums</"
+"a>"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:361
+msgid "This is the help screen displaying the table of books blah blah blah."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:403
+msgid "Book Cover LG"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:418
+#: admin/class-rcno-reviews-admin.php:427
+msgid "Recencio Book Reviews"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:419
+msgid "Reviews"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:428
+#: admin/class-rcno-reviews-admin.php:447
+msgid "Settings"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:562
+#, php-format
+msgid "%s "
+msgid_plural "%s "
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/class-rcno-reviews-admin.php:588
+#: admin/class-rcno-reviews-admin.php:591
+msgid "Review updated."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:589
+msgid "Custom field updated."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:590
+msgid "Custom field deleted."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:593
+#, php-format
+msgid "Review restored to revision from %s"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:594
+msgid "Review published."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:595
+msgid "Review saved."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:596
+msgid "Review submitted."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:598
+#, php-format
+msgid "Review scheduled for: <strong>%1$s</strong>."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:600
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:602
+msgid "Review draft updated."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:608
+msgid "View review"
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:614
+msgid "Preview review"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-callback-helper.php:61
+#, php-format
+msgid "The callback function used for <strong>%s</strong> setting is missing."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-callback-helper.php:132
+#, php-format
+msgid "Options for <strong>%s</strong> multicheck is missing."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-callback-helper.php:175
+#: admin/settings/class-rcno-reviews-callback-helper.php:217
+#, php-format
+msgid "Options for <strong>%s</strong> radio is missing."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-callback-helper.php:481
+msgid "Upload File"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-sanitization-helper.php:95
+msgid "Settings updated."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:67
+msgid "Default Tab"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:68
+msgid "Second Tab"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:69
+msgid "General"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:70
+#: admin/settings/class-rcno-reviews-settings-definition.php:263
+msgid "Taxonomies"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:71
+msgid "Components"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:72
+msgid "Templates"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:94
+msgid "Header"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:98
+msgid "Missing Callback"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:102
+#: admin/settings/class-rcno-reviews-settings-definition.php:103
+msgid "Checkbox"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:107
+#: admin/settings/class-rcno-reviews-settings-definition.php:117
+msgid "Multicheck"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:108
+msgid "Multicheck with 3 options"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:110
+#: admin/settings/class-rcno-reviews-settings-definition.php:125
+#: admin/settings/class-rcno-reviews-settings-definition.php:190
+msgid "I read the <a href='https://wphuman.com/blog/'>WP Human Blog</a>"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:111
+#: admin/settings/class-rcno-reviews-settings-definition.php:126
+#: admin/settings/class-rcno-reviews-settings-definition.php:191
+msgid "<a href='http://tangrufus.com/'>Tang Rufus' Blog</a> looks great"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:112
+#: admin/settings/class-rcno-reviews-settings-definition.php:127
+#: admin/settings/class-rcno-reviews-settings-definition.php:192
+msgid "You can apply filters on this option!"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:118
+msgid "Multicheck without options"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:122
+#: admin/settings/class-rcno-reviews-settings-definition.php:132
+msgid "Radio"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:123
+msgid "Radio with 3 options"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:133
+msgid "Radio without options"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:137
+#: admin/settings/class-rcno-reviews-settings-definition.php:138
+msgid "Text"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:142
+#: admin/settings/class-rcno-reviews-settings-definition.php:143
+msgid "Text with std"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:144
+#: admin/settings/class-rcno-reviews-settings-definition.php:183
+msgid "std will be saved!"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:148
+#: admin/settings/class-rcno-reviews-settings-definition.php:149
+msgid "Email"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:153
+msgid "URL"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:154
+msgid "By default, only http & https are allowed"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:158
+#: admin/settings/class-rcno-reviews-settings-definition.php:159
+msgid "Password"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:163
+#: admin/settings/class-rcno-reviews-settings-definition.php:164
+#: admin/settings/class-rcno-reviews-settings-definition.php:168
+msgid "Number"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:169
+msgid "Max: 1000, Min: 20, Step: 30"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:176
+#: admin/settings/class-rcno-reviews-settings-definition.php:177
+msgid "Textarea"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:181
+#: admin/settings/class-rcno-reviews-settings-definition.php:182
+msgid "Textarea with std"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:187
+msgid "Select"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:188
+msgid "Select with 3 options"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:197
+msgid "Rich Editor"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:198
+msgid "Rich Editor save as HTML markups"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:202
+#: admin/settings/class-rcno-reviews-settings-definition.php:203
+msgid "Upload"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:210
+msgid "You can extend me via hooks and filters."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:218
+msgid "General Settings"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:222
+#: admin/settings/class-rcno-reviews-settings-definition.php:282
+#: admin/settings/class-rcno-reviews-settings-definition.php:303
+#: admin/settings/class-rcno-reviews-settings-definition.php:324
+msgid "Slug"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:223
+msgid "Book reviews will be available at:"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:229
+msgid "404s errors"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:230
+msgid ""
+"You've set up everything correctly here but now WordPress is giving you an "
+"404 (not found) error?\n"
+"\t\t\t\t\t Try flushing your permalink settings. Visit Settings -> "
+"Permalinks and just save without changing anything."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:235
+msgid "Reviews on homepage?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:236
+msgid "Should book reviews be shown on homepage?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:240
+msgid "Reviews in RSS?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:241
+msgid "Should book reviews be shown in the RSS feed.?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:245
+msgid "Reviews archive page"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:246
+msgid "Show full content or excerpt on archive pages."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:248
+msgid "The entire book review"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:249
+msgid "Only excerpt of the review"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:259
+msgid "Review Taxonomies"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:267
+msgid "Taxonomy Selection"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:268
+msgid "Custom Taxonomy Selection with 3 options"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:270
+msgid "Author"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:271
+#: admin/settings/class-rcno-reviews-settings-definition.php:299
+msgid "Genre"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:272
+#: admin/settings/class-rcno-reviews-settings-definition.php:320
+msgid "Series"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:283
+msgid "Place the slug of the author taxonomy here."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:288
+#: admin/settings/class-rcno-reviews-settings-definition.php:309
+#: admin/settings/class-rcno-reviews-settings-definition.php:330
+msgid "Hierarchical"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:289
+#: admin/settings/class-rcno-reviews-settings-definition.php:310
+#: admin/settings/class-rcno-reviews-settings-definition.php:331
+msgid "Is this custom taxonomy hierarchical?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:293
+#: admin/settings/class-rcno-reviews-settings-definition.php:314
+#: admin/settings/class-rcno-reviews-settings-definition.php:335
+msgid "Show in table"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:294
+#: admin/settings/class-rcno-reviews-settings-definition.php:315
+#: admin/settings/class-rcno-reviews-settings-definition.php:336
+msgid "Show this custom taxonomy on the admin table"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:304
+msgid "Place the slug of the genre taxonomy here."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:325
+msgid "Place the slug of the series taxonomy here."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:345
+msgid "Book Review Components"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:349
+msgid "ISBN number"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:350
+msgid "Show the ISBN field for book reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:354
+msgid "ISBN13 number"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:355
+msgid "Show the ISBN13 field for book reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:359
+msgid "ASIN number"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:360
+msgid "Show the ASIN field for book reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:364
+msgid "Goodreads ID"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:365
+msgid "Show the Goodreads book ID field for book reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:369
+msgid "Goodreads URL"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:370
+msgid "Show the Goodreads book URL field for book reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:374
+#: admin/views/rcno-general-info-metabox.php:23
+msgid "Publisher"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:375
+msgid "Show the book publisher for reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:379
+msgid "Published Date"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:380
+msgid "Show the book's published date for reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:384
+msgid "Published Format"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:385
+msgid "Show the book's published format for reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:389
+msgid "Published Edition"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:390
+msgid "Show the book's published edition for reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:394
+#: admin/views/rcno-general-info-metabox.php:59
+msgid "Page Count"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:395
+msgid "Show the book's page count for reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:399
+msgid "Goodreads Rating"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:400
+msgid "Show the book's Goodreads rating for reviews?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:404
+msgid "Book Review Widgets"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:408
+msgid "Book Slider"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:409
+msgid "Use the Rcno Book Slider widget?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:413
+msgid "Recent Reviews"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:414
+msgid "Use the Rcno Recent Reviews widget?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:418
+msgid "Tag Cloud"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:419
+msgid "Use the Rcno Tag Cloud widget?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:423
+msgid "Taxonomy List"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:424
+msgid "Use the Rcno Taxonomy List widget?"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:431
+msgid "Book review template"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:432
+msgid "Select how you want your book reviews to look."
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:437
+msgid "Default Book Cover"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:438
+msgid "The default image to use when a book cover isn't upload"
+msgstr ""
+
+#: admin/views/rcno-book-cover-metabox.php:18
+msgid "Add Book Cover"
+msgstr ""
+
+#: admin/views/rcno-book-cover-metabox.php:24
+msgid "Remove Book Cover"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:32
+msgid "Publication Date"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:41
+msgid "Publication Format"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:50
+msgid "Edition"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:68
+msgid "GoodReads Average"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:81
+msgid "GoodReads ID"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:90
+msgid "ISBN13"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:99
+msgid "ASIN"
+msgstr ""
+
+#: admin/views/rcno-general-info-metabox.php:108
+msgid "GoodReads URL"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:17
+msgid "Insert book review listing"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:18
+#: admin/views/rcno-reviews-modal.php:18
+msgid "Close"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:24
+msgid "Embed taxonomy index"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:26
+msgid "Taxonomy"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:38
+msgid "Embed book review index"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:44
+#: admin/views/rcno-reviews-modal.php:78
+msgid "Cancel"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:47
+#: admin/views/rcno-reviews-modal.php:81
+msgid "Include Shortcut"
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:17
+msgid "Insert book review"
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:24
+msgid ""
+"Choose the review you want to include from the list below or search for it."
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:28
+msgid "Search"
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:42
+msgid "No search term specified. Showing recent items."
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:43
+msgid "Search or use up and down arrow keys to select an item."
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:50
+msgid "Display options"
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:52
+msgid "Display options:"
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:56
+msgid "Embed excerpt only"
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:60
+msgid "Embed <b>without</b> description"
+msgstr ""
+
+#: admin/views/rcno-reviews-modal.php:68
+#, php-format
+msgid ""
+"%1sCreate a new review.%2s (This will open a new tab and you will need to "
+"return here for including the review"
+msgstr ""
+
+#: includes/class-rcno-goodreads-api.php:85
+msgid "There was an error fetch data from GoodReads"
+msgstr ""
+
+#: includes/class-rcno-reviews-rest-api.php:41
+msgid "Failed to update the book ISBN."
+msgstr ""
+
+#: includes/class-rcno-reviews-rest-api.php:46
+msgid "Book ISBN Number"
+msgstr ""
+
+#: includes/class-rcno-reviews-shortcodes.php:191
+#: includes/class-rcno-reviews-shortcodes.php:192
+msgid "Add Review"
+msgstr ""
+
+#: includes/class-rcno-reviews-shortcodes.php:234
+#: includes/class-rcno-reviews-shortcodes.php:341
+msgid "No title"
+msgstr ""
+
+#: includes/class-rcno-reviews-shortcodes.php:235
+#: includes/class-rcno-reviews-shortcodes.php:342
+msgid "Review"
+msgstr ""
+
+#: includes/class-rcno-reviews-shortcodes.php:236
+#: includes/class-rcno-reviews-shortcodes.php:237
+#: includes/class-rcno-reviews-shortcodes.php:343
+#: includes/class-rcno-reviews-shortcodes.php:344
+msgid "Insert"
+msgstr ""
+
+#: includes/class-rcno-reviews-shortcodes.php:300
+#: includes/class-rcno-reviews-shortcodes.php:301
+msgid "Add Listing"
+msgstr ""
+
+#: public/class-rcno-reviews-public-ratings.php:125
+msgid "Rate this review"
+msgstr ""
+
+#: public/class-rcno-reviews-public-ratings.php:181
+msgid "I don't know who you are"
+msgstr ""
+
+#: public/class-rcno-template-tags.php:648
+msgid "Overall Score"
+msgstr ""
+
+#: public/templates/rcno_default/reviews_index.php:70
+msgid "There are no book reviews to display."
+msgstr ""
+
+#: public/templates/rcno_default/taxonomy.php:79
+msgid "There are no terms in this taxonomy."
+msgstr ""
+
+#: public/templates/rcno_default/taxonomy.php:83
+msgid "<b>Error:</b> No taxonomy set for this list!"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:40
+msgid "Rcno Book Slider"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:52
+msgid "A widget to display a reviewed book slider"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:203
+#: public/widgets/class-rcno-reviews-tag-cloud.php:209
+msgid "Ascending"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:204
+#: public/widgets/class-rcno-reviews-tag-cloud.php:210
+msgid "Descending"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:205
+#: public/widgets/class-rcno-reviews-tag-cloud.php:211
+msgid "Random"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:212
+#: public/widgets/class-rcno-reviews-recent-reviews.php:190
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:207
+msgid "Title (optional)"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:220
+#: public/widgets/class-rcno-reviews-recent-reviews.php:198
+msgid "Number of Reviews:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:229
+#: public/widgets/class-rcno-reviews-tag-cloud.php:261
+msgid "Order:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:241
+msgid "Slide Duration:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-recent-reviews.php:40
+msgid "Rcno Recent Reviews"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-recent-reviews.php:52
+msgid "A widget to display the most recent book reviews."
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:40
+#: public/widgets/class-rcno-reviews-tag-cloud.php:169
+msgid "Rcno Tag Cloud"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:52
+msgid ""
+"An advanced widget that gives you total control over the output of your tags."
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:204
+msgid "Flat"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:205
+msgid "List"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:215
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:242
+msgid "Count"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:216
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:239
+msgid "Name"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:231
+msgid "Title:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:239
+msgid "Taxonomy:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:250
+msgid "Format:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:272
+msgid "Order by:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:294
+msgid "Number:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:302
+msgid "Largest:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:310
+msgid "Smallest:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:318
+msgid "Unit:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-tag-cloud.php:329
+msgid "Separator:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:40
+msgid "Rcno Taxonomy List"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:52
+msgid ""
+"An advanced widget that gives you total control over the output of your book "
+"review taxonomies."
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:134
+msgid "No terms found"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:215
+msgid "Taxonomy to display"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:226
+msgid "Displayed taxonomy count:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:234
+msgid "Order items by"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:250
+msgid "ASC"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:253
+msgid "DESC"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:261
+msgid "Show count with"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:267
+msgid "before and"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:273
+msgid "behind"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:280
+msgid "Hide empty terms?"
+msgstr ""

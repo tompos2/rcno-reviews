@@ -60,7 +60,7 @@ class Rcno_Reviews_Get_Templates {
 
 		$docComments = array_filter(
 			token_get_all( file_get_contents( $filename ) ),
-			"f_comment"
+			'rcno_file_comment'
 		);
 
 		$fileDocComment = array_shift( $docComments );
@@ -90,7 +90,7 @@ class Rcno_Reviews_Get_Templates {
 
 }
 
-function f_comment( $entry ){
+function rcno_file_comment( $entry ) {
 	return $entry[0] === T_COMMENT;
 }
 
@@ -105,7 +105,7 @@ function layout_list() {
 	$list = array();
 
 	foreach ($layouts as $layout) {
-		$name = strtolower( str_replace(' ', '_', $layout['title']) );
+		$name = strtolower( str_replace( ' ', '_', $layout['title'] ) );
 		$list[$name] = array(
 			'screenshot' => $layout['screenshot'],
 			'title'      => $layout['title'],
