@@ -281,6 +281,9 @@ class Rcno_Reviews {
 		// Get the rendered content of a book review and forward it to the theme as the_content().
 		$this->loader->add_filter( 'the_content', $plugin_public, 'rcno_get_review_content' );
 
+		$this->loader->add_filter( 'excerpt_length', $plugin_public, 'rcno_reviews_excerpt_length', 10 );
+		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'rcno_reviews_excerpt_more', 10 );
+
 	}
 
 	private function define_template_hooks() {

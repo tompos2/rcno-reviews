@@ -116,7 +116,7 @@ class Rcno_Reviews_Public {
 
 		// Check on all public pages.
 		if ( ! is_admin() && $query->is_main_query() ) {
-			// Post archive page:
+			// Post archive page.
 			if ( is_post_type_archive( 'rcno_review' ) ) {
 				// set post type to only reviews.
 				$query->set( 'post_type', 'rcno_review' );
@@ -469,6 +469,31 @@ class Rcno_Reviews_Public {
 		}
 
 		return $include_path;
+	}
+
+	/**
+	 * Filter the except length to 20 words.
+	 *
+	 * @since 1.0.0
+	 * @param int $length Excerpt length.
+	 * @return int (Maybe) modified excerpt length.
+	 */
+	public function rcno_reviews_excerpt_length( $length ) {
+		return (int) Rcno_Reviews_Option::get_option( 'rcno_excerpt_word_count', '55' );
+	}
+
+	/**
+	 * Filter the "read more" excerpt string link to the post.
+	 *
+	 * @since 1.0.0
+	 * @param string $more "Read more" excerpt string.
+	 * @return string (Maybe) modified "read more" excerpt string.
+	 */
+	function rcno_reviews_excerpt_more( $more ) {
+		return sprintf( ' <a class="read-more" href="%1$s">%2$s</a>',
+			get_permalink( get_the_ID() ),
+			__( Rcno_Reviews_Option::get_option( 'rcno_excerpt_read_more', 'Read more' ), 'rcno-reviews' )
+		);
 	}
 
 }

@@ -71,6 +71,8 @@ class Rcno_Reviews_Activator {
 			'rcno_show_tag_cloud_widget'      => '1',
 			'rcno_show_taxonomy_list_widget'  => '1',
 			'rcno_review_template'            => 'rcno_default',
+			'rcno_excerpt_read_more'          => 'Read more',
+			'rcno_excerpt_word_count'         => '55',
 		);
 
 		if ( null !== $settings_version ) {

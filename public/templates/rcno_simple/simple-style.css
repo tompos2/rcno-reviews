@@ -176,10 +176,15 @@
     width: 100%;
     height: 100%;
     color: #fff;
-    padding: 15% 5px;
+    padding: 0 5px;
     text-align: center;
     font-weight: 600;
     transition: all 0.2s ease-in-out;
+}
+
+.review-content .book-cover-container .book-info h2 {
+    color: #fff !important;
+    margin: 3em 0 10px 0 !important;
 }
 
 .review-content .book-cover-container:hover .book-info {
@@ -189,7 +194,7 @@
 .review-content .book-cover-container .book-info p,
 .review-content .book-cover-container .book-info a {
     color: #fff;
-    margin: 0;
+    margin: 0 !important;
     text-decoration: none !important;
     box-shadow: none !important;
 }

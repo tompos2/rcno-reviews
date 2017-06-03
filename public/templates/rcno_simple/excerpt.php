@@ -32,8 +32,10 @@ if ( $review->is_review_embedded() ) { ?>
 
 <?php
 
-	$review->the_rcno_book_review_content( $review_id );
+    the_excerpt( $review_id );
 
-echo '<!--- Recencio Book Reviews --->';
+	//$review->the_rcno_book_review_content( $review_id );
+
+    echo '<!--- Recencio Book Reviews --->';
 
 ?>
