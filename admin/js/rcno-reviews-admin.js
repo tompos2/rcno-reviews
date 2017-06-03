@@ -65,7 +65,7 @@
 
         // The author taxonomy can't be hierarchical.
         $( '#rcno_reviews_settings\\[rcno_author_hierarchical\\]' ).attr( 'disabled', true );
-        $( '#rcno_reviews_settings\\[rcno_show_isbn\\]' ).attr( 'disabled', true );
+        //$( '#rcno_reviews_settings\\[rcno_show_isbn\\]' ).attr( 'disabled', true );
 
     });
 

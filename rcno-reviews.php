@@ -37,6 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
 function activate_rcno_reviews() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-rcno-reviews-activator.php';
 	Rcno_Reviews_Activator::activate();
+	Rcno_Reviews_Activator::setup_rcno_settings();
 }
 
 /**

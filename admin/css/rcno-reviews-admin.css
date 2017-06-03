@@ -3,8 +3,9 @@
  * included in this file.
  */
 
-#rcno_reviews_settings[rcno_author_hierarchical] {
-
+button.button.reset-button {
+    background: red;
+    color: #fff;
 }
 
  .rcno-ajax-loading {
