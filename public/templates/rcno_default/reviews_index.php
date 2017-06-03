@@ -23,12 +23,12 @@ if ( $posts && count( $posts ) > 0 ) {
 			// Add first letter headlines for easier navigation.
 
 			// Get the first letter (without special chars).
-			$first_letter = substr( $template->rcno_normalize_special_chars( $post->post_title ), 0, 1 );
+			$first_letter = substr( remove_accents( $post->post_title ), 0, 1 );
 
 			// Check if we've already had a headline.
 			if ( ! in_array( $first_letter, $letters, true ) ) {
 				// Close list of proceeding group.
-				if ( $i != 0 ) {
+				if ( $i !== 0 ) {
 					$out .= '</ul>';
 				}
 				// Create a headline.

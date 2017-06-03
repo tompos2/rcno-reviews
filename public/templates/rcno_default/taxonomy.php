@@ -30,7 +30,7 @@ if ( $terms ) {
 					// Add first letter headlines for easier navigation.
 
 					// Get the first letter (without special chars).
-					$first_letter = substr( $template->rcno_normalize_special_chars( $title ), 0, 1 );
+					$first_letter = substr( remove_accents( $title ), 0, 1 );
 
 					// Check if we've already had a headline.
 					if ( ! in_array( $first_letter, $letters, true ) ) {

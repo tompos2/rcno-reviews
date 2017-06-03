@@ -69,8 +69,8 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 	<?php
 	    // Prints the review and book's metadata in the JSON+LD format content.
-        echo $template->get_the_rcno_book_schema_data( $review_id );
-        echo $template->get_the_rcno_review_schema_data( $review_id );
+        $template->the_rcno_book_schema_data( $review_id );
+        $template->the_rcno_review_schema_data( $review_id );
         echo '<!--- Recencio Book Reviews --->';
 	?>
 

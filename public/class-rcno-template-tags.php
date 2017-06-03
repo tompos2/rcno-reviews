@@ -55,6 +55,9 @@ class Rcno_Template_Tags {
 
 	/**
 	 * Includes the 'functions file' to be used by the book review template.
+	 *
+	 * @since 1.0.0
+	 * @return void
 	 */
 	public function include_functions_file() {
 
@@ -81,6 +84,13 @@ class Rcno_Template_Tags {
 	 * FULL BOOK DETAILS TEMPLATE TAGS
 	 *******************************************************************************/
 
+	/**
+	 * Generates the book details box.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return string
+	 */
 	public function get_the_rcno_full_book_details( $review_id ) {
 		$review = get_post_custom( $review_id );
 
@@ -116,56 +126,82 @@ class Rcno_Template_Tags {
 		return $out;
 	}
 
+	/**
+	 * Prints the book details box.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return void
+	 */
+	public function the_rcno_full_book_details( $review_id ) {
+		echo $this->get_the_rcno_full_book_details( $review_id );
+	}
+
 	/** ****************************************************************************
 	 * ADMIN RATING TEMPLATE TAGS
 	 *******************************************************************************/
-		private function get_the_rcno_admin_book_rating( $review_id ) { // @TODO: Use an SVG to avoid issues with none UTF-8 fonts.
-			$review = get_post_custom( $review_id );
 
-			if ( ! isset( $review['rcno_admin_rating'] ) ) {
-				return false;
-			}
+	/**
+	 * Generates the private 5 star rating given by the reviewer.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return bool|string
+	 */
+	private function get_the_rcno_admin_book_rating( $review_id ) { // @TODO: Use an SVG to avoid issues with none UTF-8 fonts.
+		$review = get_post_custom( $review_id );
 
-			$book_rating = (int) $review['rcno_admin_rating'][0];
-
-			switch ( $book_rating ) {
-				case 5:
-					return '<div class="rcno-admin-rating">
-							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-							</div>';
-					break;
-
-				case 4;
-					return '<div class="rcno-admin-rating">
-							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
-							</div>';
-					break;
-
-				case 3;
-					return '<div class="rcno-admin-rating">
-							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
-							</div>';
-					break;
-
-				case 2;
-					return '<div class="rcno-admin-rating">
-							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
-							</div>';
-					break;
-
-				case 1;
-					return '<div class="rcno-admin-rating">
-							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-							</div>';
-					break;
-
-				default:
-					return '<div class="rcno-admin-rating">
-							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-							</div>';
-			}
+		if ( ! isset( $review['rcno_admin_rating'] ) ) {
+			return false;
 		}
 
+		$book_rating = (int) $review['rcno_admin_rating'][0];
+
+		switch ( $book_rating ) {
+			case 5:
+				return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+							</div>';
+				break;
+
+			case 4;
+				return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+							</div>';
+				break;
+
+			case 3;
+				return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
+							</div>';
+				break;
+
+			case 2;
+				return '<div class="rcno-admin-rating">
+							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
+							</div>';
+				break;
+
+			case 1;
+				return '<div class="rcno-admin-rating">
+							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+							</div>';
+				break;
+
+			default:
+				return '<div class="rcno-admin-rating">
+							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+							</div>';
+		}
+	}
+
+	/**
+	 * Prints the private 5 star rating given by the reviewer.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return void
+	 */
 	public function the_rcno_admin_book_rating( $review_id ) {
 		echo $this->get_the_rcno_admin_book_rating( $review_id );
 	}
@@ -176,6 +212,13 @@ class Rcno_Template_Tags {
 	 * BOOK COVER TEMPLATE TAGS
 	 *******************************************************************************/
 
+	/**
+	 * Generates the book cover, or a default book cover if none is uploaded.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return bool|string
+	 */
 	public function get_the_rcno_book_cover( $review_id ) {
 		$review = get_post_custom( $review_id );
 
@@ -201,9 +244,11 @@ class Rcno_Template_Tags {
 	}
 
 	/**
-	 * Print the book cover.
+	 * Prints the book cover, or a default book cover if none is uploaded.
 	 *
-	 * @param $review_id
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return void
 	 */
 	public function the_rcno_book_cover( $review_id ) {
 		echo $this->get_the_rcno_book_cover( $review_id );
@@ -351,10 +396,11 @@ class Rcno_Template_Tags {
 	}
 
 	/**
-	 * Outputs the rendered description
+	 * Prints the book's description.
 	 *
-	 * @param $review_id
 	 * @since 1.0.0
+	 * @param $review_id
+	 * @return void
 	 */
 	public function the_rcno_book_description( $review_id ) {
 		echo $this->get_the_rcno_book_description( $review_id );
@@ -365,6 +411,13 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK REVIEW CONTENT TEMPLATE TAGS
 	 *******************************************************************************/
 
+	/**
+	 * Generates the markup for the review content of a book review.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return string
+	 */
 	public function get_the_rcno_book_review_content( $review_id ) {
 
 		$review_content = '';
@@ -376,7 +429,11 @@ class Rcno_Template_Tags {
 	}
 
 	/**
-	 * @param $review_id
+	 * Prints out the review content of a book review.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return void
 	 */
 	public function the_rcno_book_review_content( $review_id ) {
 		echo $this->get_the_rcno_book_review_content( $review_id );
@@ -388,6 +445,18 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK META TEMPLATE TAGS
 	 *******************************************************************************/
 
+	/**
+	 * Generated the required markup for the requested stored book metadata,
+	 * accessed via specific meta-keys.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @param string $meta_key
+	 * @param string $wrapper
+	 * @param bool $label
+	 *
+	 * @return string|null
+	 */
 	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '', $label = true ) {
 
 		$review = get_post_custom( $review_id );
@@ -453,6 +522,17 @@ class Rcno_Template_Tags {
 	}
 
 
+	/**
+	 * Prints out the requested stored book metadata, accessed via specific meta-keys.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @param string $meta_key
+	 * @param string $wrapper
+	 * @param bool $label
+	 *
+	 * @return void
+	 */
 	public function the_rcno_book_meta( $review_id, $meta_key, $wrapper, $label ) {
 		echo $this->get_the_rcno_book_meta( $review_id, $meta_key, $wrapper, $label );
 	}
@@ -462,11 +542,12 @@ class Rcno_Template_Tags {
 	 *******************************************************************************/
 
 	/**
-	 * Calculates the review scores
+	 * Calculates the review scores.
 	 *
-	 * @param               $num
-	 * @param   string      $type
-	 * @param   bool        $stars
+	 * @since 1.0.0
+	 * @param int $num
+	 * @param string $type
+	 * @param bool $stars
 	 *
 	 * @return string
 	 */
@@ -530,8 +611,8 @@ class Rcno_Template_Tags {
 	/**
 	 * Creates the review box for the frontend.
 	 *
+	 * @since 1.0.0
 	 * @param  int  $review_id
-	 *
 	 * @return string|null
 	 */
 	private function rcno_the_review_box( $review_id ) {
@@ -599,7 +680,9 @@ class Rcno_Template_Tags {
 	/**
 	 * Prints the review box on the frontend.
 	 *
+	 * @since 1.0.0
 	 * @param int $review_id
+	 * @return void
 	 */
 	public function rcno_print_review_box( $review_id ) {
 		echo $this->rcno_the_review_box( $review_id );
@@ -607,12 +690,12 @@ class Rcno_Template_Tags {
 
 
   /**
-	 * Creates the review badge for the frontend.
-	 *
-	 * @param   int     $review_id
-	 *
-	 * @return string|null
-	 */
+   * Creates the review badge for the frontend.
+   *
+   * @since 1.0.0
+   * @param int $review_id
+   * @return string|null
+   */
 	private function rcno_the_review_badge( $review_id ) {
 
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
@@ -648,7 +731,10 @@ class Rcno_Template_Tags {
 
 	/**
 	 * Prints the review badge on the frontend.
+	 *
+	 * @since 1.0.0
 	 * @param $review_id
+	 * @return void
 	 */
 	public function rcno_print_review_badge( $review_id ){
 		echo $this->rcno_the_review_badge( $review_id );
@@ -659,6 +745,13 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK REVIEW SCHEME DATA TAGS
 	 *******************************************************************************/
 
+	/**
+	 * Generates the markup for the 'Book' schema type in the JSON+LD format.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return string
+	 */
 	public function get_the_rcno_book_schema_data( $review_id ) {
 
 		$out = '';
@@ -702,6 +795,25 @@ class Rcno_Template_Tags {
 		return $out;
 	}
 
+	/**
+	 * Prints the 'Book' schema type in the JSON+LD format.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return void
+	 */
+	public function the_rcno_book_schema_data( $review_id ) {
+		echo $this->get_the_rcno_book_schema_data( $review_id );
+	}
+
+
+	/**
+	 * Generates the markup for the 'Review' schema type in the JSON+LD format.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return string
+	 */
 	public function get_the_rcno_review_schema_data( $review_id ) {
 
 		$out = '';
@@ -766,9 +878,27 @@ class Rcno_Template_Tags {
 		return $out;
 	}
 
+	/**
+	 * Prints the 'Review' schema type in the JSON+LD format.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return void
+	 */
+	public function the_rcno_review_schema_data( $review_id ) {
+		$this->get_the_rcno_review_schema_data( $review_id );
+	}
 
-	public function get_the_rcno_alphabet_nav_bar( $letters = false ) {
-		// An array with the (complete) alphabet
+
+	/**
+	 * Generates a navigation bar of letters of the alphabet.
+	 *
+	 * @since 1.0.0
+	 * @param array $letters
+	 * @return string
+	 */
+	public function get_the_rcno_alphabet_nav_bar( $letters = array() ) {
+		// An array with the (complete) alphabet.
 		$alphabet = array(
 			'A',
 			'B',
@@ -800,85 +930,48 @@ class Rcno_Template_Tags {
 
 		$out = '';
 
-		// Start the list:
+		// Start the list.
 		$out .= '<ul class="rcno-alphabet-navigation">';
 
 		foreach ( $alphabet as $a ) {
-			// loop through the alphabet
+			// loop through the alphabet.
 			if ( $letters ) {
 				if ( in_array( $a, $letters, true ) ) {
-					// active letter, so we should set a link in the nav menu
+					// active letter, so we should set a link in the nav menu.
 					$out .= '<li class="active"><a href="#' . $a . '">' . $a . '</a></li>';
 				} else {
-					// inactive letter, no link
+					// inactive letter, no link.
 					$out .= '<li class="inactive">' . $a . '</li>';
 				}
 			} else {
-				// each letter active
+				// each letter active.
 				$out .= '<li class="active"><a href="#' . $a . '">' . $a . '</a></li>';
 			}
 		}
 
-		// End the list:
+		// End the list.
 		$out .= '</ul>';
 
-		// return the rendered nav bar
+		// return the rendered nav bar.
 		return $out;
 	}
 
-	public function the_rcno_alphabet_nav_bar( $letters = false ) {
+	/**
+	 * Prints a navigation bar of letters of the alphabet.
+	 *
+	 * @since 1.0.0
+	 * @param array $letters
+	 * @return void
+	 */
+	public function the_rcno_alphabet_nav_bar( $letters ) {
 		echo $this->get_the_rcno_alphabet_nav_bar( $letters );
 	}
 
 
-	public function rcno_normalize_special_chars( $text ) { //@TODO: consider using 'remove_accents()'.
-		// Replacement matrix for special characters.
-		$trans = array(
-			'á' => 'a',
-			'à' => 'a',
-			'â' => 'a',
-			'ã' => 'a',
-			'Á' => 'A',
-			'À' => 'A',
-			'Â' => 'A',
-			'Ã' => 'A',
-			'ä' => 'a',
-			'Ä' => 'A',
-			'é' => 'e',
-			'è' => 'e',
-			'ê' => 'e',
-			'ë' => 'e',
-			'É' => 'E',
-			'È' => 'E',
-			'Ê' => 'E',
-			'Ë' => 'E',
-			'í' => 'i',
-			'ì' => 'i',
-			'î' => 'i',
-			'ï' => 'i',
-			'Í' => 'I',
-			'Ì' => 'I',
-			'Î' => 'I',
-			'Ï' => 'I',
-			'ö' => 'o',
-			'Ö' => 'O',
-			'ø' => 'o',
-			'Ø' => 'O',
-			'ü' => 'u',
-			'Ü' => 'U'
-		);
-
-		// Replace special chars.
-		$text = str_replace( array_keys( $trans ), array_values( $trans ), $text );
-
-		// Return the sanitized text.
-		return $text;
-	}
-
-
 	/**
-	 * Check if the review is embedded into a post, page or another custom post type.
+	 * Check if the review is embedded in a post, page or another custom post type.
 	 *
+	 * @since 1.0.0
 	 * @return boolean
 	 */
 	public function is_review_embedded() {
