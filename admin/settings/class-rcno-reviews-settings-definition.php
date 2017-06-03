@@ -438,6 +438,20 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'The default image to use when a book cover isn\'t upload', self::$plugin_name ),
 					'type' => 'upload'
 				),
+				'rcno_excerpt_read_more'               => array(
+					'name' => __( 'Read more text', self::$plugin_name ),
+					'desc' => __( 'The review excerpt \'Read more\' tag.', self::$plugin_name ),
+					'std'  => 'Read more',
+					'type' => 'text'
+				),
+				'rcno_excerpt_word_count'     => array(
+					'name' => __( 'Review excerpt word count', self::$plugin_name ),
+					'desc' => __( 'Max: 500, Min: 20', self::$plugin_name ),
+					'max'  => 500,
+					'min'  => 20,
+					'step' => 1,
+					'type' => 'number'
+				),
 
 
 			)
