@@ -4,6 +4,8 @@ $review_score_criteria = get_post_meta( $review->ID, 'rcno_review_score_criteria
 $review_score_type = get_post_meta( $review->ID, 'rcno_review_score_type', true );
 $review_score_position = get_post_meta( $review->ID, 'rcno_review_score_position', true );
 
+$review_score_enable = get_post_meta( $review->ID, 'rcno_review_score_enable', true );
+
 wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonce' );
 ?>
 
@@ -28,7 +30,8 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
     <div class="review-score-options" style="width:25%; display:inline-block">
         <div class="review-score-rating-enable">
             <label for="rcno_review_score_enable">Enable Rating Box</label>
-            <input type="checkbox" id="rcno_review_score_enable" name="rcno_review_score_enable" value="1" checked="checked">
+            <input type="hidden" id="rcno_review_score_enable" name="rcno_review_score_enable" value="0"> <!-- The need for this is weird -->
+            <input type="checkbox" id="rcno_review_score_enable" name="rcno_review_score_enable" value="1" <?php checked( $review_score_enable, '1', true ); ?>>
         </div>
 
         <div class="review-score-rating-type">

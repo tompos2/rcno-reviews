@@ -103,6 +103,11 @@ class Rcno_Admin_Review_Score {
 			$review_score_position = $data['rcno_review_score_position'];
 			update_post_meta( $review_id, 'rcno_review_score_position', $review_score_position );
 		}
+
+		if( isset( $data['rcno_review_score_enable'] ) ) {
+			$review_score_enable = $data['rcno_review_score_enable'];
+			update_post_meta( $review_id, 'rcno_review_score_enable', $review_score_enable );
+		}
 	}
 
 }
