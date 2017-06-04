@@ -400,6 +400,17 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+
+				'components_tab_header_2'         => array(
+					'name' => '<strong>' . __( 'Book Review Score Box', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_show_review_score_box'    => array(
+					'name' => __( 'Review Score Box', self::$plugin_name ),
+					'desc' => __( 'Enable the review score box?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+
 				'components_tab_header_1'         => array(
 					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',
 					'type' => 'header'

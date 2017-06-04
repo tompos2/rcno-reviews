@@ -48,6 +48,11 @@ class Rcno_Admin_Review_Score {
 	 * @since 1.0.0
 	 */
 	public function rcno_book_review_score_metabox() {
+		// Disables the review score metabox displaying on review edit screen.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
+			return false;
+		}
+
 		// Add editor metabox for ISBN number.
 		add_meta_box(
 			'rcno_book_review_score_metabox',

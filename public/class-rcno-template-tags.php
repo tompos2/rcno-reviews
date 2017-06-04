@@ -613,9 +613,14 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 * @param  int  $review_id
-	 * @return string|null
+	 * @return string|null|false
 	 */
 	private function rcno_the_review_box( $review_id ) {
+
+		// Disables the review score box displaying on frontend book reviews.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
+			return false;
+		}
 
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria       = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
@@ -694,9 +699,14 @@ class Rcno_Template_Tags {
    *
    * @since 1.0.0
    * @param int $review_id
-   * @return string|null
+   * @return string|null|false
    */
 	private function rcno_the_review_badge( $review_id ) {
+
+		// Disables the review score badge displaying on frontend book reviews.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
+			return false;
+		}
 
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria       = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
