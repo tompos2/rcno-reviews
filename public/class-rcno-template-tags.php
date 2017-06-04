@@ -625,8 +625,8 @@ class Rcno_Template_Tags {
 		}
 
 		$rating_criteria_count = count( $rating_criteria );
-		$review_summary        = 'The review summary goes here'; // @TODO: Create review summary.
-		$review_box_title      = 'The review title goes here'; // @TODO: Create review title.
+		$review_summary        = substr(wp_strip_all_tags($this->get_the_rcno_book_review_content( $review_id ), true), 0, 260) . '...'; // @TODO: Create review summary.
+		$review_box_title      = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ); // @TODO: Create review title.
 
 		$score_array = array();
 
@@ -648,7 +648,7 @@ class Rcno_Template_Tags {
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
-		$output .= '<span class="review-title">' . $review_box_title . '</span>';
+		$output .= '<h2 class="review-title">' . $review_box_title . '</h2>';
 		$output .= '<p>' . $review_summary . '</p>';
 		$output .= '</div>';
 		$output .= '</div>';
@@ -886,7 +886,7 @@ class Rcno_Template_Tags {
 	 * @return void
 	 */
 	public function the_rcno_review_schema_data( $review_id ) {
-		$this->get_the_rcno_review_schema_data( $review_id );
+		echo $this->get_the_rcno_review_schema_data( $review_id );
 	}
 
 

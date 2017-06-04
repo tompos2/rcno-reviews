@@ -20,7 +20,10 @@ $plugin_name = 'rcno-reviews';
 $version = '1.0.0';
 
 $template = new Rcno_Template_Tags( $plugin_name, $version );
-$ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
+$review_score_enable = (bool) get_post_meta( $review_id, 'rcno_review_score_enable', true );
+$review_score_position = get_post_meta( $review_id, 'rcno_review_score_position', true );
+
+//$ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 ?>
 
@@ -32,6 +35,14 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 <div class="rcno-book-info">
     <div class="review-content">
+
+	    <?php if ( true === $review_score_enable && 'top' === $review_score_position ) : ?>
+
+            <div class="review-box-container">
+			    <?php $template->rcno_print_review_box( $review_id ); ?>
+            </div>
+
+	    <?php endif; ?>
 
         <div class="book-cover-container">
             <div class="book-cover">
@@ -64,6 +75,14 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
             // Prints the book review content.
             $template->the_rcno_book_review_content( $review_id );
 	    ?>
+
+        <?php if ( true === $review_score_enable && 'bottom' === $review_score_position ) : ?>
+
+            <div class="review-box-container">
+                <?php $template->rcno_print_review_box( $review_id ); ?>
+            </div>
+
+        <?php endif; ?>
 
     </div>
 
