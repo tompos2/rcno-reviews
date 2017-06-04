@@ -49,6 +49,11 @@
     });
 
     $(function () {
+        $('.rcno-color-input').wpColorPicker();
+
+    });
+
+    $(function () {
         $('.rcno_review_template img').click(function() {
             $(this).addClass('checked');
         });

@@ -165,9 +165,13 @@ class Rcno_Reviews_Admin {
 		 * class.
 		 */
 
+		// Add the media uploader.
 		wp_enqueue_media();
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, false );
+		// Add the color picker css file.
+		wp_enqueue_style( 'wp-color-picker' );
+
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, false );
 
 		if ( $hook === 'post-new.php' || $hook === 'post.php' ) {
 			if ( 'rcno_review' === $post->post_type ) {

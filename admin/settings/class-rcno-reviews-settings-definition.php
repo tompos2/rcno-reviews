@@ -410,6 +410,16 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Enable the review score box?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+				'rcno_show_review_score_box_background'    => array(
+					'name' => __( 'Background Color', self::$plugin_name ),
+					'desc' => __( 'Background Color for the review score box?', self::$plugin_name ),
+					'type' => 'color'
+				),
+				'rcno_show_review_score_box_accent'    => array(
+					'name' => __( 'Accent Color', self::$plugin_name ),
+					'desc' => __( 'Accent color for the review score box?', self::$plugin_name ),
+					'type' => 'color'
+				),
 
 				'components_tab_header_1'         => array(
 					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',

@@ -280,6 +280,21 @@ class Rcno_Reviews_Callback_Helper {
 	}
 
 	/**
+	 * Color Picker Callback
+	 *
+	 * Renders text fields.
+	 *
+	 * @since 	1.0.0
+	 * @param 	array $args Arguments passed by the setting
+	 * @return 	void
+	 */
+	public function color_callback( $args ) {
+
+		$this->input_type_callback( 'color', $args );
+
+	}
+
+	/**
 	 * Email Callback
 	 *
 	 * Renders email fields.
@@ -340,7 +355,7 @@ class Rcno_Reviews_Callback_Helper {
 
 		$html = '<input type="' . $type . '" ';
 		$html .= $this->get_id_and_name_attributes( $args['id'] );
-		$html .= 'class="' . $args['size'] . '-text" ';
+		$html .= 'class="' . $args['size'] . '-text ' . 'rcno-' . $type . '-input' . '"';
 		$html .= 'value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 
 		$html .= '<br />';
