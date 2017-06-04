@@ -290,8 +290,17 @@ class Rcno_Reviews_Callback_Helper {
 	 */
 	public function color_callback( $args ) {
 
-		$this->input_type_callback( 'color', $args );
+		$value = Rcno_Reviews_Option::get_option( $args['id'], $args['std']  );
 
+		$html = '<input type="text" ';
+		$html .= $this->get_id_and_name_attributes( $args['id'] );
+		$html .= 'class="' . $args['size'] . '-text ' . 'rcno-color-input' . '"';
+		$html .= 'value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+
+		$html .= '<br />';
+		$html .= $this->get_label_for( $args['id'], $args['desc'] );
+
+		echo $html;
 	}
 
 	/**

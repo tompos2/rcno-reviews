@@ -622,6 +622,9 @@ class Rcno_Template_Tags {
 			return false;
 		}
 
+		$background = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_background' );
+		$accent = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_accent' );
+
 		$rating_type           = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria       = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
 
@@ -646,9 +649,9 @@ class Rcno_Template_Tags {
 		$this->rcno_review_score = $final_score;
 
 		$output = '';
-		$output .= '<div id="rcno-review-score-box">';
+		$output .= '<div id="rcno-review-score-box" style="background:' . $background . '">';
 		$output .= '<div class="review-summary">';
-		$output .= '<div class="overall-score">';
+		$output .= '<div class="overall-score" style="background:' . $accent . '">';
 		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, false ) . '</span>';
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
@@ -665,7 +668,7 @@ class Rcno_Template_Tags {
 				$output .= '<li>';
 			}
 			$output .= '<div class="rcno-review-score-bar-container">';
-			$output .= '<div class="review-score-bar" style="width:' . $percentage_score . '%">';
+			$output .= '<div class="review-score-bar" style="width:' . $percentage_score . '%; background:' . $accent .'">';
 			$output .= '<span class="score-bar">' . $criteria['label'] . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';

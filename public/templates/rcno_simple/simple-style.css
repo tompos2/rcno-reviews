@@ -4,7 +4,6 @@
 */
 
 #rcno-review-score-box {
-    background: #f5f2dd;
     padding: 10px;
     margin: 0 0 2em;
 }
@@ -26,7 +25,7 @@
 }
 
 #rcno-review-score-box ul li .review-score-bar {
-    background: green;
+    background: transparent;
 }
 
 #rcno-review-score-box ul li .review-score-bar span.score-bar {
@@ -55,7 +54,6 @@
 #rcno-review-score-box .review-summary .overall-score {
     width: 120px;
     height: 120px;
-    background: green;
     padding: 5px;
     text-align: center;
     display: inline-block;
