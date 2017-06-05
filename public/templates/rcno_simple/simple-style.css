@@ -10,6 +10,7 @@
 
 #rcno-review-score-box ul {
     list-style: none;
+    clear: left;
 }
 
 #rcno-review-score-box .review-summary {
@@ -58,14 +59,15 @@
     text-align: center;
     display: inline-block;
     position: relative;
+    float: left;
 }
 
 #rcno-review-score-box .review-summary .review-text {
     width: 74%;
     display: inline-block;
     max-height: 120px;
-    margin: 0 0 0 10px;
-    float: right;
+    margin: 0 0 1em 10px;
+    float: left;
 }
 
 #rcno-review-score-box .review-summary .review-text h2 {
@@ -77,6 +79,8 @@
     margin: 0;
     font-size: .9em;
     line-height: 1.2;
+    height: 6em;
+    overflow: hidden;
 }
 
 #rcno-review-score-box .review-summary .overall-score .overall {
@@ -216,4 +220,41 @@
     margin: 0 !important;
     text-decoration: none !important;
     box-shadow: none !important;
+}
+
+
+@media screen and ( min-width: 300px ) and ( max-width: 399px ) {
+
+    #rcno-review-score-box .review-summary .review-text {
+        width: 58%;
+    }
+
+    #rcno-review-score-box ul {
+        margin: 0;
+    }
+
+}
+
+@media screen and ( min-width: 400px ) and ( max-width: 600px ) {
+
+    #rcno-review-score-box .review-summary .review-text {
+        width: 70%;
+    }
+
+    #rcno-review-score-box ul {
+        margin: 0;
+    }
+
+}
+
+@media screen and ( min-width: 601px ) and ( max-width: 801px ) {
+
+    #rcno-review-score-box .review-summary .review-text {
+        width: 70%;
+    }
+
+    #rcno-review-score-box ul {
+        margin: 0;
+    }
+
 }

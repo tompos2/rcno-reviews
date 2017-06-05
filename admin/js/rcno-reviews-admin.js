@@ -288,21 +288,31 @@
                             book['GoodreadsResponse']['book']['title']
                         );
 
-                        $('#rcno_book_title').val(
-                            book['GoodreadsResponse']['book']['work']['original_title']
-                        );
+                        if ( typeof book['GoodreadsResponse']['book']['work']['original_title'] === 'object' ) {
+                            $('#rcno_book_title').val(
+                                book['GoodreadsResponse']['book']['title']
+                            );
+                        } else {
+                            $('#rcno_book_title').val(
+                                book['GoodreadsResponse']['book']['work']['original_title']
+                            );
+                        }
 
-                        tinymce.get('rcno_book_description').setContent(
-                            book['GoodreadsResponse']['book']['description']
-                        );
+                        if( book['GoodreadsResponse']['book']['description'] !== null ) {
+                            tinymce.get('rcno_book_description').setContent(
+                                book['GoodreadsResponse']['book']['description']
+                            );
+                        }
 
                         $('#new-tag-rcno_author').val(
                             book['GoodreadsResponse']['book']['authors']['author']['name']
                         );
 
-                        $('#new-tag-rcno_genre').val(
-                            $.upCase(book['GoodreadsResponse']['book']['popular_shelves']['shelf'][0]['name'])
-                        );
+                        if ( typeof book['GoodreadsResponse']['book']['popular_shelves'] === 'object' ) {
+                            $('#new-tag-rcno_genre').val(
+                                $.upCase(book['GoodreadsResponse']['book']['popular_shelves']['shelf'][0]['name'])
+                            );
+                        }
 
                         if( typeof book['GoodreadsResponse']['book']['series_works'] === 'object' ){
                             $('#new-tag-rcno_series').val(

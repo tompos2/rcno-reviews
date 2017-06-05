@@ -31,9 +31,9 @@ $default_options = array(
 	'rcno_show_page_count'     => '1',
 	'rcno_show_gr_rating'      => '1',
 
-	'rcno_show_review_score_box'        => '1',
-	'rcno_show_review_score_box_background' => '1',
-	'rcno_show_review_score_box_accent'     => '1',
+	'rcno_show_review_score_box'            => '1',
+	'rcno_show_review_score_box_background' => '#ffffff',
+	'rcno_show_review_score_box_accent'     => '#0f0000',
 
 	'rcno_show_book_slider_widget'    => '1',
 	'rcno_show_recent_reviews_widget' => '1',
