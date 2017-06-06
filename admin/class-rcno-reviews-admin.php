@@ -220,9 +220,11 @@ class Rcno_Reviews_Admin {
 		$opts['show_in_menu']          = true;
 		$opts['show_in_nav_menu']      = true;
 		$opts['show_ui']               = true;
-		$opts['show_in_rest']          = true;
-		$opts['base_rest']             = $cpt_name;
-		$opts['rest_controller_class'] = 'WP_REST_Posts_Controller';
+
+		//$opts['show_in_rest']          = true;
+		//$opts['rest_base']             = $cpt_slug;
+		//$opts['rest_controller_class'] = 'WP_REST_Posts_Controller';
+
 		$opts['supports']              = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments' );
 		$opts['taxonomies']            = array();
 
@@ -304,6 +306,11 @@ class Rcno_Reviews_Admin {
 			$opts['show_in_nav_menus'] = true;
 			$opts['show_tag_cloud']    = true;
 			$opts['show_ui']           = true;
+
+			//$opts['show_in_rest']          = true;
+			//$opts['rest_base']             = $tax['tax_settings']['slug'];
+			//$opts['rest_controller_class'] = 'WP_REST_Terms_Controller';
+
 			$opts['sort']              = '';
 			// $opts['update_count_callback'] 	= '';
 			$opts['capabilities']['assign_terms'] = 'edit_posts';
@@ -633,6 +640,50 @@ class Rcno_Reviews_Admin {
 		}
 
 		add_post_type_support( 'rcno_review', AMP_QUERY_VAR );
+	}
+
+
+	/**
+	 * Add the book review custom post type to the REST API.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function rcno_reviews_rest_support() {
+		global $wp_post_types;
+
+		$post_type_name = 'rcno_review';
+		if( isset( $wp_post_types[ $post_type_name ] ) ) {
+			$wp_post_types[$post_type_name]->show_in_rest = true;
+			$wp_post_types[$post_type_name]->rest_base = 'review';
+			$wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
+		}
+	}
+
+
+	/**
+	 * Add the book review taxonomies to the REST API.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function rcno_reviews_taxonomy_rest_support() {
+		global $wp_taxonomies;
+
+		$taxonomies = array_keys( Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
+		$tax_name = array();
+
+		foreach ( $taxonomies as $tax ) {
+			$tax_name[$tax] = 'rcno_' . $tax;
+		}
+
+		foreach ( $tax_name as $key => $value ) {
+			if ( isset( $wp_taxonomies[ $value ] ) ) {
+				$wp_taxonomies[ $value ]->show_in_rest = true;
+				$wp_taxonomies[ $value ]->rest_base             = $key;
+				$wp_taxonomies[ $value ]->rest_controller_class = 'WP_REST_Terms_Controller';
+			}
+		}
 	}
 
 }

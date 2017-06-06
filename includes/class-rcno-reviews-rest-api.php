@@ -31,21 +31,17 @@ class Rcno_Reviews_Rest_API {
 	public function rcno_register_rest_fields(){
 
 		register_rest_field( 'rcno_review', 'book_ISBN', array(
-			'get_callback' => function() {
-				$book_ISBN = get_post_meta( get_post()->ID, 'rcno_book_isbn', true );
-				return (string) $book_ISBN;
+			'get_callback' => function( $object ) {
+				return get_post_meta( $object['id'], 'rcno_book_isbn', true );
 			},
-			'update_callback' => function( $meta_value ) { // @TODO: Fix update callback.
-				$ret = update_post_meta( get_post()->ID, 'rcno_book_isbn', $meta_value );
-				if ( false === $ret ) {
-					return new WP_Error( 'rest_book_ISBN_update_failed', __( 'Failed to update the book ISBN.' ), array( 'status' => 500 ) );
+			'update_callback' => function( $object, $value ) {
+				if ( ! $value || ! is_string( $value ) ) {
+					return false;
 				}
-				return true;
+
+				return update_post_meta( $object['id'], 'rcno_book_isbn', strip_tags( $value ) );
 			},
-			'schema' => array(
-				'description' => __( 'Book ISBN Number' ),
-				'type'        => 'string'
-			),
+			'schema' => null,
 		) );
 	}
 }
