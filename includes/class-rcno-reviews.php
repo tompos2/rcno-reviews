@@ -197,10 +197,6 @@ class Rcno_Reviews {
 		// Registers new featured image sizes for the book review post type.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_book_cover_sizes' );
 
-		// Registers the book reviews CPT and custom taxonomies with the WordPress REST API.
-		$this->loader->add_action( 'init', $plugin_admin, 'rcno_reviews_rest_support', 25 );
-		$this->loader->add_action( 'init', $plugin_admin, 'rcno_reviews_taxonomy_rest_support', 25 );
-
 		// Adds the book reviews post type to AMP.
 		$this->loader->add_action( 'amp_init', $plugin_admin, 'rcno_add_reviews_cpt_amp' );
 
@@ -313,6 +309,10 @@ class Rcno_Reviews {
 	private function define_rest_hooks() {
 
 		$plugin_rest = new Rcno_Reviews_Rest_API( $this->get_plugin_name(), $this->get_version() );
+
+		// Registers the book reviews CPT and custom taxonomies with the WordPress REST API.
+		$this->loader->add_action( 'init', $plugin_rest, 'rcno_reviews_rest_support', 25 );
+		$this->loader->add_action( 'init', $plugin_rest, 'rcno_reviews_taxonomy_rest_support', 25 );
 
 		$this->loader->add_action( 'rest_api_init', $plugin_rest, 'rcno_register_rest_fields' );
 	}
