@@ -219,7 +219,7 @@ class Rcno_Template_Tags {
 	 * @param int $review_id
 	 * @return bool|string
 	 */
-	public function get_the_rcno_book_cover( $review_id ) {
+	public function get_the_rcno_book_cover( $review_id, $wrapper = true ) {
 		$review = get_post_custom( $review_id );
 
 		if ( ! isset( $review['rcno_reviews_book_cover_src'] ) ) {
@@ -230,6 +230,11 @@ class Rcno_Template_Tags {
 		if ( '' === $book_src ) {
 			$book_src = Rcno_Reviews_Option::get_option( 'rcno_default_cover', plugin_dir_url( __FILE__ ) . 'images/no-cover.jpg' );
 		}
+
+		if ( false === $wrapper) {
+			return $book_src;
+		}
+
 		$book_title = $review['rcno_reviews_book_cover_title'][0];
 		$book_alt = $review['rcno_reviews_book_cover_alt'][0];
 
@@ -297,7 +302,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return null|string
 	 */
-	private function get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = '/' ) {
+	public function get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = '/' ) {
 
 		$out = '';
 

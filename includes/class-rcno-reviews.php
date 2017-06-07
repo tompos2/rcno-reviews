@@ -311,8 +311,7 @@ class Rcno_Reviews {
 		$plugin_rest = new Rcno_Reviews_Rest_API( $this->get_plugin_name(), $this->get_version() );
 
 		// Registers the book reviews CPT and custom taxonomies with the WordPress REST API.
-		$this->loader->add_action( 'init', $plugin_rest, 'rcno_reviews_rest_support', 25 );
-		$this->loader->add_action( 'init', $plugin_rest, 'rcno_reviews_taxonomy_rest_support', 25 );
+		$this->loader->add_action( 'init', $plugin_rest, 'rcno_enable_rest_support', 25 );
 
 		$this->loader->add_action( 'rest_api_init', $plugin_rest, 'rcno_register_rest_fields' );
 	}

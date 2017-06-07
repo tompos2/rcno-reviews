@@ -181,6 +181,14 @@ class Rcno_Reviews_Admin {
 			}
 		}
 
+		if ( $hook === 'post-new.php' || $hook === 'post.php' ) {
+			if ( 'rcno_review' === $post->post_type ) {
+
+				wp_enqueue_script( 'google-book-api', plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-google-books.js', array( 'jquery' ), '1.0.0', true );
+
+			}
+		}
+
 		
 
 	}

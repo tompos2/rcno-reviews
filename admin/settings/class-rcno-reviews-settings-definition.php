@@ -241,6 +241,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Should book reviews be shown in the RSS feed.?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+				'rcno_reviews_in_rest'           => array(
+					'name' => __( 'Reviews in REST API?', self::$plugin_name ),
+					'desc' => __( 'Enables basic support for reviews in the WordPress REST API.', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
 				'rcno_reviews_archive'          => array(
 					'name'    => __( 'Reviews archive page', self::$plugin_name ),
 					'desc'    => __( 'Show full content or excerpt on archive pages.', self::$plugin_name ),
