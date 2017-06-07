@@ -329,7 +329,7 @@ class Rcno_Template_Tags {
 	/**
 	 * Print taxonomy terms.
 	 *
-	 * @param        $taxonomy
+	 * @param string $taxonomy
 	 * @param bool   $label
 	 * @param string $sep
 	 */
@@ -372,6 +372,7 @@ class Rcno_Template_Tags {
 	/**
 	 * Renders the book description. An empty string if description is empty.
 	 *
+	 * @param int $review_id
 	 * @since 1.0.0
 	 * @return string
 	 */
@@ -391,7 +392,7 @@ class Rcno_Template_Tags {
 			}
 		}
 
-		// Return the rendered description
+		// Return the rendered description.
 		return $out;
 	}
 
@@ -526,6 +527,7 @@ class Rcno_Template_Tags {
 	 * Prints out the requested stored book metadata, accessed via specific meta-keys.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param int $review_id
 	 * @param string $meta_key
 	 * @param string $wrapper
@@ -545,6 +547,7 @@ class Rcno_Template_Tags {
 	 * Calculates the review scores.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param int $num
 	 * @param string $type
 	 * @param bool $stars
