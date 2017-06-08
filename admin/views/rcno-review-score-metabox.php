@@ -73,7 +73,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
                 <tr>
                     <td><input type="text" class="widefat" name="label[]" value="<?php if( $field['label'] !== '' ) echo esc_attr( $field['label'] ); ?>" /></td>
 
-                    <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" value="<?php if ( $field['score'] !== '' ) echo esc_attr( $field['score'] ); ?>" /></td>
+                    <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" value="<?php if ( $field['score'] !== '' ) echo esc_attr( $field['score'] ); ?>" /></td>
 
                     <td><a class="button remove-row" href="#">Remove</a></td>
                 </tr>
@@ -85,7 +85,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
             <tr>
                 <td><input type="text" class="widefat" name="label[]" /></td>
 
-                <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" /></td>
+                <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" /></td>
 
                 <td><a class="button remove-row" href="#">Remove</a></td>
             </tr>
@@ -95,14 +95,14 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
         <tr class="empty-row screen-reader-text">
             <td><input type="text" class="widefat" name="label[]" /></td>
 
-            <td><input type="number" min="0" max="10" step="0.1" class="widefat" name="score[]" /></td>
+            <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" /></td>
 
             <td><a class="button remove-row" href="#">Remove</a></td>
         </tr>
         </tbody>
 
     </table>
-        <p style="margin:0;font-size:10px;text-align:right;">Label: The name of criteria - Score: A number value between 0 - 10, in increments of 0.1</p>
+        <p style="margin:0;font-size:10px;text-align:right;">Label: The name of criteria - Score: A number value between 0 - 5, in increments of 0.1</p>
         <p><a id="add-row" class="button button-primary" href="#">Add Criteria</a></p>
 
     </div>

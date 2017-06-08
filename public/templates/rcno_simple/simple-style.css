@@ -11,6 +11,7 @@
 #rcno-review-score-box ul {
     list-style: none;
     clear: left;
+    padding: 1em 0 0 0;
 }
 
 #rcno-review-score-box .review-summary {

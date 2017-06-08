@@ -38,8 +38,6 @@ class Rcno_Template_Tags {
 	 */
 	protected $version;
 
-	private $rcno_review_score;
-
 
 	/**
 	 * The current version of the plugin.
@@ -49,6 +47,24 @@ class Rcno_Template_Tags {
 	 * @var      object    $public_rating    An instance of the Public Rating class.
 	 */
 	protected $public_rating;
+
+	/**
+	 * The current version of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $private_score    An array of all the private scoring criteria.
+	 */
+	protected $private_score;
+
+	/**
+	 * The current version of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      int    $private_rating    The rating from the 5 star metabox.
+	 */
+	protected $private_rating;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -166,6 +182,7 @@ class Rcno_Template_Tags {
 		}
 
 		$book_rating = (int) $review['rcno_admin_rating'][0];
+		$this->private_rating = $book_rating;
 
 		switch ( $book_rating ) {
 			case 5:
@@ -578,19 +595,19 @@ class Rcno_Template_Tags {
 			case 'stars' :
 
 				if ( false !== $stars ) {
-					if ( $num <= 2 ) {
+					if ( $num <= 1 ) {
 						$output = '<span class="badge-star" title="1 star"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
 					}
-					if ( $num > 2 && $num <= 4 ) {
+					if ( $num > 1 && $num <= 2 ) {
 						$output = '<span class="badge-star" title="2 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
 					}
-					if ( $num > 4 && $num <= 6 ) {
+					if ( $num > 2 && $num <= 3 ) {
 						$output = '<span class="badge-star" title="3 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
 					}
-					if ( $num > 6 && $num <= 8 ) {
+					if ( $num > 3 && $num <= 4 ) {
 						$output = '<span class="badge-star" title="4 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i></span>';
 					}
-					if ( $num > 8 && $num <= 10 ) {
+					if ( $num > 4 && $num <= 5 ) {
 						$output = '<span class="badge-star" title="5 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i></span>';
 					}
 				} else {
@@ -600,19 +617,19 @@ class Rcno_Template_Tags {
 				break;
 
 			case 'letter' :
-				if ( $num <= 2 ) {
+				if ( $num <= 1 ) {
 					$output = 'E';
 				}
-				if ( $num > 2 && $num <= 4 ) {
+				if ( $num > 1 && $num <= 2 ) {
 					$output = 'D';
 				}
-				if ( $num > 4 && $num <= 6 ) {
+				if ( $num > 2 && $num <= 3 ) {
 					$output = 'C';
 				}
-				if ( $num > 6 && $num <= 8 ) {
+				if ( $num > 3 && $num <= 4 ) {
 					$output = 'B';
 				}
-				if ( $num > 8 && $num <= 10 ) {
+				if ( $num > 4 && $num <= 5 ) {
 					$output = 'A';
 				}
 				break;
@@ -651,8 +668,8 @@ class Rcno_Template_Tags {
 		}
 
 		$rating_criteria_count = count( $rating_criteria );
-		$review_summary        = substr(wp_strip_all_tags($this->get_the_rcno_book_review_content( $review_id ), true), 0, 260) . '...'; // @TODO: Create review summary.
-		$review_box_title      = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ); // @TODO: Create review title.
+		$review_summary        = substr(wp_strip_all_tags($this->get_the_rcno_book_review_content( $review_id ), true), 0, 260) . '...';
+		$review_box_title      = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
 
 		$score_array = array();
 
@@ -660,11 +677,11 @@ class Rcno_Template_Tags {
 			$score_array[] = $criteria['score'];
 		}
 
+
 		$final_score = array_sum( $score_array );
 		$final_score = $final_score / $rating_criteria_count;
 		$final_score = number_format( $final_score, 1, '.', '' );
 
-		$this->rcno_review_score = $final_score;
 
 		$output = '';
 		$output .= '<div id="rcno-review-score-box" style="background:' . $background . '">';
@@ -680,7 +697,7 @@ class Rcno_Template_Tags {
 		$output .= '</div>';
 		$output .= '<ul>';
 		foreach ( $rating_criteria as $criteria ) {
-			$percentage_score = $criteria['score'] * 10;
+			$percentage_score = ( $criteria['score'] / 5 ) * 100;
 
 			if ( $criteria['label'] ) {
 				$output .= '<li>';
@@ -777,6 +794,25 @@ class Rcno_Template_Tags {
 	 *******************************************************************************/
 
 	/**
+	 * Gets the review criteria scores even if the box is disabled.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @return array
+	 */
+	public function rcno_get_review_score( $review_id ) {
+		$review_scores = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
+		$scores = array();
+
+		if ( $review_scores ) {
+			foreach ( $review_scores as $score ) {
+				$scores[] = $score['score'];
+			}
+		}
+		return $scores;
+	}
+
+	/**
 	 * Generates the markup for the 'Book' schema type in the JSON+LD format.
 	 *
 	 * @since 1.0.0
@@ -850,6 +886,7 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_review_schema_data( $review_id ) {
 
 		$this->public_rating = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
+		$this->private_score = $this->rcno_get_review_score( $review_id );
 
 		$out = '';
 		$out .= '<script type="application/ld+json">';
@@ -891,18 +928,27 @@ class Rcno_Template_Tags {
 
 		$out .= '}';
 
-		$out .= ', "reviewRating": {';
-		$out .= '"@type":"Rating"';
-		$out .= ', "worstRating": 1';
-		$out .= ', "bestRating": 5';
-		$out .= ', "ratingValue": ' . 3.7;
-		$out .= '}';
+		if ( $this->private_score ) {
+			$out .= ', "reviewRating": {';
+			$out .= '"@type": "Rating"';
+			$out .= ', "worstRating": ' . min( $this->private_score );
+			$out .= ', "bestRating": '  . max( $this->private_score );
+			$out .= ', "ratingValue": ' . array_sum( $this->private_score ) / count( $this->private_score );
+			$out .= '}';
+		} else {
+			$out .= ', "reviewRating": {';
+			$out .= '"@type": "Rating"';
+			$out .= ', "worstRating": ' . 1;
+			$out .= ', "bestRating": '  . 5;
+			$out .= ', "ratingValue": ' . $this->private_rating;
+			$out .= '}';
+		}
 
 		if( $this->public_rating->rcno_rating_info( 'count' ) > 0 ) {
 			$out .= ', "aggregateRating": {';
 			$out .= '"@type":"AggregateRating"';
 			$out .= ', "worstRating": ' . $this->public_rating->rcno_rating_info( 'min' );
-			$out .= ', "bestRating": ' . $this->public_rating->rcno_rating_info( 'max' );
+			$out .= ', "bestRating": '  . $this->public_rating->rcno_rating_info( 'max' );
 			$out .= ', "ratingValue": ' . $this->public_rating->rcno_rating_info( 'avg' );
 			$out .= ', "reviewCount": ' . $this->public_rating->rcno_rating_info( 'count' );
 			$out .= '}';
