@@ -71,7 +71,7 @@ class Rcno_Admin_ISBN {
 	 * @param $review
 	 */
 	public function do_rcno_book_isbn_metabox( $review ) {
-		include __DIR__ . '/views/rcno-isbn-metabox.php';
+		include __DIR__ . '/views/rcno-reviews-isbn-metabox.php';
 	}
 
 	/**

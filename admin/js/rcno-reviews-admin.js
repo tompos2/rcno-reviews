@@ -28,6 +28,16 @@
      * Although scripts in the WordPress core, Plugins and Themes may be
      * practising this, we should strive to set a better example in our own work.
      */
+
+    $( window ).load(function() {
+
+        $('#rcno_genre-add-toggle').hide();
+        $('#rcno_genre-add').removeClass('wp-hidden-child');
+        $('#newrcno_genre').val('');
+
+    });
+
+
     $(function() { //@TODO: Check to see if this file upload feature needs sanitation.
         $('.rcno_reviews_settings_upload_button').click(function(e) {
             e.preventDefault();

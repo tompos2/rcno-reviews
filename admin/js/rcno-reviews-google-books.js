@@ -55,14 +55,34 @@
                             book.items["0"].volumeInfo.categories["0"].replace( ' ', ', ' )
                         );
 
+                        $('#newrcno_genre').val(
+                            book.items["0"].volumeInfo.categories["0"].replace( ' ', ', ' )
+                        );
+
                         $('#rcno_book_publisher').val(
                             book.items["0"].volumeInfo.publisher
+                        );
+
+                        $('#rcno_book_pub_date').val(
+                            book.items["0"].volumeInfo.publishedDate
+                        );
+
+                        $('#rcno_book_page_count').val(
+                            book.items["0"].volumeInfo.pageCount
+                        );
+
+                        $('#rcno_book_isbn13').val(
+                            book.items["0"].volumeInfo.industryIdentifiers[1].identifier
+                        );
+
+                        tinymce.get('rcno_book_description').setContent(
+                            book.items["0"].volumeInfo.description
                         );
 
                     }
                 },
                 error: function () {
-
+                    $('.book-isbn-metabox-error').show();
                 }
             });
 
