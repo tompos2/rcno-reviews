@@ -73,17 +73,22 @@ class Rcno_Reviews_Get_Templates {
 			$params[ trim( $param[0] ) ] = trim( $param[1] );
 		}
 
-		$this->layouts[ $file ]['description'] = $params['Description'];
-		$this->layouts[ $file ]['title']       = $params['Layout Name'];
-		$this->layouts[ $file ]['author']      = $params['Author'];
-		$this->layouts[ $file ]['author_mail'] = $params['Author Mail'];
-		$this->layouts[ $file ]['author_url']  = $params['Author URL'];
-		$this->layouts[ $file ]['version']     = $params['Version'];
+		$this->layouts[ $file ]['description'] = isset( $params['Description'] ) ? $params['Description'] : '';
+		$this->layouts[ $file ]['title']       = isset( $params['Layout Name'] ) ? $params['Layout Name'] : '';
+		$this->layouts[ $file ]['author']      = isset( $params['Author'] )      ? $params['Author']      : '';
+		$this->layouts[ $file ]['author_mail'] = isset( $params['Author Mail'] ) ? $params['Author Mail'] : '';
+		$this->layouts[ $file ]['author_url']  = isset( $params['Author URL'] )  ? $params['Author URL']  : '';
+		$this->layouts[ $file ]['version']     = isset( $params['Version'] )     ? $params['Version']     : '';
 		if ( file_exists( $dir_name . $file . '/logo.png' ) ) {
 			$this->layouts[ $file ]['logo'] = $this->layouts[ $file ]['url'] . '/logo.png';
+		} else {
+			$this->layouts[ $file ]['logo'] = '';
 		}
+
 		if ( file_exists( $dir_name . $file . '/screenshot.png' ) ) {
 			$this->layouts[ $file ]['screenshot'] = $this->layouts[ $file ]['url'] . '/screenshot.png';
+		} else {
+			$this->layouts[ $file ]['screenshot'] = '';
 		}
 
 	}

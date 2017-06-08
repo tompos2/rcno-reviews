@@ -64,8 +64,8 @@ class Rcno_Reviews_Settings_Definition {
 	static public function get_tabs() {
 
 		$tabs                   = array();
-		$tabs['default_tab']    = __( 'Default Tab', self::$plugin_name );
-		$tabs['second_tab']     = __( 'Second Tab', self::$plugin_name );
+		//$tabs['default_tab']    = __( 'Default Tab', self::$plugin_name );
+		//$tabs['second_tab']     = __( 'Second Tab', self::$plugin_name );
 		$tabs['general_tab']    = __( 'General', self::$plugin_name );
 		$tabs['taxonomy_tab']   = __( 'Taxonomies', self::$plugin_name );
 		$tabs['components_tab'] = __( 'Components', self::$plugin_name );
