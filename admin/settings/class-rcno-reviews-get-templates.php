@@ -13,7 +13,7 @@ class Rcno_Reviews_Get_Templates {
 	/**
 	 * Create a list of available layouts locally and globally.
 	 */
-	public function get_layouts_list() { //@TODO: Find a clean way to invoke this, or move it.
+	public function get_layouts_list() {
 
 		// First create a list of all globally available layouts.
 		$dir_name = WP_PLUGIN_DIR . '/rcno-reviews/public/templates/';

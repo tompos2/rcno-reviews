@@ -1,7 +1,6 @@
 <?php
 /**
  * Render a list of all terms of this taxonomy
- * @todo: create a multi-column layout
  */
 
 $template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );

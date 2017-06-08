@@ -43,4 +43,8 @@ $default_options = array(
 	'rcno_review_template'            => 'rcno_default',
 	'rcno_excerpt_read_more'          => 'Read more',
 	'rcno_excerpt_word_count'         => '55',
+
+	'rcno_enable_goodreads'     => '',
+	'rcno_goodreads_key'        => '',
+	'rcno_goodreads_secret'     => '',
 );

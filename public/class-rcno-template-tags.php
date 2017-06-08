@@ -40,6 +40,16 @@ class Rcno_Template_Tags {
 
 	private $rcno_review_score;
 
+
+	/**
+	 * The current version of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      object    $public_rating    An instance of the Public Rating class.
+	 */
+	protected $public_rating;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -796,18 +806,20 @@ class Rcno_Template_Tags {
 		$out .= ', "bookEdition": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ) . '"';
 		$out .= ', "bookFormat": "http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ) . '"';
 		$out .= ', "numberOfPages": ' . (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
-		$out .= ', "potentialAction": {'; // Begin potentialAction.
-		$out .= '"@type": "ReadAction"';
-		$out .= ', "target": {'; // Begin target.
-		$out .= '"@type": "EntryPoint"';
-		$out .= ', "urlTemplate": "http://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true"';
-		$out .= ', "actionPlatform": ['; // Begin actionPlatform.
-		$out .= '"http://schema.org/DesktopWebPlatform"';
-		$out .= ', "http://schema.org/IOSPlatform"';
-		$out .= ', "http://schema.org/AndroidPlatform"';
-		$out .= ']'; // End actionPlatform.
-		$out .= '}'; // End target.
-		$out .= '}'; // End potentialAction.
+
+//		$out .= ', "potentialAction": {'; // Begin potentialAction.
+//		$out .= '"@type": "ReadAction"';
+//		$out .= ', "target": {'; // Begin target.
+//		$out .= '"@type": "EntryPoint"';
+//		$out .= ', "urlTemplate": "http://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true"';
+//		$out .= ', "actionPlatform": ['; // Begin actionPlatform.
+//		$out .= '"http://schema.org/DesktopWebPlatform"';
+//		$out .= ', "http://schema.org/IOSPlatform"';
+//		$out .= ', "http://schema.org/AndroidPlatform"';
+//		$out .= ']'; // End actionPlatform.
+//		$out .= '}'; // End target.
+//		$out .= '}'; // End potentialAction.
+
 		$out .= '}'; // End First example.
 		$out .= ']'; // End workExample.
 		$out .= '}';
@@ -836,6 +848,8 @@ class Rcno_Template_Tags {
 	 * @return string
 	 */
 	public function get_the_rcno_review_schema_data( $review_id ) {
+
+		$this->public_rating = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
 
 		$out = '';
 		$out .= '<script type="application/ld+json">';
@@ -884,14 +898,15 @@ class Rcno_Template_Tags {
 		$out .= ', "ratingValue": ' . 3.7;
 		$out .= '}';
 
-		$out .= ', "aggregateRating": {';
-		$out .= '"@type":"AggregateRating"';
-		$out .= ', "worstRating": 1';
-		$out .= ', "bestRating": 5';
-		$out .= ', "ratingValue": ' . 4.5;
-		$out .= ', "reviewCount": ' . 103;
-		$out .= '}';
-
+		if( $this->public_rating->rcno_rating_info( 'count' ) > 0 ) {
+			$out .= ', "aggregateRating": {';
+			$out .= '"@type":"AggregateRating"';
+			$out .= ', "worstRating": ' . $this->public_rating->rcno_rating_info( 'min' );
+			$out .= ', "bestRating": ' . $this->public_rating->rcno_rating_info( 'max' );
+			$out .= ', "ratingValue": ' . $this->public_rating->rcno_rating_info( 'avg' );
+			$out .= ', "reviewCount": ' . $this->public_rating->rcno_rating_info( 'count' );
+			$out .= '}';
+		}
 
 		$out .= '}';
 		$out .= '</script>';
@@ -919,35 +934,9 @@ class Rcno_Template_Tags {
 	 * @return string
 	 */
 	public function get_the_rcno_alphabet_nav_bar( $letters = array() ) {
+
 		// An array with the (complete) alphabet.
-		$alphabet = array(
-			'A',
-			'B',
-			'C',
-			'D',
-			'E',
-			'F',
-			'G',
-			'H',
-			'I',
-			'J',
-			'K',
-			'L',
-			'M',
-			'N',
-			'O',
-			'P',
-			'Q',
-			'R',
-			'S',
-			'T',
-			'U',
-			'V',
-			'W',
-			'X',
-			'Y',
-			'Z'
-		);
+		$alphabet = range( 'A', 'Z' );
 
 		$out = '';
 
@@ -1002,7 +991,5 @@ class Rcno_Template_Tags {
 			return false;
 		}
 	}
-
-
 
 }

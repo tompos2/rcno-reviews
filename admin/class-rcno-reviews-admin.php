@@ -283,7 +283,7 @@ class Rcno_Reviews_Admin {
 	 * @uses    register_taxonomy()
 	 * @return  void
 	 */
-	public function rcno_custom_taxonomy() { // @TODO: Complete the custom taxonomy feature.
+	public function rcno_custom_taxonomy() {
 
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection', array( 'author' => 'Author' ) );
 		$keys = array_keys( $custom_taxonomies );

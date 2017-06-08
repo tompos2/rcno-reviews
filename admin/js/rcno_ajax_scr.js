@@ -91,7 +91,6 @@ var rcnoReviewSc;
 
             /* Button to open dialog */
             $('body').on('click', '#rcno-add-review-button', function(event) {
-                console.log('Click'); //TODO: Remove me.
                 editor_id = jQuery('#rcno-add-review-button').attr( "data_editor" );
                 window.rcnoReviewSc.open( editor_id );
             });

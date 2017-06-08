@@ -41,7 +41,7 @@ class Rcno_GoodReads_API {
 	 * @param string $key API KEY
 	 */
 	public function __construct() {
-		$this->key = Rcno_Reviews_Option::get_option( 'rcno_goodreads_key' );
+		$this->key = Rcno_Reviews_Option::get_option( 'rcno_goodreads_key', '' );
 	}
 
 
