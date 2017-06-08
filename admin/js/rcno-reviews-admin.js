@@ -28,18 +28,18 @@
      * Although scripts in the WordPress core, Plugins and Themes may be
      * practising this, we should strive to set a better example in our own work.
      */
-    $(function () { //@TODO: Check to see if this file upload feature needs sanitation.
-        $('.rcno_reviews_settings_upload_button').click(function (e) {
+    $(function() { //@TODO: Check to see if this file upload feature needs sanitation.
+        $('.rcno_reviews_settings_upload_button').click(function(e) {
             e.preventDefault();
 
             var custom_uploader = wp.media({
-                title: 'Custom File',
-                button: {
-                    text: 'Upload File'
-                },
-                multiple: false  // Set this to true to allow multiple files to be selected
-            })
-                .on('select', function () {
+                    title: 'Custom File',
+                    button: {
+                        text: 'Upload File'
+                    },
+                    multiple: false // Set this to true to allow multiple files to be selected
+                })
+                .on('select', function() {
                     var attachment = custom_uploader.state().get('selection').first().toJSON();
                     $('.rcno_reviews_upload_field').val(attachment.url); //@TODO: The classes used in this function need to be dynamic
 
@@ -48,12 +48,12 @@
         });
     });
 
-    $(function () {
+    $(function() {
         $('.rcno-color-input').wpColorPicker();
 
     });
 
-    $(function () {
+    $(function() {
         $('.rcno_review_template img').click(function() {
             $(this).addClass('checked');
         });
@@ -61,17 +61,33 @@
 
     $(function() {
 
-        var author_tax = $( '#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]' );
+        var author_tax = $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]');
 
         // The author taxonomy must always be enabled.
-        if ( author_tax.is( ':checked' ) ) {
-            author_tax.attr( 'disabled', true );
+        if (author_tax.is(':checked')) {
+            author_tax.attr('disabled', true);
         }
 
         // The author taxonomy can't be hierarchical.
-        $( '#rcno_reviews_settings\\[rcno_author_hierarchical\\]' ).attr( 'disabled', true );
+        $('#rcno_reviews_settings\\[rcno_author_hierarchical\\]').attr('disabled', true);
+        $('#rcno_reviews_settings\\[rcno_series_hierarchical\\]').attr('disabled', true);
         //$( '#rcno_reviews_settings\\[rcno_show_isbn\\]' ).attr( 'disabled', true );
 
+    });
+
+    $(function() {
+        $('.rcno-reset-button').on('click', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'post',
+                url: my_script_vars.ajaxURL,
+                data: {
+                    action: 'reset_all_options',
+                    reset_nonce: my_script_vars.rcno_reset_nonce
+                }
+            });
+        });
     });
 
     function renderMediaUploader() {
@@ -82,7 +98,7 @@
          * If an instance of file_frame already exists, then we can open it
          * rather than creating a new instance.
          */
-        if ( undefined !== file_frame ) {
+        if (undefined !== file_frame) {
 
             file_frame.open();
             return;
@@ -101,8 +117,8 @@
          * We're also not allowing the user to select more than one image.
          */
         file_frame = wp.media.frames.file_frame = wp.media({
-            frame:    'post',
-            state:    'insert',
+            frame: 'post',
+            state: 'insert',
             multiple: false
         });
 
@@ -114,34 +130,34 @@
          * the file_frame, we need to make sure that the handler is attached
          * to the insert event.
          */
-        file_frame.on( 'insert', function() {
+        file_frame.on('insert', function() {
 
             // Read the JSON data returned from the Media Uploader.
             var json = file_frame.state().get('selection').first().toJSON();
 
             // First, make sure that we have the URL of an image to display.
-            if ( 0 > $.trim( json.url.length ) ) {
+            if (0 > $.trim(json.url.length)) {
                 return;
             }
 
             // After that, set the properties of the image and display it.
-            $( '#rcno-reviews-book-cover-container' )
-                .children( 'img' )
-                .attr( 'src', json.url )
-                .attr( 'alt', json.caption )
-                .attr( 'title', json.title )
+            $('#rcno-reviews-book-cover-container')
+                .children('img')
+                .attr('src', json.url)
+                .attr('alt', json.caption)
+                .attr('title', json.title)
                 .show()
                 .parent()
-                .removeClass( 'hidden' );
+                .removeClass('hidden');
 
             // Next, hide the anchor responsible for allowing the user to select an image
-            $( '#rcno-add-book-cover' ).hide();
-            $( '#rcno-remove-book-cover' ).parent().removeClass( 'hidden' );
+            $('#rcno-add-book-cover').hide();
+            $('#rcno-remove-book-cover').parent().removeClass('hidden');
 
 
-            $( '#rcno-reviews-book-cover-src' ).val( json.url );
-            $( '#rcno-reviews-book-cover-title' ).val( json.title );
-            $( '#rcno-reviews-book-cover-alt' ).val( json.alt );
+            $('#rcno-reviews-book-cover-src').val(json.url);
+            $('#rcno-reviews-book-cover-title').val(json.title);
+            $('#rcno-reviews-book-cover-alt').val(json.alt);
 
         });
 
@@ -150,11 +166,11 @@
 
     }
 
-    function resetUploadForm( $ ) {
+    function resetUploadForm($) {
 
         // First, we'll hide the image
-        $( '#rcno-reviews-book-cover-container' )
-            .children( 'img' )
+        $('#rcno-reviews-book-cover-container')
+            .children('img')
             .hide();
 
         $('#rcno-add-book-cover')
@@ -162,27 +178,27 @@
             .show();
 
         // Finally, we add the 'hidden' class back to this anchor's parent
-        $( '#rcno-remove-book-cover' )
-            .addClass( 'hidden' );
+        $('#rcno-remove-book-cover')
+            .addClass('hidden');
 
     }
 
-    function renderFeaturedImage( $ ) {
+    function renderFeaturedImage($) {
 
         /* If a thumbnail URL has been associated with this image
          * Then we need to display the image and the reset link.
          */
-        if ( '' !== $.trim ( $( '#rcno-reviews-book-cover-src' ).val() ) ) {
+        if ('' !== $.trim($('#rcno-reviews-book-cover-src').val())) {
 
-            $( '#rcno-reviews-book-cover-container' ).removeClass( 'hidden' );
+            $('#rcno-reviews-book-cover-container').removeClass('hidden');
 
-            $( '#rcno-add-book-cover' )
+            $('#rcno-add-book-cover')
                 .parent()
                 .hide();
 
-            $( '#rcno-remove-book-cover' )
+            $('#rcno-remove-book-cover')
                 .parent()
-                .removeClass( 'hidden' );
+                .removeClass('hidden');
 
         }
 
@@ -190,51 +206,27 @@
 
     $(function() {
 
-        renderFeaturedImage( $ );
+        renderFeaturedImage($);
 
-        $( '#rcno-add-book-cover' ).on( 'click', function( e ) {
-          e.preventDefault();
+        $('#rcno-add-book-cover').on('click', function(e) {
+            e.preventDefault();
 
             // Display the media uploader.
             renderMediaUploader();
         });
 
-        $( '#rcno-remove-book-cover' ).on( 'click', function( e ) {
+        $('#rcno-remove-book-cover').on('click', function(e) {
             e.preventDefault();
 
             // Remove the image, toggle the anchors.
-            resetUploadForm( $ );
+            resetUploadForm($);
 
         });
     });
 
     $(function() {
+
         $('rcno-isbn-fetch').on('click', function(e) {
-            e.preventDefault();
-
-            var book_isbn = $('#rcno_book_isbn').val();
-            var google_url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
-            var api_url = google_url + book_isbn;
-
-            $.ajax({
-                url: api_url,
-                type: 'GET',
-                success: function (book) {
-                    console.log(book);
-                },
-                error: function () {
-
-                }
-            });
-
-        });
-
-
-    });
-
-    $(function() {
-
-        $('.rcno-isbn-fetch').on('click', function(e) {
             e.preventDefault();
 
             $.sanitize = function(input) {
@@ -288,7 +280,7 @@
                             book['GoodreadsResponse']['book']['title']
                         );
 
-                        if ( typeof book['GoodreadsResponse']['book']['work']['original_title'] === 'object' ) {
+                        if (typeof book['GoodreadsResponse']['book']['work']['original_title'] === 'object') {
                             $('#rcno_book_title').val(
                                 book['GoodreadsResponse']['book']['title']
                             );
@@ -298,7 +290,7 @@
                             );
                         }
 
-                        if( book['GoodreadsResponse']['book']['description'] !== null ) {
+                        if (book['GoodreadsResponse']['book']['description'] !== null) {
                             tinymce.get('rcno_book_description').setContent(
                                 book['GoodreadsResponse']['book']['description']
                             );
@@ -308,15 +300,15 @@
                             book['GoodreadsResponse']['book']['authors']['author']['name']
                         );
 
-                        if ( typeof book['GoodreadsResponse']['book']['popular_shelves'] === 'object' ) {
+                        if (typeof book['GoodreadsResponse']['book']['popular_shelves'] === 'object') {
                             $('#new-tag-rcno_genre').val(
                                 $.upCase(book['GoodreadsResponse']['book']['popular_shelves']['shelf'][0]['name'])
                             );
                         }
 
-                        if( typeof book['GoodreadsResponse']['book']['series_works'] === 'object' ){
+                        if (typeof book['GoodreadsResponse']['book']['series_works'] === 'object') {
                             $('#new-tag-rcno_series').val(
-                                $.sanitize( book['GoodreadsResponse']['book']['series_works']['series_work']['series']['title'] )
+                                $.sanitize(book['GoodreadsResponse']['book']['series_works']['series_work']['series']['title'])
                             );
                         }
 
@@ -325,9 +317,9 @@
                         );
 
                         $('#rcno_book_pub_date').val(
-                            book['GoodreadsResponse']['book']['publication_month']
-                            + '/' + book['GoodreadsResponse']['book']['publication_day']
-                            + '/' + book['GoodreadsResponse']['book']['publication_year']
+                            book['GoodreadsResponse']['book']['publication_month'] +
+                            '/' + book['GoodreadsResponse']['book']['publication_day'] +
+                            '/' + book['GoodreadsResponse']['book']['publication_year']
                         );
 
                         $('#rcno_book_pub_format').val(

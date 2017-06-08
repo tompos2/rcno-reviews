@@ -23,7 +23,7 @@
 	<?php settings_fields( 'rcno_reviews_settings' ); ?>
 	<?php do_settings_sections( 'rcno_reviews_settings_' . $active_tab ); ?>
 	<?php submit_button(); ?>
-    <button class="button reset-button">Reset Settings</button>
+    <button class="button rcno-reset-button">Reset Settings</button>
 </form>
 <br class="clear" />
 

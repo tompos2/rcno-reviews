@@ -256,6 +256,8 @@ class Rcno_Reviews {
 		$this->loader->add_filter( 'admin_head', $plugin_admin,  'rcno_reviews_help_tab' );
 		$this->loader->add_action( 'contextual_help', $plugin_admin, 'rcno_add_help_text', 10, 3 );
 
+		$this->loader->add_action( 'wp_ajax_reset_all_options', $plugin_admin, 'reset_all_options' );
+
 	}
 
 	/**

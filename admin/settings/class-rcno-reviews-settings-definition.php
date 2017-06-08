@@ -451,6 +451,7 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'checkbox'
 				),
 			),
+			// Templates tab.
 			'templates_tab'  => array(
 
 				'rcno_review_template' => array(
