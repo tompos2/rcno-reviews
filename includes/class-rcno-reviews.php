@@ -81,6 +81,7 @@ class Rcno_Reviews {
 		$this->define_widget_hooks();
 
 		$this->define_rest_hooks();
+		$this->define_gr_hooks();
 
 		$this->define_shortcodes();
 
@@ -153,7 +154,6 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-settings.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-goodreads-api.php';
-		new Rcno_GoodReads_API(); // @TODO: We can do this better.
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-rest-api.php';
 
@@ -289,11 +289,14 @@ class Rcno_Reviews {
 	}
 
 	private function define_template_hooks() {
+
 		$template_hooks = new Rcno_Template_Tags( $this->get_plugin_name(), $this->get_version() );
 		$template_hooks->include_functions_file();
+
 	}
 
 	private function define_widget_hooks() {
+
 		$tag_cloud = new Rcno_Reviews_Tag_Cloud();
 		$this->loader->add_action( 'widgets_init', $tag_cloud, 'rcno_register_tag_cloud_widget' );
 
@@ -319,6 +322,15 @@ class Rcno_Reviews {
 	}
 
 
+	private function define_gr_hooks() {
+
+		$goodreads = new Rcno_Goodreads_API();
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $goodreads, 'rcno_enqueue_gr_scripts' );
+		$this->loader->add_action( 'wp_ajax_save_post_meta', $goodreads, 'gr_ajax_save_post_meta' );
+	}
+
+
 	private function define_shortcodes() {
 		
 		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
@@ -335,6 +347,7 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_button_scl' );
 		$this->loader->add_action( 'in_admin_footer',   $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
 		$this->loader->add_action( 'admin_enqueue_scripts',   $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
+
 	}
 
 	private function define_public_ratings() {

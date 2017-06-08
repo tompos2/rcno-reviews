@@ -41,9 +41,24 @@ class Rcno_GoodReads_API {
 	 * @param string $key API KEY
 	 */
 	public function __construct() {
-		$this->key = "8bQh2W6yuSRpi9Ejs6xINw"; //@TODO: Get via a menu option.
-		add_action( 'wp_ajax_save_post_meta', array( $this, 'ajax_save_post_meta' ) );
+		$this->key = Rcno_Reviews_Option::get_option( 'rcno_goodreads_key' );
 	}
+
+
+	public function rcno_enqueue_gr_scripts( $hook ) {
+		global $post;
+
+		if ( $hook === 'post-new.php' || $hook === 'post.php' ) {
+			if ( 'rcno_review' === $post->post_type ) {
+				wp_enqueue_script( 'goodreads-script', plugin_dir_url( __FILE__ ) . '../admin/js/rcno-goodreads-api.js', array( 'jquery' ), '1.0.0', true );
+				wp_localize_script( 'goodreads-script', 'gr_options', array(
+					'api_key' => $this->key,
+				) );
+			}
+		}
+
+	}
+
 
 	/**
 	 * Generate URL for Request
@@ -454,7 +469,7 @@ class Rcno_GoodReads_API {
 		return $get ? $get->user : $get;
 	}
 
-	public function ajax_save_post_meta(){
+	public function gr_ajax_save_post_meta(){
 
 		$review_id = (int) $_POST['review_id'];
 		$gr_isbn   = (int) $_POST['gr_isbn'];
