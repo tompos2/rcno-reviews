@@ -588,6 +588,8 @@ class Rcno_Template_Tags {
 	 */
 	private function rcno_calc_review_score( $num, $type, $stars = false ) {
 
+		$color = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_accent_2', '#ffd700' );
+
 		$output = '';
 
 		switch ( $type ) {
@@ -596,19 +598,19 @@ class Rcno_Template_Tags {
 
 				if ( false !== $stars ) {
 					if ( $num <= 1 ) {
-						$output = '<span class="badge-star" title="1 star"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+						$output = '<span class="badge-star" title="1 star" style="color:' . $color . '"><span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></span>';
 					}
 					if ( $num > 1 && $num <= 2 ) {
-						$output = '<span class="badge-star" title="2 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+						$output = '<span class="badge-star" title="2 stars" style="color:' . $color . '"><span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span></span>';
 					}
 					if ( $num > 2 && $num <= 3 ) {
-						$output = '<span class="badge-star" title="3 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i><i class="dashicons dashicons-star-empty"></i></span>';
+						$output = '<span class="badge-star" title="3 stars" style="color:' . $color . '"><span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span></span>';
 					}
 					if ( $num > 3 && $num <= 4 ) {
-						$output = '<span class="badge-star" title="4 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-empty"></i></span>';
+						$output = '<span class="badge-star" title="4 stars" style="color:' . $color . '"><span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span></span>';
 					}
 					if ( $num > 4 && $num <= 5 ) {
-						$output = '<span class="badge-star" title="5 stars"><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i><i class="dashicons dashicons-star-filled"></i></span>';
+						$output = '<span class="badge-star" title="5 stars" style="color:' . $color . '"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></span>';
 					}
 				} else {
 					$output = $num;
@@ -687,7 +689,7 @@ class Rcno_Template_Tags {
 		$output .= '<div id="rcno-review-score-box" style="background:' . $background . '">';
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score" style="background:' . $accent . '">';
-		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, false ) . '</span>';
+		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
 		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
@@ -707,7 +709,7 @@ class Rcno_Template_Tags {
 			$output .= '<span class="score-bar">' . $criteria['label'] . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';
-			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type, false );
+			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type, true );
 			$output .= '</span>';
 			$output .= '</div>';
 			$output .= '</li>';

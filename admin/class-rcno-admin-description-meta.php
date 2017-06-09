@@ -52,7 +52,7 @@ class Rcno_Admin_Description_Meta {
 		// Add editor metabox for description
 		add_meta_box(
 			'rcno_book_description_metabox',
-			__( 'Book Description', 'rcno-reviews' ),
+			__( 'Book Description/Synopsis', 'rcno-reviews' ),
 			array( $this, 'do_rcno_book_description_metabox' ),
 			'rcno_review',
 			'normal',

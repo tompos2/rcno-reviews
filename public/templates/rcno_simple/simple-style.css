@@ -49,8 +49,8 @@
     top: 6px;
 }
 
-#rcno-review-score-box span.badge-star {
-    color: #FFC107;
+#rcno-review-score-box .overall-score span.badge-star {
+    font-size: 21px;
 }
 
 #rcno-review-score-box .review-summary .overall-score {

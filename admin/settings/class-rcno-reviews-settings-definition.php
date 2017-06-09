@@ -422,8 +422,13 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'color'
 				),
 				'rcno_show_review_score_box_accent'    => array(
-					'name' => __( 'Accent Color', self::$plugin_name ),
-					'desc' => __( 'Accent color for the review score box?', self::$plugin_name ),
+					'name' => __( 'Accent Color 1', self::$plugin_name ),
+					'desc' => __( 'The first accent color for the review score box?', self::$plugin_name ),
+					'type' => 'color'
+				),
+				'rcno_show_review_score_box_accent_2'    => array(
+					'name' => __( 'Accent Color 2', self::$plugin_name ),
+					'desc' => __( 'The second accent color for the review score box?', self::$plugin_name ),
 					'type' => 'color'
 				),
 
