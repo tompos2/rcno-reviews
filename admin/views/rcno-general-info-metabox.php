@@ -9,13 +9,22 @@
  * @subpackage Rcno_Reviews/admin/views
  */
 
-$book_title     = get_post_meta( $review->ID, 'rcno_book_title', true );
+
 
 ?>
 
 <div class="book-general-info-metaboxes">
 
     <div class="book-general-metabox-1">
+
+	    <?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_publisher' ) ) : ?>
+            <div class="book-title">
+			    <?php $book_title= get_post_meta( $review->ID, 'rcno_book_title', true ); ?>
+                <label class="rcno_book_title_label" for="rcno_book_title"><?php _e( 'Title', 'rcno-reviews' ) ?></label>
+                <input type="text" name="rcno_book_title" id="rcno_book_title" value="<?php echo sanitize_text_field( $book_title ); ?>" />
+	            <?php wp_nonce_field( 'rcno_save_book_title_metadata', 'rcno_general_title_nonce' ); ?>
+            </div>
+	    <?php endif; ?>
 
 	    <?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_publisher' ) ) : ?>
             <div class="publisher-info">
@@ -62,15 +71,6 @@ $book_title     = get_post_meta( $review->ID, 'rcno_book_title', true );
             </div>
 	    <?php endif; ?>
 
-	    <?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_gr_rating' ) ) : ?>
-        <div class="publication-gr-review">
-            <?php $gr_review = get_post_meta( $review->ID, 'rcno_book_gr_review', true ); ?>
-            <label class="rcno_book_gr_review" for="rcno_book_gr_review"><?php _e( 'GoodReads Average', 'rcno-reviews' ) ?></label>
-            <input type="text" name="rcno_book_gr_review" id="rcno_book_gr_review" size="20" value="<?php echo sanitize_text_field( $gr_review ); ?>" />
-            <?php wp_nonce_field( 'rcno_save_book_gr_review_metadata', 'rcno_general_gr_review_nonce' ); ?>
-        </div>
-	    <?php endif; ?>
-
     </div>
 
     <div class="book-general-metabox-2">
@@ -102,6 +102,15 @@ $book_title     = get_post_meta( $review->ID, 'rcno_book_title', true );
             </div>
         <?php endif; ?>
 
+	    <?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_gr_rating' ) ) : ?>
+            <div class="publication-gr-review">
+			    <?php $gr_review = get_post_meta( $review->ID, 'rcno_book_gr_review', true ); ?>
+                <label class="rcno_book_gr_review" for="rcno_book_gr_review"><?php _e( 'Average', 'rcno-reviews' ) ?></label>
+                <input type="text" name="rcno_book_gr_review" id="rcno_book_gr_review" size="20" value="<?php echo sanitize_text_field( $gr_review ); ?>" />
+			    <?php wp_nonce_field( 'rcno_save_book_gr_review_metadata', 'rcno_general_gr_review_nonce' ); ?>
+            </div>
+	    <?php endif; ?>
+
 	    <?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_gr_url' ) ) : ?>
             <div class="publication-gr-url">
                 <?php $gr_url = get_post_meta( $review->ID, 'rcno_book_gr_url', true ); ?>
@@ -112,8 +121,5 @@ $book_title     = get_post_meta( $review->ID, 'rcno_book_title', true );
 	    <?php endif; ?>
 
     </div>
-
-    <input type="hidden" name="rcno_book_title" id="rcno_book_title" value="<?php echo sanitize_text_field( $book_title ); ?>" />
-	<?php wp_nonce_field( 'rcno_save_book_title_metadata', 'rcno_general_title_nonce' ); ?>
 
 </div>

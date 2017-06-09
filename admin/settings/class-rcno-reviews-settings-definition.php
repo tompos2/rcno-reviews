@@ -501,12 +501,12 @@ class Rcno_Reviews_Settings_Definition {
 				'rcno_goodreads_key'      => array(
 					'name' => __( 'Goodreads® API Key', self::$plugin_name ),
 					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
-					'type' => 'text'
+					'type' => 'password'
 				),
 				'rcno_goodreads_secret'   => array(
 					'name' => __( 'Goodreads® API Secret', self::$plugin_name ),
 					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
-					'type' => 'text'
+					'type' => 'password'
 				),
 
 			)
