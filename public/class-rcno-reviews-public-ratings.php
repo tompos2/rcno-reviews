@@ -51,13 +51,10 @@ class Rcno_Reviews_Public_Rating {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-
+	public function __construct( $plugin_name, $version ) {		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
-
 
 	/**
 	 * Enqueues the public facing stylesheet for the comment ratings.

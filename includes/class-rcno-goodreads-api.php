@@ -46,6 +46,12 @@ class Rcno_GoodReads_API {
 
 
 	public function rcno_enqueue_gr_scripts( $hook ) {
+
+		// Disables the enqueuing of the Goodreads script on review edit screen.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_goodreads' ) ) {
+			return false;
+		}
+
 		global $post;
 
 		if ( $hook === 'post-new.php' || $hook === 'post.php' ) {

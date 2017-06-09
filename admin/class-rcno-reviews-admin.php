@@ -227,11 +227,7 @@ class Rcno_Reviews_Admin {
 		$opts['show_in_nav_menu']      = true;
 		$opts['show_ui']               = true;
 
-		//$opts['show_in_rest']          = true;
-		//$opts['rest_base']             = $cpt_slug;
-		//$opts['rest_controller_class'] = 'WP_REST_Posts_Controller';
-
-		$opts['supports']              = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments' );
+		$opts['supports']              = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments', 'revisions' );
 		$opts['taxonomies']            = array();
 
 		$opts['capabilities']['delete_others_posts']    = "delete_others_{$cap_type}s";
@@ -312,10 +308,6 @@ class Rcno_Reviews_Admin {
 			$opts['show_in_nav_menus'] = true;
 			$opts['show_tag_cloud']    = true;
 			$opts['show_ui']           = true;
-
-			//$opts['show_in_rest']          = true;
-			//$opts['rest_base']             = $tax['tax_settings']['slug'];
-			//$opts['rest_controller_class'] = 'WP_REST_Terms_Controller';
 
 			$opts['sort']              = '';
 			// $opts['update_count_callback'] 	= '';

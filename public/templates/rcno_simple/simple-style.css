@@ -11,11 +11,17 @@
 #rcno-review-score-box ul {
     list-style: none;
     clear: left;
-    padding: 1em 0 0 0;
+    margin: 0;
 }
 
 #rcno-review-score-box .review-summary {
     margin: 0 0 1em 0;
+}
+
+#rcno-review-score-box .review-summary:after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
 #rcno-review-score-box ul li .rcno-review-score-bar-container {
@@ -67,7 +73,7 @@
     width: 74%;
     display: inline-block;
     max-height: 120px;
-    margin: 0 0 1em 10px;
+    margin: 0 0 0 10px;
     float: left;
 }
 
@@ -128,8 +134,9 @@
 }
 
 .rcno-full-book .rcno-full-book-cover img.rcno-book-cover,
-.review-content .book-cover-container .book-cover img.rcno-book-cover{
-    width: 100%; /* Twenty Ten does not do this for some strange reason */
+.review-content .book-cover-container .book-cover img.rcno-book-cover {
+    width: 100%;
+    /* Twenty Ten does not do this for some strange reason */
     height: auto;
     display: block;
 }
@@ -223,39 +230,29 @@
     box-shadow: none !important;
 }
 
-
-@media screen and ( min-width: 300px ) and ( max-width: 399px ) {
-
+@media screen and ( min-width: 300px) and ( max-width: 399px) {
     #rcno-review-score-box .review-summary .review-text {
         width: 58%;
     }
-
     #rcno-review-score-box ul {
         margin: 0;
     }
-
 }
 
-@media screen and ( min-width: 400px ) and ( max-width: 600px ) {
-
+@media screen and ( min-width: 400px) and ( max-width: 600px) {
     #rcno-review-score-box .review-summary .review-text {
         width: 70%;
     }
-
     #rcno-review-score-box ul {
         margin: 0;
     }
-
 }
 
-@media screen and ( min-width: 601px ) and ( max-width: 801px ) {
-
+@media screen and ( min-width: 601px) and ( max-width: 801px) {
     #rcno-review-score-box .review-summary .review-text {
         width: 70%;
     }
-
     #rcno-review-score-box ul {
         margin: 0;
     }
-
 }

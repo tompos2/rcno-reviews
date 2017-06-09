@@ -489,8 +489,22 @@ class Rcno_Reviews_Settings_Definition {
 			),
 			'advanced_tab'  => array(
 
+				'rcno_googlebooks_settings' => array(
+					'name' => '<strong>' . __( 'Google Books® Settings', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_enable_googlebooks'   => array(
+					'name' => __( 'Enable Google Books®', self::$plugin_name ),
+					'desc' => __( 'Enable the external Google Books® API access.', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_googlebooks_key'      => array(
+					'name' => __( 'Google Books® API Key', self::$plugin_name ),
+					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
+					'type' => 'password'
+				),
 				'rcno_goodreads_settings' => array(
-					'name' => '<strong>' . __( 'Goodreads Settings', self::$plugin_name ) . '</strong>',
+					'name' => '<strong>' . __( 'Goodreads® Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
 				'rcno_enable_goodreads'   => array(

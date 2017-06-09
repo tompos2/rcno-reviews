@@ -30,7 +30,7 @@
             var url = 'https://www.goodreads.com/book/isbn/' + gr_isbn + '?key=' + gr_key;
 
             $.ajax({
-                url: 'http://query.yahooapis.com/v1/public/yql',
+                url: 'https://query.yahooapis.com/v1/public/yql',
                 type: 'GET',
                 data: {
                     q: "select * from xml where url=\"" + url + "\"",
