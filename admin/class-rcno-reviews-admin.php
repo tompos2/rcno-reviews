@@ -178,18 +178,8 @@ class Rcno_Reviews_Admin {
 			'ajaxURL'    => admin_url( 'admin-ajax.php' ),
 			'rcno_reset_nonce' => wp_create_nonce( 'rcno-rest-nonce' ),
 		));
-
-		if ( $hook === 'post-new.php' || $hook === 'post.php' ) {
-			if ( 'rcno_review' === $post->post_type ) {
-
-				wp_enqueue_script( 'google-book-api', plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-google-books.js', array( 'jquery' ), '1.0.0', true );
-
-			}
-		}
-
-		
-
 	}
+
 
 	/**
 	 * Creates the book review custom post type.

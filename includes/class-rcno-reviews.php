@@ -81,7 +81,7 @@ class Rcno_Reviews {
 		$this->define_widget_hooks();
 
 		$this->define_rest_hooks();
-		$this->define_gr_hooks();
+		$this->define_external_hooks();
 
 		$this->define_shortcodes();
 
@@ -154,6 +154,7 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-settings.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-goodreads-api.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-googlebooks.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-rest-api.php';
 
@@ -322,12 +323,15 @@ class Rcno_Reviews {
 	}
 
 
-	private function define_gr_hooks() {
+	private function define_external_hooks() {
 
 		$goodreads = new Rcno_Goodreads_API();
+		$googlebooks = new Rcno_Reviews_GoogleBooks_API( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $goodreads, 'rcno_enqueue_gr_scripts' );
 		$this->loader->add_action( 'wp_ajax_save_post_meta', $goodreads, 'gr_ajax_save_post_meta' );
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $googlebooks, 'rcno_enqueue_gb_scripts' );
 	}
 
 
