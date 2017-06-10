@@ -2,7 +2,7 @@
 'use strict';
 
     $(function() {
-        $('rcno-isbn-fetch').on('click', function(e) {
+        $('.rcno-isbn-fetch.google-books').on('click', function(e) {
             e.preventDefault();
 
             $.sanitize = function(input) {

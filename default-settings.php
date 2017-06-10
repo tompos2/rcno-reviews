@@ -45,6 +45,7 @@ $default_options = array(
 	'rcno_excerpt_read_more'          => 'Read more',
 	'rcno_excerpt_word_count'         => '55',
 
+	'rcno_external_book_api'    => 'no-3rd-party',
 	'rcno_enable_googlebooks'   => '',
 	'rcno_googlebooks_key'      => '',
 	'rcno_enable_goodreads'     => '',

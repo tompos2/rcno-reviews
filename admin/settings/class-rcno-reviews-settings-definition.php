@@ -489,6 +489,17 @@ class Rcno_Reviews_Settings_Definition {
 			),
 			'advanced_tab'  => array(
 
+				'rcno_external_book_api' => array(
+					'name'    => __( 'External Book API', self::$plugin_name ),
+					'desc'    => __( 'Select which 3rd party API is used to fetch book data.' . '<br />' . 'The corresponding option must also be enabled below.', self::$plugin_name ),
+					'options' => array(
+						'no-3rd-party'           => __( 'None', self::$plugin_name ),
+						'google-books'   => __( 'Google Books® API', self::$plugin_name ),
+						'good-reads'     => __( 'Goodreads® API', self::$plugin_name ),
+					),
+					'type'    => 'select'
+				),
+
 				'rcno_googlebooks_settings' => array(
 					'name' => '<strong>' . __( 'Google Books® Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'

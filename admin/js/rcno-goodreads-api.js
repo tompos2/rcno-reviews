@@ -3,7 +3,7 @@
 
     $(function() {
 
-        $('.rcno-isbn-fetch').on('click', function(e) {
+        $('.rcno-isbn-fetch.good-reads').on('click', function(e) {
             e.preventDefault();
 
             $.sanitize = function(input) {
