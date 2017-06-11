@@ -42,7 +42,6 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 	    $template->the_rcno_full_book_details( $review_id );
 
-	    do_action( 'before_the_rcno_book_review_content' );
 		$template->the_rcno_book_review_content( $review_id );
 
 		$template->rcno_print_review_box( $review_id );

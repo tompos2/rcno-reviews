@@ -72,6 +72,7 @@
 
 #rcno-review-score-box .review-summary .review-text {
     width: 74%;
+    width: calc(100% - 130px);
     display: inline-block;
     max-height: 120px;
     margin: 0 0 0 10px;
@@ -232,29 +233,3 @@
     box-shadow: none !important;
 }
 
-@media screen and ( min-width: 300px) and ( max-width: 399px) {
-    #rcno-review-score-box .review-summary .review-text {
-        width: 58%;
-    }
-    #rcno-review-score-box ul {
-        margin: 0;
-    }
-}
-
-@media screen and ( min-width: 400px) and ( max-width: 600px) {
-    #rcno-review-score-box .review-summary .review-text {
-        width: 70%;
-    }
-    #rcno-review-score-box ul {
-        margin: 0;
-    }
-}
-
-@media screen and ( min-width: 601px) and ( max-width: 801px) {
-    #rcno-review-score-box .review-summary .review-text {
-        width: 70%;
-    }
-    #rcno-review-score-box ul {
-        margin: 0;
-    }
-}

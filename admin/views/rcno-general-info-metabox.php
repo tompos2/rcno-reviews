@@ -31,7 +31,7 @@
                 <?php $publisher = get_post_meta( $review->ID, 'rcno_book_publisher', true ); ?>
                 <label class="rcno_book_publisher_label" for="rcno_book_publisher"><?php _e( 'Publisher', 'rcno-reviews' ) ?></label>
                 <input type="text" name="rcno_book_publisher" id="rcno_book_publisher" size="20" value="<?php echo sanitize_text_field( $publisher ); ?>" />
-                <?php wp_nonce_field( 'rcno_save_book_info_metadata', 'rcno_general_info_nonce' ); ?>
+                <?php wp_nonce_field( 'rcno_save_book_publisher_metadata', 'rcno_general_publisher_nonce' ); ?>
             </div>
 	    <?php endif; ?>
 

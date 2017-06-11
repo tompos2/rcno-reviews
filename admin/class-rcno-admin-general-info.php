@@ -76,67 +76,78 @@ class Rcno_Admin_General_Info {
 
 
 		// Saving book title post_meta field.
-		if ( isset( $data['rcno_book_title'] ) ) { //@TODO: Add book title nonce check.
+		if ( isset( $data['rcno_book_title'] )
+		     && wp_verify_nonce( $data['rcno_general_title_nonce'], 'rcno_save_book_title_metadata' ) ) {
 			$book_title = sanitize_text_field( $data['rcno_book_title'] );
 			update_post_meta( $review_id, 'rcno_book_title', $book_title );
 		}
 
 		// Saving book publisher post_meta field.
-		if ( isset( $data['rcno_book_publisher'] ) ) { //@TODO: Add book publisher nonce check.
+		if ( isset( $data['rcno_book_publisher'] )
+		     && wp_verify_nonce( $data['rcno_general_publisher_nonce'], 'rcno_save_book_publisher_metadata' ) ) {
 			$book_publisher = sanitize_text_field( $data['rcno_book_publisher'] );
 			update_post_meta( $review_id, 'rcno_book_publisher', $book_publisher );
 		}
 
 		// Saving book published date post_meta field.
-		if ( isset( $data['rcno_book_pub_date'] ) ) { //@TODO: Add book pub date nonce check.
+		if ( isset( $data['rcno_book_pub_date'] )
+		     && wp_verify_nonce( $data['rcno_general_pub_date_nonce'], 'rcno_save_book_pub_date_metadata' ) ) {
 			$book_pub_date = sanitize_text_field( $data['rcno_book_pub_date'] );
 			update_post_meta( $review_id, 'rcno_book_pub_date', $book_pub_date );
 		}
 
 		// Saving book published format post_meta field.
-		if ( isset( $data['rcno_book_pub_format'] ) ) { //@TODO: Add book pub format nonce check.
+		if ( isset( $data['rcno_book_pub_format'] )
+		     && wp_verify_nonce( $data['rcno_general_pub_format_nonce'], 'rcno_save_book_pub_format_metadata' ) ) {
 			$book_pub_format = sanitize_text_field( $data['rcno_book_pub_format'] );
 			update_post_meta( $review_id, 'rcno_book_pub_format', $book_pub_format );
 		}
 
 		// Saving book published edition post_meta field.
-		if ( isset( $data['rcno_book_pub_edition'] ) ) { //@TODO: Add book pub format nonce check.
+		if ( isset( $data['rcno_book_pub_edition'] )
+		     && wp_verify_nonce( $data['rcno_general_pub_edition_nonce'], 'rcno_save_book_pub_edition_metadata' ) ) {
 			$book_pub_edition = sanitize_text_field( $data['rcno_book_pub_edition'] );
 			update_post_meta( $review_id, 'rcno_book_pub_edition', $book_pub_edition );
 		}
 
-		// Saving book published format post_meta field.
-		if ( isset( $data['rcno_book_page_count'] ) ) { //@TODO: Add book page count nonce check.
+		// Saving book page count post_meta field.
+		if ( isset( $data['rcno_book_page_count'] )
+		     && wp_verify_nonce( $data['rcno_general_page_count_nonce'], 'rcno_save_book_page_count_metadata' ) ) {
 			$book_page_count = sanitize_text_field( $data['rcno_book_page_count'] );
 			update_post_meta( $review_id, 'rcno_book_page_count', $book_page_count );
 		}
 
-		// Saving book published format post_meta field.
-		if ( isset( $data['rcno_book_gr_review'] ) ) { //@TODO: Add book GR review value nonce check.
+		// Saving book Gr review average post_meta field.
+		if ( isset( $data['rcno_book_gr_review'] )
+		     && wp_verify_nonce( $data['rcno_general_gr_review_nonce'], 'rcno_save_book_gr_review_metadata' ) ) {
 			$book_gr_review = sanitize_text_field( $data['rcno_book_gr_review'] );
 			update_post_meta( $review_id, 'rcno_book_gr_review', $book_gr_review );
 		}
 
-		// Saving book published format post_meta field.
-		if ( isset( $data['rcno_book_gr_id'] ) ) { //@TODO: Add book GR ID value nonce check.
+		// Saving book Gr ID post_meta field.
+		if ( isset( $data['rcno_book_gr_id'] )
+		     && wp_verify_nonce( $data['rcno_general_gr_id_nonce'], 'rcno_save_book_gr_id_metadata' ) ) {
 			$book_gr_id = sanitize_text_field( $data['rcno_book_gr_id'] );
 			update_post_meta( $review_id, 'rcno_book_gr_id', $book_gr_id );
 		}
 
-		// Saving book published format post_meta field.
-		if ( isset( $data['rcno_book_isbn13'] ) ) { //@TODO: Add book book ISBN value nonce check.
+		// Saving book ISBN13 post_meta field.
+		if ( isset( $data['rcno_book_isbn13'] )
+		     && wp_verify_nonce( $data['rcno_general_isbn13_nonce'], 'rcno_save_book_isbn13_metadata' ) ) {
 			$book_isbn13 = sanitize_text_field( $data['rcno_book_isbn13'] );
 			update_post_meta( $review_id, 'rcno_book_isbn13', $book_isbn13 );
 		}
 
-		// Saving book published format post_meta field.
-		if ( isset( $data['rcno_book_asin'] ) ) { //@TODO: Add book book ASIN value nonce check.
+		// Saving book ASIN post_meta field.
+		if ( isset( $data['rcno_book_asin'] )
+		     && wp_verify_nonce( $data['rcno_general_asin_nonce'], 'rcno_save_book_asin_metadata' ) ) {
 			$book_asin = sanitize_text_field( $data['rcno_book_asin'] );
 			update_post_meta( $review_id, 'rcno_book_asin', $book_asin );
 		}
 
-		// Saving book published format post_meta field.
-		if ( isset( $data['rcno_book_gr_url'] ) ) { //@TODO: Add book GR url value nonce check.
+		// Saving book Gr URL post_meta field.
+		if ( isset( $data['rcno_book_gr_url'] )
+		     && wp_verify_nonce( $data['rcno_general_gr_url_nonce'], 'rcno_save_book_gr_url_metadata' ) ) {
 			$book_gr_url = sanitize_text_field( $data['rcno_book_gr_url'] );
 			update_post_meta( $review_id, 'rcno_book_gr_url', $book_gr_url );
 		}
