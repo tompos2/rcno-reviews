@@ -140,9 +140,6 @@ class Rcno_Admin_General_Info {
 			$book_gr_url = sanitize_text_field( $data['rcno_book_gr_url'] );
 			update_post_meta( $review_id, 'rcno_book_gr_url', $book_gr_url );
 		}
-
-		wp_update_post( $review );
-
 	}
 
 }

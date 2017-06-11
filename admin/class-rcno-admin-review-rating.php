@@ -78,7 +78,6 @@ class Rcno_Admin_Review_Rating {
 		if ( isset( $data['rcno_admin_rating'] ) ) {
 
 			$book_rating = sanitize_text_field( $data['rcno_admin_rating'] );
-
 			update_post_meta( $review_id, 'rcno_admin_rating', $book_rating );
 		}
 	}

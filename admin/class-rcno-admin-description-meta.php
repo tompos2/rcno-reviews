@@ -84,8 +84,6 @@ class Rcno_Admin_Description_Meta {
 
 			$book_description = strip_tags( $data['rcno_book_description'] );
 			update_post_meta( $review_id, 'rcno_book_description', $book_description );
-
-			wp_update_post( $review );
 		}
 	}
 

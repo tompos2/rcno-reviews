@@ -498,7 +498,7 @@ class Rcno_Reviews_Admin {
 					$errors = 'There was an error saving the review. Insufficient administrator rights.';
 				}
 
-				//If we have an error update the error_option and return.
+				// If we have an error update the error_option and return.
 				if ( $errors ) {
 					update_option( 'rcno_admin_errors', $errors );
 					return $review_id;
@@ -510,6 +510,8 @@ class Rcno_Reviews_Admin {
 				$this->book_general_info->rcno_save_book_general_info_metadata( $review_id, $data, $review );
 				$this->book_review_score->rcno_save_book_review_score_metadata( $review_id, $data, $review );
 				$this->book_review_rating->rcno_save_book_review_rating_metadata( $review_id, $data, $review );
+
+				wp_update_post( $review );
 
 				add_action( 'save_post', array( $this, 'rcno_save_review' ) );
 			}

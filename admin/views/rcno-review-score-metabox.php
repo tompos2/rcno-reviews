@@ -83,10 +83,18 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
             // show a blank one
             ?>
             <tr>
-                <td><input type="text" class="widefat" name="label[]" /></td>
-
-                <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" /></td>
-
+                <td><input type="text" class="widefat" name="label[]" placeholder="Plot"/></td>
+                <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" placeholder="4.2"/></td>
+                <td><a class="button remove-row" href="#">Remove</a></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="widefat" name="label[]" placeholder="Characters"/></td>
+                <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" placeholder="3.5"/></td>
+                <td><a class="button remove-row" href="#">Remove</a></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="widefat" name="label[]" placeholder="Pacing"/></td>
+                <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" placeholder="2.8"/></td>
                 <td><a class="button remove-row" href="#">Remove</a></td>
             </tr>
         <?php endif; ?>
@@ -94,9 +102,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
         <!-- empty hidden one for jQuery -->
         <tr class="empty-row screen-reader-text">
             <td><input type="text" class="widefat" name="label[]" /></td>
-
             <td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]" /></td>
-
             <td><a class="button remove-row" href="#">Remove</a></td>
         </tr>
         </tbody>

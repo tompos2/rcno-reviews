@@ -1,14 +1,33 @@
 #rcno-review-score-box {
-    background: #f5f2dd;
     padding: 10px;
 }
 
 #rcno-review-score-box ul {
     list-style: none;
+    margin: 0;
+    clear: right;
+    /*padding: 15px 0 0 0;*/
 }
 
 #rcno-review-score-box .review-summary {
-    margin: 0 0 1em 0;
+    margin: 0 0 .5em 0;
+}
+
+#rcno-review-score-box .review-summary .review-text h2 {
+    margin: 0 0 10px 0;
+}
+
+#rcno-review-score-box .review-summary .review-text {
+    width: 78%;
+    width: calc(100% - 130px);
+    display: inline-block;
+}
+
+#rcno-review-score-box .review-summary .review-text p {
+    line-height: 1.2;
+    height: 4.8em;
+    overflow: hidden;
+    margin: 0;
 }
 
 #rcno-review-score-box ul li .rcno-review-score-bar-container {
@@ -54,11 +73,12 @@
     text-align: center;
     display: inline-block;
     position: relative;
+    float: right;
 }
 
 #rcno-review-score-box .review-summary .overall-score .overall {
     color: #fff;
-    font-size: 60px;
+    font-size: 55px;
     font-weight: 800;
     display: block;
     line-height: 1;

@@ -12,6 +12,7 @@
     list-style: none;
     clear: left;
     margin: 0;
+    padding: 0;
 }
 
 #rcno-review-score-box .review-summary {
@@ -78,8 +79,9 @@
 }
 
 #rcno-review-score-box .review-summary .review-text h2 {
-    margin: 0;
+    margin: 0 0 10px 0;
     font-weight: 600;
+    line-height: 1;
 }
 
 #rcno-review-score-box .review-summary .review-text p {

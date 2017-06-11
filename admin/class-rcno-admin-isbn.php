@@ -85,12 +85,8 @@ class Rcno_Admin_ISBN {
 		if ( isset( $data['rcno_book_isbn'] ) && wp_verify_nonce( $data['rcno_isbn_nonce'], 'rcno_save_book_isbn_metadata' ) ) {
 
 			$book_isbn = sanitize_text_field( $data['rcno_book_isbn'] );
-
 			update_post_meta( $review_id, 'rcno_book_isbn', $book_isbn );
-
-			wp_update_post( $review );
 		}
-
 	}
 
 }
