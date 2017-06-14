@@ -61,7 +61,8 @@
     });
 
     $(function () {
-        $('.rcno_review_template img').click(function() {
+        $('img.template-label-image.checked').click(function() {
+            console.log( $(this) );
             $(this).addClass('checked');
         });
     });

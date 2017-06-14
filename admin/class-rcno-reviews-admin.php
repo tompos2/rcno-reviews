@@ -673,6 +673,7 @@ class Rcno_Reviews_Admin {
 			'rcno_show_review_score_box'            => '1',
 			'rcno_show_review_score_box_background' => '#ffffff',
 			'rcno_show_review_score_box_accent'     => '#0f0000',
+			'rcno_show_review_score_box_accent_2'   => '#ffd700',
 
 			'rcno_show_book_slider_widget'    => '1',
 			'rcno_show_recent_reviews_widget' => '1',
@@ -681,6 +682,13 @@ class Rcno_Reviews_Admin {
 			'rcno_review_template'            => 'rcno_default',
 			'rcno_excerpt_read_more'          => 'Read more',
 			'rcno_excerpt_word_count'         => '55',
+
+			'rcno_external_book_api'    => 'no-3rd-party',
+			'rcno_enable_googlebooks'   => '',
+			'rcno_googlebooks_key'      => '',
+			'rcno_enable_goodreads'     => '',
+			'rcno_goodreads_key'        => '',
+			'rcno_goodreads_secret'     => '',
 		);
 
 		// Set the options to the defaults from the '$default_options' array.
