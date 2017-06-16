@@ -266,9 +266,9 @@ class Rcno_Template_Tags {
 		$book_alt = $review['rcno_reviews_book_cover_alt'][0];
 
 		$out = '';
-		$out .= '<img src="' . $book_src . '" ';
-		$out .= 'title="' . $book_title . '" ';
-		$out .= 'alt="' . $book_alt . '" ';
+		$out .= '<img src="' . esc_attr( $book_src ) . '" ';
+		$out .= 'title="' . esc_attr( $book_title ) . '" ';
+		$out .= 'alt="' . esc_attr( $book_alt ) . '" ';
 		$out .= 'class="rcno-book-cover"';
 		$out .= '>';
 
@@ -530,7 +530,7 @@ class Rcno_Template_Tags {
 				if ( '' === $wrapper ) {
 					$out .= '';
 				} else {
-					$out .= '<' . $wrapper . ' ' . 'class="' . sanitize_html_class( $meta_key ) . '"' . '>'; // @TODO: Sanitizing the HTML class is not necessary.
+					$out .= '<' . $wrapper . ' ' . 'class="' . sanitize_html_class( $meta_key ) . '"' . '>';
 				}
 
 				if ( $label ) {

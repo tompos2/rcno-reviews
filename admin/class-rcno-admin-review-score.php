@@ -89,8 +89,8 @@ class Rcno_Admin_Review_Score {
 
 		for ( $i = 0; $i < $count; $i++ ) {
 			if ( $labels[$i] !== '' ) {
-				$new[ $i ]['label'] = strip_tags( $labels[ $i ] );
-				$new[ $i ]['score'] = strip_tags( $scores[ $i ] );
+				$new[ $i ]['label'] = sanitize_text_field( $labels[ $i ] );
+				$new[ $i ]['score'] = sanitize_text_field( $scores[ $i ] );
 			}
 		}
 		if ( ! empty( $new ) && $new !== $old ) {
@@ -99,6 +99,7 @@ class Rcno_Admin_Review_Score {
 			delete_post_meta( $review_id, 'rcno_review_score_criteria', $old );
 		}
 
+		// @TODO: Below needs sanitization.
 		if( isset( $data['rcno_review_score_type'] ) ) {
 			$review_score_type = $data['rcno_review_score_type'];
 			update_post_meta( $review_id, 'rcno_review_score_type', $review_score_type );

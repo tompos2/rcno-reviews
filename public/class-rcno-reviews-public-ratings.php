@@ -83,7 +83,7 @@ class Rcno_Reviews_Public_Rating {
 
 	/**
 	 * Saves the comment rating data on the 'comment_post' WP hook
-	 * @param $id
+	 * @param int $id
 	 * @return void
 	 */
 	public function rcno_comment_post( $id ) {
@@ -92,7 +92,7 @@ class Rcno_Reviews_Public_Rating {
 			return;
 		}
 
-		$comment_karma = (int) $_POST['comment_karma'];
+		$comment_karma = absint( $_POST['comment_karma'] );
 
 		if ( $comment_karma > 5 ) {
 			$comment_karma = 5;
@@ -136,9 +136,9 @@ class Rcno_Reviews_Public_Rating {
 
 		$user = '';
 
-		$comment_ID      = (int) $_POST['comment_ID'];
-		$comment_post_ID = (int) $_POST['comment_post_ID'];
-		$comment_karma   = (int) $_POST['rating'];
+		$comment_ID      = intval( $_POST['comment_ID'] );
+		$comment_post_ID = intval( $_POST['comment_post_ID'] );
+		$comment_karma   = intval( $_POST['rating'] );
 
 		$comment_author_cookie     = $_COOKIE[ 'comment_author_' . COOKIEHASH ];
 		$comment_author_e_cookie   = $_COOKIE[ 'comment_author_email_' . COOKIEHASH ];
@@ -269,13 +269,13 @@ class Rcno_Reviews_Public_Rating {
 	/**
 	 * Does the retrieval of public comment scores from the comment meta table.
 	 *
-	 * @param $review_id
+	 * @param int $review_id
 	 * @return array
 	 */
 	private function count_ratings_info( $review_id ) {
 
 		$comments = get_comments( array(
-			'post_id'   => $review_id,
+			'post_id'   => intval( $review_id ),
 			'meta_key'  => 'rcno_review_comment_rating',
 		) );
 
