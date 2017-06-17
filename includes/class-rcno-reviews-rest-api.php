@@ -86,11 +86,11 @@ class Rcno_Reviews_Rest_API {
 	public function rcno_reviews_taxonomy_rest_support() {
 		global $wp_taxonomies;
 
-		$taxonomies = array_keys( Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
+		$taxonomies = explode( ",", Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
 		$tax_name = array();
 
 		foreach ( $taxonomies as $tax ) {
-			$tax_name[$tax] = 'rcno_' . $tax;
+			$tax_name[ strtolower( $tax ) ] = 'rcno_' . strtolower( $tax );
 		}
 
 		foreach ( $tax_name as $key => $value ) {

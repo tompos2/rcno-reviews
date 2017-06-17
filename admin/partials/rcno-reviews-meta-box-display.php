@@ -26,4 +26,3 @@
     <button class="button rcno-reset-button">Reset Settings</button>
 </form>
 <br class="clear" />
-

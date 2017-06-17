@@ -75,6 +75,9 @@ class Rcno_Reviews_Settings_Definition {
 		return apply_filters( 'rcno_reviews_settings_tabs', $tabs );
 	}
 
+
+
+
 	/**
 	 * 'Whitelisted' Rcno_Reviews settings, filters are provided for each settings
 	 * section to allow extensions and other plugins to add their own settings
@@ -272,75 +275,8 @@ class Rcno_Reviews_Settings_Definition {
 				'rcno_taxonomy_selection'        => array(
 					'name'    => __( 'Taxonomy Selection', self::$plugin_name ),
 					'desc'    => __( 'Custom Taxonomy Selection with 3 options', self::$plugin_name ),
-					'options' => array(
-						'author' => __( 'Author', self::$plugin_name ),
-						'genre'  => __( 'Genre', self::$plugin_name ),
-						'series' => __( 'Series', self::$plugin_name ),
-					),
-					'type'    => 'multicheck'
-				),
-				// Book Review Author Taxonomy.
-				'rcno_author_header'             => array(
-					'name' => '<h2 class="section-heading">' . __( 'Author', self::$plugin_name ) . '</h2>',
-					'type' => 'header'
-				),
-				'rcno_author_slug'               => array(
-					'name' => __( 'Slug', self::$plugin_name ),
-					'desc' => __( 'Place the slug of the author taxonomy here.', self::$plugin_name ),
-					'std'  => 'author',
-					'type' => 'text'
-				),
-				'rcno_author_hierarchical'       => array(
-					'name' => __( 'Hierarchical', self::$plugin_name ),
-					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
-					'type' => 'checkbox'
-				),
-				'rcno_author_show'               => array(
-					'name' => __( 'Show in table', self::$plugin_name ),
-					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
-					'type' => 'checkbox'
-				),
-				// Book Review Genre Taxonomy.
-				'rcno_genre_header'              => array(
-					'name' => '<h2 class="section-heading">' . __( 'Genre', self::$plugin_name ) . '</h2>',
-					'type' => 'header'
-				),
-				'rcno_genre_slug'                => array(
-					'name' => __( 'Slug', self::$plugin_name ),
-					'desc' => __( 'Place the slug of the genre taxonomy here.', self::$plugin_name ),
-					'std'  => 'genre',
-					'type' => 'text'
-				),
-				'rcno_genre_hierarchical'        => array(
-					'name' => __( 'Hierarchical', self::$plugin_name ),
-					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
-					'type' => 'checkbox'
-				),
-				'rcno_genre_show'                => array(
-					'name' => __( 'Show in table', self::$plugin_name ),
-					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
-					'type' => 'checkbox'
-				),
-				// Book Review Series Taxonomy.
-				'rcno_series_header'             => array(
-					'name' => '<h2 class="section-heading">' . __( 'Series', self::$plugin_name ) . '</h2>',
-					'type' => 'header'
-				),
-				'rcno_series_slug'               => array(
-					'name' => __( 'Slug', self::$plugin_name ),
-					'desc' => __( 'Place the slug of the series taxonomy here.', self::$plugin_name ),
-					'std'  => 'series',
-					'type' => 'text'
-				),
-				'rcno_series_hierarchical'       => array(
-					'name' => __( 'Hierarchical', self::$plugin_name ),
-					'desc' => __( 'Is this custom taxonomy hierarchical?', self::$plugin_name ),
-					'type' => 'checkbox'
-				),
-				'rcno_series_show'               => array(
-					'name' => __( 'Show in table', self::$plugin_name ),
-					'desc' => __( 'Show this custom taxonomy on the admin table', self::$plugin_name ),
-					'type' => 'checkbox'
+					'std'     => 'Author',
+					'type'    => 'text'
 				),
 
 			),
@@ -539,7 +475,44 @@ class Rcno_Reviews_Settings_Definition {
 
 		);
 
+		$taxes = explode( ",", Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
+
+		foreach ( $taxes as $tax ) {
+			foreach( self::taxonomy_options( $tax ) as $key => $value ) {
+				$settings['taxonomy_tab'][ strtolower( $key ) ] = $value;
+			}
+		}
+
 		return self::apply_tab_slug_filters( $settings );
 	}
 
+	public static function taxonomy_options( $tax ) {
+
+		$opts = array(
+			'rcno_' . $tax .'_header'       => array(
+				'name' => '<h2 class="section-heading">' . __( ucfirst( $tax ), 'rcno-reviews' ) . '</h2>',
+				'type' => 'header'
+			),
+			'rcno_' . $tax . '_slug'         => array(
+				'name' => __( 'Slug', 'rcno-reviews' ),
+				'desc' => __( 'Place the slug of the ' . $tax . ' taxonomy here.', 'rcno-reviews' ),
+				'std'  => $tax,
+				'type' => 'text'
+			),
+			'rcno_' . $tax . '_hierarchical' => array(
+				'name' => __( 'Hierarchical', 'rcno-reviews' ),
+				'desc' => __( 'Is this custom taxonomy hierarchical?', 'rcno-reviews' ),
+				'type' => 'checkbox'
+			),
+			'rcno_' . $tax . '_show'         => array(
+				'name' => __( 'Show in table', 'rcno-reviews' ),
+				'desc' => __( 'Show this custom taxonomy on the admin table', 'rcno-reviews' ),
+				'type' => 'checkbox'
+			),
+		);
+
+		return $opts;
+	}
+
 }
+

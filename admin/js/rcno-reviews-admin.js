@@ -58,6 +58,11 @@
 
     $(function() {
         $('.rcno-color-input').wpColorPicker();
+        $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]').selectize({
+            create: true,
+            plugins: ['remove_button', 'restore_on_backspace']
+
+        });
     });
 
     $(function () {

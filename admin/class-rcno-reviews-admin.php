@@ -140,8 +140,8 @@ class Rcno_Reviews_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-admin.css', array(), $this->version, 'all' );
-
 		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . '/css/rcno-reviews-modal.css', $this->version, 'all' );
+		wp_enqueue_style( 'selectize-css', plugin_dir_url( __FILE__ ) . '/css/selectize.default.css', '0.12.4', 'all' );
 
 	}
 
@@ -172,6 +172,7 @@ class Rcno_Reviews_Admin {
 		wp_enqueue_style( 'wp-color-picker' );
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, false );
+		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', false );
 
 		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
 			'reviewID'   => ( null !== $post ) ? $post->ID : '',
@@ -271,16 +272,16 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_custom_taxonomy() {
 
-		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection', array( 'author' => 'Author' ) );
-		$keys = array_keys( $custom_taxonomies );
+		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+		$keys = explode( ",", $custom_taxonomies );
 		$taxonomies = array();
 
 		foreach ( $keys as $key ) {
 			$taxonomies[] = array(
 				'tax_settings'  => array(
-					'slug'          => Rcno_Reviews_Option::get_option( "rcno_{$key}_slug", 'author' ),
-					'hierarchy'     => Rcno_Reviews_Option::get_option( "rcno_{$key}_hierarchical", false ),
-					'show_in_table' => Rcno_Reviews_Option::get_option( "rcno_{$key}_show", true ),
+					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug', 'author' ),
+					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
+					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show', true ),
 				)
 			);
 		}
