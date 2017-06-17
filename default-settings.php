@@ -7,11 +7,7 @@ $default_options = array(
 	'rcno_reviews_on_homepage' => '1',
 	'rcno_reviews_in_rss'      => '1',
 	'rcno_reviews_in_rest'     => '1',
-	'rcno_taxonomy_selection'  => array(
-		'author' => 'Author',
-		'genre'  => 'Genre',
-		'series' => 'Series',
-	),
+	'rcno_taxonomy_selection'  => 'Author',
 	'rcno_author_slug'         => 'author',
 	'rcno_author_show'         => '1',
 	'rcno_genre_slug'          => 'genre',

@@ -134,8 +134,9 @@ class Rcno_Template_Tags {
 		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', true );
 		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_series', true );
 		$out .= '</div>';
+
 		$out .= '<div class="col-2">';
-		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'div', true );
+		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher', true );
 		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'div', true );
 		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', 'div', true );
 		$out .= '</div>';

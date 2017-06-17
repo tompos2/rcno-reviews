@@ -59,7 +59,7 @@ class Rcno_Reviews_Settings_Definition {
 	 * Retrieve settings tabs
 	 *
 	 * @since    1.0.0
-	 * @return    array    $tabs    Settings tabs
+	 * @return   array    $tabs    Settings tabs
 	 */
 	static public function get_tabs() {
 
@@ -274,7 +274,7 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'rcno_taxonomy_selection'        => array(
 					'name'    => __( 'Taxonomy Selection', self::$plugin_name ),
-					'desc'    => __( 'Custom Taxonomy Selection with 3 options', self::$plugin_name ),
+					'desc'    => __( 'Create and delete book review taxonomies here.', self::$plugin_name ),
 					'std'     => 'Author',
 					'type'    => 'text'
 				),
