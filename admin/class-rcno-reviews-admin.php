@@ -279,7 +279,7 @@ class Rcno_Reviews_Admin {
 		foreach ( $keys as $key ) {
 			$taxonomies[] = array(
 				'tax_settings'  => array(
-					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug', 'author' ),
+					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug' ),
 					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
 					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show', true ),
 				)
@@ -292,7 +292,7 @@ class Rcno_Reviews_Admin {
 			$tax_name = 'rcno_' . $tax['tax_settings']['slug'];
 
 			$opts['hierarchical']      = $tax['tax_settings']['hierarchy'];
-			// $opts['meta_box_cb'] 	   = '';
+			//$opts['meta_box_cb'] 	   = array( $this, 'rcno_custom_taxonomy_metabox' );
 			$opts['public']            = true;
 			$opts['query_var']         = $tax_name;
 			$opts['show_admin_column'] = $tax['tax_settings']['show_in_table'];
@@ -337,6 +337,10 @@ class Rcno_Reviews_Admin {
 			register_taxonomy( $tax_name, 'rcno_review', $opts );
 
 		}
+	}
+
+	public function rcno_custom_taxonomy_metabox( $post, $box ) {
+		include __DIR__ . '/views/rcno-reviews-taxonomies-metabox.php';
 	}
 
 
