@@ -141,7 +141,7 @@ class Rcno_Reviews_Admin {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-admin.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . '/css/rcno-reviews-modal.css', $this->version, 'all' );
-		wp_enqueue_style( 'selectize-css', plugin_dir_url( __FILE__ ) . '/css/selectize.default.css', '0.12.4', 'all' );
+		wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . '/css/selectize.default.css', '0.12.4', 'all' );
 
 	}
 
@@ -201,7 +201,7 @@ class Rcno_Reviews_Admin {
 
 		$opts['can_export']            = true;
 		$opts['capability_type']       = $cap_type;
-		$opts['description']           = '';
+		$opts['description']           = 'A book review custom post type provide by the Recencio Book Reviews plugin.';
 		$opts['exclude_from_search']   = false;
 		$opts['has_archive']           = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
 		$opts['hierarchical']          = false;
@@ -219,7 +219,8 @@ class Rcno_Reviews_Admin {
 		$opts['show_ui']               = true;
 
 		$opts['supports']              = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments', 'revisions' );
-		$opts['taxonomies']            = array();
+
+		$opts['taxonomies'] = Rcno_Reviews_Option::get_option( 'rcno_enable_builtin_taxonomy' ) ? array( 'category', 'post_tag' ) : array();
 
 		$opts['capabilities']['delete_others_posts']    = "delete_others_{$cap_type}s";
 		$opts['capabilities']['delete_post']            = "delete_{$cap_type}";
@@ -299,9 +300,16 @@ class Rcno_Reviews_Admin {
 			$opts['show_in_nav_menus'] = true;
 			$opts['show_tag_cloud']    = true;
 			$opts['show_ui']           = true;
-
 			$opts['sort']              = '';
-			// $opts['update_count_callback'] 	= '';
+
+			/**
+			 * Note: If you want to ensure that your custom taxonomy behaves like a tag,
+			 * you must add the option 'update_count_callback' => '_update_post_term_count'.
+			 * Not doing so will result in multiple comma-separated items added at once being saved as a single value,
+			 * not as separate values. This can cause undue stress when using get_the_term_list and other term display functions.
+			 */
+			$opts['update_count_callback'] 	= $tax['tax_settings']['hierarchy'] ? '_update_post_term_count' : '';
+
 			$opts['capabilities']['assign_terms'] = 'edit_posts';
 			$opts['capabilities']['delete_terms'] = 'manage_categories';
 			$opts['capabilities']['edit_terms']   = 'manage_categories';
@@ -521,6 +529,7 @@ class Rcno_Reviews_Admin {
 				add_action( 'save_post', array( $this, 'rcno_save_review' ) );
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -547,7 +556,7 @@ class Rcno_Reviews_Admin {
 	 * @param array $query_args
 	 */
 	public function rcno_dashboard_recent_posts_widget( $query_args ) {
-		$query_args = array_merge( $query_args, array( 'post_type' => array( 'post', 'rcno_review' ) ) );
+		$query_args['post_type'] = 'rcno_review';
 		return $query_args;
 	}
 

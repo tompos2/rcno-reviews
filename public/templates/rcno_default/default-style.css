@@ -157,10 +157,12 @@
 }
 
 .rcno-full-book-cover .rcno-admin-rating {
-    background: rgba(255, 87, 34, 0.8);
+    background: rgba(78, 78, 78, 0.50);
     width: 100%;
     text-align: center;
     line-height: 1;
+    position: absolute;
+    bottom: 0;
 }
 
 ul.rcno-alphabet-navigation {

@@ -279,6 +279,16 @@ class Rcno_Reviews_Settings_Definition {
 					'type'    => 'text'
 				),
 
+				'rcno_builtin_taxonomy_header' => array(
+					'name' => '<h2 class="section-heading">' . __( 'Builtin Taxonomies', self::$plugin_name ) . '</h2>',
+					'type' => 'header'
+				),
+				'rcno_enable_builtin_taxonomy'        => array(
+					'name'    => __( 'Default WP Taxonomy', self::$plugin_name ),
+					'desc'    => __( 'Enable the builtin \'category\' and \'tags\' taxonomies.', self::$plugin_name ),
+					'type'    => 'checkbox'
+				),
+
 			),
 
 			//Components tab.
