@@ -7,12 +7,12 @@
             e.preventDefault();
 
             $.sanitize = function(input) {
-                var output = input
+                return input
                     .replace(/<script[^>]*?>.*?<\/script>/gi, '')
                     .replace(/<[\/\!]*?[^<>]*?>/gi, '')
                     .replace(/<style[^>]*?>.*?<\/style>/gi, '')
                     .replace(/<![\s\S]*?--[ \t\n\r]*>/gi, '');
-                return output;
+
             };
 
             $.upCase = function(str) {
@@ -23,11 +23,11 @@
                 }
             };
 
-            var gr_ajx_gif = $('.rcno-ajax-loading');
-            var gr_isbn = $('#rcno_book_isbn').val();
-            var gr_key = gr_options.api_key;
+            var ajx_gif = $('.rcno-ajax-loading');
+            var book_isbn = $('#rcno_book_isbn').val();
+            var api_key = gr_options.api_key;
             // https://www.goodreads.com/book/isbn/0441172717?key=################
-            var url = 'https://www.goodreads.com/book/isbn/' + gr_isbn + '?key=' + gr_key;
+            var url = 'https://www.goodreads.com/book/isbn/' + book_isbn + '?key=' + api_key;
 
             $.ajax({
                 url: 'https://query.yahooapis.com/v1/public/yql',
@@ -37,11 +37,11 @@
                     format: 'json'
                 },
                 beforeSend: function() {
-                    gr_ajx_gif.show();
+                    ajx_gif.show();
                 },
                 complete: function() {
                     console.log('Complete');
-                    gr_ajx_gif.hide();
+                    ajx_gif.hide();
                 },
                 success: function(grDoc) {
                     console.log(grDoc.query.results );

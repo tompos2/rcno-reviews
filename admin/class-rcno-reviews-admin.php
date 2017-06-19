@@ -549,6 +549,49 @@ class Rcno_Reviews_Admin {
 	}
 
 
+	public function rcno_remove_admin_columns( $columns ) {
+		unset( $columns['author'] );
+
+		return $columns;
+	}
+
+	public function rcno_sort_admin_columns( $columns ) {
+		$registered_taxonomies = get_object_taxonomies( 'rcno_review' );
+		$registered_taxonomies = array_diff( $registered_taxonomies, array( 'category', 'post_tag' ) );
+
+		foreach (  $registered_taxonomies as $taxonomy) {
+			$columns['taxonomy-'. $taxonomy] = 'taxonomy-' . $taxonomy;
+		}
+
+		return $columns;
+	}
+
+	function rcno_query_admin_columns( $clauses, $wp_query ) {
+
+		global $wpdb;
+
+		if ( isset( $wp_query->query['orderby'] ) && preg_match( '/taxonomy-rcno_/', $wp_query->query['orderby'] ) ) {
+			$taxonomy = str_replace( 'taxonomy-', '', $wp_query->query['orderby'] );
+
+			$clauses['join']    .= <<<SQL
+LEFT OUTER JOIN {$wpdb->term_relationships} ON {$wpdb->posts}.ID={$wpdb->term_relationships}.object_id
+LEFT OUTER JOIN {$wpdb->term_taxonomy} USING (term_taxonomy_id)
+LEFT OUTER JOIN {$wpdb->terms} USING (term_id)
+SQL;
+			$clauses['where']   .= "AND (taxonomy = '" . $taxonomy . "' OR taxonomy IS NULL)";
+			$clauses['groupby'] = "object_id";
+			$clauses['orderby'] = "GROUP_CONCAT({$wpdb->terms}.name ORDER BY name ASC)";
+			if ( strtoupper( $wp_query->get( 'order' ) ) === 'ASC' ) {
+				$clauses['orderby'] .= 'ASC';
+			} else {
+				$clauses['orderby'] .= 'DESC';
+			}
+		}
+
+		return $clauses;
+	}
+
+
 	/**
 	 * Adds book reviews to the 'Recent Activity' Dashboard widget
 	 *

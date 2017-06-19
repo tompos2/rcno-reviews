@@ -146,8 +146,6 @@ class Rcno_Template_Tags {
 		$out .= wp_trim_words( $this->get_the_rcno_book_description( $review_id ), 75 );
 		$out .= '</div>';
 
-		$out .= '<div class="clear"></div>';
-
 		$out .= '</div>';
 
 		return $out;
@@ -909,7 +907,7 @@ class Rcno_Template_Tags {
 		$out .= ', "author": {';
 		$out .= '"@type": "Person"';
 		$out .= ', "name": ' . '"' . get_the_author() . '"';
-		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"'; // Social profile for review author.
+		$out .= ', "sameAs": ' . '"' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '"';
 		$out .= '}';
 
 		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"';

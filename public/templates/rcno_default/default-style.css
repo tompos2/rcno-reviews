@@ -122,7 +122,7 @@
 }
 
 .rcno-full-book-cover {
-    width: 35%;
+    width: 200px;
     background: rgba(96, 125, 139, 0.36);
     display: inline-block;
     float: left;
@@ -147,7 +147,9 @@
     line-height: 1.5;
     clear: left;
     display: inline-block;
-    width: 63%;
+    width: calc(100% - 220px);
+    height: 13.5em;
+    overflow: auto;
 }
 
 .rcno-admin-rating span {
