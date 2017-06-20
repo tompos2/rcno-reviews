@@ -1,3 +1,16 @@
+.rcno-full-book-description::-webkit-scrollbar {
+    width: .5em;
+}
+
+.rcno-full-book-description::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.rcno-full-book-description::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
 #rcno-review-score-box {
     padding: 10px;
 }
