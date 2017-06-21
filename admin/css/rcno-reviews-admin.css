@@ -23,6 +23,11 @@
     color: #b7b7b7;
 }
 
+#dashboard_right_now li a.rcno_review-count:before,
+#dashboard_right_now span.rcno_review-count:before {
+    content: url('../images/logo-20.png');
+}
+
 button.button.reset-button {
     background: red;
     color: #fff;
