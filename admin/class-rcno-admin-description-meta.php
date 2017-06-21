@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Saving the general meta information.
- *
- * @link       https://wzymedia.com
- * @since      1.0.0
- *
- * @package    Rcno_Reviews
- * @subpackage Rcno_Reviews/admin
- */
-
 /**
  * Saving the general meta information.
  *
@@ -21,6 +10,15 @@
  * @author     wzyMedia <wzy@outlook.com>
  */
 class Rcno_Admin_Description_Meta {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -36,17 +34,22 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $version The version of this plugin.
+	 * @param   string $plugin_name
+	 * @param   string $version
 	 */
-	public function __construct( $version ) {
-		$this->version = $version;
+	public function __construct( $plugin_name, $version ) {
 
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
 	}
 
 	/**
-	 * Add a metabox for the book description
+	 * Adds a metabox for the book's description/synopsis
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use add_meta_meta_box()
+	 * @return void
 	 */
 	public function rcno_book_description_metabox() {
 		// Add editor metabox for description
@@ -60,6 +63,16 @@ class Rcno_Admin_Description_Meta {
 		);
 	}
 
+
+	/**
+	 * Creates the book description metabox using WordPress wp_editor.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @see wp_editor()
+	 * @param object $review
+	 * @return void
+	 */
 	public function do_rcno_book_description_metabox( $review ) {
 		$description              = get_post_meta( $review->ID, 'rcno_book_description', true );
 		$options                  = array(
@@ -73,16 +86,24 @@ class Rcno_Admin_Description_Meta {
 	}
 
 	/**
-	 * Saves all the book data on the review edit screen.
+	 * Checks the presence of, sanitize then saves the book's description/synopsis data.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use update_post_meta()
+	 * @use sanitize_post_field()
+	 *
+	 * @param int $review_id
+	 * @param array $data
+	 * @param mixed $review
+	 *
+	 * @return void
 	 */
 	public function rcno_save_book_description_metadata( $review_id, $data, $review = null ) {
 
-		// Saving description not only to the post_meta field but also to excerpt and content.
 		if ( isset( $data['rcno_book_description'] ) ) {
 
-			$book_description = strip_tags( $data['rcno_book_description'] );
+			$book_description = sanitize_post_field( 'rcno_book_description', $data['rcno_book_description'], $review_id );
 			update_post_meta( $review_id, 'rcno_book_description', $book_description );
 		}
 	}

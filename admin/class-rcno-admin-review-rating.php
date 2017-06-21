@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Saving the book 5 rating score meta information.
- *
- * @link       https://wzymedia.com
- * @since      1.0.0
- *
- * @package    Rcno_Reviews
- * @subpackage Rcno_Reviews/admin
- */
-
 /**
  * Saving the book review 5 star score meta information.
  *
@@ -22,6 +11,16 @@
  */
 
 class Rcno_Admin_Review_Rating {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
 	/**
 	 * The version of this plugin.
 	 *
@@ -36,19 +35,25 @@ class Rcno_Admin_Review_Rating {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $version The version of this plugin.
+	 * @param   string $plugin_name
+	 * @param   string $version
 	 */
-	public function __construct( $version ) {
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 	}
 
 	/**
-	 * Add a metabox for the book 5 star rating information.
+	 * Add a metabox for the book's 5 star rating information.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use add_meta_box()
+	 * @return void
 	 */
 	public function rcno_book_review_rating_metabox() {
-		// Add editor metabox for ISBN number.
+
 		add_meta_box(
 			'rcno_book_review_rating_metabox',
 			__( '5 Star Rating', 'rcno-reviews' ),
@@ -61,21 +66,34 @@ class Rcno_Admin_Review_Rating {
 
 	/**
 	 * Builds and display the 5 star metabox UI.
-	 * @param $review
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param object $review
+	 * @return void
 	 */
 	public function do_rcno_book_review_rating_metabox( $review ) {
 		include __DIR__ . '/views/rcno-review-rating-metabox.php';
 	}
 
 	/**
-	 * Saves all the book data on the review edit screen.
+	 * Checks the presence of, sanitizes then saves all the book's 5 star rating.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use update_post_meta()
+	 * @use wp_verify_nonce()
+	 * @use sanitize_text_field()
+	 *
+	 * @param int $review_id
+	 * @param array $data
+	 * @param mixed $review
+	 *
+	 * @return void
 	 */
 	public function rcno_save_book_review_rating_metadata( $review_id, $data, $review = null ) {
 
-		// Saving description not only to the post_meta field but also to excerpt and content.
-		if ( isset( $data['rcno_admin_rating'] ) ) {
+		if ( isset( $data['rcno_admin_rating'] ) ) { //TODO: This needs a nonce check.
 
 			$book_rating = sanitize_text_field( $data['rcno_admin_rating'] );
 			update_post_meta( $review_id, 'rcno_admin_rating', $book_rating );

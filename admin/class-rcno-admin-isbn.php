@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Saving the book ISBN meta information.
- *
- * @link       https://wzymedia.com
- * @since      1.0.0
- *
- * @package    Rcno_Reviews
- * @subpackage Rcno_Reviews/admin
- */
-
 /**
  * Saving the book ISBN meta information.
  *
@@ -22,6 +11,16 @@
  */
 
 class Rcno_Admin_ISBN {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
 	/**
 	 * The version of this plugin.
 	 *
@@ -36,16 +35,25 @@ class Rcno_Admin_ISBN {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $version The version of this plugin.
+	 * @param   string $plugin_name
+	 * @param   string $version
 	 */
-	public function __construct( $version ) {
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 	}
 
 	/**
-	 * Add a metabox for the book ISBN information.
+	 * Add a metabox for the book's ISBN information.
+	 *
+	 * If the option has been disabled on the plugin setting page, return early with a false
+	 * and don't do anything.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use add_meta_box
+	 * @return bool
 	 */
 	public function rcno_book_isbn_metabox() {
 
@@ -54,7 +62,6 @@ class Rcno_Admin_ISBN {
 			return false;
 		}
 
-		// Add editor metabox for ISBN number.
 		add_meta_box(
 			'rcno_book_isbn_metabox',
 			__( 'ISBN Number', 'rcno-reviews' ),
@@ -68,16 +75,30 @@ class Rcno_Admin_ISBN {
 
 	/**
 	 * Builds and display the metabox UI.
-	 * @param $review
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param object $review
+	 * @return void
 	 */
 	public function do_rcno_book_isbn_metabox( $review ) {
 		include __DIR__ . '/views/rcno-reviews-isbn-metabox.php';
 	}
 
 	/**
-	 * Saves all the book data on the review edit screen.
+	 * Check the presence of, sanitizes then saves book's ISBN.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use update_post_meta()
+	 * @use wp_verify_nonce()
+	 * @use sanitize_text_field()
+	 *
+	 * @param int $review_id
+	 * @param array $data
+	 * @param mixed $review
+	 *
+	 * @return void
 	 */
 	public function rcno_save_book_isbn_metadata( $review_id, $data, $review = null ) {
 

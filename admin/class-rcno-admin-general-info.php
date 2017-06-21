@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Saving the general book meta information.
- *
- * @link       https://wzymedia.com
- * @since      1.0.0
- *
- * @package    Rcno_Reviews
- * @subpackage Rcno_Reviews/admin
- */
-
 /**
  * Saving the general book meta information.
  *
@@ -22,6 +11,16 @@
  */
 
 class Rcno_Admin_General_Info {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
 	/**
 	 * The version of this plugin.
 	 *
@@ -36,19 +35,26 @@ class Rcno_Admin_General_Info {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $version The version of this plugin.
+	 * @param   string $plugin_name
+	 * @param   string $version
 	 */
-	public function __construct( $version ) {
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 	}
 
 	/**
-	 * Add a metabox for the book meta information.
+	 * Adda a metabox for the book general meta information, such as title,
+	 * illustrator, page count, etc
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use add_meta_meta_box()
+	 * @return void
 	 */
 	public function rcno_book_general_info_metabox() {
-		// Add editor metaboxes for general book information.
+
 		add_meta_box(
 			'rcno_book_general_info_metabox',
 			__( 'General Information', 'rcno-reviews' ),
@@ -60,17 +66,32 @@ class Rcno_Admin_General_Info {
 	}
 
 	/**
-	 * Builds and display the metaboxes UI.
-	 * @param $review
+	 * Creates the metaboxes UI.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param object $review
+	 * @return void
 	 */
 	public function do_rcno_book_general_info_metabox( $review ) {
 		include __DIR__ . '/views/rcno-general-info-metabox.php';
 	}
 
 	/**
-	 * Saves all the book data on the review edit screen.
+	 * Checks the presence of, sanitizes then saves the book data on the review edit screen.
+	 * Also runs a nonce security check
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use update_post_meta()
+	 * @use wp_verify_nonce()
+	 * @use sanitize_text_field()
+	 *
+	 * @param int $review_id
+	 * @param array $data
+	 * @param mixed $review
+	 *
+	 * @return void
 	 */
 	public function rcno_save_book_general_info_metadata( $review_id, $data, $review = null ) {
 

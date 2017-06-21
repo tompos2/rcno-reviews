@@ -1,20 +1,9 @@
 <?php
-
 /**
- * Saving a book for to use with in book reviews.
+ * Saving a book cover for display in book reviews.
  *
- * @link       https://wzymedia.com
- * @since      1.0.0
- *
- * @package    Rcno_Reviews
- * @subpackage Rcno_Reviews/admin
- */
-
-/**
- * Saving a book for to use with in book reviews.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
+ * Create the "Book Cover" metabox in the admin create/edit book review screen.
+ * Also handles the saving and updating of the image source path, alt-text and title HTML attributes.
  *
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/admin
@@ -46,7 +35,8 @@ class Rcno_Admin_Book_Cover {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $version The version of this plugin.
+	 * @param   string $plugin_name
+	 * @param   string $version
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
@@ -54,9 +44,11 @@ class Rcno_Admin_Book_Cover {
 	}
 
 	/**
-	 * Add a metabox for the book ISBN information.
+	 * Add the book cover upload metabox.
 	 *
 	 * @since 1.0.0
+	 * @use add_meta_meta_box()
+	 * @return void
 	 */
 	public function rcno_book_cover_metabox() {
 		// Add editor metabox for the book cover.
@@ -72,16 +64,28 @@ class Rcno_Admin_Book_Cover {
 
 	/**
 	 * Builds and display the metabox UI.
-	 * @param $review
+	 *
+	 * @since 1.0.0
+	 * @param object $review
+	 * @return void
 	 */
 	public function do_rcno_book_cover_metabox( $review ) {
 		include __DIR__ . '/views/rcno-book-cover-metabox.php';
 	}
 
 	/**
-	 * Saves all the book data on the review edit screen.
+	 * Checks the presence of, sanitizes then saves all the book cover metadata on the review edit screen.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @use update_post_meta()
+	 * @use sanitize_text_field()
+	 *
+	 * @param int $review_id
+	 * @param array $data
+	 * @param mixed $review
+	 *
+	 * @return void
 	 */
 	public function rcno_save_book_cover_metadata( $review_id, $data, $review = null ) {
 
