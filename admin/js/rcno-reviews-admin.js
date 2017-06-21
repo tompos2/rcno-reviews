@@ -66,9 +66,10 @@
     });
 
     $(function () {
-        $('img.template-label-image.checked').click(function() {
-            console.log( $(this) );
-            $(this).addClass('checked');
+        $('.template-label-image').click(function() {
+            var x = $(this);
+            $('.template-label-image').removeClass('checked');
+            $(x).addClass('checked');
         });
     });
 

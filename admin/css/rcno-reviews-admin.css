@@ -28,6 +28,10 @@
     content: url('../images/logo-20.png');
 }
 
+.menu-icon-rcno_review a .wp-menu-image.svg {
+    background-size: 14px auto !important;
+}
+
 button.button.reset-button {
     background: red;
     color: #fff;
@@ -208,7 +212,7 @@ tr.rcno_review_template>td {
 }
 
 tr.rcno_review_template>td .template-options img.template-label-image.checked {
-    border: 5px solid #4CAF50;
+    border: 5px solid rgba(30,140,190,.8);
     box-sizing: border-box;
 }
 
@@ -251,23 +255,21 @@ tr.rcno_review_slug_instructions>th {
     position: relative;
 }
 
+.label-container:hover .template-label-info {
+    transform: translateY(-62px);
+}
+
 .template-label-info {
     position: absolute;
     width: 100%;
-    bottom: -59px;
-    height: 302px;
+    bottom: -25px;
+    height: 30px;
     transition: cubic-bezier(0.55, 0.06, 0.68, 0.19) 0.2s;
 }
 
-.template-label-info:hover {
-    bottom: 0;
-}
-
 .template-label-p {
-    background: #4caf50;
-    padding: 5px;
+    background: rgba(30,140,190,.8);
+    padding: 5px 10px;
     color: #fff;
-    margin: 238px 0 0 0;
+    margin: 0;
 }
-
-.label-container .template-label-info:hover {}
