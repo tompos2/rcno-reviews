@@ -96,7 +96,7 @@ class Rcno_Template_Tags {
 			$include_path = get_stylesheet_directory() . '/rcno-templates/' . preg_replace('/^local\_/', '', $layout ) . '/functions.php';
 		} else {
 			// Global layout.
-			$include_path = plugin_dir_path( __FILE__ )  . 'templates/' . $layout . '/functions.php';
+			$include_path = plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/functions.php';
 		}
 
 		// Check if the layout file really exists.
@@ -106,7 +106,7 @@ class Rcno_Template_Tags {
 		}
 	}
 
-	/** ****************************************************************************
+	/******************************************************************************
 	 * FULL BOOK DETAILS TEMPLATE TAGS
 	 *******************************************************************************/
 
@@ -117,14 +117,14 @@ class Rcno_Template_Tags {
 	 * @param int $review_id
 	 * @return string
 	 */
-	public function get_the_rcno_full_book_details( $review_id ) {
+	public function get_the_rcno_full_book_details( $review_id, $size ) {
 		$review = get_post_custom( $review_id );
 
 		$out = '';
 		$out .= '<div class="rcno-full-book">'
 		;
 		$out .= '<div class="rcno-full-book-cover">';
-		$out .= $this->get_the_rcno_book_cover( $review_id );
+		$out .= $this->get_the_rcno_book_cover( $review_id, $size );
 		$out .= $this->get_the_rcno_admin_book_rating( $review_id );
 		$out .= '</div>';
 
@@ -156,10 +156,11 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 * @param int $review_id
+	 * @param int $size
 	 * @return void
 	 */
-	public function the_rcno_full_book_details( $review_id ) {
-		echo $this->get_the_rcno_full_book_details( $review_id );
+	public function the_rcno_full_book_details( $review_id, $size ) {
+		echo $this->get_the_rcno_full_book_details( $review_id, $size );
 	}
 
 	/** ****************************************************************************
@@ -243,9 +244,11 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 * @param int $review_id
+	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-lg', 'rcno-book-cover-lg'
+	 * @param bool $wrapper
 	 * @return bool|string
 	 */
-	public function get_the_rcno_book_cover( $review_id, $wrapper = true ) {
+	public function get_the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true ) {
 		$review = get_post_custom( $review_id );
 
 		if ( ! isset( $review['rcno_reviews_book_cover_src'] ) ) {
@@ -253,9 +256,13 @@ class Rcno_Template_Tags {
 		}
 
 		$book_src = $review['rcno_reviews_book_cover_src'][0];
-		if ( '' === $book_src ) {
+		$attachment_id = attachment_url_to_postid( $book_src );
+		$book_src = wp_get_attachment_image_url( $attachment_id, $size );
+
+		if ( false === (bool) $book_src ) {
 			$book_src = Rcno_Reviews_Option::get_option( 'rcno_default_cover', plugin_dir_url( __FILE__ ) . 'images/no-cover.jpg' );
 		}
+
 
 		if ( false === $wrapper) {
 			return $book_src;
@@ -264,10 +271,13 @@ class Rcno_Template_Tags {
 		$book_title = $review['rcno_reviews_book_cover_title'][0];
 		$book_alt = $review['rcno_reviews_book_cover_alt'][0];
 
+		$book_title = $book_title ? esc_attr( $book_title ) : __( 'No Cover Available', 'rcno-reviews' );
+		$book_alt  = $book_alt ? esc_attr( $book_alt ) : __( 'no-book-cover-available', 'rcno-reviews' );
+
 		$out = '';
 		$out .= '<img src="' . esc_attr( $book_src ) . '" ';
-		$out .= 'title="' . esc_attr( $book_title ) . '" ';
-		$out .= 'alt="' . esc_attr( $book_alt ) . '" ';
+		$out .= 'title="' . $book_title . '" ';
+		$out .= 'alt="' . $book_alt . '" ';
 		$out .= 'class="rcno-book-cover"';
 		$out .= '>';
 
@@ -281,8 +291,8 @@ class Rcno_Template_Tags {
 	 * @param int $review_id
 	 * @return void
 	 */
-	public function the_rcno_book_cover( $review_id ) {
-		echo $this->get_the_rcno_book_cover( $review_id );
+	public function the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true ) {
+		echo $this->get_the_rcno_book_cover( $review_id, $size, $wrapper );
 	}
 
 
@@ -444,6 +454,47 @@ class Rcno_Template_Tags {
 	 */
 	public function the_rcno_book_description( $review_id ) {
 		echo $this->get_the_rcno_book_description( $review_id );
+	}
+
+	/** ****************************************************************************
+	 * REVIEW BOOK REVIEW EXCERPT TEMPLATE TAGS
+	 *******************************************************************************/
+	/**
+	 * Gets the provide excerpt for a the book review.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @param int $length
+	 * @return string
+	 */
+	public function get_the_rcno_book_review_excerpt( $review_id, $length = 200 ) {
+		$excerpt = get_the_excerpt( $review_id );
+		$length ++;
+
+		if ( mb_strlen( $excerpt ) > $length ) {
+			$sub_ex   = mb_substr( $excerpt, 0, $length - 5 );
+			$ex_words = explode( ' ', $sub_ex );
+			$ex_cut   = - ( mb_strlen( $ex_words[ count( $ex_words ) - 1 ] ) );
+			if ( $ex_cut < 0 ) {
+				return mb_substr( $sub_ex, 0, $ex_cut ) . '...';
+			} else {
+				return $sub_ex . '...';
+			}
+		} else {
+			return $excerpt;
+		}
+	}
+
+	/**
+	 * Prints the provide excerpt for a book review.
+	 *
+	 * @since 1.0.0
+	 * @param int $review_id
+	 * @param int $length
+	 * @return void
+	 */
+	public function the_rcno_book_review_excerpt( $review_id, $length = 200 ){
+		echo $this->get_the_rcno_book_review_excerpt( $review_id, $length );
 	}
 
 
@@ -677,7 +728,7 @@ class Rcno_Template_Tags {
 		}
 
 		$rating_criteria_count = count( $rating_criteria );
-		$review_summary        = substr(wp_strip_all_tags($this->get_the_rcno_book_review_content( $review_id ), true), 0, 260) . '...';
+		$review_summary        = $this->get_the_rcno_book_review_excerpt( $review_id );
 		$review_box_title      = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
 
 		$score_array = array();
@@ -919,7 +970,7 @@ class Rcno_Template_Tags {
 		$out .= ', "sameAs": ' . '"' . get_bloginfo( 'url' ) .'"';
 		$out .= '}';
 
-		$out .= ', "description": ' . '"' . substr(wp_strip_all_tags($this->get_the_rcno_book_review_content( $review_id ), true), 0, 199) . '"';
+		$out .= ', "description": ' . '"' . $this->get_the_rcno_book_review_excerpt( $review_id ) . '"';
 		$out .= ', "inLanguage": ' . '"' . get_bloginfo( 'language' ) . '"';
 
 		$out .= ', "itemReviewed": {';

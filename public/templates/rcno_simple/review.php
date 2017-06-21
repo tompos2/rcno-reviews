@@ -48,7 +48,7 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
             <div class="book-cover">
                 <?php
                     // Prints the book cover.
-                    $template->the_rcno_book_cover( $review_id );
+                    $template->the_rcno_book_cover( $review_id, 'full' );
 
                     // Prints the book's private 5 star rating.
                     $template->the_rcno_admin_book_rating( $review_id );

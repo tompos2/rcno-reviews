@@ -121,7 +121,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
                     ?>
 
                     <div class="widget-book-cover">
-                    <?php $review->the_rcno_book_cover( $review_id ); ?>
+                    <?php $review->the_rcno_book_cover( $review_id, 'rcno-book-cover-sm' ); ?>
                     <?php $review->the_rcno_admin_book_rating( $review_id ); ?>
                     </div>
                     <div class="widget-book-details">

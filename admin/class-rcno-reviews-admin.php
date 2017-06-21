@@ -275,6 +275,11 @@ class Rcno_Reviews_Admin {
 
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 		$keys = explode( ",", $custom_taxonomies );
+
+		if( ! in_array( 'Author', $keys, true ) ){
+			$keys[] = 'Author'; // This is book review plugin, the book author taxonomy must always be present.
+		}
+
 		$taxonomies = array();
 
 		foreach ( $keys as $key ) {
@@ -408,11 +413,13 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_book_cover_sizes(){
 
-		add_image_size( 'rcno-book-cover-lg', 381, 500 );
+		add_image_size( 'rcno-book-cover-lg', 380, 500, array( 'left', 'top' ) );
+		add_image_size( 'rcno-book-cover-sm', 85, 130, array( 'left', 'top' ) );
 
 		add_filter( 'image_size_names_choose', function ( $sizes ){
 			return array_merge( $sizes, array(
 				'rcno-book-cover-lg' => __( 'Book Cover LG', 'rcno-reviews' ),
+				'rcno-book-cover-sm' => __( 'Book Cover SM', 'rcno-reviews' ),
 			) );
 		} );
 	}

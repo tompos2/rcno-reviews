@@ -40,7 +40,7 @@ $ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 	<?php
 
-	    $template->the_rcno_full_book_details( $review_id );
+	    $template->the_rcno_full_book_details( $review_id, 'full' );
 
 		$template->the_rcno_book_review_content( $review_id );
 
