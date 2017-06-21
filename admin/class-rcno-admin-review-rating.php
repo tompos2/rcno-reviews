@@ -49,7 +49,7 @@ class Rcno_Admin_Review_Rating {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @use add_meta_box()
+	 * @uses add_meta_box()
 	 * @return void
 	 */
 	public function rcno_book_review_rating_metabox() {
@@ -81,9 +81,9 @@ class Rcno_Admin_Review_Rating {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @use update_post_meta()
-	 * @use wp_verify_nonce()
-	 * @use sanitize_text_field()
+	 * @uses update_post_meta()
+	 * @uses wp_verify_nonce()
+	 * @uses sanitize_text_field()
 	 *
 	 * @param int $review_id
 	 * @param array $data

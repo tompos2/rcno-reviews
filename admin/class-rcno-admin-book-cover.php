@@ -47,7 +47,7 @@ class Rcno_Admin_Book_Cover {
 	 * Add the book cover upload metabox.
 	 *
 	 * @since 1.0.0
-	 * @use add_meta_meta_box()
+	 * @uses add_meta_meta_box()
 	 * @return void
 	 */
 	public function rcno_book_cover_metabox() {
@@ -78,8 +78,8 @@ class Rcno_Admin_Book_Cover {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @use update_post_meta()
-	 * @use sanitize_text_field()
+	 * @uses update_post_meta()
+	 * @uses sanitize_text_field()
 	 *
 	 * @param int $review_id
 	 * @param array $data

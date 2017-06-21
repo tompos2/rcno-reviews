@@ -48,7 +48,7 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @use add_meta_meta_box()
+	 * @uses add_meta_meta_box()
 	 * @return void
 	 */
 	public function rcno_book_description_metabox() {
@@ -90,8 +90,8 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @use update_post_meta()
-	 * @use sanitize_post_field()
+	 * @uses update_post_meta()
+	 * @uses sanitize_post_field()
 	 *
 	 * @param int $review_id
 	 * @param array $data
