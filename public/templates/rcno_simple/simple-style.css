@@ -233,3 +233,12 @@
     box-shadow: none !important;
 }
 
+ul.rcno-alphabet-navigation {
+    list-style: none;
+	display: flex;
+}
+
+ul.rcno-alphabet-navigation li {
+    flex-basis: 4%;
+}
+
