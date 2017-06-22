@@ -117,7 +117,7 @@ class Rcno_Template_Tags {
 	 * @param int $review_id
 	 * @return string
 	 */
-	public function get_the_rcno_full_book_details( $review_id, $size ) {
+	public function get_the_rcno_full_book_details( $review_id, $size = 'medium' ) {
 		$review = get_post_custom( $review_id );
 
 		$out = '';
@@ -159,7 +159,7 @@ class Rcno_Template_Tags {
 	 * @param int $size
 	 * @return void
 	 */
-	public function the_rcno_full_book_details( $review_id, $size ) {
+	public function the_rcno_full_book_details( $review_id, $size = 'medium' ) {
 		echo $this->get_the_rcno_full_book_details( $review_id, $size );
 	}
 
