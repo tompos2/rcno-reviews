@@ -58,7 +58,14 @@
 
     $(function() {
         $('.rcno-color-input').wpColorPicker();
+
         $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]').selectize({
+            create: true,
+            plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+
+        });
+
+        $('#rcno_reviews_settings\\[rcno_store_purchase_links\\]').selectize({
             create: true,
             plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
 

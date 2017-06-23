@@ -23,8 +23,6 @@ $template = new Rcno_Template_Tags( $plugin_name, $version );
 $review_score_enable = (bool) get_post_meta( $review_id, 'rcno_review_score_enable', true );
 $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position', true );
 
-//$ratings = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
-
 ?>
 
 <?php if ( $template->is_review_embedded() ) : ?>
@@ -47,6 +45,9 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
         <?php
             // Prints the book review content.
             $template->the_rcno_book_review_content( $review_id );
+
+            // Prints the book purchase links.
+            $template->the_rcno_book_purchase_links( $review_id );
 	    ?>
 
         <?php if ( true === $review_score_enable && 'bottom' === $review_score_position ) : ?>

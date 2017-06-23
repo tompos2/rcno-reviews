@@ -1,12 +1,14 @@
 <?php
 
 $buy_links = get_post_meta( $review->ID, 'rcno_review_buy_links', true );
-$stores = array(
-	'amazon' => 'Amazon',
-	'barnes-noble' => 'Barnes &amp; Noble',
-	'nook' => 'Nook',
-	'kobo' => 'Kobo',
-);
+
+$_stores = Rcno_Reviews_Option::get_option('rcno_store_purchase_links');
+$_stores = explode( ",", $_stores );
+
+$stores = array();
+foreach ( $_stores as $store) {
+	$stores[ sanitize_title( $store ) ] = $store;
+}
 
 wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonce' );
 

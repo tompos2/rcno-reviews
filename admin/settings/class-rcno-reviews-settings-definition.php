@@ -353,6 +353,29 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'checkbox'
 				),
 
+				// Purchase Links.
+				'components_tab_header_3'         => array(
+					'name' => '<strong>' . __( 'Book Purchase Links', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_enable_purchase_links'    => array(
+					'name' => __( 'Enable Purchase Links' , self::$plugin_name ),
+					'desc' => __( 'Enable the use of book purchase links', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_store_purchase_links'    => array(
+					'name' => __( 'Store/Shop', self::$plugin_name ),
+					'desc' => __( 'Enter the name of stores to purchase books from.', self::$plugin_name ),
+					'std'  => 'Amazon,Barnes & Noble,Kobo',
+					'type' => 'text'
+				),
+				'rcno_store_purchase_link_background'    => array(
+					'name' => __( 'Background Color', self::$plugin_name ),
+					'desc' => __( 'Background Color for the purchase button.', self::$plugin_name ),
+					'type' => 'color'
+				),
+
+				// Review score box.
 				'components_tab_header_2'         => array(
 					'name' => '<strong>' . __( 'Book Review Score Box', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
@@ -378,6 +401,7 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'color'
 				),
 
+				// Custom widgets.
 				'components_tab_header_1'         => array(
 					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',
 					'type' => 'header'

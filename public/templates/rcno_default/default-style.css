@@ -31,7 +31,6 @@
 }
 
 #rcno-review-score-box .review-summary .review-text {
-    width: 78%;
     width: calc(100% - 150px);
     display: inline-block;
 }

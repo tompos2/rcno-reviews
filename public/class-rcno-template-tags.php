@@ -630,6 +630,53 @@ class Rcno_Template_Tags {
 	}
 
 	/** ****************************************************************************
+	 * REVIEW BOOK PURCHASE LINKS TEMPLATE TAGS
+	 *******************************************************************************/
+
+	public function get_the_rcno_book_purchase_links( $review_id, $label = false ) {
+
+		// Disables the purchase links displaying on reviews.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_purchase_links' ) ) {
+			return false;
+		}
+
+		$purchase_links = get_post_meta( $review_id, 'rcno_review_buy_links', true );
+
+		if ( ! $purchase_links ) {
+			return false;
+		}
+
+		$background = Rcno_Reviews_Option::get_option('rcno_store_purchase_link_background');
+		$_stores = Rcno_Reviews_Option::get_option('rcno_store_purchase_links');
+		$_stores = explode( ",", $_stores );
+
+		$stores = array();
+		foreach ( $_stores as $store) {
+			$stores[ sanitize_title( $store ) ] = $store;
+		}
+
+		$links = '';
+		$links .= '<div class="rcno-purchase-links-container">';
+
+		if ( $label ) {
+			$links .= '<span>' . __( 'Purchase on: ', 'rcno-reviews' ) . '</span>';
+		}
+
+		foreach ( $purchase_links as $value ) {
+			$links .= '<a href="' . esc_url( $value['link'] ) . '" class="rcno-purchase-links '
+			          . sanitize_html_class( $value['store'] ) . '"' . ' style="background:' . $background . '" rel="nofollow"' . ' >';
+			$links .= sanitize_text_field( $stores[ $value['store'] ] );
+			$links .= '</a> ';
+		}
+		$links .= '</div>';
+		return $links;
+	}
+
+	public function the_rcno_book_purchase_links( $review_id, $label = false  ) {
+		echo $this->get_the_rcno_book_purchase_links( $review_id, $label );
+	}
+
+	/** ****************************************************************************
 	 * REVIEW BOOK REVIEW SCORE TEMPLATE TAGS
 	 *******************************************************************************/
 

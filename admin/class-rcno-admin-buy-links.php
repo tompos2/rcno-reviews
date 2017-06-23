@@ -52,8 +52,9 @@ class Rcno_Admin_Buy_Links {
 	 * @return bool
 	 */
 	public function rcno_book_buy_links_metabox() {
-		// Disables the review score metabox displaying on review edit screen.
-		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
+
+		// Disables the purchase links metabox displaying on review edit screen.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_purchase_links' ) ) {
 			return false;
 		}
 
@@ -91,6 +92,7 @@ class Rcno_Admin_Buy_Links {
 	 * @uses delete_post_meta()
 	 * @uses wp_verify_nonce()
 	 * @uses sanitize_text_field()
+	 * @uses esc_url()
 	 *
 	 * @param int $review_id
 	 * @param array $data
@@ -109,9 +111,9 @@ class Rcno_Admin_Buy_Links {
 		$count = count( $stores );
 
 		for ( $i = 0; $i < $count; $i++ ) {
-			if ( '' !== $links[$i]  ) {
+			if ( '' !== $links[$i]  ) { // Don't save an item if a link is not provided.
 				$new[ $i ]['store'] = sanitize_text_field( $stores[ $i ] );
-				$new[ $i ]['link']  = sanitize_text_field( $links[ $i ] );
+				$new[ $i ]['link']  = esc_url( $links[ $i ] );
 			}
 		}
 
