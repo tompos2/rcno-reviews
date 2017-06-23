@@ -238,6 +238,9 @@ class Rcno_Reviews {
 		// Load the '5 Star Rating' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_review_rating, 'rcno_book_review_rating_metabox' );
 
+		// Load the 'Purchase Links' metabox on the review post edit screen.
+		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->buy_links, 'rcno_book_buy_links_metabox' );
+
 		// Save book review.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'rcno_save_review', 10, 2 );
 

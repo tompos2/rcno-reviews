@@ -1,0 +1,126 @@
+<?php
+/**
+ * Handles the creation, storage and sanitation of buy links for the reviewed book.
+ *
+ * @package    Rcno_Reviews
+ * @subpackage Rcno_Reviews/admin
+ * @author     wzyMedia <wzy@outlook.com>
+ */
+
+class Rcno_Admin_Buy_Links {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $version The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since   1.0.0
+	 *
+	 * @param   string $plugin_name
+	 * @param   string $version
+	 */
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+	}
+
+	/**
+	 * Add a metabox for the book's review criteria based scoring information.
+	 * This feature can disabled via the plugin's setting page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @uses add_meta_box()
+	 *
+	 * @return bool
+	 */
+	public function rcno_book_buy_links_metabox() {
+		// Disables the review score metabox displaying on review edit screen.
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
+			return false;
+		}
+
+		add_meta_box(
+			'rcno_book_buy_links_metabox',
+			__( 'Purchase Links', 'rcno-reviews' ),
+			array( $this, 'do_rcno_book_buy_links_metabox' ),
+			'rcno_review',
+			'normal',
+			'high'
+		);
+
+		return true;
+	}
+
+	/**
+	 * Builds and display the metabox UI.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param object $review
+	 * @return void
+	 */
+	public function do_rcno_book_buy_links_metabox( $review ) {
+		include __DIR__ . '/views/rcno-buy_links-metabox.php';
+	}
+
+	/**
+	 * Fetches, sanitizes, delete and saves the book's criteria based scoring information
+	 *
+	 * @since 1.0.0
+	 *
+	 * @uses get_post_meta()
+	 * @uses update_post_meta()
+	 * @uses delete_post_meta()
+	 * @uses wp_verify_nonce()
+	 * @uses sanitize_text_field()
+	 *
+	 * @param int $review_id
+	 * @param array $data
+	 * @param mixed $review
+	 *
+	 * @return void
+	 */
+	public function rcno_save_book_buy_links_metadata( $review_id, $data, $review = null ) {
+
+		$old = get_post_meta( $review_id, 'rcno_review_buy_links', true);
+		$new = array();
+
+		$stores = isset( $data['store'] ) ? $data['store'] : array();
+		$links = isset( $data['link'] ) ? $data['link'] : array();
+
+		$count = count( $stores );
+
+		for ( $i = 0; $i < $count; $i++ ) {
+			if ( '' !== $links[$i]  ) {
+				$new[ $i ]['store'] = sanitize_text_field( $stores[ $i ] );
+				$new[ $i ]['link']  = sanitize_text_field( $links[ $i ] );
+			}
+		}
+
+		if ( ! empty( $new ) && $new !== $old ) {
+			update_post_meta( $review_id, 'rcno_review_buy_links', $new );
+		} elseif ( empty( $new ) && $old ) {
+			delete_post_meta( $review_id, 'rcno_review_buy_links', $old );
+		}
+
+	}
+
+}

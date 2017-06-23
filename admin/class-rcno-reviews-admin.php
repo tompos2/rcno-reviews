@@ -89,6 +89,14 @@ class Rcno_Reviews_Admin {
 	public $book_review_rating;
 
 	/**
+	 * Instance of the Rcno_Admin_Buy_Links class handling the purchase links.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public $buy_links;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * The constructor also imports and initializes the classes related to controlling
@@ -120,6 +128,9 @@ class Rcno_Reviews_Admin {
 
 		require_once __DIR__ . '/class-rcno-admin-review-rating.php';
 		$this->book_review_rating = new Rcno_Admin_Review_Rating( $this->plugin_name, $this->version );
+
+		require_once __DIR__ . '/class-rcno-admin-buy-links.php';
+		$this->buy_links = new Rcno_Admin_Buy_Links( $this->plugin_name, $this->version );
 	}
 
 	/**
@@ -597,6 +608,7 @@ class Rcno_Reviews_Admin {
 				$this->book_general_info->rcno_save_book_general_info_metadata( $review_id, $data, $review );
 				$this->book_review_score->rcno_save_book_review_score_metadata( $review_id, $data, $review );
 				$this->book_review_rating->rcno_save_book_review_rating_metadata( $review_id, $data, $review );
+				$this->buy_links->rcno_save_book_buy_links_metadata( $review_id, $data, $review );
 
 				wp_update_post( $review );
 
