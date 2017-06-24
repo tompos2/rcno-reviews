@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Handles the creation, storage and sanitation of buy links for the reviewed book.
  *
@@ -6,7 +7,6 @@
  * @subpackage Rcno_Reviews/admin
  * @author     wzyMedia <wzy@outlook.com>
  */
-
 class Rcno_Admin_Buy_Links {
 
 	/**
@@ -14,7 +14,7 @@ class Rcno_Admin_Buy_Links {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -38,7 +38,7 @@ class Rcno_Admin_Buy_Links {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Rcno_Admin_Buy_Links {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses add_meta_box()
+	 * @uses  add_meta_box()
 	 *
 	 * @return bool
 	 */
@@ -76,6 +76,7 @@ class Rcno_Admin_Buy_Links {
 	 * @since 1.0.0
 	 *
 	 * @param object $review
+	 *
 	 * @return void
 	 */
 	public function do_rcno_book_buy_links_metabox( $review ) {
@@ -87,14 +88,14 @@ class Rcno_Admin_Buy_Links {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses get_post_meta()
-	 * @uses update_post_meta()
-	 * @uses delete_post_meta()
-	 * @uses wp_verify_nonce()
-	 * @uses sanitize_text_field()
-	 * @uses esc_url()
+	 * @uses  get_post_meta()
+	 * @uses  update_post_meta()
+	 * @uses  delete_post_meta()
+	 * @uses  wp_verify_nonce()
+	 * @uses  sanitize_text_field()
+	 * @uses  esc_url()
 	 *
-	 * @param int $review_id
+	 * @param int   $review_id
 	 * @param array $data
 	 * @param mixed $review
 	 *
@@ -102,16 +103,16 @@ class Rcno_Admin_Buy_Links {
 	 */
 	public function rcno_save_book_buy_links_metadata( $review_id, $data, $review = null ) {
 
-		$old = get_post_meta( $review_id, 'rcno_review_buy_links', true);
+		$old = get_post_meta( $review_id, 'rcno_review_buy_links', true );
 		$new = array();
 
 		$stores = isset( $data['store'] ) ? $data['store'] : array();
-		$links = isset( $data['link'] ) ? $data['link'] : array();
+		$links  = isset( $data['link'] ) ? $data['link'] : array();
 
 		$count = count( $stores );
 
-		for ( $i = 0; $i < $count; $i++ ) {
-			if ( '' !== $links[$i]  ) { // Don't save an item if a link is not provided.
+		for ( $i = 0; $i < $count; $i ++ ) {
+			if ( '' !== $links[ $i ] ) { // Don't save an item if a link is not provided.
 				$new[ $i ]['store'] = sanitize_text_field( $stores[ $i ] );
 				$new[ $i ]['link']  = esc_url( $links[ $i ] );
 			}

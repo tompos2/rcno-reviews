@@ -1,5 +1,5 @@
 <?php
-    $book_rating = get_post_meta( $review->ID, 'rcno_admin_rating', true );
+$book_rating = get_post_meta( $review->ID, 'rcno_admin_rating', true );
 ?>
 
 <div class="rcno-rate">

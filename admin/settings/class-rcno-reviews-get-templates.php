@@ -75,10 +75,10 @@ class Rcno_Reviews_Get_Templates {
 
 		$this->layouts[ $file ]['description'] = isset( $params['Description'] ) ? $params['Description'] : '';
 		$this->layouts[ $file ]['title']       = isset( $params['Layout Name'] ) ? $params['Layout Name'] : '';
-		$this->layouts[ $file ]['author']      = isset( $params['Author'] )      ? $params['Author']      : '';
+		$this->layouts[ $file ]['author']      = isset( $params['Author'] ) ? $params['Author'] : '';
 		$this->layouts[ $file ]['author_mail'] = isset( $params['Author Mail'] ) ? $params['Author Mail'] : '';
-		$this->layouts[ $file ]['author_url']  = isset( $params['Author URL'] )  ? $params['Author URL']  : '';
-		$this->layouts[ $file ]['version']     = isset( $params['Version'] )     ? $params['Version']     : '';
+		$this->layouts[ $file ]['author_url']  = isset( $params['Author URL'] ) ? $params['Author URL'] : '';
+		$this->layouts[ $file ]['version']     = isset( $params['Version'] ) ? $params['Version'] : '';
 		if ( file_exists( $dir_name . $file . '/logo.png' ) ) {
 			$this->layouts[ $file ]['logo'] = $this->layouts[ $file ]['url'] . '/logo.png';
 		} else {
@@ -100,18 +100,18 @@ function rcno_file_comment( $entry ) {
 }
 
 $templates = new Rcno_Reviews_Get_Templates();
-$layouts = $templates->layouts;
+$layouts   = $templates->layouts;
 
 function layout_list() {
 
 	$templates = new Rcno_Reviews_Get_Templates();
-	$layouts = $templates->layouts;
+	$layouts   = $templates->layouts;
 
 	$list = array();
 
-	foreach ($layouts as $layout) {
-		$name = strtolower( str_replace( ' ', '_', $layout['title'] ) );
-		$list[$name] = array(
+	foreach ( $layouts as $layout ) {
+		$name          = strtolower( str_replace( ' ', '_', $layout['title'] ) );
+		$list[ $name ] = array(
 			'screenshot' => $layout['screenshot'],
 			'title'      => $layout['title'],
 			'author'     => $layout['author'],

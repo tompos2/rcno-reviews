@@ -43,5 +43,4 @@ class Rcno_Reviews_i18n {
 	}
 
 
-
 }

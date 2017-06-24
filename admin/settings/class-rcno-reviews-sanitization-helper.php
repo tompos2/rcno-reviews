@@ -14,27 +14,27 @@ class Rcno_Reviews_Sanitization_Helper {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since 	1.0.0
-	 * @access 	private
-	 * @var 	string 		$plugin_name 	The ID of this plugin.
+	 * @since     1.0.0
+	 * @access    private
+	 * @var    string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
 	/**
 	 * The array of plugin settings.
 	 *
-	 * @since 	1.0.0
-	 * @access 	private
-	 * @var 	array 		$registered_settings 	The array of plugin settings.
+	 * @since     1.0.0
+	 * @access    private
+	 * @var    array $registered_settings The array of plugin settings.
 	 */
 	private $registered_settings;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since 	1.0.0
-	 * @var 	string 		$plugin_name 			The name of this plugin.
-	 * @var 	string 		$version 				The version of this plugin.
+	 * @since    1.0.0
+	 * @var    string $plugin_name The name of this plugin.
+	 * @var    string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name ) {
 
@@ -64,9 +64,11 @@ class Rcno_Reviews_Sanitization_Helper {
 	 * - plugin_name_settings_on_change_<tab_slug>
 	 * - plugin_name_settings_on_change_<field_key>
 	 *
-	 * @since 	1.0.0
-	 * @param 	array 		$input 		The value inputted in the field
-	 * @return 	mixed 		$input 		Sanitizied value
+	 * @since    1.0.0
+	 *
+	 * @param    array $input The value inputted in the field
+	 *
+	 * @return    mixed        $input        Sanitizied value
 	 */
 	public function settings_sanitize( $input = array() ) {
 
@@ -85,9 +87,9 @@ class Rcno_Reviews_Sanitization_Helper {
 
 		// Loop through each setting being saved and pass it through a sanitization filter
 		foreach ( $input as $key => $value ) {
-			$new_value = $value; // set value of $value in $new_value
-			$input[$key] = $this->apply_type_filter( $input, $tab, $key );
-			$input[$key] = $this->apply_general_filter( $input, $key );
+			$new_value     = $value; // set value of $value in $new_value
+			$input[ $key ] = $this->apply_type_filter( $input, $tab, $key );
+			$input[ $key ] = $this->apply_general_filter( $input, $key );
 			$this->do_settings_on_key_change_hook( $key, $new_value );
 
 		}
@@ -100,18 +102,18 @@ class Rcno_Reviews_Sanitization_Helper {
 	private function apply_type_filter( $input, $tab, $key ) {
 
 		// Get the setting type (checkbox, select, etc)
-		$type = isset( $this->registered_settings[$tab][$key]['type'] ) ? $this->registered_settings[$tab][$key]['type'] : false;
+		$type = isset( $this->registered_settings[ $tab ][ $key ]['type'] ) ? $this->registered_settings[ $tab ][ $key ]['type'] : false;
 
 		if ( false === $type ) {
-			return $input[$key];
+			return $input[ $key ];
 		}
 
-		return apply_filters( 'rcno_reviews_settings_sanitize_' . $type, $input[$key], $key );
+		return apply_filters( 'rcno_reviews_settings_sanitize_' . $type, $input[ $key ], $key );
 	}
 
 	private function apply_general_filter( $input, $key ) {
 
-		return apply_filters( 'rcno_reviews_settings_sanitize', $input[$key], $key );
+		return apply_filters( 'rcno_reviews_settings_sanitize', $input[ $key ], $key );
 	}
 
 	// Key specific on change hook
@@ -119,9 +121,9 @@ class Rcno_Reviews_Sanitization_Helper {
 
 		$old_plugin_settings = get_option( 'rcno_reviews_settings' );
 		//checks if value is saved already in $old_plugin_settings
-		if ( isset($old_plugin_settings[$key]) && $old_plugin_settings[$key] !== $new_value ) {
+		if ( isset( $old_plugin_settings[ $key ] ) && $old_plugin_settings[ $key ] !== $new_value ) {
 
-			do_action( 'rcno_reviews_settings_on_change_' . $key, $new_value, $old_plugin_settings[$key] );
+			do_action( 'rcno_reviews_settings_on_change_' . $key, $new_value, $old_plugin_settings[ $key ] );
 
 		}
 	}
@@ -130,11 +132,11 @@ class Rcno_Reviews_Sanitization_Helper {
 	private function do_settings_on_change_hook( $new_values, $tab ) {
 
 		$old_plugin_settings = get_option( 'rcno_reviews_settings' );
-		$changed = false;
+		$changed             = false;
 
-		foreach( $new_values as $key => $new_value ) {
+		foreach ( $new_values as $key => $new_value ) {
 
-			if ( isset($old_plugin_settings[$key]) && $old_plugin_settings[$key] !== $new_value ) {
+			if ( isset( $old_plugin_settings[ $key ] ) && $old_plugin_settings[ $key ] !== $new_value ) {
 				$changed = true;
 			}
 		}
@@ -146,8 +148,8 @@ class Rcno_Reviews_Sanitization_Helper {
 		}
 	}
 
-	private function not_empty_or_zero( $var ){
-		  return ( !empty( $var ) || '0' == $var );
+	private function not_empty_or_zero( $var ) {
+		return ( ! empty( $var ) || '0' == $var );
 	}
 
 	// Loop through the whitelist and unset any that are empty for the tab being saved
@@ -155,16 +157,19 @@ class Rcno_Reviews_Sanitization_Helper {
 
 		$old_plugin_settings = get_option( 'rcno_reviews_settings' );
 
-		if(!is_array($old_plugin_settings))
+		if ( ! is_array( $old_plugin_settings ) ) {
 			$old_plugin_settings = array();
+		}
 
 		// Remove empty elements
-		$input = array_filter( $input, array( $this, 'not_empty_or_zero') );
-		foreach ( $this->registered_settings[$tab] as $key => $_value ) {
+		$input = array_filter( $input, array( $this, 'not_empty_or_zero' ) );
+		foreach ( $this->registered_settings[ $tab ] as $key => $_value ) {
 
-			if ( ! isset( $input[$key] ) ) {
+			if ( ! isset( $input[ $key ] ) ) {
 				$this->do_settings_on_key_change_hook( $key, null );
-				if(isset($old_plugin_settings[$key])){unset( $old_plugin_settings[$key] );}
+				if ( isset( $old_plugin_settings[ $key ] ) ) {
+					unset( $old_plugin_settings[ $key ] );
+				}
 			}
 		}
 
@@ -175,9 +180,11 @@ class Rcno_Reviews_Sanitization_Helper {
 	/**
 	 * Sanitize text fields
 	 *
-	 * @since 	1.0.0
-	 * @param 	array 		$input 		The field value
-	 * @return 	string 		$input 		Sanitized value
+	 * @since    1.0.0
+	 *
+	 * @param    array $input The field value
+	 *
+	 * @return    string        $input        Sanitized value
 	 */
 	public function sanitize_text_field( $input ) {
 
@@ -187,9 +194,11 @@ class Rcno_Reviews_Sanitization_Helper {
 	/**
 	 * Sanitize email fields
 	 *
-	 * @since 	1.0.0
-	 * @param 	array 	$input 				The field value
-	 * @return 	string 	$sanitizes_email 	Sanitizied email, return empty string if not is_email()
+	 * @since    1.0.0
+	 *
+	 * @param    array $input The field value
+	 *
+	 * @return    string    $sanitizes_email    Sanitizied email, return empty string if not is_email()
 	 */
 	public function sanitize_email_field( $input ) {
 
@@ -206,13 +215,15 @@ class Rcno_Reviews_Sanitization_Helper {
 	 * Sanitize checkbox fields
 	 * From WordPress SEO by Yoast class-wpsep-options.php
 	 *
-	 * @since 	1.0.0
-	 * @param 	array 		$input 		The field value
-	 * @return 	string 		$input 		'1' if true, empty string otherwise
+	 * @since    1.0.0
+	 *
+	 * @param    array $input The field value
+	 *
+	 * @return    string        $input        '1' if true, empty string otherwise
 	 */
 	public function sanitize_checkbox_field( $input ) {
 
-		$true  = array(
+		$true = array(
 			'1',
 			'true',
 			'True',
@@ -225,7 +236,7 @@ class Rcno_Reviews_Sanitization_Helper {
 			'on',
 			'On',
 			'ON',
-			);
+		);
 
 		// String
 		if ( is_string( $input ) ) {
@@ -260,12 +271,12 @@ class Rcno_Reviews_Sanitization_Helper {
 	 * Not to be confused with the old native WP function
 	 * From WordPress SEO by Yoast class-wpsep-options.php
 	 *
-	 * @since 	1.0.0
+	 * @since    1.0.0
 	 *
-	 * @param 	string 		$input
-	 * @param 	array  		$allowed_protocols
+	 * @param    string $input
+	 * @param    array  $allowed_protocols
 	 *
-	 * @return 	string 		URL that safe to use in database queries, redirects and HTTP requests.
+	 * @return    string        URL that safe to use in database queries, redirects and HTTP requests.
 	 */
 	public function sanitize_url_field( $input, $allowed_protocols = array( 'http', 'https' ) ) {
 

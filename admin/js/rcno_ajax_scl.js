@@ -8,7 +8,7 @@
  */
 var rcnoListingsSc;
 
-( function( $ ) {
+(function ($) {
     var editor,
         inputs = {},
         isTouch = ( 'ontouchend' in document );
@@ -21,75 +21,75 @@ var rcnoListingsSc;
         lastSearch: '',
         textarea: '',
 
-        init: function() {
+        init: function () {
             inputs.wrap = $('#rcno-modal-wrap-scl');
-            inputs.dialog = $( '#rcno-modal-form-scl' );
-            inputs.backdrop = $( '#rcno-modal-backdrop-scl' );
-            inputs.submit = $( '#rcno-modal-submit-scl' );
-            inputs.close = $( '#rcno-modal-close-scl' );
+            inputs.dialog = $('#rcno-modal-form-scl');
+            inputs.backdrop = $('#rcno-modal-backdrop-scl');
+            inputs.submit = $('#rcno-modal-submit-scl');
+            inputs.close = $('#rcno-modal-close-scl');
             // URL
-            inputs.id = $( '#review-id-field' );
-            inputs.nonce = $( '#rcno_ajax_nonce' );
+            inputs.id = $('#review-id-field');
+            inputs.nonce = $('#rcno_ajax_nonce');
             // Secondary options
-            inputs.title = $( '#review-title-field' );
+            inputs.title = $('#review-title-field');
             // Advanced Options
-            inputs.taxonomy =$( '#review-taxonomy' );
+            inputs.taxonomy = $('#review-taxonomy');
 
             // Bind event handlers
-            inputs.dialog.keydown( rcnoListingsSc.keydown );
-            inputs.dialog.keyup( rcnoListingsSc.keyup );
-            inputs.submit.click( function( event ) {
+            inputs.dialog.keydown(rcnoListingsSc.keydown);
+            inputs.dialog.keyup(rcnoListingsSc.keyup);
+            inputs.submit.click(function (event) {
                 event.preventDefault();
                 rcnoListingsSc.update();
             });
-            inputs.close.add( inputs.backdrop ).add( '#rcno-modal-cancel-scl a' ).click( function( event ) {
+            inputs.close.add(inputs.backdrop).add('#rcno-modal-cancel-scl a').click(function (event) {
                 event.preventDefault();
                 rcnoListingsSc.close();
             });
-            $('body').on('click', '#review-taxonomy',  function( event ){
+            $('body').on('click', '#review-taxonomy', function (event) {
                 event.preventDefault();
                 $('input:radio[name=rcno-modal-scl-mode]')[0].checked = true;
             });
 
             /* Button to open the modal dialog */
-            $('body').on('click', '#rcno-add-listings-button', function(event) {
+            $('body').on('click', '#rcno-add-listings-button', function (event) {
                 console.log('Listings');
-                editor_id = jQuery('#rcno-add-listings-button').attr( "data_editor" );
-                window.rcnoListingsSc.open( editor_id );
+                editor_id = jQuery('#rcno-add-listings-button').attr("data_editor");
+                window.rcnoListingsSc.open(editor_id);
             });
         },
 
-        open: function( editorId ) {
+        open: function (editorId) {
             var ed;
 
 
             rcnoListingsSc.range = null;
 
-            if ( editorId ) {
+            if (editorId) {
                 window.wpActiveEditor = editorId;
             }
 
-            if ( ! window.wpActiveEditor ) {
+            if (!window.wpActiveEditor) {
                 return;
             }
 
-            this.textarea = $( '#' + window.wpActiveEditor ).get( 0 );
+            this.textarea = $('#' + window.wpActiveEditor).get(0);
 
-            if ( typeof tinymce !== 'undefined' ) {
-                ed = tinymce.get( wpActiveEditor );
+            if (typeof tinymce !== 'undefined') {
+                ed = tinymce.get(wpActiveEditor);
 
-                if ( ed && ! ed.isHidden() ) {
+                if (ed && !ed.isHidden()) {
                     editor = ed;
                 } else {
                     editor = null;
                 }
 
-                if ( editor && tinymce.isIE ) {
+                if (editor && tinymce.isIE) {
                     editor.windowManager.bookmark = editor.selection.getBookmark();
                 }
             }
 
-            if ( ! rcnoListingsSc.isMCE() && document.selection ) {
+            if (!rcnoListingsSc.isMCE() && document.selection) {
                 this.textarea.focus();
                 this.range = document.selection.createRange();
             }
@@ -98,25 +98,25 @@ var rcnoListingsSc;
             inputs.backdrop.show();
 
             rcnoListingsSc.refresh();
-            $( document ).trigger( 'rcnoListingsSc-open', inputs.wrap );
+            $(document).trigger('rcnoListingsSc-open', inputs.wrap);
         },
 
-        isMCE: function() {
-            return editor && ! editor.isHidden();
+        isMCE: function () {
+            return editor && !editor.isHidden();
         },
 
-        refresh: function() {
+        refresh: function () {
 //		// Refresh rivers (clear links, check visibility)
 //		rivers.search.refresh();
 //		rivers.recent.refresh();
 
-            if ( rcnoListingsSc.isMCE() ) {
+            if (rcnoListingsSc.isMCE()) {
                 rcnoListingsSc.mceRefresh();
             } else {
                 rcnoListingsSc.setDefaultValues();
             }
 
-            if ( isTouch ) {
+            if (isTouch) {
                 // Close the onscreen keyboard
                 inputs.id.focus().blur();
             } else {
@@ -128,18 +128,18 @@ var rcnoListingsSc;
 
         },
 
-        mceRefresh: function() {
+        mceRefresh: function () {
             var e;
 
             // If link exists, select proper values.
-            if ( e = editor.dom.getParent( editor.selection.getNode(), 'A' ) ) {
+            if (e = editor.dom.getParent(editor.selection.getNode(), 'A')) {
                 // Set URL and description.
-                inputs.id.val( editor.dom.getAttrib( e, 'href' ) );
-                inputs.title.val( editor.dom.getAttrib( e, 'title' ) );
+                inputs.id.val(editor.dom.getAttrib(e, 'href'));
+                inputs.title.val(editor.dom.getAttrib(e, 'title'));
                 // Set open in new tab.
-                inputs.openInNewTab.prop( 'checked', ( '_blank' === editor.dom.getAttrib( e, 'target' ) ) );
+                inputs.openInNewTab.prop('checked', ( '_blank' === editor.dom.getAttrib(e, 'target') ));
                 // Update save prompt.
-                inputs.submit.val( rcnoListingsScL10n.update );
+                inputs.submit.val(rcnoListingsScL10n.update);
 
                 // If there's no link, set the default values.
             } else {
@@ -147,12 +147,12 @@ var rcnoListingsSc;
             }
         },
 
-        close: function() {
-            if ( ! rcnoListingsSc.isMCE() ) {
+        close: function () {
+            if (!rcnoListingsSc.isMCE()) {
                 rcnoListingsSc.textarea.focus();
 
-                if ( rcnoListingsSc.range ) {
-                    rcnoListingsSc.range.moveToBookmark( rcnoListingsSc.range.getBookmark() );
+                if (rcnoListingsSc.range) {
+                    rcnoListingsSc.range.moveToBookmark(rcnoListingsSc.range.getBookmark());
                     rcnoListingsSc.range.select();
                 }
             } else {
@@ -161,34 +161,34 @@ var rcnoListingsSc;
 
             inputs.backdrop.hide();
             inputs.wrap.hide();
-            $( document ).trigger( 'rcnoListingsSc-close', inputs.wrap );
+            $(document).trigger('rcnoListingsSc-close', inputs.wrap);
         },
 
-        update: function() {
-            if ( rcnoListingsSc.isMCE() )
+        update: function () {
+            if (rcnoListingsSc.isMCE())
                 rcnoListingsSc.mceUpdate();
             else
                 rcnoListingsSc.htmlUpdate();
         },
 
         //Build the shortcode here!
-        htmlUpdate: function() {
+        htmlUpdate: function () {
             var attrs, html, begin, end, cursor, title, selection,
                 textarea = rcnoListingsSc.textarea;
 
-            if ( ! textarea )
+            if (!textarea)
                 return;
 
-            var out="[";
+            var out = "[";
 
-            sel = $( "input[name='rcno-modal-scl-mode']:checked" );
-            switch(sel.val()) {
+            sel = $("input[name='rcno-modal-scl-mode']:checked");
+            switch (sel.val()) {
                 case 'rcno-tax-list':
-                    out+="rcno-tax-list ";
-                    out+="tax=\""+$( "#rcno-modal-form-scl select option:selected" ).val()+"\"";
+                    out += "rcno-tax-list ";
+                    out += "tax=\"" + $("#rcno-modal-form-scl select option:selected").val() + "\"";
                     break;
                 case 'rcno-reviews-index':
-                    out+= "rcno-reviews-index";
+                    out += "rcno-reviews-index";
                     break;
                 default:
                     alert(sel.val());
@@ -196,23 +196,23 @@ var rcnoListingsSc;
                     return;
             }
 
-            out+="]\n";
+            out += "]\n";
 
             // Insert Shortcode
-            if ( document.selection && rcnoListingsSc.range ) {
+            if (document.selection && rcnoListingsSc.range) {
                 // IE
                 // Note: If no text is selected, IE will not place the cursor
                 //       inside the closing tag.
                 textarea.focus();
                 rcnoListingsSc.range.text = out;
-            } else if ( typeof textarea.selectionStart !== 'undefined' ) {
+            } else if (typeof textarea.selectionStart !== 'undefined') {
                 // W3C
-                begin       = textarea.selectionStart;
-                end         = textarea.selectionEnd;
-                selection   = textarea.value.substring( begin, end );
-                cursor      = begin + out.length;
-                textarea.value = textarea.value.substring( 0, begin ) + out +
-                    textarea.value.substring( end, textarea.value.length );
+                begin = textarea.selectionStart;
+                end = textarea.selectionEnd;
+                selection = textarea.value.substring(begin, end);
+                cursor = begin + out.length;
+                textarea.value = textarea.value.substring(0, begin) + out +
+                    textarea.value.substring(end, textarea.value.length);
                 // Update cursor position
                 textarea.selectionStart = textarea.selectionEnd = cursor;
             }
@@ -221,24 +221,24 @@ var rcnoListingsSc;
             textarea.focus();
         },
 
-        mceUpdate: function() {
+        mceUpdate: function () {
             var link;
-            var out="[";
-            sel = $( "input[name='rcno-modal-scl-mode']:checked" );
-            switch(sel.val()) {
+            var out = "[";
+            sel = $("input[name='rcno-modal-scl-mode']:checked");
+            switch (sel.val()) {
                 case 'rcno-tax-list':
-                    out+="rcno-tax-list ";
-                    out+="tax=\""+$( "#rcno-modal-form-scl select option:selected" ).val()+"\"";
+                    out += "rcno-tax-list ";
+                    out += "tax=\"" + $("#rcno-modal-form-scl select option:selected").val() + "\"";
                     break;
                 case 'rcno-reviews-index':
-                    out+= "rcno-reviews-index";
+                    out += "rcno-reviews-index";
                     break;
                 default:
                     alert(sel.val());
                     alert('error');
                     return;
             }
-            out+="]<br/>";
+            out += "]<br/>";
 
             rcnoListingsSc.close();
             editor.focus();
@@ -247,83 +247,83 @@ var rcnoListingsSc;
 
         },
 
-        updateFields: function( e, li ) {
-            inputs.id.val( li.children( '.item-id' ).val() );
-            inputs.title.val( li.hasClass( 'no-title' ) ? '' : li.children( '.item-title' ).text() );
+        updateFields: function (e, li) {
+            inputs.id.val(li.children('.item-id').val());
+            inputs.title.val(li.hasClass('no-title') ? '' : li.children('.item-title').text());
         },
 
-        setDefaultValues: function() {
+        setDefaultValues: function () {
             // Set id to default
-            inputs.id.val( '' );
+            inputs.id.val('');
             // Set description to default.
-            inputs.title.val( '' );
+            inputs.title.val('');
 
             // Update save prompt.
-            inputs.submit.val( rcnoListingsScL10n.save );
+            inputs.submit.val(rcnoListingsScL10n.save);
         },
 
-        keydown: function( event ) {
+        keydown: function (event) {
             var fn, id,
                 key = $.ui.keyCode;
 
-            if ( key.ESCAPE === event.keyCode ) {
+            if (key.ESCAPE === event.keyCode) {
                 rcnoListingsSc.close();
                 event.stopImmediatePropagation();
-            } else if ( key.TAB === event.keyCode ) {
+            } else if (key.TAB === event.keyCode) {
                 id = event.target.id;
 
                 // wp-link-submit must always be the last focusable element in the dialog.
                 // following focusable elements will be skipped on keyboard navigation.
-                if ( id === 'wp-link-submit' && ! event.shiftKey ) {
+                if (id === 'wp-link-submit' && !event.shiftKey) {
                     inputs.close.focus();
                     event.preventDefault();
-                } else if ( id === 'wp-link-close' && event.shiftKey ) {
+                } else if (id === 'wp-link-close' && event.shiftKey) {
                     inputs.submit.focus();
                     event.preventDefault();
                 }
             }
 
-            if ( event.keyCode !== key.UP && event.keyCode !== key.DOWN ) {
+            if (event.keyCode !== key.UP && event.keyCode !== key.DOWN) {
                 return;
             }
 
-            if ( document.activeElement &&
-                ( document.activeElement.id === 'link-title-field' || document.activeElement.id === 'url-field' ) ) {
+            if (document.activeElement &&
+                ( document.activeElement.id === 'link-title-field' || document.activeElement.id === 'url-field' )) {
                 return;
             }
 
             fn = event.keyCode === key.UP ? 'prev' : 'next';
-            clearInterval( rcnoListingsSc.keyInterval );
-            rcnoListingsSc[ fn ]();
-            rcnoListingsSc.keyInterval = setInterval( rcnoListingsSc[ fn ], rcnoListingsSc.keySensitivity );
+            clearInterval(rcnoListingsSc.keyInterval);
+            rcnoListingsSc[fn]();
+            rcnoListingsSc.keyInterval = setInterval(rcnoListingsSc[fn], rcnoListingsSc.keySensitivity);
             event.preventDefault();
         },
 
-        keyup: function( event ) {
+        keyup: function (event) {
             var key = $.ui.keyCode;
 
-            if ( event.which === key.UP || event.which === key.DOWN ) {
-                clearInterval( rcnoListingsSc.keyInterval );
+            if (event.which === key.UP || event.which === key.DOWN) {
+                clearInterval(rcnoListingsSc.keyInterval);
                 event.preventDefault();
             }
         },
 
-        delayedCallback: function( func, delay ) {
+        delayedCallback: function (func, delay) {
             var timeoutTriggered, funcTriggered, funcArgs, funcContext;
 
-            if ( ! delay )
+            if (!delay)
                 return func;
 
-            setTimeout( function() {
-                if ( funcTriggered )
-                    return func.apply( funcContext, funcArgs );
+            setTimeout(function () {
+                if (funcTriggered)
+                    return func.apply(funcContext, funcArgs);
                 // Otherwise, wait.
                 timeoutTriggered = true;
-            }, delay );
+            }, delay);
 
-            return function() {
-                if ( timeoutTriggered )
-                    return func.apply( this, arguments );
+            return function () {
+                if (timeoutTriggered)
+                    return func.apply(this, arguments);
                 // Otherwise, wait.
                 funcArgs = arguments;
                 funcContext = this;
@@ -332,5 +332,5 @@ var rcnoListingsSc;
         }
 
     };
-    $( document ).ready( rcnoListingsSc.init );
-})( jQuery );
+    $(document).ready(rcnoListingsSc.init);
+})(jQuery);

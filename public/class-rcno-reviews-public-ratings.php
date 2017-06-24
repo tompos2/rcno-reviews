@@ -31,7 +31,7 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -40,7 +40,7 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -48,12 +48,13 @@ class Rcno_Reviews_Public_Rating {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 *
+	 * @param      string $plugin_name The name of the plugin.
+	 * @param      string $version     The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {		
+	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -61,7 +62,7 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function rcno_enqueue_public_ratings_styles() {
 
-		wp_enqueue_style( 'rcno-public-ratings-styles',  plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-public-ratings.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'rcno-public-ratings-styles', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-public-ratings.css', array(), $this->version, 'all' );
 
 	}
 
@@ -71,10 +72,10 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function rcno_enqueue_public_ratings_scripts() {
 
-		wp_enqueue_script( 'rcno-public-ratings-scripts',  plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public-ratings-script.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'rcno-public-ratings-scripts', plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public-ratings-script.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( 'rcno-public-ratings-scripts', 'rcno_public_object',
 			array(
-				'public_ajax_url' => admin_url( 'admin-ajax.php' ),
+				'public_ajax_url'      => admin_url( 'admin-ajax.php' ),
 				'public_ratings_nonce' => wp_create_nonce( 'rcno-ajax-public-ratings-nonce' ),
 			) );
 
@@ -83,7 +84,9 @@ class Rcno_Reviews_Public_Rating {
 
 	/**
 	 * Saves the comment rating data on the 'comment_post' WP hook
+	 *
 	 * @param int $id
+	 *
 	 * @return void
 	 */
 	public function rcno_comment_post( $id ) {
@@ -117,6 +120,7 @@ class Rcno_Reviews_Public_Rating {
 		}
 
 		$star = '<li class="empty"><span class="l"></span><span class="r"></span></li>';
+
 		return printf(
 			'<div class="rating-container"><p class="rating-label">%s</p><ul class="rating form-rating">%s</ul></div>',
 			__( 'Rate this review', 'rcno-reviews' ),
@@ -215,6 +219,7 @@ class Rcno_Reviews_Public_Rating {
 	 * Calculates the raw review score from the comment metadata.
 	 *
 	 * @param string $query
+	 *
 	 * @return bool|float|int|mixed
 	 */
 	public function rcno_rating_info( $query ) {
@@ -230,33 +235,37 @@ class Rcno_Reviews_Public_Rating {
 
 			case 'avg':
 				$avg = $this->count_ratings_info( $review_id );
-				if( null !== $avg ) {
+				if ( null !== $avg ) {
 					return $this->rating = array_sum( $avg ) / count( $avg );
 				}
+
 				return 0;
 				break;
 
 			case 'count':
 				$count = $this->count_ratings_info( $review_id );
-				if( null !== $count ) {
+				if ( null !== $count ) {
 					return $this->comment_count = (int) count( $count );
 				}
+
 				return 0;
 				break;
 
 			case 'min':
 				$min = $this->count_ratings_info( $review_id );
-				if( null !== $min ) {
+				if ( null !== $min ) {
 					return $this->min_rating = (int) min( $min );
 				}
+
 				return 0;
 				break;
 
 			case 'max':
 				$max = $this->count_ratings_info( $review_id );
-				if( null !== $max ) {
+				if ( null !== $max ) {
 					return $this->max_rating = (int) max( $max );
 				}
+
 				return 0;
 				break;
 
@@ -270,23 +279,24 @@ class Rcno_Reviews_Public_Rating {
 	 * Does the retrieval of public comment scores from the comment meta table.
 	 *
 	 * @param int $review_id
+	 *
 	 * @return array
 	 */
 	private function count_ratings_info( $review_id ) {
 
 		$comments = get_comments( array(
-			'post_id'   => intval( $review_id ),
-			'meta_key'  => 'rcno_review_comment_rating',
+			'post_id'  => intval( $review_id ),
+			'meta_key' => 'rcno_review_comment_rating',
 		) );
 
-		$comment_ids = array();
+		$comment_ids  = array();
 		$karma_scores = array();
 
-		foreach( $comments as $comment ) {
+		foreach ( $comments as $comment ) {
 			$comment_ids[] = $comment->comment_ID;
 		}
 
-		foreach( $comment_ids as $value ){
+		foreach ( $comment_ids as $value ) {
 			$karma_scores[] = get_comment_meta( $value, 'rcno_review_comment_rating', true );
 		}
 
@@ -373,7 +383,9 @@ class Rcno_Reviews_Public_Rating {
 
 	/**
 	 * Displays the review rating.
+	 *
 	 * @param int $id
+	 *
 	 * @return string
 	 */
 	public function the_rating( $id = 0 ) {
@@ -386,13 +398,16 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function the_comment_rating() {
 		global $comment;
+
 		return $this->rate_calculate( $comment->comment_post_ID, true );
 	}
 
 
 	/**
 	 * Add the star rating above the displayed comment.
+	 *
 	 * @param $content
+	 *
 	 * @return string
 	 */
 	public function display_comment_rating( $content ) {
@@ -403,6 +418,7 @@ class Rcno_Reviews_Public_Rating {
 		$out = '';
 		$out .= $this->the_comment_rating();
 		$out .= $content;
+
 		return $out;
 	}
 

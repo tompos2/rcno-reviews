@@ -25,7 +25,7 @@ class Rcno_Reviews_GoogleBooks_API {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
@@ -34,7 +34,7 @@ class Rcno_Reviews_GoogleBooks_API {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
 
@@ -43,7 +43,7 @@ class Rcno_Reviews_GoogleBooks_API {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var     string      $key    Google Books API key stored in the plugin settings table.
+	 * @var     string $key Google Books API key stored in the plugin settings table.
 	 */
 	protected $key;
 
@@ -52,13 +52,13 @@ class Rcno_Reviews_GoogleBooks_API {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $version The version of this plugin.
+	 * @param   string $version     The version of this plugin.
 	 * @param   string $plugin_name The name of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 		$this->key = Rcno_Reviews_Option::get_option( 'rcno_googlebooks_key', '' );
 	}
@@ -68,7 +68,8 @@ class Rcno_Reviews_GoogleBooks_API {
 
 		// Disables the enqueuing of the Goodreads script on review edit screen.
 		if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_googlebooks' )
-		     && 'google-books' === Rcno_Reviews_Option::get_option( 'rcno_external_book_api' ) ) {
+		     && 'google-books' === Rcno_Reviews_Option::get_option( 'rcno_external_book_api' )
+		) {
 
 			global $post;
 
@@ -82,8 +83,6 @@ class Rcno_Reviews_GoogleBooks_API {
 			}
 		}
 	}
-
-
 
 
 }

@@ -17,10 +17,10 @@ if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
 }
 
 $plugin_name = 'rcno-reviews';
-$version = '1.0.0';
+$version     = '1.0.0';
 
-$template = new Rcno_Template_Tags( $plugin_name, $version );
-$review_score_enable = (bool) get_post_meta( $review_id, 'rcno_review_score_enable', true );
+$template              = new Rcno_Template_Tags( $plugin_name, $version );
+$review_score_enable   = (bool) get_post_meta( $review_id, 'rcno_review_score_enable', true );
 $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position', true );
 
 ?>
@@ -34,37 +34,42 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 <div class="rcno-book-info">
     <div class="review-content">
 
-	    <?php if ( true === $review_score_enable && 'top' === $review_score_position ) : ?>
+		<?php if ( true === $review_score_enable && 'top' === $review_score_position ) : ?>
 
             <div class="review-box-container">
-			    <?php $template->rcno_print_review_box( $review_id ); ?>
+				<?php $template->rcno_print_review_box( $review_id ); ?>
             </div>
 
-	    <?php endif; ?>
+		<?php endif; ?>
 
-        <?php
-            // Prints the book review content.
-            $template->the_rcno_book_review_content( $review_id );
+		<?php
+		// Prints the book review content.
+		do_action( 'before_rcno_review_content' );
+		$template->the_rcno_book_review_content( $review_id );
+		do_action( 'after_rcno_review_content' );
 
-            // Prints the book purchase links.
-            $template->the_rcno_book_purchase_links( $review_id );
-	    ?>
 
-        <?php if ( true === $review_score_enable && 'bottom' === $review_score_position ) : ?>
+		// Prints the book purchase links.
+		do_action( 'before_rcno_purchase_links' );
+		$template->the_rcno_book_purchase_links( $review_id );
+		do_action( 'after_rcno_purchase_links' );
+		?>
+
+		<?php if ( true === $review_score_enable && 'bottom' === $review_score_position ) : ?>
 
             <div class="review-box-container">
-                <?php $template->rcno_print_review_box( $review_id ); ?>
+				<?php $template->rcno_print_review_box( $review_id ); ?>
             </div>
 
-        <?php endif; ?>
+		<?php endif; ?>
 
     </div>
 
 	<?php
-	    // Prints the review and book's metadata in the JSON+LD format content.
-        $template->the_rcno_book_schema_data( $review_id );
-        $template->the_rcno_review_schema_data( $review_id );
-        echo '<!--- Recencio Book Reviews --->';
+	// Prints the review and book's metadata in the JSON+LD format content.
+	$template->the_rcno_book_schema_data( $review_id );
+	$template->the_rcno_review_schema_data( $review_id );
+	echo '<!--- Recencio Book Reviews --->';
 	?>
 
 </div>

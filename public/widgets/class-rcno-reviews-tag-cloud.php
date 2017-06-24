@@ -18,21 +18,21 @@
  */
 class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 
-    public $widget_options;
-    public $control_options;
+	public $widget_options;
+	public $control_options;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
 	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version The version of this plugin.
+	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct() {
 
-	    $this->set_widget_options();
+		$this->set_widget_options();
 
 		// Create the widget.
 		parent::__construct(
@@ -57,7 +57,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 			'width'  => 325,
 			'height' => 350
 		);
-    }
+	}
 
 	/**
 	 * Register our widget, un-register the builtin widget.
@@ -69,8 +69,9 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 
 		register_widget( 'Rcno_Reviews_Tag_Cloud' );
 		unregister_widget( 'WP_Widget_Tag_Cloud' );
+
 		return true;
-    }
+	}
 
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
@@ -194,11 +195,11 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 
 		// Element options.
 		$taxonomies = get_taxonomies(
-                        array(
-                        'show_tagcloud' => true,
-                        '_builtin' => false,
-                        ),
-                        'objects' );
+			array(
+				'show_tagcloud' => true,
+				'_builtin'      => false,
+			),
+			'objects' );
 
 		$format = array(
 			'flat' => esc_attr__( 'Flat', 'rcno-reviews' ),
@@ -295,7 +296,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
                 </label>
                 <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>"
                        name="<?php echo $this->get_field_name( 'number' ); ?>"
-                       value="<?php echo esc_attr( $instance['number'] ); ?>" />
+                       value="<?php echo esc_attr( $instance['number'] ); ?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'largest' ); ?>">

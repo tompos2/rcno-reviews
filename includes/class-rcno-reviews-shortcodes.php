@@ -26,7 +26,7 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -35,7 +35,7 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -43,20 +43,24 @@ class Rcno_Reviews_Shortcodes {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
-	 * @param      class     Rcno_Reviews_Public  $plugin_public;    An instance of the Rcno_Reviews_Public class.
+	 *
+	 * @param      string $plugin_name The name of the plugin.
+	 * @param      string $version     The version of this plugin.
+	 * @param             class        Rcno_Reviews_Public  $plugin_public;    An instance of the Rcno_Reviews_Public
+	 *                                                      class.
 	 */
 	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name 	 = $plugin_name;
-		$this->version 			 = $version;
+		$this->plugin_name = $plugin_name;
+		$this->version     = $version;
 	}
 
 	/**
 	 * Render an embedded review by evaluating the rcno-review shortcode.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param mixed $options
+	 *
 	 * @return string
 	 */
 	public function rcno_do_review_shortcode( $options ) {
@@ -86,8 +90,8 @@ class Rcno_Reviews_Shortcodes {
 
 				$posts = get_posts( array(
 					'post_type' => 'rcno_review',
-					'nopaging' => true,
-				));
+					'nopaging'  => true,
+				) );
 
 				$review_post = $posts[ array_rand( $posts ) ];
 				/**
@@ -105,7 +109,7 @@ class Rcno_Reviews_Shortcodes {
 				if ( 1 === (int) $options['nodesc'] ) {
 					// Embed without description.
 					$template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
-					$output = $template->get_the_rcno_full_book_details( intval( $options['id'] ) );
+					$output   = $template->get_the_rcno_full_book_details( intval( $options['id'] ) );
 				} elseif ( 0 === (int) $options['excerpt'] ) {
 					// Embed complete review.
 					$output = $plugin_public->rcno_render_review_content( $review_post );
@@ -135,7 +139,7 @@ class Rcno_Reviews_Shortcodes {
 
 		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
 
-		 // Set default values for options not set explicitly.
+		// Set default values for options not set explicitly.
 		$options = shortcode_atts( array(
 			'headers' => 'false',
 			'tax'     => 'n/a',
@@ -170,13 +174,15 @@ class Rcno_Reviews_Shortcodes {
 		return do_shortcode( $output );
 	}
 
-/**
-************************ SHORTCODE FOR REVIEW *****************************
-*/
+	/**
+	 ************************ SHORTCODE FOR REVIEW *****************************
+	 */
 
 	/**
 	 * Add a button for the shortcode dialog above the editor just as "Add Media"
+	 *
 	 * @param string $editor_id
+	 *
 	 * @return void
 	 */
 	public function rcno_add_review_button_scr( $editor_id = 'content' ) {
@@ -261,12 +267,12 @@ class Rcno_Reviews_Shortcodes {
 		$query['offset'] = $args['pagenum'] > 1 ? $query['posts_per_page'] * ( $args['pagenum'] - 1 ) : 0;
 
 		$reviews = get_posts( array(
-			                           's'              => $args['s'],
-		                             'post_type'      => 'rcno_review',
-		                             'posts_per_page' => $query['posts_per_page'],
-		                             'offset'         => $query['offset'],
-		                             'orderby'        => 'post_date',
-        ) );
+			's'              => $args['s'],
+			'post_type'      => 'rcno_review',
+			'posts_per_page' => $query['posts_per_page'],
+			'offset'         => $query['offset'],
+			'orderby'        => 'post_date',
+		) );
 
 		$json = array();
 

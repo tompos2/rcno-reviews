@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Saving the book review score meta information.
  *
@@ -9,7 +10,6 @@
  * @subpackage Rcno_Reviews/admin
  * @author     wzyMedia <wzy@outlook.com>
  */
-
 class Rcno_Admin_Review_Score {
 
 	/**
@@ -17,7 +17,7 @@ class Rcno_Admin_Review_Score {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -41,7 +41,7 @@ class Rcno_Admin_Review_Score {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Rcno_Admin_Review_Score {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses add_meta_box()
+	 * @uses  add_meta_box()
 	 *
 	 * @return bool
 	 */
@@ -78,6 +78,7 @@ class Rcno_Admin_Review_Score {
 	 * @since 1.0.0
 	 *
 	 * @param object $review
+	 *
 	 * @return void
 	 */
 	public function do_rcno_book_review_score_metabox( $review ) {
@@ -89,13 +90,13 @@ class Rcno_Admin_Review_Score {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses get_post_meta()
-	 * @uses update_post_meta()
-	 * @uses delete_post_meta()
-	 * @uses wp_verify_nonce()
-	 * @uses sanitize_text_field()
+	 * @uses  get_post_meta()
+	 * @uses  update_post_meta()
+	 * @uses  delete_post_meta()
+	 * @uses  wp_verify_nonce()
+	 * @uses  sanitize_text_field()
 	 *
-	 * @param int $review_id
+	 * @param int   $review_id
 	 * @param array $data
 	 * @param mixed $review
 	 *
@@ -103,7 +104,7 @@ class Rcno_Admin_Review_Score {
 	 */
 	public function rcno_save_book_review_score_metadata( $review_id, $data, $review = null ) {
 
-		$old = get_post_meta( $review_id, 'rcno_review_score_criteria', true);
+		$old = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
 		$new = array();
 
 		$labels = isset( $data['label'] ) ? $data['label'] : array();
@@ -111,8 +112,8 @@ class Rcno_Admin_Review_Score {
 
 		$count = count( $labels );
 
-		for ( $i = 0; $i < $count; $i++ ) {
-			if ( $labels[$i] !== '' ) {
+		for ( $i = 0; $i < $count; $i ++ ) {
+			if ( $labels[ $i ] !== '' ) {
 				$new[ $i ]['label'] = sanitize_text_field( $labels[ $i ] );
 				$new[ $i ]['score'] = sanitize_text_field( $scores[ $i ] );
 			}
@@ -124,17 +125,17 @@ class Rcno_Admin_Review_Score {
 		}
 
 		// @TODO: Below needs sanitization.
-		if( isset( $data['rcno_review_score_type'] ) ) {
+		if ( isset( $data['rcno_review_score_type'] ) ) {
 			$review_score_type = $data['rcno_review_score_type'];
 			update_post_meta( $review_id, 'rcno_review_score_type', $review_score_type );
 		}
 
-		if( isset( $data['rcno_review_score_position'] ) ) {
+		if ( isset( $data['rcno_review_score_position'] ) ) {
 			$review_score_position = $data['rcno_review_score_position'];
 			update_post_meta( $review_id, 'rcno_review_score_position', $review_score_position );
 		}
 
-		if( isset( $data['rcno_review_score_enable'] ) ) {
+		if ( isset( $data['rcno_review_score_enable'] ) ) {
 			$review_score_enable = $data['rcno_review_score_enable'];
 			update_post_meta( $review_id, 'rcno_review_score_enable', $review_score_enable );
 		}

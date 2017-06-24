@@ -63,7 +63,7 @@ class Rcno_Reviews_Settings_Definition {
 	 */
 	static public function get_tabs() {
 
-		$tabs                   = array();
+		$tabs = array();
 		//$tabs['default_tab']    = __( 'Default Tab', self::$plugin_name );
 		//$tabs['second_tab']     = __( 'Second Tab', self::$plugin_name );
 		$tabs['general_tab']    = __( 'General', self::$plugin_name );
@@ -74,8 +74,6 @@ class Rcno_Reviews_Settings_Definition {
 
 		return apply_filters( 'rcno_reviews_settings_tabs', $tabs );
 	}
-
-
 
 
 	/**
@@ -245,7 +243,7 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Should book reviews be shown in the RSS feed.?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_reviews_in_rest'           => array(
+				'rcno_reviews_in_rest'          => array(
 					'name' => __( 'Reviews in REST API?', self::$plugin_name ),
 					'desc' => __( 'Enables basic support for reviews in the WordPress REST API.', self::$plugin_name ),
 					'type' => 'checkbox'
@@ -273,155 +271,155 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'header'
 				),
 				'rcno_taxonomy_selection'        => array(
-					'name'    => __( 'Taxonomy Selection', self::$plugin_name ),
-					'desc'    => __( 'Create and delete book review taxonomies here.', self::$plugin_name ),
-					'std'     => 'Author',
-					'type'    => 'text'
+					'name' => __( 'Taxonomy Selection', self::$plugin_name ),
+					'desc' => __( 'Create and delete book review taxonomies here.', self::$plugin_name ),
+					'std'  => 'Author',
+					'type' => 'text'
 				),
 
 				'rcno_builtin_taxonomy_header' => array(
 					'name' => '<h2 class="section-heading">' . __( 'Builtin Taxonomies', self::$plugin_name ) . '</h2>',
 					'type' => 'header'
 				),
-				'rcno_enable_builtin_taxonomy'        => array(
-					'name'    => __( 'Default WP Taxonomy', self::$plugin_name ),
-					'desc'    => __( 'Enable the builtin \'category\' and \'tags\' taxonomies.', self::$plugin_name ),
-					'type'    => 'checkbox'
+				'rcno_enable_builtin_taxonomy' => array(
+					'name' => __( 'Default WP Taxonomy', self::$plugin_name ),
+					'desc' => __( 'Enable the builtin \'category\' and \'tags\' taxonomies.', self::$plugin_name ),
+					'type' => 'checkbox'
 				),
 
 			),
 
 			//Components tab.
 			'components_tab' => array(
-				'components_tab_header'           => array(
+				'components_tab_header'                 => array(
 					'name' => '<strong>' . __( 'Book Review Components', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_show_isbn'                  => array(
+				'rcno_show_isbn'                        => array(
 					'name' => __( 'ISBN number', self::$plugin_name ),
 					'desc' => __( 'Show the ISBN field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_isbn13'                => array(
+				'rcno_show_isbn13'                      => array(
 					'name' => __( 'ISBN13 number', self::$plugin_name ),
 					'desc' => __( 'Show the ISBN13 field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_asin'                  => array(
+				'rcno_show_asin'                        => array(
 					'name' => __( 'ASIN number', self::$plugin_name ),
 					'desc' => __( 'Show the ASIN field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_gr_id'                 => array(
+				'rcno_show_gr_id'                       => array(
 					'name' => __( 'Goodreads ID', self::$plugin_name ),
 					'desc' => __( 'Show the Goodreads book ID field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_gr_url'                => array(
+				'rcno_show_gr_url'                      => array(
 					'name' => __( 'Goodreads URL', self::$plugin_name ),
 					'desc' => __( 'Show the Goodreads book URL field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_publisher'             => array(
+				'rcno_show_publisher'                   => array(
 					'name' => __( 'Publisher', self::$plugin_name ),
 					'desc' => __( 'Show the book publisher for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_pub_date'              => array(
+				'rcno_show_pub_date'                    => array(
 					'name' => __( 'Published Date', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s published date for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_pub_format'            => array(
+				'rcno_show_pub_format'                  => array(
 					'name' => __( 'Published Format', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s published format for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_pub_edition'           => array(
+				'rcno_show_pub_edition'                 => array(
 					'name' => __( 'Published Edition', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s published edition for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_page_count'            => array(
+				'rcno_show_page_count'                  => array(
 					'name' => __( 'Page Count', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s page count for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_gr_rating'             => array(
+				'rcno_show_gr_rating'                   => array(
 					'name' => __( 'Goodreads Rating', self::$plugin_name ),
 					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
 
 				// Purchase Links.
-				'components_tab_header_3'         => array(
+				'components_tab_header_3'               => array(
 					'name' => '<strong>' . __( 'Book Purchase Links', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_enable_purchase_links'    => array(
-					'name' => __( 'Enable Purchase Links' , self::$plugin_name ),
+				'rcno_enable_purchase_links'            => array(
+					'name' => __( 'Enable Purchase Links', self::$plugin_name ),
 					'desc' => __( 'Enable the use of book purchase links', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_store_purchase_links'    => array(
+				'rcno_store_purchase_links'             => array(
 					'name' => __( 'Store/Shop', self::$plugin_name ),
 					'desc' => __( 'Enter the name of stores to purchase books from.', self::$plugin_name ),
 					'std'  => 'Amazon,Barnes & Noble,Kobo',
 					'type' => 'text'
 				),
-				'rcno_store_purchase_link_background'    => array(
+				'rcno_store_purchase_link_background'   => array(
 					'name' => __( 'Background Color', self::$plugin_name ),
 					'desc' => __( 'Background Color for the purchase button.', self::$plugin_name ),
 					'type' => 'color'
 				),
 
 				// Review score box.
-				'components_tab_header_2'         => array(
+				'components_tab_header_2'               => array(
 					'name' => '<strong>' . __( 'Book Review Score Box', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_show_review_score_box'    => array(
+				'rcno_show_review_score_box'            => array(
 					'name' => __( 'Review Score Box', self::$plugin_name ),
 					'desc' => __( 'Enable the review score box?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_review_score_box_background'    => array(
+				'rcno_show_review_score_box_background' => array(
 					'name' => __( 'Background Color', self::$plugin_name ),
 					'desc' => __( 'Background Color for the review score box?', self::$plugin_name ),
 					'type' => 'color'
 				),
-				'rcno_show_review_score_box_accent'    => array(
+				'rcno_show_review_score_box_accent'     => array(
 					'name' => __( 'Accent Color 1', self::$plugin_name ),
 					'desc' => __( 'The first accent color for the review score box?', self::$plugin_name ),
 					'type' => 'color'
 				),
-				'rcno_show_review_score_box_accent_2'    => array(
+				'rcno_show_review_score_box_accent_2'   => array(
 					'name' => __( 'Accent Color 2', self::$plugin_name ),
 					'desc' => __( 'The second accent color for the review score box?', self::$plugin_name ),
 					'type' => 'color'
 				),
 
 				// Custom widgets.
-				'components_tab_header_1'         => array(
+				'components_tab_header_1'               => array(
 					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_show_book_slider_widget'    => array(
+				'rcno_show_book_slider_widget'          => array(
 					'name' => __( 'Book Slider', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Book Slider widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_recent_reviews_widget' => array(
+				'rcno_show_recent_reviews_widget'       => array(
 					'name' => __( 'Recent Reviews', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Recent Reviews widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_tag_cloud_widget'      => array(
+				'rcno_show_tag_cloud_widget'            => array(
 					'name' => __( 'Tag Cloud', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Tag Cloud widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_taxonomy_list_widget'  => array(
+				'rcno_show_taxonomy_list_widget'        => array(
 					'name' => __( 'Taxonomy List', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Taxonomy List widget?', self::$plugin_name ),
 					'type' => 'checkbox'
@@ -430,24 +428,24 @@ class Rcno_Reviews_Settings_Definition {
 			// Templates tab.
 			'templates_tab'  => array(
 
-				'rcno_review_template' => array(
+				'rcno_review_template'    => array(
 					'name'    => __( 'Book review template', self::$plugin_name ),
 					'desc'    => __( 'Select how you want your book reviews to look.', self::$plugin_name ),
 					'options' => layout_list(),
 					'type'    => 'template'
 				),
-				'rcno_default_cover'                     => array(
+				'rcno_default_cover'      => array(
 					'name' => __( 'Default Book Cover', self::$plugin_name ),
 					'desc' => __( 'The default image to use when a book cover isn\'t upload', self::$plugin_name ),
 					'type' => 'upload'
 				),
-				'rcno_excerpt_read_more'               => array(
+				'rcno_excerpt_read_more'  => array(
 					'name' => __( 'Read more text', self::$plugin_name ),
 					'desc' => __( 'The review excerpt \'Read more\' tag.', self::$plugin_name ),
 					'std'  => 'Read more',
 					'type' => 'text'
 				),
-				'rcno_excerpt_word_count'     => array(
+				'rcno_excerpt_word_count' => array(
 					'name' => __( 'Review excerpt word count', self::$plugin_name ),
 					'desc' => __( 'Max: 500, Min: 20', self::$plugin_name ),
 					'max'  => 500,
@@ -457,15 +455,15 @@ class Rcno_Reviews_Settings_Definition {
 				),
 
 			),
-			'advanced_tab'  => array(
+			'advanced_tab'   => array(
 
 				'rcno_external_book_api' => array(
 					'name'    => __( 'External Book API', self::$plugin_name ),
 					'desc'    => __( 'Select which 3rd party API is used to fetch book data.' . '<br />' . 'The corresponding option must also be enabled below.', self::$plugin_name ),
 					'options' => array(
-						'no-3rd-party'           => __( 'None', self::$plugin_name ),
-						'google-books'   => __( 'Google Books® API', self::$plugin_name ),
-						'good-reads'     => __( 'Goodreads® API', self::$plugin_name ),
+						'no-3rd-party' => __( 'None', self::$plugin_name ),
+						'google-books' => __( 'Google Books® API', self::$plugin_name ),
+						'good-reads'   => __( 'Goodreads® API', self::$plugin_name ),
 					),
 					'type'    => 'select'
 				),
@@ -484,21 +482,21 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
 					'type' => 'password'
 				),
-				'rcno_goodreads_settings' => array(
+				'rcno_goodreads_settings'   => array(
 					'name' => '<strong>' . __( 'Goodreads® Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_enable_goodreads'   => array(
+				'rcno_enable_goodreads'     => array(
 					'name' => __( 'Enable Goodreads®', self::$plugin_name ),
 					'desc' => __( 'Enable the external Goodreads® API access.', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_goodreads_key'      => array(
+				'rcno_goodreads_key'        => array(
 					'name' => __( 'Goodreads® API Key', self::$plugin_name ),
 					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
 					'type' => 'password'
 				),
-				'rcno_goodreads_secret'   => array(
+				'rcno_goodreads_secret'     => array(
 					'name' => __( 'Goodreads® API Secret', self::$plugin_name ),
 					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
 					'type' => 'password'
@@ -512,7 +510,7 @@ class Rcno_Reviews_Settings_Definition {
 		$taxes = explode( ",", Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
 
 		foreach ( $taxes as $tax ) {
-			foreach( self::taxonomy_options( $tax ) as $key => $value ) {
+			foreach ( self::taxonomy_options( $tax ) as $key => $value ) {
 				$settings['taxonomy_tab'][ strtolower( $key ) ] = $value;
 			}
 		}
@@ -523,7 +521,7 @@ class Rcno_Reviews_Settings_Definition {
 	public static function taxonomy_options( $tax ) {
 
 		$opts = array(
-			'rcno_' . $tax .'_header'       => array(
+			'rcno_' . $tax . '_header'       => array(
 				'name' => '<h2 class="section-heading">' . __( ucfirst( $tax ), 'rcno-reviews' ) . '</h2>',
 				'type' => 'header'
 			),

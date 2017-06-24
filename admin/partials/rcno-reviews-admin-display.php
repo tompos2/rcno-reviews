@@ -21,11 +21,11 @@
 
     <h2 class="nav-tab-wrapper">
 		<?php
-		foreach( $tabs as $tab_slug => $tab_name ) {
+		foreach ( $tabs as $tab_slug => $tab_name ) {
 
 			$tab_url = add_query_arg( array(
 				'settings-updated' => false,
-				'tab' => $tab_slug
+				'tab'              => $tab_slug
 			) );
 
 			$active = $active_tab == $tab_slug ? ' nav-tab-active' : '';

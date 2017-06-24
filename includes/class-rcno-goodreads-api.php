@@ -49,7 +49,8 @@ class Rcno_GoodReads_API {
 
 		// Disables the enqueuing of the Goodreads script on review edit screen.
 		if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_goodreads' )
-		     && 'good-reads' === Rcno_Reviews_Option::get_option( 'rcno_external_book_api' ) ) {
+		     && 'good-reads' === Rcno_Reviews_Option::get_option( 'rcno_external_book_api' )
+		) {
 
 			global $post;
 
@@ -102,14 +103,15 @@ class Rcno_GoodReads_API {
 		try {
 			$response = wp_remote_get( $url );
 
-			if( is_wp_error( $response ) ){
+			if ( is_wp_error( $response ) ) {
 				return new WP_Error( 'goodreads_api_fetch_failed', __( 'There was an error fetch data from GoodReads' ) );
 			}
 
 			$response = $response['body'];
+
 			return $response;
 
-		} catch( Exception $e ){
+		} catch ( Exception $e ) {
 			return false;
 		}
 	}
@@ -297,7 +299,7 @@ class Rcno_GoodReads_API {
 	 * Search Books By Author Name
 	 *
 	 * @param string $title Author Name
-	 * @param int    $page Page number. Default is 1
+	 * @param int    $page  Page number. Default is 1
 	 *
 	 * @return \SimpleXMLElement|\SimpleXMLElement[]
 	 */
@@ -315,7 +317,8 @@ class Rcno_GoodReads_API {
 	 * Get User groups
 	 *
 	 * @param  int   $id
-	 * @param string $sort One of 'my_activity', 'members', 'last_activity', 'title' ('members' will sort by number of members in the group)
+	 * @param string $sort One of 'my_activity', 'members', 'last_activity', 'title' ('members' will sort by number of
+	 *                     members in the group)
 	 * @param int    $page
 	 *
 	 * @return \SimpleXMLElement|\SimpleXMLElement[]
@@ -334,7 +337,7 @@ class Rcno_GoodReads_API {
 	/**
 	 * Get Group Members
 	 *
-	 * @param int         $id Group ID
+	 * @param int         $id   Group ID
 	 * @param string|bool $search
 	 * @param string|bool $sort One of 'last_online', 'num_comments', 'date_joined', 'num_books', 'first_name'
 	 * @param int         $page Page number. Default is 1
@@ -381,7 +384,7 @@ class Rcno_GoodReads_API {
 	/**
 	 * Get Information about group by ID
 	 *
-	 * @param int    $id Group ID
+	 * @param int    $id   Group ID
 	 * @param string $sort Field to sort topics by. One of 'comments_count', 'title', 'updated_at', 'views'
 	 *
 	 * @return \SimpleXMLElement|\SimpleXMLElement[]
@@ -475,27 +478,27 @@ class Rcno_GoodReads_API {
 		return $get ? $get->user : $get;
 	}
 
-	public function gr_ajax_save_post_meta(){
+	public function gr_ajax_save_post_meta() {
 
 		$review_id = (int) $_POST['review_id'];
 		$gr_isbn   = (int) $_POST['gr_isbn'];
 
-		$book            = $this->bookByISBN( $gr_isbn );
-		$gr_description  = (string) $book->description;
+		$book           = $this->bookByISBN( $gr_isbn );
+		$gr_description = (string) $book->description;
 
-		if( '' === $gr_description ){
+		if ( '' === $gr_description ) {
 			return false;
 		}
 
-		if ( update_post_meta( $review_id, 'rcno_book_description', strip_tags( $gr_description ) ) ){
+		if ( update_post_meta( $review_id, 'rcno_book_description', strip_tags( $gr_description ) ) ) {
 			$success = 1;
 		}
 
-		if ( update_post_meta( $review_id, 'rcno_book_isbn', $gr_isbn ) ){
+		if ( update_post_meta( $review_id, 'rcno_book_isbn', $gr_isbn ) ) {
 			$success = 1;
 		}
 
-		if( $success ) {
+		if ( $success ) {
 			wp_send_json_success();
 		} else {
 			wp_send_json_error();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Saving the book ISBN meta information.
  *
@@ -9,7 +10,6 @@
  * @subpackage Rcno_Reviews/admin
  * @author     wzyMedia <wzy@outlook.com>
  */
-
 class Rcno_Admin_ISBN {
 
 	/**
@@ -17,7 +17,7 @@ class Rcno_Admin_ISBN {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -41,7 +41,7 @@ class Rcno_Admin_ISBN {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Rcno_Admin_ISBN {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses add_meta_box
+	 * @uses  add_meta_box
 	 * @return bool
 	 */
 	public function rcno_book_isbn_metabox() {
@@ -70,6 +70,7 @@ class Rcno_Admin_ISBN {
 			'side',
 			'high'
 		);
+
 		return true;
 	}
 
@@ -79,6 +80,7 @@ class Rcno_Admin_ISBN {
 	 * @since 1.0.0
 	 *
 	 * @param object $review
+	 *
 	 * @return void
 	 */
 	public function do_rcno_book_isbn_metabox( $review ) {
@@ -90,11 +92,11 @@ class Rcno_Admin_ISBN {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses update_post_meta()
-	 * @uses wp_verify_nonce()
-	 * @uses sanitize_text_field()
+	 * @uses  update_post_meta()
+	 * @uses  wp_verify_nonce()
+	 * @uses  sanitize_text_field()
 	 *
-	 * @param int $review_id
+	 * @param int   $review_id
 	 * @param array $data
 	 * @param mixed $review
 	 *

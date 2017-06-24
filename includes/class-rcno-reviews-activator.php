@@ -81,7 +81,7 @@ class Rcno_Reviews_Activator {
 		);
 
 		if ( null !== $settings_version ) {
-			$settings_version = $settings_version[ 'rcno_settings_version' ];
+			$settings_version = $settings_version['rcno_settings_version'];
 		}
 
 		if ( '1.0.0' !== $settings_version ) {

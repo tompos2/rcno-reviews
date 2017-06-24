@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Saving a book cover for display in book reviews.
  *
@@ -9,7 +10,6 @@
  * @subpackage Rcno_Reviews/admin
  * @author     wzyMedia <wzy@outlook.com>
  */
-
 class Rcno_Admin_Book_Cover {
 
 	/**
@@ -17,7 +17,7 @@ class Rcno_Admin_Book_Cover {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -40,14 +40,14 @@ class Rcno_Admin_Book_Cover {
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
 	 * Add the book cover upload metabox.
 	 *
 	 * @since 1.0.0
-	 * @uses add_meta_meta_box()
+	 * @uses  add_meta_meta_box()
 	 * @return void
 	 */
 	public function rcno_book_cover_metabox() {
@@ -66,7 +66,9 @@ class Rcno_Admin_Book_Cover {
 	 * Builds and display the metabox UI.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param object $review
+	 *
 	 * @return void
 	 */
 	public function do_rcno_book_cover_metabox( $review ) {
@@ -78,10 +80,10 @@ class Rcno_Admin_Book_Cover {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses update_post_meta()
-	 * @uses sanitize_text_field()
+	 * @uses  update_post_meta()
+	 * @uses  sanitize_text_field()
 	 *
-	 * @param int $review_id
+	 * @param int   $review_id
 	 * @param array $data
 	 * @param mixed $review
 	 *
@@ -90,17 +92,17 @@ class Rcno_Admin_Book_Cover {
 	public function rcno_save_book_cover_metadata( $review_id, $data, $review = null ) {
 
 		// Saving description not only to the post_meta field but also to excerpt and content.
-		if ( isset( $data['rcno_reviews_book_cover_src'] )  ) {
+		if ( isset( $data['rcno_reviews_book_cover_src'] ) ) {
 			$cover_src = sanitize_text_field( $data['rcno_reviews_book_cover_src'] );
 			update_post_meta( $review_id, 'rcno_reviews_book_cover_src', $cover_src );
 		}
 
-		if ( isset( $data['rcno_reviews_book_cover_alt'] )  ) {
+		if ( isset( $data['rcno_reviews_book_cover_alt'] ) ) {
 			$cover_alt = sanitize_text_field( $data['rcno_reviews_book_cover_alt'] );
 			update_post_meta( $review_id, 'rcno_reviews_book_cover_alt', $cover_alt );
 		}
 
-		if ( isset( $data['rcno_reviews_book_cover_title'] )  ) {
+		if ( isset( $data['rcno_reviews_book_cover_title'] ) ) {
 			$cover_title = sanitize_text_field( $data['rcno_reviews_book_cover_title'] );
 			update_post_meta( $review_id, 'rcno_reviews_book_cover_title', $cover_title );
 		}

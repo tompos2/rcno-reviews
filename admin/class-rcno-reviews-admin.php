@@ -27,7 +27,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -36,14 +36,14 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
 	/**
 	 * Instance of the general meta class handling all general information related functions
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public $description_meta;
@@ -51,7 +51,7 @@ class Rcno_Reviews_Admin {
 	/**
 	 * Instance of the ISBN class handling book ISBN number functions.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public $book_isbn;
@@ -59,7 +59,7 @@ class Rcno_Reviews_Admin {
 	/**
 	 * Instance of the Book_Cover class.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public $book_cover;
@@ -67,7 +67,7 @@ class Rcno_Reviews_Admin {
 	/**
 	 * Instance of the Rcno_Admin_General_Info class handling general book info functions.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public $book_general_info;
@@ -75,7 +75,7 @@ class Rcno_Reviews_Admin {
 	/**
 	 * Instance of the Rcno_Admin_Review_Score class handling general book info functions.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public $book_review_score;
@@ -83,7 +83,7 @@ class Rcno_Reviews_Admin {
 	/**
 	 * Instance of the Rcno_Admin_Review_Rating class handling simple 5 star rating functions.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public $book_review_rating;
@@ -91,7 +91,7 @@ class Rcno_Reviews_Admin {
 	/**
 	 * Instance of the Rcno_Admin_Buy_Links class handling the purchase links.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public $buy_links;
@@ -103,13 +103,14 @@ class Rcno_Reviews_Admin {
 	 * the various metaboxes on the review edit screen.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 *
+	 * @param      string $plugin_name The name of this plugin.
+	 * @param      string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 		require_once __DIR__ . '/class-rcno-admin-description-meta.php';
 		$this->description_meta = new Rcno_Admin_Description_Meta( $this->plugin_name, $this->version );
@@ -138,7 +139,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @uses wp_enqueue_style()
+	 * @uses     wp_enqueue_style()
 	 * @return void
 	 */
 	public function enqueue_styles() {
@@ -166,10 +167,10 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @uses wp_enqueue_media() For using the builtin media uploader functionality.
-	 * @uses wp_enqueue_style()
-	 * @uses wp_enqueue_script()
-	 * @uses wp_localize_script()
+	 * @uses     wp_enqueue_media() For using the builtin media uploader functionality.
+	 * @uses     wp_enqueue_style()
+	 * @uses     wp_enqueue_script()
+	 * @uses     wp_localize_script()
 	 *
 	 * @param $hook
 	 */
@@ -194,14 +195,17 @@ class Rcno_Reviews_Admin {
 		// Add the color picker css file.
 		wp_enqueue_style( 'wp-color-picker' );
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array(
+			'jquery',
+			'wp-color-picker'
+		), $this->version, false );
 		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', false );
 
 		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
-			'reviewID'   => ( null !== $post ) ? $post->ID : '',
-			'ajaxURL'    => admin_url( 'admin-ajax.php' ),
+			'reviewID'         => ( null !== $post ) ? $post->ID : '',
+			'ajaxURL'          => admin_url( 'admin-ajax.php' ),
 			'rcno_reset_nonce' => wp_create_nonce( 'rcno-rest-nonce' ),
-		));
+		) );
 	}
 
 
@@ -224,28 +228,40 @@ class Rcno_Reviews_Admin {
 		$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $cpt_slug ) );
 		$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $cpt_slug ) );
 
-		$opts['can_export']            = true;
-		$opts['capability_type']       = $cap_type;
-		$opts['description']           = 'A book review custom post type provide by the Recencio Book Reviews plugin.';
-		$opts['exclude_from_search']   = false;
-		$opts['has_archive']           = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
-		$opts['hierarchical']          = false;
-		$opts['map_meta_cap']          = true;
-		$opts['menu_icon']             = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyMDYuNSAzMTQuNyIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjA2LjUgMzE0LjciIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwb2x5Z29uIGZpbGw9IiM4Mjg3OEMiIHBvaW50cz0iMCw4Ny40IDE2Mi41LDMzLjIgMTYyLjUsMTUuNCAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDE4Ni4zLDQ4LjggMTg2LjEsMzMuMiAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDEzOS41LDE4LjcgMTM5LjUsMCAiLz48Zz48cGF0aCBmaWxsPSIjODI4NzhDIiBkPSJNMC41LDg3Ljd2MjI3bDIwNi0zMS41VjUyLjdMMC41LDg3Ljd6IE0xODUuNSwyNTEuNGwtNDcuMSw2LjZsLTEuMy0wLjhjLTUuOC02LjEtMTMtMTYuNy0yMi0zMy4zYy01LjktMTAuOS0xMC4zLTE4LjEtMTMuMS0yMS41Yy0yLjYtMy4xLTUuMi01LjItNy44LTYuMmMtMS4zLTAuNS00LjYtMS0xMy42LTAuMXY0MS44YzAsNS41LDEuMSw5LjUsMy4zLDExLjZjMi4zLDIuMiw2LjUsMy4zLDEyLjUsMy4zbDMuMiwwdjEwLjRsLTc5LDExdi0xMC42bDMuNS0wLjdjMTAuNy0yLjMsMTUuNS03LjcsMTUuNS0xNy41VjE0NS40YzAtNy4yLTEuNC0xMC4xLTIuNy0xMS4zYy0xLjQtMS4yLTQuNi0yLjgtMTIuOC0zLjJsLTMuNS0wLjF2LTEwLjRsNzUuMS0xMC41YzE5LjEtMi43LDM0LjMtMS42LDQ0LjgsMy44YzExLDUuNywxNi41LDE0LjgsMTYuNSwyNy45YzAsOS4zLTIuOSwxNy45LTguNiwyNS40Yy00LjIsNS42LTkuOCwxMC4zLTE2LjcsMTQuM2MxLjksMS4zLDMuOCwzLDUuNyw1LjFjNC4yLDQuNSwxMC4xLDEzLjQsMTcuOSwyNi45YzcuMywxMi41LDEyLjYsMjAuNSwxNS44LDIzLjVjMi45LDIuNyw2LjYsNC4xLDExLjcsNC4ybDIuNywwLjFWMjUxLjR6Ii8+PHBhdGggZmlsbD0iIzgyODc4QyIgZD0iTTg2LjksMTI1LjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzExNC4yLDEzMC4zLDEwNS41LDEyMy4xLDg2LjksMTI1Ljd6Ii8+PC9nPjwvZz48cG9seWdvbiBmaWxsPSIjOURDMkUwIiBwb2ludHM9IjYyNywxMTMuNCA3ODkuNSw1OS4yIDc4OS41LDQxLjQgIi8+PHBvbHlnb24gZmlsbD0iIzlEQzJFMCIgcG9pbnRzPSI2MjcuNCwxMTMuNSA4MTMuMyw3NC44IDgxMy4xLDU5LjIgIi8+PHBvbHlnb24gZmlsbD0iIzJCNzRBNSIgcG9pbnRzPSI2MjcuNCwxMTMuNSA3NjYuNSw0NC43IDc2Ni41LDI2ICIvPjxnPjxwYXRoIGZpbGw9IiMzMDgyQzYiIGQ9Ik02MjcuNSwxMTMuN3YyMjdsMjA2LTMxLjVWNzguN0w2MjcuNSwxMTMuN3ogTTgxMi41LDI3Ny40bC00Ny4xLDYuNmwtMS4zLTAuOGMtNS44LTYuMS0xMy0xNi43LTIyLTMzLjNjLTUuOS0xMC45LTEwLjMtMTguMS0xMy4xLTIxLjVjLTIuNi0zLjEtNS4yLTUuMi03LjgtNi4yYy0xLjMtMC41LTQuNi0xLTEzLjYtMC4xdjQxLjhjMCw1LjUsMS4xLDkuNSwzLjMsMTEuNmMyLjMsMi4yLDYuNSwzLjMsMTIuNSwzLjNsMy4yLDB2MTAuNGwtNzksMTF2LTEwLjZsMy41LTAuN2MxMC43LTIuMywxNS41LTcuNywxNS41LTE3LjVWMTcxLjRjMC03LjItMS40LTEwLjEtMi43LTExLjNjLTEuNC0xLjItNC42LTIuOC0xMi44LTMuMmwtMy41LTAuMXYtMTAuNGw3NS4xLTEwLjVjMTkuMS0yLjcsMzQuMy0xLjYsNDQuOCwzLjhjMTEsNS43LDE2LjUsMTQuOCwxNi41LDI3LjljMCw5LjMtMi45LDE3LjktOC42LDI1LjRjLTQuMiw1LjYtOS44LDEwLjMtMTYuNywxNC4zYzEuOSwxLjMsMy44LDMsNS43LDUuMWM0LjIsNC41LDEwLjEsMTMuNCwxNy45LDI2LjljNy4zLDEyLjUsMTIuNiwyMC41LDE1LjgsMjMuNWMyLjksMi43LDYuNiw0LjEsMTEuNyw0LjJsMi43LDAuMVYyNzcuNHoiLz48cGF0aCBmaWxsPSIjMzA4MkM2IiBkPSJNNzEzLjksMTUxLjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzc0MS4yLDE1Ni4zLDczMi41LDE0OS4xLDcxMy45LDE1MS43eiIvPjwvZz48L3N2Zz4=';
-		$opts['menu_position']         = 5;
-		$opts['public']                = true;
-		$opts['publicly_querable']     = true;
-		$opts['query_var']             = true;
-		$opts['register_meta_box_cb']  = '';
-		$opts['rewrite']               = false;
-		$opts['show_in_admin_bar']     = true;
-		$opts['show_in_menu']          = true;
-		$opts['show_in_nav_menu']      = true;
-		$opts['show_ui']               = true;
+		$opts['can_export']           = true;
+		$opts['capability_type']      = $cap_type;
+		$opts['description']          = 'A book review custom post type provide by the Recencio Book Reviews plugin.';
+		$opts['exclude_from_search']  = false;
+		$opts['has_archive']          = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
+		$opts['hierarchical']         = false;
+		$opts['map_meta_cap']         = true;
+		$opts['menu_icon']            = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyMDYuNSAzMTQuNyIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjA2LjUgMzE0LjciIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwb2x5Z29uIGZpbGw9IiM4Mjg3OEMiIHBvaW50cz0iMCw4Ny40IDE2Mi41LDMzLjIgMTYyLjUsMTUuNCAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDE4Ni4zLDQ4LjggMTg2LjEsMzMuMiAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDEzOS41LDE4LjcgMTM5LjUsMCAiLz48Zz48cGF0aCBmaWxsPSIjODI4NzhDIiBkPSJNMC41LDg3Ljd2MjI3bDIwNi0zMS41VjUyLjdMMC41LDg3Ljd6IE0xODUuNSwyNTEuNGwtNDcuMSw2LjZsLTEuMy0wLjhjLTUuOC02LjEtMTMtMTYuNy0yMi0zMy4zYy01LjktMTAuOS0xMC4zLTE4LjEtMTMuMS0yMS41Yy0yLjYtMy4xLTUuMi01LjItNy44LTYuMmMtMS4zLTAuNS00LjYtMS0xMy42LTAuMXY0MS44YzAsNS41LDEuMSw5LjUsMy4zLDExLjZjMi4zLDIuMiw2LjUsMy4zLDEyLjUsMy4zbDMuMiwwdjEwLjRsLTc5LDExdi0xMC42bDMuNS0wLjdjMTAuNy0yLjMsMTUuNS03LjcsMTUuNS0xNy41VjE0NS40YzAtNy4yLTEuNC0xMC4xLTIuNy0xMS4zYy0xLjQtMS4yLTQuNi0yLjgtMTIuOC0zLjJsLTMuNS0wLjF2LTEwLjRsNzUuMS0xMC41YzE5LjEtMi43LDM0LjMtMS42LDQ0LjgsMy44YzExLDUuNywxNi41LDE0LjgsMTYuNSwyNy45YzAsOS4zLTIuOSwxNy45LTguNiwyNS40Yy00LjIsNS42LTkuOCwxMC4zLTE2LjcsMTQuM2MxLjksMS4zLDMuOCwzLDUuNyw1LjFjNC4yLDQuNSwxMC4xLDEzLjQsMTcuOSwyNi45YzcuMywxMi41LDEyLjYsMjAuNSwxNS44LDIzLjVjMi45LDIuNyw2LjYsNC4xLDExLjcsNC4ybDIuNywwLjFWMjUxLjR6Ii8+PHBhdGggZmlsbD0iIzgyODc4QyIgZD0iTTg2LjksMTI1LjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzExNC4yLDEzMC4zLDEwNS41LDEyMy4xLDg2LjksMTI1Ljd6Ii8+PC9nPjwvZz48cG9seWdvbiBmaWxsPSIjOURDMkUwIiBwb2ludHM9IjYyNywxMTMuNCA3ODkuNSw1OS4yIDc4OS41LDQxLjQgIi8+PHBvbHlnb24gZmlsbD0iIzlEQzJFMCIgcG9pbnRzPSI2MjcuNCwxMTMuNSA4MTMuMyw3NC44IDgxMy4xLDU5LjIgIi8+PHBvbHlnb24gZmlsbD0iIzJCNzRBNSIgcG9pbnRzPSI2MjcuNCwxMTMuNSA3NjYuNSw0NC43IDc2Ni41LDI2ICIvPjxnPjxwYXRoIGZpbGw9IiMzMDgyQzYiIGQ9Ik02MjcuNSwxMTMuN3YyMjdsMjA2LTMxLjVWNzguN0w2MjcuNSwxMTMuN3ogTTgxMi41LDI3Ny40bC00Ny4xLDYuNmwtMS4zLTAuOGMtNS44LTYuMS0xMy0xNi43LTIyLTMzLjNjLTUuOS0xMC45LTEwLjMtMTguMS0xMy4xLTIxLjVjLTIuNi0zLjEtNS4yLTUuMi03LjgtNi4yYy0xLjMtMC41LTQuNi0xLTEzLjYtMC4xdjQxLjhjMCw1LjUsMS4xLDkuNSwzLjMsMTEuNmMyLjMsMi4yLDYuNSwzLjMsMTIuNSwzLjNsMy4yLDB2MTAuNGwtNzksMTF2LTEwLjZsMy41LTAuN2MxMC43LTIuMywxNS41LTcuNywxNS41LTE3LjVWMTcxLjRjMC03LjItMS40LTEwLjEtMi43LTExLjNjLTEuNC0xLjItNC42LTIuOC0xMi44LTMuMmwtMy41LTAuMXYtMTAuNGw3NS4xLTEwLjVjMTkuMS0yLjcsMzQuMy0xLjYsNDQuOCwzLjhjMTEsNS43LDE2LjUsMTQuOCwxNi41LDI3LjljMCw5LjMtMi45LDE3LjktOC42LDI1LjRjLTQuMiw1LjYtOS44LDEwLjMtMTYuNywxNC4zYzEuOSwxLjMsMy44LDMsNS43LDUuMWM0LjIsNC41LDEwLjEsMTMuNCwxNy45LDI2LjljNy4zLDEyLjUsMTIuNiwyMC41LDE1LjgsMjMuNWMyLjksMi43LDYuNiw0LjEsMTEuNyw0LjJsMi43LDAuMVYyNzcuNHoiLz48cGF0aCBmaWxsPSIjMzA4MkM2IiBkPSJNNzEzLjksMTUxLjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzc0MS4yLDE1Ni4zLDczMi41LDE0OS4xLDcxMy45LDE1MS43eiIvPjwvZz48L3N2Zz4=';
+		$opts['menu_position']        = 5;
+		$opts['public']               = true;
+		$opts['publicly_querable']    = true;
+		$opts['query_var']            = true;
+		$opts['register_meta_box_cb'] = '';
+		$opts['rewrite']              = false;
+		$opts['show_in_admin_bar']    = true;
+		$opts['show_in_menu']         = true;
+		$opts['show_in_nav_menu']     = true;
+		$opts['show_ui']              = true;
 
-		$opts['supports']              = array( 'title', 'editor', 'thumbnail', 'excerpt', 'featured', 'author', 'comments', 'revisions' );
+		$opts['supports'] = array(
+			'title',
+			'editor',
+			'thumbnail',
+			'excerpt',
+			'featured',
+			'author',
+			'comments',
+			'revisions'
+		);
 
-		$opts['taxonomies'] = Rcno_Reviews_Option::get_option( 'rcno_enable_builtin_taxonomy' ) ? array( 'category', 'post_tag' ) : array();
+		$opts['taxonomies'] = Rcno_Reviews_Option::get_option( 'rcno_enable_builtin_taxonomy' ) ? array(
+			'category',
+			'post_tag'
+		) : array();
 
 		$opts['capabilities']['delete_others_posts']    = "delete_others_{$cap_type}s";
 		$opts['capabilities']['delete_post']            = "delete_{$cap_type}";
@@ -300,9 +316,9 @@ class Rcno_Reviews_Admin {
 	public function rcno_custom_taxonomy() {
 
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
-		$keys = explode( ",", $custom_taxonomies );
+		$keys              = explode( ",", $custom_taxonomies );
 
-		if( ! in_array( 'Author', $keys, true ) ){
+		if ( ! in_array( 'Author', $keys, true ) ) {
 			$keys[] = 'Author'; // This is book review plugin, the book author taxonomy must always be present.
 		}
 
@@ -310,7 +326,7 @@ class Rcno_Reviews_Admin {
 
 		foreach ( $keys as $key ) {
 			$taxonomies[] = array(
-				'tax_settings'  => array(
+				'tax_settings' => array(
 					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug' ),
 					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
 					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show', true ),
@@ -323,7 +339,7 @@ class Rcno_Reviews_Admin {
 			$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['slug'] ) );
 			$tax_name = 'rcno_' . $tax['tax_settings']['slug'];
 
-			$opts['hierarchical']      = $tax['tax_settings']['hierarchy'];
+			$opts['hierarchical'] = $tax['tax_settings']['hierarchy'];
 			//$opts['meta_box_cb'] 	   = array( $this, 'rcno_custom_taxonomy_metabox' );
 			$opts['public']            = true;
 			$opts['query_var']         = $tax_name;
@@ -339,7 +355,7 @@ class Rcno_Reviews_Admin {
 			 * Not doing so will result in multiple comma-separated items added at once being saved as a single value,
 			 * not as separate values. This can cause undue stress when using get_the_term_list and other term display functions.
 			 */
-			$opts['update_count_callback'] 	= $tax['tax_settings']['hierarchy'] ? '_update_post_term_count' : '';
+			$opts['update_count_callback'] = $tax['tax_settings']['hierarchy'] ? '_update_post_term_count' : '';
 
 			$opts['capabilities']['assign_terms'] = 'edit_posts';
 			$opts['capabilities']['delete_terms'] = 'manage_categories';
@@ -368,8 +384,8 @@ class Rcno_Reviews_Admin {
 			$opts['rewrite']['hierarchical'] = false;
 
 			// Pluralizing the rewrite slug to prevent clash with builtin author taxonomy and author custom taxonomy.
-			$opts['rewrite']['slug']         = __( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
-			$opts['rewrite']['with_front']   = false;
+			$opts['rewrite']['slug']       = __( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
+			$opts['rewrite']['with_front'] = false;
 
 			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );
 
@@ -384,7 +400,7 @@ class Rcno_Reviews_Admin {
 	 * @since 1.0.0
 	 *
 	 * @param object $post
-	 * @param array $box
+	 * @param array  $box
 	 *
 	 * @return void
 	 */
@@ -399,7 +415,7 @@ class Rcno_Reviews_Admin {
 	 * @since 1.0.0
 	 *
 	 * @param string $contextual_help
-	 * @param int $screen_id
+	 * @param int    $screen_id
 	 * @param object $screen
 	 *
 	 * @return string
@@ -433,8 +449,8 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses get_current_screen()
-	 * @uses add_help_tab()
+	 * @uses  get_current_screen()
+	 * @uses  add_help_tab()
 	 *
 	 * @return void
 	 */
@@ -463,17 +479,17 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @uses    add_image_size()
-	 * @uses    add_filter()
+	 * @uses     add_image_size()
+	 * @uses     add_filter()
 	 *
 	 * @return  void
 	 */
-	public function rcno_book_cover_sizes(){
+	public function rcno_book_cover_sizes() {
 
 		add_image_size( 'rcno-book-cover-lg', 380, 500, array( 'left', 'top' ) );
 		add_image_size( 'rcno-book-cover-sm', 85, 130, array( 'left', 'top' ) );
 
-		add_filter( 'image_size_names_choose', function ( $sizes ){
+		add_filter( 'image_size_names_choose', function ( $sizes ) {
 			return array_merge( $sizes, array(
 				'rcno-book-cover-lg' => __( 'Book Cover LG', 'rcno-reviews' ),
 				'rcno-book-cover-sm' => __( 'Book Cover SM', 'rcno-reviews' ),
@@ -487,9 +503,9 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since       1.0.0
 	 *
-	 * @uses add_menu_page()
-	 * @uses add_submenu_page()
-	 * @uses remove_menu_page()
+	 * @uses        add_menu_page()
+	 * @uses        add_submenu_page()
+	 * @uses        remove_menu_page()
 	 *
 	 * @return      void
 	 */
@@ -521,6 +537,7 @@ class Rcno_Reviews_Admin {
 	 * @since    1.0.0
 	 *
 	 * @param array $links
+	 *
 	 * @return array $links
 	 */
 	public function add_action_links( $links ) {
@@ -547,7 +564,7 @@ class Rcno_Reviews_Admin {
 
 		$default_tab = Rcno_Reviews_Settings_Definition::get_default_tab_slug();
 
-		$active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET[ 'tab' ] : $default_tab;
+		$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : $default_tab;
 
 		include_once( 'partials/' . $this->plugin_name . '-admin-display.php' );
 
@@ -560,16 +577,16 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @see     https://developer.wordpress.org/reference/functions/wp_update_post/#user-contributed-notes
 	 *
-	 * @uses wp_is_post_revision()
-	 * @uses remove_action()
-	 * @uses add_action()
-	 * @uses current_user_can()
-	 * @uses update_option()
-	 * @uses wp_update_post()
+	 * @uses    wp_is_post_revision()
+	 * @uses    remove_action()
+	 * @uses    add_action()
+	 * @uses    current_user_can()
+	 * @uses    update_option()
+	 * @uses    wp_update_post()
 	 *
 	 *
-	 * @param   int $review_id post ID of review being saved.
-	 * @param   mixed $review the review post object.
+	 * @param   int   $review_id post ID of review being saved.
+	 * @param   mixed $review    the review post object.
 	 *
 	 *
 	 *
@@ -599,6 +616,7 @@ class Rcno_Reviews_Admin {
 				// If we have an error update the error_option and return.
 				if ( $errors ) {
 					update_option( 'rcno_admin_errors', $errors );
+
 					return $review_id;
 				}
 
@@ -615,6 +633,7 @@ class Rcno_Reviews_Admin {
 				add_action( 'save_post', array( $this, 'rcno_save_review' ) );
 			}
 		}
+
 		return true;
 	}
 
@@ -643,6 +662,7 @@ class Rcno_Reviews_Admin {
 	 * @since 1.0.0
 	 *
 	 * @param array $columns
+	 *
 	 * @return array
 	 */
 	public function rcno_remove_admin_columns( $columns ) {
@@ -656,14 +676,15 @@ class Rcno_Reviews_Admin {
 	 * @since 1.0.0
 	 *
 	 * @param array $columns
+	 *
 	 * @return array
 	 */
 	public function rcno_sort_admin_columns( $columns ) {
 		$registered_taxonomies = get_object_taxonomies( 'rcno_review' );
 		$registered_taxonomies = array_diff( $registered_taxonomies, array( 'category', 'post_tag' ) );
 
-		foreach (  $registered_taxonomies as $taxonomy) {
-			$columns['taxonomy-'. $taxonomy] = 'taxonomy-' . $taxonomy;
+		foreach ( $registered_taxonomies as $taxonomy ) {
+			$columns[ 'taxonomy-' . $taxonomy ] = 'taxonomy-' . $taxonomy;
 		}
 
 		return $columns;
@@ -674,7 +695,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $clauses
+	 * @param array  $clauses
 	 * @param object $wp_query
 	 *
 	 * @return array
@@ -711,10 +732,12 @@ SQL;
 	 * @since 1.0.0
 	 *
 	 * @param array $query_args
+	 *
 	 * @return array
 	 */
 	public function rcno_dashboard_recent_posts_widget( $query_args ) {
 		$query_args['post_type'] = 'rcno_review';
+
 		return $query_args;
 	}
 
@@ -725,6 +748,7 @@ SQL;
 	 * @since 1.0.0
 	 *
 	 * @param array $items
+	 *
 	 * @return array
 	 */
 	public function rcno_add_reviews_glance_items( $items = array() ) {
@@ -752,8 +776,10 @@ SQL;
 	 *
 	 * @since 1.0.0
 	 *
-	 * @see /wp-admin/edit-form-advanced.php
+	 * @see   /wp-admin/edit-form-advanced.php
+	 *
 	 * @param array $messages Existing post update messages.
+	 *
 	 * @return array Amended post update messages with new review update messages.
 	 */
 	function rcno_updated_review_messages( $messages ) {
@@ -783,16 +809,17 @@ SQL;
 		if ( $post_type_object->publicly_queryable && 'rcno_review' === $post_type ) {
 			$permalink = get_permalink( $post->ID );
 
-			$view_link = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View review', 'rcno-reviews' ) );
+			$view_link                 = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View review', 'rcno-reviews' ) );
 			$messages[ $post_type ][1] .= $view_link;
 			$messages[ $post_type ][6] .= $view_link;
 			$messages[ $post_type ][9] .= $view_link;
 
-			$preview_permalink = add_query_arg( 'preview', 'true', $permalink );
-			$preview_link = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview review', 'rcno-reviews' ) );
+			$preview_permalink          = add_query_arg( 'preview', 'true', $permalink );
+			$preview_link               = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview review', 'rcno-reviews' ) );
 			$messages[ $post_type ][8]  .= $preview_link;
 			$messages[ $post_type ][10] .= $preview_link;
 		}
+
 		return $messages;
 	}
 
@@ -802,7 +829,7 @@ SQL;
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses add_post_type_support()
+	 * @uses  add_post_type_support()
 	 *
 	 * @return void
 	 */
@@ -820,13 +847,13 @@ SQL;
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses update_option()
+	 * @uses  update_option()
 	 *
 	 * @return void
 	 */
 	public function reset_all_options() {
 
-		if ( ! wp_verify_nonce( $_POST['reset_nonce'], 'rcno-rest-nonce') ) {
+		if ( ! wp_verify_nonce( $_POST['reset_nonce'], 'rcno-rest-nonce' ) ) {
 			return;
 		}
 
@@ -875,12 +902,12 @@ SQL;
 			'rcno_excerpt_read_more'          => 'Read more',
 			'rcno_excerpt_word_count'         => '55',
 
-			'rcno_external_book_api'    => 'no-3rd-party',
-			'rcno_enable_googlebooks'   => '',
-			'rcno_googlebooks_key'      => '',
-			'rcno_enable_goodreads'     => '',
-			'rcno_goodreads_key'        => '',
-			'rcno_goodreads_secret'     => '',
+			'rcno_external_book_api'  => 'no-3rd-party',
+			'rcno_enable_googlebooks' => '',
+			'rcno_googlebooks_key'    => '',
+			'rcno_enable_goodreads'   => '',
+			'rcno_goodreads_key'      => '',
+			'rcno_goodreads_secret'   => '',
 		);
 
 		// Set the options to the defaults from the '$default_options' array.

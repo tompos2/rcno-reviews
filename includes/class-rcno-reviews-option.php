@@ -25,10 +25,12 @@ class Rcno_Reviews_Option {
 	 *
 	 * Looks to see if the specified setting exists, returns default if not.
 	 *
-	 * @since 	1.0.0
+	 * @since    1.0.0
+	 *
 	 * @param string $key
-	 * @param mixed $default
-	 * @return 	mixed 	$value 	Value saved / $default if key if not exist
+	 * @param mixed  $default
+	 *
+	 * @return    mixed    $value    Value saved / $default if key if not exist
 	 */
 	static public function get_option( $key, $default = false ) {
 
@@ -50,7 +52,7 @@ class Rcno_Reviews_Option {
 	 * This is for developers to update options outside the settings page.
 	 *
 	 * WARNING: Hooks and filters will be triggered!!
-	 * @TODO: Trigger hooks & filters, pull requests welcomed
+	 * @TODO  : Trigger hooks & filters, pull requests welcomed
 	 *
 	 * @since 1.0.0
 	 * @return true if the option was saved or false if not
@@ -78,7 +80,7 @@ class Rcno_Reviews_Option {
 	 * This is for developers to delete options outside the settings page.
 	 *
 	 * WARNING: Hooks and filters will be triggered!!
-	 * @TODO: Trigger hooks & filters, pull requests welcomed
+	 * @TODO  : Trigger hooks & filters, pull requests welcomed
 	 *
 	 * @since 1.0.0
 	 * @return true if the option was deleted or false if not

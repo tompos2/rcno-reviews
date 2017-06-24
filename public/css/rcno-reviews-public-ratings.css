@@ -1,14 +1,57 @@
-.rating {overflow: hidden; margin: -5px 0 0 0 !important; display: block; background: #fff}
-.rating li {float: left; margin: 0 2px 2px 0; width: 23px; height: 22px; cursor: pointer; overflow: hidden;
-    list-style: none !important}
-.rating .l {float: left; height: 22px; width: 12px; background: #ccc url(star.png) 0 0}
-.rating .r {float: right; height: 22px; width: 11px; background: #ccc url(star.png) -12px 0}
-.rating .half .l {background-color: gold;}
-.rating .half .r {background-color: #ccc}
-.rating .whole .l {background-color: gold;}
-.rating .whole .r {background-color: gold;}
-.rating .rover .l {background-color: gold;}
-.rating .rover .r {background-color: gold;}
+.rating {
+    overflow: hidden;
+    margin: -5px 0 0 0 !important;
+    display: block;
+    background: #fff
+}
+
+.rating li {
+    float: left;
+    margin: 0 2px 2px 0;
+    width: 23px;
+    height: 22px;
+    cursor: pointer;
+    overflow: hidden;
+    list-style: none !important
+}
+
+.rating .l {
+    float: left;
+    height: 22px;
+    width: 12px;
+    background: #ccc url(star.png) 0 0
+}
+
+.rating .r {
+    float: right;
+    height: 22px;
+    width: 11px;
+    background: #ccc url(star.png) -12px 0
+}
+
+.rating .half .l {
+    background-color: gold;
+}
+
+.rating .half .r {
+    background-color: #ccc
+}
+
+.rating .whole .l {
+    background-color: gold;
+}
+
+.rating .whole .r {
+    background-color: gold;
+}
+
+.rating .rover .l {
+    background-color: gold;
+}
+
+.rating .rover .r {
+    background-color: gold;
+}
 
 .rpr_description .ratings {
     position: absolute;

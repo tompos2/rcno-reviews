@@ -1,11 +1,11 @@
-(function($) {
-'use strict';
+(function ($) {
+    'use strict';
 
-    $(function() {
-        $('.rcno-isbn-fetch.google-books').on('click', function(e) {
+    $(function () {
+        $('.rcno-isbn-fetch.google-books').on('click', function (e) {
             e.preventDefault();
 
-            $.sanitize = function(input) {
+            $.sanitize = function (input) {
                 var output = input
                     .replace(/<script[^>]*?>.*?<\/script>/gi, '')
                     .replace(/<[\/\!]*?[^<>]*?>/gi, '')
@@ -14,7 +14,7 @@
                 return output;
             };
 
-            $.upCase = function(str) {
+            $.upCase = function (str) {
                 if (str.length) {
                     return str[0].toUpperCase() + str.slice(1).toLowerCase();
                 } else {
@@ -22,24 +22,24 @@
                 }
             };
 
-            var gr_ajx_gif  = $('.rcno-ajax-loading');
-            var book_isbn   = $('#rcno_book_isbn').val();
-            var google_url  = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
-            var api_url     = google_url + book_isbn;
+            var gr_ajx_gif = $('.rcno-ajax-loading');
+            var book_isbn = $('#rcno_book_isbn').val();
+            var google_url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+            var api_url = google_url + book_isbn;
 
             $.ajax({
                 url: api_url,
                 type: 'GET',
-                beforeSend: function() {
+                beforeSend: function () {
                     gr_ajx_gif.show();
                 },
-                complete: function() {
+                complete: function () {
                     gr_ajx_gif.hide();
                 },
-                success: function ( book ) {
-                    console.log( book );
+                success: function (book) {
+                    console.log(book);
 
-                    if ( book.totalItems === 0 ) {
+                    if (book.totalItems === 0) {
                         $('.book-isbn-metabox-error').show();
                     } else {
 
@@ -52,11 +52,11 @@
                         );
 
                         $('#new-tag-rcno_genre').val(
-                            book.items["0"].volumeInfo.categories["0"].replace( ' ', ', ' )
+                            book.items["0"].volumeInfo.categories["0"].replace(' ', ', ')
                         );
 
                         $('#newrcno_genre').val(
-                            book.items["0"].volumeInfo.categories["0"].replace( ' ', ', ' )
+                            book.items["0"].volumeInfo.categories["0"].replace(' ', ', ')
                         );
 
                         $('#rcno_book_publisher').val(

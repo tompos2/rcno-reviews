@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Saving the general meta information.
  *
@@ -16,7 +17,7 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -40,7 +41,7 @@ class Rcno_Admin_Description_Meta {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -48,7 +49,7 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses add_meta_meta_box()
+	 * @uses  add_meta_meta_box()
 	 * @return void
 	 */
 	public function rcno_book_description_metabox() {
@@ -69,8 +70,10 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @see wp_editor()
+	 * @see   wp_editor()
+	 *
 	 * @param object $review
+	 *
 	 * @return void
 	 */
 	public function do_rcno_book_description_metabox( $review ) {
@@ -79,8 +82,8 @@ class Rcno_Admin_Description_Meta {
 			'textarea_rows' => 8,
 		);
 		$options['media_buttons'] = false;
-		$options['teeny'] = true;
-		$options['quicktags'] = false;
+		$options['teeny']         = true;
+		$options['quicktags']     = false;
 
 		wp_editor( $description, 'rcno_book_description', $options );
 	}
@@ -90,10 +93,10 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses update_post_meta()
-	 * @uses sanitize_post_field()
+	 * @uses  update_post_meta()
+	 * @uses  sanitize_post_field()
 	 *
-	 * @param int $review_id
+	 * @param int   $review_id
 	 * @param array $data
 	 * @param mixed $review
 	 *

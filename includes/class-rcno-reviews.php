@@ -35,7 +35,7 @@ class Rcno_Reviews {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Rcno_Reviews_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Rcno_Reviews_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,7 +44,7 @@ class Rcno_Reviews {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
@@ -53,7 +53,7 @@ class Rcno_Reviews {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
 
@@ -69,7 +69,7 @@ class Rcno_Reviews {
 	public function __construct() {
 
 		$this->plugin_name = 'rcno-reviews';
-		$this->version = '1.0.0';
+		$this->version     = '1.0.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -212,13 +212,13 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
 
 		// Built the option page.
-		$settings_callback = new Rcno_Reviews_Callback_Helper( $this->plugin_name );
+		$settings_callback     = new Rcno_Reviews_Callback_Helper( $this->plugin_name );
 		$settings_sanitization = new Rcno_Reviews_Sanitization_Helper( $this->plugin_name );
-		$plugin_settings = new Rcno_Reviews_Settings( $this->get_plugin_name(), $settings_callback, $settings_sanitization);
-		$this->loader->add_action( 'admin_init' , $plugin_settings, 'register_settings' );
+		$plugin_settings       = new Rcno_Reviews_Settings( $this->get_plugin_name(), $settings_callback, $settings_sanitization );
+		$this->loader->add_action( 'admin_init', $plugin_settings, 'register_settings' );
 
 		$plugin_meta_box = new Rcno_Reviews_Meta_Box( $this->get_plugin_name() );
-		$this->loader->add_action( 'load-toplevel_page_' . $this->get_plugin_name() , $plugin_meta_box, 'add_meta_boxes' );
+		$this->loader->add_action( 'load-toplevel_page_' . $this->get_plugin_name(), $plugin_meta_box, 'add_meta_boxes' );
 
 		// Load the 'Book Description' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->description_meta, 'rcno_book_description_metabox' );
@@ -248,16 +248,16 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'rcno_admin_notice_handler' );
 
 		// Add book reviews to Recent Activity widget.
-		$this->loader->add_filter( 'dashboard_recent_posts_query_args', $plugin_admin,  'rcno_dashboard_recent_posts_widget' );
+		$this->loader->add_filter( 'dashboard_recent_posts_query_args', $plugin_admin, 'rcno_dashboard_recent_posts_widget' );
 
 		// Add book reviews to 'At a Glance' widget.
-		$this->loader->add_filter( 'dashboard_glance_items', $plugin_admin,  'rcno_add_reviews_glance_items' );
+		$this->loader->add_filter( 'dashboard_glance_items', $plugin_admin, 'rcno_add_reviews_glance_items' );
 
 		// Add messages on the book review editor screen.
-		$this->loader->add_filter( 'post_updated_messages', $plugin_admin,  'rcno_updated_review_messages' );
+		$this->loader->add_filter( 'post_updated_messages', $plugin_admin, 'rcno_updated_review_messages' );
 
 		// Add the help tab to the  review editor screen.
-		$this->loader->add_filter( 'admin_head', $plugin_admin,  'rcno_reviews_help_tab' );
+		$this->loader->add_filter( 'admin_head', $plugin_admin, 'rcno_reviews_help_tab' );
 		$this->loader->add_action( 'contextual_help', $plugin_admin, 'rcno_add_help_text', 10, 3 );
 
 		$this->loader->add_filter( 'manage_rcno_review_posts_columns', $plugin_admin, 'rcno_remove_admin_columns' );
@@ -332,7 +332,7 @@ class Rcno_Reviews {
 
 	private function define_external_hooks() {
 
-		$goodreads = new Rcno_Goodreads_API();
+		$goodreads   = new Rcno_Goodreads_API();
 		$googlebooks = new Rcno_Reviews_GoogleBooks_API( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $goodreads, 'rcno_enqueue_gr_scripts' );
@@ -343,21 +343,21 @@ class Rcno_Reviews {
 
 
 	private function define_shortcodes() {
-		
+
 		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
 
 		add_shortcode( 'rcno-reviews', array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
 		add_shortcode( 'rcno-tax-list', array( $plugin_shortcodes, 'rcno_do_taxlist_shortcode' ) );
 		add_shortcode( 'rcno-reviews-index', array( $plugin_shortcodes, 'rcno_do_reviews_index_shortcode' ) );
 
-		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_review_button_scr' );
+		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scr' );
 		$this->loader->add_action( 'wp_ajax_rcno_get_results', $plugin_shortcodes, 'rcno_process_ajax_scr' );
 
-		$this->loader->add_action( 'media_buttons',   $plugin_shortcodes, 'rcno_add_button_scl' );
-		$this->loader->add_action( 'in_admin_footer',   $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
-		$this->loader->add_action( 'admin_enqueue_scripts',   $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
+		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_button_scl' );
+		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
 
 	}
 

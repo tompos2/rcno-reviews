@@ -27,7 +27,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -36,22 +36,23 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 * @version 1.0.0
-	 * @param string $plugin_name       The name of the plugin.
-	 * @param string $version    The version of this plugin.
+	 *
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -173,7 +174,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @return array $query
 	 */
-	public function rcno_add_reviews_to_rss_feed( array  $query) {
+	public function rcno_add_reviews_to_rss_feed( array $query ) {
 
 		$reviews_in_rss = Rcno_Reviews_Option::get_option( 'rcno_reviews_in_rss' );
 
@@ -208,7 +209,7 @@ class Rcno_Reviews_Public {
 			$review_post          = get_post();
 			$review               = get_post_custom( $review_post->ID );
 			$GLOBALS['review_id'] = $review_post->ID;
-			$archive_display = Rcno_Reviews_Option::get_option( 'rcno_reviews_archive' );
+			$archive_display      = Rcno_Reviews_Option::get_option( 'rcno_reviews_archive' );
 
 			if ( is_single() || 'archive_display_full' === $archive_display ) {
 				$content = $this->rcno_render_review_content( $review_post );
@@ -231,7 +232,9 @@ class Rcno_Reviews_Public {
 	 * then content is rendered by this function
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param string $content
+	 *
 	 * @return string $content
 	 */
 	public function rcno_get_review_excerpt( $content ) {
@@ -347,8 +350,10 @@ class Rcno_Reviews_Public {
 	 * Render a list of all terms of a taxonomy using the templates's 'taxonomy.php' file.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param string $taxonomy
-	 * @param bool $headers
+	 * @param bool   $headers
+	 *
 	 * @return string $content
 	 */
 	public function rcno_render_taxlist( $taxonomy, $headers = false ) {
@@ -368,7 +373,7 @@ class Rcno_Reviews_Public {
 		$review_post = false;
 
 		if ( 'n/a' !== $taxonomy && '' !== $taxonomy ) {
-			 // Get the terms of the selected taxonomy.
+			// Get the terms of the selected taxonomy.
 			$terms = get_terms( $taxonomy, array( 'orderby' => 'name', 'order' => 'ASC' ) );
 		} else {
 			// Set $terms to false for the layout and it's error messages
@@ -394,11 +399,13 @@ class Rcno_Reviews_Public {
 	 * Render a list of all reviews alphabetically using the layout's reviews_index.php file
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param mixed $headers
+	 *
 	 * @return string $content
 	 */
 	public function rcno_render_review_index( $headers = false ) {
-		 // Create empty output variable.
+		// Create empty output variable.
 		$output = '';
 
 		// Get the layout's include path.
@@ -475,7 +482,9 @@ class Rcno_Reviews_Public {
 	 * Filter the except length to 20 words.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param int $length Excerpt length.
+	 *
 	 * @return int modified excerpt length.
 	 */
 	public function rcno_reviews_excerpt_length( $length ) {
@@ -486,7 +495,9 @@ class Rcno_Reviews_Public {
 	 * Filter the "read more" excerpt string link to the post.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param string $more "Read more" excerpt string.
+	 *
 	 * @return string modified "read more" excerpt string.
 	 */
 	function rcno_reviews_excerpt_more( $more ) {

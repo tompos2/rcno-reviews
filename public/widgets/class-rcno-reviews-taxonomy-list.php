@@ -24,11 +24,11 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
 	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version The version of this plugin.
+	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct() {
 
@@ -38,8 +38,8 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		parent::__construct(
 			'rcno-reviews-taxonomy-list',
 			__( 'Rcno Taxonomy List', 'rcno-reviews' ),
-            $this->widget_options,
-            $this->control_options
+			$this->widget_options,
+			$this->control_options
 		);
 
 	}
@@ -64,11 +64,12 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	 * Register our widget, un-register the builtin widget.
 	 */
 	public function rcno_register_taxonomy_list_widget() {
-	    if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_taxonomy_list_widget' ) ) {
-	        return false;
-        }
+		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_taxonomy_list_widget' ) ) {
+			return false;
+		}
 		register_widget( 'Rcno_Reviews_Taxonomy_List' );
-	    return true;
+
+		return true;
 	}
 
 	/**
@@ -106,8 +107,8 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		}
 
 		if ( empty( $instance['taxonomy'] ) ) {
-		    return;
-        }
+			return;
+		}
 
 		/**
 		 * Put together the list of terms
@@ -200,7 +201,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		$before_count = sanitize_text_field( $instance['before_count'] );
 		$after_count  = sanitize_text_field( $instance['after_count'] );
 		$hide_empty   = isset( $instance['hide_empty'] ) ? (bool) $instance['hide_empty'] : false;
-		$taxonomies = get_taxonomies( array( 'show_tagcloud' => true, '_builtin' => false ), 'objects' );
+		$taxonomies   = get_taxonomies( array( 'show_tagcloud' => true, '_builtin' => false ), 'objects' );
 		?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?> ">
@@ -226,7 +227,8 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 				<?php _e( 'Displayed taxonomy count:', 'rcno-reviews' ); ?>
             </label>
             <input type="number" class="widefat" id="<?php echo $this->get_field_id( 'item_count' ); ?>"
-                   name="<?php echo $this->get_field_name( 'item_count' ); ?>" value="<?php echo esc_attr( $item_count ); ?>"
+                   name="<?php echo $this->get_field_name( 'item_count' ); ?>"
+                   value="<?php echo esc_attr( $item_count ); ?>"
                    style="width:50px;" min="1" max="100"/>
         </p>
         <p>
@@ -244,7 +246,8 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
             </select>
             <label for="<?php echo $this->get_field_id( 'order' ); ?>">
             </label>
-            <select id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>"
+            <select id="<?php echo $this->get_field_id( 'order' ); ?>"
+                    name="<?php echo $this->get_field_name( 'order' ); ?>"
                     class="widefat" style="width:100px;">'
                 <option value="asc" <?php echo selected( $order, 'asc', false ); ?> >
 					<?php _e( 'ASC', 'rcno-reviews' ); ?>

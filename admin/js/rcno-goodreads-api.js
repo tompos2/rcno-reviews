@@ -1,12 +1,12 @@
-(function($) {
+(function ($) {
     'use strict';
 
-    $(function() {
+    $(function () {
 
-        $('.rcno-isbn-fetch.good-reads').on('click', function(e) {
+        $('.rcno-isbn-fetch.good-reads').on('click', function (e) {
             e.preventDefault();
 
-            $.sanitize = function(input) {
+            $.sanitize = function (input) {
                 return input
                     .replace(/<script[^>]*?>.*?<\/script>/gi, '')
                     .replace(/<[\/\!]*?[^<>]*?>/gi, '')
@@ -15,7 +15,7 @@
 
             };
 
-            $.upCase = function(str) {
+            $.upCase = function (str) {
                 if (str.length) {
                     return str[0].toUpperCase() + str.slice(1).toLowerCase();
                 } else {
@@ -36,15 +36,15 @@
                     q: "select * from xml where url=\"" + url + "\"",
                     format: 'json'
                 },
-                beforeSend: function() {
+                beforeSend: function () {
                     ajx_gif.show();
                 },
-                complete: function() {
+                complete: function () {
                     console.log('Complete');
                     ajx_gif.hide();
                 },
-                success: function(grDoc) {
-                    console.log(grDoc.query.results );
+                success: function (grDoc) {
+                    console.log(grDoc.query.results);
                     var book = grDoc.query.results;
 
                     if (book.error) {
@@ -70,12 +70,12 @@
                         );
 
                         $('#new-tag-rcno_genre').val(
-                            $.upCase( book.GoodreadsResponse.book.popular_shelves.shelf["0"].name )
+                            $.upCase(book.GoodreadsResponse.book.popular_shelves.shelf["0"].name)
                         );
 
-                        if( typeof book.GoodreadsResponse.book.series_works === 'object' ){
+                        if (typeof book.GoodreadsResponse.book.series_works === 'object') {
                             $('#new-tag-rcno_series').val(
-                                $.sanitize( book.GoodreadsResponse.book.series_works.series_work.series.title )
+                                $.sanitize(book.GoodreadsResponse.book.series_works.series_work.series.title)
                             );
                         }
 

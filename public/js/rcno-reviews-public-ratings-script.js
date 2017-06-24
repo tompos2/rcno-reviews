@@ -5,20 +5,20 @@
 
     var karmaId = 'comment_karma';
 
-    function doHover( e ) {
-        $( e.currentTarget )
+    function doHover(e) {
+        $(e.currentTarget)
             .prevAll().addBack()[(e.type === 'mouseenter' ? 'add' : 'remove') + 'Class']('rover');
     }
 
-    function setUI( elem ) {
+    function setUI(elem) {
         elem.prevAll().addBack()
-            .addClass( 'whole' ).removeClass( 'empty half rover' );
+            .addClass('whole').removeClass('empty half rover');
 
         elem.nextAll()
-            .addClass( 'empty' ).removeClass( 'whole half rover' );
+            .addClass('empty').removeClass('whole half rover');
     }
 
-    function doFormRating( e ) {
+    function doFormRating(e) {
         var elem = $(e.currentTarget),
             indx,
             ctx,
@@ -27,39 +27,39 @@
 
         $karma = $('#comment_karma');
 
-        setUI( elem );
+        setUI(elem);
 
         ctx = elem.parent();
-        indx = ctx.find('li').index( e.currentTarget ) + 1;
+        indx = ctx.find('li').index(e.currentTarget) + 1;
 
-        if ( ! $karma.length ) {
+        if (!$karma.length) {
             field = $('<input type="hidden" />').attr({
-                name : karmaId,
-                id : karmaId,
-                value : indx
+                name: karmaId,
+                id: karmaId,
+                value: indx
             });
-            ctx.after( field );
+            ctx.after(field);
         } else {
-            $karma.val( indx );
+            $karma.val(indx);
         }
     }
 
-    function doRating( e ) {
-        var elem = $( e.currentTarget ), indx, ctx;
+    function doRating(e) {
+        var elem = $(e.currentTarget), indx, ctx;
 
-        setUI( elem );
+        setUI(elem);
 
         ctx = elem.parent();
-        indx = ctx.find('li').index( e.currentTarget ) + 1;
+        indx = ctx.find('li').index(e.currentTarget) + 1;
 
         $.ajax({
-            type   : 'post',
-            url    : rcno_public_object.public_ajax_url,
-            data   : {
-                action : 'rcno_rate_review',
-                rating : indx,
-                comment_post_ID : ctx.data('id'),
-                comment_ID : ctx.data('comment-id'),
+            type: 'post',
+            url: rcno_public_object.public_ajax_url,
+            data: {
+                action: 'rcno_rate_review',
+                rating: indx,
+                comment_post_ID: ctx.data('id'),
+                comment_ID: ctx.data('comment-id'),
                 security_nonce: rcno_public_object.public_ratings_nonce
             }
         });
@@ -71,11 +71,11 @@
         var hoverEvents = 'mouseenter mouseleave';
 
         $('.form-rating li')
-            .bind( hoverEvents, doHover )
-            .click( doFormRating );
+            .bind(hoverEvents, doHover)
+            .click(doFormRating);
 
         $('.needs-rating li')
-            .bind( hoverEvents, doHover )
-            .click( doRating );
+            .bind(hoverEvents, doHover)
+            .click(doRating);
     });
 }(jQuery));

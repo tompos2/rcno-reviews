@@ -3,7 +3,7 @@
  * included in this file.
  */
 
- ::-webkit-input-placeholder {
+::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     color: #b7b7b7;
 }
@@ -165,12 +165,12 @@ button.button.reset-button {
     float: left;
 }
 
-#rcno_book_review_rating_metabox .rcno-rate:not(:checked)>input {
+#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > input {
     position: absolute;
     top: -9999px;
 }
 
-#rcno_book_review_rating_metabox .rcno-rate:not(:checked)>label {
+#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label {
     float: right;
     width: 1em;
     overflow: hidden;
@@ -181,51 +181,51 @@ button.button.reset-button {
     height: 25px;
 }
 
-#rcno_book_review_rating_metabox .rcno-rate:not(:checked)>label:before {
+#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label:before {
     content: '★ ';
 }
 
-#rcno_book_review_rating_metabox .rcno-rate>input:checked~label {
+#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label {
     color: #ffc700 !important;
 }
 
-#rcno_book_review_rating_metabox .rcno-rate:not(:checked)>label:hover,
-#rcno_book_review_rating_metabox .rcno-rate:not(:checked)>label:hover~label {
+#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label:hover,
+#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label:hover ~ label {
     color: #deb217 !important;
 }
 
-#rcno_book_review_rating_metabox .rcno-rate>input:checked+label:hover,
-#rcno_book_review_rating_metabox .rcno-rate>input:checked+label:hover~label,
-#rcno_book_review_rating_metabox .rcno-rate>input:checked~label:hover,
-#rcno_book_review_rating_metabox .rcno-rate>input:checked~label:hover~label,
-#rcno_book_review_rating_metabox .rcno-rate>label:hover~input:checked~label {
+#rcno_book_review_rating_metabox .rcno-rate > input:checked + label:hover,
+#rcno_book_review_rating_metabox .rcno-rate > input:checked + label:hover ~ label,
+#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label:hover,
+#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label:hover ~ label,
+#rcno_book_review_rating_metabox .rcno-rate > label:hover ~ input:checked ~ label {
     color: #c59b08 !important;
 }
 
-#rcno_book_review_rating_metabox .rcno-rate input[type=radio]:checked+label:before {
+#rcno_book_review_rating_metabox .rcno-rate input[type=radio]:checked + label:before {
     color: #c59b08 !important;
 }
 
-tr.rcno_review_template>td {
+tr.rcno_review_template > td {
     display: flex;
     line-height: 0;
 }
 
-tr.rcno_review_template>td .template-options img.template-label-image.checked {
-    border: 5px solid rgba(30,140,190,.8);
+tr.rcno_review_template > td .template-options img.template-label-image.checked {
+    border: 5px solid rgba(30, 140, 190, .8);
     box-sizing: border-box;
 }
 
-tr.rcno_review_template>td .template-options .label-container p {
+tr.rcno_review_template > td .template-options .label-container p {
     line-height: 1;
 }
 
-tr.rcno_review_template>td .template-options {
+tr.rcno_review_template > td .template-options {
     margin: 0 1em;
     position: relative;
 }
 
-tr.rcno_review_template>td input[type=radio] {
+tr.rcno_review_template > td input[type=radio] {
     display: none;
 }
 
@@ -239,12 +239,12 @@ tr.rcno_review_slug_instructions {
     background: rgba(255, 0, 0, 0.04);
 }
 
-tr.rcno_review_slug_instructions>td {
+tr.rcno_review_slug_instructions > td {
     padding: 0 10px;
 }
 
-tr.rcno_review_slug_instructions>td>p,
-tr.rcno_review_slug_instructions>th {
+tr.rcno_review_slug_instructions > td > p,
+tr.rcno_review_slug_instructions > th {
     font-size: 12px !important;
     color: red;
 }
@@ -268,7 +268,7 @@ tr.rcno_review_slug_instructions>th {
 }
 
 .template-label-p {
-    background: rgba(30,140,190,.8);
+    background: rgba(30, 140, 190, .8);
     padding: 5px 10px;
     color: #fff;
     margin: 0;

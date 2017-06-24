@@ -7,7 +7,7 @@ class Rcno_Reviews_Rest_API {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -16,7 +16,7 @@ class Rcno_Reviews_Rest_API {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -25,7 +25,7 @@ class Rcno_Reviews_Rest_API {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      object    $template An instance of the Rcno_Template_Tags class.
+	 * @var      object $template An instance of the Rcno_Template_Tags class.
 	 */
 	private $template;
 
@@ -33,7 +33,7 @@ class Rcno_Reviews_Rest_API {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -69,10 +69,10 @@ class Rcno_Reviews_Rest_API {
 		global $wp_post_types;
 
 		$post_type_name = 'rcno_review';
-		if( isset( $wp_post_types[ $post_type_name ] ) ) {
-			$wp_post_types[$post_type_name]->show_in_rest = true;
-			$wp_post_types[$post_type_name]->rest_base = 'review';
-			$wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
+		if ( isset( $wp_post_types[ $post_type_name ] ) ) {
+			$wp_post_types[ $post_type_name ]->show_in_rest          = true;
+			$wp_post_types[ $post_type_name ]->rest_base             = 'review';
+			$wp_post_types[ $post_type_name ]->rest_controller_class = 'WP_REST_Posts_Controller';
 		}
 	}
 
@@ -87,7 +87,7 @@ class Rcno_Reviews_Rest_API {
 		global $wp_taxonomies;
 
 		$taxonomies = explode( ",", Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
-		$tax_name = array();
+		$tax_name   = array();
 
 		foreach ( $taxonomies as $tax ) {
 			$tax_name[ strtolower( $tax ) ] = 'rcno_' . strtolower( $tax );
@@ -95,7 +95,7 @@ class Rcno_Reviews_Rest_API {
 
 		foreach ( $tax_name as $key => $value ) {
 			if ( isset( $wp_taxonomies[ $value ] ) ) {
-				$wp_taxonomies[ $value ]->show_in_rest = true;
+				$wp_taxonomies[ $value ]->show_in_rest          = true;
 				$wp_taxonomies[ $value ]->rest_base             = $key;
 				$wp_taxonomies[ $value ]->rest_controller_class = 'WP_REST_Terms_Controller';
 			}
@@ -103,102 +103,102 @@ class Rcno_Reviews_Rest_API {
 	}
 
 
-	public function rcno_register_rest_fields(){
+	public function rcno_register_rest_fields() {
 
 		register_rest_field( 'rcno_review', 'book_ISBN', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_isbn', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_ISBN13', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_isbn13', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_ASIN', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_asin', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_title', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_title', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_author', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return wp_strip_all_tags( $this->template->get_the_rcno_taxonomy_terms( $object['id'], 'rcno_author', false, ', ' ) );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_genre', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return wp_strip_all_tags( $this->template->get_the_rcno_taxonomy_terms( $object['id'], 'rcno_genre', false, ', ' ) );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_series', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return wp_strip_all_tags( $this->template->get_the_rcno_taxonomy_terms( $object['id'], 'rcno_series', false, ', ' ) );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_publisher', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_publisher', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_published_date', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_pub_date', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_published_date', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_pub_date', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_page_count', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return get_post_meta( $object['id'], 'rcno_book_page_count', true );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 		register_rest_field( 'rcno_review', 'book_cover', array(
-			'get_callback' => function( $object ) {
+			'get_callback'    => function ( $object ) {
 				return $this->template->get_the_rcno_book_cover( $object['id'], false );
 			},
 			'update_callback' => 'null',
-			'schema' => null,
+			'schema'          => null,
 		) );
 
 	}

@@ -14,7 +14,7 @@ if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
 }
 
 $plugin_name = 'rcno-reviews';
-$version = '1.0.0';
+$version     = '1.0.0';
 
 $review = new Rcno_Template_Tags( $plugin_name, $version );
 
@@ -27,15 +27,15 @@ $review = new Rcno_Template_Tags( $plugin_name, $version );
  * However, if the review is embedded, we need to do it here.
  */
 if ( $review->is_review_embedded() ) { ?>
-	<h2 class="rcno-review-title"><?php echo get_the_title( $review_id ); ?></h2>
+    <h2 class="rcno-review-title"><?php echo get_the_title( $review_id ); ?></h2>
 <?php } ?>
 
 <?php
 
-    the_excerpt( $review_id );
+the_excerpt( $review_id );
 
-	//$review->the_rcno_book_review_content( $review_id );
+//$review->the_rcno_book_review_content( $review_id );
 
-    echo '<!--- Recencio Book Reviews --->';
+echo '<!--- Recencio Book Reviews --->';
 
 ?>

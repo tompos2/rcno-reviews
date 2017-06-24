@@ -17,7 +17,7 @@ class Rcno_Reviews_Settings {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -26,7 +26,7 @@ class Rcno_Reviews_Settings {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -35,7 +35,7 @@ class Rcno_Reviews_Settings {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      array     $registered_settings    The array of plugin settings.
+	 * @var      array $registered_settings The array of plugin settings.
 	 */
 	private $registered_settings;
 
@@ -44,7 +44,7 @@ class Rcno_Reviews_Settings {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Rcno_Reviews_Callback_Helper    $callback    Render HTML elements.
+	 * @var      Rcno_Reviews_Callback_Helper $callback Render HTML elements.
 	 */
 	protected $callback;
 
@@ -53,17 +53,18 @@ class Rcno_Reviews_Settings {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Rcno_Reviews_Sanitization_Helper    $sanitization    Sanitize and validate settings.
+	 * @var      Rcno_Reviews_Sanitization_Helper $sanitization Sanitize and validate settings.
 	 */
 	protected $sanitization;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since 	1.0.0
-	 * @param 	string    							$plugin_name 			The name of this plugin.
-	 * @param 	Rcno_Reviews_Callback_Helper 		$settings_callback 		The callback helper for rendering HTML markups
-	 * @param 	Rcno_Reviews_Sanitization_Helper 	$settings_sanitization 	The sanitization helper for sanitizing settings
+	 * @since    1.0.0
+	 *
+	 * @param    string                           $plugin_name           The name of this plugin.
+	 * @param    Rcno_Reviews_Callback_Helper     $settings_callback     The callback helper for rendering HTML markups
+	 * @param    Rcno_Reviews_Sanitization_Helper $settings_sanitization The sanitization helper for sanitizing settings
 	 */
 	public function __construct( $plugin_name, $settings_callback, $settings_sanitization ) {
 
@@ -79,16 +80,16 @@ class Rcno_Reviews_Settings {
 	/**
 	 * Register all settings sections and fields.
 	 *
-	 * @since 	1.0.0
-	 * @return 	void
-	*/
+	 * @since    1.0.0
+	 * @return    void
+	 */
 	public function register_settings() {
 
 		if ( false === get_option( 'rcno_reviews_settings' ) ) {
 			add_option( 'rcno_reviews_settings', array(), '', 'yes' );
 		}
 
-		foreach( $this->registered_settings as $tab => $settings ) {
+		foreach ( $this->registered_settings as $tab => $settings ) {
 
 			// add_settings_section( $id, $title, $callback, $page )
 			add_settings_section(
@@ -96,7 +97,7 @@ class Rcno_Reviews_Settings {
 				__return_null(),
 				'__return_false',
 				'rcno_reviews_settings_' . $tab
-				);
+			);
 
 			foreach ( $settings as $key => $option ) {
 
@@ -106,29 +107,35 @@ class Rcno_Reviews_Settings {
 				add_settings_field(
 					'rcno_reviews_settings[' . $key . ']',
 					$_name,
-					method_exists( $this->callback, $option['type'] . '_callback' ) ? array( $this->callback, $option['type'] . '_callback' ) : array( $this->callback, 'missing_callback' ),
+					method_exists( $this->callback, $option['type'] . '_callback' ) ? array(
+						$this->callback,
+						$option['type'] . '_callback'
+					) : array( $this->callback, 'missing_callback' ),
 					'rcno_reviews_settings_' . $tab,
 					'rcno_reviews_settings_' . $tab,
 					array(
 						'id'      => $key,
-						'desc'    => !empty( $option['desc'] ) ? $option['desc'] : '',
+						'desc'    => ! empty( $option['desc'] ) ? $option['desc'] : '',
 						'name'    => $_name,
 						'section' => $tab,
 						'size'    => isset( $option['size'] ) ? $option['size'] : 'regular',
 						'options' => isset( $option['options'] ) ? $option['options'] : '',
 						'std'     => isset( $option['std'] ) ? $option['std'] : '',
-						'max'    => isset( $option['max'] ) ? $option['max'] : 999999,
-						'min'    => isset( $option['min'] ) ? $option['min'] : 0,
-						'step'   => isset( $option['step'] ) ? $option['step'] : 1,
-						'class'  => $key,
-						)
-					);
+						'max'     => isset( $option['max'] ) ? $option['max'] : 999999,
+						'min'     => isset( $option['min'] ) ? $option['min'] : 0,
+						'step'    => isset( $option['step'] ) ? $option['step'] : 1,
+						'class'   => $key,
+					)
+				);
 			} // end foreach
 
 		} // end foreach
 
 		// Creates our settings in the options table
-		register_setting( 'rcno_reviews_settings', 'rcno_reviews_settings', array( $this->sanitization, 'settings_sanitize' ) );
+		register_setting( 'rcno_reviews_settings', 'rcno_reviews_settings', array(
+			$this->sanitization,
+			'settings_sanitize'
+		) );
 
 	}
 }

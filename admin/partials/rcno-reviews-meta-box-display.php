@@ -16,7 +16,7 @@
  * Renders a single meta box.
  *
  * @since       1.0.0
-*/
+ */
 ?>
 
 <form action="options.php" method="POST">
@@ -25,4 +25,4 @@
 	<?php submit_button(); ?>
     <button class="button rcno-reset-button">Reset Settings</button>
 </form>
-<br class="clear" />
+<br class="clear"/>
