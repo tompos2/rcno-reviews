@@ -190,41 +190,44 @@ class Rcno_Template_Tags {
 		$book_rating          = (int) $review['rcno_admin_rating'][0];
 		$this->private_rating = $book_rating;
 
-		switch ( $book_rating ) {
-			case 5:
-				return '<div class="rcno-admin-rating">
+		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
+
+			switch ( $book_rating ) {
+				case 5:
+					return '<div class="rcno-admin-rating">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 							</div>';
-				break;
+					break;
 
-			case 4;
-				return '<div class="rcno-admin-rating">
+				case 4;
+					return '<div class="rcno-admin-rating">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
 							</div>';
-				break;
+					break;
 
-			case 3;
-				return '<div class="rcno-admin-rating">
+				case 3;
+					return '<div class="rcno-admin-rating">
 							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
 							</div>';
-				break;
+					break;
 
-			case 2;
-				return '<div class="rcno-admin-rating">
+				case 2;
+					return '<div class="rcno-admin-rating">
 							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
-				break;
+					break;
 
-			case 1;
-				return '<div class="rcno-admin-rating">
+				case 1;
+					return '<div class="rcno-admin-rating">
 							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
-				break;
+					break;
 
-			default:
-				return '<div class="rcno-admin-rating">
+				default:
+					return '<div class="rcno-admin-rating">
 							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
+			}
 		}
 	}
 
@@ -656,6 +659,16 @@ class Rcno_Template_Tags {
 	 * REVIEW BOOK PURCHASE LINKS TEMPLATE TAGS
 	 *******************************************************************************/
 
+	/**
+	 * Generates the and escapes book purchase links.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int    $review_id     The post ID of the book review.
+	 * @param bool   $label         Displays the a label before the purchase links.
+	 *
+	 * @return string
+	 */
 	public function get_the_rcno_book_purchase_links( $review_id, $label = false ) {
 
 		// Disables the purchase links displaying on reviews.
@@ -669,6 +682,7 @@ class Rcno_Template_Tags {
 			return false;
 		}
 
+		$links_label = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links_label' );
 		$background = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_background' );
 		$_stores    = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links' );
 		$_stores    = explode( ",", $_stores );
@@ -682,13 +696,13 @@ class Rcno_Template_Tags {
 		$links .= '<div class="rcno-purchase-links-container">';
 
 		if ( $label ) {
-			$links .= '<span>' . __( 'Purchase on: ', 'rcno-reviews' ) . '</span>';
+			$links .= '<span>' . esc_html( $links_label ) . '</span> ';
 		}
 
 		foreach ( $purchase_links as $value ) {
 			$links .= '<a href="' . esc_url( $value['link'] ) . '" class="rcno-purchase-links '
 			          . sanitize_html_class( $value['store'] ) . '"' . ' style="background:' . $background . '" rel="nofollow"' . ' >';
-			$links .= sanitize_text_field( $stores[ $value['store'] ] );
+			$links .= esc_html( $stores[ $value['store'] ] );
 			$links .= '</a> ';
 		}
 		$links .= '</div>';
@@ -696,6 +710,16 @@ class Rcno_Template_Tags {
 		return $links;
 	}
 
+	/**
+	 * Prints the book purchase links.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int    $review_id     The post ID of the book review.
+	 * @param bool   $label         Displays the a label before the purchase links.
+	 *
+	 * @return void
+	 */
 	public function the_rcno_book_purchase_links( $review_id, $label = false ) {
 		echo $this->get_the_rcno_book_purchase_links( $review_id, $label );
 	}

@@ -100,6 +100,18 @@ class Rcno_Reviews_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public.js', array( 'jquery' ), $this->version, false );
 
+		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
+
+			$star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
+			$custom_css = '
+				.rcno-admin-rating span {
+				    color: ' . $star_color . '
+				}
+			';
+
+			wp_add_inline_style( $this->plugin_name, $custom_css );
+		}
+
 	}
 
 	/**

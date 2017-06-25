@@ -54,14 +54,17 @@ class Rcno_Admin_Review_Rating {
 	 */
 	public function rcno_book_review_rating_metabox() {
 
-		add_meta_box(
-			'rcno_book_review_rating_metabox',
-			__( '5 Star Rating', 'rcno-reviews' ),
-			array( $this, 'do_rcno_book_review_rating_metabox' ),
-			'rcno_review',
-			'side',
-			'high'
-		);
+		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
+
+			add_meta_box(
+				'rcno_book_review_rating_metabox',
+				__( '5 Star Rating', 'rcno-reviews' ),
+				array( $this, 'do_rcno_book_review_rating_metabox' ),
+				'rcno_review',
+				'side',
+				'high'
+			);
+		}
 	}
 
 	/**

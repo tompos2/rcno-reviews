@@ -160,6 +160,34 @@ class Rcno_Reviews_Admin {
 		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . '/css/rcno-reviews-modal.css', $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . '/css/selectize.default.css', '0.12.4', 'all' );
 
+		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
+
+			$star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
+			$custom_css = '
+				#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label {
+				    color: ' . $star_color . '
+				}
+				
+				#rcno_book_review_rating_metabox .rcno-rate input[type=radio]:checked + label:before {
+				    color: ' . $star_color . '
+				}
+				#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label:hover,
+				#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label:hover ~ label {
+				    color: ' . $star_color . '
+				}
+				#rcno_book_review_rating_metabox .rcno-rate > input:checked + label:hover,
+				#rcno_book_review_rating_metabox .rcno-rate > input:checked + label:hover ~ label,
+				#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label:hover,
+				#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label:hover ~ label,
+				#rcno_book_review_rating_metabox .rcno-rate > label:hover ~ input:checked ~ label {
+				    color: ' . $star_color . '
+				}
+			';
+			wp_add_inline_style( $this->plugin_name, $custom_css );
+		}
+
+
+
 	}
 
 	/**

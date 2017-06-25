@@ -185,27 +185,6 @@ button.button.reset-button {
     content: '★ ';
 }
 
-#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label {
-    color: #ffc700 !important;
-}
-
-#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label:hover,
-#rcno_book_review_rating_metabox .rcno-rate:not(:checked) > label:hover ~ label {
-    color: #deb217 !important;
-}
-
-#rcno_book_review_rating_metabox .rcno-rate > input:checked + label:hover,
-#rcno_book_review_rating_metabox .rcno-rate > input:checked + label:hover ~ label,
-#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label:hover,
-#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label:hover ~ label,
-#rcno_book_review_rating_metabox .rcno-rate > label:hover ~ input:checked ~ label {
-    color: #c59b08 !important;
-}
-
-#rcno_book_review_rating_metabox .rcno-rate input[type=radio]:checked + label:before {
-    color: #c59b08 !important;
-}
-
 tr.rcno_review_template > td {
     display: flex;
     line-height: 0;
