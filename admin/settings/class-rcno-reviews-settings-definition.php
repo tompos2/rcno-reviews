@@ -446,46 +446,52 @@ class Rcno_Reviews_Settings_Definition {
 			'extras_tab' => array(
 
 				// Comment 5 star ratings.
-				'extras_tab_header_0'               => array(
+				'extras_tab_header_0'            => array(
 					'name' => '<strong>' . __( 'Reader Comment Rating', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_enable_comment_ratings'          => array(
+				'rcno_enable_comment_ratings'    => array(
 					'name' => __( 'Comment Ratings', self::$plugin_name ),
 					'desc' => __( 'Enable reader submitted ratings in the comment form', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_comment_rating_star_color'   => array(
+				'rcno_comment_rating_label'             => array(
+					'name' => __( 'Rating Label', self::$plugin_name ),
+					'desc' => __( 'Enter the label before the comment 5 star rating field', self::$plugin_name ),
+					'std'  => __( 'Rate this review: ', self::$plugin_name ),
+					'type' => 'text'
+				),
+				'rcno_comment_rating_star_color' => array(
 					'name' => __( 'Comment Star Color', self::$plugin_name ),
 					'desc' => __( 'Background color for the reader comment 5 star rating', self::$plugin_name ),
 					'type' => 'color'
 				),
-				'spacer-6'               => array(
+				'spacer-6'                       => array(
 					'name' => '',
 					'type' => 'spacer'
 				),
 
 				// Custom widgets.
-				'extras_tab_header_1'               => array(
+				'extras_tab_header_1'             => array(
 					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
-				'rcno_show_book_slider_widget'          => array(
+				'rcno_show_book_slider_widget'    => array(
 					'name' => __( 'Book Slider', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Book Slider widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_recent_reviews_widget'       => array(
+				'rcno_show_recent_reviews_widget' => array(
 					'name' => __( 'Recent Reviews', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Recent Reviews widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_tag_cloud_widget'            => array(
+				'rcno_show_tag_cloud_widget'      => array(
 					'name' => __( 'Tag Cloud', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Tag Cloud widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_taxonomy_list_widget'        => array(
+				'rcno_show_taxonomy_list_widget'  => array(
 					'name' => __( 'Taxonomy List', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Taxonomy List widget?', self::$plugin_name ),
 					'type' => 'checkbox'

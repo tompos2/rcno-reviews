@@ -44,13 +44,11 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 
 		<?php
 		// Prints the book review content.
-		do_action( 'before_rcno_review_content' );
 		$template->the_rcno_book_review_content( $review_id );
 		do_action( 'after_rcno_review_content' );
 
 
 		// Prints the book purchase links.
-		do_action( 'before_rcno_purchase_links' );
 		$template->the_rcno_book_purchase_links( $review_id );
 		do_action( 'after_rcno_purchase_links' );
 		?>

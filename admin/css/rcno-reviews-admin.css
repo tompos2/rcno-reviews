@@ -253,7 +253,16 @@ tr.rcno_review_slug_instructions > th {
     margin: 0;
 }
 
-div#components_tab th {
+#general_tab h2.hndle,
+#taxonomy_tab h2.hndle,
+#components_tab h2.hndle,
+#extras_tab h2.hndle,
+#templates_tab h2.hndle,
+#advanced_tab h2.hndle{
+    display: none;
+}
+
+#components_tab th {
     padding-left: 15px;
 }
 
