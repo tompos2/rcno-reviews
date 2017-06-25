@@ -21,11 +21,6 @@
  */
 class Rcno_Reviews_Public_Rating {
 
-	private $rating;
-	private $comment_count;
-	private $min_rating;
-	private $max_rating;
-
 	/**
 	 * The ID of this plugin.
 	 *
@@ -45,6 +40,69 @@ class Rcno_Reviews_Public_Rating {
 	private $version;
 
 	/**
+	 * The enable public comment setting.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      bool   $enable_rating
+	 */
+	private $enable_rating;
+
+	/**
+	 * The public rating label, stored in the settings.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string   $enable_rating
+	 */
+	private $ratings_label;
+
+	/**
+	 * The background color of the comment rating stars.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string   $star_color
+	 */
+	private $star_color;
+
+	/**
+	 * The comment rating provided by a site visitor.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $rating.
+	 */
+	private $rating;
+
+	/**
+	 * The total count of comments that have provide with a rating, per review post.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $comment_count.
+	 */
+	private $comment_count;
+
+	/**
+	 * The minimum rating value provided by a site visitor, per review post.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      int    $min_rating.
+	 */
+	private $min_rating;
+
+	/**
+	 * The maximum rating value provided by a site visitor, per review post.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      int    $max_rating.
+	 */
+	private $max_rating;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -55,6 +113,10 @@ class Rcno_Reviews_Public_Rating {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+
+		$this->enable_rating = (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_comment_ratings', false );
+		$this->ratings_label = (string) Rcno_Reviews_Option::get_option( 'rcno_comment_rating_label' );
+		$this->star_color    = (string) Rcno_Reviews_Option::get_option( 'rcno_comment_rating_star_color', '#CCCCCC' );
 	}
 
 	/**
@@ -62,7 +124,23 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function rcno_enqueue_public_ratings_styles() {
 
-		wp_enqueue_style( 'rcno-public-ratings-styles', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-public-ratings.css', array(), $this->version, 'all' );
+		if ( $this->enable_rating ) {
+			wp_enqueue_style( 'rcno-public-ratings-styles', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-public-ratings.css', array(), $this->version, 'all' );
+
+			$custom_css = '
+				.rating .whole .l, .rating .whole .r {
+				    background-color: ' . $this->star_color . '
+				}
+				.rating .half .l, .rating .half .r {
+				    background-color: ' . $this->star_color . '
+				}
+				.rating .rover .l, .rating .rover .r {
+				    background-color: ' . $this->star_color . '
+				}
+			';
+
+			wp_add_inline_style( 'rcno-public-ratings-styles', $custom_css );
+		}
 
 	}
 
@@ -72,12 +150,14 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function rcno_enqueue_public_ratings_scripts() {
 
+		if ( $this->enable_rating ) {
 		wp_enqueue_script( 'rcno-public-ratings-scripts', plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public-ratings-script.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( 'rcno-public-ratings-scripts', 'rcno_public_object',
 			array(
 				'public_ajax_url'      => admin_url( 'admin-ajax.php' ),
 				'public_ratings_nonce' => wp_create_nonce( 'rcno-ajax-public-ratings-nonce' ),
 			) );
+		}
 
 	}
 
@@ -112,20 +192,22 @@ class Rcno_Reviews_Public_Rating {
 	/**
 	 * Display the star rating inside the comment form.
 	 *
-	 * @return string|false
+	 * @return string|bool
 	 */
 	public function rcno_comment_ratings_form() {
-		if ( 'rcno_review' !== get_post_type() ) {
-			return false; // Only render on book reviews.
+
+		if ( is_singular( 'rcno_review' ) && $this->enable_rating ) {
+
+			$star = '<li class="empty"><span class="l"></span><span class="r"></span></li>';
+
+			return printf(
+				'<div class="rating-container"><p class="rating-label">%s</p><ul class="rating form-rating">%s</ul></div>',
+				$this->ratings_label,
+				str_repeat( $star, 5 )
+			);
 		}
 
-		$star = '<li class="empty"><span class="l"></span><span class="r"></span></li>';
-
-		return printf(
-			'<div class="rating-container"><p class="rating-label">%s</p><ul class="rating form-rating">%s</ul></div>',
-			__( 'Rate this review', 'rcno-reviews' ),
-			str_repeat( $star, 5 )
-		);
+		return false;
 	}
 
 
@@ -386,7 +468,7 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @param int $id
 	 *
-	 * @return string
+	 * @return void
 	 */
 	public function the_rating( $id = 0 ) {
 		echo $this->rate_calculate( $id );
@@ -408,18 +490,19 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @param $content
 	 *
-	 * @return string
+	 * @return string|bool
 	 */
 	public function display_comment_rating( $content ) {
-		if ( ! is_single() ) {
-			return null; // If we are not on a simple post no need to render comment ratings.
+
+		if ( is_singular( 'rcno_review' ) && $this->enable_rating ) {
+			$out = '';
+			$out .= $this->the_comment_rating();
+			$out .= $content;
+
+			return $out;
 		}
 
-		$out = '';
-		$out .= $this->the_comment_rating();
-		$out .= $content;
-
-		return $out;
+		return false;
 	}
 
 }

@@ -29,30 +29,6 @@
     background: #ccc url(star.png) -12px 0
 }
 
-.rating .half .l {
-    background-color: gold;
-}
-
-.rating .half .r {
-    background-color: #ccc
-}
-
-.rating .whole .l {
-    background-color: gold;
-}
-
-.rating .whole .r {
-    background-color: gold;
-}
-
-.rating .rover .l {
-    background-color: gold;
-}
-
-.rating .rover .r {
-    background-color: gold;
-}
-
 .rpr_description .ratings {
     position: absolute;
     top: 5px;
