@@ -256,7 +256,7 @@ class Rcno_Template_Tags {
 	 * @since 1.0.0
 	 *
 	 * @param int    $review_id
-	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-lg', 'rcno-book-cover-lg'
+	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'
 	 * @param bool   $wrapper
 	 *
 	 * @return bool|string

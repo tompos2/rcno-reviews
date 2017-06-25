@@ -67,3 +67,14 @@
     position: absolute;
     bottom: 0;
 }
+
+.rcno-book-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.rcno-book-grid-container .book-grid-item {
+    flex-basis: 85px;
+    margin: 2px;
+}

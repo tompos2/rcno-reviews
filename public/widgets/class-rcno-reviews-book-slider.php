@@ -65,13 +65,21 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	 */
 	public function enqueue_scripts() {
 		$widget_settings = $this->get_settings();
+		$slide_duration = 5;
+
+		// Because we don't know where in the array the setting will be.
+		foreach ( $widget_settings as $setting ) {
+		    if ( isset( $setting['slide_duration'] ) ) {
+			    $slide_duration = $setting['slide_duration'];
+            }
+        }
 
 		wp_enqueue_style( 'owl-carousel-main', plugin_dir_url( __FILE__ ) . '../css/owl.carousel.min.css', array(), '1.0.0', 'all' );
 		wp_enqueue_style( 'owl-carousel-theme', plugin_dir_url( __FILE__ ) . '../css/owl.theme.default.min.css', array(), '1.0.0', 'all' );
 
 		wp_enqueue_script( 'owl-carousel-script', plugin_dir_url( __FILE__ ) . '../js/owl.carousel.min.js', array( 'jquery' ), '1.0.0', true );
 		wp_localize_script( 'owl-carousel-script', 'owl_carousel_options', array(
-			'duration' => absint( $widget_settings[4]['slide_duration'] ),
+			'duration' => absint( $slide_duration ),
 		) );
 	}
 
@@ -123,7 +131,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		$query_args = array(
 			'post_type'      => 'rcno_review',
 			'posts_per_page' => isset( $instance['review_count'] ) ? absint( $instance['review_count'] ) : 5,
-			'orderby'        => isset( $instance['order'] ) ? strip_tags( $instance['order'] ) : 'RAND',
+			'orderby'        => isset( $instance['order'] ) ? strip_tags( $instance['order'] ) : 'rand',
 		);
 
 		$recent_reviews = new WP_Query( $query_args );
@@ -201,9 +209,9 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		$title          = sanitize_text_field( $instance['title'] );
 		$review_count   = absint( $instance['review_count'] );
 		$order          = array(
-			'ASC'  => esc_attr__( 'Ascending', 'rcno-reviews' ),
-			'DESC' => esc_attr__( 'Descending', 'rcno-reviews' ),
-			'RAND' => esc_attr__( 'Random', 'rcno-reviews' ),
+			'date'  => esc_attr__( 'Date', 'rcno-reviews' ),
+			'title' => esc_attr__( 'Title', 'rcno-reviews' ),
+			'rand'  => esc_attr__( 'Random', 'rcno-reviews' ),
 		);
 		$slide_duration = absint( $instance['slide_duration'] );
 
