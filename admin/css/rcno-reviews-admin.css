@@ -273,3 +273,29 @@ tr.rcno_review_slug_instructions > th {
     color: #fff;
     margin: 0;
 }
+
+div#components_tab th {
+    padding-left: 15px;
+}
+
+td hr {
+    display: none;
+}
+
+tr.components_tab_header th,
+tr.components_tab_header_1 th,
+tr.components_tab_header_2 th,
+tr.components_tab_header_3 th,
+tr.components_tab_header_4 th {
+    background: #efefef;
+    border: 1px solid #efefef;
+    text-align: center;
+}
+
+tr.components_tab_header td,
+tr.components_tab_header_1 td,
+tr.components_tab_header_2 td,
+tr.components_tab_header_3 td,
+tr.components_tab_header_4 td {
+    border-bottom: 1px solid #efefef;
+}

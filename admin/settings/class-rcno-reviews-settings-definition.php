@@ -69,6 +69,7 @@ class Rcno_Reviews_Settings_Definition {
 		$tabs['general_tab']    = __( 'General', self::$plugin_name );
 		$tabs['taxonomy_tab']   = __( 'Taxonomies', self::$plugin_name );
 		$tabs['components_tab'] = __( 'Components', self::$plugin_name );
+		$tabs['extras_tab']     = __( 'Extras', self::$plugin_name );
 		$tabs['templates_tab']  = __( 'Templates', self::$plugin_name );
 		$tabs['advanced_tab']   = __( 'Advanced', self::$plugin_name );
 
@@ -350,6 +351,10 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+				'spacer2'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
 
 				// Purchase Links.
 				'components_tab_header_3'               => array(
@@ -361,9 +366,15 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Enable the use of book purchase links', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+				'rcno_store_purchase_links_label'             => array(
+					'name' => __( 'Links Label', self::$plugin_name ),
+					'desc' => __( 'Enter the name of stores to purchase books from.', self::$plugin_name ),
+					'std'  => 'Purchase on: ',
+					'type' => 'text'
+				),
 				'rcno_store_purchase_links'             => array(
 					'name' => __( 'Store/Shop', self::$plugin_name ),
-					'desc' => __( 'Enter the name of stores to purchase books from.', self::$plugin_name ),
+					'desc' => __( 'Enter the label shown before purchase links.', self::$plugin_name ),
 					'std'  => 'Amazon,Barnes & Noble,Kobo',
 					'type' => 'text'
 				),
@@ -372,6 +383,31 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Background Color for the purchase button.', self::$plugin_name ),
 					'type' => 'color'
 				),
+				'spacer'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
+
+				// 5 Star Rating box.
+				'components_tab_header_4'               => array(
+					'name' => '<strong>' . __( 'Book 5 Star Rating Box', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_enable_star_rating_box'            => array(
+					'name' => __( '5 Star Rating', self::$plugin_name ),
+					'desc' => __( 'Enable the 5 star rating box?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_star_rating_color' => array(
+					'name' => __( 'Star Rating Color', self::$plugin_name ),
+					'desc' => __( 'Background color for the 5 star rating?', self::$plugin_name ),
+					'type' => 'color'
+				),
+				'spacer5'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
+
 
 				// Review score box.
 				'components_tab_header_2'               => array(
@@ -398,9 +434,39 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'The second accent color for the review score box?', self::$plugin_name ),
 					'type' => 'color'
 				),
+				'spacer-1'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
+
+
+			),
+
+			// Extras tab.
+			'extras_tab' => array(
+
+				// Comment 5 star ratings.
+				'extras_tab_header_0'               => array(
+					'name' => '<strong>' . __( 'Reader Comment Rating', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
+				'rcno_enable_comment_ratings'          => array(
+					'name' => __( 'Comment Ratings', self::$plugin_name ),
+					'desc' => __( 'Enable reader submitted ratings in the comment form', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
+				'rcno_comment_rating_star_color'   => array(
+					'name' => __( 'Comment Star Color', self::$plugin_name ),
+					'desc' => __( 'Background color for the reader comment 5 star rating', self::$plugin_name ),
+					'type' => 'color'
+				),
+				'spacer-6'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
 
 				// Custom widgets.
-				'components_tab_header_1'               => array(
+				'extras_tab_header_1'               => array(
 					'name' => '<strong>' . __( 'Book Review Widgets', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
@@ -424,7 +490,9 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Use the Rcno Taxonomy List widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+
 			),
+
 			// Templates tab.
 			'templates_tab'  => array(
 

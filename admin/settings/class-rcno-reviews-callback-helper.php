@@ -64,6 +64,21 @@ class Rcno_Reviews_Callback_Helper {
 	}
 
 	/**
+	 * Spacer Callback
+	 *
+	 * Renders an empty table row used for spacing.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @param    array $args Arguments passed by the setting
+	 *
+	 * @return    void
+	 */
+	public function spacer_callback( $args ) {
+		echo '';
+	}
+
+	/**
 	 * Header Callback
 	 *
 	 * Renders the header.
@@ -248,8 +263,6 @@ class Rcno_Reviews_Callback_Helper {
 			}
 
 			$html .= '<div class="template-options">';
-			//$html .= $checked ? ' checked' : '';
-			//$html .= '">';
 			$html .= '<input type="radio"';
 			$html .= $this->get_name_attribute( $args['id'] );
 			$html .= $this->get_id_attribute( $args['id'] . '][' . $field_key );
@@ -277,7 +290,6 @@ class Rcno_Reviews_Callback_Helper {
 
 		}
 
-		//$html .= '<p class="description">' . $args['desc'] . '</p>';
 		echo $html;
 	}
 
@@ -497,9 +509,9 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args       Arguments passed by the setting
+	 * @param   array   $args        Arguments passed by the setting
 	 *
-	 * @global         $wp_version WordPress Version
+	 * @global  int     $wp_version  WordPress version number
 	 */
 	public function rich_editor_callback( $args ) {
 		global $wp_version;
@@ -526,11 +538,11 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * Renders upload fields.
 	 *
-	 * @since    1.0.0
+	 * @since   1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param   array $args Arguments passed by the setting
 	 *
-	 * @return    void
+	 * @return  void
 	 */
 	public function upload_callback( $args ) {
 
