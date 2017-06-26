@@ -481,6 +481,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Use the Rcno Book Slider widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+				'rcno_show_book_grid_widget'    => array(
+					'name' => __( 'Book Grid', self::$plugin_name ),
+					'desc' => __( 'Use the Rcno Book Grid widget?', self::$plugin_name ),
+					'type' => 'checkbox'
+				),
 				'rcno_show_recent_reviews_widget' => array(
 					'name' => __( 'Recent Reviews', self::$plugin_name ),
 					'desc' => __( 'Use the Rcno Recent Reviews widget?', self::$plugin_name ),
