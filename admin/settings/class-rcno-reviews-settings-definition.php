@@ -321,9 +321,9 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Show the Goodreads book URL field for book reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
-				'rcno_show_publisher'                   => array(
-					'name' => __( 'Publisher', self::$plugin_name ),
-					'desc' => __( 'Show the book publisher for reviews?', self::$plugin_name ),
+				'rcno_show_illustrator'                   => array(
+					'name' => __( 'Illustrator', self::$plugin_name ),
+					'desc' => __( 'Show the book\'s illustrator for reviews?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
 				'rcno_show_pub_date'                    => array(

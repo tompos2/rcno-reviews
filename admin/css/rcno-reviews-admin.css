@@ -82,32 +82,37 @@ button.button.reset-button {
     justify-content: space-between;
 }
 
+.book-general-metabox-1 label,
+.book-general-metabox-2 label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .book-general-metabox-1 .book-title,
-.book-general-metabox-1 .publisher-info,
+.book-general-metabox-1 .illustrator-info,
 .book-general-metabox-1 .publication-date,
 .book-general-metabox-1 .publication-format,
 .book-general-metabox-1 .publication-edition,
 .book-general-metabox-1 .publication-page-count {
-    flex-basis: 16%;
     display: inline-block;
     position: relative;
-    margin: 1em 0 0 0;
+    margin: 1em 5px 0 0;
 }
 
 .book-general-metabox-1 .book-title {
-    flex-basis: 26%;
+    flex: 1 1 30%;
 }
 
-.book-general-metabox-1 .publisher-info {
-    flex-basis: 14%;
+.book-general-metabox-1 .illustrator-info,
+.book-general-metabox-1 .publication-date,
+.book-general-metabox-1 .publication-format,
+.book-general-metabox-1 .publication-edition {
+    flex: 1 1 14%;
 }
 
 .book-general-metabox-1 .publication-page-count {
-    flex-basis: 9%;
-}
-
-.book-general-metabox-1 .publication-date {
-    flex-basis: 13%;
+    flex: 1 1 9%;
 }
 
 .book-general-metabox-2 .publication-gr-id,
@@ -115,25 +120,23 @@ button.button.reset-button {
 .book-general-metabox-2 .publication-asin,
 .book-general-metabox-2 .publication-gr-url,
 .book-general-metabox-2 .publication-gr-review {
-    flex-basis: 15%;
     display: inline-block;
     position: relative;
-    margin: 1em 10px 0 0;
+    margin: 1em 5px 0 0;
 }
 
 .book-general-metabox-2 .publication-gr-id,
 .book-general-metabox-2 .publication-isbn13,
 .book-general-metabox-2 .publication-asin {
-    flex-basis: 15%;
+    flex: 1 1 15%;
 }
 
 .book-general-metabox-2 .publication-gr-review {
-    flex-basis: 9%;
+    flex: 1 1 9%;
 }
 
 .book-general-metabox-2 .publication-gr-url {
-    flex-basis: 39%;
-    margin-right: 0;
+    flex: 1 1 39%;
 }
 
 .review-score-metabox-container {
@@ -278,6 +281,7 @@ tr.components_tab_header_4 th {
     background: #efefef;
     border: 1px solid #efefef;
     text-align: center;
+    font-size: 16px;
 }
 
 tr.components_tab_header td,

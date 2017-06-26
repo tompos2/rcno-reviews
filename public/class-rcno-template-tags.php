@@ -579,7 +579,7 @@ class Rcno_Template_Tags {
 		$review = get_post_custom( $review_id );
 
 		$meta_keys = array(
-			'rcno_book_publisher'   => 'Publisher',
+			'rcno_book_illustrator' => 'Illustrator',
 			'rcno_book_pub_date'    => 'Published',
 			'rcno_book_pub_format'  => 'Format',
 			'rcno_book_pub_edition' => 'Edition',
@@ -1002,7 +1002,8 @@ class Rcno_Template_Tags {
 		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"'; // URL to this review page.
 		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) . '"';
 		$out .= ', "genre": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) ) . '"';
-		$out .= ', "publisher": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', '', false ) . '"';
+		$out .= ', "publisher": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id,
+				'rcno_publisher', false ) ) . '"';
 		$out .= ', "workExample": ['; // Begin workExample.
 		$out .= '{'; // Begin First example.
 		$out .= '"@type": "Book"';
@@ -1030,6 +1031,33 @@ class Rcno_Template_Tags {
 		$out .= '</script>';
 
 		return $out;
+	}
+
+	public function _get_the_rcno_book_schema_data( $review_id ) {
+		$data = array();
+
+		$data['@context'] = 'http://schema.org';
+		$data['@type']    = 'Book';
+		$data['name']     = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
+		$data['author'] = array(
+			'@type' => 'Person',
+			'name' => wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author',	false ) ),
+		);
+		$data['url'] = get_post_permalink( $review_id );
+		$data['sameAs'] = 'http://google.com/'; // A reference page that unambiguously indicates the item's identity; for example, the URL of the item's Wikipedia page
+		$data['datePublished'] = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false );
+		$data['genre'] = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
+		$data['publisher'] = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher', false
+		) );
+		$data['workExample'][] = array(
+				'@type' => 'Book',
+				'isbn'  => $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ),
+				'bookEdition' => $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ),
+				'bookFormat' => 'http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ),
+				'numberOfPages' => (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false ),
+		);
+
+		return wp_json_encode( $data );
 	}
 
 	/**
