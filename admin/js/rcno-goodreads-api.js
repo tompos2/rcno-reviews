@@ -11,7 +11,8 @@
                     .replace(/<script[^>]*?>.*?<\/script>/gi, '')
                     .replace(/<[\/\!]*?[^<>]*?>/gi, '')
                     .replace(/<style[^>]*?>.*?<\/style>/gi, '')
-                    .replace(/<![\s\S]*?--[ \t\n\r]*>/gi, '');
+                    .replace(/<![\s\S]*?--[ \t\n\r]*>/gi, '')
+                    .trim();
 
             };
 
@@ -22,6 +23,26 @@
                     return '';
                 }
             };
+
+
+
+            var review_title = $('#title');
+
+            var title = $('#rcno_book_title');
+            var author = $('#new-tag-rcno_author');
+            var genre = $('#new-tag-rcno_genre');
+            var publisher = $('#rcno_book_publisher');
+            var pub_date = $('#rcno_book_pub_date');
+            var pub_fmt = $('#rcno_book_pub_format');
+            var pub_edt = $('#rcno_book_pub_edition');
+            var series  = $('#new-tag-rcno_series');
+            var p_count  = $('#rcno_book_page_count');
+            var gr_rvw  = $('#rcno_book_gr_review');
+            var gr_id  = $('#rcno_book_gr_id');
+            var isbn13  = $('#rcno_book_isbn13');
+            var asin  = $('#rcno_book_asin');
+            var gr_url  = $('#rcno_book_gr_url');
+
 
             var ajx_gif = $('.rcno-ajax-loading');
             var book_isbn = $('#rcno_book_isbn').val();
@@ -53,11 +74,11 @@
 
                     } else {
 
-                        $('#title').val(
+                        review_title.val(
                             book.GoodreadsResponse.book.title
                         );
 
-                        $('#rcno_book_title').val(
+                        title.val(
                             book.GoodreadsResponse.book.work.original_title
                         );
 
@@ -65,59 +86,67 @@
                             book.GoodreadsResponse.book.description
                         );
 
-                        $('#new-tag-rcno_author').val(
+                        author.val(
                             book.GoodreadsResponse.book.authors.author.name
                         );
 
-                        $('#new-tag-rcno_genre').val(
+                        genre.val(
                             $.upCase(book.GoodreadsResponse.book.popular_shelves.shelf["0"].name)
                         );
 
                         if (typeof book.GoodreadsResponse.book.series_works === 'object') {
-                            $('#new-tag-rcno_series').val(
-                                $.sanitize(book.GoodreadsResponse.book.series_works.series_work.series.title)
-                            );
+                            if ( $.isArray( book.GoodreadsResponse.book.series_works.series_work ) ) {
+                                series.val(
+                                    $.sanitize( book.GoodreadsResponse.book.series_works.series_work["0"].series.title )
+                                );
+                            } else {
+                                series.val(
+                                    $.sanitize(book.GoodreadsResponse.book.series_works.series_work.series.title)
+                                );
+                            }
+                        } else {
+                            series.val('');
                         }
 
-                        $('#rcno_book_publisher').val(
+                        publisher.val(
                             book.GoodreadsResponse.book.publisher
                         );
 
-                        $('#rcno_book_pub_date').val(
+                        pub_date.val(
                             book.GoodreadsResponse.book.publication_month
                             + '/' + book.GoodreadsResponse.book.publication_day
                             + '/' + book.GoodreadsResponse.book.publication_year
                         );
 
-                        $('#rcno_book_pub_format').val(
+                        pub_fmt.val(
                             book.GoodreadsResponse.book.format
                         );
 
-                        $('#rcno_book_pub_edition').val(
+                        pub_edt.val(
                             book.GoodreadsResponse.book.edition_information
                         );
 
-                        $('#rcno_book_page_count').val(
+                        p_count.val(
                             book.GoodreadsResponse.book.num_pages
                         );
 
-                        $('#rcno_book_gr_review').val(
+                        gr_rvw.val(
                             book.GoodreadsResponse.book.average_rating
                         );
 
-                        $('#rcno_book_gr_id').val(
+                        gr_id.val(
                             book.GoodreadsResponse.book.id
                         );
 
-                        $('#rcno_book_isbn13').val(
+                        isbn13.val(
                             book.GoodreadsResponse.book.isbn13
                         );
 
-                        $('#rcno_book_asin').val(
+                        asin.val(
                             book.GoodreadsResponse.book.asin
                         );
 
-                        $('#rcno_book_gr_url').val(
+                        gr_url.val(
                             book.GoodreadsResponse.book.url
                         );
 
@@ -126,7 +155,7 @@
                 }
             });
 
-        })
+        });
 
     });
 
