@@ -105,12 +105,12 @@ class Rcno_Admin_General_Info {
 			update_post_meta( $review_id, 'rcno_book_title', $book_title );
 		}
 
-		// Saving book publisher post_meta field.
-		if ( isset( $data['rcno_book_publisher'] )
-		     && wp_verify_nonce( $data['rcno_general_publisher_nonce'], 'rcno_save_book_publisher_metadata' )
+		// Saving book illustrator post_meta field.
+		if ( isset( $data['rcno_book_illustrator'] )
+		     && wp_verify_nonce( $data['rcno_general_illustrator_nonce'], 'rcno_save_book_illustrator_metadata' )
 		) {
-			$book_publisher = sanitize_text_field( $data['rcno_book_publisher'] );
-			update_post_meta( $review_id, 'rcno_book_publisher', $book_publisher );
+			$book_illustrator = sanitize_text_field( $data['rcno_book_illustrator'] );
+			update_post_meta( $review_id, 'rcno_book_illustrator', $book_illustrator );
 		}
 
 		// Saving book published date post_meta field.
