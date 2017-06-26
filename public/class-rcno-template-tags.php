@@ -988,73 +988,37 @@ class Rcno_Template_Tags {
 	 * @return string
 	 */
 	public function get_the_rcno_book_schema_data( $review_id ) {
-
-		$out = '';
-		$out .= '<script type="application/ld+json">';
-		$out .= '{';
-		$out .= '"@context": "http://schema.org"';
-		$out .= ', "@type": "Book"';
-		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) . '"';
-		$out .= ', "author": {'; // Begin author.
-		$out .= '"@type": "Person"';
-		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) ) . '"';
-		$out .= '}'; // End author.
-		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"'; // URL to this review page.
-		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) . '"';
-		$out .= ', "genre": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) ) . '"';
-		$out .= ', "publisher": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id,
-				'rcno_publisher', false ) ) . '"';
-		$out .= ', "workExample": ['; // Begin workExample.
-		$out .= '{'; // Begin First example.
-		$out .= '"@type": "Book"';
-		$out .= ', "isbn": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) . '"';
-		$out .= ', "bookEdition": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ) . '"';
-		$out .= ', "bookFormat": "http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ) . '"';
-		$out .= ', "numberOfPages": ' . (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
-
-//		$out .= ', "potentialAction": {'; // Begin potentialAction.
-//		$out .= '"@type": "ReadAction"';
-//		$out .= ', "target": {'; // Begin target.
-//		$out .= '"@type": "EntryPoint"';
-//		$out .= ', "urlTemplate": "http://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true"';
-//		$out .= ', "actionPlatform": ['; // Begin actionPlatform.
-//		$out .= '"http://schema.org/DesktopWebPlatform"';
-//		$out .= ', "http://schema.org/IOSPlatform"';
-//		$out .= ', "http://schema.org/AndroidPlatform"';
-//		$out .= ']'; // End actionPlatform.
-//		$out .= '}'; // End target.
-//		$out .= '}'; // End potentialAction.
-
-		$out .= '}'; // End First example.
-		$out .= ']'; // End workExample.
-		$out .= '}';
-		$out .= '</script>';
-
-		return $out;
-	}
-
-	public function _get_the_rcno_book_schema_data( $review_id ) {
 		$data = array();
+
+		$book_title = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
+		$book_fmt = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false );
+		$book_author = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) );
+		$book_url = get_post_permalink( $review_id );
+		$book_pub_date = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
+		$book_genre = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
+		$book_publisher = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) );
+		$book_isbn = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
+		$book_edtn = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false );
+		$book_pc = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
 
 		$data['@context'] = 'http://schema.org';
 		$data['@type']    = 'Book';
-		$data['name']     = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
+		$data['name']     = $book_title;
 		$data['author'] = array(
 			'@type' => 'Person',
-			'name' => wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author',	false ) ),
+			'name' => $book_author,
 		);
-		$data['url'] = get_post_permalink( $review_id );
+		$data['url'] = $book_url;
 		$data['sameAs'] = 'http://google.com/'; // A reference page that unambiguously indicates the item's identity; for example, the URL of the item's Wikipedia page
-		$data['datePublished'] = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false );
-		$data['genre'] = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
-		$data['publisher'] = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher', false
-		) );
+		$data['datePublished'] = date( 'c', $book_pub_date );
+		$data['genre'] = $book_genre;
+		$data['publisher'] = $book_publisher;
 		$data['workExample'][] = array(
 				'@type' => 'Book',
-				'isbn'  => $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ),
-				'bookEdition' => $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ),
-				'bookFormat' => 'http://schema.org/' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ),
-				'numberOfPages' => (int) $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false ),
+				'isbn'  => $book_isbn,
+				'bookEdition' => $book_edtn,
+				'bookFormat' => 'http://schema.org/' . $book_fmt,
+				'numberOfPages' => (int) $book_pc,
 		);
 
 		return wp_json_encode( $data );
@@ -1070,7 +1034,7 @@ class Rcno_Template_Tags {
 	 * @return void
 	 */
 	public function the_rcno_book_schema_data( $review_id ) {
-		echo $this->get_the_rcno_book_schema_data( $review_id );
+		echo '<script type="application/ld+json">' . $this->get_the_rcno_book_schema_data( $review_id ) . '</script>';
 	}
 
 
@@ -1085,79 +1049,77 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_review_schema_data( $review_id ) {
 
-		$this->public_rating = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
-		$this->private_score = $this->rcno_get_review_score( $review_id );
+		$data = array();
 
-		$out = '';
-		$out .= '<script type="application/ld+json">';
-		$out .= '{';
+		$reviewer     = get_the_author();
+		$reviewer_url = get_author_posts_url( get_the_author_meta( 'ID' ) );
+		$review_url   = get_post_permalink( $review_id );
+		$review_date  = get_the_date( 'c', $review_id );
+		$site_name    = get_bloginfo( 'name' );
+		$site_url     = get_bloginfo( 'url' );
+		$description  = $this->get_the_rcno_book_review_excerpt( $review_id );
+		$language     = get_bloginfo( 'language' );
+		$book_name    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
+		$book_isbn    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
+		$book_author  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) );
+		$author_url   = 'http://google.com';
+		$bk_pub_date  = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
+		$priv_score   = $this->rcno_get_review_score( $review_id );
+		$pub_rating   = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
 
-		$out .= '"@context": "http://schema.org"';
-		$out .= ', "@type": "Review"';
-
-		$out .= ', "author": {';
-		$out .= '"@type": "Person"';
-		$out .= ', "name": ' . '"' . get_the_author() . '"';
-		$out .= ', "sameAs": ' . '"' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '"';
-		$out .= '}';
-
-		$out .= ', "url": ' . '"' . get_post_permalink( $review_id ) . '"';
-		$out .= ', "datePublished": ' . '"' . get_the_date( 'F j, Y', $review_id ) . '"';
-
-		$out .= ', "publisher": {';
-		$out .= '"@type": "Organization"';
-		$out .= ', "name": ' . '"' . get_bloginfo( 'name' ) . '"';
-		$out .= ', "sameAs": ' . '"' . get_bloginfo( 'url' ) . '"';
-		$out .= '}';
-
-		$out .= ', "description": ' . '"' . $this->get_the_rcno_book_review_excerpt( $review_id ) . '"';
-		$out .= ', "inLanguage": ' . '"' . get_bloginfo( 'language' ) . '"';
-
-		$out .= ', "itemReviewed": {';
-		$out .= '"@type":"Book"';
-		$out .= ', "name": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) . '"';
-		$out .= ', "isbn": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) . '"';
-
-		$out .= ', "author": {';
-		$out .= '"@type": "Person"';
-		$out .= ', "name": ' . '"' . wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) ) . '"';
-		$out .= ', "sameAs": "https://plus.google.com/114108465800532712602"'; // Social profile for book author.
-		$out .= '}';
-
-		$out .= ', "datePublished": ' . '"' . $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) . '"';
-
-		$out .= '}';
-
-		if ( $this->private_score ) {
-			$out .= ', "reviewRating": {';
-			$out .= '"@type": "Rating"';
-			$out .= ', "worstRating": ' . min( $this->private_score );
-			$out .= ', "bestRating": ' . max( $this->private_score );
-			$out .= ', "ratingValue": ' . array_sum( $this->private_score ) / count( $this->private_score );
-			$out .= '}';
+		$data['@context']      = 'http://schema.org';
+		$data['@type']         = 'Review';
+		$data['author']        = array(
+			'@type'  => 'Person',
+			'name'   => $reviewer,
+			'sameAs' => $reviewer_url,
+		);
+		$data['url']           = $review_url;
+		$data['datePublished'] = $review_date;
+		$data['publisher']     = array(
+			'@type'  => 'Organization',
+			'name'   => $site_name,
+			'sameAs' => $site_url,
+		);
+		$data['description'] = $description;
+		$data['inLanguage'] = $language;
+		$data['itemReviewed'] = array(
+			'@type' => 'Book',
+			'name'  => $book_name,
+			'isbn'  => $book_isbn,
+			'author' => array(
+				'@type'  => 'Person',
+				'name'   => $book_author,
+				'sameAs' => $author_url,
+			),
+			'datePublished' => date( 'c', $bk_pub_date ),
+		);
+		if ( $priv_score ) {
+			$data['reviewRating'] = array(
+				'@type'       => 'Rating',
+				'worstRating' => number_format( min( $priv_score ), 1 ),
+				'bestRating'  => number_format( max( $priv_score ), 1 ),
+				'ratingValue' => number_format( array_sum( $priv_score ) / count( $priv_score ), 1 ),
+			);
 		} else {
-			$out .= ', "reviewRating": {';
-			$out .= '"@type": "Rating"';
-			$out .= ', "worstRating": ' . 1;
-			$out .= ', "bestRating": ' . 5;
-			$out .= ', "ratingValue": ' . $this->private_rating;
-			$out .= '}';
+			$data['reviewRating'] = array(
+				'@type'       => 'Rating',
+				'worstRating' => 1,
+				'bestRating'  => 5,
+				'ratingValue' => $this->private_rating,
+			);
+		}
+		if ( $pub_rating->rcno_rating_info( 'count' ) > 0 ) {
+			$data['aggregateRating'] = array(
+				'@type'         => 'AggregateRating',
+				'worstRating'   => $pub_rating->rcno_rating_info( 'min' ),
+				'bestRating'    => $pub_rating->rcno_rating_info( 'max' ),
+				'ratingValue'   => $pub_rating->rcno_rating_info( 'avg' ),
+				'reviewCount'   => $pub_rating->rcno_rating_info( 'count' ),
+			);
 		}
 
-		if ( $this->public_rating->rcno_rating_info( 'count' ) > 0 ) {
-			$out .= ', "aggregateRating": {';
-			$out .= '"@type":"AggregateRating"';
-			$out .= ', "worstRating": ' . $this->public_rating->rcno_rating_info( 'min' );
-			$out .= ', "bestRating": ' . $this->public_rating->rcno_rating_info( 'max' );
-			$out .= ', "ratingValue": ' . $this->public_rating->rcno_rating_info( 'avg' );
-			$out .= ', "reviewCount": ' . $this->public_rating->rcno_rating_info( 'count' );
-			$out .= '}';
-		}
-
-		$out .= '}';
-		$out .= '</script>';
-
-		return $out;
+		return wp_json_encode( $data );
 	}
 
 	/**
@@ -1170,7 +1132,7 @@ class Rcno_Template_Tags {
 	 * @return void
 	 */
 	public function the_rcno_review_schema_data( $review_id ) {
-		echo $this->get_the_rcno_review_schema_data( $review_id );
+		echo '<script type="application/ld+json">' . $this->get_the_rcno_review_schema_data( $review_id ) . '</script>';
 	}
 
 
