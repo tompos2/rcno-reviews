@@ -188,43 +188,44 @@ class Rcno_Template_Tags {
 		}
 
 		$book_rating          = (int) $review['rcno_admin_rating'][0];
+		$background           = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
 		$this->private_rating = $book_rating;
 
 		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 
 			switch ( $book_rating ) {
 				case 5:
-					return '<div class="rcno-admin-rating">
+					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 							</div>';
 					break;
 
 				case 4;
-					return '<div class="rcno-admin-rating">
+					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
 							</div>';
 					break;
 
 				case 3;
-					return '<div class="rcno-admin-rating">
+					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
 							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
 				case 2;
-					return '<div class="rcno-admin-rating">
+					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
 							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
 				case 1;
-					return '<div class="rcno-admin-rating">
+					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
 							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
 				default:
-					return '<div class="rcno-admin-rating">
+					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
 							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
 			}
@@ -683,9 +684,9 @@ class Rcno_Template_Tags {
 		}
 
 		$links_label = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links_label' );
-		$background = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_background' );
-		$_stores    = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links' );
-		$_stores    = explode( ",", $_stores );
+		$background  = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_background' );
+		$_stores     = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links' );
+		$_stores     = explode( ",", $_stores );
 
 		$stores = array();
 		foreach ( $_stores as $store ) {

@@ -61,7 +61,6 @@
                     ajx_gif.show();
                 },
                 complete: function () {
-                    console.log('Complete');
                     ajx_gif.hide();
                 },
                 success: function (grDoc) {

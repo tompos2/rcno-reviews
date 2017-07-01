@@ -23,6 +23,24 @@
     color: #b7b7b7;
 }
 
+.toplevel_page_rcno-reviews .wrap > h2:first-child {
+    background-image: url('../images/logo-30-color.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 20px;
+    padding: 0 0 0 1.2em;
+    margin: 1em 0;
+}
+
+.toplevel_page_rcno-reviews .wrap h2:before {
+    /*content: url('../images/logo-20.png');
+    margin: 0 1em 0 0;*/
+}
+
+.post-type-rcno_review .form-table th {
+    padding: 15px 10px 15px 0;
+}
+
 #dashboard_right_now li a.rcno_review-count:before,
 #dashboard_right_now span.rcno_review-count:before {
     content: url('../images/logo-20.png');
@@ -61,14 +79,6 @@ button.button.reset-button {
 
 .book-isbn-metabox-error p {
     padding: 3px;
-}
-
-.form-table h2.section-heading {
-    font-size: 20px !important;
-    padding: 0 .5em !important;
-    font-weight: 600 !important;
-    border: 1px solid #b5b5b5;
-    background: #efefef;
 }
 
 .book-general-info-metaboxes input {
@@ -265,6 +275,11 @@ tr.rcno_review_slug_instructions > th {
     display: none;
 }
 
+#general_tab th,
+#taxonomy_tab th,
+#extras_tab th,
+#templates_tab th,
+#advanced_tab th,
 #components_tab th {
     padding-left: 15px;
 }
@@ -273,21 +288,13 @@ td hr {
     display: none;
 }
 
-tr.components_tab_header th,
-tr.components_tab_header_1 th,
-tr.components_tab_header_2 th,
-tr.components_tab_header_3 th,
-tr.components_tab_header_4 th {
+tr.rcno-table-header th {
     background: #efefef;
     border: 1px solid #efefef;
     text-align: center;
     font-size: 16px;
 }
 
-tr.components_tab_header td,
-tr.components_tab_header_1 td,
-tr.components_tab_header_2 td,
-tr.components_tab_header_3 td,
-tr.components_tab_header_4 td {
-    border-bottom: 1px solid #efefef;
+tr.rcno-table-header td {
+    border-bottom: 2px solid #efefef;
 }

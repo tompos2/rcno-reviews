@@ -6,12 +6,11 @@
             e.preventDefault();
 
             $.sanitize = function (input) {
-                var output = input
+                return input
                     .replace(/<script[^>]*?>.*?<\/script>/gi, '')
                     .replace(/<[\/\!]*?[^<>]*?>/gi, '')
                     .replace(/<style[^>]*?>.*?<\/style>/gi, '')
                     .replace(/<![\s\S]*?--[ \t\n\r]*>/gi, '');
-                return output;
             };
 
             $.upCase = function (str) {

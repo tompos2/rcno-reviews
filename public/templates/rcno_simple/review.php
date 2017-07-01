@@ -31,6 +31,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
     </h2>
 <?php endif; ?>
 
+<?php do_action( 'before_rcno_book_review' ); ?>
+
 <div class="rcno-book-info">
     <div class="review-content">
 
@@ -39,6 +41,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
             <div class="review-box-container">
 				<?php $template->rcno_print_review_box( $review_id ); ?>
             </div>
+
+            <?php do_action( 'after_rcno_review_score_box' ); ?>
 
 		<?php endif; ?>
 
@@ -50,6 +54,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 
 				// Prints the book's private 5 star rating.
 				$template->the_rcno_admin_book_rating( $review_id );
+
+				do_action( 'after_rcno_book_cover' );
 				?>
             </div>
             <div class="book-info">
@@ -65,6 +71,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'p', true );
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_pub_format', 'p', true );
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_isbn', 'p', true );
+
+				do_action( 'after_rcno_book_information' );
 				?>
             </div>
         </div>
@@ -72,6 +80,7 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 		<?php
 		// Prints the book review content.
 		$template->the_rcno_book_review_content( $review_id );
+		do_action( 'after_rcno_review_content' );
 
 		// Prints the book purchase links.
 		$template->the_rcno_book_purchase_links( $review_id, true );
@@ -83,6 +92,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
             <div class="review-box-container">
 				<?php $template->rcno_print_review_box( $review_id ); ?>
             </div>
+
+            <?php do_action( 'after_rcno_review_score_box' ); ?>
 
 		<?php endif; ?>
 
@@ -96,3 +107,5 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 	?>
 
 </div>
+
+<?php do_action( 'after_rcno_book_review' ); ?>

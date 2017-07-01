@@ -17,4 +17,3 @@ function rcno_default_styles() {
 function rcno_default_scripts() {
 	wp_enqueue_script( 'rcno-simple-script', plugin_dir_url( __FILE__ ) . '/simple-script.js', array( 'jquery' ), '1.0.0', true );
 }
-

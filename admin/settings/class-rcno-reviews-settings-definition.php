@@ -217,7 +217,7 @@ class Rcno_Reviews_Settings_Definition {
 
 			// Begin the General Tab.
 			'general_tab'    => array(
-				'general_tab_header'            => array(
+				'general_tab_header_0'            => array(
 					'name' => '<strong>' . __( 'General Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
@@ -258,17 +258,17 @@ class Rcno_Reviews_Settings_Definition {
 					),
 					'type'    => 'select'
 				),
+				'spacer_0'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
 
 			),
 
 			// Begin taxonomies tab.
 			'taxonomy_tab'   => array(
-				'taxonomy_tab_header'            => array(
+				'taxonomy_tab_header_0' => array(
 					'name' => '<strong>' . __( 'Review Taxonomies', self::$plugin_name ) . '</strong>',
-					'type' => 'header'
-				),
-				'rcno_taxonomy_selection_header' => array(
-					'name' => '<h2 class="section-heading">' . __( 'Taxonomies', self::$plugin_name ) . '</h2>',
 					'type' => 'header'
 				),
 				'rcno_taxonomy_selection'        => array(
@@ -277,9 +277,12 @@ class Rcno_Reviews_Settings_Definition {
 					'std'  => 'Author',
 					'type' => 'text'
 				),
-
-				'rcno_builtin_taxonomy_header' => array(
-					'name' => '<h2 class="section-heading">' . __( 'Builtin Taxonomies', self::$plugin_name ) . '</h2>',
+				'spacer_1'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
+				'taxonomy_tab_header_1' => array(
+					'name' => '<strong>' . __( 'Builtin Taxonomies', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
 				'rcno_enable_builtin_taxonomy' => array(
@@ -287,12 +290,16 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Enable the builtin \'category\' and \'tags\' taxonomies.', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+				'spacer_2'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
 
 			),
 
 			//Components tab.
 			'components_tab' => array(
-				'components_tab_header'                 => array(
+				'components_tab_header_0'                 => array(
 					'name' => '<strong>' . __( 'Book Review Components', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
@@ -400,7 +407,13 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'rcno_star_rating_color' => array(
 					'name' => __( 'Star Rating Color', self::$plugin_name ),
-					'desc' => __( 'Background color for the 5 star rating?', self::$plugin_name ),
+					'desc' => __( 'The color of the 5 star rating.', self::$plugin_name ),
+					'type' => 'color'
+				),
+				'rcno_star_background_color' => array(
+					'name' => __( 'Star Background Color', self::$plugin_name ),
+					'desc' => __( 'Background color for the 5 star rating. (Delete existing value for transparent background)',
+						self::$plugin_name ),
 					'type' => 'color'
 				),
 				'spacer5'               => array(
@@ -501,12 +514,20 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Use the Rcno Taxonomy List widget?', self::$plugin_name ),
 					'type' => 'checkbox'
 				),
+				'spacer-7'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
 
 			),
 
 			// Templates tab.
 			'templates_tab'  => array(
 
+				'templates_tab_header_0'             => array(
+					'name' => '<strong>' . __( 'Review Templates', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
 				'rcno_review_template'    => array(
 					'name'    => __( 'Book review template', self::$plugin_name ),
 					'desc'    => __( 'Select how you want your book reviews to look.', self::$plugin_name ),
@@ -532,10 +553,18 @@ class Rcno_Reviews_Settings_Definition {
 					'step' => 1,
 					'type' => 'number'
 				),
+				'spacer-8'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
 
 			),
 			'advanced_tab'   => array(
 
+				'advanced_tab_header_0'             => array(
+					'name' => '<strong>' . __( 'Book APIs', self::$plugin_name ) . '</strong>',
+					'type' => 'header'
+				),
 				'rcno_external_book_api' => array(
 					'name'    => __( 'External Book API', self::$plugin_name ),
 					'desc'    => __( 'Select which 3rd party API is used to fetch book data.' . '<br />' . 'The corresponding option must also be enabled below.', self::$plugin_name ),
@@ -546,8 +575,12 @@ class Rcno_Reviews_Settings_Definition {
 					),
 					'type'    => 'select'
 				),
+				'spacer-8'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
 
-				'rcno_googlebooks_settings' => array(
+				'advanced_tab_header_1' => array(
 					'name' => '<strong>' . __( 'Google Books® Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
@@ -558,10 +591,15 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'rcno_googlebooks_key'      => array(
 					'name' => __( 'Google Books® API Key', self::$plugin_name ),
-					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
+					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://console.developers.google.com/apis/credentials',
 					'type' => 'password'
 				),
-				'rcno_goodreads_settings'   => array(
+				'spacer-9'               => array(
+					'name' => '',
+					'type' => 'spacer'
+				),
+
+				'advanced_tab_header_2'   => array(
 					'name' => '<strong>' . __( 'Goodreads® Settings', self::$plugin_name ) . '</strong>',
 					'type' => 'header'
 				),
@@ -579,6 +617,10 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => __( 'Goodreads® API Secret', self::$plugin_name ),
 					'desc' => __( 'Available at: ', self::$plugin_name ) . 'https://www.goodreads.com/api/keys',
 					'type' => 'password'
+				),
+				'spacer-10'               => array(
+					'name' => '',
+					'type' => 'spacer'
 				),
 
 			)
@@ -601,7 +643,7 @@ class Rcno_Reviews_Settings_Definition {
 
 		$opts = array(
 			'rcno_' . $tax . '_header'       => array(
-				'name' => '<h2 class="section-heading">' . __( ucfirst( $tax ), 'rcno-reviews' ) . '</h2>',
+				'name' => '<strong>' . __( ucfirst( $tax ), 'rcno-reviews' ) . '</strong>',
 				'type' => 'header'
 			),
 			'rcno_' . $tax . '_slug'         => array(
@@ -619,6 +661,10 @@ class Rcno_Reviews_Settings_Definition {
 				'name' => __( 'Show in table', 'rcno-reviews' ),
 				'desc' => __( 'Show this custom taxonomy on the admin table', 'rcno-reviews' ),
 				'type' => 'checkbox'
+			),
+			'spacer' . $tax                  => array(
+				'name' => '',
+				'type' => 'spacer'
 			),
 		);
 
