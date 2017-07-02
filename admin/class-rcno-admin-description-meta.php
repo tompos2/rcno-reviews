@@ -35,8 +35,8 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $plugin_name
-	 * @param   string $version
+	 * @param   string $plugin_name     The ID of this plugin.
+	 * @param   string $version         The current version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -53,7 +53,7 @@ class Rcno_Admin_Description_Meta {
 	 * @return void
 	 */
 	public function rcno_book_description_metabox() {
-		// Add editor metabox for description
+		// Add editor metabox for description.
 		add_meta_box(
 			'rcno_book_description_metabox',
 			__( 'Book Description/Synopsis', 'rcno-reviews' ),
@@ -72,11 +72,12 @@ class Rcno_Admin_Description_Meta {
 	 *
 	 * @see   wp_editor()
 	 *
-	 * @param object $review
+	 * @param object $review The current post object.
 	 *
 	 * @return void
 	 */
 	public function do_rcno_book_description_metabox( $review ) {
+		// @TODO: Are nonce necessary for wp_editor metaboxes?
 		$description              = get_post_meta( $review->ID, 'rcno_book_description', true );
 		$options                  = array(
 			'textarea_rows' => 8,
@@ -96,9 +97,9 @@ class Rcno_Admin_Description_Meta {
 	 * @uses  update_post_meta()
 	 * @uses  sanitize_post_field()
 	 *
-	 * @param int   $review_id
-	 * @param array $data
-	 * @param mixed $review
+	 * @param int   $review_id The post ID of the review post.
+	 * @param array $data      The data passed from the post custom metabox.
+	 * @param mixed $review     The review object this data is being saved to.
 	 *
 	 * @return void
 	 */

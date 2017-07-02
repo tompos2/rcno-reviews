@@ -32,8 +32,8 @@ class Rcno_Admin_Buy_Links {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $plugin_name
-	 * @param   string $version
+	 * @param   string $plugin_name     The ID of this plugin.
+	 * @param   string $version         The current version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -75,12 +75,12 @@ class Rcno_Admin_Buy_Links {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $review
+	 * @param object $review    The current post object.
 	 *
 	 * @return void
 	 */
 	public function do_rcno_book_buy_links_metabox( $review ) {
-		include __DIR__ . '/views/rcno-buy_links-metabox.php';
+		include __DIR__ . '/views/rcno-buy-links-metabox.php';
 	}
 
 	/**
@@ -95,13 +95,17 @@ class Rcno_Admin_Buy_Links {
 	 * @uses  sanitize_text_field()
 	 * @uses  esc_url()
 	 *
-	 * @param int   $review_id
-	 * @param array $data
-	 * @param mixed $review
+	 * @param int   $review_id The post ID of the review post.
+	 * @param array $data      The data passed from the post custom metabox.
+	 * @param mixed $review     The review object this data is being saved to.
 	 *
-	 * @return void
+	 * @return void|bool
 	 */
 	public function rcno_save_book_buy_links_metadata( $review_id, $data, $review = null ) {
+
+		if ( ! wp_verify_nonce( $data['rcno_buy_links_nonce'], 'rcno_buy_links_meta_box_nonce' ) ) {
+			return false;
+		}
 
 		$old = get_post_meta( $review_id, 'rcno_review_buy_links', true );
 		$new = array();
@@ -123,7 +127,5 @@ class Rcno_Admin_Buy_Links {
 		} elseif ( empty( $new ) && $old ) {
 			delete_post_meta( $review_id, 'rcno_review_buy_links', $old );
 		}
-
 	}
-
 }

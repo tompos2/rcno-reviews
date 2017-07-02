@@ -35,8 +35,8 @@ class Rcno_Admin_Review_Rating {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $plugin_name
-	 * @param   string $version
+	 * @param   string $plugin_name     The ID of this plugin.
+	 * @param   string $version         The current version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -72,7 +72,7 @@ class Rcno_Admin_Review_Rating {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $review
+	 * @param object $review    The current post object.
 	 *
 	 * @return void
 	 */
@@ -89,9 +89,9 @@ class Rcno_Admin_Review_Rating {
 	 * @uses  wp_verify_nonce()
 	 * @uses  sanitize_text_field()
 	 *
-	 * @param int   $review_id
-	 * @param array $data
-	 * @param mixed $review
+	 * @param int   $review_id The post ID of the review post.
+	 * @param array $data      The data passed from the post custom metabox.
+	 * @param mixed $review     The review object this data is being saved to.
 	 *
 	 * @return void
 	 */

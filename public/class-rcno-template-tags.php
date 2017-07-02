@@ -116,7 +116,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int	 $review_id	The current review's post ID.
+	 * @param string $size		The required size of the book cover.
 	 *
 	 * @return string
 	 */
@@ -158,8 +159,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
-	 * @param int $size
+	 * @param int	 $review_id	The current review's post ID.
+	 * @param string $size		The required size of the book cover.
 	 *
 	 * @return void
 	 */
@@ -176,11 +177,12 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return bool|string
 	 */
-	private function get_the_rcno_admin_book_rating( $review_id ) { // @TODO: Use an SVG to avoid issues with none UTF-8 fonts.
+	private function get_the_rcno_admin_book_rating( $review_id ) {
+		// @TODO: Use an SVG to avoid issues with none UTF-8 fonts.
 		$review = get_post_custom( $review_id );
 
 		if ( ! isset( $review['rcno_admin_rating'] ) ) {
@@ -195,41 +197,43 @@ class Rcno_Template_Tags {
 
 			switch ( $book_rating ) {
 				case 5:
-					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
+					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 							</div>';
 					break;
 
 				case 4;
-					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
+					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
 							</div>';
 					break;
 
 				case 3;
-					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
+					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
 				case 2;
-					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
+					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
 				case 1;
-					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
+					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
 				default:
-					return '<div class="rcno-admin-rating" style="background: ' . $background .'">
+					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
 			}
 		}
+
+		return true;
 	}
 
 	/**
@@ -237,7 +241,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return void
 	 */
@@ -256,9 +260,9 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $review_id
-	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'
-	 * @param bool   $wrapper
+	 * @param int    $review_id		The current review's post ID.
+	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
+	 * @param bool   $wrapper	Whether to wrap the image URL in the 'img' HTML tag.
 	 *
 	 * @return bool|string
 	 */
@@ -303,7 +307,9 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int    $review_id		The current review's post ID.
+	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
+	 * @param bool   $wrapper	Whether to wrap the image URL in the 'img' HTML tag.
 	 *
 	 * @return void
 	 */
@@ -316,6 +322,13 @@ class Rcno_Template_Tags {
 	 * TAXONOMY RELATED TEMPLATE TAGS
 	 *******************************************************************************/
 
+	/**
+	 * Creates the taxonomy headline.
+	 *
+	 * @param string $taxonomy The custom taxonomy to print the header tags for.
+	 *
+	 * @return string
+	 */
 	private function get_the_rcno_taxonomy_headline( $taxonomy ) {
 
 		// Get the taxonomy.
@@ -339,7 +352,9 @@ class Rcno_Template_Tags {
 	/**
 	 * Print the taxonomy headline.
 	 *
-	 * @param $taxonomy
+	 * @param string $taxonomy The custom taxonomy to print the header tags for.
+	 *
+	 * @return void
 	 */
 	public function the_rcno_taxonomy_headline( $taxonomy ) {
 		echo $this->get_the_rcno_taxonomy_headline( $taxonomy );
@@ -347,9 +362,12 @@ class Rcno_Template_Tags {
 
 
 	/**
-	 * @param        $taxonomy
-	 * @param bool   $label
-	 * @param string $sep
+	 * Returns the list of terms per taxonomy along with labels.
+	 *
+	 * @param int 	 $review_id	The current review's post ID.
+	 * @param string $taxonomy	The custom taxonomy to print the HTML tags for.
+	 * @param bool   $label		Whether or not to print the taxonomy label.
+	 * @param string $sep		The separator used for multiple taxonomies.
 	 *
 	 * @return null|string
 	 */
@@ -364,7 +382,9 @@ class Rcno_Template_Tags {
 			return null;
 		}
 
-		$counts    = wp_get_post_terms( $review_id, $taxonomy ); // Get the number of terms in a category, per post.
+		//$counts    = wp_get_post_terms( $review_id, $taxonomy );
+		$counts = get_the_terms( $review_id, $taxonomy );
+
 		$tax_label = $tax->labels->name;
 
 		if ( count( $counts ) === 1 ) { // If we have only 1 term singularize the label name.
@@ -375,7 +395,7 @@ class Rcno_Template_Tags {
 		$prefix = '';
 
 		if ( $label ) {
-			$prefix = '<span class="rcno-tax-name">' . $tax_label . ': ' . '</span>';
+			$prefix = '<span class="rcno-tax-name">' . $tax_label . ': </span>';
 		}
 
 		if ( $terms && ! is_wp_error( $terms ) ) {
@@ -391,41 +411,53 @@ class Rcno_Template_Tags {
 	}
 
 	/**
-	 * Print taxonomy terms.
+	 * Prints taxonomy terms.
 	 *
-	 * @param string $taxonomy
-	 * @param bool   $label
-	 * @param string $sep
+	 * @param int 	 $review_id	The current review's post ID.
+	 * @param string $taxonomy	The custom taxonomy to print the HTML tags for.
+	 * @param bool   $label		Whether or not to print the taxonomy label.
+	 * @param string $sep		The separator used for multiple taxonomies.
+	 *
+	 * @return void
 	 */
 	public function the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = ', ' ) {
 		echo $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label, $sep );
 	}
-
-
+	
 	/**
-	 * @param $label
-	 * @param $sep
+	 * Generates a list of all the taxonomy and terms attached to a review post.
+	 *
+	 * @param int    $review_id The current review's post ID.
+	 * @param string $label     Whether or not to print the taxonomy label.
+	 * @param string $sep       The separator used for multiple taxonomies.
 	 *
 	 * @return string
 	 */
-	private function get_the_rcno_taxonomy_list( $label, $sep ) {
+	private function get_the_rcno_taxonomy_list( $review_id, $label, $sep ) {
+
 		$out = '';
-
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+		$custom_taxonomies = explode( ',', $custom_taxonomies );
 
-		foreach ( $custom_taxonomies as $tax_key => $tax_value ) {
-			$out .= $this->get_the_rcno_taxonomy_terms( 'rcno_' . $tax_key, $label, $sep );
+		foreach ( $custom_taxonomies as $tax_value ) {
+			$tax = 'rcno_' . strtolower( $tax_value );
+			$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $tax, $label, $sep );
 		}
 
 		return $out;
 	}
 
 	/**
-	 * @param $label
-	 * @param $sep
+	 * Prints a list of all the taxonomy and terms attached to a review post.
+	 *
+	 * @param int    $review_id The current review's post ID.
+	 * @param string $label     Whether or not to print the taxonomy label.
+	 * @param string $sep       The separator used for multiple taxonomies.
+	 *
+	 * @return void
 	 */
-	public function the_rcno_taxonomy_list( $label, $sep ) {
-		echo $this->get_the_rcno_taxonomy_list( $label, $sep );
+	public function the_rcno_taxonomy_list( $review_id, $label, $sep ) {
+		echo $this->get_the_rcno_taxonomy_list( $review_id, $label, $sep );
 	}
 
 
@@ -436,7 +468,7 @@ class Rcno_Template_Tags {
 	/**
 	 * Renders the book description. An empty string if description is empty.
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @since 1.0.0
 	 * @return string
@@ -445,10 +477,10 @@ class Rcno_Template_Tags {
 
 		$review = get_post_custom( $review_id );
 
-		// Create an empty output string
+		// Create an empty output string.
 		$out = '';
 
-		// Render the description only if it is not empty
+		// Render the description only if it is not empty.
 		if ( isset( $review['rcno_book_description'] ) ) {
 			if ( strlen( $review['rcno_book_description'][0] ) > 0 ) {
 				$out .= '<div class="rcno-book-description">';
@@ -466,7 +498,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return void
 	 */
@@ -482,8 +514,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
-	 * @param int $length
+	 * @param int $review_id	The current review's post ID.
+	 * @param int $length		The maximum character length of the excerpt.
 	 *
 	 * @return string
 	 */
@@ -510,8 +542,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
-	 * @param int $length
+	 * @param int $review_id	The current review's post ID.
+	 * @param int $length		The maximum character length of the excerpt.
 	 *
 	 * @return void
 	 */
@@ -529,7 +561,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return string
 	 */
@@ -548,7 +580,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return void
 	 */
@@ -568,10 +600,10 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $review_id
-	 * @param string $meta_key
-	 * @param string $wrapper
-	 * @param bool   $label
+	 * @param int    $review_id		The current review's post ID.
+	 * @param string $meta_key		The predefined meta key we are requesting.
+	 * @param string $wrapper		The predefined HTML tag to wrap our content.
+	 * @param bool   $label			Whether or not to show a label.
 	 *
 	 * @return string|null
 	 */
@@ -615,7 +647,7 @@ class Rcno_Template_Tags {
 				if ( '' === $wrapper ) {
 					$out .= '';
 				} else {
-					$out .= '<' . $wrapper . ' ' . 'class="' . sanitize_html_class( $meta_key ) . '"' . '>';
+					$out .= '<' . $wrapper . ' class="' . sanitize_html_class( $meta_key ) . '">';
 				}
 
 				if ( $label ) {
@@ -645,10 +677,10 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $review_id
-	 * @param string $meta_key
-	 * @param string $wrapper
-	 * @param bool   $label
+	 * @param int    $review_id		The current review's post ID.
+	 * @param string $meta_key		The predefined meta key we are requesting.
+	 * @param string $wrapper		The predefined HTML tag to wrap our content.
+	 * @param bool   $label			Whether or not to show a label.
 	 *
 	 * @return void
 	 */
@@ -665,8 +697,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $review_id     The post ID of the book review.
-	 * @param bool   $label         Displays the a label before the purchase links.
+	 * @param int  $review_id     The post ID of the book review.
+	 * @param bool $label         Displays the a label before the purchase links.
 	 *
 	 * @return string
 	 */
@@ -686,7 +718,7 @@ class Rcno_Template_Tags {
 		$links_label = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links_label' );
 		$background  = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_background' );
 		$_stores     = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links' );
-		$_stores     = explode( ",", $_stores );
+		$_stores     = explode( ',', $_stores );
 
 		$stores = array();
 		foreach ( $_stores as $store ) {
@@ -716,8 +748,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $review_id     The post ID of the book review.
-	 * @param bool   $label         Displays the a label before the purchase links.
+	 * @param int  $review_id     The post ID of the book review.
+	 * @param bool $label         Displays the a label before the purchase links.
 	 *
 	 * @return void
 	 */
@@ -804,7 +836,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  int $review_id
+	 * @param  int $review_id	The current review's post ID.
 	 *
 	 * @return string|null|false
 	 */
@@ -883,7 +915,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return void
 	 */
@@ -897,7 +929,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return string|null|false
 	 */
@@ -944,7 +976,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return void
 	 */
@@ -962,7 +994,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The current review's post ID.
 	 *
 	 * @return array
 	 */
@@ -984,7 +1016,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The post ID of the current review.
 	 *
 	 * @return string
 	 */
@@ -994,13 +1026,14 @@ class Rcno_Template_Tags {
 		$book_title = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
 		$book_fmt = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false );
 		$book_author = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) );
-		$book_url = get_post_permalink( $review_id );
+		$book_review_url = get_post_permalink( $review_id );
 		$book_pub_date = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
 		$book_genre = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
 		$book_publisher = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) );
 		$book_isbn = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
 		$book_edtn = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false );
 		$book_pc = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
+		$book_ext_url = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false );
 
 		$data['@context'] = 'http://schema.org';
 		$data['@type']    = 'Book';
@@ -1009,8 +1042,8 @@ class Rcno_Template_Tags {
 			'@type' => 'Person',
 			'name' => $book_author,
 		);
-		$data['url'] = $book_url;
-		$data['sameAs'] = 'http://google.com/'; // A reference page that unambiguously indicates the item's identity; for example, the URL of the item's Wikipedia page
+		$data['url'] = $book_review_url;
+		$data['sameAs'] = $book_ext_url;
 		$data['datePublished'] = date( 'c', $book_pub_date );
 		$data['genre'] = $book_genre;
 		$data['publisher'] = $book_publisher;
@@ -1030,7 +1063,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The post ID of the current review.
 	 *
 	 * @return void
 	 */
@@ -1044,7 +1077,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The post ID of the current review.
 	 *
 	 * @return string
 	 */
@@ -1063,7 +1096,7 @@ class Rcno_Template_Tags {
 		$book_name    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
 		$book_isbn    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
 		$book_author  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) );
-		$author_url   = 'http://google.com';
+		$author_url   = 'http://google.com'; // @TODO: Need a way to get a URL linked to the author author.
 		$bk_pub_date  = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
 		$priv_score   = $this->rcno_get_review_score( $review_id );
 		$pub_rating   = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
@@ -1128,7 +1161,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $review_id
+	 * @param int $review_id	The post ID of the current review.
 	 *
 	 * @return void
 	 */
@@ -1142,7 +1175,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $letters
+	 * @param array $letters	An array of the first letter of all taxonomy terms with reviews.
 	 *
 	 * @return string
 	 */
@@ -1184,7 +1217,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $letters
+	 * @param array $letters	An array of the first letter of all taxonomy terms with reviews.
 	 *
 	 * @return void
 	 */

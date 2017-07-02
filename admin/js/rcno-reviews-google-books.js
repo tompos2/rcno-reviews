@@ -42,7 +42,7 @@
                         $('.book-isbn-metabox-error').show();
                     } else {
 
-                        $('#title').val(
+                        $('#rcno_book_title').val(
                             book.items["0"].volumeInfo.title
                         );
 
@@ -70,8 +70,20 @@
                             book.items["0"].volumeInfo.pageCount
                         );
 
-                        $('#rcno_book_isbn13').val(
-                            book.items["0"].volumeInfo.industryIdentifiers[1].identifier
+                        $.each( book.items["0"].volumeInfo.industryIdentifiers, function ( key, value) {
+                            if( value['type'] === 'ISBN_13') {
+                                $('#rcno_book_isbn13').val(
+                                    value['identifier']
+                                );
+                            }
+                        });
+
+                        $('#rcno_book_gr_review').val(
+                            book.items["0"].volumeInfo.averageRating
+                        );
+
+                        $('#rcno_book_gr_url').val(
+                            book.items["0"].volumeInfo.canonicalVolumeLink
                         );
 
                         tinymce.get('rcno_book_description').setContent(

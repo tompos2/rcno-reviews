@@ -26,28 +26,28 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 ?>
 
 <?php if ( $template->is_review_embedded() ) : ?>
-    <h2 class="rcno-review-title">
+	<h2 class="rcno-review-title">
 		<?php echo get_the_title( $review_id ) ?>
-    </h2>
+	</h2>
 <?php endif; ?>
 
 <?php do_action( 'before_rcno_book_review' ); ?>
 
 <div class="rcno-book-info">
-    <div class="review-content">
+	<div class="review-content">
 
 		<?php if ( true === $review_score_enable && 'top' === $review_score_position ) : ?>
 
-            <div class="review-box-container">
+			<div class="review-box-container">
 				<?php $template->rcno_print_review_box( $review_id ); ?>
-            </div>
+			</div>
 
-            <?php do_action( 'after_rcno_review_score_box' ); ?>
+			<?php do_action( 'after_rcno_review_score_box' ); ?>
 
 		<?php endif; ?>
 
-        <div class="book-cover-container">
-            <div class="book-cover">
+		<div class="book-cover-container">
+			<div class="book-cover">
 				<?php
 				// Prints the book cover.
 				$template->the_rcno_book_cover( $review_id, 'full' );
@@ -57,8 +57,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 
 				do_action( 'after_rcno_book_cover' );
 				?>
-            </div>
-            <div class="book-info">
+			</div>
+			<div class="book-info">
 				<?php
 				// Prints the book cover and book's meta data.
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_title', 'h2', false );
@@ -74,8 +74,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 
 				do_action( 'after_rcno_book_information' );
 				?>
-            </div>
-        </div>
+			</div>
+		</div>
 
 		<?php
 		// Prints the book review content.
@@ -89,15 +89,15 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 
 		<?php if ( true === $review_score_enable && 'bottom' === $review_score_position ) : ?>
 
-            <div class="review-box-container">
+			<div class="review-box-container">
 				<?php $template->rcno_print_review_box( $review_id ); ?>
-            </div>
+			</div>
 
-            <?php do_action( 'after_rcno_review_score_box' ); ?>
+			<?php do_action( 'after_rcno_review_score_box' ); ?>
 
 		<?php endif; ?>
 
-    </div>
+	</div>
 
 	<?php
 	// Prints the review and book's metadata in the JSON+LD format content.
