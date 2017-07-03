@@ -45,6 +45,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @var	   object	$description_meta
 	 */
 	public $description_meta;
 
@@ -53,6 +54,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @var	   object	$book_isbn;
 	 */
 	public $book_isbn;
 
@@ -61,6 +63,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @var	   $book_cover
 	 */
 	public $book_cover;
 
@@ -69,6 +72,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @var    $book_general_info
 	 */
 	public $book_general_info;
 
@@ -77,6 +81,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @var    $book_review_score
 	 */
 	public $book_review_score;
 
@@ -85,6 +90,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @var    $book_review_rating
 	 */
 	public $book_review_rating;
 
@@ -93,6 +99,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @var    $buy_links
 	 */
 	public $buy_links;
 
@@ -225,7 +232,7 @@ class Rcno_Reviews_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array(
 			'jquery',
-			'wp-color-picker'
+			'wp-color-picker',
 		), $this->version, false );
 		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', false );
 
@@ -283,12 +290,12 @@ class Rcno_Reviews_Admin {
 			'featured',
 			'author',
 			'comments',
-			'revisions'
+			'revisions',
 		);
 
 		$opts['taxonomies'] = Rcno_Reviews_Option::get_option( 'rcno_enable_builtin_taxonomy' ) ? array(
 			'category',
-			'post_tag'
+			'post_tag',
 		) : array();
 
 		$opts['capabilities']['delete_others_posts']    = "delete_others_{$cap_type}s";
@@ -344,7 +351,7 @@ class Rcno_Reviews_Admin {
 	public function rcno_custom_taxonomy() {
 
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
-		$keys              = explode( ",", $custom_taxonomies );
+		$keys              = explode( ',', $custom_taxonomies );
 
 		if ( ! in_array( 'Author', $keys, true ) ) {
 			$keys[] = 'Author'; // This is book review plugin, the book author taxonomy must always be present.
@@ -358,7 +365,7 @@ class Rcno_Reviews_Admin {
 					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug' ),
 					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
 					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show', true ),
-				)
+				),
 			);
 		}
 
@@ -427,8 +434,8 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $post
-	 * @param array  $box
+	 * @param object $post	The post object of the current review.
+	 * @param array  $box	The metaboxes attached to the current post object.
 	 *
 	 * @return void
 	 */
@@ -564,19 +571,15 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param array $links
+	 * @param array $links	The links below the entry on the plugin list field.
 	 *
 	 * @return array $links
 	 */
 	public function add_action_links( $links ) {
 
-		return array_merge(
-			array(
-				'settings' => '<a href="' . admin_url( 'admin.php?page=' . $this->plugin_name ) . '">' . __( 'Settings', $this->plugin_name ) . '</a>'
-			),
-			$links
-		);
+		$links['settings'] = '<a href="' . admin_url( 'admin.php?page=' . $this->plugin_name ) . '">' . __( 'Settings',	$this->plugin_name ) . '</a>';
 
+		return $links;
 	}
 
 	/**
@@ -612,11 +615,8 @@ class Rcno_Reviews_Admin {
 	 * @uses    update_option()
 	 * @uses    wp_update_post()
 	 *
-	 *
 	 * @param   int   $review_id post ID of review being saved.
 	 * @param   mixed $review    the review post object.
-	 *
-	 *
 	 *
 	 * @return  int|bool
 	 */
@@ -628,7 +628,7 @@ class Rcno_Reviews_Admin {
 
 			$data = $_POST;
 
-			if ( null !== $review && $review->post_type === 'rcno_review' ) {
+			if ( null !== $review && 'rcno_review' === $review->post_type ) {
 				$errors = false;
 
 				// Verify if this is an auto save routine. If it is our form has not been submitted, so we don't want to do anything.
@@ -672,12 +672,12 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @return void
 	 */
-	public function rcno_admin_notice_handler() { // @TODO: Use the builtin error handler.
+	public function rcno_admin_notice_handler() {
 
 		$errors = get_option( 'rcno_admin_errors' );
 
 		if ( $errors ) {
-			echo '<div class="error"><p>' . $errors . '</p></div>';
+			echo '<div class="error"><p>' . esc_html( $errors ) . '</p></div>';
 		}
 
 		// Reset the error option for the next error.
@@ -689,7 +689,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $columns
+	 * @param array $columns	An array of the columns in the admin reviews page.
 	 *
 	 * @return array
 	 */
@@ -701,9 +701,10 @@ class Rcno_Reviews_Admin {
 
 	/**
 	 * Enables the sorting and filtering of the admin columns based on custom taxonomies.
+	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $columns
+	 * @param array $columns	An array of the columns in the admin reviews page.
 	 *
 	 * @return array
 	 */
@@ -723,8 +724,8 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array  $clauses
-	 * @param object $wp_query
+	 * @param array  $clauses	An array of the SQL statement sent with each WP_Query.
+	 * @param object $wp_query	The WP WP_Query object.
 	 *
 	 * @return array
 	 */
@@ -759,7 +760,7 @@ SQL;
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $query_args
+	 * @param array $query_args	An array of the query arguments.
 	 *
 	 * @return array
 	 */
@@ -775,7 +776,7 @@ SQL;
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $items
+	 * @param array $items	The list of items in the widget.
 	 *
 	 * @return array
 	 */
@@ -811,8 +812,8 @@ SQL;
 	 * @return array Amended post update messages with new review update messages.
 	 */
 	function rcno_updated_review_messages( $messages ) {
-		$post             = get_post();
-		$post_type        = get_post_type( $post );
+		$review           = get_post();
+		$post_type        = get_post_type( $review );
 		$post_type_object = get_post_type_object( $post_type );
 
 		$messages['rcno_review'] = array(
@@ -829,13 +830,13 @@ SQL;
 			9  => sprintf(
 				__( 'Review scheduled for: <strong>%1$s</strong>.', 'rcno-reviews' ),
 				// translators: Publish box date format, see http://php.net/date
-				date_i18n( __( 'M j, Y @ G:i', 'rcno-reviews' ), strtotime( $post->post_date ) )
+				date_i18n( __( 'M j, Y @ G:i', 'rcno-reviews' ), strtotime( $review->post_date ) )
 			),
-			10 => __( 'Review draft updated.', 'rcno-reviews' )
+			10 => __( 'Review draft updated.', 'rcno-reviews' ),
 		);
 
 		if ( $post_type_object->publicly_queryable && 'rcno_review' === $post_type ) {
-			$permalink = get_permalink( $post->ID );
+			$permalink = get_permalink( $review->ID );
 
 			$view_link                 = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View review', 'rcno-reviews' ) );
 			$messages[ $post_type ][1] .= $view_link;

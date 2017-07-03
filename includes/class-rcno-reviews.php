@@ -76,6 +76,8 @@ class Rcno_Reviews {
 
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		
+		$this->define_taxonomy_hook();
 
 		$this->define_template_hooks();
 		$this->define_widget_hooks();
@@ -134,10 +136,13 @@ class Rcno_Reviews {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public.php';
-
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-template-tags.php';
-
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public-ratings.php';
+
+		/**
+		 * The class responsible for defining all actions that occur in the author taxonomy area.
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-rcno-author-taxonomy-metabox.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-shortcodes.php';
 
@@ -266,7 +271,6 @@ class Rcno_Reviews {
 		$this->loader->add_filter( 'posts_clauses', $plugin_admin, 'rcno_query_admin_columns', 10, 2 );
 
 		$this->loader->add_action( 'wp_ajax_reset_all_options', $plugin_admin, 'reset_all_options' );
-
 	}
 
 	/**
@@ -294,14 +298,25 @@ class Rcno_Reviews {
 
 		$this->loader->add_filter( 'excerpt_length', $plugin_public, 'rcno_reviews_excerpt_length', 10 );
 		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'rcno_reviews_excerpt_more', 10 );
+	}
 
+	private function define_taxonomy_hook() {
+
+		$author_taxonomy = new Rcno_Author_Taxonomy_Metabox( $this->get_plugin_name(), $this->get_version() );
+
+		// Load the 'Author' taxonomy metabox on the taxonomy edit screen.
+		$this->loader->add_action( 'rcno_author_add_form_fields', $author_taxonomy, 'rcno_author_taxonomy_metabox' );
+		$this->loader->add_action( 'rcno_author_edit_form_fields', $author_taxonomy, 'rcno_author_taxonomy_metabox' );
+
+		// Save the author taxonomy metadata.
+		$this->loader->add_action( 'created_rcno_author', $author_taxonomy, 'rcno_save_author_taxonomy_metadata' );
+		$this->loader->add_action( 'edited_rcno_author', $author_taxonomy, 'rcno_save_author_taxonomy_metadata' );
 	}
 
 	private function define_template_hooks() {
 
 		$template_hooks = new Rcno_Template_Tags( $this->get_plugin_name(), $this->get_version() );
 		$template_hooks->include_functions_file();
-
 	}
 
 	private function define_widget_hooks() {
@@ -320,7 +335,6 @@ class Rcno_Reviews {
 
 		$book_grid = new Rcno_Reviews_Book_Grid();
 		$this->loader->add_action( 'widgets_init', $book_grid, 'rcno_register_book_grid_widget' );
-
 	}
 
 	private function define_rest_hooks() {
@@ -362,7 +376,6 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_button_scl' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
-
 	}
 
 	private function define_public_ratings() {
