@@ -338,7 +338,7 @@ class Rcno_Reviews_Public {
 
 		// Get the review data.
 		$review = get_post_custom( $review_post->ID );
-		//$content = $this->get_reviews_content($review_post);
+		// $content = $this->get_reviews_content($review_post).
 
 		// Start rendering.
 		ob_start();
@@ -363,8 +363,8 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $taxonomy
-	 * @param bool   $headers
+	 * @param string $taxonomy	The custom taxonomy the list is being generated for.
+	 * @param bool   $headers	Whether or not to show a first letter navigation header before each item.
 	 *
 	 * @return string $content
 	 */
@@ -373,22 +373,22 @@ class Rcno_Reviews_Public {
 		// Create empty output variable.
 		$output = '';
 
-		// Get the layout's include path
+		// Get the layout's include path.
 		$include_path = $this->rcno_get_the_layout() . 'taxonomy.php';
 
 		if ( ! file_exists( $include_path ) ) {
-			// If the layout does not provide an taxonomy file, use the default one:
+			// If the layout does not provide an taxonomy file, use the default one.
 			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/taxonomy.php';
 		}
 
-		// Set review_post to false for template tags
+		// Set review_post to false for template tags.
 		$review_post = false;
 
 		if ( 'n/a' !== $taxonomy && '' !== $taxonomy ) {
 			// Get the terms of the selected taxonomy.
 			$terms = get_terms( $taxonomy, array( 'orderby' => 'name', 'order' => 'ASC' ) );
 		} else {
-			// Set $terms to false for the layout and it's error messages
+			// Set $terms to false for the layout and it's error messages.
 			$terms = false;
 		}
 
@@ -412,7 +412,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed $headers
+	 * @param mixed $headers	Whether or not to show a first letter navigation header before each item.
 	 *
 	 * @return string $content
 	 */
@@ -444,7 +444,7 @@ class Rcno_Reviews_Public {
 		$query = new WP_Query( $args );
 		$posts = array();
 
-		if ( $query->have_posts() ) { //reviews found.
+		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				global $post;
@@ -475,15 +475,15 @@ class Rcno_Reviews_Public {
 	 */
 	private function rcno_get_the_layout() {
 
-		// Get the layout chosen:
+		// Get the layout chosen.
 		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template' );
 		// Calculate the include path for the layout.
 		// Check if a global or local layout should be used.
 		if ( false !== strpos( $layout, 'local' ) ) {
-			//Local layout.
+			// Local layout.
 			$include_path = get_stylesheet_directory() . '/rcno-templates/' . preg_replace( '/^local\_/', '', $layout ) . '/';
 		} else {
-			//Global layout.
+			// Global layout.
 			$include_path = plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/';
 		}
 

@@ -99,33 +99,33 @@ class Rcno_Admin_Buy_Links {
 	 * @param array $data      The data passed from the post custom metabox.
 	 * @param mixed $review     The review object this data is being saved to.
 	 *
-	 * @return void|bool
+	 * @return void
 	 */
 	public function rcno_save_book_buy_links_metadata( $review_id, $data, $review = null ) {
 
-		if ( ! wp_verify_nonce( $data['rcno_buy_links_nonce'], 'rcno_buy_links_meta_box_nonce' ) ) {
-			return false;
-		}
+		if ( isset( $data['rcno_buy_links_nonce'] ) && wp_verify_nonce( $data['rcno_buy_links_nonce'], 'rcno_buy_links_meta_box_nonce' ) ) {
 
-		$old = get_post_meta( $review_id, 'rcno_review_buy_links', true );
-		$new = array();
+			$old = get_post_meta( $review_id, 'rcno_review_buy_links', true );
+			$new = array();
 
-		$stores = isset( $data['store'] ) ? $data['store'] : array();
-		$links  = isset( $data['link'] ) ? $data['link'] : array();
+			$stores = isset( $data['store'] ) ? $data['store'] : array();
+			$links  = isset( $data['link'] ) ? $data['link'] : array();
 
-		$count = count( $stores );
+			$count = count( $stores );
 
-		for ( $i = 0; $i < $count; $i ++ ) {
-			if ( '' !== $links[ $i ] ) { // Don't save an item if a link is not provided.
-				$new[ $i ]['store'] = sanitize_text_field( $stores[ $i ] );
-				$new[ $i ]['link']  = esc_url( $links[ $i ] );
+			for ( $i = 0; $i < $count; $i ++ ) {
+				if ( '' !== $links[ $i ] ) { // Don't save an item if a link is not provided.
+					$new[ $i ]['store'] = sanitize_text_field( $stores[ $i ] );
+					$new[ $i ]['link']  = esc_url( $links[ $i ] );
+				}
+			}
+
+			if ( ! empty( $new ) && $new !== $old ) {
+				update_post_meta( $review_id, 'rcno_review_buy_links', $new );
+			} elseif ( empty( $new ) && $old ) {
+				delete_post_meta( $review_id, 'rcno_review_buy_links', $old );
 			}
 		}
-
-		if ( ! empty( $new ) && $new !== $old ) {
-			update_post_meta( $review_id, 'rcno_review_buy_links', $new );
-		} elseif ( empty( $new ) && $old ) {
-			delete_post_meta( $review_id, 'rcno_review_buy_links', $old );
-		}
 	}
+	
 }

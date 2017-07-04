@@ -10,6 +10,35 @@ $out = '';
 
 if ( $terms ) {
 	if ( count( $terms ) > 0 ) {
+
+		if ( 'rcno_author' === $taxonomy ) {
+			// If we are looking at authors, move the first name to last and separate by a comma.
+			foreach ( $terms as $_term ) {
+				$_term_name = $_term->name;
+				$_term_name = explode( ' ', $_term_name );
+				$_term_name = array_reverse( $_term_name );
+				$_term_name = implode( ', ', $_term_name );
+
+				$_term->name = $_term_name;
+			}
+		}
+
+		if ( 'rcno_series' === $taxonomy ) {
+			// If we are looking at book series, move all articles to the and of string and separate by a comma.
+			foreach ( $terms as $_term ) {
+				$_term_name = $_term->name;
+				$_term_name = preg_replace( '/^(A|An|The) (.+)/', '$2, $1', $_term_name );
+
+				$_term->name = $_term_name;
+			}
+		}
+
+		foreach ( $terms as $key => $value ) {
+			// Form the terms available we are only taking the 'name' and 'ID' and doing a natural sort.
+			$_terms[ $value->term_id ] = $value->name;
+			natcasesort( $_terms );
+		}
+
 		// Create an index i to compare the number in the list and check for first and last item.
 		$i = 0;
 
@@ -17,52 +46,49 @@ if ( $terms ) {
 		$letters = array();
 
 		// Walk through all the terms to build alphabet navigation.
-		foreach ( $terms as $term ) {
+		foreach ( $_terms as $key => $value ) {
 			// Get term meta data.
-			$term_meta = get_term_meta( $term->term_id );
+			$term_meta = get_term_meta( $key );
 
-			// Skip ingredients withe meta 'use_in_list' == false
-			if ( ! ( $taxonomy === 'rcno_genre' && isset( $term_meta['use_in_list'] ) && $term_meta['use_in_list'] !== 0 ) ) {
-				$title = ucfirst( $term->name );
+			$title = ucfirst( $value );
 
-				if ( $headers ) {
-					// Add first letter headlines for easier navigation.
+			if ( 'true' === $headers ) { // Add first letter headlines for easier navigation.
 
-					// Get the first letter (without special chars).
-					$first_letter = substr( remove_accents( $title ), 0, 1 );
+				// Get the first letter (without special chars).
+				$first_letter = substr( remove_accents( $title ), 0, 1 );
 
-					// Check if we've already had a headline.
-					if ( ! in_array( $first_letter, $letters, true ) ) {
-						// Close list of proceeding group.
-						if ( $i !== 0 ) {
-							$out .= '</ul>';
-						}
-						// Create a headline.
-						$out .= '<h2><a class="rcno-toplink" href="#top">&uarr;</a><a name="' . $first_letter . '"></a>';
-						$out .= strtoupper( $first_letter );
-						$out .= '</h2>';
-
-						// Start new list.
-						$out .= '<ul class="rcno-taxlist">';
-
-						// Add the letter to the list.
-						$letters[] = $first_letter;
+				// Check if we've already had a headline.
+				if ( ! in_array( $first_letter, $letters, true ) ) {
+					// Close list of proceeding group.
+					if ( 0 !== $i ) {
+						$out .= '</ul>';
 					}
-				} else {
-					// Start list before first item.
-					if ( $i === 0 ) {
-						$out .= '<ul class="rcno-taxlist">';
-					}
+					// Create a headline.
+					$out .= '<h2><a class="rcno-toplink" href="#top">&uarr;</a><a name="' . $first_letter . '"></a>';
+					$out .= strtoupper( $first_letter );
+					$out .= '</h2>';
+
+					// Start new list.
+					$out .= '<ul class="rcno-taxlist">';
+
+					// Add the letter to the list.
+					$letters[] = $first_letter;
 				}
-
-				// Add the entry for the term.
-				$out .= '<li><a href="' . get_term_link( $term ) . '">';
-				$out .= $title;
-				$out .= '</a></li>';
-
-				// Increment the counter.
-				$i ++;
+			} else {
+				// Start list before first item.
+				if ( 0 === $i ) {
+					$out .= '<ul class="rcno-taxlist">';
+				}
 			}
+
+			// Add the entry for the term.
+			$out .= '<li><a href="' . get_term_link( $key ) . '">';
+			$out .= $title;
+			$out .= '</a></li>';
+
+			// Increment the counter.
+			$i ++;
+
 		}
 		// Close the last list.
 		$out .= '</ul>';
@@ -75,9 +101,10 @@ if ( $terms ) {
 
 	} else {
 		// No terms in this taxonomy.
-		_e( 'There are no terms in this taxonomy.', 'rcno-reviews' );
+		esc_html_e( 'There are no terms in this taxonomy.', 'rcno-reviews' );
 	}
+
 } else {
 	// Error: no taxonomy set.
-	_e( '<b>Error:</b> No taxonomy set for this list!', 'rcno-reviews' );
+	esc_html_e( '<b>Error:</b> No taxonomy set for this list!', 'rcno-reviews' );
 }
