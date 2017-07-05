@@ -728,7 +728,7 @@ class Rcno_Template_Tags {
 		$links .= '<div class="rcno-purchase-links-container">';
 
 		if ( $label ) {
-			$links .= '<span>' . esc_html( $links_label ) . '</span> ';
+			$links .= '<span class="buy-link-label">' . esc_html( $links_label ) . '</span> ';
 		}
 
 		foreach ( $purchase_links as $value ) {
@@ -765,9 +765,9 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $num
-	 * @param string $type
-	 * @param bool   $stars
+	 * @param int    $num       The review score number rating.
+	 * @param string $type      The selected review type.
+	 * @param bool   $stars     Whether to display the review scores as stars.
 	 *
 	 * @return string
 	 */

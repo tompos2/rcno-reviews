@@ -15,9 +15,7 @@ if ( $terms ) {
 			// If we are looking at authors, move the first name to last and separate by a comma.
 			foreach ( $terms as $_term ) {
 				$_term_name = $_term->name;
-				$_term_name = explode( ' ', $_term_name );
-				$_term_name = array_reverse( $_term_name );
-				$_term_name = implode( ', ', $_term_name );
+				$_term_name = preg_replace( '/^(.+) (.+)/', '$2, $1', $_term_name );
 
 				$_term->name = $_term_name;
 			}
@@ -33,11 +31,21 @@ if ( $terms ) {
 			}
 		}
 
+		function cmp( $a, $b ) {
+			return strcasecmp( $a['name'], $b['name'] );
+		}
+
 		foreach ( $terms as $key => $value ) {
 			// Form the terms available we are only taking the 'name' and 'ID' and doing a natural sort.
-			$_terms[ $value->term_id ] = $value->name;
-			natcasesort( $_terms );
+			$_terms[] = array(
+				'ID'    => $value->term_id ,
+				'name'  => $value->name,
+				'count' => $value->count,
+			);
+			usort( $_terms, 'cmp' );
 		}
+
+		var_dump( $_terms );
 
 		// Create an index i to compare the number in the list and check for first and last item.
 		$i = 0;
@@ -46,11 +54,11 @@ if ( $terms ) {
 		$letters = array();
 
 		// Walk through all the terms to build alphabet navigation.
-		foreach ( $_terms as $key => $value ) {
+		foreach ( $_terms as $value ) {
 			// Get term meta data.
-			$term_meta = get_term_meta( $key );
+			$term_meta = get_term_meta( $value['ID'] );
 
-			$title = ucfirst( $value );
+			$title = ucfirst( $value['name'] );
 
 			if ( 'true' === $headers ) { // Add first letter headlines for easier navigation.
 
@@ -82,7 +90,7 @@ if ( $terms ) {
 			}
 
 			// Add the entry for the term.
-			$out .= '<li><a href="' . get_term_link( $key ) . '">';
+			$out .= '<li><a href="' . get_term_link( $value['ID'] ) . '">';
 			$out .= $title;
 			$out .= '</a></li>';
 

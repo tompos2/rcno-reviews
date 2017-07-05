@@ -119,9 +119,11 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param WP_Query $query
+	 * @param object $query The default WP_Query object.
+	 *
+	 * @return  void
 	 */
-	public function rcno_review_query( WP_Query $query ) {
+	public function rcno_review_query( $query ) {
 		// Don't change query on admin page.
 		if ( is_admin() ) {
 			return;
@@ -159,11 +161,11 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param type WP_Query object.
+	 * @param object $query The default WP_Query object.
 	 *
 	 * @return void
 	 */
-	private function rcno_add_review_to_query( WP_Query $query ) {
+	private function rcno_add_review_to_query( $query ) {
 		// Add CPT to query.
 		$post_type = $query->get( 'post_type' );
 
@@ -182,7 +184,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param type array $query
+	 * @param array $query  The current WP query array.
 	 *
 	 * @return array $query
 	 */
@@ -204,7 +206,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $content
+	 * @param string $content   The default WP content.
 	 *
 	 * @return string $content
 	 */
@@ -215,7 +217,8 @@ class Rcno_Reviews_Public {
 
 		// Only render specifically if we have a review.
 		if ( 'rcno_review' === get_post_type() ) {
-			// Remove the filter
+
+			// Remove the filter.
 			remove_filter( 'the_content', array( $this, 'rcno_get_review_content' ) );
 
 			$review_post          = get_post();
@@ -245,7 +248,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $content
+	 * @param string $content The default WP content.
 	 *
 	 * @return string $content
 	 */
@@ -277,7 +280,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $review_post
+	 * @param object $review_post   The WP post object.
 	 *
 	 * @return string $content
 	 */
@@ -286,7 +289,7 @@ class Rcno_Reviews_Public {
 		$include_path = $this->rcno_get_the_layout() . 'review.php';
 
 		if ( ! file_exists( $include_path ) ) {
-			// If the layout does not provide a review template file, use the default one
+			// If the layout does not provide a review template file, use the default one.
 			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/review.php';
 		}
 
@@ -317,7 +320,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $review_post
+	 * @param object $review_post   The WP post object.
 	 *
 	 * @return string $content
 	 */

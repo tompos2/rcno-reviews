@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Render a list of all book reviews.0
+ * Render a list of all book reviews.
  */
 
 $template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 
-// Create an empty output variable
+// Create an empty output variable.
 $out = '';
 
 if ( $posts && count( $posts ) > 0 ) {
-	// Create an index i to compare the number in the list and check for first and last item
+	// Create an index i to compare the number in the list and check for first and last item.
 	$i = 0;
 
 	// Create an empty array to take with the first letters of all headlines.
@@ -18,8 +18,8 @@ if ( $posts && count( $posts ) > 0 ) {
 
 	// Walk through all the terms to build alphabet navigation.
 	foreach ( $posts as $post ) {
-		if ( $headers ) {
-			// Add first letter headlines for easier navigation.
+
+		if ( $headers ) { // Add first letter headlines for easier navigation.
 
 			// Get the first letter (without special chars).
 			$first_letter = substr( remove_accents( $post->post_title ), 0, 1 );
@@ -27,7 +27,7 @@ if ( $posts && count( $posts ) > 0 ) {
 			// Check if we've already had a headline.
 			if ( ! in_array( $first_letter, $letters, true ) ) {
 				// Close list of proceeding group.
-				if ( $i !== 0 ) {
+				if ( 0 !== $i ) {
 					$out .= '</ul>';
 				}
 				// Create a headline.
@@ -43,7 +43,7 @@ if ( $posts && count( $posts ) > 0 ) {
 			}
 		} else {
 			// Start list before first item.
-			if ( $i === 0 ) {
+			if ( 0 === $i ) {
 				$out .= '<ul class="rcno-taxlist">';
 			}
 		}
@@ -66,5 +66,5 @@ if ( $posts && count( $posts ) > 0 ) {
 	$template->the_rcno_alphabet_nav_bar( $letters );
 } else {
 	// No book reviews.
-	_e( 'There are no book reviews to display.', 'rcno-reviews' );
+	esc_html_e( 'There are no book reviews to display.', 'rcno-reviews' );
 }
