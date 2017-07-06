@@ -22,7 +22,7 @@
             };
 
             var gr_ajx_gif = $('.rcno-ajax-loading');
-            var book_isbn = $('#rcno_book_isbn').val();
+            var book_isbn = $('#rcno_book_isbn').val().trim();
             var google_url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
             var api_url = google_url + book_isbn;
 

@@ -29,13 +29,15 @@
      * practising this, we should strive to set a better example in our own work.
      */
 
-    $(window).load(function () {
+    $(function () {
+
+        // Removes hidden class on the new genre taxonomy box
         $('#rcno_genre-add-toggle').hide();
         $('#rcno_genre-add').removeClass('wp-hidden-child');
         $('#newrcno_genre').val('');
-    });
 
-    $(function () {
+
+        // Settings page up load button
         $('.rcno_reviews_settings_upload_button').click(function (e) {
             e.preventDefault();
 
@@ -53,12 +55,13 @@
                 })
                 .open();
         });
-    });
 
 
-    $(function () {
+        // Adds default WP color picker UI to settings page
         $('.rcno-color-input').wpColorPicker();
 
+
+        // Adds selectize.js support to text boxes on settings page
         $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]').selectize({
             create: true,
             plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
@@ -70,18 +73,17 @@
             plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
 
         });
-    });
 
-    $(function () {
+
+        // Adds and removes 'checked' class on review template selection
         $('.template-label-image').click(function () {
             var x = $(this);
             $('.template-label-image').removeClass('checked');
             $(x).addClass('checked');
         });
-    });
 
-    $(function () {
 
+        // Disables end user editing certain plugin options
         var author_tax = $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]');
 
         // The author taxonomy must always be enabled.
@@ -94,9 +96,8 @@
         $('#rcno_reviews_settings\\[rcno_series_hierarchical\\]').attr('disabled', true);
         //$( '#rcno_reviews_settings\\[rcno_show_isbn\\]' ).attr( 'disabled', true );
 
-    });
 
-    $(function () {
+        // Reset settings page options via AJAX. Is this necessary?
         $('.rcno-reset-button').on('click', function (e) {
             e.preventDefault();
             $.ajax({
@@ -108,8 +109,11 @@
                 }
             });
         });
+
     });
 
+
+    // Image uploader using the WP media uploader
     function renderMediaUploader() {
 
         var file_frame, image_data;

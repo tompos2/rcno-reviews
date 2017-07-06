@@ -1095,7 +1095,10 @@ class Rcno_Template_Tags {
 		$book_name    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
 		$book_isbn    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
 		$book_author  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) );
-		$author_url   = 'http://google.com'; // @TODO: Need a way to get a URL linked to the author author.
+
+		$author_terms = get_the_terms( $review_id, 'rcno_author' );
+		$book_aut_url = get_term_meta( $author_terms[0]->term_id, 'rcno_author_taxonomy_url', true );
+
 		$bk_pub_date  = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
 		$priv_score   = $this->rcno_get_review_score( $review_id );
 		$pub_rating   = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
@@ -1123,7 +1126,7 @@ class Rcno_Template_Tags {
 			'author' => array(
 				'@type'  => 'Person',
 				'name'   => $book_author,
-				'sameAs' => $author_url,
+				'sameAs' => $book_aut_url,
 			),
 			'datePublished' => date( 'c', $bk_pub_date ),
 		);
@@ -1148,7 +1151,7 @@ class Rcno_Template_Tags {
 				'worstRating'   => $pub_rating->rcno_rating_info( 'min' ),
 				'bestRating'    => $pub_rating->rcno_rating_info( 'max' ),
 				'ratingValue'   => $pub_rating->rcno_rating_info( 'avg' ),
-				'reviewCount'   => $pub_rating->rcno_rating_info( 'count' ),
+				'ratingCount'   => $pub_rating->rcno_rating_info( 'count' ),
 			);
 		}
 

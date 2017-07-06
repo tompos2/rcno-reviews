@@ -24,8 +24,6 @@
                 }
             };
 
-
-
             var review_title = $('#title');
 
             var title = $('#rcno_book_title');
@@ -45,7 +43,7 @@
 
 
             var ajx_gif = $('.rcno-ajax-loading');
-            var book_isbn = $('#rcno_book_isbn').val();
+            var book_isbn = $('#rcno_book_isbn').val().trim();
             var api_key = gr_options.api_key;
             // https://www.goodreads.com/book/isbn/0441172717?key=################
             var url = 'https://www.goodreads.com/book/isbn/' + book_isbn + '?key=' + api_key;

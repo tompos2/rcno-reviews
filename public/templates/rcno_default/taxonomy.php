@@ -45,8 +45,6 @@ if ( $terms ) {
 			usort( $_terms, 'cmp' );
 		}
 
-		var_dump( $_terms );
-
 		// Create an index i to compare the number in the list and check for first and last item.
 		$i = 0;
 
