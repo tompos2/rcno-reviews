@@ -422,7 +422,7 @@ class Rcno_Template_Tags {
 	public function the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = ', ' ) {
 		echo $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label, $sep );
 	}
-	
+
 	/**
 	 * Generates a list of all the taxonomy and terms attached to a review post.
 	 *

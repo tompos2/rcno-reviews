@@ -139,7 +139,7 @@ var rcnoListingsSc;
                 // Set open in new tab.
                 inputs.openInNewTab.prop('checked', ( '_blank' === editor.dom.getAttrib(e, 'target') ));
                 // Update save prompt.
-                inputs.submit.val(rcnoListingsScL10n.update);
+                inputs.submit.val(rcnoListingsSc.update);
 
                 // If there's no link, set the default values.
             } else {
@@ -165,10 +165,11 @@ var rcnoListingsSc;
         },
 
         update: function () {
-            if (rcnoListingsSc.isMCE())
+            if (rcnoListingsSc.isMCE()) {
                 rcnoListingsSc.mceUpdate();
-            else
+            } else {
                 rcnoListingsSc.htmlUpdate();
+            }
         },
 
         //Build the shortcode here!
