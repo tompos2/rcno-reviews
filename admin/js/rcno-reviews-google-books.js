@@ -50,13 +50,17 @@
                             book.items["0"].volumeInfo.authors["0"]
                         );
 
-                        $('#new-tag-rcno_genre').val(
-                            book.items["0"].volumeInfo.categories["0"].replace(' ', ', ')
-                        );
+                        if ( book.items["0"].volumeInfo.categories ) {
+                            $('#new-tag-rcno_genre').val(
+                                book.items["0"].volumeInfo.categories["0"].replace(' ', ', ')
+                            );
+                        }
 
-                        $('#newrcno_genre').val(
-                            book.items["0"].volumeInfo.categories["0"].replace(' ', ', ')
-                        );
+                        if ( book.items["0"].volumeInfo.categories ) {
+                            $('#newrcno_genre').val(
+                                book.items["0"].volumeInfo.categories["0"].replace(' ', ', ')
+                            );
+                        }
 
                         $('#rcno_book_publisher').val(
                             book.items["0"].volumeInfo.publisher

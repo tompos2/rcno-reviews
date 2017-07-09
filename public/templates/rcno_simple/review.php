@@ -109,3 +109,36 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 </div>
 
 <?php do_action( 'after_rcno_book_review' ); ?>
+
+<?php
+$gr = new Rcno_GoodReads_API();
+
+$book = $gr->bookByISBN( '1472235177' );
+
+function XML2JSON($xml) {
+
+	function normalizeSimpleXML($obj, &$result) {
+		$data = $obj;
+		if (is_object($data)) {
+			$data = get_object_vars($data);
+		}
+		if (is_array($data)) {
+			foreach ($data as $key => $value) {
+				$res = null;
+				normalizeSimpleXML($value, $res);
+				if (($key == '@attributes') && ($key)) {
+					$result = $res;
+				} else {
+					$result[$key] = $res;
+				}
+			}
+		} else {
+			$result = $data;
+		}
+	}
+	normalizeSimpleXML(simplexml_load_string($xml), $result);
+	return json_encode($result);
+}
+
+
+var_dump( XML2JSON($book) );

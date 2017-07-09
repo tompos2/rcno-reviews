@@ -76,7 +76,7 @@ class Rcno_Reviews {
 
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		
+
 		$this->define_taxonomy_hook();
 
 		$this->define_template_hooks();
@@ -300,6 +300,12 @@ class Rcno_Reviews {
 		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'rcno_reviews_excerpt_more', 10 );
 	}
 
+	/**
+	 * Register all of the hooks related to the taxonomy edit page.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
 	private function define_taxonomy_hook() {
 
 		$author_taxonomy = new Rcno_Author_Taxonomy_Metabox( $this->get_plugin_name(), $this->get_version() );
@@ -313,12 +319,24 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'edited_rcno_author', $author_taxonomy, 'rcno_save_author_taxonomy_metadata' );
 	}
 
+	/**
+	 * Runs the 'include_functions_file' method used to include a functions.php n our custom review templates.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
 	private function define_template_hooks() {
 
 		$template_hooks = new Rcno_Template_Tags( $this->get_plugin_name(), $this->get_version() );
 		$template_hooks->include_functions_file();
 	}
 
+	/**
+	 * Register all of the hooks related to the public-facing custom widgets.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
 	private function define_widget_hooks() {
 
 		$tag_cloud = new Rcno_Reviews_Tag_Cloud();
@@ -337,6 +355,12 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'widgets_init', $book_grid, 'rcno_register_book_grid_widget' );
 	}
 
+	/**
+	 * Register all of the hooks related to the public-facing WP REST API  functionalities.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
 	private function define_rest_hooks() {
 
 		$plugin_rest = new Rcno_Reviews_Rest_API( $this->get_plugin_name(), $this->get_version() );
@@ -348,18 +372,31 @@ class Rcno_Reviews {
 	}
 
 
+	/**
+	 * Register all of the hooks related to the external book data API.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
 	private function define_external_hooks() {
 
 		$goodreads   = new Rcno_Goodreads_API();
 		$googlebooks = new Rcno_Reviews_GoogleBooks_API( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $goodreads, 'rcno_enqueue_gr_scripts' );
-		$this->loader->add_action( 'wp_ajax_save_post_meta', $goodreads, 'gr_ajax_save_post_meta' );
+		//$this->loader->add_action( 'wp_ajax_save_post_meta', $goodreads, 'gr_ajax_save_post_meta' );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $googlebooks, 'rcno_enqueue_gb_scripts' );
 	}
 
 
+	/**
+	 * Register all of the hooks related to the shortcodes functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
 	private function define_shortcodes() {
 
 		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
@@ -378,6 +415,13 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
 	}
 
+	/**
+	 * Register all of the hooks related to the public-facing comment reviews ratings functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
 	private function define_public_ratings() {
 
 		$public_ratings = new Rcno_Reviews_Public_Rating( $this->get_plugin_name(), $this->get_version() );

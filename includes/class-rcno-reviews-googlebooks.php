@@ -52,8 +52,8 @@ class Rcno_Reviews_GoogleBooks_API {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   string $version     The version of this plugin.
 	 * @param   string $plugin_name The name of this plugin.
+	 * @param   string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -64,6 +64,15 @@ class Rcno_Reviews_GoogleBooks_API {
 	}
 
 
+	/**
+	 * Checks if we have enabled and chose Google Books as our external book API.
+	 *
+	 * @simce 1.0.0
+	 *
+	 * @param string $hook The global hook variable.
+	 *
+	 * @return void
+	 */
 	public function rcno_enqueue_gb_scripts( $hook ) {
 
 		// Disables the enqueuing of the Goodreads script on review edit screen.
@@ -73,7 +82,7 @@ class Rcno_Reviews_GoogleBooks_API {
 
 			global $post;
 
-			if ( $hook === 'post-new.php' || $hook === 'post.php' ) {
+			if ( 'post-new.php' === $hook || 'post.php' === $hook  ) {
 				if ( 'rcno_review' === $post->post_type ) {
 					wp_enqueue_script( 'googlebooks-script', plugin_dir_url( __FILE__ ) . '../admin/js/rcno-reviews-google-books.js', array( 'jquery' ), '1.0.0', true );
 					wp_localize_script( 'googlebooks-script', 'gb_options', array(
@@ -83,6 +92,5 @@ class Rcno_Reviews_GoogleBooks_API {
 			}
 		}
 	}
-
 
 }
