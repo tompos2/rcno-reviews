@@ -26,9 +26,6 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
-	 *
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct() {
 
@@ -49,13 +46,13 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'book-grid',
-			'description' => esc_html__( 'A widget to display a grid of reviewed books', 'rcno-reviews' )
+			'description' => esc_html__( 'A widget to display a grid of reviewed books', 'rcno-reviews' ),
 		);
 
 		// Set up the widget control options.
 		$this->control_options = array(
 			'width'  => 325,
-			'height' => 350
+			'height' => 350,
 		);
 
 	}
@@ -95,7 +92,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		extract( $args, EXTR_SKIP );
 
 		// If there is an error, stop and return
-		if ( isset( $instance['error'] ) && $instance['error'] ) {
+		if ( isset( $instance[ 'error' ] ) && $instance[ 'error' ] ) {
 			return;
 		}
 
@@ -104,15 +101,15 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		echo $before_widget;
 
 		// Output the title (if we have any).
-		if ( $instance['title'] ) {
-			echo $before_title . sanitize_text_field( $instance['title'] ) . $after_title;
+		if ( $instance && $instance[ 'title' ] ) {
+			echo $before_title . sanitize_text_field( $instance[ 'title' ] ) . $after_title;
 		}
 
 		// Begin frontend output.
 		$query_args = array(
 			'post_type'      => 'rcno_review',
-			'posts_per_page' => isset( $instance['review_count'] ) ? absint( $instance['review_count'] ) : 9,
-			'orderby'        => isset( $instance['order'] ) ? sanitize_text_field( $instance['order'] ) : 'date',
+			'posts_per_page' => isset( $instance[ 'review_count' ] ) ? absint( $instance[ 'review_count' ] ) : 9,
+			'orderby'        => isset( $instance[ 'order' ] ) ? sanitize_text_field( $instance[ 'order' ] ) : 'date',
 		);
 
 		$recent_books = new WP_Query( $query_args );
@@ -128,11 +125,11 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 					$review_id = get_the_ID();
 					$review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 					?>
-                    <div class="book-grid-item">
-                        <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-                            <?php $review->the_rcno_book_cover( $review_id, 'rcno-book-cover-sm' ); ?>
-                        </a>
-                    </div>
+					<div class="book-grid-item">
+						<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+							<?php $review->the_rcno_book_cover( $review_id, 'rcno-book-cover-sm' ); ?>
+						</a>
+					</div>
 
 				<?php } ?>
 			</div>
@@ -158,12 +155,12 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		//$instance = $new_instance;
 
 		// Check and sanitize all inputs.
-		$instance['title']          = strip_tags( $new_instance['title'] );
-		$instance['review_count']   = absint( $new_instance['review_count'] );
-		$instance['order']          = strip_tags( $new_instance['order'] );
+		$instance['title']        = strip_tags( $new_instance['title'] );
+		$instance['review_count'] = absint( $new_instance['review_count'] );
+		$instance['order']        = strip_tags( $new_instance['order'] );
 
 
-		// and now we return new values and wordpress do all work for you
+		// and now we return new values and wordpress do all work for you.
 		return $instance;
 	}
 
@@ -177,18 +174,18 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		global $slide_duration;
 		// Set up the default form values.
 		$defaults = array(
-			'title'          => '',
-			'review_count'   => 5,
-			'order'          => 'rand',
+			'title'        => '',
+			'review_count' => 5,
+			'order'        => 'rand',
 		);
 
 		// Merge the user-selected arguments with the defaults.
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
 		// element options.
-		$title          = sanitize_text_field( $instance['title'] );
-		$review_count   = absint( $instance['review_count'] );
-		$order          = array(
+		$title        = sanitize_text_field( $instance[ 'title' ] );
+		$review_count = absint( $instance[ 'review_count' ] );
+		$order        = array(
 			'title' => esc_attr__( 'Title', 'rcno-reviews' ),
 			'date'  => esc_attr__( 'Date', 'rcno-reviews' ),
 			'rand'  => esc_attr__( 'Random', 'rcno-reviews' ),
@@ -200,7 +197,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-			       name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
+				   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
 		</p>
 
 		<p>
@@ -208,9 +205,9 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 				<?php _e( 'Number of Reviews:', 'rcno-reviews' ); ?>
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
-			       name="<?php echo $this->get_field_name( 'review_count' ); ?>"
-			       value="<?php echo esc_attr( $review_count ); ?>"
-			       style="width:50px;" min="1" max="100" pattern="[0-9]"/>
+				   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
+				   value="<?php echo esc_attr( $review_count ); ?>"
+				   style="width:50px;" min="1" max="100" pattern="[0-9]"/>
 		</p>
 
 		<p>
@@ -218,9 +215,9 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 				<?php _e( "Order:", 'rcno-reviews' ); ?>
 			</label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
-			        name="<?php echo $this->get_field_name( 'order' ); ?>" style="width:100px">
+					name="<?php echo $this->get_field_name( 'order' ); ?>" style="width:100px">
 				<?php foreach ( $order as $option_value => $option_label ) { ?>
-					<option value="<?php echo $option_value; ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo $option_label; ?></option>
+					<option value="<?php echo $option_value; ?>" <?php selected( $instance[ 'order' ], $option_value ); ?>><?php echo $option_label; ?></option>
 				<?php } ?>
 			</select>
 		</p>
