@@ -55,7 +55,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -70,7 +70,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -85,7 +85,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -100,7 +100,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -121,7 +121,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -147,7 +147,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -193,7 +193,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -238,7 +238,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -300,7 +300,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -317,7 +317,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -343,7 +343,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -360,7 +360,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -377,7 +377,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -394,8 +394,8 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    string $type Input Type
-	 * @param    array  $args Arguments passed by the setting
+	 * @param    string $type Input Type.
+	 * @param    array  $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -421,7 +421,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -451,7 +451,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -474,13 +474,42 @@ class Rcno_Reviews_Callback_Helper {
 	}
 
 	/**
+	 * CSS Box Callback
+	 *
+	 * Renders textarea fields.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @param    array $args Arguments passed by the setting.
+	 *
+	 * @return    void
+	 */
+	public function cssbox_callback( $args ) {
+
+		$value = Rcno_Reviews_Option::get_option( $args['id'], $args['std'] );
+
+
+		$html = '<textarea ';
+		$html .= 'class="rcno-css-box"';
+		$html .= 'cols="100" rows="10" ';
+		$html .= $this->get_id_and_name_attributes( $args['id'] ) . '>';
+		$html .= esc_textarea( stripslashes( $value ) );
+		$html .= '</textarea>';
+
+		$html .= '<br />';
+		$html .= $this->get_label_for( $args['id'], $args['desc'] );
+
+		echo $html;
+	}
+
+	/**
 	 * Select Callback
 	 *
 	 * Renders select fields.
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $args Arguments passed by the setting
+	 * @param    array $args Arguments passed by the setting.
 	 *
 	 * @return    void
 	 */
@@ -509,7 +538,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param   array   $args        Arguments passed by the setting
+	 * @param   array   $args        Arguments passed by the setting.
 	 *
 	 * @global  int     $wp_version  WordPress version number
 	 */
@@ -540,7 +569,7 @@ class Rcno_Reviews_Callback_Helper {
 	 *
 	 * @since   1.0.0
 	 *
-	 * @param   array $args Arguments passed by the setting
+	 * @param   array $args Arguments passed by the setting.
 	 *
 	 * @return  void
 	 */

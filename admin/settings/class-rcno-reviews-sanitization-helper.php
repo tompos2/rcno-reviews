@@ -46,6 +46,7 @@ class Rcno_Reviews_Sanitization_Helper {
 		add_filter( 'rcno_reviews_settings_sanitize_email', array( $this, 'sanitize_email_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_checkbox', array( $this, 'sanitize_checkbox_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_url', array( $this, 'sanitize_url_field' ) );
+		add_filter( 'rcno_reviews_settings_sanitize_cssbox', array( $this, 'sanitize_cssbox_field' ) );
 	}
 
 	/**
@@ -66,7 +67,7 @@ class Rcno_Reviews_Sanitization_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $input The value inputted in the field
+	 * @param    array $input The value inputted in the field.
 	 *
 	 * @return    mixed        $input        Sanitizied value
 	 */
@@ -79,15 +80,15 @@ class Rcno_Reviews_Sanitization_Helper {
 		parse_str( $_POST['_wp_http_referer'], $referrer );
 		$tab = isset( $referrer['tab'] ) ? $referrer['tab'] : Rcno_Reviews_Settings_Definition::get_default_tab_slug();
 
-		// Tab filter
+		// Tab filter.
 		$input = apply_filters( 'rcno_reviews_settings_sanitize_' . $tab, $input );
 
-		// Trigger action hook for general settings update for $tab
+		// Trigger action hook for general settings update for $tab.
 		$this->do_settings_on_change_hook( $input, $tab );
 
-		// Loop through each setting being saved and pass it through a sanitization filter
+		// Loop through each setting being saved and pass it through a sanitization filter.
 		foreach ( $input as $key => $value ) {
-			$new_value     = $value; // set value of $value in $new_value
+			$new_value     = $value; // set value of $value in $new_value.
 			$input[ $key ] = $this->apply_type_filter( $input, $tab, $key );
 			$input[ $key ] = $this->apply_general_filter( $input, $key );
 			$this->do_settings_on_key_change_hook( $key, $new_value );
@@ -101,7 +102,7 @@ class Rcno_Reviews_Sanitization_Helper {
 
 	private function apply_type_filter( $input, $tab, $key ) {
 
-		// Get the setting type (checkbox, select, etc)
+		// Get the setting type (checkbox, select, etc).
 		$type = isset( $this->registered_settings[ $tab ][ $key ]['type'] ) ? $this->registered_settings[ $tab ][ $key ]['type'] : false;
 
 		if ( false === $type ) {
@@ -116,11 +117,11 @@ class Rcno_Reviews_Sanitization_Helper {
 		return apply_filters( 'rcno_reviews_settings_sanitize', $input[ $key ], $key );
 	}
 
-	// Key specific on change hook
+	// Key specific on change hook.
 	private function do_settings_on_key_change_hook( $key, $new_value ) {
 
 		$old_plugin_settings = get_option( 'rcno_reviews_settings' );
-		//checks if value is saved already in $old_plugin_settings
+		//checks if value is saved already in $old_plugin_settings.
 		if ( isset( $old_plugin_settings[ $key ] ) && $old_plugin_settings[ $key ] !== $new_value ) {
 
 			do_action( 'rcno_reviews_settings_on_change_' . $key, $new_value, $old_plugin_settings[ $key ] );
@@ -128,7 +129,7 @@ class Rcno_Reviews_Sanitization_Helper {
 		}
 	}
 
-	// Tab specific on change hook (only if a value has changed)
+	// Tab specific on change hook (only if a value has changed).
 	private function do_settings_on_change_hook( $new_values, $tab ) {
 
 		$old_plugin_settings = get_option( 'rcno_reviews_settings' );
@@ -152,7 +153,7 @@ class Rcno_Reviews_Sanitization_Helper {
 		return ( ! empty( $var ) || '0' == $var );
 	}
 
-	// Loop through the whitelist and unset any that are empty for the tab being saved
+	// Loop through the whitelist and unset any that are empty for the tab being saved.
 	private function get_output( $tab, $input ) {
 
 		$old_plugin_settings = get_option( 'rcno_reviews_settings' );
@@ -161,7 +162,7 @@ class Rcno_Reviews_Sanitization_Helper {
 			$old_plugin_settings = array();
 		}
 
-		// Remove empty elements
+		// Remove empty elements.
 		$input = array_filter( $input, array( $this, 'not_empty_or_zero' ) );
 		foreach ( $this->registered_settings[ $tab ] as $key => $_value ) {
 
@@ -182,7 +183,7 @@ class Rcno_Reviews_Sanitization_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $input The field value
+	 * @param    array $input The field value.
 	 *
 	 * @return    string        $input        Sanitized value
 	 */
@@ -196,7 +197,7 @@ class Rcno_Reviews_Sanitization_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $input The field value
+	 * @param    array $input The field value.
 	 *
 	 * @return    string    $sanitizes_email    Sanitizied email, return empty string if not is_email()
 	 */
@@ -217,7 +218,7 @@ class Rcno_Reviews_Sanitization_Helper {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param    array $input The field value
+	 * @param    array $input The field value.
 	 *
 	 * @return    string        $input        '1' if true, empty string otherwise
 	 */
@@ -238,7 +239,7 @@ class Rcno_Reviews_Sanitization_Helper {
 			'ON',
 		);
 
-		// String
+		// String.
 		if ( is_string( $input ) ) {
 
 			$input = trim( $input );
@@ -248,17 +249,17 @@ class Rcno_Reviews_Sanitization_Helper {
 			}
 		}
 
-		// Boolean
+		// Boolean.
 		if ( is_bool( $input ) && $input ) {
 			return '1';
 		}
 
-		// Integer
+		// Integer.
 		if ( is_int( $input ) && 1 === $input ) {
 			return '1';
 		}
 
-		// Float
+		// Float.
 		if ( is_float( $input ) && ! is_nan( $input ) && (float) 1 === $input ) {
 			return '1';
 		}
@@ -283,4 +284,37 @@ class Rcno_Reviews_Sanitization_Helper {
 		return esc_url_raw( sanitize_text_field( rawurldecode( $input ) ), $allowed_protocols );
 
 	}
+
+	/**
+	 * Sanitize user provided CSS using the CSSTidy library
+	 *
+	 * @see https://wordpress.stackexchange.com/questions/53970/sanitize-user-entered-css.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @param    string $input The user provided option being saved.
+	 *
+	 * @return    string        Parsed and sanitized CSS string.
+	 */
+	public function sanitize_cssbox_field( $input ) {
+
+		require 'class-rcno-reviews-css-tidy.php';
+
+		$csstidy = new csstidy();
+		$csstidy->set_cfg( 'remove_bslash', false );
+		$csstidy->set_cfg( 'compress_colors', false );
+		$csstidy->set_cfg( 'compress_font-weight', false );
+		$csstidy->set_cfg( 'discard_invalid_properties', true );
+		$csstidy->set_cfg( 'merge_selectors', false );
+		$csstidy->set_cfg( 'remove_last_;', false );
+		$csstidy->set_cfg( 'css_level', 'CSS3.0' );
+		$csstidy->set_cfg( 'template', dirname( __FILE__ ) . '/csstidy/wordpress-standard.tpl' );
+		$input = preg_replace( '/\\\\([0-9a-fA-F]{4})/', '\\\\\\\\$1', $input );
+		$input = wp_kses_split( $input, array(), array() );
+		$csstidy->parse( $input );
+		$input = $csstidy->print->plain();
+
+		return $input;
+	}
+
 }

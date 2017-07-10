@@ -1,6 +1,6 @@
 === Recencio Book Reviews ===
 Donate link: https://wzymedia.com
-Tags: book-reviews, reviews
+Tags: book-reviews, reviews, book-library,
 Requires at least: 3.0.1
 Tested up to: 4.8
 Stable tag: trunk
@@ -29,18 +29,19 @@ And, all of the above is SEO friendly by way of validated JSON+LD metadata for t
 * custom post type for book reviews
 * automatically fetch book details via its ISBN, or enter manually
 * custom backend to enter book reviews fast
-* your choice of a 5 star rating or a review criteria scoring system
+* your choice of a 5 star rating or a criteria-based scoring system
 * builtin book taxonomies such as, Author, Genre, Series and Publisher come predefined, but you can create whatever taxonomy you like.
 * use default post categories and tags on book reviews as well, or disable them if you want to
-* access reviews by alphabetical indices of title or any taxonomy term
+* access reviews by alphabetical indices of review title or taxonomy entries such as book author or book publisher
 * include book reviews in your normal posts or pages using shortcodes
 * search engine friendly book review output using schema.org‘s review and book metadata as JSON-LD
-* choose between different templates to determine how your book review should look or create your own custom layout
+* choose between 4 different templates to determine how your book review should look or create your own custom layout
 + 5 custom widgets such as a book cover slider and book cover grid
 * site visitor rating system via the builtin comment form, or disable it if you want to
 * basic support of the new WP REST API system
 * have you book reviews show up in your site's RSS feed
 * create book purchase links using your own affiliate code
+* translation ready
 
 == Installation ==
 

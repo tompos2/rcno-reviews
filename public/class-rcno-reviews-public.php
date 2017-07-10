@@ -103,11 +103,13 @@ class Rcno_Reviews_Public {
 		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 
 			$star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
+			$usr_custom_css = Rcno_Reviews_Option::get_option( 'rcno_custom_styling', '' );
 			$custom_css = '
 				.rcno-admin-rating span {
 				    color: ' . $star_color . '
 				}
 			';
+			$custom_css = $custom_css . $usr_custom_css;
 
 			wp_add_inline_style( $this->plugin_name, $custom_css );
 		}

@@ -563,6 +563,20 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '',
 					'type' => 'spacer',
 				),
+				 // Custom stylesheet.
+				'templates_tab_header_1'  => array(
+					'name' => '<strong>' . __( 'Reviews Custom Styling', 'rcno-reviews' ) . '</strong>',
+					'type' => 'header',
+				),
+				'rcno_custom_styling'                   => array(
+					'name' => __( 'Custom styles', 'rcno-reviews' ),
+					'desc' => __( 'Add your custom CSS here to fine-tune the look of your book reviews', 'rcno-reviews' ),
+					'type' => 'cssbox',
+				),
+				'spacer-9'                => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
 
 			),
 			'advanced_tab'   => array(
