@@ -716,6 +716,7 @@ class Rcno_Template_Tags {
 
 		$links_label = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links_label' );
 		$background  = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_background' );
+		$txt_color   = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_text_color' );
 		$_stores     = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links' );
 		$_stores     = explode( ',', $_stores );
 
@@ -733,7 +734,7 @@ class Rcno_Template_Tags {
 
 		foreach ( $purchase_links as $value ) {
 			$links .= '<a href="' . esc_url( $value['link'] ) . '" class="rcno-purchase-links '
-			          . sanitize_html_class( $value['store'] ) . '"' . ' style="background:' . $background . '" rel="nofollow"' . ' >';
+			          . sanitize_html_class( $value['store'] ) . '"' . ' style="background:' . $background . '; color:' . $txt_color . '"' . 'rel="nofollow"' . ' >';
 			$links .= esc_html( $stores[ $value['store'] ] );
 			$links .= '</a> ';
 		}

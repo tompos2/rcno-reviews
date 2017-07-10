@@ -1,61 +1,58 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
+=== Recencio Book Reviews ===
 Donate link: https://wzymedia.com
-Tags: comments, spam
+Tags: book-reviews, reviews
 Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+Tested up to: 4.8
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Recencio Book Reviews is a powerful and very flexible tool to manage your blog’s book review collection. It was designed with the book reviewer in mind and created for easy
+and fast usage.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Recencio Book Reviews is a powerful and very flexible tool to manage your blog’s book review collection. It was designed with the book reviewer in mind and created for easy
+and fast usage. The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
+The basically adds a post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
+Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. As creating new book taxonomies is easy it’s up to
+you which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
+the custom widgets to create tag clouds or top ten lists.
+Of course you can use all the WordPress goodies you know from posts on book reviews as well: images, videos and comments.
+Despite it’s simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t
+need can be deactivated and are hidden from the UI. You can even create your own book review template files to gain complete control the look and feel of book reviews.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+And, all of the above is SEO friendly by way of validated JSON+LD metadata for the 'Book' and 'Review' schema markup.
 
-A few notes about the sections above:
+**Features**
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
-
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+* custom post type for book reviews
+* automatically fetch book details via its ISBN, or enter manually
+* custom backend to enter book reviews fast
+* your choice of a 5 star rating or a review criteria scoring system
+* builtin book taxonomies such as, Author, Genre, Series and Publisher come predefined, but you can create whatever taxonomy you like.
+* use default post categories and tags on book reviews as well, or disable them if you want to
+* access reviews by alphabetical indices of title or any taxonomy term
+* include book reviews in your normal posts or pages using shortcodes
+* search engine friendly book review output using schema.org‘s review and book metadata as JSON-LD
+* choose between different templates to determine how your book review should look or create your own custom layout
++ 5 custom widgets such as a book cover slider and book cover grid
+* site visitor rating system via the builtin comment form, or disable it if you want to
+* basic support of the new WP REST API system
+* have you book reviews show up in your site's RSS feed
+* create book purchase links using your own affiliate code
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `rcno-reviews.php` to the `/wp-content/plugins/` directory
+1. Upload `rcno-reviews` folder to your website's `/wp-content/plugins/` folder
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Add new book reviews via the new 'Reviews' option on your site's admin menu
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= I am getting a 404 page when I visit a book review =
 
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+Try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.
 
 == Screenshots ==
 
@@ -67,48 +64,5 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+= 1.0.0 =
+* Initial plugin release.

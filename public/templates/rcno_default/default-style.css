@@ -179,6 +179,15 @@
     bottom: 0;
 }
 
+.rcno-purchase-links-container {
+    margin: 0 0 1em 0;
+    text-align: right;
+}
+
+.rcno-purchase-links-container a {
+    padding: 5px;
+}
+
 ul.rcno-alphabet-navigation {
     list-style: none;
     display: flex;
