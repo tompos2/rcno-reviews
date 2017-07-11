@@ -325,8 +325,8 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'checkbox',
 				),
 				'rcno_show_gr_url'                      => array(
-					'name' => __( 'Goodreads URL', 'rcno-reviews' ),
-					'desc' => __( 'Show the Goodreads book URL field for book reviews?', 'rcno-reviews' ),
+					'name' => __( 'Book URL', 'rcno-reviews' ),
+					'desc' => __( 'Show the book\'s URL field for book reviews?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_illustrator'                 => array(
@@ -376,13 +376,13 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'rcno_store_purchase_links_label'       => array(
 					'name' => __( 'Links Label', 'rcno-reviews' ),
-					'desc' => __( 'Enter the name of stores to purchase books from.', 'rcno-reviews' ),
+					'desc' => __( 'Enter the label shown before purchase links.', 'rcno-reviews' ),
 					'std'  => 'Purchase on: ',
 					'type' => 'text',
 				),
 				'rcno_store_purchase_links'             => array(
 					'name' => __( 'Store/Shop', 'rcno-reviews' ),
-					'desc' => __( 'Enter the label shown before purchase links.', 'rcno-reviews' ),
+					'desc' => __( 'Enter the name of stores to purchase books from.', 'rcno-reviews' ),
 					'std'  => 'Amazon,Barnes & Noble,Kobo',
 					'type' => 'text',
 				),

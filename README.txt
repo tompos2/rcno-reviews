@@ -24,9 +24,10 @@ need can be deactivated and are hidden from the UI. You can even create your own
 
 And, all of the above is SEO friendly by way of validated JSON+LD metadata for the 'Book' and 'Review' schema markup.
 
-**Features**
+** Features **
 
 * custom post type for book reviews
+* 100% WordPress theme compatibility
 * automatically fetch book details via its ISBN, or enter manually
 * custom backend to enter book reviews fast
 * your choice of a 5 star rating or a criteria-based scoring system
@@ -34,13 +35,14 @@ And, all of the above is SEO friendly by way of validated JSON+LD metadata for t
 * use default post categories and tags on book reviews as well, or disable them if you want to
 * access reviews by alphabetical indices of review title or taxonomy entries such as book author or book publisher
 * include book reviews in your normal posts or pages using shortcodes
-* search engine friendly book review output using schema.org‘s review and book metadata as JSON-LD
+* search engine friendly book review output using schema.org‘s review and book metadata as JSON+LD
 * choose between 4 different templates to determine how your book review should look or create your own custom layout
 + 5 custom widgets such as a book cover slider and book cover grid
 * site visitor rating system via the builtin comment form, or disable it if you want to
 * basic support of the new WP REST API system
 * have you book reviews show up in your site's RSS feed
 * create book purchase links using your own affiliate code
+* have your site visitors/reader leave a 5 rating via the comment form
 * translation ready
 
 == Installation ==
@@ -55,13 +57,21 @@ And, all of the above is SEO friendly by way of validated JSON+LD metadata for t
 
 Try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.
 
+= How can I get support for this plugin =
+
+Please open a new topic on the plugin's WordPress.org support page
+
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Choose from a choice of 4 builtin book review templates, or create your own inside your current theme
+2. Enable or disable the user comment rating feature. Also an option to disable each custom widget
+3. Remove or add your own list of stores to purchase books from
+4. New book review admin page
+5. Custom WordPress widgets
+6. Book authors index page
+7. Book reviews index page
+8. Book review post using the default template
+9. Book review post showing the criteria-based review score box
 
 == Changelog ==
 
