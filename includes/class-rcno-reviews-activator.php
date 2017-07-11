@@ -42,11 +42,7 @@ class Rcno_Reviews_Activator {
 			'rcno_reviews_archive'     => 'archive_display_excerpt',
 			'rcno_reviews_on_homepage' => '1',
 			'rcno_reviews_in_rss'      => '1',
-			'rcno_taxonomy_selection'  => array(
-				'author' => 'Author',
-				'genre'  => 'Genre',
-				'series' => 'Series',
-			),
+			'rcno_taxonomy_selection'  => 'Author,Genre,Series,Publisher',
 			'rcno_author_slug'         => 'author',
 			'rcno_author_show'         => '1',
 			'rcno_genre_slug'          => 'genre',

@@ -3,7 +3,7 @@ Donate link: https://wzymedia.com
 Tags: book-reviews, reviews, book-library,
 Requires at least: 3.0.1
 Tested up to: 4.8
-Stable tag: trunk
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
