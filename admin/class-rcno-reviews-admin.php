@@ -169,12 +169,12 @@ class Rcno_Reviews_Admin {
 
 		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 
-			$star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
+			// $star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
+			$star_color = '#ffd700'; // This is fixed and not affected by user settings.
 			$custom_css = '
 				#rcno_book_review_rating_metabox .rcno-rate > input:checked ~ label {
 				    color: ' . $star_color . '
 				}
-				
 				#rcno_book_review_rating_metabox .rcno-rate input[type=radio]:checked + label:before {
 				    color: ' . $star_color . '
 				}

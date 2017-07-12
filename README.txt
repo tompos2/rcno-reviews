@@ -77,3 +77,6 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.0.0 =
 * Initial plugin release.
+
+= 1.0.1 =
+* Fixed an issue with white color stars on a white background on initial install.
