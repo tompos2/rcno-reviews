@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Recencio Book Reviews
  * Plugin URI:        https://recencio.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.1
+ * Description:       A powerful and very flexible tool to manage your blog’s book review collection. Designed with the book reviewer in mind.
+ * Version:           1.0.2
  * Author:            wzyMedia
  * Author URI:        https://wzymedia.com
  * License:           GPL-2.0+
@@ -29,6 +29,10 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+// Define our constants.
+define( 'RCNO_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'RCNO_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.

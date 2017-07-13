@@ -16,7 +16,7 @@ class Rcno_Reviews_Get_Templates {
 	public function get_layouts_list() {
 
 		// First create a list of all globally available layouts.
-		$dir_name = WP_PLUGIN_DIR . '/rcno-reviews/public/templates/';
+		$dir_name = RCNO_PLUGIN_PATH . '/public/templates/';
 
 		$this->add_layout_to_list( $dir_name );
 
@@ -33,7 +33,7 @@ class Rcno_Reviews_Get_Templates {
 				while ( false !== ( $file = readdir( $handle ) ) ) {
 					if ( $file !== '.' && $file !== '..' && $file !== '.svn' ) {
 						if ( preg_match( "/plugin/", $dir_name ) ) {
-							$base_url = plugins_url() . '/' . 'rcno-reviews' . '/public/templates/' . $file;
+							$base_url = RCNO_PLUGIN_URI . 'public/templates/' . $file;
 							$local    = false;
 						} else {
 							$base_url = get_template_directory_uri() . '/rcno-templates/' . $file;

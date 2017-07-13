@@ -1,9 +1,9 @@
 === Recencio Book Reviews ===
 Donate link: https://wzymedia.com
-Tags: book-reviews, reviews, book-library,
+Tags: book-reviews, reviews, book-library, book-rating, 5 star rating, review criteria
 Requires at least: 3.0.1
 Tested up to: 4.8
-Stable tag: 1.0.0
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ need can be deactivated and are hidden from the UI. You can even create your own
 
 And, all of the above is SEO friendly by way of validated JSON+LD metadata for the 'Book' and 'Review' schema markup.
 
-** Features **
+= Features =
 
 * custom post type for book reviews
 * 100% WordPress theme compatibility
@@ -37,7 +37,7 @@ And, all of the above is SEO friendly by way of validated JSON+LD metadata for t
 * include book reviews in your normal posts or pages using shortcodes
 * search engine friendly book review output using schema.org‘s review and book metadata as JSON+LD
 * choose between 4 different templates to determine how your book review should look or create your own custom layout
-+ 5 custom widgets such as a book cover slider and book cover grid
+* 5 custom widgets such as a book cover slider and book cover grid
 * site visitor rating system via the builtin comment form, or disable it if you want to
 * basic support of the new WP REST API system
 * have you book reviews show up in your site's RSS feed
@@ -80,3 +80,6 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.0.1 =
 * Fixed an issue with white color stars on a white background on initial install.
+
+= 1.0.2 =
+* Fixed an issue where templates stop working before plugin folder name got changed.
