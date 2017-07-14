@@ -206,10 +206,8 @@ class Rcno_Reviews_Admin {
 	 * @uses     wp_enqueue_style()
 	 * @uses     wp_enqueue_script()
 	 * @uses     wp_localize_script()
-	 *
-	 * @param $hook
 	 */
-	public function enqueue_scripts( $hook ) {
+	public function enqueue_scripts() {
 		global $post;
 
 		/**

@@ -1,6 +1,6 @@
 === Recencio Book Reviews ===
 Donate link: https://wzymedia.com
-Tags: book-reviews, reviews, book-library, book-rating, 5 star rating, review criteria
+Tags: book-reviews, reviews, book library, book ratings, 5 star rating, book reviews
 Requires at least: 3.0.1
 Tested up to: 4.8
 Stable tag: trunk
@@ -14,7 +14,7 @@ and fast usage.
 
 Recencio Book Reviews is a powerful and very flexible tool to manage your blog’s book review collection. It was designed with the book reviewer in mind and created for easy
 and fast usage. The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
-The basically adds a post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
+This plugin basically adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
 Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. As creating new book taxonomies is easy it’s up to
 you which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
 the custom widgets to create tag clouds or top ten lists.
