@@ -1100,6 +1100,10 @@ class Rcno_Template_Tags {
 		$author_terms = get_the_terms( $review_id, 'rcno_author' );
 		$book_aut_url = get_term_meta( $author_terms[0]->term_id, 'rcno_author_taxonomy_url', true );
 
+		if ( '' === $book_aut_url ) {
+			$book_aut_url = 'https://www.goodreads.com/book/author/' . str_replace( ' ', '+', $book_author );
+		}
+
 		$bk_pub_date  = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
 		$priv_score   = $this->rcno_get_review_score( $review_id );
 		$pub_rating   = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );

@@ -29,7 +29,14 @@ class Rcno_Reviews_Rest_API {
 	 */
 	private $template;
 
-
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version     The version of this plugin.
+	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
@@ -54,6 +61,13 @@ class Rcno_Reviews_Rest_API {
 		$this->rcno_reviews_taxonomy_rest_support();
 	}
 
+	/**
+	 * Creates an instance of the Rcno_Template_Tags object and assigns to a class property
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
 	public function get_template_tags() {
 		$this->template = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 	}
@@ -86,7 +100,7 @@ class Rcno_Reviews_Rest_API {
 	public function rcno_reviews_taxonomy_rest_support() {
 		global $wp_taxonomies;
 
-		$taxonomies = explode( ",", Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
+		$taxonomies = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
 		$tax_name   = array();
 
 		foreach ( $taxonomies as $tax ) {
@@ -103,6 +117,15 @@ class Rcno_Reviews_Rest_API {
 	}
 
 
+	/**
+	 * Registers REST fields for our custom meta fields.
+	 *
+	 * @since '1.0.0
+	 *
+	 * @uses 'register_rest_field'
+	 *
+	 * @return void
+	 */
 	public function rcno_register_rest_fields() {
 
 		register_rest_field( 'rcno_review', 'book_ISBN', array(
@@ -163,7 +186,7 @@ class Rcno_Reviews_Rest_API {
 
 		register_rest_field( 'rcno_review', 'book_publisher', array(
 			'get_callback'    => function ( $object ) {
-				return get_post_meta( $object['id'], 'rcno_book_publisher', true );
+				return wp_strip_all_tags( $this->template->get_the_rcno_taxonomy_terms( $object['id'], 'rcno_publisher', false, ', ' ) );
 			},
 			'update_callback' => 'null',
 			'schema'          => null,
@@ -171,15 +194,7 @@ class Rcno_Reviews_Rest_API {
 
 		register_rest_field( 'rcno_review', 'book_published_date', array(
 			'get_callback'    => function ( $object ) {
-				return get_post_meta( $object['id'], 'rcno_book_pub_date', true );
-			},
-			'update_callback' => 'null',
-			'schema'          => null,
-		) );
-
-		register_rest_field( 'rcno_review', 'book_published_date', array(
-			'get_callback'    => function ( $object ) {
-				return get_post_meta( $object['id'], 'rcno_book_pub_date', true );
+				return date( 'c', strtotime( get_post_meta( $object['id'], 'rcno_book_pub_date', true ) ) );
 			},
 			'update_callback' => 'null',
 			'schema'          => null,

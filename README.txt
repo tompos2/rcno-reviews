@@ -1,6 +1,7 @@
 === Recencio Book Reviews ===
+Contributors: Kemory Grubb
 Donate link: https://wzymedia.com
-Tags: book-reviews, reviews, book library, book ratings, 5 star rating, book reviews
+Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
 Tested up to: 4.8
 Stable tag: trunk
@@ -83,3 +84,7 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.0.2 =
 * Fixed an issue where templates stop working before plugin folder name got changed.
+
+= 1.0.3 =
+* Generate a book author's URL if one is not provided by site owner
+* Cleaned up the 'Rcno_Reviews_Rest_API' class
