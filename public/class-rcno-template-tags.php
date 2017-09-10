@@ -1055,6 +1055,8 @@ class Rcno_Template_Tags {
 				'numberOfPages' => (int) $book_pc,
 		);
 
+		$data = apply_filters( 'rcno_book_schema_data_filter', $data );
+
 		return wp_json_encode( $data );
 	}
 
@@ -1159,6 +1161,8 @@ class Rcno_Template_Tags {
 				'ratingCount'   => $pub_rating->rcno_rating_info( 'count' ),
 			);
 		}
+
+		$data = apply_filters( 'rcno_review_schema_data_filter', $data );
 
 		return wp_json_encode( $data );
 	}
