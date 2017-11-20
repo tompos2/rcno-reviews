@@ -1099,8 +1099,11 @@ class Rcno_Template_Tags {
 		$book_isbn    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
 		$book_author  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) );
 
+		$book_aut_url = '';
 		$author_terms = get_the_terms( $review_id, 'rcno_author' );
-		$book_aut_url = get_term_meta( $author_terms[0]->term_id, 'rcno_author_taxonomy_url', true );
+		if ( $author_terms && ! is_wp_error( $author_terms ) ) {
+			$book_aut_url = get_term_meta( $author_terms[0]->term_id, 'rcno_author_taxonomy_url', true );
+		}
 
 		if ( '' === $book_aut_url ) {
 			$book_aut_url = 'https://www.goodreads.com/book/author/' . str_replace( ' ', '+', $book_author );
@@ -1246,9 +1249,8 @@ class Rcno_Template_Tags {
 	public function is_review_embedded() {
 		if ( 'rcno_review' !== get_post_type() ) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 }
