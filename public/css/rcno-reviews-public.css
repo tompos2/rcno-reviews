@@ -7,6 +7,8 @@
     margin: 0 0 20px 0;
     width: 100%;
     overflow: hidden;
+    display: flex;
+    align-items: left;
 }
 
 .rcno-recent-review h3 {
@@ -19,6 +21,7 @@
 .rcno-recent-review .widget-book-details {
     float: right;
     width: 70%;
+    flex: 1 1 70%;
 }
 
 .rcno-recent-review .widget-book-details p {
@@ -27,21 +30,23 @@
 }
 
 .rcno-recent-review .widget-book-cover {
-    width: 26%;
+    width: 25%;
     display: inline-block;
     position: relative;
     margin: 0 10px 0 0;
+    flex: 1 1 25%;
 }
 
 .rcno-recent-review .widget-book-cover .rcno-admin-rating {
     position: absolute;
-    bottom: 3px;
+    bottom: 0;
     text-align: center;
     width: 100%;
 }
 
 .rcno-recent-review .widget-book-cover .rcno-admin-rating span {
-    font-size: 18px;
+    font-size: 1em;
+    line-height: 1;
 }
 
 .rcno-recent-review .widget-book-details p {

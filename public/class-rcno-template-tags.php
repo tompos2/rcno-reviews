@@ -123,6 +123,8 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_full_book_details( $review_id, $size = 'medium' ) {
 		$review = get_post_custom( $review_id );
 
+		$taxonomies = get_post_taxonomies( $review_id );
+
 		$out = '';
 		$out .= '<div class="rcno-full-book">';
 		$out .= '<div class="rcno-full-book-cover">';
@@ -131,17 +133,14 @@ class Rcno_Template_Tags {
 		$out .= '</div>';
 
 		$out .= '<div class="rcno-full-book-details">';
-		$out .= '<div class="col-1">';
-		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', true );
-		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', true );
-		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_series', true );
-		$out .= '</div>';
 
-		$out .= '<div class="col-2">';
-		$out .= $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher', true );
+		foreach ( $taxonomies as $taxonomy ) {
+			$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true );
+		}
+
 		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'div', true );
 		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', 'div', true );
-		$out .= '</div>';
+
 		$out .= '</div>';
 
 		$out .= '<div class="rcno-full-book-description">';
@@ -201,25 +200,25 @@ class Rcno_Template_Tags {
 							</div>';
 					break;
 
-				case 4;
+				case 4:
 					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
 							</div>';
 					break;
 
-				case 3;
+				case 3:
 					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
-				case 2;
+				case 2:
 					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';
 					break;
 
-				case 1;
+				case 1:
 					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
 							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 							</div>';

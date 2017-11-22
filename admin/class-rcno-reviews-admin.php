@@ -424,6 +424,7 @@ class Rcno_Reviews_Admin {
 
 			register_taxonomy( $tax_name, 'rcno_review', $opts );
 
+			flush_rewrite_rules();
 		}
 	}
 

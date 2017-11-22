@@ -669,7 +669,7 @@ class Rcno_Reviews_Settings_Definition {
 			'rcno_' . $tax . '_slug'         => array(
 				'name' => __( 'Slug', 'rcno-reviews' ),
 				'desc' => __( 'Place the slug of the ' . $tax . ' taxonomy here.', 'rcno-reviews' ),
-				'std'  => $tax,
+				'std'  => strtolower( $tax ),
 				'type' => 'text',
 			),
 			'rcno_' . $tax . '_hierarchical' => array(

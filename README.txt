@@ -3,7 +3,7 @@ Contributors: Kemory Grubb
 Donate link: https://wzymedia.com
 Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -88,3 +88,13 @@ Please open a new topic on the plugin's WordPress.org support page
 = 1.0.3 =
 * Generate a book author's URL if one is not provided by site owner
 * Cleaned up the 'Rcno_Reviews_Rest_API' class
+
+= 1.0.5 =
+* fixed an error when fetching a taxonomy with an error, updated to v1.0.5
+
+= 1.0.6 =
+* Moved flush rewrite rule function to better handle plugin activation.
+* Added flush rewrite rule function to run on plugin deactivation.
+* Better handle taxonomy slugs.
+* Better handle multiple user added taxonomies.
+* Adjusted the styling of the recent book review widget

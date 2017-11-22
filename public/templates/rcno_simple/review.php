@@ -66,8 +66,8 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 				$template->the_rcno_taxonomy_terms( $review_id, 'rcno_author', true );
 				$template->the_rcno_taxonomy_terms( $review_id, 'rcno_genre', true );
 				$template->the_rcno_taxonomy_terms( $review_id, 'rcno_series', true );
+				$template->the_rcno_taxonomy_terms( $review_id, 'rcno_publisher', true );
 
-				$template->the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'p', true );
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'p', true );
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_pub_format', 'p', true );
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_isbn', 'p', true );
