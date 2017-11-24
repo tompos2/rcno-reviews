@@ -98,3 +98,6 @@ Please open a new topic on the plugin's WordPress.org support page
 * Better handle taxonomy slugs.
 * Better handle multiple user added taxonomies.
 * Adjusted the styling of the recent book review widget
+
+= 1.0.7 =
+* Fixed issue with comments not showing when comment ratings is disabled.

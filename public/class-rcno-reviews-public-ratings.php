@@ -502,7 +502,7 @@ class Rcno_Reviews_Public_Rating {
 			return $out;
 		}
 
-		return false;
+		return $content;
 	}
 
 }
