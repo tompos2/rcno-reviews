@@ -231,7 +231,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		wp_enqueue_script( 'rcno_ajax_scr', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scr.js', array( 'jquery' ) );
+		wp_enqueue_script( 'rcno_ajax_scr', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scr.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( 'rcno_ajax_scr', 'rcno_vars', array(
 				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)
@@ -338,7 +338,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scl.js', array( 'jquery' ) );
+		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scl.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( 'rcno_ajax_scl', 'rcno_vars', array(
 				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)

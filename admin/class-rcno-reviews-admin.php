@@ -231,8 +231,8 @@ class Rcno_Reviews_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array(
 			'jquery',
 			'wp-color-picker',
-		), $this->version, false );
-		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', false );
+		), $this->version, true );
+		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', true );
 
 		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
 			'reviewID'         => ( null !== $post ) ? $post->ID : '',
@@ -922,7 +922,6 @@ SQL;
 			'rcno_excerpt_read_more' => 'Read more',
 			'rcno_excerpt_word_count' => '55',
 			'rcno_reviews_in_rest' => '1',
-			'rcno_publisher_slug' => 'Publisher',
 			'rcno_publisher_show' => '1',
 			'rcno_show_illustrator' => '1',
 			'rcno_store_purchase_links_label' => 'Purchase on:',
