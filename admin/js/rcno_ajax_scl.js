@@ -53,7 +53,6 @@ var rcnoListingsSc;
 
             /* Button to open the modal dialog */
             $('body').on('click', '#rcno-add-listings-button', function (event) {
-                console.log('Listings');
                 editor_id = jQuery('#rcno-add-listings-button').attr("data_editor");
                 window.rcnoListingsSc.open(editor_id);
             });

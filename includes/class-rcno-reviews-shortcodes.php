@@ -46,8 +46,6 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @param      string $plugin_name The name of the plugin.
 	 * @param      string $version     The version of this plugin.
-	 * @param             class        Rcno_Reviews_Public  $plugin_public;    An instance of the Rcno_Reviews_Public
-	 *                                                      class.
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
@@ -134,6 +132,7 @@ class Rcno_Reviews_Shortcodes {
 	 * @since 1.0.0
 	 *
 	 * @param mixed $options
+	 * @return void
 	 */
 	public function rcno_do_taxlist_shortcode( $options ) {
 
@@ -158,6 +157,7 @@ class Rcno_Reviews_Shortcodes {
 	 * @since 1.0.0
 	 *
 	 * @param mixed $options
+	 * @return void
 	 */
 	public function rcno_do_reviews_index_shortcode( $options ) {
 
@@ -230,7 +230,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		wp_enqueue_script( 'rcno_ajax_scr', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scr.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'rcno_ajax_scr', plugin_dir_url( __DIR__ ) . 'admin/js/rcno_ajax_scr.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( 'rcno_ajax_scr', 'rcno_vars', array(
 				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)
@@ -318,7 +318,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		require plugin_dir_path( __DIR__ ) . 'admin/views/rcno-reviews-modal.php';
+		require plugin_dir_path( __DIR__ ) . 'admin/views/rcno-reviews-listings-modal.php';
 	}
 
 	/**
@@ -337,7 +337,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __FILE__ ) . '\\../admin/js/rcno_ajax_scl.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __DIR__ ) . 'admin/js/rcno_ajax_scl.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( 'rcno_ajax_scl', 'rcno_vars', array(
 				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)
