@@ -211,8 +211,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		require dirname( __FILE__ ) . '\\../admin/views/rcno-reviews-modal.php';
-
+		require plugin_dir_path( __DIR__ ) . 'admin/views/rcno-reviews-modal.php';
 	}
 
 	/**
@@ -319,7 +318,7 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		require dirname( __FILE__ ) . '\\../admin/views/rcno-reviews-listings-modal.php';
+		require plugin_dir_path( __DIR__ ) . 'admin/views/rcno-reviews-modal.php';
 	}
 
 	/**

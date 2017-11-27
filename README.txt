@@ -104,3 +104,6 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.0.8 =
 * Moved all admin scripts to footer and added version numbers
+
+= 1.0.9 =
+* Fixed an error in the review shortcodes file cause by the differences between Windows and Unix use of '/'
