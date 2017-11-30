@@ -110,3 +110,6 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.0.10 =
 * Fixed regression from last patch
+
+= 1.1.10 =
+* Added an option to display book covers on the book reviews index page
