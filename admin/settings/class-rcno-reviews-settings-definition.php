@@ -559,6 +559,11 @@ class Rcno_Reviews_Settings_Definition {
 					'step' => 1,
 					'type' => 'number',
 				),
+				'rcno_show_book_covers_index'      => array(
+					'name' => __( 'Book covers', 'rcno-reviews' ),
+					'desc' => __( 'Book covers on review index page?', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'spacer-8'                => array(
 					'name' => '',
 					'type' => 'spacer',

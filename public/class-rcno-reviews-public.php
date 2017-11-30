@@ -100,16 +100,35 @@ class Rcno_Reviews_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public.js', array( 'jquery' ), $this->version, false );
 
-		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
+		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 
+			$covers_index_page = '';
 			$star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
 			$usr_custom_css = Rcno_Reviews_Option::get_option( 'rcno_custom_styling', '' );
+			if ( Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false ) ) {
+				$covers_index_page = '
+					ul.rcno-taxlist-book-covers {
+					    display: flex;
+					    justify-content: flex-start;
+					    flex-wrap: wrap;
+					    list-style: none;
+					}
+					ul.rcno-taxlist-book-covers li {
+					    flex: 0 1 125px;
+					    margin: 0 10px 0 0;
+					}
+					ul.rcno-taxlist-book-covers p {
+					    display: none;
+					}
+				';
+			}
 			$custom_css = '
 				.rcno-admin-rating span {
 				    color: ' . $star_color . '
 				}
 			';
-			$custom_css = $custom_css . $usr_custom_css;
+			$custom_css .= $usr_custom_css;
+			$custom_css .= $covers_index_page;
 
 			wp_add_inline_style( $this->plugin_name, $custom_css );
 		}

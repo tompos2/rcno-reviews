@@ -36,7 +36,7 @@ if ( $posts && count( $posts ) > 0 ) {
 				$out .= '</h2>';
 
 				// Start new list.
-				$out .= '<ul class="rcno-taxlist">';
+				$out .= '<ul class="rcno-taxlist rcno-taxlist-book-covers">';
 
 				// Add the letter to the list.
 				$letters[] = $first_letter;
@@ -44,13 +44,18 @@ if ( $posts && count( $posts ) > 0 ) {
 		} else {
 			// Start list before first item.
 			if ( 0 === $i ) {
-				$out .= '<ul class="rcno-taxlist">';
+				$out .= '<ul class="rcno-taxlist rcno-taxlist-book-covers">';
 			}
 		}
 
 		// Add the entry for the post.
 		$out .= '<li><a href="' . get_permalink( $post->ID ) . '">';
-		$out .= $post->post_title;
+
+		if ( Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false ) ) {
+			$out .= $template->get_the_rcno_book_cover( $post->ID, 'medium', true );
+		}
+
+		$out .= '<p>' . $post->post_title . '</p>';
 		$out .= '</a></li>';
 
 		// increment the counter.
