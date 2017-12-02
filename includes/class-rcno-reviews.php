@@ -89,6 +89,8 @@ class Rcno_Reviews {
 
 		$this->define_public_ratings();
 
+		$this->define_currently_reading();
+
 	}
 
 	/**
@@ -163,6 +165,8 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-googlebooks.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-rest-api.php';
+
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-rcno-currently-reading.php';
 
 		$this->loader = new Rcno_Reviews_Loader();
 	}
@@ -438,6 +442,22 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'comment_form_logged_in_after', $public_ratings, 'rcno_comment_ratings_form' );
 
 		$this->loader->add_filter( 'comment_text', $public_ratings, 'display_comment_rating', 9 );
+	}
+
+	/**
+	 * Register all of the hooks related to the currently reading functionality
+	 * of the plugin.
+	 *
+	 * @since    1.1.10
+	 * @access   private
+	 */
+	public function define_currently_reading() {
+
+		$currently_reading = new Rcno_Currently_Reading( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'wp_dashboard_setup', $currently_reading, 'rcno_register_currently_reading_dash_widget' );
+		$this->loader->add_action( 'rest_api_init', $currently_reading, 'rcno_currently_rest_routes' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $currently_reading, 'rcno_enqueue_currently_reading_scripts' );
 	}
 
 	/**
