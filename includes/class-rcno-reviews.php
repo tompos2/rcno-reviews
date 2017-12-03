@@ -153,6 +153,7 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-recent-reviews.php';
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-book-slider.php';
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-book-grid.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-currently-reading.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-option.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-callback-helper.php';
@@ -357,6 +358,9 @@ class Rcno_Reviews {
 
 		$book_grid = new Rcno_Reviews_Book_Grid();
 		$this->loader->add_action( 'widgets_init', $book_grid, 'rcno_register_book_grid_widget' );
+
+		$reading = new Rcno_Reviews_Currently_Reading();
+		$this->loader->add_action( 'widgets_init', $reading, 'rcno_register_currently_reading_widget' );
 	}
 
 	/**
@@ -458,6 +462,9 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'wp_dashboard_setup', $currently_reading, 'rcno_register_currently_reading_dash_widget' );
 		$this->loader->add_action( 'rest_api_init', $currently_reading, 'rcno_currently_rest_routes' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $currently_reading, 'rcno_enqueue_currently_reading_scripts' );
+
+
+
 	}
 
 	/**

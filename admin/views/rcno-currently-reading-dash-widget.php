@@ -1,4 +1,9 @@
-<?php { ?>
+<?php {
+
+	$progress = get_option( $this->widget_id, array() );
+	$most_recent = end($progress);
+
+?>
 
 	<form id="<?php echo $this->widget_id; ?>" >
 		<div id="feedback"></div>
@@ -16,5 +21,7 @@
 		</div>
 		<?php submit_button( __( 'Update Progress', 'rcno-reviews' ) ); ?>
 	</form>
+
+    <?php var_dump($most_recent, $progress); ?>
 
 <?php } ?>

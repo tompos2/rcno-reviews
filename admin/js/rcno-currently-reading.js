@@ -11,12 +11,14 @@
   })
   .then(function (r) {
 
-    if (r.hasOwnProperty('industry')) {
-      $('#industry').val(r.industry);
+    var result = r[ r.length - 1 ];
+
+    if (result.hasOwnProperty('industry')) {
+      $('#industry').val(result.industry);
     }
 
-    if (r.hasOwnProperty('amount')) {
-      $('#amount').val(r.amount);
+    if (result.hasOwnProperty('amount')) {
+      $('#amount').val(result.amount);
     }
 
   });
@@ -43,6 +45,9 @@
     .then(function (r) {
 
       $('#feedback').html('<p>' + currently_reading.strings.saved + '</p>');
+
+      // @see https://stackoverflow.com/questions/3357553/how-do-i-store-an-array-in-localstorage
+      localStorage.setItem( 'currently_reading_progress', JSON.stringify( data ) );
 
     })
 

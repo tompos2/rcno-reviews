@@ -70,8 +70,10 @@ class Rcno_Currently_Reading {
 		$this->version     = $version;
 		$this->widget_id   = 'rcno_currently_reading';
 		$this->default_progress = array(
-			'industry' => 'lumber',
-			'amount' => 42
+			array(
+				'industry' => 'lumber',
+				'amount' => 42
+			)
 		);
 	}
 
@@ -156,13 +158,16 @@ class Rcno_Currently_Reading {
 	 */
 	public function rcno_save_currently_reading_progress( array $progress ) { // @TODO: Check for empty values.
 
-		//remove any non-allowed indexes before save
+		$_progress = get_option( $this->widget_id, array() );
+
+		// Remove any non-allowed indexes before save
 		foreach ( $progress as $key => $value ){
 			if ( ! array_key_exists( $key, $this->default_progress ) ) {
 				unset( $progress[ $key ] );
 			}
 		}
-		update_option( $this->widget_id, $progress );
+		$_progress[] = $progress; // Append our most recent progress to the existing data.
+		update_option( $this->widget_id, $_progress );
 	}
 
 
