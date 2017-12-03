@@ -1,6 +1,6 @@
 (function ($) {
 
-  $.ajax({
+  /*$.ajax({
     method: 'GET',
     url: currently_reading.api.url,
     beforeSend: function (xhr) {
@@ -21,14 +21,25 @@
       $('#amount').val(result.amount);
     }
 
-  });
+  });*/
 
   $('#rcno_currently_reading').on('submit', function (e) {
     e.preventDefault();
 
+    var finished = 0;
+
+    if ($('#rcno_currently_reading_finished').is(":checked")) {
+      finished = 1;
+    }
+
     var data = {
-      amount: $('#amount').val(),
-      industry: $('#industry').val()
+      book_title: $('#rcno_currently_reading_book_title').val(),
+      book_author: $('#rcno_currently_reading_book_author').val(),
+      current_page: $('#rcno_current_page_number').val(),
+      num_of_pages: $('#rcno_current_num_pages').val(),
+      progress_comment: $('#rcno_currently_reading_book_comment').val(),
+      last_updated: JSON.parse(JSON.stringify(new Date())),
+      finished_book: finished
     };
 
     $.ajax({

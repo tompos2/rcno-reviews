@@ -71,8 +71,13 @@ class Rcno_Currently_Reading {
 		$this->widget_id   = 'rcno_currently_reading';
 		$this->default_progress = array(
 			array(
-				'industry' => 'lumber',
-				'amount' => 42
+				'book_title'       => '',
+				'book_author'      => '',
+				'current_page'     => 1,
+				'num_of_pages'     => 1,
+				'progress_comment' => '',
+				'last_updated'     => '',
+				'finished_book'    => 0,
 			)
 		);
 	}
@@ -131,7 +136,7 @@ class Rcno_Currently_Reading {
 	}
 
 	/**
-	 * Get the currently reading progress.
+	 * Get the currently reading progress data.
 	 *
 	 * @since   1.1.10
 	 *
@@ -160,16 +165,15 @@ class Rcno_Currently_Reading {
 
 		$_progress = get_option( $this->widget_id, array() );
 
-		// Remove any non-allowed indexes before save
+		// Remove any non-allowed indexes before save.
 		foreach ( $progress as $key => $value ){
-			if ( ! array_key_exists( $key, $this->default_progress ) ) {
+			if ( ! array_key_exists( $key, $this->default_progress[0] ) ) {
 				unset( $progress[ $key ] );
 			}
 		}
 		$_progress[] = $progress; // Append our most recent progress to the existing data.
 		update_option( $this->widget_id, $_progress );
 	}
-
 
 	/**
 	 * Adds the REST routes for the currently reading feature.
@@ -181,14 +185,39 @@ class Rcno_Currently_Reading {
 				'methods'              => 'POST',
 				'callback'             => array( $this, 'update_progress' ),
 				'args'                 => array(
-					'industry' => array(
+					'book_title' => array(
 						'type'              => 'string',
-						'required'          => false,
+						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'amount'   => array(
+					'book_author' => array(
+						'type'              => 'string',
+						'required'          => true,
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'current_page'   => array(
 						'type'              => 'integer',
-						'required'          => false,
+						'required'          => true,
+						'sanitize_callback' => 'absint',
+					),
+					'num_of_pages'   => array(
+						'type'              => 'integer',
+						'required'          => true,
+						'sanitize_callback' => 'absint',
+					),
+					'progress_comment' => array(
+						'type'              => 'string',
+						'required'          => true,
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'last_updated' => array(
+						'type'              => 'string',
+						'required'          => true,
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'finished_book' => array(
+						'type'              => 'integer',
+						'required'          => true,
 						'sanitize_callback' => 'absint',
 					),
 				),
@@ -223,8 +252,13 @@ class Rcno_Currently_Reading {
 	public function update_progress( WP_REST_Request $request ) {
 
 		$progress = array(
-			'industry' => $request->get_param( 'industry' ),
-			'amount'   => $request->get_param( 'amount' ),
+			'book_title' => $request->get_param( 'book_title' ),
+			'book_author'   => $request->get_param( 'book_author' ),
+			'current_page'   => $request->get_param( 'current_page' ),
+			'num_of_pages'   => $request->get_param( 'num_of_pages' ),
+			'progress_comment'   => $request->get_param( 'progress_comment' ),
+			'last_updated'   => $request->get_param( 'last_updated' ),
+			'finished_book'   => $request->get_param( 'finished_book' ),
 		);
 
 		$this->rcno_save_currently_reading_progress( $progress );
