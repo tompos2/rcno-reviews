@@ -27,12 +27,17 @@
     e.preventDefault();
 
     var finished = 0;
-
     if ($('#rcno_currently_reading_finished').is(":checked")) {
       finished = 1;
     }
 
+    var cover = $('#rcno_currently_reading_upload_field').val();
+    if (cover === undefined) {
+      cover = $('#rcno_currently_reading_cover').attr('src');
+    }
+
     var data = {
+      book_cover: cover,
       book_title: $('#rcno_currently_reading_book_title').val(),
       book_author: $('#rcno_currently_reading_book_author').val(),
       current_page: $('#rcno_current_page_number').val(),
@@ -66,14 +71,34 @@
 
       var message = currently_reading.strings.error;
 
-      if (r.hasOwnProperty('message')) {
-        message = r.message;
+      if (r.status === 400) {
+        message = r.responseJSON.message;
       }
 
       $('#feedback').html('<p>' + message + '</p>');
 
     });
 
+  });
+
+
+  // Currently reading book cover button.
+  $('.rcno_currently_upload_button').on('click', function (e) {
+    e.preventDefault();
+
+    var cover_uploader = wp.media({
+      title: 'Currently Reading Book Cover',
+      button: {
+        text: 'Use File'
+      },
+      multiple: false  // Set this to true to allow multiple files to be selected
+    })
+      .on('select', function () {
+        var attachment = cover_uploader.state().get('selection').first().toJSON();
+        $('#rcno_currently_reading_upload_field').val(attachment.url);
+
+      })
+      .open();
   });
 
 })(jQuery);

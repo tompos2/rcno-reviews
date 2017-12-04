@@ -71,6 +71,7 @@ class Rcno_Currently_Reading {
 		$this->widget_id   = 'rcno_currently_reading';
 		$this->default_progress = array(
 			array(
+				'book_cover'       => '',
 				'book_title'       => '',
 				'book_author'      => '',
 				'current_page'     => 1,
@@ -159,7 +160,7 @@ class Rcno_Currently_Reading {
 	 * @since   1.1.10
 	 *
 	 * @param   array   $progress   The progress data sent from dash widget.
-	 * @return  void
+	 * @return  boolean
 	 */
 	public function rcno_save_currently_reading_progress( array $progress ) { // @TODO: Check for empty values.
 
@@ -171,8 +172,12 @@ class Rcno_Currently_Reading {
 				unset( $progress[ $key ] );
 			}
 		}
+		if ( $progress['finished_book'] ) {
+			return update_option( $this->widget_id, array() );
+		}
+
 		$_progress[] = $progress; // Append our most recent progress to the existing data.
-		update_option( $this->widget_id, $_progress );
+		return update_option( $this->widget_id, $_progress );
 	}
 
 	/**
@@ -185,6 +190,11 @@ class Rcno_Currently_Reading {
 				'methods'              => 'POST',
 				'callback'             => array( $this, 'update_progress' ),
 				'args'                 => array(
+					'book_cover' => array(
+						'type'              => 'string',
+						'required'          => true,
+						'sanitize_callback' => 'sanitize_text_field',
+					),
 					'book_title' => array(
 						'type'              => 'string',
 						'required'          => true,
@@ -252,6 +262,7 @@ class Rcno_Currently_Reading {
 	public function update_progress( WP_REST_Request $request ) {
 
 		$progress = array(
+			'book_cover' => $request->get_param( 'book_cover' ),
 			'book_title' => $request->get_param( 'book_title' ),
 			'book_author'   => $request->get_param( 'book_author' ),
 			'current_page'   => $request->get_param( 'current_page' ),
