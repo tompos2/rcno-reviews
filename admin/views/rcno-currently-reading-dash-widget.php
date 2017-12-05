@@ -5,12 +5,12 @@
 	$book_cover       = isset( $most_recent[ 'book_cover' ] ) ? $most_recent[ 'book_cover' ] : '';
 	$book_title       = isset( $most_recent[ 'book_title' ] ) ? $most_recent[ 'book_title' ] : '';
 	$book_author      = isset( $most_recent[ 'book_author' ] ) ? $most_recent[ 'book_author' ] : '';
-	$current_page     = isset( $most_recent[ 'current_page' ] ) ? $most_recent[ 'current_page' ] : 1;
+	$current_page     = isset( $most_recent[ 'current_page' ] ) ? $most_recent[ 'current_page' ] : 0;
 	$num_of_pages     = isset( $most_recent[ 'num_of_pages' ] ) ? $most_recent[ 'num_of_pages' ] : 1;
 	$progress_comment = isset( $most_recent[ 'progress_comment' ] ) ? $most_recent[ 'progress_comment' ] : '';
 	$finished_book    = isset( $most_recent[ 'finished_book' ] ) ? $most_recent[ 'finished_book' ] : 0;
 	$last_updated     = isset( $most_recent[ 'last_updated' ] ) ? $most_recent[ 'last_updated' ] : '';
-	$percentage       = round( ( $current_page / $num_of_pages ) * 100 );
+	$percentage       = ! empty( $num_of_pages ) ? round( ( $current_page / $num_of_pages ) * 100 ) : 0;
 
 ?>
     <form id="<?php echo $this->widget_id; ?>">
@@ -21,7 +21,7 @@
                     <img src="<?php echo $book_cover; ?>" alt="currently-reading-book-cover" style="width: 100px"
                          id="rcno_currently_reading_cover">
                     <div class="progress-bar">
-                         <span class="percentage-value">40%</span>
+                         <span class="percentage-value"><?php echo $percentage . '%'?></span>
                         <div class="percentage" style="width: <?php echo $percentage . '%'?>"></div>
                     </div>
                 <?php else : ?>

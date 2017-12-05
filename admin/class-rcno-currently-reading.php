@@ -74,7 +74,7 @@ class Rcno_Currently_Reading {
 				'book_cover'       => '',
 				'book_title'       => '',
 				'book_author'      => '',
-				'current_page'     => 1,
+				'current_page'     => 0,
 				'num_of_pages'     => 1,
 				'progress_comment' => '',
 				'last_updated'     => '',
@@ -101,7 +101,7 @@ class Rcno_Currently_Reading {
 			),
 			'strings' => array(
 				'saved' => __( 'Progress updated', 'rcno-reviews' ),
-				'error' => __( 'Error', 'text-domain' )
+				'error' => __( 'Error', 'rcno-reviews' )
 			),
 		) );
 
@@ -116,6 +116,10 @@ class Rcno_Currently_Reading {
 	 * @return  void
 	 */
 	public function rcno_register_currently_reading_dash_widget() {
+
+		if ( ! Rcno_Reviews_Option::get_option( 'rcno_show_currently_reading_widget' ) ) {
+			return;
+		}
 
 		wp_add_dashboard_widget(
 			$this->widget_id,
@@ -231,7 +235,7 @@ class Rcno_Currently_Reading {
 						'sanitize_callback' => 'absint',
 					),
 				),
-				'permissions_callback' => array( $this, 'permissions' ),
+				'permission_callback' => array( $this, 'permissions' ),
 			)
 		);
 
@@ -240,7 +244,7 @@ class Rcno_Currently_Reading {
 				'methods'              => 'GET',
 				'callback'             => array( $this, 'get_progress' ),
 				'args'                 => array(),
-				'permissions_callback' => array( $this, 'permissions' ),
+				'permission_callback' => array( $this, 'permissions' ),
 			)
 		);
 	}
@@ -258,8 +262,16 @@ class Rcno_Currently_Reading {
 	 * Update currently reading progress.
 	 *
 	 * @param WP_REST_Request $request
+	 * @return string
 	 */
 	public function update_progress( WP_REST_Request $request ) {
+
+		$rest_nonce = $request->get_header('x_wp_nonce');
+
+		if( ! $rest_nonce || ! wp_verify_nonce( $rest_nonce, 'wp_rest' ) ) {
+			return new WP_REST_Response( new WP_Error( 'rest_security_invalid_nonce', __( 'Security nonce is invalid or not set' ),
+				array( 'status' => 403 ) ), 403 );
+		}
 
 		$progress = array(
 			'book_cover' => $request->get_param( 'book_cover' ),
@@ -274,7 +286,7 @@ class Rcno_Currently_Reading {
 
 		$this->rcno_save_currently_reading_progress( $progress );
 
-		return rest_ensure_response( $this->rcno_get_currently_reading_progress() )->set_status( 201 );
+		return rest_ensure_response( $this->rcno_get_currently_reading_progress() );
 	}
 
 	/**

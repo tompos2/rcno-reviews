@@ -83,3 +83,59 @@
     flex-basis: 85px;
     margin: 2px;
 }
+
+.currently-reading-widget-fe {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 0 0 5px 0;
+}
+
+.currently-reading-widget-fe .book-cover {
+    width: 80px;
+    margin: 0 10px 0 0;
+    display: inline-block;
+    text-align: center;
+}
+
+.currently-reading-widget-fe .book-cover span {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.currently-reading-widget-fe .book-progress {
+     width: 100%;
+     display: inline-block;
+     flex: 1;
+}
+
+.currently-reading-widget-fe .book-progress h3,
+.currently-reading-widget-fe .book-progress p {
+    margin: 0 0 5px 0;
+    line-height: 1.3;
+}
+
+.currently-reading-widget-fe .book-progress p {
+    font-size: .9em;
+}
+
+.currently-reading-widget-fe .book-cover .progress-bar-container {
+    height: 100%;
+    position: relative;
+}
+
+.currently-reading-widget-fe .book-cover .progress-bar {
+    background: rgba(0, 0, 0, 0.44);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.review-coming-soon h3 {
+    text-align: center;
+    text-transform: uppercase;
+    border-top: 1px solid;
+    padding: 5px;
+}

@@ -71,7 +71,7 @@
 
       var message = currently_reading.strings.error;
 
-      if (r.status === 400) {
+      if (r.status !== 200) {
         message = r.responseJSON.message;
       }
 

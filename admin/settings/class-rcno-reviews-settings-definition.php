@@ -520,6 +520,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Use the Rcno Taxonomy List widget?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
+				'rcno_show_currently_reading_widget'  => array(
+					'name' => __( 'Currently Reading', 'rcno-reviews' ),
+					'desc' => __( 'Use the Rcno Currently Reading widget?', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'spacer-7'                        => array(
 					'name' => '',
 					'type' => 'spacer',

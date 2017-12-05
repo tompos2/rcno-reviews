@@ -67,11 +67,12 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 	 * Register our book slider widget and enqueue the relevant scripts.
 	 */
 	public function rcno_register_currently_reading_widget() {
-		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_show_currently_reading_grid_widget', true ) ) {
+		if ( ! Rcno_Reviews_Option::get_option( 'rcno_show_currently_reading_widget' ) ) {
+		    return;
+        }
 
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-			register_widget( 'Rcno_Reviews_Currently_Reading' );
-		}
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        register_widget( 'Rcno_Reviews_Currently_Reading' );
 	}
 
 	/**
@@ -110,11 +111,42 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 
 		$progress = get_option( 'rcno_currently_reading', array() );
 		$most_recent = end($progress);
+		$percentage  = isset( $most_recent['num_of_pages'] ) ? round( ( $most_recent['current_page'] / $most_recent['num_of_pages'] ) * 100 ) : 0;
+		?>
 
-		var_dump($most_recent);
+        <?php if( $most_recent['book_title'] && $most_recent['book_author']) : ?>
 
-		// Close the theme's widget wrapper.
-		echo $after_widget;
+            <div class="currently-reading-widget-fe">
+                <div class="book-cover">
+			        <?php if( $most_recent['book_cover'] ) : ?>
+                        <div class="progress-bar-container">
+                            <img src="<?php echo $most_recent['book_cover'] ?>" alt="book-cover" />
+                            <div class="progress-bar" style="height: <?php echo $percentage;?>%"></div>
+                        </div>
+				    <?php endif; ?>
+                    <span><?php echo sprintf( '%s/%s', $most_recent['current_page'], $most_recent['num_of_pages'] )
+                        ?></span>
+                </div>
+
+                <div class="book-progress">
+                    <h3 class="book-title"><?php echo $most_recent['book_title'] ?></h3>
+                    <p class="book-author"><?php echo sprintf( '%s %s', __( 'by', 'rcno-reviews' ),
+                            $most_recent['book_author'] ); ?></p>
+                    <p class="book-comment"><?php echo $most_recent['progress_comment'] ?></p>
+                </div>
+            </div>
+            <div class="review-coming-soon">
+                <h3><?php echo sanitize_text_field( $instance[ 'review_coming_soon' ] ); ?></h3>
+            </div>
+
+		<?php else : ?>
+
+            <h3><?php echo sanitize_text_field( $instance[ 'no_currently_reading' ] ); ?></h3>
+
+		<?php endif; ?>
+
+		<?php
+            echo $after_widget; // Close the theme's widget wrapper.
 	}
 
 	/**
@@ -134,7 +166,9 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 		//$instance = $new_instance;
 
 		// Check and sanitize all inputs.
-		$instance['title']        = strip_tags( $new_instance['title'] );
+		$instance[ 'title' ]                = strip_tags( $new_instance[ 'title' ] );
+		$instance[ 'no_currently_reading' ] = strip_tags( $new_instance[ 'no_currently_reading' ] );
+		$instance[ 'review_coming_soon' ]   = strip_tags( $new_instance[ 'review_coming_soon' ] );
 		//$instance['review_count'] = absint( $new_instance['review_count'] );
 		//$instance['order']        = strip_tags( $new_instance['order'] );
 
@@ -153,15 +187,10 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$defaults = array(
-			'title'        => '',
-		);
-
-		// Merge the user-selected arguments with the defaults.
-		$instance = wp_parse_args( (array) $instance, $defaults );
-
 		// Element options.
-		$title        = sanitize_text_field( $instance[ 'title' ] );
+		$title                = ! empty( $instance[ 'title'] ) ? sanitize_text_field( $instance[ 'title' ] ) : '';
+		$no_currently_reading = ! empty( $instance[ 'no_currently_reading'] ) ? sanitize_text_field( $instance[ 'no_currently_reading' ] ) : esc_html__( 'No currently reading book right now.', 'rcno-reviews' );
+		$review_coming_soon   = ! empty( $instance[ 'review_coming_soon'] ) ? sanitize_text_field( $instance[ 'review_coming_soon' ] ) : esc_html__( 'Review coming soon!', 'rcno-reviews' );
 
 		?>
 		<p>
@@ -169,8 +198,24 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-			       name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
+			       name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title; ?>"/>
 		</p>
+
+        <p>
+            <label for="<?php echo $this->get_field_id( 'no_currently_reading' ); ?> ">
+				<?php _e( 'No currently reading book', 'rcno-reviews' ); ?>
+            </label>
+            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'no_currently_reading' ); ?>"
+                   name="<?php echo $this->get_field_name( 'no_currently_reading' ); ?>" value="<?php echo esc_attr( $no_currently_reading ) ?>"/>
+        </p>
+
+        <p>
+            <label for="<?php echo $this->get_field_id( 'review_coming_soon' ); ?> ">
+				<?php _e( 'Review coming soon', 'rcno-reviews' ); ?>
+            </label>
+            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'review_coming_soon' ); ?>"
+                   name="<?php echo $this->get_field_name( 'review_coming_soon' ); ?>" value="<?php echo esc_attr( $review_coming_soon ) ?>"/>
+        </p>
 
 		<?php
 	}
