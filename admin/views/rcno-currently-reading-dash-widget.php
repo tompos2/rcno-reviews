@@ -13,7 +13,7 @@
 	$percentage       = ! empty( $num_of_pages ) ? round( ( $current_page / $num_of_pages ) * 100 ) : 0;
 
 ?>
-    <form id="<?php echo $this->widget_id; ?>">
+    <form id="<?php echo $this->widget_id . '_form'; ?>">
         <div id="feedback"></div>
         <div class="currently-reading-wrapper">
             <div class="book">
@@ -25,20 +25,24 @@
                         <div class="percentage" style="width: <?php echo $percentage . '%'?>"></div>
                     </div>
                 <?php else : ?>
-                    <input type="text" id="rcno_currently_reading_upload_field"> <span><input type="button"
-                                                                                              class="rcno_currently_upload_button
-                button-secondary" value="<?php _e( 'Book cover', 'rcno-reviews' ); ?>"></span>
+                    <input type="hidden" id="rcno_currently_reading_upload_field">
+                    <div class="rcno_currently_upload_button book-upload-container">
+                        <p class="dashicons dashicons-welcome-add-page"></p>
+                        <p><?php _e( 'Book Cover', 'rcno-reviews' );?></p>
+                    </div>
                 <?php endif; ?>
             </div>
             <div class="info">
                 <div class="form-field input-text-wrap">
-                    <input type="text" id="rcno_currently_reading_book_title" value="<?php echo $book_title; ?>" placeholder="<?php _e( 'Book Title', 'rcno-reviews' ) ?>" <?php if ( '' !== $book_title ) { echo 'disabled'; }; ?> />
-                    <input type="text" id="rcno_currently_reading_book_author" value="<?php echo $book_author; ?>" placeholder="<?php _e( 'Book Author', 'rcno-reviews' ) ?>" <?php if ( '' !== $book_author ) { echo 'disabled'; }; ?> >
+                    <input type="text" id="rcno_currently_reading_book_title" value="<?php echo $book_title; ?>"
+                           placeholder="<?php _e( 'Book Title', 'rcno-reviews' ) ?>" <?php if ( '' !== $book_title )
+                           { echo 'disabled'; }; ?> required />
+                    <input type="text" id="rcno_currently_reading_book_author" value="<?php echo $book_author; ?>"
+                           placeholder="<?php _e( 'Book Author', 'rcno-reviews' ) ?>" <?php if ( '' !== $book_author
+                    ) { echo 'disabled'; }; ?> required />
                     <p class="rcno_current_page"><strong><?php _e( 'Currently on page ', 'rcno-reviews' ) ?> <input
                                     type="number" value="<?php echo $current_page; ?>" id="rcno_current_page_number"
-                                    min="1" > / <input type="number" value="<?php
-                            echo
-                            $num_of_pages; ?>"
+                                    min="1" > / <input type="number" value="<?php echo $num_of_pages; ?>"
                                                        id="rcno_current_num_pages" <?php if ( $num_of_pages > 1 ) {
                                                            echo 'disabled="disabled"'; }; ?> min="1" /></strong></p>
                     <textarea name="" id="rcno_currently_reading_book_comment" cols="30" rows="5" placeholder="<?php _e( 'Comment on progress', 'rcno-reviews' ) ?>..." style="width: 100%" ><?php echo $progress_comment; ?></textarea>
@@ -50,8 +54,7 @@
             <label for="rcno_currently_reading_finished"><input name="rcno_currently_reading_finished" id="rcno_currently_reading_finished" type="checkbox" <?php checked( $finished_book, true, true ); ?> /> <?php _e( 'Finished', 'rcno-reviews' ) ?></label>
 	        <?php if ( '' !== $last_updated ) : ?>
                 <span class="last-updated">
-                    <?php printf( __( '%s ago', 'rcno-reviews' ), human_time_diff( strtotime( $last_updated ),
-                        current_time( 'timestamp' ) ) ); ?>
+                    <?php printf( __( '%s ago', 'rcno-reviews' ), human_time_diff( strtotime( $last_updated ), current_time( 'timestamp' ) ) ); ?>
                 </span>
 	        <?php endif; ?>
         </div>
@@ -84,9 +87,12 @@
         input#rcno_current_num_pages {
             width: 60px !important;
         }
-        #rcno_currently_reading .finished {
+        #rcno_currently_reading_form .finished {
             position: relative;
             margin: 10px 0 0 0;
+        }
+        #rcno_currently_reading_form .notice {
+            padding: 8px;
         }
         span.last-updated {
             float: right;
@@ -97,22 +103,28 @@
         .currently-reading-wrapper .book .progress-bar {
             width: 100%;
             height: 20px;
-            background: #ccc;
+            background: #f1f1f1;
         }
         .currently-reading-wrapper .book .percentage {
             height: 20px;
-            background: red;
+            background: #0085ba;
         }
-        .percentage-value {
+        .progress-bar .percentage-value {
             float: right;
-            color: #fff;
+            color: #ffffff;
+            margin: 0 30% 0 0;
+            font-weight: bold;
         }
-        div#feedback p {
-            background: red;
-            color: #fff;
-            padding: 4px;
-            border-radius: 2px;
-            box-shadow: 1px 1px 2px #b2b2b2;
+        .book-upload-container {
+            height: 140px;
+            background: #f1f1f1;
+            text-align: center;
+            cursor: pointer;
+        }
+        .book-upload-container .dashicons {
+            font-size: 2em;
+            color: #797979;
+            margin: 1em 0 0em 0;
         }
     </style>
 <?php } ?>

@@ -449,7 +449,7 @@ class Rcno_Reviews {
 	}
 
 	/**
-	 * Register all of the hooks related to the currently reading functionality
+	 * Register all of the hooks related to the currently reading widget functionality
 	 * of the plugin.
 	 *
 	 * @since    1.1.10

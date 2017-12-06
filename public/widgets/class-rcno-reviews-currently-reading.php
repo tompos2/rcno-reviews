@@ -169,9 +169,6 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 		$instance[ 'title' ]                = strip_tags( $new_instance[ 'title' ] );
 		$instance[ 'no_currently_reading' ] = strip_tags( $new_instance[ 'no_currently_reading' ] );
 		$instance[ 'review_coming_soon' ]   = strip_tags( $new_instance[ 'review_coming_soon' ] );
-		//$instance['review_count'] = absint( $new_instance['review_count'] );
-		//$instance['order']        = strip_tags( $new_instance['order'] );
-
 
 		// and now we return new values and wordpress do all work for you.
 		return $instance;

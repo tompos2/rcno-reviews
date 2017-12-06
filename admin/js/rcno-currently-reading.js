@@ -23,7 +23,7 @@
 
   });*/
 
-  $('#rcno_currently_reading').on('submit', function (e) {
+  $('#rcno_currently_reading_form').on('submit', function (e) {
     e.preventDefault();
 
     var finished = 0;
@@ -60,10 +60,11 @@
 
     .then(function (r) {
 
-      $('#feedback').html('<p>' + currently_reading.strings.saved + '</p>');
+      $('#feedback').html('<p id="message" class="updated notice notice-success">' + currently_reading.strings.saved + '</p>');
 
       // @see https://stackoverflow.com/questions/3357553/how-do-i-store-an-array-in-localstorage
-      localStorage.setItem( 'currently_reading_progress', JSON.stringify( data ) );
+      var last_response = r[r.length - 1];
+      localStorage.setItem( 'rcno_currently_reading_progress', JSON.stringify( last_response ) );
 
     })
 
@@ -75,7 +76,7 @@
         message = r.responseJSON.message;
       }
 
-      $('#feedback').html('<p>' + message + '</p>');
+      $('#feedback').html('<p id="message" class="updated error notice-error">' + message + '</p>');
 
     });
 
@@ -96,7 +97,7 @@
       .on('select', function () {
         var attachment = cover_uploader.state().get('selection').first().toJSON();
         $('#rcno_currently_reading_upload_field').val(attachment.url);
-
+        $('.book-upload-container').html('<img src="' + attachment.url + '" style="width: 100px" />');
       })
       .open();
   });

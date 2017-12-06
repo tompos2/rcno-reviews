@@ -196,7 +196,7 @@ class Rcno_Currently_Reading {
 				'args'                 => array(
 					'book_cover' => array(
 						'type'              => 'string',
-						'required'          => true,
+						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
 					'book_title' => array(
@@ -274,14 +274,14 @@ class Rcno_Currently_Reading {
 		}
 
 		$progress = array(
-			'book_cover' => $request->get_param( 'book_cover' ),
-			'book_title' => $request->get_param( 'book_title' ),
-			'book_author'   => $request->get_param( 'book_author' ),
-			'current_page'   => $request->get_param( 'current_page' ),
-			'num_of_pages'   => $request->get_param( 'num_of_pages' ),
-			'progress_comment'   => $request->get_param( 'progress_comment' ),
-			'last_updated'   => $request->get_param( 'last_updated' ),
-			'finished_book'   => $request->get_param( 'finished_book' ),
+			'book_cover'       => $request->get_param( 'book_cover' ),
+			'book_title'       => $request->get_param( 'book_title' ),
+			'book_author'      => $request->get_param( 'book_author' ),
+			'current_page'     => $request->get_param( 'current_page' ),
+			'num_of_pages'     => $request->get_param( 'num_of_pages' ),
+			'progress_comment' => $request->get_param( 'progress_comment' ),
+			'last_updated'     => $request->get_param( 'last_updated' ),
+			'finished_book'    => $request->get_param( 'finished_book' ),
 		);
 
 		$this->rcno_save_currently_reading_progress( $progress );
