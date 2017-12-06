@@ -74,6 +74,11 @@
 
         });
 
+      $('#rcno_reviews_settings\\[rcno_no_pluralization\\]').selectize({
+          create: true,
+          plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+
+      });
 
         // Adds and removes 'checked' class on review template selection
         $('.template-label-image').click(function () {

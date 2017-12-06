@@ -57,7 +57,7 @@
 
 class Rcno_Pluralize_Helper {
 
-	static $plural = array(
+	public static $plural = array(
 		'/(quiz)$/i'                     => "$1zes",
 		'/^(ox)$/i'                      => "$1en",
 		'/([m|l])ouse$/i'                => "$1ice",
@@ -79,7 +79,7 @@ class Rcno_Pluralize_Helper {
 		'/$/'                            => "s"
 	);
 
-	static $singular = array(
+	public static $singular = array(
 		'/(quiz)zes$/i'                                                    => "$1",
 		'/(matr)ices$/i'                                                   => "$1ix",
 		'/(vert|ind)ices$/i'                                               => "$1ex",
@@ -110,7 +110,7 @@ class Rcno_Pluralize_Helper {
 		'/s$/i'                                                            => ""
 	);
 
-	static $irregular = array(
+	public static $irregular = array(
 		'move'   => 'moves',
 		'foot'   => 'feet',
 		'goose'  => 'geese',
@@ -122,7 +122,7 @@ class Rcno_Pluralize_Helper {
 		'valve'  => 'valves'
 	);
 
-	static $uncountable = array(
+	public static $uncountable = array(
 		'sheep',
 		'fish',
 		'deer',
@@ -135,8 +135,13 @@ class Rcno_Pluralize_Helper {
 	);
 
 	public static function pluralize( $string ) {
+		// get a list of user added uncountable words from settings page
+		$new_list = Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' );
+		$new_list = explode( ',', $new_list );
+		$new_uncountable = array_merge( $new_list, self::$uncountable  );
+
 		// save some time in the case that singular and plural are the same
-		if ( in_array( strtolower( $string ), self::$uncountable ) ) {
+		if ( in_array( strtolower( $string ), $new_uncountable, true ) ) {
 			return $string;
 		}
 
@@ -161,8 +166,13 @@ class Rcno_Pluralize_Helper {
 	}
 
 	public static function singularize( $string ) {
+		// get a list of user added uncountable words from settings page
+		$new_list = Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' );
+		$new_list = explode( ',', $new_list );
+		$new_uncountable = array_merge( $new_list, self::$uncountable  );
+
 		// save some time in the case that singular and plural are the same
-		if ( in_array( strtolower( $string ), self::$uncountable ) ) {
+		if ( in_array( strtolower( $string ), $new_uncountable, true ) ) {
 			return $string;
 		}
 

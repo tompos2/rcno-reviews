@@ -113,3 +113,7 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.1.10 =
 * Added an option to display book covers on the book reviews index page
+
+= 1.2.11 =
+* Added an new "currently reading" widget
+* Added an setting page option to list 'uncountable' words in users native language. These words wont be singularized or pluralized by the plugin

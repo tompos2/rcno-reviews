@@ -653,6 +653,16 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'spacer',
 				),
 
+				'advanced_tab_header_3' => array(
+					'name' => '<strong>' . __( 'Uncountable Words', 'rcno-reviews' ) . '</strong>',
+					'type' => 'header',
+				),
+				'rcno_no_pluralization'      => array(
+					'name' => __( 'Word List', 'rcno-reviews' ),
+					'desc' => __( 'Create a list of words that have no plural or singular form e.g. "sheep, fish"', 'rcno-reviews' ),
+					'type' => 'text',
+				),
+
 			),
 
 

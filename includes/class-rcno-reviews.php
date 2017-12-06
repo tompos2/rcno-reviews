@@ -69,7 +69,7 @@ class Rcno_Reviews {
 	public function __construct() {
 
 		$this->plugin_name = 'rcno-reviews';
-		$this->version     = '1.1.10';
+		$this->version     = '1.2.11';
 
 		$this->load_dependencies();
 		$this->set_locale();
