@@ -1,6 +1,6 @@
 === Recencio Book Reviews ===
 Contributors: Kemory Grubb
-Donate link: https://wzymedia.com
+Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
 Tested up to: 4.9

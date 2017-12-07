@@ -136,12 +136,12 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
                 </div>
             </div>
             <div class="review-coming-soon">
-                <h3><?php echo sanitize_text_field( $instance[ 'review_coming_soon' ] ); ?></h3>
+                <p><?php echo sanitize_text_field( $instance[ 'review_coming_soon' ] ); ?></p>
             </div>
 
 		<?php else : ?>
 
-            <h3><?php echo sanitize_text_field( $instance[ 'no_currently_reading' ] ); ?></h3>
+            <p><?php echo sanitize_text_field( $instance[ 'no_currently_reading' ] ); ?></p>
 
 		<?php endif; ?>
 
