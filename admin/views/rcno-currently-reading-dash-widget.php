@@ -45,7 +45,8 @@
                                     min="1" > / <input type="number" value="<?php echo $num_of_pages; ?>"
                                                        id="rcno_current_num_pages" <?php if ( $num_of_pages > 1 ) {
                                                            echo 'disabled="disabled"'; }; ?> min="1" /></strong></p>
-                    <textarea name="" id="rcno_currently_reading_book_comment" cols="30" rows="5" placeholder="<?php _e( 'Comment on progress', 'rcno-reviews' ) ?>..." style="width: 100%" ><?php echo $progress_comment; ?></textarea>
+                    <textarea name="" id="rcno_currently_reading_book_comment" cols="30" rows="4" placeholder="<?php
+                    _e( 'Comment on progress', 'rcno-reviews' ) ?>..." style="width: 100%" ><?php echo $progress_comment; ?></textarea>
                 </div>
             </div>
         </div>

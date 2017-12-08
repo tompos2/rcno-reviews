@@ -116,7 +116,7 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 
         <?php if( $most_recent['book_title'] && $most_recent['book_author']) : ?>
 
-            <div class="currently-reading-widget-fe">
+            <div class="rcno-currently-reading-widget-fe">
                 <div class="book-cover">
 			        <?php if( $most_recent['book_cover'] ) : ?>
                         <div class="progress-bar-container">
@@ -135,7 +135,7 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
                     <p class="book-comment"><?php echo $most_recent['progress_comment'] ?></p>
                 </div>
             </div>
-            <div class="review-coming-soon">
+            <div class="rcno-review-coming-soon">
                 <p><?php echo sanitize_text_field( $instance[ 'review_coming_soon' ] ); ?></p>
             </div>
 

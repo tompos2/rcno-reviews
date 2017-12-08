@@ -189,7 +189,7 @@ class Rcno_Currently_Reading {
 	 */
 	public function rcno_currently_rest_routes() {
 
-		register_rest_route( 'rcno-reviews/v1', '/currently-reading',
+		register_rest_route( 'rcno/v1', '/currently-reading',
 			array(
 				'methods'              => 'POST',
 				'callback'             => array( $this, 'update_progress' ),
@@ -239,7 +239,7 @@ class Rcno_Currently_Reading {
 			)
 		);
 
-		register_rest_route( 'rcno-reviews/v1', '/currently-reading',
+		register_rest_route( 'rcno/v1', '/currently-reading',
 			array(
 				'methods'              => 'GET',
 				'callback'             => array( $this, 'get_progress' ),
