@@ -259,6 +259,11 @@ class Rcno_Reviews_Settings_Definition {
 					),
 					'type'    => 'select',
 				),
+				'rcno_reviews_ignore_articles'          => array(
+					'name' => __( 'Ignore articles', 'rcno-reviews' ),
+					'desc' => __( 'Ignore articles when sorting titles. (e.g. "The", "A", "An")', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'spacer_0'                      => array(
 					'name' => '',
 					'type' => 'spacer',

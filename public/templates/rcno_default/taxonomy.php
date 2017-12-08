@@ -4,6 +4,7 @@
  */
 
 $template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+$ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
 
 // Create an empty output variable.
 $out = '';
@@ -21,7 +22,7 @@ if ( $terms ) {
 			}
 		}
 
-		if ( 'rcno_series' === $taxonomy ) {
+		if ( 'rcno_series' === $taxonomy && $ignore_articles ) {
 			// If we are looking at book series, move all articles to the and of string and separate by a comma.
 			foreach ( $terms as $_term ) {
 				$_term_name = $_term->name;
@@ -61,7 +62,7 @@ if ( $terms ) {
 			if ( 'true' === $headers ) { // Add first letter headlines for easier navigation.
 
 				// Get the first letter (without special chars).
-				$first_letter = substr( remove_accents( $title ), 0, 1 );
+				$first_letter = remove_accents( $title )[0];
 
 				// Check if we've already had a headline.
 				if ( ! in_array( $first_letter, $letters, true ) ) {

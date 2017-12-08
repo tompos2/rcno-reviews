@@ -117,3 +117,6 @@ Please open a new topic on the plugin's WordPress.org support page
 = 1.2.11 =
 * Added an new "currently reading" widget
 * Added an setting page option to list 'uncountable' words in users native language. These words wont be singularized or pluralized by the plugin
+
+= 1.3.0 =
+* Added an option to ignore articles when sorting titles
