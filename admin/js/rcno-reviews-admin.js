@@ -32,13 +32,13 @@
     $(function () {
 
         // Removes hidden class on the new genre taxonomy box
-        $('#rcno_genre-add-toggle').hide();
-        $('#rcno_genre-add').removeClass('wp-hidden-child');
-        $('#newrcno_genre').val('');
+        // $('#rcno_genre-add-toggle').hide();
+        // $('#rcno_genre-add').removeClass('wp-hidden-child');
+        // $('#newrcno_genre').val('');
 
 
         // Settings page up load button
-        $('.rcno_reviews_settings_upload_button').click(function (e) {
+        $('.rcno_reviews_settings_upload_button').on('click', function (e) {
             e.preventDefault();
 
             var custom_uploader = wp.media({
