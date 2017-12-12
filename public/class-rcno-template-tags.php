@@ -733,7 +733,7 @@ class Rcno_Template_Tags {
 
 		foreach ( $purchase_links as $value ) {
 			$links .= '<a href="' . esc_url( $value['link'] ) . '" class="rcno-purchase-links '
-			          . sanitize_html_class( $value['store'] ) . '"' . ' style="background:' . $background . '; color:' . $txt_color . '"' . 'rel="nofollow"' . ' >';
+			          . sanitize_html_class( $value['store'] ) . '"' . ' style="background:' . $background . '; color:' . $txt_color . '"' . 'target="_blank" rel="noopener nofollow"' . ' >';
 			$links .= esc_html( $stores[ $value['store'] ] );
 			$links .= '</a> ';
 		}
