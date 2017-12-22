@@ -596,7 +596,7 @@ class Rcno_Reviews_Admin {
 
 		$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : $default_tab;
 
-		include_once( 'partials/' . $this->plugin_name . '-admin-display.php' );
+		include_once 'partials/' . $this->plugin_name . '-admin-display.php';
 
 	}
 
@@ -728,7 +728,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @return array
 	 */
-	function rcno_query_admin_columns( $clauses, $wp_query ) {
+	public function rcno_query_admin_columns( $clauses, $wp_query ) {
 
 		global $wpdb;
 
@@ -783,7 +783,7 @@ SQL;
 		$num_reviews = wp_count_posts( 'rcno_review' );
 
 		if ( $num_reviews ) {
-			$published = intval( $num_reviews->publish );
+			$published = (int) $num_reviews->publish;
 			$post_type = get_post_type_object( 'rcno_review' );
 
 			$text = _n( '%s ' . $post_type->labels->singular_name, '%s ' . $post_type->labels->name, $published, 'rcno-reviews' );
@@ -810,7 +810,7 @@ SQL;
 	 *
 	 * @return array Amended post update messages with new review update messages.
 	 */
-	function rcno_updated_review_messages( $messages ) {
+	public function rcno_updated_review_messages( $messages ) {
 		$review           = get_post();
 		$post_type        = get_post_type( $review );
 		$post_type_object = get_post_type_object( $post_type );

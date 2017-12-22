@@ -72,7 +72,6 @@ class Rcno_Reviews_Activator {
 			'rcno_excerpt_read_more'                => 'Read more',
 			'rcno_excerpt_word_count'               => '55',
 			'rcno_reviews_in_rest'                  => '1',
-			'rcno_publisher_slug'                   => 'Publisher',
 			'rcno_publisher_show'                   => '1',
 			'rcno_show_illustrator'                 => '1',
 			'rcno_store_purchase_links_label'       => 'Purchase on:',
