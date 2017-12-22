@@ -684,22 +684,29 @@ class Rcno_Reviews_Admin {
 	}
 
 	/**
-	 * Removes the post/review author from the admin columns.
+	 * Adds or removes columns from the admin columns.
+	 *
+	 * The builtin 'author' column is removed to avoid confusion with the
+	 * book author of a reviews book.
 	 *
 	 * @since 1.0.0
 	 *
+	 * @see   https://stackoverflow.com/a/3354804/3513481
 	 * @param array $columns	An array of the columns in the admin reviews page.
 	 *
 	 * @return array
 	 */
 	public function rcno_remove_admin_columns( $columns ) {
 		unset( $columns['author'] );
-		$columns['book_cover'] = __( 'Cover', 'rcno-review' );
+
+		if ( true ) { // TODO: Add an option to the setting page if requested.
+			$columns = array_slice( $columns, 0, 1, true)
+			           + array( 'book_cover' => __( 'Cover', 'rcno-review' ) )
+			           + array_slice( $columns, 1, count( $columns ) - 1, true);
+		}
 
 		return $columns;
 	}
-
-	// TODO: https://stackoverflow.com/a/3354804/3513481
 
 	/**
 	 * Enables the sorting and filtering of the admin columns based on custom taxonomies.

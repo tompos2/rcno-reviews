@@ -298,3 +298,7 @@ tr.rcno-table-header th {
 tr.rcno-table-header td {
     border-bottom: 2px solid #efefef;
 }
+
+.column-book_cover {
+    width: 50px;
+}
