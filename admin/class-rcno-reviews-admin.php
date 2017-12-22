@@ -694,9 +694,12 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_remove_admin_columns( $columns ) {
 		unset( $columns['author'] );
+		$columns['book_cover'] = __( 'Cover', 'rcno-review' );
 
 		return $columns;
 	}
+
+	// TODO: https://stackoverflow.com/a/3354804/3513481
 
 	/**
 	 * Enables the sorting and filtering of the admin columns based on custom taxonomies.
@@ -716,6 +719,32 @@ class Rcno_Reviews_Admin {
 		}
 
 		return $columns;
+	}
+
+	/**
+	 * Adds the book cover to the admin columns
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array $column_name	The array key and usually the name of the column.
+	 * @param array $review_id	    The post ID of each review listed in the admin column.
+	 *
+	 * @return void
+	 */
+	public function rcno_add_image_column_content( $column_name, $review_id ) {
+		$review        = get_post_custom( $review_id );
+		$book_cover    = $review[ 'rcno_reviews_book_cover_src' ][ 0 ];
+		$attachment_id = attachment_url_to_postid( $book_cover );
+		$book_src      = wp_get_attachment_image_url( $attachment_id, 'rcno-book-cover-sm' );
+
+		if ( $column_name === 'book_cover' ) {
+			if ( $book_src ) {
+				echo '<img src="' . $book_src . '" width="50px" />';
+			} else {
+				echo '<div style="width: 50px; height: 75px; background-color: #f1f1f1"></div>';
+			}
+
+		}
 	}
 
 	/**
