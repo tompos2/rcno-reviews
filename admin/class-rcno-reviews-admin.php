@@ -684,16 +684,27 @@ class Rcno_Reviews_Admin {
 	}
 
 	/**
-	 * Removes the post/review author from the admin columns.
+	 * Adds or removes columns from the admin columns.
+	 *
+	 * The builtin 'author' column is removed to avoid confusion with the
+	 * book author of a reviews book.
 	 *
 	 * @since 1.0.0
 	 *
+	 * @see   https://stackoverflow.com/a/3354804/3513481
 	 * @param array $columns	An array of the columns in the admin reviews page.
 	 *
 	 * @return array
 	 */
-	public function rcno_remove_admin_columns( $columns ) {
+	public function rcno_add_remove_admin_columns( $columns ) {
 		unset( $columns['author'] );
+
+		if ( true ) { // TODO: Add an option to the setting page if requested.
+			// Insert the new book cover column after the first column.
+			$columns = array_slice( $columns, 0, 1, true)
+			           + array( 'book_cover' => __( 'Cover', 'rcno-review' ) )
+			           + array_slice( $columns, 1, count( $columns ) - 1, true);
+		}
 
 		return $columns;
 	}
@@ -716,6 +727,32 @@ class Rcno_Reviews_Admin {
 		}
 
 		return $columns;
+	}
+
+	/**
+	 * Adds the book cover to the admin columns
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array $column_name	The array key and usually the name of the column.
+	 * @param array $review_id	    The post ID of each review listed in the admin column.
+	 *
+	 * @return void
+	 */
+	public function rcno_add_image_column_content( $column_name, $review_id ) {
+		$review        = get_post_custom( $review_id );
+		$book_cover    = $review[ 'rcno_reviews_book_cover_src' ][ 0 ];
+		$attachment_id = attachment_url_to_postid( $book_cover );
+		$book_src      = wp_get_attachment_image_url( $attachment_id, 'rcno-book-cover-sm' );
+
+		if ( $column_name === 'book_cover' ) {
+			if ( $book_src ) {
+				echo '<img src="' . $book_src . '" width="50px" />';
+			} else {
+				echo '<div style="width: 50px; height: 75px; background-color: #f1f1f1"></div>';
+			}
+
+		}
 	}
 
 	/**
