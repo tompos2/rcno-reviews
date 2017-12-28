@@ -696,10 +696,11 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @return array
 	 */
-	public function rcno_remove_admin_columns( $columns ) {
+	public function rcno_add_remove_admin_columns( $columns ) {
 		unset( $columns['author'] );
 
 		if ( true ) { // TODO: Add an option to the setting page if requested.
+			// Insert the new book cover column after the first column.
 			$columns = array_slice( $columns, 0, 1, true)
 			           + array( 'book_cover' => __( 'Cover', 'rcno-review' ) )
 			           + array_slice( $columns, 1, count( $columns ) - 1, true);

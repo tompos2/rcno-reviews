@@ -120,3 +120,7 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.3.0 =
 * Added an option to ignore articles when sorting titles
+
+= 1.4.0 =
+* Add book covers to the review posts admin column
+* Fixed an issue with removing custom taxonomies from the review posts admin column

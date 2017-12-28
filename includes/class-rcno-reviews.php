@@ -69,7 +69,7 @@ class Rcno_Reviews {
 	public function __construct() {
 
 		$this->plugin_name = 'rcno-reviews';
-		$this->version     = '1.3.0';
+		$this->version     = '1.4.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -271,8 +271,8 @@ class Rcno_Reviews {
 		$this->loader->add_filter( 'admin_head', $plugin_admin, 'rcno_reviews_help_tab' );
 		$this->loader->add_action( 'contextual_help', $plugin_admin, 'rcno_add_help_text', 10, 3 );
 
-		$this->loader->add_filter( 'manage_rcno_review_posts_columns', $plugin_admin, 'rcno_remove_admin_columns' );
-		$this->loader->add_filter( 'manage_edit-rcno_review_sortable_columns', $plugin_admin, 'rcno_sort_admin_columns', 11 );
+		$this->loader->add_filter( 'manage_rcno_review_posts_columns', $plugin_admin, 'rcno_add_remove_admin_columns' );
+		$this->loader->add_filter( 'manage_edit-rcno_review_sortable_columns', $plugin_admin, 'rcno_sort_admin_columns' );
 		$this->loader->add_filter( 'manage_rcno_review_posts_custom_column', $plugin_admin, 'rcno_add_image_column_content', 10, 2 );
 		$this->loader->add_filter( 'posts_clauses', $plugin_admin, 'rcno_query_admin_columns', 10, 2 );
 
