@@ -73,7 +73,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 
 		$title            = $instance['title'];
 		$posttype_enabled = $instance['posttype_enabled'];
-		$posttype         = $instance['posttype'];
+		//$posttype         = $instance['posttype'];
 
 		echo $args['before_widget'];
 
@@ -85,7 +85,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
             <div id="calendar_wrap">
 				<?php
                     if ( ! $posttype_enabled ) {
-					    ucc_get_calendar( array( $posttype ) );
+					    ucc_get_calendar( array( 'rcno_review' ) );
 				    } else {
 					    ucc_get_calendar();
                     }
@@ -108,7 +108,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 		$instance                     = $old_instance;
 		$instance['title']            = strip_tags( $new_instance['title'] );
 		$instance['posttype_enabled'] = isset( $new_instance['posttype_enabled'] ) ? $new_instance['posttype_enabled'] : false;
-		$instance['posttype']         = $new_instance['posttype'];
+		//$instance['posttype']         = $new_instance['posttype'];
 
 		return $instance;
 	}
@@ -136,16 +136,16 @@ class Rcno_Reviews_Calendar extends WP_Widget {
                    type="checkbox" value="1" <?php checked( '1', $posttype_enabled ); ?>/>
             <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show regular posts?', 'rcno-reviews' ); ?></label>
         </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'posttype' ); ?>"><?php _e( 'Choose the Post Type to display' ); ?></label>
-            <select name="<?php echo $this->get_field_name( 'posttype' ); ?>" id="<?php echo $this->get_field_id( 'posttype' ); ?>" class="widefat">
+<!--        <p>
+            <label for="<?php /*echo $this->get_field_id( 'posttype' ); */?>"><?php /*_e( 'Choose the Post Type to display' ); */?></label>
+            <select name="<?php /*echo $this->get_field_name( 'posttype' ); */?>" id="<?php /*echo $this->get_field_id( 'posttype' ); */?>" class="widefat">
 				<?php
-				foreach ( $posttypes as $option ) {
+/*				foreach ( $posttypes as $option ) {
 					echo '<option value="' . $option->name . '" id="' . $option->name . '"', $posttype == $option->name ? ' selected="selected"' : '', '>', $option->name, '</option>';
 				}
-				?>
+				*/?>
             </select>
-        </p>
+        </p>-->
 		<?php
 	}
 
@@ -154,7 +154,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 /* ucc_get_calendar() :: Extends get_calendar() by including custom post types.
  * Derived from get_calendar() code in /wp-includes/general-template.php.
  */
-function ucc_get_calendar( $post_types = '', $initial = true, $echo = true ) {
+function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true ) {
 	global $wpdb, $m, $monthnum, $year, $wp_locale, $posts;
 
 	if ( empty( $post_types ) || ! is_array( $post_types ) ) {
