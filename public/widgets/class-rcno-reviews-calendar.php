@@ -63,7 +63,12 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 		}
 	}
 
-	/** @see WP_Widget::widget */
+	/**
+	 * Outputs the content of the widget
+	 *
+	 * @param array $args
+	 * @param array $instance
+	 */
 	public function widget( $args, $instance ) {
 
 		extract( $args );
@@ -81,7 +86,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
         <div class="widget_calendar">
             <div id="calendar_wrap">
 				<?php
-                    if ( $posttype_enabled === true ) {
+                    if ( $posttype_enabled === '1' ) {
 					    ucc_get_calendar( array( $posttype ) );
 				    } else {
 					    ucc_get_calendar();
@@ -93,7 +98,14 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 		<?php
 	}
 
-	/** @see WP_Widget::update */
+	/**
+	 * Processing widget options on save
+	 *
+	 * @param array $new_instance The new options
+	 * @param array $old_instance The previous options
+	 *
+	 * @return array
+	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance                     = $old_instance;
 		$instance['title']            = strip_tags( $new_instance['title'] );
@@ -103,7 +115,11 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 		return $instance;
 	}
 
-	/** @see WP_Widget::form */
+	/**
+	 * Outputs the options form on admin
+	 *
+	 * @param array $instance The widget options
+	 */
 	public function form( $instance ) {
 
 		$posttypes = get_post_types( '', 'objects' );
@@ -120,7 +136,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
         <p>
             <input id="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>" name="<?php echo $this->get_field_name( 'posttype_enabled' ); ?>"
                    type="checkbox" value="1" <?php checked( '1', $posttype_enabled ); ?>/>
-            <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show only one post type?' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show only book reviews?' ); ?></label>
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'posttype' ); ?>"><?php _e( 'Choose the Post Type to display' ); ?></label>
@@ -134,7 +150,6 @@ class Rcno_Reviews_Calendar extends WP_Widget {
         </p>
 		<?php
 	}
-
 
 }
 
