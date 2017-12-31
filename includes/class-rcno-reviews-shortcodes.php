@@ -96,10 +96,10 @@ class Rcno_Reviews_Shortcodes {
 				 * Get post by id
 				 */
 			} else {
-				$review_post = get_post( intval( $options['id'] ) );
+				$review_post = get_post( (int)$options['id'] );
 			}
 
-			if ( ! is_null( $review_post ) && $review_post->post_type === 'rcno_review' ) {
+			if ( null !== $review_post && $review_post->post_type === 'rcno_review' ) {
 				$output               = '';
 				$review               = get_post_custom( $review_post->ID );
 				$GLOBALS['review_id'] = $review_post->ID; // Set review ID for retrieval in embedded reviews.
@@ -107,7 +107,7 @@ class Rcno_Reviews_Shortcodes {
 				if ( 1 === (int) $options['nodesc'] ) {
 					// Embed without description.
 					$template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
-					$output   = $template->get_the_rcno_full_book_details( intval( $options['id'] ) );
+					$output   = $template->get_the_rcno_full_book_details( (int)$options['id'] );
 				} elseif ( 0 === (int) $options['excerpt'] ) {
 					// Embed complete review.
 					$output = $plugin_public->rcno_render_review_content( $review_post );
@@ -132,7 +132,7 @@ class Rcno_Reviews_Shortcodes {
 	 * @since 1.0.0
 	 *
 	 * @param mixed $options
-	 * @return void
+	 * @return string
 	 */
 	public function rcno_do_taxlist_shortcode( $options ) {
 
@@ -140,7 +140,7 @@ class Rcno_Reviews_Shortcodes {
 
 		// Set default values for options not set explicitly.
 		$options = shortcode_atts( array(
-			'headers' => 'false',
+			'headers' => 1,
 			'tax'     => 'n/a',
 		), $options );
 
@@ -157,7 +157,7 @@ class Rcno_Reviews_Shortcodes {
 	 * @since 1.0.0
 	 *
 	 * @param mixed $options
-	 * @return void
+	 * @return string
 	 */
 	public function rcno_do_reviews_index_shortcode( $options ) {
 
@@ -165,7 +165,7 @@ class Rcno_Reviews_Shortcodes {
 
 		// Set default values for options not set explicitly.
 		$options = shortcode_atts( array(
-			'headers' => 'false',
+			'headers' => 1,
 		), $options );
 
 		// The actual rendering is done by a special function.
@@ -276,7 +276,7 @@ class Rcno_Reviews_Shortcodes {
 		$json = array();
 
 		foreach ( $reviews as $review ) {
-			array_push( $json, array( 'id' => $review->ID, 'title' => $review->post_title ) );
+			$json[] = array( 'id' => $review->ID, 'title' => $review->post_title );
 		}
 
 		wp_send_json( $json );
@@ -296,7 +296,7 @@ class Rcno_Reviews_Shortcodes {
 	 */
 	public function rcno_add_button_scl( $editor_id = 'content' ) {
 		global $post_type;
-		if ( ! in_array( $post_type, array( 'page' ), true ) ) {
+		if ( 'page' !== $post_type ) {
 			return;
 		}
 
@@ -314,7 +314,7 @@ class Rcno_Reviews_Shortcodes {
 	 */
 	public function rcno_load_in_admin_footer_scl() {
 		global $post_type;
-		if ( ! in_array( $post_type, array( 'page' ), true ) ) {
+		if ( 'page' !== $post_type ) {
 			return;
 		}
 
@@ -333,7 +333,7 @@ class Rcno_Reviews_Shortcodes {
 		global $post_type;
 
 		// Only load on pages where it is necessary.
-		if ( ! in_array( $post_type, array( 'page' ), true ) ) {
+		if ( 'page' !== $post_type) {
 			return;
 		}
 

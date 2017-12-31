@@ -200,3 +200,16 @@ ul.rcno-alphabet-navigation li {
 ul.rcno-taxlist li {
     margin: 0 0 0 2em;
 }
+
+@media (min-device-width : 320px) and (max-device-width : 480px) {
+
+    .rcno-full-book-description {
+        width: 100%;
+    }
+
+    .rcno-full-book-cover {
+        width: 100%;
+        margin: 0 0 1em 0;
+    }
+
+}

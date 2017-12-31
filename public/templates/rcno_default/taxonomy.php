@@ -59,7 +59,7 @@ if ( $terms ) {
 
 			$title = ucfirst( $value['name'] );
 
-			if ( 'true' === $headers ) { // Add first letter headlines for easier navigation.
+			if ( (bool)$headers ) { // Add first letter headlines for easier navigation.
 
 				// Get the first letter (without special chars).
 				$first_letter = remove_accents( $title )[0];

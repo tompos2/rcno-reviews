@@ -17,10 +17,10 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Create an empty array to take with the first letters of all headlines.
 	$letters = array();
 
-	// Create an empty array to take the book details
+	// Create an empty array to take the book details.
 	$books = array();
 
-	// Used in 'usort' to sort alphabetically by book title
+	// Used in 'usort' to sort alphabetically by book title.
 	function cmp( $a, $b ) {
 		return strcasecmp( $a['title'], $b['title'] );
 	}
@@ -43,7 +43,7 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Walk through all the books to build alphabet navigation.
 	foreach ( $books as $book ) {
 
-		if ( $headers ) { // Add first letter headlines for easier navigation.
+		if ( (bool) $headers && '' !== $book['title'] ) { // Add first letter headlines for easier navigation.
 
 			// Get the first letter (without special chars).
 			$first_letter = remove_accents( $book['title'] )[0];
