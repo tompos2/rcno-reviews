@@ -154,6 +154,7 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-book-slider.php';
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-book-grid.php';
 		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-currently-reading.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/widgets/class-rcno-reviews-calendar.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-option.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/settings/class-rcno-reviews-callback-helper.php';
@@ -362,6 +363,9 @@ class Rcno_Reviews {
 
 		$reading = new Rcno_Reviews_Currently_Reading();
 		$this->loader->add_action( 'widgets_init', $reading, 'rcno_register_currently_reading_widget' );
+
+		$review_calendar = new Rcno_Reviews_Calendar();
+		$this->loader->add_action( 'widgets_init', $review_calendar, 'rcno_register_review_calendar_widget' );
 	}
 
 	/**
