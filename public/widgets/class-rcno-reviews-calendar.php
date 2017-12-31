@@ -71,22 +71,20 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		extract( $args );
-
 		$title            = $instance['title'];
 		$posttype_enabled = $instance['posttype_enabled'];
 		$posttype         = $instance['posttype'];
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		if ( $title ) {
-			echo $before_title . $title . $after_title;
+			echo $args['before_title'] . $title . $args['after_title'];
 		}
 	?>
         <div class="widget_calendar">
             <div id="calendar_wrap">
 				<?php
-                    if ( $posttype_enabled === '1' ) {
+                    if ( ! $posttype_enabled ) {
 					    ucc_get_calendar( array( $posttype ) );
 				    } else {
 					    ucc_get_calendar();
@@ -94,7 +92,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
                 ?>
             </div>
         </div>
-		<?php echo $after_widget; ?>
+		<?php echo $args['after_widget']; ?>
 		<?php
 	}
 
@@ -109,7 +107,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance                     = $old_instance;
 		$instance['title']            = strip_tags( $new_instance['title'] );
-		$instance['posttype_enabled'] = $new_instance['posttype_enabled'];
+		$instance['posttype_enabled'] = isset( $new_instance['posttype_enabled'] ) ? $new_instance['posttype_enabled'] : false;
 		$instance['posttype']         = $new_instance['posttype'];
 
 		return $instance;
@@ -136,7 +134,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
         <p>
             <input id="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>" name="<?php echo $this->get_field_name( 'posttype_enabled' ); ?>"
                    type="checkbox" value="1" <?php checked( '1', $posttype_enabled ); ?>/>
-            <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show only book reviews?' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show regular posts?', 'rcno-reviews' ); ?></label>
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'posttype' ); ?>"><?php _e( 'Choose the Post Type to display' ); ?></label>
