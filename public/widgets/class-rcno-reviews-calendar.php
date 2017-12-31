@@ -65,22 +65,28 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 
 	/** @see WP_Widget::widget */
 	public function widget( $args, $instance ) {
+
 		extract( $args );
-		$title            = apply_filters( 'widget_title', $instance[ 'title' ] );
-		$posttype_enabled = $instance[ 'posttype_enabled' ];
-		$posttype         = $instance[ 'posttype' ];
-		?>
-		<?php echo $before_widget; ?>
-		<?php if ( $title ) {
+
+		$title            = $instance['title'];
+		$posttype_enabled = $instance['posttype_enabled'];
+		$posttype         = $instance['posttype'];
+
+		echo $before_widget;
+
+		if ( $title ) {
 			echo $before_title . $title . $after_title;
-		} ?>
+		}
+	?>
         <div class="widget_calendar">
             <div id="calendar_wrap">
-				<?php if ( $posttype_enabled === true ) {
-					ucc_get_calendar( array( $posttype ) );
-				} else {
-					ucc_get_calendar();
-				} ?>
+				<?php
+                    if ( $posttype_enabled === true ) {
+					    ucc_get_calendar( array( $posttype ) );
+				    } else {
+					    ucc_get_calendar();
+                    }
+                ?>
             </div>
         </div>
 		<?php echo $after_widget; ?>
@@ -89,10 +95,10 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 
 	/** @see WP_Widget::update */
 	public function update( $new_instance, $old_instance ) {
-		$instance                       = $old_instance;
-		$instance[ 'title' ]            = strip_tags( $new_instance[ 'title' ] );
-		$instance[ 'posttype_enabled' ] = $new_instance[ 'posttype_enabled' ];
-		$instance[ 'posttype' ]         = $new_instance[ 'posttype' ];
+		$instance                     = $old_instance;
+		$instance['title']            = strip_tags( $new_instance['title'] );
+		$instance['posttype_enabled'] = $new_instance['posttype_enabled'];
+		$instance['posttype']         = $new_instance['posttype'];
 
 		return $instance;
 	}
@@ -102,9 +108,9 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 
 		$posttypes = get_post_types( '', 'objects' );
 
-		$title            = esc_attr( $instance[ 'title' ] );
-		$posttype_enabled = esc_attr( $instance[ 'posttype_enabled' ] );
-		$posttype         = esc_attr( $instance[ 'posttype' ] );
+		$title            = esc_attr( $instance['title'] );
+		$posttype_enabled = esc_attr( $instance['posttype_enabled'] );
+		$posttype         = esc_attr( $instance['posttype'] );
 		?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
