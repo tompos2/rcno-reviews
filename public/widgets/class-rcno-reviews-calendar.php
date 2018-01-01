@@ -120,11 +120,8 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$posttypes = get_post_types( '', 'objects' );
-
-		$title            = esc_attr( $instance['title'] );
-		$posttype_enabled = esc_attr( $instance['posttype_enabled'] );
-		$posttype         = esc_attr( $instance['posttype'] );
+		$title            = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
+		$posttype_enabled = isset( $instance['posttype_enabled'] ) ? esc_attr( $instance['posttype_enabled'] ) : false;
 		?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -136,19 +133,8 @@ class Rcno_Reviews_Calendar extends WP_Widget {
                    type="checkbox" value="1" <?php checked( '1', $posttype_enabled ); ?>/>
             <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show regular posts?', 'rcno-reviews' ); ?></label>
         </p>
-<!--        <p>
-            <label for="<?php /*echo $this->get_field_id( 'posttype' ); */?>"><?php /*_e( 'Choose the Post Type to display' ); */?></label>
-            <select name="<?php /*echo $this->get_field_name( 'posttype' ); */?>" id="<?php /*echo $this->get_field_id( 'posttype' ); */?>" class="widefat">
-				<?php
-/*				foreach ( $posttypes as $option ) {
-					echo '<option value="' . $option->name . '" id="' . $option->name . '"', $posttype == $option->name ? ' selected="selected"' : '', '>', $option->name, '</option>';
-				}
-				*/?>
-            </select>
-        </p>-->
 		<?php
 	}
-
 }
 
 /* ucc_get_calendar() :: Extends get_calendar() by including custom post types.
@@ -218,23 +204,23 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 	}
 
 	// week_begins = 0 stands for Sunday
-	$week_begins = intval( get_option( 'start_of_week' ) );
+	$week_begins = (int) get_option( 'start_of_week' );
 
 	// Let's figure out when we are
 	if ( ! empty( $monthnum ) && ! empty( $year ) ) {
-		$thismonth = '' . zeroise( intval( $monthnum ), 2 );
-		$thisyear  = '' . intval( $year );
+		$thismonth = '' . zeroise( (int) $monthnum, 2 );
+		$thisyear  = '' . (int) $year;
 	} elseif ( ! empty( $w ) ) {
 		// We need to get the month from MySQL
-		$thisyear  = '' . intval( substr( $m, 0, 4 ) );
+		$thisyear  = '' . (int) substr( $m, 0, 4 );
 		$d         = ( ( $w - 1 ) * 7 ) + 6; //it seems MySQL's weeks disagree with PHP's
 		$thismonth = $wpdb->get_var( "SELECT DATE_FORMAT( ( DATE_ADD( '${thisyear}0101' , INTERVAL $d DAY ) ) , '%m' ) " );
 	} elseif ( ! empty( $m ) ) {
-		$thisyear = '' . intval( substr( $m, 0, 4 ) );
+		$thisyear = '' . (int) substr( $m, 0, 4 );
 		if ( strlen( $m ) < 6 ) {
 			$thismonth = '01';
 		} else {
-			$thismonth = '' . zeroise( intval( substr( $m, 4, 2 ) ), 2 );
+			$thismonth = '' . zeroise( (int) substr( $m, 4, 2 ), 2 );
 		}
 	} else {
 		$thisyear  = gmdate( 'Y', current_time( 'timestamp' ) );
@@ -352,11 +338,11 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 
 	// See how much we should pad in the beginning
 	$pad = calendar_week_mod( date( 'w', $unixmonth ) - $week_begins );
-	if ( 0 != $pad ) {
+	if ( 0 !== $pad ) {
 		$calendar_output .= "\n\t\t" . '<td colspan="' . esc_attr( $pad ) . '" class="pad">&nbsp;</td>';
 	}
 
-	$daysinmonth = intval( date( 't', $unixmonth ) );
+	$daysinmonth = (int) date( 't', $unixmonth );
 	for ( $day = 1; $day <= $daysinmonth; ++ $day ) {
 		if ( isset( $newrow ) && $newrow ) {
 			$calendar_output .= "\n\t</tr>\n\t<tr>\n\t\t";
