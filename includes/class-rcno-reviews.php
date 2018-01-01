@@ -207,6 +207,9 @@ class Rcno_Reviews {
 		// Creates the book review custom taxonomy.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_custom_taxonomy' );
 
+		// Creates date archive rewrite rules.
+		$this->loader->add_action( 'generate_rewrite_rules', $plugin_admin, 'rcno_date_archives_rewrite_rules' );
+
 		// Registers new featured image sizes for the book review post type.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_book_cover_sizes' );
 

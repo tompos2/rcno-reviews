@@ -908,6 +908,85 @@ SQL;
 	}
 
 	/**
+	 * Adds the book review CPT to the rewrite rules for date archive.
+	 *
+	 * @since 1.5.0
+	 * @see goo.gl/RYqinL
+
+	 *
+	 * @param $wp_rewrite
+	 *
+	 * @return WP_Rewrite
+	 */
+	public function rcno_date_archives_rewrite_rules( $wp_rewrite ) {
+		$rules             = $this->rcno_generate_date_archives( 'rcno_review', $wp_rewrite );
+		$wp_rewrite->rules = array_merge( $rules, $wp_rewrite->rules );
+
+		return $wp_rewrite;
+	}
+
+	/**
+	 * Generates the rewrite rules for the date archives.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param $cpt
+	 * @param $wp_rewrite
+	 *
+	 * @return array
+	 */
+	public function rcno_generate_date_archives( $cpt, $wp_rewrite ) {
+		$rules = array();
+
+		$post_type    = get_post_type_object( $cpt );
+
+		if ( null === $post_type ) { // If our custom post type is not present fail gracefully.
+			return $rules;
+		}
+
+		$slug_archive = $post_type->has_archive;
+		if ( $slug_archive === false ) {
+			return $rules;
+		}
+		if ( $slug_archive === true ) {
+			$slug_archive = $post_type->name;
+		}
+
+		$dates = array(
+			array(
+				'rule' => '([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})',
+				'vars' => array( 'year', 'monthnum', 'day' ),
+			),
+			array(
+				'rule' => '([0-9]{4})/([0-9]{1,2})',
+				'vars' => array( 'year', 'monthnum' ),
+			),
+			array(
+				'rule' => '([0-9]{4})',
+				'vars' => array( 'year' ),
+			),
+		);
+
+		foreach ( $dates as $data ) {
+			$query = 'index.php?post_type=' . $cpt;
+			$rule  = $slug_archive . '/' . $data[ 'rule' ];
+
+			$i = 1;
+			foreach ( $data['vars'] as $var ) {
+				$query .= '&' . $var . '=' . $wp_rewrite->preg_index( $i );
+				$i ++;
+			}
+
+			$rules[ $rule . '/?$' ]                               = $query;
+			$rules[ $rule . '/feed/(feed|rdf|rss|rss2|atom)/?$' ] = $query . '&feed=' . $wp_rewrite->preg_index( $i );
+			$rules[ $rule . '/(feed|rdf|rss|rss2|atom)/?$' ]      = $query . '&feed=' . $wp_rewrite->preg_index( $i );
+			$rules[ $rule . '/page/([0-9]{1,})/?$' ]              = $query . '&paged=' . $wp_rewrite->preg_index( $i );
+		}
+
+		return $rules;
+	}
+
+	/**
 	 * Reset plugin option to default settings.
 	 *
 	 * @since 1.0.0

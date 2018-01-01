@@ -200,7 +200,7 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 	}
 
 	if ( isset( $_GET[ 'w' ] ) ) {
-		$w = '' . intval( $_GET[ 'w' ] );
+		$w = '' . (int) $_GET[ 'w' ];
 	}
 
 	// week_begins = 0 stands for Sunday
@@ -213,7 +213,7 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 	} elseif ( ! empty( $w ) ) {
 		// We need to get the month from MySQL
 		$thisyear  = '' . (int) substr( $m, 0, 4 );
-		$d         = ( ( $w - 1 ) * 7 ) + 6; //it seems MySQL's weeks disagree with PHP's
+		$d         = ( ( $w - 1 ) * 7 ) + 6; //it seems MySQL's weeks disagree with PHP's.
 		$thismonth = $wpdb->get_var( "SELECT DATE_FORMAT( ( DATE_ADD( '${thisyear}0101' , INTERVAL $d DAY ) ) , '%m' ) " );
 	} elseif ( ! empty( $m ) ) {
 		$thisyear = '' . (int) substr( $m, 0, 4 );
