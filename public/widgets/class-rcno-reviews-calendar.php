@@ -258,7 +258,7 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 	}
 
 	foreach ( $myweek as $wd ) {
-		$day_name        = ( true == $initial ) ? $wp_locale->get_weekday_initial( $wd ) : $wp_locale->get_weekday_abbrev( $wd );
+		$day_name        = ( true === $initial ) ? $wp_locale->get_weekday_initial( $wd ) : $wp_locale->get_weekday_abbrev( $wd );
 		$wd              = esc_attr( $wd );
 		$calendar_output .= "\n\t\t<th scope=\"col\" title=\"$wd\">$day_name</th>";
 	}
@@ -355,21 +355,20 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 			$calendar_output .= '<td>';
 		}
 
-		if ( in_array( $day, $daywithpost ) ) // any posts today?
-		{
-			$calendar_output .= '<a href="' . get_day_link( $thisyear, $thismonth, $day ) . "\" title=\"" . esc_attr( $ak_titles_for_day[ $day ] ) . "\">$day</a>";
+		if ( in_array( $day, $daywithpost, false ) ) { // any posts today?
+		    $calendar_output .= '<a href="' . get_day_link( $thisyear, $thismonth, $day ) . "\" title=\"" . esc_attr( $ak_titles_for_day[ $day ] ) . "\">$day</a>";
 		} else {
 			$calendar_output .= $day;
 		}
 		$calendar_output .= '</td>';
 
-		if ( 6 == calendar_week_mod( date( 'w', mktime( 0, 0, 0, $thismonth, $day, $thisyear ) ) - $week_begins ) ) {
+		if ( 6 === (int) calendar_week_mod( date( 'w', mktime( 0, 0, 0, $thismonth, $day, $thisyear ) ) - $week_begins ) ) {
 			$newrow = true;
 		}
 	}
 
 	$pad = 7 - calendar_week_mod( date( 'w', mktime( 0, 0, 0, $thismonth, $day, $thisyear ) ) - $week_begins );
-	if ( $pad != 0 && $pad != 7 ) {
+	if ( $pad !== 0 && $pad !== 7 ) {
 		$calendar_output .= "\n\t\t" . '<td class="pad" colspan="' . esc_attr( $pad ) . '">&nbsp;</td>';
 	}
 
