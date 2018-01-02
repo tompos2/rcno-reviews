@@ -142,6 +142,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
  */
 function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true ) {
 	global $wpdb, $m, $monthnum, $year, $wp_locale, $posts;
+	$custom_post_type = get_post_type_object( 'rcno_review' );
 
 	if ( empty( $post_types ) || ! is_array( $post_types ) ) {
 		$args     = array(
@@ -270,8 +271,18 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
   <tfoot>
   <tr>';
 
+	$prev_month_link = '';
+	$next_month_link = '';
+
+	if ( null !== $custom_post_type && null !== $previous ) {
+		$prev_month_link = get_site_url() . '/' . $custom_post_type->has_archive . '/' . $previous->year . '/' . $previous->month . '/';
+    }
+    if ( null !== $custom_post_type && null !== $next ) {
+	    $next_month_link = get_site_url() . '/' . $custom_post_type->has_archive . '/' . $next->year . '/' . $next->month . '/';
+    }
+
 	if ( $previous ) {
-		$calendar_output .= "\n\t\t" . '<td colspan="3" id="prev"><a href="' . get_month_link( $previous->year, $previous->month ) . '" title="' . sprintf( __( 'View reviews for %1$s %2$s' ), $wp_locale->get_month( $previous->month ), date( 'Y', mktime( 0, 0, 0, $previous->month, 1, $previous->year ) ) ) . '">&laquo; ' . $wp_locale->get_month_abbrev( $wp_locale->get_month( $previous->month ) ) . '</a></td>';
+		$calendar_output .= "\n\t\t" . '<td colspan="3" id="prev"><a href="' . $prev_month_link . '" title="' . sprintf( __( 'View reviews for %1$s %2$s' ), $wp_locale->get_month( $previous->month ), date( 'Y', mktime( 0, 0, 0, $previous->month, 1, $previous->year ) ) ) . '">&laquo; ' . $wp_locale->get_month_abbrev( $wp_locale->get_month( $previous->month ) ) . '</a></td>';
 	} else {
 		$calendar_output .= "\n\t\t" . '<td colspan="3" id="prev" class="pad">&nbsp;</td>';
 	}
@@ -279,7 +290,7 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 	$calendar_output .= "\n\t\t" . '<td class="pad">&nbsp;</td>';
 
 	if ( $next ) {
-		$calendar_output .= "\n\t\t" . '<td colspan="3" id="next"><a href="' . get_month_link( $next->year, $next->month ) . '" title="' . esc_attr( sprintf( __( 'View reviews for %1$s %2$s' ), $wp_locale->get_month( $next->month ), date( 'Y', mktime( 0, 0, 0, $next->month, 1, $next->year ) ) ) ) . '">' . $wp_locale->get_month_abbrev( $wp_locale->get_month( $next->month ) ) . ' &raquo;</a></td>';
+		$calendar_output .= "\n\t\t" . '<td colspan="3" id="next"><a href="' . $next_month_link . '" title="' . esc_attr( sprintf( __( 'View reviews for %1$s %2$s' ), $wp_locale->get_month( $next->month ), date( 'Y', mktime( 0, 0, 0, $next->month, 1, $next->year ) ) ) ) . '">' . $wp_locale->get_month_abbrev( $wp_locale->get_month( $next->month ) ) . ' &raquo;</a></td>';
 	} else {
 		$calendar_output .= "\n\t\t" . '<td colspan="3" id="next" class="pad">&nbsp;</td>';
 	}
@@ -355,8 +366,13 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 			$calendar_output .= '<td>';
 		}
 
+		$post_day_link = '';
+		if ( null !== $custom_post_type && $day ) {
+			$post_day_link = get_site_url() . '/' . $custom_post_type->has_archive . '/' . $thisyear . '/' . $thismonth . '/' . $day . '/';
+		}
+
 		if ( in_array( $day, $daywithpost, false ) ) { // any posts today?
-		    $calendar_output .= '<a href="' . get_day_link( $thisyear, $thismonth, $day ) . "\" title=\"" . esc_attr( $ak_titles_for_day[ $day ] ) . "\">$day</a>";
+		    $calendar_output .= '<a href="' . $post_day_link . "\" title=\"" . esc_attr( $ak_titles_for_day[ $day ] ) . "\">$day</a>";
 		} else {
 			$calendar_output .= $day;
 		}
