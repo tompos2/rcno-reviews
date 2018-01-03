@@ -87,7 +87,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
                     if ( ! $posttype_enabled ) {
 					    ucc_get_calendar( array( 'rcno_review' ) );
 				    } else {
-					    ucc_get_calendar();
+					    ucc_get_calendar( '', true, true, true  );
                     }
                 ?>
             </div>
@@ -140,7 +140,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 /* ucc_get_calendar() :: Extends get_calendar() by including custom post types.
  * Derived from get_calendar() code in /wp-includes/general-template.php.
  */
-function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true ) {
+function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true, $regular_posts = false ) {
 	global $wpdb, $m, $monthnum, $year, $wp_locale, $posts;
 	$custom_post_type = get_post_type_object( 'rcno_review' );
 
@@ -271,13 +271,19 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
   <tfoot>
   <tr>';
 
-	$prev_month_link = '';
-	$next_month_link = '';
 
-	if ( null !== $custom_post_type && null !== $previous ) {
+	$next_month_link = '';
+	$prev_month_link = '';
+
+	if ( $regular_posts && $previous ) {
+		$prev_month_link = get_month_link( $previous->year , $previous->month );
+	} elseif ( null !== $custom_post_type && null !== $previous ) {
 		$prev_month_link = get_site_url() . '/' . $custom_post_type->has_archive . '/' . $previous->year . '/' . $previous->month . '/';
     }
-    if ( null !== $custom_post_type && null !== $next ) {
+
+    if ( $regular_posts && $next ) {
+	    $next_month_link = get_month_link( $next->year , $next->month );
+    } elseif ( null !== $custom_post_type && null !== $next ) {
 	    $next_month_link = get_site_url() . '/' . $custom_post_type->has_archive . '/' . $next->year . '/' . $next->month . '/';
     }
 
@@ -367,7 +373,9 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true 
 		}
 
 		$post_day_link = '';
-		if ( null !== $custom_post_type && $day ) {
+		if ( $regular_posts ) {
+			$post_day_link = get_day_link( $thisyear , $thismonth , $day );
+		} elseif ( null !== $custom_post_type && $day ) {
 			$post_day_link = get_site_url() . '/' . $custom_post_type->has_archive . '/' . $thisyear . '/' . $thismonth . '/' . $day . '/';
 		}
 
