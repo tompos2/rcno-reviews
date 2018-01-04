@@ -530,6 +530,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Use the Rcno Currently Reading widget?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
+				'rcno_show_review_calendar_widget'  => array(
+					'name' => __( 'Review Calendar', 'rcno-reviews' ),
+					'desc' => __( 'Use the Rcno Review Calendar widget?', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'spacer-7'                        => array(
 					'name' => '',
 					'type' => 'spacer',

@@ -55,10 +55,10 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 	}
 
 	/**
-	 * Register our review calendar with if enabled in plugin settings.
+	 * Register our review calendar widget if enabled in plugin settings.
 	 */
 	public function rcno_register_review_calendar_widget() {
-		if ( true ) {
+		if ( Rcno_Reviews_Option::get_option( 'rcno_show_review_calendar_widget' ) ) {
 			register_widget( 'Rcno_Reviews_Calendar' );
 		}
 	}
