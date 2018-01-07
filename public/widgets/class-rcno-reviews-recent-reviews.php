@@ -26,9 +26,6 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
-	 *
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct() {
 
@@ -77,7 +74,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 *
 	 * @since 0.6.0
 	 */
-	function widget( $sidebar, $instance ) {
+	public function widget( $sidebar, $instance ) {
 		extract( $sidebar );
 
 		/* Set the $args for wp_tag_cloud() to the $instance array. */
@@ -89,7 +86,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		extract( $args, EXTR_SKIP );
 
 		// If there is an error, stop and return
-		if ( isset( $instance['error'] ) && $instance['error'] ) {
+		if ( ! empty( $instance['error'] ) ) {
 			return;
 		}
 
@@ -105,8 +102,8 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		// Begin frontend output.
 		$query_args     = array(
 			'post_type'      => 'rcno_review',
-			'posts_per_page' => 5,
-			'orderby'        => 'rand',
+			'posts_per_page' => (int) $instance['review_count'],
+			//'orderby'        => 'rand',
 		);
 		$recent_reviews = new WP_Query( $query_args );
 
@@ -150,7 +147,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 *
 	 * @since 0.8.0
 	 */
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		// Fill current state with old data to be sure we not loose anything
 		$instance = $old_instance;
 
@@ -171,7 +168,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 *
 	 * @since 0.8.0
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 		/* Set up the default form values. */
 		$defaults = array(
 			'title'        => '',
