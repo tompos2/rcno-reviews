@@ -127,3 +127,8 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.5.0 =
 * Add a new review calendar widget
+
+= 1.5.1 =
+* Fixed an issue with the incorrect API path for the Currently Reading dashboard widget
+* Set Book Grid widget to default to 9 book for a balanced layout
+* Set Recent Reviews widget to sort reviews by most recent and fixed review count option
