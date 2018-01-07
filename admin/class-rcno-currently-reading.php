@@ -92,19 +92,24 @@ class Rcno_Currently_Reading {
 	 */
 	public function rcno_enqueue_currently_reading_scripts() {
 
-		wp_enqueue_script( $this->widget_id, plugin_dir_url( __DIR__ ) . 'admin/js/rcno-currently-reading.js',
-			array( 'jquery' ), '1.0.0', true );
-		wp_localize_script( $this->widget_id, 'currently_reading', array(
-			'api' => array(
-				'url'   => esc_url_raw( rest_url( 'rcno-reviews/v1/currently-reading' ) ),
-				'nonce' => wp_create_nonce( 'wp_rest' ),
-			),
-			'strings' => array(
-				'saved' => __( 'Progress updated', 'rcno-reviews' ),
-				'error' => __( 'Error', 'rcno-reviews' )
-			),
-		) );
+		$screen = get_current_screen();
 
+		if ( null !== $screen && 'dashboard' === $screen->id ) {
+
+			wp_enqueue_script( $this->widget_id, plugin_dir_url( __DIR__ ) . 'admin/js/rcno-currently-reading.js',
+				array( 'jquery' ), '1.5.1', true );
+			wp_localize_script( $this->widget_id, 'currently_reading', array(
+				'api' => array(
+					'url'   => esc_url_raw( rest_url( 'rcno/v1/currently-reading' ) ),
+					'nonce' => wp_create_nonce( 'wp_rest' ),
+				),
+				'strings' => array(
+					'saved' => __( 'Progress updated', 'rcno-reviews' ),
+					'error' => __( 'Error', 'rcno-reviews' )
+				),
+			) );
+
+		}
 	}
 
 	/**

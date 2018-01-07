@@ -1,28 +1,5 @@
 (function ($) {
 
-  /*$.ajax({
-    method: 'GET',
-    url: currently_reading.api.url,
-    beforeSend: function (xhr) {
-
-      xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
-
-    }
-  })
-  .then(function (r) {
-
-    var result = r[ r.length - 1 ];
-
-    if (result.hasOwnProperty('industry')) {
-      $('#industry').val(result.industry);
-    }
-
-    if (result.hasOwnProperty('amount')) {
-      $('#amount').val(result.amount);
-    }
-
-  });*/
-
   $('#rcno_currently_reading_form').on('submit', function (e) {
     e.preventDefault();
 
