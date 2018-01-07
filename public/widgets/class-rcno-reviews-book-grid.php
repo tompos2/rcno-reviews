@@ -80,7 +80,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 	 *
 	 * @since 0.6.0
 	 */
-	function widget( $sidebar, $instance ) {
+	public function widget( $sidebar, $instance ) {
 		extract( $sidebar );
 
 		/* Set the $args for wp_tag_cloud() to the $instance array. */
@@ -92,7 +92,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		extract( $args, EXTR_SKIP );
 
 		// If there is an error, stop and return
-		if ( isset( $instance[ 'error' ] ) && $instance[ 'error' ] ) {
+		if ( !empty( $instance['error'] ) ) {
 			return;
 		}
 
@@ -147,7 +147,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 	 *
 	 * @since 0.8.0
 	 */
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		// Fill current state with old data to be sure we not loose anything
 		$instance = $old_instance;
 
@@ -169,13 +169,13 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 	 *
 	 * @since 0.8.0
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		global $slide_duration;
 		// Set up the default form values.
 		$defaults = array(
 			'title'        => '',
-			'review_count' => 5,
+			'review_count' => 9,
 			'order'        => 'rand',
 		);
 
