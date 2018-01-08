@@ -75,7 +75,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
         }
 
 		wp_enqueue_style( 'owl-carousel-main', plugin_dir_url( __FILE__ ) . '../css/owl.carousel.min.css', array(), '1.0.0', 'all' );
-		wp_enqueue_style( 'owl-carousel-theme', plugin_dir_url( __FILE__ ) . '../css/owl.theme.default.min.css', array(), '1.0.0', 'all' );
+		// wp_enqueue_style( 'owl-carousel-theme', plugin_dir_url( __FILE__ ) . '../css/owl.theme.default.min.css', array(), '1.0.0', 'all' );
 
 		wp_enqueue_script( 'owl-carousel-script', plugin_dir_url( __FILE__ ) . '../js/owl.carousel.min.js', array( 'jquery' ), '1.0.0', true );
 		wp_localize_script( 'owl-carousel-script', 'owl_carousel_options', array(

@@ -143,7 +143,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $query The default WP_Query object.
+	 * @param WP_Query $query The default query object.
 	 *
 	 * @return  void
 	 */

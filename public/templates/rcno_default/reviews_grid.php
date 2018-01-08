@@ -19,19 +19,21 @@ if ( $posts && count( $posts ) > 0 ) {
 
 	// Used in 'usort' to sort alphabetically by book title.
 	function cmp( $a, $b ) {
-		return strcasecmp( $a['title'], $b['title'] );
+		return strcasecmp( $a['sorted_title'], $b['sorted_title'] );
 	}
 
 	// Loop through each post, book title from post-meta and work on book title.
 	foreach ( $posts as $book ) {
 		$book_details = get_post_custom( $book->ID );
-		$title = $book_details['rcno_book_title'];
+		$sorted_title = $book_details['rcno_book_title'][0];
+		$unsorted_title = $sorted_title;
 		if ( $ignore_articles ) {
-			$title = preg_replace( '/^(A|An|The) (.+)/', '$2, $1', $book_details['rcno_book_title'] );
+			$sorted_title = preg_replace( '/^(A|An|The) (.+)/', '$2, $1', $sorted_title );
 		}
 		$books[] = array(
 			'ID'    => $book->ID,
-			'title' => $title[0],
+			'sorted_title' => $sorted_title,
+			'unsorted_title' => $unsorted_title,
 
 		);
 		usort( $books, 'cmp' );
@@ -46,9 +48,9 @@ if ( $posts && count( $posts ) > 0 ) {
 		$out .= '<div class="rcno-book-grid-item"><a href="' . get_permalink( $book['ID'] ) . '">';
 
 		// Pick the 'medium' book cover size
-		$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-lg', true );
+		$out .= $template->get_the_rcno_book_cover( $book['ID'], 'medium', true );
 
-		$out .= '<p>' . $book['title'] . '</p>';
+		$out .= '<p>' . $book['unsorted_title'] . '</p>';
 		$out .= '</a></div>';
 
 		// increment the counter.

@@ -284,7 +284,8 @@ class Rcno_Template_Tags {
 			return $book_src;
 		}
 
-		$book_title = $review['rcno_reviews_book_cover_title'][0];
+		// Use the book title because most users wont edit it form the file upload screen.
+		$book_title = $review['rcno_book_title'][0];
 		$book_alt   = $review['rcno_reviews_book_cover_alt'][0];
 
 		$book_title = $book_title ? esc_attr( $book_title ) : __( 'No Cover Available', 'rcno-reviews' );
