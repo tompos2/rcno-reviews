@@ -139,3 +139,26 @@
     border-top: 1px solid;
     padding: 5px;
 }
+
+.rcno-book-grid-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.rcno-book-grid-item {
+    position: relative;
+    flex: 0 1 200px;
+    margin: 0 10px 10px 0;
+}
+
+.rcno-book-grid-item p {
+    position: absolute;
+    bottom: 0;
+    display: none;
+}
+
+.rcno-book-grid-item img {
+    width: 100%;
+    margin: 0;
+}

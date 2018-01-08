@@ -175,6 +175,29 @@ class Rcno_Reviews_Shortcodes {
 	}
 
 	/**
+	 * Do the shortcode 'rcno-index' and render a list of all reviews
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param mixed $options
+	 * @return string
+	 */
+	public function rcno_do_reviews_grid_shortcode( $options ) {
+
+		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
+
+		// Set default values for options not set explicitly.
+		$options = shortcode_atts( array(
+			'headers' => 1,
+		), $options );
+
+		// The actual rendering is done by a special function.
+		$output = $plugin_public->rcno_render_review_grid( $options['headers'] );
+
+		return do_shortcode( $output );
+	}
+
+	/**
 	 ************************ SHORTCODE FOR REVIEW *****************************
 	 */
 

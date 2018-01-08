@@ -420,6 +420,7 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-reviews', array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
 		add_shortcode( 'rcno-tax-list', array( $plugin_shortcodes, 'rcno_do_taxlist_shortcode' ) );
 		add_shortcode( 'rcno-reviews-index', array( $plugin_shortcodes, 'rcno_do_reviews_index_shortcode' ) );
+		add_shortcode( 'rcno-reviews-grid', array( $plugin_shortcodes, 'rcno_do_reviews_grid_shortcode' ) );
 
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );

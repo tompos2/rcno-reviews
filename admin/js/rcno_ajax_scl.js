@@ -176,8 +176,9 @@ var rcnoListingsSc;
             var attrs, html, begin, end, cursor, title, selection,
                 textarea = rcnoListingsSc.textarea;
 
-            if (!textarea)
-                return;
+            if (! textarea) {
+              return;
+            }
 
             var out = "[";
 
@@ -190,9 +191,11 @@ var rcnoListingsSc;
                 case 'rcno-reviews-index':
                     out += "rcno-reviews-index";
                     break;
+                case 'rcno-reviews-grid':
+                    out += "rcno-reviews-grid";
+                    break;
                 default:
-                    alert(sel.val());
-                    alert('error');
+                    alert( 'Error' + sel.val());
                     return;
             }
 
@@ -233,9 +236,11 @@ var rcnoListingsSc;
                 case 'rcno-reviews-index':
                     out += "rcno-reviews-index";
                     break;
+                case 'rcno-reviews-grid':
+                    out += "rcno-reviews-grid";
+                    break;
                 default:
-                    alert(sel.val());
-                    alert('error');
+                    alert( 'Error:' + sel.val() );
                     return;
             }
             out += "]<br/>";

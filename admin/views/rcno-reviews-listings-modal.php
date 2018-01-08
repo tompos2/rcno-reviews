@@ -43,6 +43,11 @@
 						   id="rcno-modal-scl-mode-ind"/>
 					<label for="rcno-modal-scl-mode-ind"><b><?php esc_html_e( 'Embed book review index', 'rcno-reviews' ); ?></b></label>
 				</li>
+                <li>
+                    <input type="radio" value="rcno-reviews-grid" name="rcno-modal-scl-mode"
+                           id="rcno-modal-scl-mode-grid"/>
+                    <label for="rcno-modal-scl-mode-grid"><b><?php esc_html_e( 'Embed book review grid', 'rcno-reviews' ); ?></b></label>
+                </li>
 			</ul>
 		</div>
 		<div class="submitbox">

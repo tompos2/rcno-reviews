@@ -492,6 +492,66 @@ class Rcno_Reviews_Public {
 
 
 	/**
+	 * Render a grid of all reviews alphabetically using the layout's reviews_grid.php file
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param mixed $headers	Whether or not to show a first letter navigation header before each item.
+	 *
+	 * @return string $content
+	 */
+	public function rcno_render_review_grid( $headers = false ) {
+		// Create empty output variable.
+		$output = '';
+
+		// Get the layout's include path.
+		$include_path = $this->rcno_get_the_layout() . 'reviews_grid.php';
+
+		if ( ! file_exists( $include_path ) ) {
+			// If the layout does not provide an taxonomy file, use the default one.
+			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/reviews_grid.php';
+		}
+
+		/**
+		 * Set review_post to false for template tags.
+		 */
+		$review_post = false;
+
+		// Get an alphabetically ordered list of all reviews.
+		$args  = array(
+			'post_type'      => 'rcno_review',
+			'post_status'    => 'publish',
+			'orderby'        => 'post_title',
+			'order'          => 'ASC',
+			'posts_per_page' => - 1,
+		);
+		$query = new WP_Query( $args );
+		$posts = array();
+
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				global $post;
+				$posts[] = $post;
+			}
+		}
+
+		// Include the taxonomy file.
+		include_once __DIR__ . '/class-rcno-template-tags.php';
+		include_once $include_path;
+
+		// Render the content using that file.
+		$content = ob_get_contents();
+
+		// Finish rendering.
+		ob_end_clean();
+
+		// Return the rendered content.
+		return $content;
+	}
+
+
+	/**
 	 * Get the path to the layout file depending on the layout options.
 	 *
 	 * @since 1.0.0
