@@ -191,10 +191,13 @@
 ul.rcno-alphabet-navigation {
     list-style: none;
     display: flex;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 ul.rcno-alphabet-navigation li {
-    flex-basis: 4%;
+    flex: 0 1 20px;
 }
 
 ul.rcno-taxlist li {

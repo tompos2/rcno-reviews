@@ -254,12 +254,19 @@
 }
 
 ul.rcno-alphabet-navigation {
-    display: flex;
     list-style: none;
+    display: flex;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 ul.rcno-alphabet-navigation li {
-    flex-basis: 4%;
+    flex: 0 1 20px;
+}
+
+ul.rcno-taxlist li {
+    margin: 0 0 0 20px;
 }
 
 .rcno-purchase-links-container {
@@ -284,4 +291,17 @@ ul.rcno-alphabet-navigation li {
 .rcno-purchase-links-container .rcno-purchase-links:hover {
     color: #fff;
     background: #fd9025 !important;
+}
+
+@media (min-device-width : 320px) and (max-device-width : 480px) {
+
+    .rcno-full-book-description {
+        width: 100%;
+    }
+
+    .rcno-full-book-cover {
+        width: 100%;
+        margin: 0 0 1em 0;
+    }
+
 }

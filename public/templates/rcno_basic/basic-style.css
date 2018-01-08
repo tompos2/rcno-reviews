@@ -243,11 +243,35 @@
 }
 
 ul.rcno-alphabet-navigation {
-    display: flex;
     list-style: none;
+    display: flex;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 ul.rcno-alphabet-navigation li {
-    flex-basis: 4%;
+    flex: 0 1 20px;
+}
+
+ul.rcno-taxlist li {
+    margin: 0;
+}
+
+ul.rcno-taxlist {
+    list-style: none;
+}
+
+@media (min-device-width : 320px) and (max-device-width : 480px) {
+
+    .rcno-full-book-description {
+        width: 100%;
+    }
+
+    .rcno-full-book-cover {
+        width: 100%;
+        margin: 0 0 1em 0;
+    }
+
 }
 

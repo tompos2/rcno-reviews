@@ -132,3 +132,9 @@ Please open a new topic on the plugin's WordPress.org support page
 * Fixed an issue with the incorrect API path for the Currently Reading dashboard widget
 * Set Book Grid widget to default to 9 book for a balanced layout
 * Set Recent Reviews widget to sort reviews by most recent and fixed review count option
+
+= 1.6.0 =
+* Added a book review grid index page, via MacyJS for a masonary layout
+* Merged Owl Carousel theme file with main file, for reduced file load
+* Book cover now uses book title meta, as most users don't provide one on file upload
+* Fixed the styling of headers on the main review index page
