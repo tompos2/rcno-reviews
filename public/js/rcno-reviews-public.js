@@ -1,45 +1,63 @@
 (function ($) {
-    'use strict';
+  'use strict';
 
-    /**
-     * All of the code for your public-facing JavaScript source
-     * should reside in this file.
-     *
-     * Note: It has been assumed you will write jQuery code here, so the
-     * $ function reference has been prepared for usage within the scope
-     * of this function.
-     *
-     * This enables you to define handlers, for when the DOM is ready:
-     *
-     * $(function() {
+  /**
+   * All of the code for your public-facing JavaScript source
+   * should reside in this file.
+   *
+   * Note: It has been assumed you will write jQuery code here, so the
+   * $ function reference has been prepared for usage within the scope
+   * of this function.
+   *
+   * This enables you to define handlers, for when the DOM is ready:
+   *
+   * $(function() {
 	 *
 	 * });
-     *
-     * When the window is loaded:
-     *
-     * $( window ).load(function() {
+   *
+   * When the window is loaded:
+   *
+   * $( window ).load(function() {
 	 *
 	 * });
-     *
-     * ...and/or other possibilities.
-     *
-     * Ideally, it is not considered best practise to attach more than a
-     * single DOM-ready or window-load handler for a particular page.
-     * Although scripts in the WordPress core, Plugins and Themes may be
-     * practising this, we should strive to set a better example in our own work.
-     */
+   *
+   * ...and/or other possibilities.
+   *
+   * Ideally, it is not considered best practise to attach more than a
+   * single DOM-ready or window-load handler for a particular page.
+   * Although scripts in the WordPress core, Plugins and Themes may be
+   * practising this, we should strive to set a better example in our own work.
+   */
 
-    $(function () {
-        if (typeof owl_carousel_options !== 'undefined') {
+  $(function () {
+    if (typeof owl_carousel_options !== 'undefined') {
 
-            $('.rcno-book-slider-container.owl-carousel').owlCarousel({
-                items: 1,
-                autoplay: true,
-                autoplayTimeout: owl_carousel_options.duration * 1000,
-                loop: true
-            });
+      $('.rcno-book-slider-container.owl-carousel').owlCarousel({
+        items: 1,
+        autoplay: true,
+        autoplayTimeout: owl_carousel_options.duration * 1000,
+        loop: true
+      });
+    }
+
+  });
+
+  $(function () {
+    if ( window.Macy !== undefined ) {
+      Macy({
+        container: '#macy-container',
+        trueOrder: false,
+        waitForImages: false,
+        margin: 10,
+        columns: 4,
+        breakAt: {
+          1200: 4,
+          940: 3,
+          520: 2,
+          400: 1
         }
-
-    });
+      });
+    }
+  });
 
 })(jQuery);

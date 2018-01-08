@@ -37,7 +37,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		usort( $books, 'cmp' );
 	}
 
-	$out .= '<div class="rcno-book-grid-container rcno-book-grid-index">';
+	$out .= '<div id="macy-container" class="rcno-book-grid-index-container rcno-book-grid-index">';
 
 	// Walk through all the books to build alphabet navigation.
 	foreach ( $books as $book ) {

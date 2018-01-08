@@ -140,7 +140,7 @@
     padding: 5px;
 }
 
-.rcno-book-grid-container {
+.rcno-book-grid-index-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;

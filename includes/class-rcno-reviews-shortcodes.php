@@ -194,6 +194,9 @@ class Rcno_Reviews_Shortcodes {
 		// The actual rendering is done by a special function.
 		$output = $plugin_public->rcno_render_review_grid( $options['headers'] );
 
+		// We are enqueuing the previously registered script.
+		wp_enqueue_script( 'macy-masonary-grid' );
+
 		return do_shortcode( $output );
 	}
 
