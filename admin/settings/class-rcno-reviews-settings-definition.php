@@ -32,7 +32,7 @@ class Rcno_Reviews_Settings_Definition {
 	 *
 	 * @return array                   [description]
 	 */
-	static private function apply_tab_slug_filters( $default_settings ) {
+	private static function apply_tab_slug_filters( $default_settings ) {
 
 		$extended_settings[] = array();
 		$extended_tabs       = self::get_tabs();
@@ -50,9 +50,9 @@ class Rcno_Reviews_Settings_Definition {
 	/**
 	 * [get_default_tab_slug description]
 	 *
-	 * @return [type] [description]
+	 * @return string
 	 */
-	static public function get_default_tab_slug() {
+	public static function get_default_tab_slug() {
 		return key( self::get_tabs() );
 	}
 
@@ -62,11 +62,9 @@ class Rcno_Reviews_Settings_Definition {
 	 * @since    1.0.0
 	 * @return   array    $tabs    Settings tabs
 	 */
-	static public function get_tabs() {
+	public static function get_tabs() {
 
 		$tabs = array();
-		//$tabs['default_tab']    = __( 'Default Tab', self::$plugin_name );
-		//$tabs['second_tab']     = __( 'Second Tab', self::$plugin_name );
 		$tabs[ 'general_tab' ]    = __( 'General', 'rcno-reviews' );
 		$tabs[ 'taxonomy_tab' ]   = __( 'Taxonomies', 'rcno-reviews' );
 		$tabs[ 'components_tab' ] = __( 'Components', 'rcno-reviews' );
@@ -86,7 +84,7 @@ class Rcno_Reviews_Settings_Definition {
 	 * @since    1.0.0
 	 * @return    mixed    $value    Value saved / $default if key if not exist
 	 */
-	static public function get_settings() {
+	public static function get_settings() {
 
 		require_once 'class-rcno-reviews-get-templates.php';
 

@@ -222,9 +222,9 @@ class Rcno_Reviews_Public_Rating {
 
 		$user = '';
 
-		$comment_ID      = intval( $_POST['comment_ID'] );
-		$comment_post_ID = intval( $_POST['comment_post_ID'] );
-		$comment_karma   = intval( $_POST['rating'] );
+		$comment_ID      = isset( $_POST['comment_ID'] ) ? (int) $_POST['comment_ID'] : '' ;
+		$comment_post_ID = isset( $_POST['comment_post_ID'] ) ? (int) $_POST['comment_post_ID'] : '';
+		$comment_karma   = isset( $_POST['rating'] ) ? (int) $_POST['rating'] : '' ;
 
 		$comment_author_cookie     = $_COOKIE[ 'comment_author_' . COOKIEHASH ];
 		$comment_author_e_cookie   = $_COOKIE[ 'comment_author_email_' . COOKIEHASH ];
@@ -261,7 +261,7 @@ class Rcno_Reviews_Public_Rating {
 		}
 
 		if ( empty( $comment_author ) || empty( $comment_author_email ) ) {
-			wp_die( __( "I don't know who you are", 'rcno-reviews' ) );
+			wp_die( __( 'I don\'t know who you are', 'rcno-reviews' ) );
 		}
 
 		update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );
@@ -327,7 +327,7 @@ class Rcno_Reviews_Public_Rating {
 			case 'count':
 				$count = $this->count_ratings_info( $review_id );
 				if ( null !== $count ) {
-					return $this->comment_count = (int) count( $count );
+					return $this->comment_count = count( $count );
 				}
 
 				return 0;
@@ -367,7 +367,7 @@ class Rcno_Reviews_Public_Rating {
 	private function count_ratings_info( $review_id ) {
 
 		$comments = get_comments( array(
-			'post_id'  => intval( $review_id ),
+			'post_id'  => (int) $review_id,
 			'meta_key' => 'rcno_review_comment_rating',
 		) );
 
@@ -382,7 +382,7 @@ class Rcno_Reviews_Public_Rating {
 			$karma_scores[] = get_comment_meta( $value, 'rcno_review_comment_rating', true );
 		}
 
-		return $karma_scores ? (array) $karma_scores : null;
+		return $karma_scores ? $karma_scores : null;
 	}
 
 
@@ -494,7 +494,7 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function display_comment_rating( $content ) {
 
-		if ( is_singular( 'rcno_review' ) && $this->enable_rating ) {
+		if ( $this->enable_rating && is_singular( 'rcno_review' ) ) {
 			$out = '';
 			$out .= $this->the_comment_rating();
 			$out .= $content;

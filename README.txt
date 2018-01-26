@@ -138,3 +138,7 @@ Please open a new topic on the plugin's WordPress.org support page
 * Merged Owl Carousel theme file with main file, for reduced file load
 * Book cover now uses book title meta, as most users don't provide one on file upload
 * Fixed the styling of headers on the main review index page
+
+= 1.6.1 =
+* Refactored the custom template functions
+* Cleaned up various classes

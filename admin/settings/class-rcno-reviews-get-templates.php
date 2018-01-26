@@ -21,7 +21,7 @@ class Rcno_Reviews_Get_Templates {
 		$this->add_layout_to_list( $dir_name );
 
 		// Then also add layouts available locally from the current theme (if applicable).
-		$dir_name = get_stylesheet_directory() . '/rcno-templates/';
+		$dir_name = get_stylesheet_directory() . '/rcno_templates/';
 
 		$this->add_layout_to_list( $dir_name );
 	}
@@ -32,11 +32,11 @@ class Rcno_Reviews_Get_Templates {
 				// Walk through all folders in that directory:
 				while ( false !== ( $file = readdir( $handle ) ) ) {
 					if ( $file !== '.' && $file !== '..' && $file !== '.svn' ) {
-						if ( preg_match( "/plugin/", $dir_name ) ) {
+						if ( false !== stripos( $dir_name, 'plugin' ) ) {
 							$base_url = RCNO_PLUGIN_URI . 'public/templates/' . $file;
 							$local    = false;
 						} else {
-							$base_url = get_template_directory_uri() . '/rcno-templates/' . $file;
+							$base_url = get_template_directory_uri() . '/rcno_templates/' . $file;
 							$local    = true;
 						}
 
@@ -69,7 +69,7 @@ class Rcno_Reviews_Get_Templates {
 		preg_match_all( $regexp, $fileDocComment[1], $matches );
 
 		foreach ( $matches[0] as $match ) {
-			$param                       = explode( ": ", $match );
+			$param                       = explode( ': ', $match );
 			$params[ trim( $param[0] ) ] = trim( $param[1] );
 		}
 

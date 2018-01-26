@@ -40,11 +40,11 @@ class Rcno_Template_Tags {
 
 
 	/**
-	 * The current version of the plugin.
+	 * The Public_Rating class.
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      object $public_rating An instance of the Public Rating class.
+	 * @var      Rcno_Reviews_Public_Rating $public_rating An instance of the Public Rating class.
 	 */
 	protected $public_rating;
 
@@ -91,20 +91,15 @@ class Rcno_Template_Tags {
 		// Get the layout chosen.
 		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template' );
 
-		// Calculate the include path for the layout: Check if a global or local layout should be used.
-		if ( false !== strpos( $layout, 'local' ) ) {
-			// Local layout.
-			$include_path = get_stylesheet_directory() . '/rcno-templates/' . preg_replace( '/^local\_/', '', $layout ) . '/functions.php';
+		$include_path = get_stylesheet_directory() . '/rcno_templates/' . $layout . '/functions.php';
+
+		if ( file_exists( $include_path ) ) {
+			include_once $include_path;
 		} else {
 			// Global layout.
-			$include_path = plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/functions.php';
+			include_once plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/functions.php';
 		}
 
-		// Check if the layout file really exists.
-		if ( file_exists( $include_path ) ) {
-			// Include the functions.php.
-			include_once( $include_path );
-		}
 	}
 
 	/******************************************************************************

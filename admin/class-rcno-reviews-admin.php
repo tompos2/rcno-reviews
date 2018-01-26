@@ -10,6 +10,14 @@
  * @subpackage Rcno_Reviews/admin
  */
 
+require_once __DIR__ . '/class-rcno-admin-description-meta.php';
+require_once __DIR__ . '/class-rcno-admin-isbn.php';
+require_once __DIR__ . '/class-rcno-admin-book-cover.php';
+require_once __DIR__ . '/class-rcno-admin-general-info.php';
+require_once __DIR__ . '/class-rcno-admin-review-score.php';
+require_once __DIR__ . '/class-rcno-admin-review-rating.php';
+require_once __DIR__ . '/class-rcno-admin-buy-links.php';
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -45,7 +53,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var	   object	$description_meta
+	 * @var	   Rcno_Admin_Description_Meta	$description_meta
 	 */
 	public $description_meta;
 
@@ -54,7 +62,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var	   object	$book_isbn;
+	 * @var	   Rcno_Admin_ISBN	$book_isbn;
 	 */
 	public $book_isbn;
 
@@ -63,7 +71,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var	   $book_cover
+	 * @var	   Rcno_Admin_Book_Cover    $book_cover
 	 */
 	public $book_cover;
 
@@ -72,7 +80,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var    $book_general_info
+	 * @var    Rcno_Admin_General_Info  $book_general_info
 	 */
 	public $book_general_info;
 
@@ -81,7 +89,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var    $book_review_score
+	 * @var    Rcno_Admin_Review_Score  $book_review_score
 	 */
 	public $book_review_score;
 
@@ -90,7 +98,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var    $book_review_rating
+	 * @var    Rcno_Admin_Review_Rating $book_review_rating
 	 */
 	public $book_review_rating;
 
@@ -99,7 +107,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var    $buy_links
+	 * @var    Rcno_Admin_Buy_Links $buy_links
 	 */
 	public $buy_links;
 
@@ -119,26 +127,13 @@ class Rcno_Reviews_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		require_once __DIR__ . '/class-rcno-admin-description-meta.php';
-		$this->description_meta = new Rcno_Admin_Description_Meta( $this->plugin_name, $this->version );
-
-		require_once __DIR__ . '/class-rcno-admin-isbn.php';
-		$this->book_isbn = new Rcno_Admin_ISBN( $this->plugin_name, $this->version );
-
-		require_once __DIR__ . '/class-rcno-admin-book-cover.php';
-		$this->book_cover = new Rcno_Admin_Book_Cover( $this->version, $this->version );
-
-		require_once __DIR__ . '/class-rcno-admin-general-info.php';
-		$this->book_general_info = new Rcno_Admin_General_Info( $this->plugin_name, $this->version );
-
-		require_once __DIR__ . '/class-rcno-admin-review-score.php';
-		$this->book_review_score = new Rcno_Admin_Review_Score( $this->plugin_name, $this->version );
-
-		require_once __DIR__ . '/class-rcno-admin-review-rating.php';
+		$this->description_meta   = new Rcno_Admin_Description_Meta( $this->plugin_name, $this->version );
+		$this->book_isbn          = new Rcno_Admin_ISBN( $this->plugin_name, $this->version );
+		$this->book_cover         = new Rcno_Admin_Book_Cover( $this->version, $this->version );
+		$this->book_general_info  = new Rcno_Admin_General_Info( $this->plugin_name, $this->version );
+		$this->book_review_score  = new Rcno_Admin_Review_Score( $this->plugin_name, $this->version );
 		$this->book_review_rating = new Rcno_Admin_Review_Rating( $this->plugin_name, $this->version );
-
-		require_once __DIR__ . '/class-rcno-admin-buy-links.php';
-		$this->buy_links = new Rcno_Admin_Buy_Links( $this->plugin_name, $this->version );
+		$this->buy_links          = new Rcno_Admin_Buy_Links( $this->plugin_name, $this->version );
 	}
 
 	/**
@@ -433,7 +428,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $post	The post object of the current review.
+	 * @param WP_Post $post	The post object of the current review.
 	 * @param array  $box	The metaboxes attached to the current post object.
 	 *
 	 * @return void
@@ -448,9 +443,9 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $contextual_help
-	 * @param int    $screen_id
-	 * @param object $screen
+	 * @param string    $contextual_help
+	 * @param int       $screen_id
+	 * @param WP_Screen $screen
 	 *
 	 * @return string
 	 */
@@ -760,8 +755,8 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array  $clauses	An array of the SQL statement sent with each WP_Query.
-	 * @param object $wp_query	The WP WP_Query object.
+	 * @param array     $clauses	An array of the SQL statement sent with each WP_Query.
+	 * @param WP_Query  $wp_query	The WP WP_Query object.
 	 *
 	 * @return array
 	 */

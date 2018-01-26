@@ -32,7 +32,7 @@ class Rcno_Reviews_Option {
 	 *
 	 * @return    mixed    $value    Value saved / $default if key if not exist
 	 */
-	static public function get_option( $key, $default = false ) {
+	public static function get_option( $key, $default = false ) {
 
 		if ( empty( $key ) ) {
 			return $default;
@@ -55,9 +55,12 @@ class Rcno_Reviews_Option {
 	 * @TODO  : Trigger hooks & filters, pull requests welcomed
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param $key
+	 * @param $value
 	 * @return true if the option was saved or false if not
 	 */
-	static public function update_option( $key, $value ) {
+	public static function update_option( $key, $value ) {
 
 		if ( empty( $key ) ) {
 			return false;
@@ -83,9 +86,11 @@ class Rcno_Reviews_Option {
 	 * @TODO  : Trigger hooks & filters, pull requests welcomed
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param $key
 	 * @return true if the option was deleted or false if not
 	 */
-	static public function delete_option( $key ) {
+	public static function delete_option( $key ) {
 
 		if ( empty( $key ) ) {
 			return false;
@@ -101,7 +106,7 @@ class Rcno_Reviews_Option {
 		return update_option( 'rcno_reviews_settings', $plugin_options );
 	}
 
-	static public function delete_all_options() {
+	public static function delete_all_options() {
 
 		// Delete all the options.
 		delete_option( 'rcno_reviews_settings' );
