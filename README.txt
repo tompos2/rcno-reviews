@@ -142,3 +142,7 @@ Please open a new topic on the plugin's WordPress.org support page
 = 1.6.1 =
 * Refactored the custom template functions
 * Cleaned up various classes
+
+= 1.6.2 =
+* Fixed a bug in last update that was remove content on homepage,
+    see: https://wordpress.org/support/topic/strange-issue-after-new-update/
