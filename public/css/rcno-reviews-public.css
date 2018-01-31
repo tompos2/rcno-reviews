@@ -127,8 +127,8 @@
 }
 
 .rcno-currently-reading-widget-fe .book-cover .progress-bar {
-    background: rgba(0, 0, 0, 0.44);
-    width: 100%;
+    background: #10a4ff;
+    height: 6px;
     position: absolute;
     bottom: 0;
 }

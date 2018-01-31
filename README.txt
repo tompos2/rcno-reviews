@@ -146,3 +146,6 @@ Please open a new topic on the plugin's WordPress.org support page
 = 1.6.2 =
 * Fixed a bug in last update that was remove content on homepage,
     see: https://wordpress.org/support/topic/strange-issue-after-new-update/
+
+= 1.6.3 =
+* redesigned the progress bar on the currently reading widget.
