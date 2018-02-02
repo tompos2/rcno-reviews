@@ -1,3 +1,5 @@
 /rcno-reviews/
 .idea/
 .vscode/
+node_modules/
+dist/

@@ -304,7 +304,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $review_post   The WP post object.
+	 * @param WP_Post $review_post   The WP post object.
 	 *
 	 * @return string $content
 	 */
@@ -606,6 +606,22 @@ class Rcno_Reviews_Public {
 			get_permalink( get_the_ID() ),
 			__( Rcno_Reviews_Option::get_option( 'rcno_excerpt_read_more', 'Read more' ), 'rcno-reviews' )
 		);
+	}
+
+	/**
+	 * Filter the "read more" excerpt string link to the post.
+	 *
+	 * @since 1.6.3
+	 *
+	 * @see https://goo.gl/QAJHQU
+	 *
+	 * @param string $link The "read more" link.
+	 *
+	 * @return string Modified "read more" excerpt string.
+	 */
+	public function rcno_reviews_remove_more_link_scroll( $link ) {
+
+		return preg_replace( '|#more-[0-9]+|', '', $link );
 	}
 
 }

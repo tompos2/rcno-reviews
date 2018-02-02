@@ -308,6 +308,9 @@ class Rcno_Reviews {
 
 		$this->loader->add_filter( 'excerpt_length', $plugin_public, 'rcno_reviews_excerpt_length', 10 );
 		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'rcno_reviews_excerpt_more', 10 );
+
+		// Removes the default behaviour of scrolling to the more tag.
+		$this->loader->add_filter( 'the_content_more_link', $plugin_public, 'rcno_reviews_remove_more_link_scroll' );
 	}
 
 	/**

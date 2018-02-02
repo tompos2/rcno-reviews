@@ -561,9 +561,12 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_review_content( $review_id ) {
 
+		$read_more = Rcno_Reviews_Option::get_option( 'rcno_excerpt_read_more' );
+
 		$review_content = '';
 		$review_content .= '<div class="rcno-book-review-content">';
-		$review_content .= apply_filters( 'the_content', get_post_field( 'post_content', $review_id ) );
+		// $review_content .= apply_filters( 'the_content', get_post_field( 'post_content', $review_id ) );
+		$review_content .= apply_filters( 'the_content', get_the_content( $read_more ) );
 		$review_content .= '</div>';
 
 		return $review_content;
@@ -697,6 +700,11 @@ class Rcno_Template_Tags {
 	 * @return string
 	 */
 	public function get_the_rcno_book_purchase_links( $review_id, $label = false ) {
+
+		// If we are on the homepage don't display this.
+		if ( is_home() || is_front_page()  ) {
+			return false;
+		}
 
 		// Disables the purchase links displaying on reviews.
 		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_purchase_links' ) ) {
@@ -837,6 +845,11 @@ class Rcno_Template_Tags {
 	 */
 	private function rcno_the_review_box( $review_id ) {
 
+		// If we are on the homepage don't display this.
+		if ( is_home() || is_front_page()  ) {
+			return false;
+		}
+
 		// Disables the review score box displaying on frontend book reviews.
 		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
 			return false;
@@ -930,6 +943,11 @@ class Rcno_Template_Tags {
 	 */
 	private function rcno_the_review_badge( $review_id ) {
 
+		// If we are on the homepage don't display this.
+		if ( is_home() || is_front_page()  ) {
+			return false;
+		}
+
 		// Disables the review score badge displaying on frontend book reviews.
 		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
 			return false;
@@ -1016,6 +1034,7 @@ class Rcno_Template_Tags {
 	 * @return string
 	 */
 	public function get_the_rcno_book_schema_data( $review_id ) {
+
 		$data = array();
 
 		$book_title = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
@@ -1062,9 +1081,15 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int $review_id	The post ID of the current review.
 	 *
-	 * @return void
+	 * @return false
 	 */
 	public function the_rcno_book_schema_data( $review_id ) {
+
+		// If we are on the homepage don't display this.
+		if ( is_home() || is_front_page()  ) {
+			return false;
+		}
+
 		echo '<script type="application/ld+json">' . $this->get_the_rcno_book_schema_data( $review_id ) . '</script>';
 	}
 
@@ -1172,9 +1197,15 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int $review_id	The post ID of the current review.
 	 *
-	 * @return void
+	 * @return false
 	 */
 	public function the_rcno_review_schema_data( $review_id ) {
+
+		// If we are on the homepage don't display this.
+		if ( is_home() || is_front_page()  ) {
+			return false;
+		}
+
 		echo '<script type="application/ld+json">' . $this->get_the_rcno_review_schema_data( $review_id ) . '</script>';
 	}
 

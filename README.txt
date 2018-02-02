@@ -148,4 +148,5 @@ Please open a new topic on the plugin's WordPress.org support page
     see: https://wordpress.org/support/topic/strange-issue-after-new-update/
 
 = 1.6.3 =
-* redesigned the progress bar on the currently reading widget.
+* Redesigned the progress bar on the currently reading widget.
+* Refactored the home page content to take into consideration the 'read more' tag.
