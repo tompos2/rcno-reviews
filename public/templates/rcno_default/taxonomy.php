@@ -68,15 +68,17 @@ if ( $terms ) {
 				if ( ! in_array( $first_letter, $letters, true ) ) {
 					// Close list of proceeding group.
 					if ( 0 !== $i ) {
-						$out .= '</ul>';
+						$out .= '</div><!--- xxxxx --->';
+						$out .= '</div><!--- .rcno-tax-wrapper --->';
 					}
 					// Create a headline.
+					$out .= '<div class="rcno-tax-wrapper">';
 					$out .= '<h2><a class="rcno-toplink" href="#top">&uarr;</a><a name="' . $first_letter . '"></a>';
 					$out .= strtoupper( $first_letter );
 					$out .= '</h2>';
 
 					// Start new list.
-					$out .= '<ul class="rcno-taxlist">';
+					$out .= '<div class="rcno-taxlist">';
 
 					// Add the letter to the list.
 					$letters[] = $first_letter;
@@ -84,26 +86,31 @@ if ( $terms ) {
 			} else {
 				// Start list before first item.
 				if ( 0 === $i ) {
-					$out .= '<ul class="rcno-taxlist">';
+					$out .= '<div class="rcno-taxlist">';
 				}
 			}
 
 			// Add the entry for the term.
-			$out .= '<li><a href="' . get_term_link( $value['ID'] ) . '">';
+			$out .= '<div class="rcno-tax-name">';
+			$out .= '<a href="' . get_term_link( $value['ID'] ) . '">';
 			$out .= $title;
-			$out .= '</a></li>';
+			$out .= '</a>';
+			$out .= '</div><!--- .rcno-tax-name --->';
 
 			// Increment the counter.
 			$i ++;
 
 		}
 		// Close the last list.
-		$out .= '</ul>';
+		$out .= '</div><!--- last .rcno-taxlist --->';
+		$out .= '</div><!--- last .rcno-tax-wrapper --->';
 
 		// Output the rendered list.
 		echo '<a name="top"></a>';
 		$template->the_rcno_alphabet_nav_bar( $letters );
+		echo '<div class="rcno-tax-container">';
 		echo $out;
+		echo '</div>';
 		$template->the_rcno_alphabet_nav_bar( $letters );
 
 	} else {
