@@ -702,7 +702,7 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_book_purchase_links( $review_id, $label = false ) {
 
 		// If we are on the homepage don't display this.
-		if ( is_home() || is_front_page()  ) {
+		if ( ! is_single()  ) {
 			return false;
 		}
 
@@ -846,7 +846,7 @@ class Rcno_Template_Tags {
 	private function rcno_the_review_box( $review_id ) {
 
 		// If we are on the homepage don't display this.
-		if ( is_home() || is_front_page()  ) {
+		if ( ! is_single()  ) {
 			return false;
 		}
 
@@ -944,7 +944,7 @@ class Rcno_Template_Tags {
 	private function rcno_the_review_badge( $review_id ) {
 
 		// If we are on the homepage don't display this.
-		if ( is_home() || is_front_page()  ) {
+		if ( ! is_single()  ) {
 			return false;
 		}
 
@@ -1086,7 +1086,7 @@ class Rcno_Template_Tags {
 	public function the_rcno_book_schema_data( $review_id ) {
 
 		// If we are on the homepage don't display this.
-		if ( is_home() || is_front_page()  ) {
+		if ( ! is_single()  ) {
 			return false;
 		}
 
@@ -1202,7 +1202,7 @@ class Rcno_Template_Tags {
 	public function the_rcno_review_schema_data( $review_id ) {
 
 		// If we are on the homepage don't display this.
-		if ( is_home() || is_front_page()  ) {
+		if ( ! is_single() ) {
 			return false;
 		}
 

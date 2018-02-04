@@ -39,9 +39,11 @@ if ( $terms ) {
 		foreach ( $terms as $key => $value ) {
 			// Form the terms available we are only taking the 'name' and 'ID' and doing a natural sort.
 			$_terms[] = array(
-				'ID'    => $value->term_id ,
-				'name'  => $value->name,
-				'count' => $value->count,
+				'ID'       => $value->term_id,
+				'name'     => $value->name,
+				'count'    => $value->count,
+				'slug'     => $value->slug,
+				'taxonomy' => $value->taxonomy,
 			);
 			usort( $_terms, 'cmp' );
 		}
@@ -54,12 +56,44 @@ if ( $terms ) {
 
 		// Walk through all the terms to build alphabet navigation.
 		foreach ( $_terms as $value ) {
+
+			$all_titles = array();
+			$all_ids = array();
+			$review_data = array();
 			// Get term meta data.
 			$term_meta = get_term_meta( $value['ID'] );
 
 			$title = ucfirst( $value['name'] );
 
-			if ( (bool)$headers ) { // Add first letter headlines for easier navigation.
+			$custom_args = array(
+				'post_type' => 'rcno_review',
+				'tax_query' => array(
+				  array(
+				      'taxonomy' => $value['taxonomy'],
+				      'field'    => 'slug',
+				      'terms'    => $value['slug'],
+				  ),
+				),
+				'nopaging' => true,
+				'order'    => 'ASC',
+				'orderby'  => 'rand'
+			);
+
+			$query = new WP_Query( $custom_args );
+
+			if ( $query->have_posts() ) {
+				while ( $query->have_posts() ) : $query->the_post();
+					$review_data[]   = array(
+						'ID'    => get_the_ID(),
+						'title' => get_the_title(),
+						'link'  => get_the_permalink(),
+					);
+				endwhile;
+			}
+
+			wp_reset_postdata();
+
+			if ( (bool) $headers ) { // Add first letter headlines for easier navigation.
 
 				// Get the first letter (without special chars).
 				$first_letter = remove_accents( $title )[0];
@@ -95,6 +129,15 @@ if ( $terms ) {
 			$out .= '<a href="' . get_term_link( $value['ID'] ) . '">';
 			$out .= $title;
 			$out .= '</a>';
+
+			foreach ( $review_data as $_data) {
+				$out .= '<div class="book-cover-container">';
+				$out .= '<a href="' . $_data['link'] .'">';
+				$out .= $template->get_the_rcno_book_cover( $_data['ID'], 'rcno-book-cover-sm' );
+				$out .= '</a>';
+				$out .= '</div>';
+			}
+
 			$out .= '</div><!--- .rcno-tax-name --->';
 
 			// Increment the counter.
@@ -120,5 +163,5 @@ if ( $terms ) {
 
 } else {
 	// Error: no taxonomy set.
-	esc_html_e( '<b>Error:</b> No taxonomy set for this list!', 'rcno-reviews' );
+	esc_html_e( 'Error: No taxonomy set for this list!', 'rcno-reviews' );
 }
