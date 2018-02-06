@@ -139,7 +139,7 @@ class Rcno_Template_Tags {
 		$out .= '</div>';
 
 		$out .= '<div class="rcno-full-book-description">';
-		$out .= wp_trim_words( $this->get_the_rcno_book_description( $review_id ), 75 );
+		$out .= $this->get_the_rcno_book_description( $review_id );
 		$out .= '</div>';
 
 		$out .= '</div>';
@@ -463,24 +463,25 @@ class Rcno_Template_Tags {
 	 * Renders the book description. An empty string if description is empty.
 	 *
 	 * @param int $review_id	The current review's post ID.
+	 * @param int $word_count	The length of the book description.
 	 *
 	 * @since 1.0.0
 	 * @return string
 	 */
-	private function get_the_rcno_book_description( $review_id ) {
+	private function get_the_rcno_book_description( $review_id, $word_count = 75 ) {
+
 
 		$review = get_post_custom( $review_id );
+		$book_description = isset( $review['rcno_book_description'][0] ) ? wp_trim_words( $review['rcno_book_description'][0], $word_count ) : '';
 
 		// Create an empty output string.
 		$out = '';
 
 		// Render the description only if it is not empty.
-		if ( isset( $review['rcno_book_description'] ) ) {
-			if ( strlen( $review['rcno_book_description'][0] ) > 0 ) {
-				$out .= '<div class="rcno-book-description">';
-				$out .= sanitize_post_field( 'rcno_book_description', $review['rcno_book_description'][0], $review_id );
-				$out .= '</div>';
-			}
+		if ( ! empty( $book_description ) ) {
+			$out .= '<div class="rcno-book-description">';
+			$out .= apply_filters( 'rcno_book_description', $book_description );
+			$out .= '</div>';
 		}
 
 		// Return the rendered description.
