@@ -165,20 +165,27 @@
 }
 
 .rcno-tax-container .rcno-tax-wrapper {
-    margin: 0 0 1em 0;
+    margin: 0 0 2em 0;
 }
 
 .rcno-tax-container .rcno-tax-name {
     margin: 0 0 1em 0;
 }
 
-.rcno-tax-container .book-cover-container {
-    display: inline-block;
-    width: 85px;
-    margin: 0 10px 10px 0;
-}
-
-.rcno-tax-container .rcno-tax-name a {
+.rcno-tax-container .rcno-tax-name > a {
     display: block;
     box-shadow: none;
+    border-bottom: 1px solid;
+    margin: 0 0 10px 0;
+}
+
+.rcno-tax-container .rcno-tax-name .books-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.rcno-tax-container .rcno-tax-name .books-container .book-cover-container {
+    flex: 0 1 85px;
+    margin: 0 10px 10px 0;
 }

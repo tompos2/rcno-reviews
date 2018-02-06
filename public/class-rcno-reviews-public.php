@@ -117,7 +117,7 @@ class Rcno_Reviews_Public {
 					    list-style: none;
 					}
 					ul.rcno-taxlist-book-covers li {
-					    flex: 0 1 125px;
+					    flex: 0 1 85px;
 					    margin: 0 10px 0 0;
 					}
 					ul.rcno-taxlist-book-covers p {

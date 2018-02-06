@@ -75,8 +75,8 @@ if ( $terms ) {
 				  ),
 				),
 				'nopaging' => true,
-				'order'    => 'ASC',
-				'orderby'  => 'rand'
+				/*'order'    => 'ASC',
+				'orderby'  => 'rand'*/
 			);
 
 			$query = new WP_Query( $custom_args );
@@ -130,13 +130,21 @@ if ( $terms ) {
 			$out .= $title;
 			$out .= '</a>';
 
+			$out .= '<div class="books-container">';
 			foreach ( $review_data as $_data) {
 				$out .= '<div class="book-cover-container">';
 				$out .= '<a href="' . $_data['link'] .'">';
 				$out .= $template->get_the_rcno_book_cover( $_data['ID'], 'rcno-book-cover-sm' );
 				$out .= '</a>';
 				$out .= '</div>';
+
+				/*$out .= '<div class="book-title-container">';
+				$out .= '<a href="' . $_data['link'] .'">';
+				$out .= $template->get_the_rcno_book_meta( $_data['ID'], 'rcno_book_title', 'p', false );
+				$out .= '</a>';
+				$out .= '</div>';*/
 			}
+			$out .= '</div><!--- .books-container--->';
 
 			$out .= '</div><!--- .rcno-tax-name --->';
 
