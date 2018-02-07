@@ -3,8 +3,11 @@
  * Render a list of all terms of this taxonomy
  */
 
-$template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+$template        = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 $ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
+$sort_name       = Rcno_Reviews_Option::get_option( 'rcno_reviews_sort_names' );
+$index_headers   = Rcno_Reviews_Option::get_option( 'rcno_reviews_index_headers' );
+$book_covers     = Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false );
 
 // Create an empty output variable.
 $out = '';
@@ -12,7 +15,7 @@ $out = '';
 if ( $terms ) {
 	if ( count( $terms ) > 0 ) {
 
-		if ( 'rcno_author' === $taxonomy ) {
+		if ( 'rcno_author' === $taxonomy && 'last_name_first_name' === $sort_name ) {
 			// If we are looking at authors, move the first name to last and separate by a comma.
 			foreach ( $terms as $_term ) {
 				$_term_name = $_term->name;
@@ -130,22 +133,24 @@ if ( $terms ) {
 			$out .= $title;
 			$out .= '</a>';
 
-			$out .= '<div class="books-container">';
+			$out .= '<div class="' . ( empty( $book_covers ) ? 'titles-container' : 'books-container' ) . '">';
 			foreach ( $review_data as $_data) {
-				$out .= '<div class="book-cover-container">';
-				$out .= '<a href="' . $_data['link'] .'">';
-				$out .= $template->get_the_rcno_book_cover( $_data['ID'], 'rcno-book-cover-sm' );
-				$out .= '</a>';
-				$out .= '</div>';
 
-				/*$out .= '<div class="book-title-container">';
-				$out .= '<a href="' . $_data['link'] .'">';
-				$out .= $template->get_the_rcno_book_meta( $_data['ID'], 'rcno_book_title', 'p', false );
-				$out .= '</a>';
-				$out .= '</div>';*/
+				if ( $book_covers ) {
+					$out .= '<div class="book-cover-container">';
+					$out .= '<a href="' . $_data[ 'link' ] . '">';
+					$out .= $template->get_the_rcno_book_cover( $_data[ 'ID' ], 'rcno-book-cover-sm' );
+					$out .= '</a>';
+					$out .= '</div>';
+				} else {
+					$out .= '<div class="book-title-container">';
+					$out .= '<a href="' . $_data['link'] .'">';
+					$out .= $template->get_the_rcno_book_meta( $_data['ID'], 'rcno_book_title', 'p', false );
+					$out .= '</a>';
+					$out .= '</div>';
+				}
 			}
 			$out .= '</div><!--- .books-container--->';
-
 			$out .= '</div><!--- .rcno-tax-name --->';
 
 			// Increment the counter.
@@ -153,8 +158,7 @@ if ( $terms ) {
 
 		}
 		// Close the last list.
-		$out .= '</div><!--- last .rcno-taxlist --->';
-		$out .= '</div><!--- last .rcno-tax-wrapper --->';
+		$out .= '</ul>';
 
 		// Output the rendered list.
 		echo '<a name="top"></a>';

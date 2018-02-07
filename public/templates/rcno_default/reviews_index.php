@@ -6,6 +6,7 @@
 
 $template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 $ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
+$index_headers   = Rcno_Reviews_Option::get_option( 'rcno_reviews_index_headers' );
 
 // Create an empty output variable.
 $out = '';
@@ -43,7 +44,12 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Walk through all the books to build alphabet navigation.
 	foreach ( $books as $book ) {
 
-		if ( (bool) $headers && '' !== $book['title'] ) { // Add first letter headlines for easier navigation.
+		if ( $index_headers && ( (bool) $headers ) ) { // Add first letter headlines for easier navigation.
+
+			if( '' === $book['title'] ) {
+				echo 'One of your books is missing its title.';
+				return new WP_Error('A book title is missing.');
+			}
 
 			// Get the first letter (without special chars).
 			$first_letter = remove_accents( $book['title'] )[0];

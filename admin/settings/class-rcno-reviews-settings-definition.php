@@ -257,11 +257,6 @@ class Rcno_Reviews_Settings_Definition {
 					),
 					'type'    => 'select',
 				),
-				'rcno_reviews_ignore_articles'          => array(
-					'name' => __( 'Ignore articles', 'rcno-reviews' ),
-					'desc' => __( 'Ignore articles when sorting titles. (e.g. "The", "A", "An")', 'rcno-reviews' ),
-					'type' => 'checkbox',
-				),
 				'spacer_0'                      => array(
 					'name' => '',
 					'type' => 'spacer',
@@ -537,6 +532,38 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '',
 					'type' => 'spacer',
 				),
+				'extras_tab_header_2'             => array(
+					'name' => '<strong>' . __( 'Index Pages', 'rcno-reviews' ) . '</strong>',
+					'type' => 'header',
+				),
+				'rcno_reviews_index_headers'      => array(
+					'name' => __( 'Navigation headers', 'rcno-reviews' ),
+					'desc' => __( 'Display navigation header on index page?', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
+				'rcno_show_book_covers_index'      => array(
+					'name' => __( 'Book covers', 'rcno-reviews' ),
+					'desc' => __( 'Book covers on review index page?', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
+				'rcno_reviews_ignore_articles'          => array(
+					'name' => __( 'Ignore articles', 'rcno-reviews' ),
+					'desc' => __( 'Ignore articles when sorting titles. (e.g. "The", "A", "An")', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
+				'rcno_reviews_sort_names'          => array(
+					'name'    => __( 'Sort author names', 'rcno-reviews' ),
+					'desc'    => __( 'Sort names by first-name or last-name', 'rcno-reviews' ),
+					'options' => array(
+						'last_name_first_name' => __( 'LastName, FirstName', 'rcno-reviews' ),
+						'first_name_last_name' => __( 'FirstName LastName', 'rcno-reviews' ),
+					),
+					'type'    => 'select',
+				),
+				'spacer-7-1'                        => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
 
 			),
 
@@ -571,11 +598,6 @@ class Rcno_Reviews_Settings_Definition {
 					'min'  => 20,
 					'step' => 1,
 					'type' => 'number',
-				),
-				'rcno_show_book_covers_index'      => array(
-					'name' => __( 'Book covers', 'rcno-reviews' ),
-					'desc' => __( 'Book covers on review index page?', 'rcno-reviews' ),
-					'type' => 'checkbox',
 				),
 				'spacer-8'                => array(
 					'name' => '',

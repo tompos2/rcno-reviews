@@ -150,3 +150,8 @@ Please open a new topic on the plugin's WordPress.org support page
 = 1.6.3 =
 * Redesigned the progress bar on the currently reading widget.
 * Refactored the home page content to take into consideration the 'read more' tag.
+
+= 1.7.0 =
+* Redesigned the taxonomy index pages to use use book covers
+* Moved index page setting to their own section on option page.
+* Refactored the book description to use a filter.
