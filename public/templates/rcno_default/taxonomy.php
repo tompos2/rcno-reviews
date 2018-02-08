@@ -77,9 +77,10 @@ if ( $terms ) {
 				      'terms'    => $value['slug'],
 				  ),
 				),
-				'nopaging' => true,
-				/*'order'    => 'ASC',
-				'orderby'  => 'rand'*/
+				'posts_per_page' => 100,
+				//'orderby'  => 'meta_value_num',
+				//'meta_key' => 'rcno_book_series_number',
+				'order'    => 'ASC',
 			);
 
 			$query = new WP_Query( $custom_args );
@@ -87,9 +88,9 @@ if ( $terms ) {
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) : $query->the_post();
 					$review_data[]   = array(
-						'ID'    => get_the_ID(),
-						'title' => get_the_title(),
-						'link'  => get_the_permalink(),
+						'ID'     => get_the_ID(),
+						'title'  => get_the_title(),
+						'link'   => get_the_permalink(),
 					);
 				endwhile;
 			}
@@ -139,7 +140,7 @@ if ( $terms ) {
 				if ( $book_covers ) {
 					$out .= '<div class="book-cover-container">';
 					$out .= '<a href="' . $_data[ 'link' ] . '">';
-					$out .= $template->get_the_rcno_book_cover( $_data[ 'ID' ], 'rcno-book-cover-sm' );
+					$out .= $template->get_the_rcno_book_cover( $_data['ID'], 'rcno-book-cover-sm' );
 					$out .= '</a>';
 					$out .= '</div>';
 				} else {

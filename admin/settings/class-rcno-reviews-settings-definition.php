@@ -347,6 +347,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Show the book\'s published edition for reviews?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
+				'rcno_show_series_number'                  => array(
+					'name' => __( 'Series Number', 'rcno-reviews' ),
+					'desc' => __( 'Show the book\'s number in the series for reviews?', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'rcno_show_page_count'                  => array(
 					'name' => __( 'Page Count', 'rcno-reviews' ),
 					'desc' => __( 'Show the book\'s page count for reviews?', 'rcno-reviews' ),

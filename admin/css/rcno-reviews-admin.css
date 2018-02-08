@@ -85,15 +85,13 @@ button.button.reset-button {
     width: 100%;
 }
 
-.book-general-metabox-1,
-.book-general-metabox-2 {
+.book-general-metabox-1 {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
-.book-general-metabox-1 label,
-.book-general-metabox-2 label {
+.book-general-metabox-1 label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -104,7 +102,8 @@ button.button.reset-button {
 .book-general-metabox-1 .publication-date,
 .book-general-metabox-1 .publication-format,
 .book-general-metabox-1 .publication-edition,
-.book-general-metabox-1 .publication-page-count {
+.book-general-metabox-1 .publication-page-count,
+.book-general-metabox-1 .publication-series-number {
     display: inline-block;
     position: relative;
     margin: 1em 5px 0 0;
@@ -121,31 +120,32 @@ button.button.reset-button {
     flex: 1 1 14%;
 }
 
-.book-general-metabox-1 .publication-page-count {
+.book-general-metabox-1 .publication-page-count,
+.book-general-metabox-1 .publication-series-number {
     flex: 0 1 9%;
 }
 
-.book-general-metabox-2 .publication-gr-id,
-.book-general-metabox-2 .publication-isbn13,
-.book-general-metabox-2 .publication-asin,
-.book-general-metabox-2 .publication-gr-url,
-.book-general-metabox-2 .publication-gr-review {
+.book-general-metabox-1 .publication-gr-id,
+.book-general-metabox-1 .publication-isbn13,
+.book-general-metabox-1 .publication-asin,
+.book-general-metabox-1 .publication-gr-url,
+.book-general-metabox-1 .publication-gr-review {
     display: inline-block;
     position: relative;
     margin: 1em 5px 0 0;
 }
 
-.book-general-metabox-2 .publication-gr-id,
-.book-general-metabox-2 .publication-isbn13,
-.book-general-metabox-2 .publication-asin {
+.book-general-metabox-1 .publication-gr-id,
+.book-general-metabox-1 .publication-isbn13,
+.book-general-metabox-1 .publication-asin {
     flex: 1 1 15%;
 }
 
-.book-general-metabox-2 .publication-gr-review {
+.book-general-metabox-1 .publication-gr-review {
     flex: 1 1 9%;
 }
 
-.book-general-metabox-2 .publication-gr-url {
+.book-general-metabox-1 .publication-gr-url {
     flex: 1 1 39%;
 }
 

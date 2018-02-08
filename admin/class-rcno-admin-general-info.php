@@ -138,6 +138,14 @@ class Rcno_Admin_General_Info {
 		}
 
 		// Saving book page count post_meta field.
+		if ( isset( $data['rcno_book_series_number'] )
+		     && wp_verify_nonce( $data['rcno_general_series_number_nonce'], 'rcno_save_book_series_number_metadata' )
+		) {
+			$book_series_number = sanitize_text_field( $data['rcno_book_series_number'] );
+			update_post_meta( $review_id, 'rcno_book_series_number', $book_series_number );
+		}
+
+		// Saving book page count post_meta field.
 		if ( isset( $data['rcno_book_page_count'] )
 		     && wp_verify_nonce( $data['rcno_general_page_count_nonce'], 'rcno_save_book_page_count_metadata' )
 		) {

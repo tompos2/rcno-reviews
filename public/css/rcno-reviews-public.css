@@ -205,3 +205,33 @@
 .rcno-tax-container .rcno-tax-name .titles-container .book-title-container .rcno_book_title {
     margin: 0 !important;
 }
+
+.rcno-book-series-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.rcno-book-series-wrapper .rcno-book-series-book {
+    position: relative;
+    width: 85px;
+    margin: 0 10px 10px 0;
+}
+
+.rcno-book-series-container h5 {
+    margin: 0 0 10px 0 !important;
+}
+
+.rcno-book-series-container .rcno-book-series-book .rcno_book_series_number {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1.5em;
+    height: 1.5em;
+    color: white;
+    background: #10a4ff;
+    line-height: 1;
+    padding: .2em 0 0 0;
+    font-size: 1em;
+    text-align: center;
+}

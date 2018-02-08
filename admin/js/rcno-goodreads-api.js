@@ -29,12 +29,13 @@
             var title = $('#rcno_book_title');
             var author = $('#new-tag-rcno_author');
             var genre = $('#new-tag-rcno_genre');
-            var publisher = $('#rcno_book_publisher');
+            var publisher = $('#new-tag-rcno_publisher');
             var pub_date = $('#rcno_book_pub_date');
             var pub_fmt = $('#rcno_book_pub_format');
             var pub_edt = $('#rcno_book_pub_edition');
             var series  = $('#new-tag-rcno_series');
             var p_count  = $('#rcno_book_page_count');
+            var s_number  = $('#rcno_book_series_number');
             var gr_rvw  = $('#rcno_book_gr_review');
             var gr_id  = $('#rcno_book_gr_id');
             var isbn13  = $('#rcno_book_isbn13');
@@ -62,7 +63,7 @@
                     ajx_gif.hide();
                 },
                 success: function (grDoc) {
-                    console.log(grDoc.query.results);
+                    console.log(grDoc.query.results); //@TODO: Disable in production.
                     var book = grDoc.query.results;
 
                     if (book.error) {
@@ -109,11 +110,10 @@
                             book.GoodreadsResponse.book.publisher
                         );
 
-                        pub_date.val(
-                            book.GoodreadsResponse.book.publication_month
-                            + '/' + book.GoodreadsResponse.book.publication_day
-                            + '/' + book.GoodreadsResponse.book.publication_year
-                        );
+                        var year  = parseInt(book.GoodreadsResponse.book.publication_year);
+                        var month = parseInt(book.GoodreadsResponse.book.publication_month);
+                        var day   = parseInt(book.GoodreadsResponse.book.publication_day);
+                        pub_date.val( month + '/' + day + '/' + year );
 
                         pub_fmt.val(
                             book.GoodreadsResponse.book.format
@@ -126,6 +126,10 @@
                         p_count.val(
                             book.GoodreadsResponse.book.num_pages
                         );
+
+                      s_number.val(
+                        book.GoodreadsResponse.book.series_works.series_work.user_position
+                      );
 
                         gr_rvw.val(
                             book.GoodreadsResponse.book.average_rating

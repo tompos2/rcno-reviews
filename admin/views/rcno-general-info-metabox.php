@@ -27,7 +27,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_illustrator' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_illustrator' ) ) : ?>
 			<div class="illustrator-info metabox">
 				<?php $illustrator = get_post_meta( $review->ID, 'rcno_book_illustrator', true ); ?>
 				<label class="rcno_book_illustrator_label"
@@ -38,7 +38,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_pub_date' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_pub_date' ) ) : ?>
 			<div class="publication-date metabox">
 				<?php $pub_date = get_post_meta( $review->ID, 'rcno_book_pub_date', true ); ?>
 				<label class="rcno_book_publication_date"
@@ -49,7 +49,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_pub_format' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_pub_format' ) ) : ?>
 			<div class="publication-format metabox">
 				<?php $pub_format = get_post_meta( $review->ID, 'rcno_book_pub_format', true ); ?>
 				<label class="rcno_book_publication_format"
@@ -60,7 +60,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_pub_edition' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_pub_edition' ) ) : ?>
 			<div class="publication-edition metabox">
 				<?php $pub_edition = get_post_meta( $review->ID, 'rcno_book_pub_edition', true ); ?>
 				<label class="rcno_book_publication_edition"
@@ -71,7 +71,18 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_page_count' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_series_number' ) ) : ?>
+            <div class="publication-series-number metabox">
+				<?php $series_number = get_post_meta( $review->ID, 'rcno_book_series_number', true ); ?>
+                <label class="rcno_book_series_number"
+                       for="rcno_book_series_number"><?php esc_attr_e( 'Series Number', 'rcno-reviews' ) ?></label>
+                <input type="text" name="rcno_book_series_number" id="rcno_book_series_number" size="20"
+                       value="<?php echo esc_attr( $series_number ); ?>"/>
+				<?php wp_nonce_field( 'rcno_save_book_series_number_metadata', 'rcno_general_series_number_nonce' ); ?>
+            </div>
+		<?php endif; ?>
+
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_page_count' ) ) : ?>
 			<div class="publication-page-count metabox">
 				<?php $page_count = get_post_meta( $review->ID, 'rcno_book_page_count', true ); ?>
 				<label class="rcno_book_page_count"
@@ -82,11 +93,7 @@
 			</div>
 		<?php endif; ?>
 
-	</div>
-
-	<div class="book-general-metabox-2">
-
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_gr_id' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_gr_id' ) ) : ?>
 			<div class="publication-gr-id metabox">
 				<?php $gr_id = get_post_meta( $review->ID, 'rcno_book_gr_id', true ); ?>
 				<label class="rcno_book_gr_id"
@@ -97,7 +104,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_isbn13' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_isbn13' ) ) : ?>
 			<div class="publication-isbn13 metabox">
 				<?php $isbn13 = get_post_meta( $review->ID, 'rcno_book_isbn13', true ); ?>
 				<label class="rcno_book_isbn13" for="rcno_book_isbn13"><?php esc_attr_e( 'ISBN13', 'rcno-reviews' ) ?></label>
@@ -107,7 +114,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_asin' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_asin' ) ) : ?>
 			<div class="publication-asin metabox">
 				<?php $asin = get_post_meta( $review->ID, 'rcno_book_asin', true ); ?>
 				<label class="rcno_book_asin" for="rcno_book_asin"><?php esc_attr_e( 'ASIN', 'rcno-reviews' ) ?></label>
@@ -117,7 +124,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_gr_rating' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_gr_rating' ) ) : ?>
 			<div class="publication-gr-review metabox">
 				<?php $gr_review = get_post_meta( $review->ID, 'rcno_book_gr_review', true ); ?>
 				<label class="rcno_book_gr_review"
@@ -128,7 +135,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_gr_url' ) ) : ?>
+		<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_gr_url' ) ) : ?>
 			<div class="publication-gr-url metabox">
 				<?php $gr_url = get_post_meta( $review->ID, 'rcno_book_gr_url', true ); ?>
 				<label class="rcno_book_gr_url"

@@ -130,6 +130,9 @@ class Rcno_Template_Tags {
 		$out .= '<div class="rcno-full-book-details">';
 
 		foreach ( $taxonomies as $taxonomy ) {
+			/*if ( 'rcno_series' === $taxonomy ) {
+				$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true ) . '#3';
+			}*/
 			$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true );
 		}
 
@@ -610,18 +613,19 @@ class Rcno_Template_Tags {
 		$review = get_post_custom( $review_id );
 
 		$meta_keys = array(
-			'rcno_book_illustrator' => 'Illustrator',
-			'rcno_book_pub_date'    => 'Published',
-			'rcno_book_pub_format'  => 'Format',
-			'rcno_book_pub_edition' => 'Edition',
-			'rcno_book_page_count'  => 'Page Count',
-			'rcno_book_gr_review'   => 'Goodreads Rating',
-			'rcno_book_gr_id'       => 'Gr ID',
-			'rcno_book_isbn13'      => 'ISBN13',
-			'rcno_book_isbn'        => 'ISBN',
-			'rcno_book_asin'        => 'ASIN',
-			'rcno_book_gr_url'      => 'Gr URL',
-			'rcno_book_title'       => 'Title',
+			'rcno_book_illustrator'   => 'Illustrator',
+			'rcno_book_pub_date'      => 'Published',
+			'rcno_book_pub_format'    => 'Format',
+			'rcno_book_pub_edition'   => 'Edition',
+			'rcno_book_page_count'    => 'Page Count',
+			'rcno_book_series_number' => 'Series Number',
+			'rcno_book_gr_review'     => 'Goodreads Rating',
+			'rcno_book_gr_id'         => 'Gr ID',
+			'rcno_book_isbn13'        => 'ISBN13',
+			'rcno_book_isbn'          => 'ISBN',
+			'rcno_book_asin'          => 'ASIN',
+			'rcno_book_gr_url'        => 'Gr URL',
+			'rcno_book_title'         => 'Title',
 
 		);
 
@@ -760,6 +764,102 @@ class Rcno_Template_Tags {
 	public function the_rcno_book_purchase_links( $review_id, $label = false ) {
 		echo $this->get_the_rcno_book_purchase_links( $review_id, $label );
 	}
+
+
+	/** ****************************************************************************
+	 * REVIEW BOOKS IN THIS SERIES
+	 *******************************************************************************/
+	/**
+	 * Generates a list of books in the 'series' taxonomy.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param int  $review_id     The post ID of the book review.
+	 * @param string  $taxonomy   The taxonomy to fetch reviews for.
+	 *
+	 * @return string
+	 */
+	public function get_the_rcno_books_in_series( $review_id, $taxonomy ) {
+
+		// If we are on not on a single review don't display this.
+		if ( ! is_single()  ) {
+			return false;
+		}
+
+		$out = '';
+		$book_data = array();
+
+		$tax = get_the_terms( $review_id, $taxonomy );
+
+		if ( false === $tax || is_wp_error( $tax ) ) {
+			return false;
+		}
+
+		$custom_args = array(
+			'post_type' => 'rcno_review',
+			'meta_key'  => 'rcno_book_series_number',
+			'orderby'   => 'meta_value_num',
+			'order'     => 'ASC',
+			'tax_query' => array(
+				array(
+					'taxonomy' => $tax[0]->taxonomy,
+					'field'    => 'slug',
+					'terms'    => $tax[0]->slug,
+				),
+			),
+			'posts_per_page' => 50,
+		);
+
+		$data = new WP_Query( $custom_args );
+
+		if ( $data->have_posts() ) {
+			while ( $data->have_posts() ) : $data->the_post();
+				$book_data[]   = array(
+					'ID'    => get_the_ID(),
+					'title' => get_the_title(),
+					'link'  => get_the_permalink(),
+				);
+			endwhile;
+		}
+		wp_reset_postdata();
+
+		if ( ! empty( $book_data ) ) {
+
+			$out .= '<div class="rcno-book-series-container">';
+			$out .= '<h5>' . __( 'Books in this series:', 'rcno-reviews' ) . '</h5>';
+			$out .= '<div class="rcno-book-series-wrapper">';
+			foreach ( $book_data as $_book_data ) {
+				if ( $_book_data[ 'ID' ] !== $review_id ) {
+					$out .= '<div class="rcno-book-series-book">';
+					$out .= '<a href="' . $_book_data[ 'link' ] . '">';
+					$out .= $this->get_the_rcno_book_cover( $_book_data['ID'], 'rcno-book-cover-sm' );
+					$out .= '</a>';
+					$out .= $this->get_the_rcno_book_meta( $_book_data['ID'], 'rcno_book_series_number', 'span', false );
+					$out .= '</div>';
+				}
+			}
+			$out .= '</div>';
+			$out .= '</div>';
+
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Prints a list of books in the 'series' taxonomy.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param int  $review_id     The post ID of the book review.
+	 * @param string  $taxonomy   The taxonomy to fetch reviews for.
+	 *
+	 * @return void
+	 */
+	public function the_rcno_books_in_series( $review_id, $taxonomy = 'rcno_series' ) {
+		echo $this->get_the_rcno_books_in_series( $review_id, $taxonomy );
+	}
+
 
 	/** ****************************************************************************
 	 * REVIEW BOOK REVIEW SCORE TEMPLATE TAGS
