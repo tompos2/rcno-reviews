@@ -201,6 +201,34 @@ class Rcno_Reviews_Shortcodes {
 	}
 
 	/**
+	 * Do the shortcode 'rcno-book-series' and render a list of all books
+	 * in a series.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param mixed $options
+	 * @return string
+	 */
+	public function rcno_do_book_series_shortcode( $options ) {
+
+		$template = new Rcno_Template_Tags( $this->plugin_name, $this->version );
+		$review_id = get_the_ID();
+
+		// Set default values for options not set explicitly.
+		$options = shortcode_atts( array(
+			'review_id' => $review_id,
+			'taxonomy'  => 'rcno_series',
+			'number'    => true,
+			'header'    => __( 'Books in this series: ', 'rcno-reviews' )
+		), $options );
+
+		// The actual rendering is done by a special function.
+		$output = $template->get_the_rcno_books_in_series( $options['review_id'], $options['taxonomy'], $options['number'], $options['header'] );
+
+		return do_shortcode( $output );
+	}
+
+	/**
 	 ************************ SHORTCODE FOR REVIEW *****************************
 	 */
 

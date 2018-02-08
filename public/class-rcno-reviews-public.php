@@ -327,7 +327,7 @@ class Rcno_Reviews_Public {
 		// Include the book review template tags.
 		require_once __DIR__ . '/class-rcno-template-tags.php';
 
-		include $include_path;
+		include_once $include_path;
 		// and render the content using that file.
 		$content = ob_get_contents();
 
@@ -372,7 +372,7 @@ class Rcno_Reviews_Public {
 
 		require_once __DIR__ . '/class-rcno-template-tags.php';
 		// Include the excerpt file.
-		include $include_path;
+		include_once $include_path;
 		// and render the content using that file.
 		$content = ob_get_contents();
 

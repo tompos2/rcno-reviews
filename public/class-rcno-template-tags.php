@@ -774,12 +774,14 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.7.0
 	 *
-	 * @param int  $review_id     The post ID of the book review.
-	 * @param string  $taxonomy   The taxonomy to fetch reviews for.
+	 * @param int       $review_id      The post ID of the book review.
+	 * @param string    $taxonomy       The taxonomy to fetch reviews for.
+	 * @param bool      $number         Display the book series number.
+	 * @param mixed     $header         The header title.
 	 *
 	 * @return string
 	 */
-	public function get_the_rcno_books_in_series( $review_id, $taxonomy ) {
+	public function get_the_rcno_books_in_series( $review_id, $taxonomy, $number, $header ) {
 
 		// If we are on not on a single review don't display this.
 		if ( ! is_single()  ) {
@@ -825,8 +827,11 @@ class Rcno_Template_Tags {
 
 		if ( ! empty( $book_data ) ) {
 
+			// Set header to a false value to use the default string.
+			$header = ! empty( $header ) ? $header : __( 'Books in this series: ', 'rcno-reviews' );
+
 			$out .= '<div class="rcno-book-series-container">';
-			$out .= '<h5>' . __( 'Books in this series:', 'rcno-reviews' ) . '</h5>';
+			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
 			$out .= '<div class="rcno-book-series-wrapper">';
 			foreach ( $book_data as $_book_data ) {
 				if ( $_book_data[ 'ID' ] !== $review_id ) {
@@ -834,7 +839,9 @@ class Rcno_Template_Tags {
 					$out .= '<a href="' . $_book_data[ 'link' ] . '">';
 					$out .= $this->get_the_rcno_book_cover( $_book_data['ID'], 'rcno-book-cover-sm' );
 					$out .= '</a>';
-					$out .= $this->get_the_rcno_book_meta( $_book_data['ID'], 'rcno_book_series_number', 'span', false );
+					if ( $number ) {
+						$out .= $this->get_the_rcno_book_meta( $_book_data['ID'], 'rcno_book_series_number', 'span', false );
+					}
 					$out .= '</div>';
 				}
 			}
@@ -851,13 +858,15 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.7.0
 	 *
-	 * @param int  $review_id     The post ID of the book review.
-	 * @param string  $taxonomy   The taxonomy to fetch reviews for.
+	 * @param int       $review_id     The post ID of the book review.
+	 * @param string    $taxonomy      The taxonomy to fetch reviews for.
+	 * @param boolean   $number        Display the book number
+	 * @param string    $header        The header title.
 	 *
 	 * @return void
 	 */
-	public function the_rcno_books_in_series( $review_id, $taxonomy = 'rcno_series' ) {
-		echo $this->get_the_rcno_books_in_series( $review_id, $taxonomy );
+	public function the_rcno_books_in_series( $review_id, $taxonomy = 'rcno_series', $number = true, $header ) {
+		echo $this->get_the_rcno_books_in_series( $review_id, $taxonomy, $number, $header );
 	}
 
 
