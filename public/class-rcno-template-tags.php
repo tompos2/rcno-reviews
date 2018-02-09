@@ -569,8 +569,14 @@ class Rcno_Template_Tags {
 
 		$review_content = '';
 		$review_content .= '<div class="rcno-book-review-content">';
-		// $review_content .= apply_filters( 'the_content', get_post_field( 'post_content', $review_id ) );
-		$review_content .= apply_filters( 'the_content', get_the_content( $read_more ) );
+
+		// We need to check this or we'll get an infinite loop with embedded reviews.
+		if ( $this->is_review_embedded() ) {
+			$review_content .= apply_filters( 'the_content', get_post_field( 'post_content', $review_id ) );
+		} else {
+			$review_content .= apply_filters( 'the_content', get_the_content( $read_more ) );
+		}
+
 		$review_content .= '</div>';
 
 		return $review_content;
