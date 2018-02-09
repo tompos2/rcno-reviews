@@ -152,6 +152,9 @@ Please open a new topic on the plugin's WordPress.org support page
 * Refactored the home page content to take into consideration the 'read more' tag.
 
 = 1.7.0 =
+* Added new "Books in this Series" feature
 * Redesigned the taxonomy index pages to use use book covers
-* Moved index page setting to their own section on option page.
-* Refactored the book description to use a filter.
+* Moved index page setting to their own section on option page
+* Refactored the book description to use a filter
+* Added the post type slug to the custom taxonomy URLS
+* Removed comment rating scripts and styles from posts that are not reviews

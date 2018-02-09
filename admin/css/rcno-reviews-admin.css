@@ -89,6 +89,7 @@ button.button.reset-button {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    margin: 0 0 1em 0;
 }
 
 .book-general-metabox-1 label {
@@ -301,4 +302,8 @@ tr.rcno-table-header td {
 
 .column-book_cover {
     width: 50px;
+}
+
+.book-general-metabox-1 .publication-gr-url {
+    display: none;
 }

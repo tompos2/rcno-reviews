@@ -325,9 +325,12 @@ class Rcno_Reviews_Public {
 		ob_start();
 
 		// Include the book review template tags.
-		require_once __DIR__ . '/class-rcno-template-tags.php';
+		include_once __DIR__ . '/class-rcno-template-tags.php';
 
-		include_once $include_path;
+		// Include the full review file. @TODO: Checkout
+		include $include_path;
+
+
 		// and render the content using that file.
 		$content = ob_get_contents();
 
@@ -344,7 +347,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $review_post   The WP post object.
+	 * @param WP_Post $review_post   The WP post object.
 	 *
 	 * @return string $content
 	 */
@@ -365,14 +368,16 @@ class Rcno_Reviews_Public {
 
 		// Get the review data.
 		$review = get_post_custom( $review_post->ID );
-		// $content = $this->get_reviews_content($review_post).
 
 		// Start rendering.
 		ob_start();
 
-		require_once __DIR__ . '/class-rcno-template-tags.php';
-		// Include the excerpt file.
-		include_once $include_path;
+		include_once __DIR__ . '/class-rcno-template-tags.php';
+
+		// Include the excerpt file. @TODO: Checkout
+		include $include_path;
+
+
 		// and render the content using that file.
 		$content = ob_get_contents();
 
@@ -420,7 +425,7 @@ class Rcno_Reviews_Public {
 		}
 
 		// Include the taxonomy file.
-		require_once __DIR__ . '/class-rcno-template-tags.php';
+		include_once __DIR__ . '/class-rcno-template-tags.php';
 
 		include $include_path;
 
@@ -481,7 +486,8 @@ class Rcno_Reviews_Public {
 		}
 
 		// Include the taxonomy file.
-		require_once __DIR__ . '/class-rcno-template-tags.php';
+		include_once __DIR__ . '/class-rcno-template-tags.php';
+
 		include $include_path;
 
 		// Render the content using that file.
