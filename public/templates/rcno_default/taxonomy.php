@@ -9,6 +9,14 @@ $sort_name       = Rcno_Reviews_Option::get_option( 'rcno_reviews_sort_names' );
 $index_headers   = Rcno_Reviews_Option::get_option( 'rcno_reviews_index_headers' );
 $book_covers     = Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false );
 
+function string_cmp( $a, $b ) {
+	return strcasecmp( $a['name'], $b['name'] );
+}
+
+function integer_cmp( $a, $b ) {
+	return $a['series'] - $b['series'];
+}
+
 // Create an empty output variable.
 $out = '';
 
@@ -35,10 +43,6 @@ if ( $terms ) {
 			}
 		}
 
-		function cmp( $a, $b ) {
-			return strcasecmp( $a['name'], $b['name'] );
-		}
-
 		foreach ( $terms as $key => $value ) {
 			// Form the terms available we are only taking the 'name' and 'ID' and doing a natural sort.
 			$_terms[] = array(
@@ -48,7 +52,7 @@ if ( $terms ) {
 				'slug'     => $value->slug,
 				'taxonomy' => $value->taxonomy,
 			);
-			usort( $_terms, 'cmp' );
+			usort( $_terms, 'string_cmp' );
 		}
 
 		// Create an index i to compare the number in the list and check for first and last item.
@@ -78,20 +82,20 @@ if ( $terms ) {
 				  ),
 				),
 				'posts_per_page' => 100,
-				//'orderby'  => 'meta_value_num',
-				//'meta_key' => 'rcno_book_series_number',
-				'order'    => 'ASC',
 			);
 
 			$query = new WP_Query( $custom_args );
 
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) : $query->the_post();
+					$series = $template->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false );
 					$review_data[]   = array(
 						'ID'     => get_the_ID(),
 						'title'  => get_the_title(),
 						'link'   => get_the_permalink(),
+						'series' => null !== $series ? (int) $series : 0
 					);
+					usort( $review_data, 'integer_cmp' );
 				endwhile;
 			}
 
