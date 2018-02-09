@@ -124,7 +124,7 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function rcno_enqueue_public_ratings_styles() {
 
-		if ( $this->enable_rating ) {
+		if ( $this->enable_rating && is_singular( 'rcno_review' ) ) {
 			wp_enqueue_style( 'rcno-public-ratings-styles', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-public-ratings.css', array(), $this->version, 'all' );
 
 			$custom_css = '
@@ -150,7 +150,7 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function rcno_enqueue_public_ratings_scripts() {
 
-		if ( $this->enable_rating ) {
+		if ( $this->enable_rating && is_singular( 'rcno_review' ) ) {
 		wp_enqueue_script( 'rcno-public-ratings-scripts', plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public-ratings-script.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script( 'rcno-public-ratings-scripts', 'rcno_public_object',
 			array(

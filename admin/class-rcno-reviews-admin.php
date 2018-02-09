@@ -366,6 +366,8 @@ class Rcno_Reviews_Admin {
 			$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
 			$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['slug'] ) );
 			$tax_name = 'rcno_' . $tax['tax_settings']['slug'];
+			$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
+			$cpt_slug = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
 
 			$opts['hierarchical'] = $tax['tax_settings']['hierarchy'];
 			//$opts['meta_box_cb'] 	   = array( $this, 'rcno_custom_taxonomy_metabox' ); // @TODO: Investigate how to update taxonomies.
@@ -412,7 +414,7 @@ class Rcno_Reviews_Admin {
 			$opts['rewrite']['hierarchical'] = false;
 
 			// Pluralizing the rewrite slug to prevent clash with builtin author taxonomy and author custom taxonomy.
-			$opts['rewrite']['slug']       = __( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
+			$opts['rewrite']['slug']       = $cpt_slug . '/' . Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
 			$opts['rewrite']['with_front'] = false;
 
 			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );

@@ -81,9 +81,8 @@ class Rcno_Reviews_Shortcodes {
 
 
 		if ( 'n/a' !== $options['id'] ) {
-			/**
-			 * Get random post
-			 */
+
+			 //Get random post
 			if ( 'random' === $options['id'] ) {
 
 				$posts = get_posts( array(
@@ -92,11 +91,10 @@ class Rcno_Reviews_Shortcodes {
 				) );
 
 				$review_post = $posts[ array_rand( $posts ) ];
-				/**
-				 * Get post by id
-				 */
 			} else {
-				$review_post = get_post( (int)$options['id'] );
+
+				 // Get post by id.
+				$review_post = get_post( (int) $options['id'] );
 			}
 
 			if ( null !== $review_post && $review_post->post_type === 'rcno_review' ) {
@@ -106,8 +104,8 @@ class Rcno_Reviews_Shortcodes {
 
 				if ( 1 === (int) $options['nodesc'] ) {
 					// Embed without description.
-					$template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
-					$output   = $template->get_the_rcno_full_book_details( (int)$options['id'] );
+					$templ = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+					$output   = $templ->get_the_rcno_full_book_details( (int)$options['id'] );
 				} elseif ( 0 === (int) $options['excerpt'] ) {
 					// Embed complete review.
 					$output = $plugin_public->rcno_render_review_content( $review_post );
