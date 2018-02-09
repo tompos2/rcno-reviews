@@ -420,13 +420,13 @@ class Rcno_Reviews {
 
 		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
 
-		add_shortcode( 'rcno-reviews', array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
+		//add_shortcode( 'rcno-reviews', array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
 		add_shortcode( 'rcno-tax-list', array( $plugin_shortcodes, 'rcno_do_taxlist_shortcode' ) );
 		add_shortcode( 'rcno-reviews-index', array( $plugin_shortcodes, 'rcno_do_reviews_index_shortcode' ) );
 		add_shortcode( 'rcno-reviews-grid', array( $plugin_shortcodes, 'rcno_do_reviews_grid_shortcode' ) );
 		add_shortcode( 'rcno-book-series', array( $plugin_shortcodes, 'rcno_do_book_series_shortcode' ) );
 
-		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
+		//$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scr' );
 		$this->loader->add_action( 'wp_ajax_rcno_get_results', $plugin_shortcodes, 'rcno_process_ajax_scr' );
