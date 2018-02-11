@@ -112,6 +112,15 @@ class Rcno_Reviews_Admin {
 	public $buy_links;
 
 	/**
+	 * Instance of the Rcno_Admin_Buy_Links class handling the purchase links.
+	 *
+	 * @since  1.7.1
+	 * @access public
+	 * @var    array $uncountable;
+	 */
+	public $uncountable;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * The constructor also imports and initializes the classes related to controlling
@@ -134,6 +143,8 @@ class Rcno_Reviews_Admin {
 		$this->book_review_score  = new Rcno_Admin_Review_Score( $this->plugin_name, $this->version );
 		$this->book_review_rating = new Rcno_Admin_Review_Rating( $this->plugin_name, $this->version );
 		$this->buy_links          = new Rcno_Admin_Buy_Links( $this->plugin_name, $this->version );
+
+		$this->uncountable        = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
 	}
 
 	/**
@@ -413,8 +424,13 @@ class Rcno_Reviews_Admin {
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
 
-			// Pluralizing the rewrite slug to prevent clash with builtin author taxonomy and author custom taxonomy.
-			$opts['rewrite']['slug']       = $cpt_slug . '/' . Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
+			// If the CPT slug is uncountable don't prepend it to the custom taxonomy slug, else soft 404s
+			if ( ! empty ( $this->uncountable ) && in_array( $cpt_slug, $this->uncountable, true ) ) {
+				$opts['rewrite']['slug'] = Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
+			} else {
+				$opts['rewrite']['slug'] = $cpt_slug . '/' . Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
+			}
+
 			$opts['rewrite']['with_front'] = false;
 
 			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );

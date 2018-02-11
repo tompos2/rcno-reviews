@@ -136,8 +136,7 @@ class Rcno_Pluralize_Helper {
 
 	public static function pluralize( $string ) {
 		// get a list of user added uncountable words from settings page
-		$new_list = Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' );
-		$new_list = explode( ',', $new_list );
+		$new_list = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
 		$new_uncountable = array_merge( $new_list, self::$uncountable  );
 
 		// save some time in the case that singular and plural are the same
@@ -167,8 +166,7 @@ class Rcno_Pluralize_Helper {
 
 	public static function singularize( $string ) {
 		// get a list of user added uncountable words from settings page
-		$new_list = Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' );
-		$new_list = explode( ',', $new_list );
+		$new_list = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
 		$new_uncountable = array_merge( $new_list, self::$uncountable  );
 
 		// save some time in the case that singular and plural are the same

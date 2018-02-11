@@ -158,3 +158,6 @@ Please open a new topic on the plugin's WordPress.org support page
 * Refactored the book description to use a filter
 * Added the post type slug to the custom taxonomy URLS
 * Removed comment rating scripts and styles from posts that are not reviews
+
+= 1.7.1 =
+* Fixed a bug with CPT slug not taking a pluralized for in some foreign languages
