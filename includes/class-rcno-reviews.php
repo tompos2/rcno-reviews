@@ -426,6 +426,8 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-reviews-grid', array( $plugin_shortcodes, 'rcno_do_reviews_grid_shortcode' ) );
 		add_shortcode( 'rcno-book-series', array( $plugin_shortcodes, 'rcno_do_book_series_shortcode' ) );
 
+		add_shortcode( 'rcno-book-list', array( $plugin_shortcodes->book_list, 'rcno_do_book_list_shortcode' ) );
+
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scr' );

@@ -235,3 +235,14 @@
     font-size: 1em;
     text-align: center;
 }
+
+.rcno-books-error {
+    padding: 1em;
+    background: rgba(244, 67, 54, 0.86);
+    color: #fff;
+    text-align: center;
+}
+
+.rcno-books-error p {
+    margin: 0;
+}

@@ -19,6 +19,9 @@
  * @subpackage Rcno_Reviews/includes
  * @author     wzyMedia <wzy@outlook.com>
  */
+
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-book-list-shortcode.php';
+
 class Rcno_Reviews_Shortcodes {
 
 	/**
@@ -40,6 +43,15 @@ class Rcno_Reviews_Shortcodes {
 	private $version;
 
 	/**
+	 * The object contain the book list shortcode object.
+	 *
+	 * @since    1.8.0
+	 * @access   public
+	 * @var      Rcno_Book_List_Shortcode $book_list The class instance.
+	 */
+	public $book_list;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
@@ -50,6 +62,8 @@ class Rcno_Reviews_Shortcodes {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+
+		$this->book_list = new Rcno_Book_List_Shortcode( $plugin_name, $version );
 	}
 
 	/**
