@@ -899,10 +899,6 @@ class Rcno_Template_Tags {
 			return false;
 		}
 
-		function integer_cmp( $a, $b ) {
-			return $a['series'] - $b['series'];
-		}
-
 		$out = '';
 		$book_data = array();
 
@@ -937,15 +933,18 @@ class Rcno_Template_Tags {
 
 		if ( $data->have_posts() ) {
 			while ( $data->have_posts() ) : $data->the_post();
-				$series = $this->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false );
-				$book_data[]   = array(
-					'ID'     => get_the_ID(),
-					'title'  => get_the_title(),
-					'link'   => get_the_permalink(),
-					'series' => null !== $series ? (int) $series : 0,
+				$series_num  = $this->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false );
+				$series      = get_the_terms( get_the_ID(), apply_filters( 'rcno_group_books_by_taxonomy', 'rcno_series' ));
+				$book_data[] = array(
+					'ID'         => get_the_ID(),
+					'title'      => get_the_title(),
+					'link'       => get_the_permalink(),
+					'series_num' => null !== $series_num ? (int) $series_num : 0,
+					'series'     => isset( $series[0]->slug ) ? $series[0]->slug : '',
 				);
 			endwhile;
-			usort( $book_data, 'integer_cmp' );
+			usort( $book_data, array( $this, 'series_integer_cmp' ) ); // Group books by series number,
+			usort( $book_data, array( $this, 'series_string_cmp' ) );  // then by series slug.
 		}
 		wp_reset_postdata();
 
@@ -1509,6 +1508,14 @@ class Rcno_Template_Tags {
 	 */
 	public function is_review_embedded() {
 		return 'rcno_review' !== get_post_type();
+	}
+
+	public function series_integer_cmp( $a, $b ) {
+		return $a['series_num'] - $b['series_num'];
+	}
+
+	public function series_string_cmp( $a, $b ) {
+		return strcasecmp( $a['series'], $b['series'] );
 	}
 
 }
