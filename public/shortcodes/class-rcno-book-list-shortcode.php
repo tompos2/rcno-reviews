@@ -40,13 +40,22 @@ class Rcno_Book_List_Shortcode {
 	private $version;
 
 	/**
-	 * The version of this plugin.
+	 * The plugin template tags.
 	 *
 	 * @since    1.8.0
 	 * @access   public
 	 * @var      Rcno_Template_Tags $template
 	 */
 	public $template;
+
+	/**
+	 * The help text for the shortcode.
+	 *
+	 * @since    1.8.0
+	 * @access   public
+	 * @var      string $help_text
+	 */
+	public $help_text;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -60,97 +69,9 @@ class Rcno_Book_List_Shortcode {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
+		$this->rcno_set_help_text();
+
 		$this->template = new Rcno_Template_Tags( $this->plugin_name, $this->version );
-	}
-
-	/**
-	 * Generates a list of books in a given taxonomy.
-	 *
-	 * @since 1.7.0
-	 *
-	 * @param int       $review_id      The post ID of the book review.
-	 * @param string    $taxonomy       The taxonomy to fetch reviews for.
-	 * @param bool      $number         Display the book series number.
-	 * @param mixed     $header         The header title.
-	 *
-	 * @return string
-	 */
-	public function get_the_rcno_book_list( $review_id, $taxonomy, $number, $header ) {
-
-		// If we are on not on a single review don't display this.
-		if ( ! is_single()  ) {
-			return false;
-		}
-
-		$out = '';
-		$book_data = array();
-
-		$tax = get_the_terms( $review_id, 'rcno_' . $taxonomy );
-
-		if ( false === $tax || is_wp_error( $tax ) ) {
-			$out .= '<div class="rcno-books-error">';
-			$out .= '<p>';
-			$out .= __('No entries found for the ', 'rcno-reviews');
-			$out .= '<em>"' . $taxonomy . '"</em>';
-			$out .= __( ' taxonomy.', 'rcno-reviews' );
-			$out .= '</p>';
-			$out .= '</div>';
-
-			return $out;
-		}
-
-		$custom_args = array(
-			'post_type' => 'rcno_review',
-			'order'     => 'ASC',
-			'tax_query' => array(
-				array(
-					'taxonomy' => $tax[0]->taxonomy,
-					'field'    => 'slug',
-					'terms'    => $tax[0]->slug,
-				),
-			),
-			'posts_per_page' => 50,
-		);
-
-		$data = new WP_Query( $custom_args );
-
-		if ( $data->have_posts() ) {
-			while ( $data->have_posts() ) : $data->the_post();
-				$book_data[]   = array(
-					'ID'    => get_the_ID(),
-					'title' => get_the_title(),
-					'link'  => get_the_permalink(),
-				);
-			endwhile;
-		}
-		wp_reset_postdata();
-
-		if ( ! empty( $book_data ) ) {
-
-			// Set header to a false value to use the default string.
-			$header = ! empty( $header ) ? $header : __( 'Books in this series ', 'rcno-reviews' ) . $taxonomy;
-
-			$out .= '<div class="rcno-book-series-container">';
-			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
-			$out .= '<div class="rcno-book-series-wrapper">';
-			foreach ( $book_data as $_book_data ) {
-				if ( $_book_data['ID'] !== $review_id ) {
-					$out .= '<div class="rcno-book-series-book">';
-					$out .= '<a href="' . esc_url( $_book_data['link'] ) . '">';
-					$out .= $this->template->get_the_rcno_book_cover( $_book_data['ID'], 'rcno-book-cover-sm' );
-					$out .= '</a>';
-					if ( $number ) {
-						$out .= $this->template->get_the_rcno_book_meta( $_book_data['ID'], 'rcno_book_series_number', 'span', false );
-					}
-					$out .= '</div>';
-				}
-			}
-			$out .= '</div>';
-			$out .= '</div>';
-
-		}
-
-		return $out;
 	}
 
 	/**
@@ -174,10 +95,82 @@ class Rcno_Book_List_Shortcode {
 			'header'    => __( 'Books in this series: ', 'rcno-reviews' )
 		), $atts );
 
-		// The actual rendering is done by a special function.
-		$output = $this->get_the_rcno_book_list( $atts['id'], $atts['taxonomy'], $atts['number'], $atts['header'] );
+		// The actual rendering is done inside the Rcno_Template_Tags class.
+		$output = $this->template->get_the_rcno_book_list( $atts['id'], $atts['taxonomy'], $atts['number'], $atts['header'] );
 
 		return do_shortcode( $output );
 	}
 
+	/**
+	 * Creates the help text for the 'rcno-book-list' shortcode.
+	 *
+	 * @since 1.8.0
+	 * @return void
+	 */
+	public function rcno_set_help_text() {
+
+		$this->help_text = '<h4>' . __( 'The Book List shortcode', 'rcno-reviews' ) . '</h4>';
+		$this->help_text .= '<p>';
+		$this->help_text .= __( 'This shortcode creates a graphical list of books belonging to a particular custom taxonomy. 
+								If the chosen custom taxonomy only has 1 reviewed book, nothing will be displayed when rendering the content of this shortcode on the frontend. 
+								',
+								'rcno-reviews' );
+		$this->help_text .= '</p>';
+
+		$this->help_text .= '<code>' . '[rcno-book-list]' . '</code> ' . __('The default shortcode.', 'rcno-reviews');
+		$this->help_text .= '<p>';
+
+		$this->help_text .= __( 'The shortcode uses a couple of parameters that can be changed or left at the default values. 
+								If the default values are being used, then it is not necessary to include them in the shortcode. The default values are listed below: ',
+								'rcno-reviews' );
+		$this->help_text .= '</p>';
+
+		$this->help_text .= '<ul>';
+
+		$this->help_text .= '<li>';
+		$this->help_text .= '<code>' . 'id' . '</code> ' . __('The post/review ID, defaults to the current review post.', 'rcno-reviews');
+		$this->help_text .= '</li>';
+
+		$this->help_text .= '<li>';
+		$this->help_text .= '<code>' . 'taxonomy' . '</code> ' . __('The custom taxonomy to display the book list for, defaults to the the "series" taxonomy.',
+																	'rcno-reviews');
+		$this->help_text .= '</li>';
+
+		$this->help_text .= '<li>';
+		$this->help_text .= '<code>' . 'number' . '</code> ' . __('Whether to display the book series number. Defaults to "yes", use 0 for "no".', 'rcno-reviews');
+		$this->help_text .= '</li>';
+
+		$this->help_text .= '<li>';
+		$this->help_text .= '<code>' . 'header' . '</code> ' . __('The header text for the book list, defaults to "Books in this series:"', 'rcno-reviews');
+		$this->help_text .= '</li>';
+
+		$this->help_text .= '</ul>';
+
+		$this->help_text .= '<p>';
+		$this->help_text .= __('Examples of the book list shortcode:', 'rcno-reviews');
+		$this->help_text .= '</p>';
+
+		$this->help_text .= '<ul>';
+
+		$this->help_text .= '<li>';
+		$this->help_text .= '<code>' . '[rcno-book-list taxonomy="publisher" number=0 header="Books by this publisher:"]' . '</code> ';
+		$this->help_text .= '</li>';
+
+		$this->help_text .= '<li>';
+		$this->help_text .= '<code>' . '[rcno-book-list taxonomy="author" header="Other books by this author:"]' . '</code> ';
+		$this->help_text .= '</li>';
+
+		$this->help_text .= '</ul>';
+	}
+
+	/**
+	 * Returns the help text for the 'rcno-book-list' shortcode.
+	 *
+	 * @since 1.8.0
+	 * @return string
+	 */
+	public function rcno_get_help_text() {
+
+		return $this->help_text;
+	}
 }

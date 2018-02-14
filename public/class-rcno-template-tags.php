@@ -877,6 +877,125 @@ class Rcno_Template_Tags {
 
 
 	/** ****************************************************************************
+	 * REVIEW BOOK BOOK LIST
+	 *******************************************************************************/
+
+	/**
+	 * Generates a list of books in a given taxonomy.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param int       $review_id      The post ID of the book review.
+	 * @param string    $taxonomy       The taxonomy to fetch reviews for.
+	 * @param bool      $number         Display the book series number.
+	 * @param mixed     $header         The header title.
+	 *
+	 * @return string
+	 */
+	public function get_the_rcno_book_list( $review_id, $taxonomy, $number, $header ) {
+
+		// If we are on not on a single review don't display this.
+		if ( ! is_single()  ) {
+			return false;
+		}
+
+		function integer_cmp( $a, $b ) {
+			return $a['series'] - $b['series'];
+		}
+
+		$out = '';
+		$book_data = array();
+
+		$tax = get_the_terms( $review_id, 'rcno_' . $taxonomy );
+
+		if ( false === $tax || is_wp_error( $tax ) ) {
+			$out .= '<div class="rcno-books-error">';
+			$out .= '<p>';
+			$out .= __('No entries found for the ', 'rcno-reviews');
+			$out .= '<em>"' . $taxonomy . '"</em>';
+			$out .= __( ' taxonomy.', 'rcno-reviews' );
+			$out .= '</p>';
+			$out .= '</div>';
+
+			return $out;
+		}
+
+		$custom_args = array(
+			'post_type' => 'rcno_review',
+			'order'     => 'ASC',
+			'tax_query' => array(
+				array(
+					'taxonomy' => $tax[0]->taxonomy,
+					'field'    => 'slug',
+					'terms'    => $tax[0]->slug,
+				),
+			),
+			'posts_per_page' => 30,
+		);
+
+		$data = new WP_Query( $custom_args );
+
+		if ( $data->have_posts() ) {
+			while ( $data->have_posts() ) : $data->the_post();
+				$series = $this->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false );
+				$book_data[]   = array(
+					'ID'     => get_the_ID(),
+					'title'  => get_the_title(),
+					'link'   => get_the_permalink(),
+					'series' => null !== $series ? (int) $series : 0,
+				);
+			endwhile;
+			usort( $book_data, 'integer_cmp' );
+		}
+		wp_reset_postdata();
+
+		// If we only have 1 book in the series no need to print anything.
+		if ( ! empty( $book_data ) && count( $book_data ) > 1 ) {
+
+			// Set header to a false value to use the default string.
+			$header = ! empty( $header ) ? $header : __( 'Books in this series: ', 'rcno-reviews' );
+
+			$out .= '<div class="rcno-book-series-container">';
+			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
+			$out .= '<div class="rcno-book-series-wrapper">';
+			foreach ( $book_data as $_book_data ) {
+				if ( $_book_data['ID'] !== $review_id ) {
+					$out .= '<div class="rcno-book-series-book">';
+					$out .= '<a href="' . esc_url( $_book_data['link'] ) . '">';
+					$out .= $this->get_the_rcno_book_cover( $_book_data['ID'], 'rcno-book-cover-sm' );
+					$out .= '</a>';
+					if ( $number ) {
+						$out .= $this->get_the_rcno_book_meta( $_book_data['ID'], 'rcno_book_series_number', 'span', false );
+					}
+					$out .= '</div>';
+				}
+			}
+			$out .= '</div>';
+			$out .= '</div>';
+
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Prints a list of books in a given taxonomy.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param int       $review_id      The post ID of the book review.
+	 * @param string    $taxonomy       The taxonomy to fetch reviews for.
+	 * @param bool      $number         Display the book series number.
+	 * @param mixed     $header         The header title.
+	 *
+	 * @return void
+	 */
+	public function the_rcno_book_list( $review_id, $taxonomy = 'series', $number = true, $header = null ) {
+		echo $this->get_the_rcno_book_list( $review_id, $taxonomy, $number, $header );
+	}
+
+
+	/** ****************************************************************************
 	 * REVIEW BOOK REVIEW SCORE TEMPLATE TAGS
 	 *******************************************************************************/
 
@@ -1335,7 +1454,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string
 	 */
-	public function get_the_rcno_alphabet_nav_bar( $letters = array() ) {
+	public function get_the_rcno_alphabet_nav_bar( array $letters ) {
 
 		// An array with the (complete) alphabet.
 		$alphabet = range( 'A', 'Z' );
@@ -1389,10 +1508,7 @@ class Rcno_Template_Tags {
 	 * @return boolean
 	 */
 	public function is_review_embedded() {
-		if ( 'rcno_review' !== get_post_type() ) {
-			return true;
-		}
-		return false;
+		return 'rcno_review' !== get_post_type();
 	}
 
 }

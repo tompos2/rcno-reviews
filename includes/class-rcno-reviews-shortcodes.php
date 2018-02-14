@@ -416,4 +416,39 @@ class Rcno_Reviews_Shortcodes {
 		) );
 	}
 
+	/**
+	 * Creates the 'Shortcodes' tab on the review edit screen.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @uses  get_current_screen()
+	 * @uses  add_help_tab()
+	 *
+	 * @return void
+	 */
+	public function rcno_reviews_shortcodes_tab() {
+
+		$screen    = get_current_screen();
+		$help_text = '<h3>' . __( 'Shortcodes Help', 'rcno-reviews' ) . '</h3>';
+		$help_text .= $this->book_list->rcno_get_help_text();
+
+		if ( null !== $screen ) {
+
+			// Return early if we're not on a book review edit screen.
+			if ( 'rcno_review' !== $screen->post_type ) {
+				return;
+			}
+
+			// Setup help tab args.
+			$args = array(
+				'id'      => 'rcno_reviews_shortcodes_help',
+				'title'   => __( 'Shortcodes', 'rcno-reviews' ),
+				'content' => $help_text,
+			);
+
+			// Add the help tab.
+			$screen->add_help_tab( $args );
+		}
+	}
+
 }

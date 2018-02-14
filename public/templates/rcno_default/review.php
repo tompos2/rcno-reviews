@@ -52,6 +52,8 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 		$template->rcno_print_review_box( $review_id );
 	}
 
+	$template->the_rcno_book_list( $review_id );
+
 	$template->the_rcno_book_schema_data( $review_id );
 	$template->the_rcno_review_schema_data( $review_id );
 
