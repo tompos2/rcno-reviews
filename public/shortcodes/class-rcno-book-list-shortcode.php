@@ -128,26 +128,28 @@ class Rcno_Book_List_Shortcode {
 		$this->help_text .= '<ul>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'id' . '</code> ' . __('The post/review ID, defaults to the current review post.', 'rcno-reviews');
+		$this->help_text .= '<code>' . 'id' . '</code> ' . __( 'The post/review ID, defaults to the current review post.', 'rcno-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'taxonomy' . '</code> ' . __('The custom taxonomy to display the book list for, defaults to the the "series" taxonomy.',
+		$this->help_text .= '<code>' . 'taxonomy' . '</code> ' . __( 'The custom taxonomy to display the book list for, defaults to the the "series" taxonomy.',
+																	'rcno-reviews' );
+		$this->help_text .= '</li>';
+
+		$this->help_text .= '<li>';
+		$this->help_text .= '<code>' . 'number' . '</code> ' . __( 'Whether to display the book series number. Defaults to "yes", use 0 for "no".',
 																	'rcno-reviews');
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'number' . '</code> ' . __('Whether to display the book series number. Defaults to "yes", use 0 for "no".', 'rcno-reviews');
-		$this->help_text .= '</li>';
-
-		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'header' . '</code> ' . __('The header text for the book list, defaults to "Books in this series:"', 'rcno-reviews');
+		$this->help_text .= '<code>' . 'header' . '</code> ' . __( 'The header text for the book list, defaults to "Books in this series:"',
+																	'rcno-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '</ul>';
 
 		$this->help_text .= '<p>';
-		$this->help_text .= __('Examples of the book list shortcode:', 'rcno-reviews');
+		$this->help_text .= __( 'Examples of the book list shortcode:', 'rcno-reviews' );
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';

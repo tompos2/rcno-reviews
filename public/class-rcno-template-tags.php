@@ -136,8 +136,8 @@ class Rcno_Template_Tags {
 			$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true );
 		}
 
-		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'div', true );
-		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', 'div', true );
+		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'div' );
+		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', 'div' );
 
 		$out .= '</div>';
 
@@ -942,9 +942,9 @@ class Rcno_Template_Tags {
 					'series_num' => null !== $series_num ? (int) $series_num : 0,
 					'series'     => isset( $series[0]->slug ) ? $series[0]->slug : '',
 				);
+				usort( $book_data, array( $this, 'series_integer_cmp' ) ); // Group books by series number,
+				usort( $book_data, array( $this, 'series_string_cmp' ) );  // then by series slug.
 			endwhile;
-			usort( $book_data, array( $this, 'series_integer_cmp' ) ); // Group books by series number,
-			usort( $book_data, array( $this, 'series_string_cmp' ) );  // then by series slug.
 		}
 		wp_reset_postdata();
 
