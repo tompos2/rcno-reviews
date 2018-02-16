@@ -39,7 +39,7 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 		<?php if ( true === $review_score_enable && 'top' === $review_score_position ) : ?>
 
             <div class="review-box-container">
-				<?php $template->rcno_print_review_box( $review_id ); ?>
+				<?php $template->the_rcno_review_box( $review_id ); ?>
             </div>
 
 			<?php do_action( 'after_rcno_review_score_box' ); ?>
@@ -60,7 +60,7 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 		<?php if ( true === $review_score_enable && 'bottom' === $review_score_position ) : ?>
 
             <div class="review-box-container">
-				<?php $template->rcno_print_review_box( $review_id ); ?>
+				<?php $template->the_rcno_review_box( $review_id ); ?>
             </div>
 
 			<?php do_action( 'after_rcno_review_score_box' ); ?>

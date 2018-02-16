@@ -21,6 +21,8 @@
  */
 
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-book-list-shortcode.php';
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-review-box-shortcode.php';
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-purchase-links-shortcode.php';
 
 class Rcno_Reviews_Shortcodes {
 
@@ -52,6 +54,24 @@ class Rcno_Reviews_Shortcodes {
 	public $book_list;
 
 	/**
+	 * The object contain the book list shortcode object.
+	 *
+	 * @since    1.8.0
+	 * @access   public
+	 * @var      Rcno_Review_Box_Shortcode $review_box The class instance.
+	 */
+	public $review_box;
+
+	/**
+	 * The object contain the purchase links shortcode object.
+	 *
+	 * @since    1.8.0
+	 * @access   public
+	 * @var      Rcno_Purchase_Links_Shortcode $purchase_links The class instance.
+	 */
+	public $purchase_links;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
@@ -63,7 +83,9 @@ class Rcno_Reviews_Shortcodes {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		$this->book_list = new Rcno_Book_List_Shortcode( $plugin_name, $version );
+		$this->book_list  = new Rcno_Book_List_Shortcode( $plugin_name, $version );
+		$this->review_box = new Rcno_Review_Box_Shortcode( $plugin_name, $version );
+		$this->purchase_links = new Rcno_Purchase_Links_Shortcode( $plugin_name, $version );
 	}
 
 	/**
@@ -221,7 +243,7 @@ class Rcno_Reviews_Shortcodes {
 	 * @param mixed $options
 	 * @return string
 	 */
-	public function rcno_do_book_series_shortcode( $options ) {
+	public function rcno_do_book_series_shortcode( $options ) { // @TODO: To be deprecated
 
 		$template = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 		$review_id = get_the_ID();
@@ -431,6 +453,8 @@ class Rcno_Reviews_Shortcodes {
 		$screen    = get_current_screen();
 		$help_text = '<h3>' . __( 'Shortcodes Help', 'rcno-reviews' ) . '</h3>';
 		$help_text .= $this->book_list->rcno_get_help_text();
+		$help_text .= $this->review_box->rcno_get_help_text();
+		$help_text .= $this->purchase_links->rcno_get_help_text();
 
 		if ( null !== $screen ) {
 

@@ -91,6 +91,8 @@ class Rcno_Reviews {
 
 		$this->define_currently_reading();
 
+		$this->cleanup_transients();
+
 	}
 
 	/**
@@ -132,6 +134,11 @@ class Rcno_Reviews {
 		 * The class responsible for the pluralization and singularization of common nouns.
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-pluralize-helper.php';
+
+		/**
+		 * The class responsible for the cleaning up of transients.
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-transients-cleanup.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -428,6 +435,8 @@ class Rcno_Reviews {
 
 		$this->loader->add_action( 'admin_head', $plugin_shortcodes, 'rcno_reviews_shortcodes_tab' );
 		add_shortcode( 'rcno-book-list', array( $plugin_shortcodes->book_list, 'rcno_do_book_list_shortcode' ) );
+		add_shortcode( 'rcno-review-box', array( $plugin_shortcodes->review_box, 'rcno_do_review_box_shortcode' ) );
+		add_shortcode( 'rcno-purchase-links', array( $plugin_shortcodes->purchase_links, 'rcno_do_purchase_links_shortcode' ) );
 
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
@@ -478,8 +487,20 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'wp_dashboard_setup', $currently_reading, 'rcno_register_currently_reading_dash_widget' );
 		$this->loader->add_action( 'rest_api_init', $currently_reading, 'rcno_currently_rest_routes' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $currently_reading, 'rcno_enqueue_currently_reading_scripts' );
+	}
 
+	/**
+	 * Register all of the hooks related to cleaning up transients on various post actions
+	 * of the plugin.
+	 *
+	 * @since    1.8.0
+	 * @access   private
+	 */
+	public function cleanup_transients() {
 
+		$transients = new Rcno_Reviews_Transients_Cleanup( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'save_post', $transients, 'rcno_delete_template_tags_transients' );
 
 	}
 

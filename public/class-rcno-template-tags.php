@@ -787,7 +787,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string
 	 */
-	public function get_the_rcno_books_in_series( $review_id, $taxonomy, $number, $header ) {
+	public function get_the_rcno_books_in_series( $review_id, $taxonomy, $number, $header ) { // @TODO: To be deprecated
 
 		// If we are on not on a single review don't display this.
 		if ( ! is_single()  ) {
@@ -916,20 +916,24 @@ class Rcno_Template_Tags {
 			return $out;
 		}
 
-		$custom_args = array(
-			'post_type' => 'rcno_review',
-			'order'     => 'ASC',
-			'tax_query' => array(
-				array(
-					'taxonomy' => $tax[0]->taxonomy,
-					'field'    => 'slug',
-					'terms'    => $tax[0]->slug,
+		if ( false === ( $data = get_transient( 'rcno_book_list_' . $review_id ) ) ) {
+			$custom_args = array(
+				'post_type'      => 'rcno_review',
+				'order'          => 'ASC',
+				'tax_query'      => array(
+					array(
+						'taxonomy' => $tax[ 0 ]->taxonomy,
+						'field'    => 'slug',
+						'terms'    => $tax[ 0 ]->slug,
+					),
 				),
-			),
-			'posts_per_page' => 30,
-		);
+				'rcno_book_list' => 30,
+			);
 
-		$data = new WP_Query( $custom_args );
+			$data = new WP_Query( $custom_args );
+
+			set_transient( 'rcno_book_list_' . $review_id, $data, 24 * HOUR_IN_SECONDS );
+		}
 
 		if ( $data->have_posts() ) {
 			while ( $data->have_posts() ) : $data->the_post();
@@ -1077,7 +1081,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string|null|false
 	 */
-	private function rcno_the_review_box( $review_id ) {
+	public function get_the_rcno_review_box( $review_id ) {
 
 		// If we are on the homepage don't display this.
 		if ( ! is_single()  ) {
@@ -1161,8 +1165,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @return void
 	 */
-	public function rcno_print_review_box( $review_id ) {
-		echo $this->rcno_the_review_box( $review_id );
+	public function the_rcno_review_box( $review_id ) {
+		echo $this->get_the_rcno_review_box( $review_id );
 	}
 
 
