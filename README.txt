@@ -160,4 +160,7 @@ Please open a new topic on the plugin's WordPress.org support page
 * Removed comment rating scripts and styles from posts that are not reviews
 
 = 1.7.1 =
-* Fixed a bug with CPT slug not taking a pluralized for in some foreign languages
+* Fixed a bug with CPT slug not taking a pluralized form in some foreign languages
+
+= 1.8.0 =
+* Added 3 new shortcodes: [rcno-book-list], [rcno-review-box] and [rcno-purchase-links]

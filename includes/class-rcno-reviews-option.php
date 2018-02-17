@@ -72,6 +72,9 @@ class Rcno_Reviews_Option {
 		// Update the specified value in the array.
 		$plugin_options[ $key ] = $value;
 
+		// Flush rewrite rules on changing options.
+		flush_rewrite_rules();
+
 		// Save the options back to the DB.
 		return update_option( 'rcno_reviews_settings', $plugin_options );
 	}
@@ -101,6 +104,9 @@ class Rcno_Reviews_Option {
 
 		// Delete the specified key.
 		unset( $plugin_options[ $key ] );
+
+		// Flush rewrite rules on changing options.
+		flush_rewrite_rules();
 
 		// Save the options back to the DB.
 		return update_option( 'rcno_reviews_settings', $plugin_options );
