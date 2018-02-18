@@ -69,7 +69,7 @@ class Rcno_Reviews {
 	public function __construct() {
 
 		$this->plugin_name = 'rcno-reviews';
-		$this->version     = '1.8.0';
+		$this->version     = '1.8.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -194,7 +194,6 @@ class Rcno_Reviews {
 		$plugin_i18n = new Rcno_Reviews_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -501,7 +500,6 @@ class Rcno_Reviews {
 		$transients = new Rcno_Reviews_Transients_Cleanup( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'save_post', $transients, 'rcno_delete_template_tags_transients' );
-
 	}
 
 	/**

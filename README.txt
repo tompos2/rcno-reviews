@@ -164,3 +164,6 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.8.0 =
 * Added 3 new shortcodes: [rcno-book-list], [rcno-review-box] and [rcno-purchase-links]
+
+= 1.8.1 =
+* Fixed an issue in how best and worst ratings are calculated for the "Reviews" schema; thanks @kimoves

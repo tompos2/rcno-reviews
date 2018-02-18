@@ -1401,8 +1401,8 @@ class Rcno_Template_Tags {
 		if ( $priv_score ) {
 			$data['reviewRating'] = array(
 				'@type'       => 'Rating',
-				'worstRating' => number_format( min( $priv_score ), 1 ),
-				'bestRating'  => number_format( max( $priv_score ), 1 ),
+				'worstRating' => 1, // number_format( min( $priv_score ), 1 )
+				'bestRating'  => 5, // number_format( max( $priv_score ), 1 )
 				'ratingValue' => number_format( array_sum( $priv_score ) / count( $priv_score ), 1 ),
 			);
 		} else {

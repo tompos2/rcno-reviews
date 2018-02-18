@@ -754,7 +754,7 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_add_image_column_content( $column_name, $review_id ) {
 		$review        = get_post_custom( $review_id );
-		$book_cover    = $review[ 'rcno_reviews_book_cover_src' ][ 0 ];
+		$book_cover    = isset( $review[ 'rcno_reviews_book_cover_src' ][0] ) ? $review[ 'rcno_reviews_book_cover_src' ][0] : '';
 		$attachment_id = attachment_url_to_postid( $book_cover );
 		$book_src      = wp_get_attachment_image_url( $attachment_id, 'rcno-book-cover-sm' );
 
@@ -829,7 +829,7 @@ SQL;
 	 *
 	 * @return array
 	 */
-	public function rcno_add_reviews_glance_items( $items = array() ) {
+	public function rcno_add_reviews_glance_items( array $items ) {
 		$num_reviews = wp_count_posts( 'rcno_review' );
 
 		if ( $num_reviews ) {
