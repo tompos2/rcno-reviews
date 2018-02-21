@@ -89,7 +89,7 @@ class Rcno_Template_Tags {
 	public function include_functions_file() {
 
 		// Get the layout chosen.
-		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template' );
+		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template', 'rcno_default' );
 
 		$include_path = get_stylesheet_directory() . '/rcno_templates/' . $layout . '/functions.php';
 

@@ -287,6 +287,9 @@ class Rcno_Reviews {
 		$this->loader->add_filter( 'posts_clauses', $plugin_admin, 'rcno_query_admin_columns', 10, 2 );
 
 		$this->loader->add_action( 'wp_ajax_reset_all_options', $plugin_admin, 'reset_all_options' );
+
+		$this->loader->add_action( 'wp_ajax_rcno_settings_export', $plugin_admin, 'rcno_settings_export' );
+		$this->loader->add_action( 'wp_ajax_rcno_settings_import', $plugin_admin, 'rcno_settings_import' );
 	}
 
 	/**

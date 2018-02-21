@@ -241,9 +241,11 @@ class Rcno_Reviews_Admin {
 		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', true );
 
 		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
-			'reviewID'         => ( null !== $post ) ? $post->ID : '',
-			'ajaxURL'          => admin_url( 'admin-ajax.php' ),
-			'rcno_reset_nonce' => wp_create_nonce( 'rcno-rest-nonce' ),
+			'reviewID'              => ( null !== $post ) ? $post->ID : '',
+			'ajaxURL'               => admin_url( 'admin-ajax.php' ),
+			'rcno_reset_nonce'      => wp_create_nonce( 'rcno-rest-nonce' ),
+			'rcno_settings_download_nonce'   => wp_create_nonce( 'rcno-settings-download-nonce' ),
+			'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
 		) );
 	}
 
@@ -1019,7 +1021,6 @@ SQL;
 			'rcno_settings_version' => '1.0.0',
 			'rcno_review_slug' => 'review',
 			'rcno_reviews_archive' => 'archive_display_excerpt',
-			'rcno_reviews_on_homepage' => '1',
 			'rcno_reviews_in_rss' => '1',
 			'rcno_taxonomy_selection' => 'Author,Genre,Series,Publisher',
 			'rcno_author_slug' => 'author',
@@ -1054,22 +1055,114 @@ SQL;
 			'rcno_publisher_show' => '1',
 			'rcno_show_illustrator' => '1',
 			'rcno_store_purchase_links_label' => 'Purchase on:',
-			'rcno_store_purchase_links' => 'Amazon,Barnes & Noble,Kobo',
+			'rcno_store_purchase_links' => 'Amazon,Barnes & Noble,Kobo,Booktopia,Nook',
 			'rcno_enable_purchase_links' => '1',
 			'rcno_store_purchase_link_text_color' => '#ffffff',
 			'rcno_store_purchase_link_background' => '#212121',
 			'rcno_enable_star_rating_box' => '1',
-			'rcno_star_rating_color' => '#ffffff',
+			'rcno_star_rating_color' => '#ededed',
 			'rcno_star_background_color' => '#212121',
 			'rcno_show_review_score_box_accent_2' => '#ffffff',
 			'rcno_comment_rating_label' => 'Rate this review:',
 			'rcno_comment_rating_star_color' => '#212121',
 			'rcno_show_book_grid_widget' => '1',
-			'rcno_external_book_api' => 'no-3rd-party',
+			'rcno_external_book_api' => 'good-reads',
+			'rcno_reviews_sort_names' => 'last_name_first_name',
+			'rcno_reviews_ignore_articles' => '1',
+			'rcno_enable_googlebooks' => '1',
+			'rcno_enable_goodreads' => '1',
+			'rcno_show_series_number' => '1',
+			'rcno_enable_comment_ratings' => '1',
+			'rcno_show_currently_reading_widget' => '1',
+			'rcno_show_review_calendar_widget' => '1',
+			'rcno_enable_builtin_taxonomy' => '1',
+			'rcno_publisher_slug' => 'publisher',
+			'rcno_no_pluralization' => '',
+			'rcno_reviews_on_homepage' => '1',
+			'rcno_reviews_index_headers' => '1',
 		);
 
 		// Set the options to the defaults from the '$default_options' array.
 		update_option( 'rcno_reviews_settings', $default_options );
+		flush_rewrite_rules();
+		wp_die();
+	}
+
+	/**
+	 * Adds the book review CPT to the rewrite rules for date archive.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @return void
+	 */
+	public function rcno_settings_export() {
+
+		if( empty( $_POST['action'] ) || 'rcno_settings_export' !== $_POST['action'] ) {
+			wp_send_json_error( array(
+				'message' => 'Invalid post action sent.'
+			), 500 );
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['settings_download_nonce'], 'rcno-settings-download-nonce' ) ) {
+			wp_send_json_error( array(
+				'message' => 'Invalid nonce.'
+			), 500 );
+			return;
+		}
+
+		if( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array(
+				'message' => 'Invalid user permissions.'
+			), 500 );
+			return;
+		}
+
+		$settings = get_option( 'rcno_reviews_settings' );
+		wp_send_json( $settings );
+		wp_die();
+	}
+
+	/**
+	 * Adds the book review CPT to the rewrite rules for date archive.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @return void
+	 */
+	public function rcno_settings_import() {
+
+		if( empty( $_POST['action'] ) || 'rcno_settings_import' !== $_POST['action'] ) {
+			wp_send_json_error( array(
+				'message' => 'Invalid post action sent.'
+			), 500 );
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['settings_import_nonce'], 'rcno-settings-import-nonce' ) ) {
+			wp_send_json_error( array(
+				'message' => 'Invalid nonce.'
+			), 500 );
+			return;
+		}
+
+		if( ! current_user_can( 'manage_options' ) ){
+			wp_send_json_error( array(
+				'message' => 'Invalid user permissions.'
+			), 500 );
+			return;
+		}
+
+		$settings = stripslashes( $_POST['file_data'] );
+		$settings = (array) json_decode( $settings );
+
+		if ( isset( $settings['rcno_settings_version'] ) ) {
+			update_option( 'rcno_reviews_settings', $settings );
+			wp_send_json_success( array(
+				'message' => 'Settings updated.'
+			), 200 );
+			flush_rewrite_rules();
+		}
 
 		wp_die();
 	}

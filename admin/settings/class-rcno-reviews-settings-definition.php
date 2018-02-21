@@ -697,6 +697,29 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Create a list of words that have no plural or singular form e.g. "sheep, fish"', 'rcno-reviews' ),
 					'type' => 'text',
 				),
+				'spacer-11'             => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
+
+				'advanced_tab_header_4' => array(
+					'name' => '<strong>' . __( 'Import/Export Settings', 'rcno-reviews' ) . '</strong>',
+					'type' => 'header',
+				),
+				'rcno_settings_import'      => array(
+					'name' => __( 'Import Settings', 'rcno-reviews' ),
+					'desc' => __( 'Import your previously saved plugin settings.', 'rcno-reviews' ),
+					'type' => 'file',
+				),
+				'rcno_settings_export'      => array(
+					'name' => __( 'Export Settings', 'rcno-reviews' ),
+					'desc' => __( 'Save the plugin settings to a file on your computer.', 'rcno-reviews' ),
+					'type' => 'download',
+				),
+				'spacer-12'             => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
 
 			),
 
