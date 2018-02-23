@@ -33,6 +33,7 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 	</h2>
 <?php endif; ?>
 
+<?php do_action( 'before_rcno_book_review' ); ?>
 
 <div class="rcno-book-info">
 
@@ -60,3 +61,5 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 	?>
 
 </div>
+
+<?php do_action( 'after_rcno_book_review' ); ?>

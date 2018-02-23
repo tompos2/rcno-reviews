@@ -167,3 +167,6 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.8.1 =
 * Fixed an issue in how best and worst ratings are calculated for the "Reviews" schema; thanks @kimoves
+
+= 1.8.2 =
+* Added an "after review" action to use for tying in the use of additional 3rd party content below reviews
