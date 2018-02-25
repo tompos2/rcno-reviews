@@ -125,6 +125,9 @@ class Rcno_Reviews_Settings {
 						'min'     => isset( $option['min'] ) ? $option['min'] : 0,
 						'step'    => isset( $option['step'] ) ? $option['step'] : 1,
 						'class'   => $key . ' rcno-table-' . $option['type'],
+						'accept'  => isset( $option['accept'] ) ? $option['accept'] : 'image/*',
+						'pattern' => isset( $option['pattern'] ) ? $option['pattern'] : '{2,}',
+						'title' => isset( $option['title'] ) ? $option['title'] : __( 'Please enter 2 or more lower-case characters.', 'rcno-reviews' ),
 					)
 				);
 			} // end foreach
