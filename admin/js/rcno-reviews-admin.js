@@ -38,7 +38,9 @@
 				}
 			} )
 			.done( function( response, status, xhr ) {
-				var filename = 'rcno-reviews-settings-' + Date.now() + '.json';
+				var filename = 'rcno-reviews-settings-' +
+					(new Date()).toISOString().replace(/[^0-9]/g, "").slice(0,15) +
+					'.json';
 
 				var type = xhr.getResponseHeader( 'Content-Type' );
 				var blob = new Blob( [JSON.stringify( response )],

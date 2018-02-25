@@ -43,6 +43,7 @@ class Rcno_Reviews_Sanitization_Helper {
 		$this->registered_settings = Rcno_Reviews_Settings_Definition::get_settings();
 
 		add_filter( 'rcno_reviews_settings_sanitize_text', array( $this, 'sanitize_text_field' ) );
+		add_filter( 'rcno_reviews_settings_sanitize_slug', array( $this, 'sanitize_slug_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_email', array( $this, 'sanitize_email_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_checkbox', array( $this, 'sanitize_checkbox_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_url', array( $this, 'sanitize_url_field' ) );
@@ -190,6 +191,20 @@ class Rcno_Reviews_Sanitization_Helper {
 	public function sanitize_text_field( $input ) {
 
 		return sanitize_text_field( $input );
+	}
+
+	/**
+	 * Sanitize slug fields
+	 *
+	 * @since    1.9.0
+	 *
+	 * @param    array $input The field value.
+	 *
+	 * @return    string        $input        Sanitized value
+	 */
+	public function sanitize_slug_field( $input ) {
+
+		return sanitize_title( $input );
 	}
 
 	/**
