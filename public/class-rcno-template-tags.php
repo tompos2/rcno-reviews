@@ -572,9 +572,9 @@ class Rcno_Template_Tags {
 
 		// We need to check this or we'll get an infinite loop with embedded reviews.
 		if ( $this->is_review_embedded() ) {
-			$review_content .= apply_filters( 'the_content', get_post_field( 'post_content', $review_id ) );
+			$review_content .= get_post_field( 'post_content', $review_id );
 		} else {
-			$review_content .= apply_filters( 'the_content', get_the_content( $read_more ) );
+			$review_content .= get_the_content( $read_more );
 		}
 
 		$review_content .= '</div>';
@@ -1401,8 +1401,8 @@ class Rcno_Template_Tags {
 		if ( $priv_score ) {
 			$data['reviewRating'] = array(
 				'@type'       => 'Rating',
-				'worstRating' => 1, // number_format( min( $priv_score ), 1 )
-				'bestRating'  => 5, // number_format( max( $priv_score ), 1 )
+				'worstRating' => 1,
+				'bestRating'  => 5,
 				'ratingValue' => number_format( array_sum( $priv_score ) / count( $priv_score ), 1 ),
 			);
 		} else {
@@ -1416,8 +1416,8 @@ class Rcno_Template_Tags {
 		if ( $pub_rating->rcno_rating_info( 'count' ) > 0 ) {
 			$data['aggregateRating'] = array(
 				'@type'         => 'AggregateRating',
-				'worstRating'   => $pub_rating->rcno_rating_info( 'min' ),
-				'bestRating'    => $pub_rating->rcno_rating_info( 'max' ),
+				'worstRating'   => 1,
+				'bestRating'    => 5,
 				'ratingValue'   => $pub_rating->rcno_rating_info( 'avg' ),
 				'ratingCount'   => $pub_rating->rcno_rating_info( 'count' ),
 			);
