@@ -225,7 +225,9 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Book reviews will be available at:', 'rcno-reviews' ) .
 					          ' <i>' . get_site_url() . '/' . '<b>slug</b>' . '/' . 'a-book-review' . '</i>',
 					'std'  => 'review',
-					'type' => 'text',
+					'type' => 'slug',
+					'pattern' => '{2,}',
+					'title' => __( 'Please only use only 1 lower-case word', 'rcno-reviews' ),
 				),
 				'rcno_review_slug_instructions' => array(
 					'name' => __( '404s errors', 'rcno-reviews' ),
@@ -710,6 +712,7 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => __( 'Import Settings', 'rcno-reviews' ),
 					'desc' => __( 'Import your previously saved plugin settings.', 'rcno-reviews' ),
 					'type' => 'file',
+					'accept' => '.json',
 				),
 				'rcno_settings_export'      => array(
 					'name' => __( 'Export Settings', 'rcno-reviews' ),
@@ -726,9 +729,7 @@ class Rcno_Reviews_Settings_Definition {
 
 		);
 
-		$taxes = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
-
-		foreach ( $taxes as $tax ) {
+		foreach ( Rcno_Reviews_Admin::$custom_taxonomies as $tax ) {
 			foreach ( self::taxonomy_options( $tax ) as $key => $value ) {
 				$settings['taxonomy_tab'][ strtolower( $key ) ] = $value;
 			}
