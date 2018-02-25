@@ -627,11 +627,41 @@ class Rcno_Reviews_Callback_Helper {
 	 */
 	public function file_callback( $args ) {
 
-		$html = '<input type="file" id="' . $args['id'] . '" class="' . 'rcno_reviews_settings_file_button ' . $args['id'] . ' file-button" value="' .
-		        __( 'Download 
-		File',
-			        'rcno-reviews' ) . '"/><br>';
+		$html = '<input type="file" id="' . $args['id'] . '" class="' . 'rcno_reviews_settings_file_button ' . $args['id'] . ' file-button" 
+value="' .
+		        __( 'Download File', 'rcno-reviews' ) . '" accept="' . $args['accept'] . '" /><br>';
 
+		$html .= $this->get_label_for( $args['id'], $args['desc'] );
+
+		echo $html;
+	}
+
+	/**
+	 * Slug Callback
+	 *
+	 * Renders slug field used to collect the CPT name.
+	 *
+	 * @since    1.9.0
+	 *
+	 * @param    array $args Arguments passed by the setting.
+	 *
+	 * @return    void
+	 */
+	public function slug_callback( $args ) {
+
+		//$this->input_type_callback( 'text', $args );
+
+		$value = Rcno_Reviews_Option::get_option( $args['id'], $args['std'] );
+
+		$html = '<input type="text" ';
+		$html .= $this->get_id_and_name_attributes( $args['id'] );
+		$html .= 'class="' . $args['size'] . '-text ' . 'rcno-slug-input' . '"';
+		$html .= 'value="' . esc_attr( stripslashes( $value ) ) . '" ';
+		$html .= 'pattern="' . $args['pattern'] . '" ';
+		$html .= 'title="' . $args['title'] . '" ';
+		$html .= '/>';
+
+		$html .= '<br />';
 		$html .= $this->get_label_for( $args['id'], $args['desc'] );
 
 		echo $html;
