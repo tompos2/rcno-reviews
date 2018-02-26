@@ -729,8 +729,10 @@ class Rcno_Reviews_Settings_Definition {
 
 		);
 
-		foreach ( Rcno_Reviews_Admin::$custom_taxonomies as $tax ) {
-			foreach ( self::taxonomy_options( $tax ) as $key => $value ) {
+		$custom_taxonomies = new Rcno_Reviews_Admin( RCNO_PLUGIN_NAME, RCNO_PLUGIN_VER );
+		$_custom_taxonomies = $custom_taxonomies->rcno_get_custom_taxonomies();
+		foreach (  $_custom_taxonomies as $tax ) {
+			foreach ( self::taxonomy_options( $tax['tax_settings']['slug'] ) as $key => $value ) {
 				$settings['taxonomy_tab'][ strtolower( $key ) ] = $value;
 			}
 		}

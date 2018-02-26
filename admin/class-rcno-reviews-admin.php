@@ -121,15 +121,6 @@ class Rcno_Reviews_Admin {
 	public $uncountable;
 
 	/**
-	 * Instance of the Rcno_Admin_Buy_Links class handling the purchase links.
-	 *
-	 * @since  1.9.0
-	 * @access public
-	 * @var    array $custom_taxonomies;
-	 */
-	public static $custom_taxonomies;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * The constructor also imports and initializes the classes related to controlling
@@ -154,7 +145,6 @@ class Rcno_Reviews_Admin {
 		$this->buy_links          = new Rcno_Admin_Buy_Links( $this->plugin_name, $this->version );
 
 		$this->uncountable        = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
-		self::$custom_taxonomies  = $this->rcno_get_custom_taxonomies();
 	}
 
 	/**
@@ -365,16 +355,27 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_get_custom_taxonomies() {
 
+		$taxonomies = array();
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
-		$author = __( 'Author', 'rcno-reviews');
+		$author = __( 'Author', 'rcno-reviews' );
 
 		if ( ! in_array( $author, $custom_taxonomies, true ) ) {
 			// This is book review plugin, the book author taxonomy must always be present.
 			$custom_taxonomies = array( $author ) + $custom_taxonomies;
 		}
 
-		return apply_filters( 'rcno_custom_taxonomies', $custom_taxonomies );
+		foreach ( $custom_taxonomies as $key ) {
+			$taxonomies[] = array(
+				'tax_settings' => array(
+					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug', strtolower( $key ) ),
+					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
+					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show', true ),
+				),
+			);
+		}
+
+		return apply_filters( 'rcno_custom_taxonomies', $taxonomies );
 	}
 
 	/**
@@ -387,20 +388,10 @@ class Rcno_Reviews_Admin {
 	 * @return  void
 	 */
 	public function rcno_custom_taxonomy() {
-		$taxonomies = array();
+
 		$custom_taxonomies = $this->rcno_get_custom_taxonomies();
 
-		foreach ( $custom_taxonomies as $key ) {
-			$taxonomies[] = array(
-				'tax_settings' => array(
-					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug', strtolower( $key ) ),
-					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical' ),
-					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show' ),
-				),
-			);
-		}
-
-		foreach ( $taxonomies as $tax ) {
+		foreach ( $custom_taxonomies as $tax ) {
 			$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
 			$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['slug'] ) );
 			$tax_name = 'rcno_' . $tax['tax_settings']['slug'];
