@@ -66,7 +66,7 @@
             <div id="rcno-modal-scr-new-review-panel">
 				<?php printf(
 				/* Translators: 1: Link tag opening and icon  2: Link tag closure */
-					__( '%1sCreate a new review.%2s (This will open a new tab and you will need to return here for including the review', 'rcno-reviews' ),
+					__( '%1sCreate a new review.%2s (This will open a new tab and you will need to return here for including the review)', 'rcno-reviews' ),
 					'<a href="' . admin_url() . '/post-new.php?post_type=rcno_review" target="_new" >' . '<i class="fa fa-plus-circle"></i>&nbsp;',
 					'</a>'
 				);

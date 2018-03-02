@@ -392,7 +392,7 @@ class Rcno_Template_Tags {
 		$prefix = '';
 
 		if ( $label ) {
-			$prefix = '<span class="rcno-tax-name">' . $tax_label . ': </span>';
+			$prefix = '<span class="rcno-tax-name">' . apply_filters( 'rcno_taxonomy_label', $tax_label ) . ': </span>';
 		}
 
 		if ( $terms && ! is_wp_error( $terms ) ) {
@@ -572,9 +572,9 @@ class Rcno_Template_Tags {
 
 		// We need to check this or we'll get an infinite loop with embedded reviews.
 		if ( $this->is_review_embedded() ) {
-			$review_content .= get_post_field( 'post_content', $review_id );
+			$review_content .= wpautop( get_post_field( 'post_content', $review_id ) );
 		} else {
-			$review_content .= get_the_content( $read_more );
+			$review_content .= wpautop( get_the_content( $read_more ) );
 		}
 
 		$review_content .= '</div>';
@@ -1287,12 +1287,23 @@ class Rcno_Template_Tags {
 		$book_pc = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
 		$book_ext_url = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false );
 
+		$book_aut_url = '';
+		$author_terms = get_the_terms( $review_id, 'rcno_author' );
+		if ( $author_terms && ! is_wp_error( $author_terms ) ) {
+			$book_aut_url = get_term_meta( $author_terms[0]->term_id, 'rcno_author_taxonomy_url', true );
+		}
+
+		if ( '' === $book_aut_url ) {
+			$book_aut_url = 'https://www.goodreads.com/book/author/' . str_replace( ' ', '+', $book_author );
+		}
+
 		$data['@context'] = 'http://schema.org';
 		$data['@type']    = 'Book';
 		$data['name']     = $book_title;
 		$data['author'] = array(
 			'@type' => 'Person',
 			'name' => $book_author,
+			'sameAs' => $book_aut_url,
 		);
 		$data['url'] = $book_review_url;
 		$data['sameAs'] = $book_ext_url;
