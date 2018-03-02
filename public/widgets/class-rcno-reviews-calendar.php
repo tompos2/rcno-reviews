@@ -392,7 +392,7 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true,
 	}
 
 	$pad = 7 - calendar_week_mod( date( 'w', mktime( 0, 0, 0, $thismonth, $day, $thisyear ) ) - $week_begins );
-	if ( $pad !== 0 && $pad !== 7 ) {
+	if ( (int) $pad !== 0 && (int) $pad !== 7 ) {
 		$calendar_output .= "\n\t\t" . '<td class="pad" colspan="' . esc_attr( $pad ) . '">&nbsp;</td>';
 	}
 

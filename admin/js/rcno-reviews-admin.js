@@ -306,4 +306,25 @@
 		} );
 	} );
 
+	$( function() {
+
+		$( '#rcno-star-rating' ).starRating({
+			initialRating: parseFloat( my_script_vars.rcno_admin_rating ),
+			starSize: 25,
+			disableAfterRate: false,
+			emptyColor: '#ccc',
+			hoverColor: '#ffd700',
+			activeColor: '#ffd700',
+			ratedColor: '#ffd700',
+			useGradient: false,
+			strokeWidth: 0,
+			callback: function( currentRating ){
+				$( '#rcno_admin_rating' ).val( currentRating );
+			}
+		});
+
+	} );
+
+
+
 } )( jQuery );

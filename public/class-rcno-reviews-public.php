@@ -53,7 +53,6 @@ class Rcno_Reviews_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
 	}
 
 	/**
@@ -99,6 +98,7 @@ class Rcno_Reviews_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'rcno-star-rating', plugin_dir_url( __FILE__ ) . 'js/rcno-star-rating.js', array( 'jquery' ), $this->version, true );
 
 		// We are only registering the script, not calling it.
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );

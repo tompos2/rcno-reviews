@@ -45,4 +45,4 @@ function rcno_insert_book_details( $content ) {
 	return $content;
 }
 
-add_filter( 'the_content', 'rcno_insert_book_details' );
+add_filter( 'the_content', 'rcno_insert_book_details', 11 );

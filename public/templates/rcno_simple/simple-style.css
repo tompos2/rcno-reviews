@@ -204,6 +204,12 @@
     width: 100%;
 }
 
+.review-content .book-cover-container .book-cover .rcno-admin-rating .jq-star {
+    height: 35px;
+    width: 25px;
+    margin: 0 5px 0 0;
+}
+
 .review-content .book-cover-container .book-info {
     position: absolute;
     background: rgba(86, 160, 0, 0.8);

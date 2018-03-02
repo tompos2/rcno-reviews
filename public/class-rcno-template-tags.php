@@ -58,15 +58,6 @@ class Rcno_Template_Tags {
 	protected $private_score;
 
 	/**
-	 * The current version of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      int $private_rating The rating from the 5 star metabox.
-	 */
-	protected $private_rating;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
@@ -174,62 +165,51 @@ class Rcno_Template_Tags {
 	 * @since 1.0.0
 	 *
 	 * @param int $review_id	The current review's post ID.
+	 * @param bool $display	    Display the stars or return value.
 	 *
-	 * @return bool|string
+	 * @return mixed
 	 */
-	private function get_the_rcno_admin_book_rating( $review_id ) {
-		// @TODO: Use an SVG to avoid issues with none UTF-8 fonts.
+	public function get_the_rcno_admin_book_rating( $review_id, $display = true ) {
+
+		$output = '';
 		$review = get_post_custom( $review_id );
 
-		if ( ! isset( $review['rcno_admin_rating'] ) ) {
+		if ( empty( $review['rcno_admin_rating'][0] ) ) {
 			return false;
 		}
 
-		$book_rating          = (int) $review['rcno_admin_rating'][0];
+		$book_rating          = (float) $review['rcno_admin_rating'][0];
 		$background           = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
-		$this->private_rating = $book_rating;
+		$colour               = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' );
 
-		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
-
-			switch ( $book_rating ) {
-				case 5:
-					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
-							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-							</div>';
-					break;
-
-				case 4:
-					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
-							<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
-							</div>';
-					break;
-
-				case 3:
-					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
-							<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
-							</div>';
-					break;
-
-				case 2:
-					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
-							<span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
-							</div>';
-					break;
-
-				case 1:
-					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
-							<span>★</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-							</div>';
-					break;
-
-				default:
-					return '<div class="rcno-admin-rating" style="background: ' . $background . '">
-							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-							</div>';
-			}
+		if ( false === $display) {
+			return $book_rating;
 		}
 
-		return true;
+		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
+
+			$output .= '<div class="rcno-admin-rating" style="background: ' . $background . '">';
+			$output .= '<div class="stars rating-' . $review_id .'" ';
+			$output .= 'title="' . $book_rating . ' ' . __( 'out of 5 stars', 'rcno-reviews' ) . '">';
+			$output .= '</div>';
+			$output .= '</div>';
+		}
+
+		$script = "
+			jQuery( '.rcno-admin-rating .rating-" . $review_id . "' ).starRating({
+				initialRating: parseFloat( " . $book_rating ." ),
+				emptyColor: '". $background ."',
+				activeColor: '". $colour ."',
+				useGradient: false,
+				strokeWidth: 0,
+				readOnly: true,
+			});
+		";
+
+		// This is the only way I can think of getting the review ID to the JS function
+		wp_add_inline_script( 'rcno-star-rating', $script );
+
+		return $output;
 	}
 
 	/**
@@ -238,11 +218,12 @@ class Rcno_Template_Tags {
 	 * @since 1.0.0
 	 *
 	 * @param int $review_id	The current review's post ID.
+	 * @param bool $display	    Display the stars or return value.
 	 *
 	 * @return void
 	 */
-	public function the_rcno_admin_book_rating( $review_id ) {
-		echo $this->get_the_rcno_admin_book_rating( $review_id );
+	public function the_rcno_admin_book_rating( $review_id, $display = true ) {
+		echo $this->get_the_rcno_admin_book_rating( $review_id, $display );
 	}
 
 
@@ -1421,7 +1402,7 @@ class Rcno_Template_Tags {
 				'@type'       => 'Rating',
 				'worstRating' => 1,
 				'bestRating'  => 5,
-				'ratingValue' => $this->private_rating,
+				'ratingValue' => $this->get_the_rcno_admin_book_rating( $review_id, false ),
 			);
 		}
 		if ( $pub_rating->rcno_rating_info( 'count' ) > 0 ) {

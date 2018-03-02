@@ -171,6 +171,12 @@
     position: relative;
 }
 
+.rcno-full-book-cover .rcno-admin-rating .jq-star {
+    height: 35px;
+    width: 25px;
+    margin: 0 5px 0 0;
+}
+
 .rcno-full-book-details .rcno-full-book-cover img {
     max-width: 200px;
 }

@@ -215,6 +215,7 @@ class Rcno_Reviews_Admin {
 	 */
 	public function enqueue_scripts() {
 		global $post;
+		$review_id = ( null !== $post ) ? $post->ID : '';
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -239,13 +240,16 @@ class Rcno_Reviews_Admin {
 			'wp-color-picker',
 		), $this->version, true );
 		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', true );
+		wp_enqueue_script( 'star-rating-svg', plugin_dir_url( __FILE__ ) . 'js/star-rating-svg.js', array( 'jquery' ), '1.2.0', true );
 
 		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
-			'reviewID'              => ( null !== $post ) ? $post->ID : '',
+			'reviewID'              => $review_id,
 			'ajaxURL'               => admin_url( 'admin-ajax.php' ),
 			'rcno_reset_nonce'      => wp_create_nonce( 'rcno-rest-nonce' ),
 			'rcno_settings_download_nonce'   => wp_create_nonce( 'rcno-settings-download-nonce' ),
 			'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
+			'rcno_admin_rating' => get_post_meta( $review_id, 'rcno_admin_rating', true ),
+
 		) );
 	}
 
