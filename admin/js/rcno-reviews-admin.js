@@ -103,11 +103,11 @@
 						}
 					} )
 					.success( function( data ) {
-						alert(
-							'Settings restored, please refresh your browser page.' );
+						alert( 'Settings restored, please refresh your browser page.' );
 						console.log( data );
 					} )
 					.error( function( data ) {
+						alert( 'Settings not restored. Required information is missing from uploaded file.' );
 						console.log( data.responseText );
 					} );
 				};

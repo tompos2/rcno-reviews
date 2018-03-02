@@ -170,8 +170,8 @@ class Rcno_Reviews_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . '/css/rcno-reviews-modal.css', $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . '/css/selectize.default.css', '0.12.4', 'all' );
+		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-modal.css', $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.default.css', '0.12.4', 'all' );
 
 		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 
@@ -1178,6 +1178,11 @@ SQL;
 				'message' => 'Settings updated.'
 			), 200 );
 			flush_rewrite_rules();
+		} else {
+			wp_send_json_error( array(
+				'message' => 'The required data was not found.'
+			), 500 );
+			return;
 		}
 
 		wp_die();
