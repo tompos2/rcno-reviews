@@ -99,6 +99,10 @@ class Rcno_Reviews_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( 'rcno-star-rating', plugin_dir_url( __FILE__ ) . 'js/rcno-star-rating.js', array( 'jquery' ), $this->version, true );
+		wp_localize_script( 'rcno-star-rating', 'rcno_star_rating_vars', array(
+			'background_colour' => Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' ),
+			'star_colour'       => Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' )
+		) );
 
 		// We are only registering the script, not calling it.
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );

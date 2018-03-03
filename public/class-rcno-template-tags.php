@@ -180,7 +180,7 @@ class Rcno_Template_Tags {
 
 		$book_rating          = (float) $review['rcno_admin_rating'][0];
 		$background           = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
-		$colour               = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' );
+		// $colour               = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' );
 
 		if ( false === $display) {
 			return $book_rating;
@@ -189,13 +189,16 @@ class Rcno_Template_Tags {
 		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 
 			$output .= '<div class="rcno-admin-rating" style="background: ' . $background . '">';
-			$output .= '<div class="stars rating-' . $review_id .'" ';
+			$output .= '<div class="stars rating-' . $review_id . '" ';
+			$output .= 'data-review-id="' . $review_id . '" ';
+			$output .= 'data-review-rating="' . $book_rating . '" ';
 			$output .= 'title="' . $book_rating . ' ' . __( 'out of 5 stars', 'rcno-reviews' ) . '">';
 			$output .= '</div>';
 			$output .= '</div>';
 		}
 
-		$script = "
+		// TODO: Remove later. Left this here for future reference.
+		/*$script = "
 			jQuery( '.rcno-admin-rating .rating-" . $review_id . "' ).starRating({
 				initialRating: parseFloat( " . $book_rating ." ),
 				emptyColor: '". $background ."',
@@ -204,10 +207,10 @@ class Rcno_Template_Tags {
 				strokeWidth: 0,
 				readOnly: true,
 			});
-		";
+		";*/
 
 		// This is the only way I can think of getting the review ID to the JS function
-		wp_add_inline_script( 'rcno-star-rating', $script );
+		// wp_add_inline_script( 'rcno-star-rating', $script );
 
 		return $output;
 	}

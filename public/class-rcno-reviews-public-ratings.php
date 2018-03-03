@@ -320,7 +320,6 @@ class Rcno_Reviews_Public_Rating {
 				if ( null !== $avg ) {
 					return $this->rating = array_sum( $avg ) / count( $avg );
 				}
-
 				return 0;
 				break;
 
@@ -329,7 +328,6 @@ class Rcno_Reviews_Public_Rating {
 				if ( null !== $count ) {
 					return $this->comment_count = count( $count );
 				}
-
 				return 0;
 				break;
 
@@ -338,7 +336,6 @@ class Rcno_Reviews_Public_Rating {
 				if ( null !== $min ) {
 					return $this->min_rating = (int) min( $min );
 				}
-
 				return 0;
 				break;
 
@@ -347,7 +344,6 @@ class Rcno_Reviews_Public_Rating {
 				if ( null !== $max ) {
 					return $this->max_rating = (int) max( $max );
 				}
-
 				return 0;
 				break;
 

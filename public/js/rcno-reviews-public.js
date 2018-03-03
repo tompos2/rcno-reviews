@@ -60,4 +60,19 @@
     }
   });
 
+  $(function() {
+      var stars = $( '.rcno-admin-rating .stars' );
+      $.each(stars, function( index, star ) {
+		  $(star).starRating({
+			  initialRating: $(star).data('review-rating'),
+			  emptyColor: rcno_star_rating_vars.background_colour,
+			  activeColor: rcno_star_rating_vars.star_colour,
+			  useGradient: false,
+			  strokeWidth: 0,
+			  readOnly: true,
+		  });
+	  });
+
+  });
+
 })(jQuery);
