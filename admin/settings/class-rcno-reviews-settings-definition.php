@@ -589,7 +589,7 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'rcno_default_cover'      => array(
 					'name' => __( 'Default Book Cover', 'rcno-reviews' ),
-					'desc' => __( 'The default image to use when a book cover isn\'t upload', 'rcno-reviews' ),
+					'desc' => __( 'The default image to use when a book cover isn\'t uploaded', 'rcno-reviews' ),
 					'type' => 'upload',
 				),
 				'rcno_excerpt_read_more'  => array(
@@ -699,6 +699,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Create a list of words that have no plural or singular form e.g. "sheep, fish"', 'rcno-reviews' ),
 					'type' => 'text',
 				),
+				'rcno_disable_pluralization' => array(
+					'name' => __( 'Disable Pluralization', 'rcno-reviews' ),
+					'desc' => __( 'Disable the automatic pluralization of words used in the settings', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'spacer-11'             => array(
 					'name' => '',
 					'type' => 'spacer',
@@ -732,7 +737,7 @@ class Rcno_Reviews_Settings_Definition {
 		$custom_taxonomies = new Rcno_Reviews_Admin( RCNO_PLUGIN_NAME, RCNO_PLUGIN_VER );
 		$_custom_taxonomies = $custom_taxonomies->rcno_get_custom_taxonomies();
 		foreach (  $_custom_taxonomies as $tax ) {
-			foreach ( self::taxonomy_options( $tax['tax_settings']['slug'] ) as $key => $value ) {
+			foreach ( self::taxonomy_options( $tax['tax_settings'] ) as $key => $value ) {
 				$settings['taxonomy_tab'][ strtolower( $key ) ] = $value;
 			}
 		}
@@ -743,27 +748,34 @@ class Rcno_Reviews_Settings_Definition {
 	public static function taxonomy_options( $tax ) {
 
 		$opts = array(
-			'rcno_' . $tax . '_header'       => array(
-				'name' => '<strong>' . __( ucfirst( $tax ), 'rcno-reviews' ) . '</strong>',
+			'rcno_' . $tax['slug'] . '_header'       => array(
+				'name' => '<strong>' . ucfirst( $tax['label'] ) . '</strong>',
 				'type' => 'header',
 			),
-			'rcno_' . $tax . '_slug'         => array(
-				'name' => __( 'Slug', 'rcno-reviews' ),
-				'desc' => __( 'Place the slug of the ' . $tax . ' taxonomy here.', 'rcno-reviews' ),
-				'std'  => strtolower( $tax ),
+			'rcno_' . $tax['slug'] . '_label'         => array(
+				'name' => __( 'Label', 'rcno-reviews' ),
+				'desc' => __( 'Place the label of the ' . $tax['label'] . ' taxonomy here, as it should display on the frontend.', 'rcno-reviews' ),
+				'std'  =>  ucfirst( $tax['label'] ),
 				'type' => 'text',
 			),
-			'rcno_' . $tax . '_hierarchical' => array(
+			'rcno_' . $tax['slug'] . '_slug'         => array(
+				'name' => __( 'Slug', 'rcno-reviews' ),
+				'desc' => __( 'Place the slug of the ' . $tax['slug'] . ' taxonomy here.', 'rcno-reviews' ),
+				'std'  => strtolower( $tax['slug'] ),
+				'type' => 'text',
+				'size' => '20'
+			),
+			'rcno_' . $tax['slug'] . '_hierarchical' => array(
 				'name' => __( 'Hierarchical', 'rcno-reviews' ),
 				'desc' => __( 'Is this custom taxonomy hierarchical?', 'rcno-reviews' ),
 				'type' => 'checkbox',
 			),
-			'rcno_' . $tax . '_show'         => array(
+			'rcno_' . $tax['slug'] . '_show'         => array(
 				'name' => __( 'Show in table', 'rcno-reviews' ),
 				'desc' => __( 'Show this custom taxonomy on the admin table', 'rcno-reviews' ),
 				'type' => 'checkbox',
 			),
-			'spacer' . $tax                  => array(
+			'spacer' . $tax['slug']                 => array(
 				'name' => '',
 				'type' => 'spacer',
 			),

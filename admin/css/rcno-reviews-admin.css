@@ -201,6 +201,7 @@ button.button.reset-button {
 
 tr.rcno_review_template > td {
     display: flex;
+    flex-wrap: wrap;
     line-height: 0;
 }
 
@@ -214,7 +215,7 @@ tr.rcno_review_template > td .template-options .label-container p {
 }
 
 tr.rcno_review_template > td .template-options {
-    margin: 0 1em;
+    margin: 0 1em 1em;
     position: relative;
 }
 
@@ -321,7 +322,7 @@ tr.rcno-table-header td {
     display: inline-block;
     position: relative;
     vertical-align: top;
-    font-family: helvetica, arial, verdana;
+    font-family: Helvetica, arial, verdana, sans-serif;
 }
 
 .jq-star {

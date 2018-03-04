@@ -372,6 +372,7 @@ class Rcno_Reviews_Admin {
 		foreach ( $custom_taxonomies as $key ) {
 			$taxonomies[] = array(
 				'tax_settings' => array(
+					'label'         => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_label', $key ),
 					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug', strtolower( $key ) ),
 					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
 					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show', true ),
@@ -396,8 +397,8 @@ class Rcno_Reviews_Admin {
 		$custom_taxonomies = $this->rcno_get_custom_taxonomies();
 
 		foreach ( $custom_taxonomies as $tax ) {
-			$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] ) );
-			$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['slug'] ) );
+			$plural   = Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['label'] );
+			$single   = Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['label'] );
 			$tax_name = 'rcno_' . $tax['tax_settings']['slug'];
 			$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
 			$cpt_slug = Rcno_Pluralize_Helper::pluralize( $cpt_slug );

@@ -57,6 +57,11 @@
 
 class Rcno_Pluralize_Helper {
 
+	/**
+	 * Regex patterns used to match singular words.
+	 *
+	 * @var array
+	 */
 	public static $plural = array(
 		'/(quiz)$/i'                     => "$1zes",
 		'/^(ox)$/i'                      => "$1en",
@@ -79,6 +84,11 @@ class Rcno_Pluralize_Helper {
 		'/$/'                            => "s"
 	);
 
+	/**
+	 * Regex patterns used to match pluralized words.
+	 *
+	 * @var array
+	 */
 	public static $singular = array(
 		'/(quiz)zes$/i'                                                    => "$1",
 		'/(matr)ices$/i'                                                   => "$1ix",
@@ -110,6 +120,11 @@ class Rcno_Pluralize_Helper {
 		'/s$/i'                                                            => ""
 	);
 
+	/**
+	 * A list of words that are irregularly pluralized in the English language.
+	 *
+	 * @var array
+	 */
 	public static $irregular = array(
 		'move'   => 'moves',
 		'foot'   => 'feet',
@@ -122,6 +137,11 @@ class Rcno_Pluralize_Helper {
 		'valve'  => 'valves'
 	);
 
+	/**
+	 * A list of words that are not pluralized in the English language.
+	 *
+	 * @var array
+	 */
 	public static $uncountable = array(
 		'sheep',
 		'fish',
@@ -134,18 +154,29 @@ class Rcno_Pluralize_Helper {
 		'equipment'
 	);
 
+	/**
+	 * Pluralizes a given string.
+	 *
+	 * @param string    $string
+	 * @return string
+	 */
 	public static function pluralize( $string ) {
-		// get a list of user added uncountable words from settings page
+
+		// Just return the untouched string if this option is enabled.
+		if ( Rcno_Reviews_Option::get_option( 'rcno_disable_pluralization', false ) ) {
+			return $string;
+		}
+		// Get a list of user added uncountable words from settings page
 		$new_list = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
 		$new_uncountable = array_merge( $new_list, self::$uncountable  );
 
-		// save some time in the case that singular and plural are the same
+		// Save some time in the case that singular and plural are the same
 		if ( in_array( strtolower( $string ), $new_uncountable, true ) ) {
 			return $string;
 		}
 
 
-		// check for irregular singular forms
+		// Check for irregular singular forms.
 		foreach ( self::$irregular as $pattern => $result ) {
 			$pattern = '/' . $pattern . '$/i';
 
@@ -154,7 +185,7 @@ class Rcno_Pluralize_Helper {
 			}
 		}
 
-		// check for matches using regular expressions
+		// Check for matches using regular expressions.
 		foreach ( self::$plural as $pattern => $result ) {
 			if ( preg_match( $pattern, $string ) ) {
 				return preg_replace( $pattern, $result, $string );
@@ -164,17 +195,29 @@ class Rcno_Pluralize_Helper {
 		return $string;
 	}
 
+	/**
+	 * Singularizes a given string.
+	 *
+	 * @param string    $string
+	 * @return string
+	 */
 	public static function singularize( $string ) {
-		// get a list of user added uncountable words from settings page
+
+		// Just return the untouched string if this option is enabled.
+		if ( Rcno_Reviews_Option::get_option( 'rcno_disable_pluralization', false ) ) {
+			return $string;
+		}
+
+		// Get a list of user added uncountable words from settings page.
 		$new_list = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
 		$new_uncountable = array_merge( $new_list, self::$uncountable  );
 
-		// save some time in the case that singular and plural are the same
+		// Save some time in the case that singular and plural are the same.
 		if ( in_array( strtolower( $string ), $new_uncountable, true ) ) {
 			return $string;
 		}
 
-		// check for irregular plural forms
+		// Check for irregular plural forms.
 		foreach ( self::$irregular as $result => $pattern ) {
 			$pattern = '/' . $pattern . '$/i';
 
@@ -183,7 +226,7 @@ class Rcno_Pluralize_Helper {
 			}
 		}
 
-		// check for matches using regular expressions
+		// Check for matches using regular expressions.
 		foreach ( self::$singular as $pattern => $result ) {
 			if ( preg_match( $pattern, $string ) ) {
 				return preg_replace( $pattern, $result, $string );
@@ -193,11 +236,18 @@ class Rcno_Pluralize_Helper {
 		return $string;
 	}
 
+	/**
+	 * Pluralizes a string based on count param.
+	 *
+	 * @param int       $count
+	 * @param string    $string
+	 * @return string
+	 */
 	public static function pluralize_if( $count, $string ) {
-		if ( $count == 1 ) {
+		if ( $count === 1 ) {
 			return "1 $string";
-		} else {
-			return $count . " " . self::pluralize( $string );
 		}
+
+		return $count . ' ' . self::pluralize( $string );
 	}
 }

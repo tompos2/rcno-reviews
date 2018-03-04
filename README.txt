@@ -170,3 +170,11 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.8.2 =
 * Added an "after review" action to use for tying in the use of additional 3rd party content below reviews
+
+= 1.9.0 =
+* Added an option to import and export plugin settings
+* Added an option to define custom taxonomy labels separate from the slug
+* The 5 star rating box now provides an option half-star review scores e.g., 3.5 of out 5 stars
+* It is now possible to disable the automatic pluralization of words used in the plugin
+* Fixed an issue with the review calendar display on months with 7 days in week 4
+* Fixed an issue with 3rd party plugins displaying twice when using the 'the_content' filter
