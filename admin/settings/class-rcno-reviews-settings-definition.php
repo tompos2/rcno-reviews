@@ -91,129 +91,6 @@ class Rcno_Reviews_Settings_Definition {
 		$settings[] = array();
 
 		$settings = array(
-			'default_tab'    => array(
-				'default_tab_settings'       => array(
-					'name' => '<strong>' . __( 'Header', 'rcno-reviews' ) . '</strong>',
-					'type' => 'header',
-				),
-				'missing_callback'           => array(
-					'name' => '<strong>' . __( 'Missing Callback', 'rcno-reviews' ) . '</strong>',
-					'type' => 'non-exist',
-				),
-				'checkbox'                   => array(
-					'name' => __( 'Checkbox', 'rcno-reviews' ),
-					'desc' => __( 'Checkbox', 'rcno-reviews' ),
-					'type' => 'checkbox',
-				),
-				'multicheck'                 => array(
-					'name'    => __( 'Multicheck', 'rcno-reviews' ),
-					'desc'    => __( 'Multicheck with 3 options', 'rcno-reviews' ),
-					'options' => array(
-						'wp-human'   => __( "I read the <a href='https://wphuman.com/blog/'>WP Human Blog</a>", 'rcno-reviews' ),
-						'tang-rufus' => __( "<a href='http://tangrufus.com/'>Tang Rufus' Blog</a> looks great", 'rcno-reviews' ),
-						'Filter'     => __( 'You can apply filters on this option!', 'rcno-reviews' ),
-					),
-					'type'    => 'multicheck',
-				),
-				'multicheck_without_options' => array(
-					'name' => __( 'Multicheck', 'rcno-reviews' ),
-					'desc' => __( 'Multicheck without options', 'rcno-reviews' ),
-					'type' => 'multicheck',
-				),
-				'radio'                      => array(
-					'name'    => __( 'Radio', 'rcno-reviews' ),
-					'desc'    => __( 'Radio with 3 options', 'rcno-reviews' ),
-					'options' => array(
-						'wp-human'   => __( "I read the <a href='https://wphuman.com/blog/'>WP Human Blog</a>", 'rcno-reviews' ),
-						'tang-rufus' => __( "<a href='http://tangrufus.com/'>Tang Rufus' Blog</a> looks great", 'rcno-reviews' ),
-						'Filter'     => __( 'You can apply filters on this option!', 'rcno-reviews' ),
-					),
-					'type'    => 'radio',
-				),
-				'radio_without_options'      => array(
-					'name' => __( 'Radio', 'rcno-reviews' ),
-					'desc' => __( 'Radio without options', 'rcno-reviews' ),
-					'type' => 'radio',
-				),
-				'text'                       => array(
-					'name' => __( 'Text', 'rcno-reviews' ),
-					'desc' => __( 'Text', 'rcno-reviews' ),
-					'type' => 'text',
-				),
-				'text_with_std'              => array(
-					'name' => __( 'Text with std', 'rcno-reviews' ),
-					'desc' => __( 'Text with std', 'rcno-reviews' ),
-					'std'  => __( 'std will be saved!', 'rcno-reviews' ),
-					'type' => 'text',
-				),
-				'email'                      => array(
-					'name' => __( 'Email', 'rcno-reviews' ),
-					'desc' => __( 'Email', 'rcno-reviews' ),
-					'type' => 'email',
-				),
-				'url'                        => array(
-					'name' => __( 'URL', 'rcno-reviews' ),
-					'desc' => __( 'By default, only http & https are allowed', 'rcno-reviews' ),
-					'type' => 'url',
-				),
-				'password'                   => array(
-					'name' => __( 'Password', 'rcno-reviews' ),
-					'desc' => __( 'Password', 'rcno-reviews' ),
-					'type' => 'password',
-				),
-				'number'                     => array(
-					'name' => __( 'Number', 'rcno-reviews' ),
-					'desc' => __( 'Number', 'rcno-reviews' ),
-					'type' => 'number',
-				),
-				'number_with_attributes'     => array(
-					'name' => __( 'Number', 'rcno-reviews' ),
-					'desc' => __( 'Max: 1000, Min: 20, Step: 30', 'rcno-reviews' ),
-					'max'  => 1000,
-					'min'  => 20,
-					'step' => 30,
-					'type' => 'number',
-				),
-				'textarea'                   => array(
-					'name' => __( 'Textarea', 'rcno-reviews' ),
-					'desc' => __( 'Textarea', 'rcno-reviews' ),
-					'type' => 'textarea',
-				),
-				'textarea_with_std'          => array(
-					'name' => __( 'Textarea with std', 'rcno-reviews' ),
-					'desc' => __( 'Textarea with std', 'rcno-reviews' ),
-					'std'  => __( 'std will be saved!', 'rcno-reviews' ),
-					'type' => 'textarea',
-				),
-				'select'                     => array(
-					'name'    => __( 'Select', 'rcno-reviews' ),
-					'desc'    => __( 'Select with 3 options', 'rcno-reviews' ),
-					'options' => array(
-						'wp-human'   => __( "I read the <a href='https://wphuman.com/blog/'>WP Human Blog</a>", 'rcno-reviews' ),
-						'tang-rufus' => __( "<a href='http://tangrufus.com/'>Tang Rufus' Blog</a> looks great", 'rcno-reviews' ),
-						'Filter'     => __( 'You can apply filters on this option!', 'rcno-reviews' ),
-					),
-					'type'    => 'select',
-				),
-				'rich_editor'                => array(
-					'name' => __( 'Rich Editor', 'rcno-reviews' ),
-					'desc' => __( 'Rich Editor save as HTML markups', 'rcno-reviews' ),
-					'type' => 'rich_editor',
-				),
-				'upload'                     => array(
-					'name' => __( 'Upload', 'rcno-reviews' ),
-					'desc' => __( 'Upload', 'rcno-reviews' ),
-					'type' => 'upload',
-				),
-			),
-			'second_tab'     => array(
-				'extend_me' => array(
-					'name' => 'Extend me',
-					'desc' => __( 'You can extend me via hooks and filters.', 'rcno-reviews' ),
-					'type' => 'text',
-				),
-			),
-
 			// Begin the General Tab.
 			'general_tab'    => array(
 				'general_tab_header_0'          => array(
@@ -231,8 +108,8 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'rcno_review_slug_instructions' => array(
 					'name' => __( '404s errors', 'rcno-reviews' ),
-					'desc' => __( 'You\'ve set up everything correctly here but now WordPress is giving you an 404 (not found) error?
-					 Try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', 'rcno-reviews' ),
+					'desc' => __( 'If you\'ve set up everything correctly here but now WordPress is giving you an 404 (not found) error,
+					 try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', 'rcno-reviews' ),
 					'type' => 'instruction',
 				),
 				'rcno_reviews_on_homepage'      => array(

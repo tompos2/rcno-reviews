@@ -11,11 +11,11 @@ add_action( 'wp_enqueue_scripts', 'rcno_insert_styles' );
 add_action( 'wp_enqueue_scripts', 'rcno_insert_scripts' );
 
 function rcno_insert_styles() {
-	wp_enqueue_style( 'rcno-insert-style', plugin_dir_url( __FILE__ ) . '/insert-style.css', array(), '1.0.0', 'all' );
+	wp_enqueue_style( 'rcno-insert-style', plugin_dir_url( __FILE__ ) . 'insert-style.css', array(), '1.0.0', 'all' );
 }
 
 function rcno_insert_scripts() {
-	wp_enqueue_script( 'rcno-insert-script', plugin_dir_url( __FILE__ ) . '/insert-script.js', array( 'jquery' ), '1.0.0', true );
+	wp_enqueue_script( 'rcno-insert-script', plugin_dir_url( __FILE__ ) . 'insert-script.js', array( 'jquery' ), '1.0.0', true );
 }
 
 
