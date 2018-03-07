@@ -141,7 +141,7 @@ class Rcno_Reviews_Shortcodes {
 				if ( 1 === (int) $options['nodesc'] ) {
 					// Embed without description.
 					$templ = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
-					$output   = $templ->get_the_rcno_full_book_details( (int)$options['id'] );
+					$output   = $templ->get_the_rcno_full_book_details( (int) $options['id'] );
 				} elseif ( 0 === (int) $options['excerpt'] ) {
 					// Embed complete review.
 					$output = $plugin_public->rcno_render_review_content( $review_post );

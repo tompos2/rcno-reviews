@@ -178,3 +178,6 @@ Please open a new topic on the plugin's WordPress.org support page
 * It is now possible to disable the automatic pluralization of words used in the plugin
 * Fixed an issue with the review calendar display on months with 7 days in week 4
 * Fixed an issue with 3rd party plugins displaying twice when using the 'the_content' filter
+
+= 1.9.1 =
+* Added a new option to use clickable title links when reviews are embedded in regular posts.

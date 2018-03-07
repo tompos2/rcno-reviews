@@ -25,11 +25,7 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 
 ?>
 
-<?php if ( $template->is_review_embedded() ) : ?>
-    <h2 class="rcno-review-title">
-		<?php echo get_the_title( $review_id ) ?>
-    </h2>
-<?php endif; ?>
+<?php $template->the_rcno_review_title( $review_id ) ?>
 
 <?php do_action( 'before_rcno_book_review' ); ?>
 

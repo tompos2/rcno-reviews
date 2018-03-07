@@ -121,9 +121,6 @@ class Rcno_Template_Tags {
 		$out .= '<div class="rcno-full-book-details">';
 
 		foreach ( $taxonomies as $taxonomy ) {
-			/*if ( 'rcno_series' === $taxonomy ) {
-				$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true ) . '#3';
-			}*/
 			$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true );
 		}
 
@@ -441,6 +438,55 @@ class Rcno_Template_Tags {
 		echo $this->get_the_rcno_taxonomy_list( $review_id, $label, $sep );
 	}
 
+	/** ****************************************************************************
+	 * REVIEW TITLE
+	 *******************************************************************************/
+
+	/**
+	 * Get the review title normally handle by WP, this is for embedded reviews.
+	 *
+	 * @since 1.9.1
+	 *
+	 * @param int    $review_id The current review's post ID.
+	 *
+	 * @return string
+	 */
+	public function get_the_rcno_review_title( $review_id ) {
+
+		$clickable = Rcno_Reviews_Option::get_option( 'rcno_reviews_embedded_title_links', false );
+		$out = '';
+
+		if ( $this->is_review_embedded() ) {
+			if ( $clickable ) {
+				$out .= '<a class="rcno-review-title-link" ';
+				$out .= 'href="' . get_the_permalink( $review_id ) . '" >';
+				$out .= '<h2 class="rcno-review-title">';
+				$out .= get_the_title( $review_id );
+				$out .= '</h2>';
+				$out .= '</a>';
+			} else {
+				$out .= '<h2 class="rcno-review-title">';
+				$out .= get_the_title( $review_id );
+				$out .= '</h2>';
+			}
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Prints the review title normally handle by WP, this is for embedded reviews.
+	 *
+	 * @since 1.9.1
+	 *
+	 * @param int    $review_id The current review's post ID.
+	 *
+	 * @return void
+	 */
+	public function the_rcno_review_title( $review_id ) {
+		echo $this->get_the_rcno_review_title( $review_id );
+	}
+
 
 	/** ****************************************************************************
 	 * REVIEW BOOK DESCRIPTION TEMPLATE TAGS
@@ -451,15 +497,18 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int $review_id	The current review's post ID.
 	 * @param int $word_count	The length of the book description.
+	 * @param bool $strip_tags	Whether to run the content through wp_trim_words
 	 *
 	 * @since 1.0.0
 	 * @return string
 	 */
-	private function get_the_rcno_book_description( $review_id, $word_count = 75 ) {
-
+	private function get_the_rcno_book_description( $review_id, $word_count = 75, $strip_tags = true ) {
 
 		$review = get_post_custom( $review_id );
-		$book_description = isset( $review['rcno_book_description'][0] ) ? wp_trim_words( $review['rcno_book_description'][0], $word_count ) : '';
+		$book_description = $review['rcno_book_description'][0];
+		if ( apply_filters( 'rcno_book_description_strip_tags', $strip_tags ) ) {
+			$book_description = wp_trim_words( $book_description, apply_filters( 'rcno_book_description_word_count', $word_count ) );
+		}
 
 		// Create an empty output string.
 		$out = '';
@@ -603,20 +652,19 @@ class Rcno_Template_Tags {
 		$review = get_post_custom( $review_id );
 
 		$meta_keys = array(
-			'rcno_book_illustrator'   => 'Illustrator',
-			'rcno_book_pub_date'      => 'Published',
-			'rcno_book_pub_format'    => 'Format',
-			'rcno_book_pub_edition'   => 'Edition',
-			'rcno_book_page_count'    => 'Page Count',
-			'rcno_book_series_number' => 'Series Number',
-			'rcno_book_gr_review'     => 'Goodreads Rating',
-			'rcno_book_gr_id'         => 'Gr ID',
-			'rcno_book_isbn13'        => 'ISBN13',
-			'rcno_book_isbn'          => 'ISBN',
-			'rcno_book_asin'          => 'ASIN',
-			'rcno_book_gr_url'        => 'Gr URL',
-			'rcno_book_title'         => 'Title',
-
+			'rcno_book_illustrator'   => __( 'Illustrator', 'rcno-reviews' ),
+			'rcno_book_pub_date'      => __( 'Published', 'rcno-reviews' ),
+			'rcno_book_pub_format'    => __( 'Format', 'rcno-reviews' ),
+			'rcno_book_pub_edition'   => __( 'Edition', 'rcno-reviews' ),
+			'rcno_book_page_count'    => __( 'Page Count', 'rcno-reviews' ),
+			'rcno_book_series_number' => __( 'Series Number', 'rcno-reviews' ),
+			'rcno_book_gr_review'     => __( 'Goodreads Rating', 'rcno-reviews' ),
+			'rcno_book_gr_id'         => __( 'Goodreads ID', 'rcno-reviews' ),
+			'rcno_book_isbn13'        => __( 'ISBN13', 'rcno-reviews' ),
+			'rcno_book_isbn'          => __( 'ISBN', 'rcno-reviews' ),
+			'rcno_book_asin'          => __( 'ASIN', 'rcno-reviews' ),
+			'rcno_book_gr_url'        => __( 'Goodreads URL', 'rcno-reviews' ),
+			'rcno_book_title'         => __( 'Title', 'rcno-reviews' ),
 		);
 
 		$wrappers = array(
@@ -643,7 +691,7 @@ class Rcno_Template_Tags {
 				}
 
 				if ( $label ) {
-					$out .= __( $meta_keys[ $meta_key ], 'rcno-reviews' ) . ': ';
+					$out .= $meta_keys[ $meta_key ] . ': ';
 				}
 
 				$out .= sanitize_text_field( $review[ $meta_key ][0] );

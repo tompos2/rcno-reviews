@@ -606,6 +606,11 @@ class Rcno_Reviews_Settings_Definition {
 					'step' => 1,
 					'type' => 'number',
 				),
+				'rcno_reviews_embedded_title_links'          => array(
+					'name' => __( 'Embedded Review Links', 'rcno-reviews' ),
+					'desc' => __( 'Enable clickable title links on embedded book reviews.', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'spacer-8'                => array(
 					'name' => '',
 					'type' => 'spacer',

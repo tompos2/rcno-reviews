@@ -26,13 +26,9 @@ $review = new Rcno_Template_Tags( $plugin_name, $version );
  * Displaying the book review title is normally done by the theme as post_title().
  * However, if the review is embedded, we need to do it here.
  */
-if ( $review->is_review_embedded() ) { ?>
-    <h2 class="rcno-review-title"><?php echo get_the_title( $review_id ); ?></h2>
-<?php } ?>
+$review->the_rcno_review_title( $review_id );
 
-<?php
-
-the_excerpt( $review_id );
+$review->the_rcno_book_review_excerpt( $review_id );
 
 //$review->the_rcno_book_review_content( $review_id );
 
