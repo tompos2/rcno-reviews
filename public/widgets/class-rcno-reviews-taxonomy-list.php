@@ -27,8 +27,6 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct() {
 
@@ -250,10 +248,10 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
                     name="<?php echo $this->get_field_name( 'order' ); ?>"
                     class="widefat" style="width:100px;">'
                 <option value="asc" <?php echo selected( $order, 'asc', false ); ?> >
-					<?php _e( 'ASC', 'rcno-reviews' ); ?>
+					<?php echo 'ASC'; ?>
                 </option>
                 <option value="desc" <?php echo selected( $order, 'desc', false ); ?> >
-					<?php _e( 'DESC', 'rcno-reviews' ); ?>
+					<?php echo 'DESC'; ?>
                 </option>
             </select>
         </p>

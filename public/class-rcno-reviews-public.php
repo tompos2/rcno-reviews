@@ -122,7 +122,7 @@ class Rcno_Reviews_Public {
 					}
 					ul.rcno-taxlist-book-covers li {
 					    flex: 0 1 85px;
-					    margin: 0 10px 0 0;
+					    margin: 0 10px 10px 0;
 					}
 					ul.rcno-taxlist-book-covers p {
 					    display: none;
@@ -465,9 +465,7 @@ class Rcno_Reviews_Public {
 			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/reviews_index.php';
 		}
 
-		/**
-		 * Set review_post to false for template tags.
-		 */
+		// Set review_post to false for template tags.
 		$review_post = false;
 
 		// Get an alphabetically ordered list of all reviews.
@@ -492,7 +490,8 @@ class Rcno_Reviews_Public {
 		// Include the taxonomy file.
 		include_once __DIR__ . '/class-rcno-template-tags.php';
 
-		include $include_path;
+		// Included once, as adding the shortcode twice to a page with case a PHP fatal error.
+		include_once $include_path;
 
 		// Render the content using that file.
 		$content = ob_get_contents();
@@ -552,7 +551,9 @@ class Rcno_Reviews_Public {
 
 		// Include the taxonomy file.
 		require_once __DIR__ . '/class-rcno-template-tags.php';
-		include $include_path;
+
+		// Included once, as adding the shortcode twice to a page with case a PHP fatal error.
+		include_once $include_path;
 
 		// Render the content using that file.
 		$content = ob_get_contents();

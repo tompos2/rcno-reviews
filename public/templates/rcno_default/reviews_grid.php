@@ -6,6 +6,8 @@
 
 $template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 $ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
+$articles_list   = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) );
+$articles_list   = implode( '|', $articles_list ) . '|\d+'; // @TODO: Figure out a better way to handle this.
 
 // Create an empty output variable.
 $out = '';
@@ -19,22 +21,21 @@ if ( $posts && count( $posts ) > 0 ) {
 
 	// Used in 'usort' to sort alphabetically by book title.
 	function cmp( $a, $b ) {
-		return strcasecmp( $a['sorted_title'], $b['sorted_title'] );
+		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
 	}
 
 	// Loop through each post, book title from post-meta and work on book title.
 	foreach ( $posts as $book ) {
 		$book_details = get_post_custom( $book->ID );
-		$sorted_title = $book_details['rcno_book_title'][0];
-		$unsorted_title = $sorted_title;
+		$unsorted_title = $book_details['rcno_book_title'][0];
+		//$sorted_title = $sorted_title;
 		if ( $ignore_articles ) {
-			$sorted_title = preg_replace( '/^(A|An|The) (.+)/', '$2, $1', $sorted_title );
+			$sorted_title = preg_replace( '/^('. $articles_list .') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
 		}
 		$books[] = array(
 			'ID'    => $book->ID,
 			'sorted_title' => $sorted_title,
 			'unsorted_title' => $unsorted_title,
-
 		);
 		usort( $books, 'cmp' );
 	}

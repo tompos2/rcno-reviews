@@ -6,6 +6,8 @@
 
 $template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 $ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
+$articles_list   = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) );
+$articles_list   = implode( '|', $articles_list ) . '|\d+'; // @TODO: Figure out a better way to handle this.
 $index_headers   = Rcno_Reviews_Option::get_option( 'rcno_reviews_index_headers' );
 
 // Create an empty output variable.
@@ -31,12 +33,11 @@ if ( $posts && count( $posts ) > 0 ) {
 		$book_details = get_post_custom( $book->ID );
 		$title = $book_details['rcno_book_title'];
 		if ( $ignore_articles ) {
-			$title = preg_replace( '/^(A|An|The) (.+)/', '$2, $1', $book_details['rcno_book_title'] );
+			$title = preg_replace( '/^('. $articles_list .') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
 		}
 		$books[] = array(
 			'ID'    => $book->ID,
 			'title' => $title[0],
-
 		);
 		usort( $books, 'cmp' );
 	}
