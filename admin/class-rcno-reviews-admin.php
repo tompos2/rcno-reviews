@@ -121,6 +121,15 @@ class Rcno_Reviews_Admin {
 	public $uncountable;
 
 	/**
+	 * Check to see if automatic pluralization has been disabled.
+	 *
+	 * @since  1.9.2
+	 * @access public
+	 * @var    bool $no_pluralize;
+	 */
+	public $no_pluralize;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * The constructor also imports and initializes the classes related to controlling
@@ -145,6 +154,7 @@ class Rcno_Reviews_Admin {
 		$this->buy_links          = new Rcno_Admin_Buy_Links( $this->plugin_name, $this->version );
 
 		$this->uncountable        = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
+		$this->no_pluralize       = Rcno_Reviews_Option::get_option( 'rcno_disable_pluralization', false );
 	}
 
 	/**
@@ -243,12 +253,13 @@ class Rcno_Reviews_Admin {
 		wp_enqueue_script( 'star-rating-svg', plugin_dir_url( __FILE__ ) . 'js/star-rating-svg.js', array( 'jquery' ), '1.2.0', true );
 
 		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
-			'reviewID'              => $review_id,
-			'ajaxURL'               => admin_url( 'admin-ajax.php' ),
-			'rcno_reset_nonce'      => wp_create_nonce( 'rcno-rest-nonce' ),
-			'rcno_settings_download_nonce'   => wp_create_nonce( 'rcno-settings-download-nonce' ),
+			'reviewID'                     => $review_id,
+			'ajaxURL'                      => admin_url( 'admin-ajax.php' ),
+			'rcno_reset_nonce'             => wp_create_nonce( 'rcno-rest-nonce' ),
+			'rcno_settings_download_nonce' => wp_create_nonce( 'rcno-settings-download-nonce' ),
 			'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
-			'rcno_admin_rating' => get_post_meta( $review_id, 'rcno_admin_rating', true ),
+			'rcno_admin_rating'            => get_post_meta( $review_id, 'rcno_admin_rating', true ),
+			'rcno_settings_reset_msg'      => __( 'Your settings have been reset, please reload the page to see them.', 'rcno-reviews' ),
 
 		) );
 	}
@@ -275,7 +286,7 @@ class Rcno_Reviews_Admin {
 
 		$opts['can_export']           = true;
 		$opts['capability_type']      = $cap_type;
-		$opts['description']          = 'A book review custom post type provide by the Recencio Book Reviews plugin.';
+		$opts['description']          = '';
 		$opts['exclude_from_search']  = false;
 		$opts['has_archive']          = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
 		$opts['hierarchical']         = false;
@@ -372,6 +383,7 @@ class Rcno_Reviews_Admin {
 		foreach ( $custom_taxonomies as $key ) {
 			$taxonomies[] = array(
 				'tax_settings' => array(
+					'settings_key'  => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_key', strtolower( $key ) ),
 					'label'         => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_label', $key ),
 					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug', strtolower( $key ) ),
 					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
@@ -384,7 +396,10 @@ class Rcno_Reviews_Admin {
 	}
 
 	/**
-	 * Creates a new course taxonomy for the book review post type
+	 * Creates a new course taxonomy for the book review post type.
+	 *
+	 * We are pluralizing the rewrite slug to prevent clash with builtin author taxonomy
+	 * and author custom taxonomy.
 	 *
 	 * @since   1.0.0
 	 * @access  public
@@ -397,11 +412,11 @@ class Rcno_Reviews_Admin {
 		$custom_taxonomies = $this->rcno_get_custom_taxonomies();
 
 		foreach ( $custom_taxonomies as $tax ) {
-			$plural   = Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['label'] );
-			$single   = Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['label'] );
-			$tax_name = 'rcno_' . $tax['tax_settings']['slug'];
-			$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
-			$cpt_slug = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
+			$plural    = Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['label'] );
+			$single    = Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['label'] );
+			$tax_name  = 'rcno_' . $tax['tax_settings']['slug'];
+			$_cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
+			$cpt_slug  = Rcno_Pluralize_Helper::pluralize( $_cpt_slug );
 
 			$opts['hierarchical'] = $tax['tax_settings']['hierarchy'];
 			//$opts['meta_box_cb'] 	   = array( $this, 'rcno_custom_taxonomy_metabox' ); // @TODO: Investigate how to update taxonomies.
@@ -448,7 +463,7 @@ class Rcno_Reviews_Admin {
 			$opts['rewrite']['hierarchical'] = false;
 
 			// If the CPT slug is uncountable don't prepend it to the custom taxonomy slug, else soft 404s
-			if ( ! empty ( $this->uncountable ) && in_array( $cpt_slug, $this->uncountable, true ) ) {
+			if ( $this->no_pluralize || in_array( $_cpt_slug, $this->uncountable, true ) ) {
 				$opts['rewrite']['slug'] = Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
 			} else {
 				$opts['rewrite']['slug'] = $cpt_slug . '/' . Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
@@ -460,7 +475,7 @@ class Rcno_Reviews_Admin {
 
 			register_taxonomy( $tax_name, 'rcno_review', $opts );
 
-			//flush_rewrite_rules( false );
+			flush_rewrite_rules( false ); // @TODO: For dev only.
 		}
 	}
 
@@ -505,10 +520,10 @@ class Rcno_Reviews_Admin {
 				'<li>' . __( 'Change the date to the date to actual publish this article, then click on Ok.', 'rcno-reviews' ) . '</li>' .
 				'</ul>' .
 				'<span><strong>' . __( 'For more information: ', 'rcno-reviews' ) . '</strong></span>' .
-				'<span>' . __( '<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>', 'rcno-reviews' ) . '</span>';
+				'<span>' . '<a href="https://wordpress.org/support/plugin/recencio-book-reviews" target="_blank">' . __( 'Support Forums', 'rcno-reviews' ) . '</a>' . '</span>';
 		} elseif ( 'edit-book' === $screen->id ) {
 			$contextual_help =
-				'<p>' . __( 'This is the help screen displaying the table of books blah blah blah.', 'rcno-reviews' ) . '</p>';
+				'<p>' . __( 'This is the help screen displaying the table of book reviews you have created.', 'rcno-reviews' ) . '</p>';
 		}
 
 		return $contextual_help;
@@ -859,8 +874,7 @@ SQL;
 			$published = (int) $num_reviews->publish;
 			$post_type = get_post_type_object( 'rcno_review' );
 
-			$text = _n( '%s ' . $post_type->labels->singular_name, '%s ' . $post_type->labels->name, $published, 'rcno-reviews' );
-			$text = sprintf( $text, number_format_i18n( $published ) );
+			$text = Rcno_Pluralize_Helper::pluralize_if( $published, $post_type->labels->singular_name );
 
 			if ( current_user_can( $post_type->cap->edit_posts ) ) {
 				$items[] = sprintf( '<a class="%1$s-count" href="edit.php?post_type=%1$s">%2$s</a>', 'rcno_review', $text ) . "\n";
@@ -895,15 +909,11 @@ SQL;
 			3  => __( 'Custom field deleted.', 'rcno-reviews' ),
 			4  => __( 'Review updated.', 'rcno-reviews' ),
 			/* translators: %s: date and time of the revision */
-			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Review restored to revision from %s', 'rcno-reviews' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			5  => isset( $_GET['revision'] ) ? __( 'Review restored to revision from ', 'rcno-reviews' ) . wp_post_revision_title( (int) $_GET['revision'], false ) : false,
 			6  => __( 'Review published.', 'rcno-reviews' ),
 			7  => __( 'Review saved.', 'rcno-reviews' ),
 			8  => __( 'Review submitted.', 'rcno-reviews' ),
-			9  => sprintf(
-				__( 'Review scheduled for: <strong>%1$s</strong>.', 'rcno-reviews' ),
-				// translators: Publish box date format, see http://php.net/date
-				date_i18n( __( 'M j, Y @ G:i', 'rcno-reviews' ), strtotime( $review->post_date ) )
-			),
+			9  => __( 'Review scheduled for: ', 'rcno-reviews' ) . date_i18n( get_option( 'date_format' ), strtotime( $review->post_date ) ),
 			10 => __( 'Review draft updated.', 'rcno-reviews' ),
 		);
 
@@ -1005,7 +1015,7 @@ SQL;
 
 		foreach ( $dates as $data ) {
 			$query = 'index.php?post_type=' . $cpt;
-			$rule  = $slug_archive . '/' . $data[ 'rule' ];
+			$rule  = Rcno_Pluralize_Helper::pluralize( $slug_archive ) . '/' . $data[ 'rule' ];
 
 			$i = 1;
 			foreach ( $data['vars'] as $var ) {
@@ -1034,6 +1044,10 @@ SQL;
 	public function reset_all_options() {
 
 		if ( ! wp_verify_nonce( $_POST['reset_nonce'], 'rcno-rest-nonce' ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
@@ -1118,7 +1132,7 @@ SQL;
 	 */
 	public function rcno_settings_export() {
 
-		if( empty( $_POST['action'] ) || 'rcno_settings_export' !== $_POST['action'] ) {
+		if ( empty( $_POST['action'] ) || 'rcno_settings_export' !== $_POST['action'] ) {
 			wp_send_json_error( array(
 				'message' => 'Invalid post action sent.'
 			), 500 );
@@ -1132,7 +1146,7 @@ SQL;
 			return;
 		}
 
-		if( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array(
 				'message' => 'Invalid user permissions.'
 			), 500 );
@@ -1153,7 +1167,7 @@ SQL;
 	 */
 	public function rcno_settings_import() {
 
-		if( empty( $_POST['action'] ) || 'rcno_settings_import' !== $_POST['action'] ) {
+		if ( empty( $_POST['action'] ) || 'rcno_settings_import' !== $_POST['action'] ) {
 			wp_send_json_error( array(
 				'message' => 'Invalid post action sent.'
 			), 500 );
@@ -1167,7 +1181,7 @@ SQL;
 			return;
 		}
 
-		if( ! current_user_can( 'manage_options' ) ){
+		if ( ! current_user_can( 'manage_options' ) ){
 			wp_send_json_error( array(
 				'message' => 'Invalid user permissions.'
 			), 500 );

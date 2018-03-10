@@ -435,6 +435,12 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Ignore articles when sorting titles. (e.g. "The", "A", "An")', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
+				'rcno_reviews_ignored_articles_list'          => array(
+					'name' => __( 'Article List', 'rcno-reviews' ),
+					'desc' => __( 'The list of articles to ignore in your language', 'rcno-reviews' ),
+					'type' => 'text',
+					'std'  => 'The,A,An'
+				),
 				'rcno_reviews_sort_names'          => array(
 					'name'    => __( 'Sort author names', 'rcno-reviews' ),
 					'desc'    => __( 'Sort names by first-name or last-name', 'rcno-reviews' ),
@@ -630,7 +636,7 @@ class Rcno_Reviews_Settings_Definition {
 	public static function taxonomy_options( $tax ) {
 
 		$opts = array(
-			'rcno_' . $tax['slug'] . '_header'       => array(
+			'rcno_' . $tax['settings_key'] . '_header'       => array(
 				'name' => '<strong>' . ucfirst( $tax['label'] ) . '</strong>',
 				'type' => 'header',
 			),
@@ -640,24 +646,24 @@ class Rcno_Reviews_Settings_Definition {
 				'std'  =>  ucfirst( $tax['label'] ),
 				'type' => 'text',
 			),
-			'rcno_' . $tax['slug'] . '_slug'         => array(
+			'rcno_' . $tax['settings_key'] . '_slug'         => array(
 				'name' => __( 'Slug', 'rcno-reviews' ),
 				'desc' => __( 'Place the slug of the ' . $tax['slug'] . ' taxonomy here.', 'rcno-reviews' ),
 				'std'  => strtolower( $tax['slug'] ),
 				'type' => 'text',
 				'size' => '20'
 			),
-			'rcno_' . $tax['slug'] . '_hierarchical' => array(
+			'rcno_' . $tax['settings_key'] . '_hierarchical' => array(
 				'name' => __( 'Hierarchical', 'rcno-reviews' ),
 				'desc' => __( 'Is this custom taxonomy hierarchical?', 'rcno-reviews' ),
 				'type' => 'checkbox',
 			),
-			'rcno_' . $tax['slug'] . '_show'         => array(
+			'rcno_' . $tax['settings_key'] . '_show'         => array(
 				'name' => __( 'Show in table', 'rcno-reviews' ),
 				'desc' => __( 'Show this custom taxonomy on the admin table', 'rcno-reviews' ),
 				'type' => 'checkbox',
 			),
-			'spacer' . $tax['slug']                 => array(
+			'spacer' . $tax['settings_key']                 => array(
 				'name' => '',
 				'type' => 'spacer',
 			),
@@ -667,4 +673,3 @@ class Rcno_Reviews_Settings_Definition {
 	}
 
 }
-

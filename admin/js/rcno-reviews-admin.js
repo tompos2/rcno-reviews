@@ -134,6 +134,11 @@
 			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
 		} );
 
+		$( '#rcno_reviews_settings\\[rcno_reviews_ignored_articles_list\\]' ).selectize( {
+			create: true,
+			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+		} );
+
 		// Adds and removes 'checked' class on review template selection
 		$( '.template-label-image' ).on( 'click', function() {
 			var x = $( this );
@@ -168,6 +173,7 @@
 					reset_nonce: my_script_vars.rcno_reset_nonce
 				}
 			} );
+			alert( my_script_vars.rcno_settings_reset_msg );
 		} );
 
 	} );

@@ -31,6 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define our constants.
+define( 'RCNO_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 define( 'RCNO_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RCNO_PLUGIN_URI',  plugin_dir_url( __FILE__ ) );
 define( 'RCNO_PLUGIN_VER',  '1.9.1' );
