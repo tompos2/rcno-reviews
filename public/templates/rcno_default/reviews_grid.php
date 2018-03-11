@@ -28,7 +28,7 @@ if ( $posts && count( $posts ) > 0 ) {
 	foreach ( $posts as $book ) {
 		$book_details = get_post_custom( $book->ID );
 		$unsorted_title = $book_details['rcno_book_title'][0];
-		//$sorted_title = $sorted_title;
+		$sorted_title = $unsorted_title;
 		if ( $ignore_articles ) {
 			$sorted_title = preg_replace( '/^('. $articles_list .') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
 		}
@@ -54,7 +54,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		$out .= '<p>' . $book['unsorted_title'] . '</p>';
 		$out .= '</a></div>';
 
-		// increment the counter.
+		// Increment the counter.
 		$i ++;
 	}
 	// Close the last list.
