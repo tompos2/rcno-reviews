@@ -180,4 +180,10 @@ Please open a new topic on the plugin's WordPress.org support page
 * Fixed an issue with 3rd party plugins displaying twice when using the 'the_content' filter
 
 = 1.9.1 =
-* Added a new option to use clickable title links when reviews are embedded in regular posts.
+* Added a new option to use clickable title links when reviews are embedded in regular posts
+
+= 1.10.0 =
+* Made some adjustments to the way custom taxonomies are auto-generated. This may break custom taxonomies with custom slugs
+* Added the correct name formatting for translation files
+* Added an option to add new articles for the sorting of titles alphabetically, useful for foreign languages
+* Fixed the potential of a fatal PHP error if shortcode is included twice on a page

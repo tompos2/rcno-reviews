@@ -290,6 +290,9 @@ class Rcno_Reviews {
 
 		$this->loader->add_action( 'wp_ajax_rcno_settings_export', $plugin_admin, 'rcno_settings_export' );
 		$this->loader->add_action( 'wp_ajax_rcno_settings_import', $plugin_admin, 'rcno_settings_import' );
+
+		// Add an update message.
+		//$this->loader->add_action( 'in_plugin_update_message-' . RCNO_PLUGIN_FILE, $plugin_admin, 'rcno_update_message_warning', 20, 2 );
 	}
 
 	/**
