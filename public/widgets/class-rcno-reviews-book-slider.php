@@ -27,8 +27,6 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct() {
 
@@ -74,10 +72,8 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
             }
         }
 
-		wp_enqueue_style( 'owl-carousel-main', plugin_dir_url( __FILE__ ) . '../css/owl.carousel.min.css', array(), '1.0.0', 'all' );
-		// wp_enqueue_style( 'owl-carousel-theme', plugin_dir_url( __FILE__ ) . '../css/owl.theme.default.min.css', array(), '1.0.0', 'all' );
-
-		wp_enqueue_script( 'owl-carousel-script', plugin_dir_url( __FILE__ ) . '../js/owl.carousel.min.js', array( 'jquery' ), '1.0.0', true );
+		wp_enqueue_style( 'owl-carousel-main', RCNO_PLUGIN_URI . 'public/css/owl.carousel.min.css', array(), '1.0.0', 'all' );
+		wp_enqueue_script( 'owl-carousel-script', RCNO_PLUGIN_URI . 'public/js/owl.carousel.min.js', array( 'jquery' ), '1.0.0', true );
 		wp_localize_script( 'owl-carousel-script', 'owl_carousel_options', array(
 			'duration' => absint( $slide_duration ),
 		) );
@@ -114,7 +110,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		extract( $args, EXTR_SKIP );
 
 		// If there is an error, stop and return
-		if ( isset( $instance['error'] ) && $instance['error'] ) {
+		if ( ! empty( $instance['error'] ) ) {
 			return;
 		}
 
@@ -123,7 +119,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		echo $before_widget;
 
 		// Output the title (if we have any).
-		if ( $instance['title'] ) {
+		if ( isset( $instance['title'] ) ) {
 			echo $before_title . sanitize_text_field( $instance['title'] ) . $after_title;
 		}
 
@@ -144,10 +140,9 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 					$recent_reviews->the_post(); ?>
 
 					<?php
-					$review_id = get_the_ID();
-					$review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+					    $review_id = get_the_ID();
+					    $review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 					?>
-					<?php //$review->the_rcno_admin_book_rating( $review_id ); ?>
                     <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 						<?php $review->the_rcno_book_cover( $review_id ); ?>
                     </a>

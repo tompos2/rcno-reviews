@@ -187,3 +187,6 @@ Please open a new topic on the plugin's WordPress.org support page
 * Added the correct name formatting for translation files
 * Added an option to add new articles for the sorting of titles alphabetically, useful for foreign languages
 * Fixed the potential of a fatal PHP error if shortcode is included twice on a page
+
+= 1.10.1 =
+* Updated admin translation strings

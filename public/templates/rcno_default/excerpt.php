@@ -26,6 +26,7 @@
 	$review->the_rcno_review_title( $review_id );
 
 	$review->the_rcno_book_review_excerpt( $review_id );
+	//echo $review->rcno_excerpt( $review_id );
 
 	echo '<!--- Recencio Book Reviews --->';
 

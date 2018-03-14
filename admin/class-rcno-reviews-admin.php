@@ -333,20 +333,20 @@ class Rcno_Reviews_Admin {
 		$opts['capabilities']['read_post']              = "read_{$cap_type}";
 		$opts['capabilities']['read_private_posts']     = "read_private_{$cap_type}s";
 
-		$opts['labels']['add_new']            = esc_html__( "New {$single}", 'rcno-reviews' );
-		$opts['labels']['add_new_item']       = esc_html__( "Add New {$single}", 'rcno-reviews' );
-		$opts['labels']['all_items']          = esc_html__( $plural, 'rcno-reviews' );
-		$opts['labels']['edit_item']          = esc_html__( "Edit {$single}", 'rcno-reviews' );
-		$opts['labels']['menu_name']          = esc_html__( $plural, 'rcno-reviews' );
-		$opts['labels']['name']               = esc_html__( $plural, 'rcno-reviews' );
-		$opts['labels']['name_admin_bar']     = esc_html__( $single, 'rcno-reviews' );
-		$opts['labels']['new_item']           = esc_html__( "New {$single}", 'rcno-reviews' );
-		$opts['labels']['not_found']          = esc_html__( "No {$plural} Found", 'rcno-reviews' );
-		$opts['labels']['not_found_in_trash'] = esc_html__( "No {$plural} Found in Trash", 'rcno-reviews' );
-		$opts['labels']['parent_item_colon']  = esc_html__( "Parent {$plural} :", 'rcno-reviews' );
-		$opts['labels']['search_items']       = esc_html__( "Search {$plural}", 'rcno-reviews' );
-		$opts['labels']['singular_name']      = esc_html__( $single, 'rcno-reviews' );
-		$opts['labels']['view_item']          = esc_html__( "View {$single}", 'rcno-reviews' );
+		$opts['labels']['add_new']            = sprintf( __( 'New %1$s', 'rcno-reviews' ), $single );
+		$opts['labels']['add_new_item']       = sprintf( __( 'Add New %1$s', 'rcno-reviews' ), $single );
+		$opts['labels']['all_items']          = $plural;
+		$opts['labels']['edit_item']          = sprintf( __( 'Edit %1$s', 'rcno-reviews' ), $single );
+		$opts['labels']['menu_name']          = $plural;
+		$opts['labels']['name']               = $plural;
+		$opts['labels']['name_admin_bar']     = $single;
+		$opts['labels']['new_item']           = sprintf( __( 'New %1$s', 'rcno-reviews' ), $single );
+		$opts['labels']['not_found']          = sprintf( __( 'No %1$s Found', 'rcno-reviews' ), $plural );
+		$opts['labels']['not_found_in_trash'] = sprintf( __( 'No %1$s Found in Trash', 'rcno-reviews' ), $plural );
+		$opts['labels']['parent_item_colon']  = sprintf( __( 'Parent %1$s :', 'rcno-reviews' ), $plural );
+		$opts['labels']['search_items']       = sprintf( __( 'Search %1$s', 'rcno-reviews' ), $plural );
+		$opts['labels']['singular_name']      = $single;
+		$opts['labels']['view_item']          = sprintf( __( 'View %1$s', 'rcno-reviews' ), $single );
 
 		$opts['rewrite']['ep_mask']    = EP_PERMALINK;
 		$opts['rewrite']['feeds']      = false;
@@ -441,23 +441,23 @@ class Rcno_Reviews_Admin {
 			$opts['capabilities']['edit_terms']   = 'manage_categories';
 			$opts['capabilities']['manage_terms'] = 'manage_categories';
 
-			$opts['labels']['add_new_item']               = esc_html__( "Add New {$single}", 'rcno-reviews' );
-			$opts['labels']['add_or_remove_items']        = esc_html__( "Add or remove {$plural}", 'rcno-reviews' );
-			$opts['labels']['all_items']                  = esc_html__( $plural, 'rcno-reviews' );
-			$opts['labels']['choose_from_most_used']      = esc_html__( "Choose from most used {$plural}", 'rcno-reviews' );
-			$opts['labels']['edit_item']                  = esc_html__( "Edit {$single}", 'rcno-reviews' );
-			$opts['labels']['menu_name']                  = esc_html__( $plural, 'rcno-reviews' );
-			$opts['labels']['name']                       = esc_html__( $plural, 'rcno-reviews' );
-			$opts['labels']['new_item_name']              = esc_html__( "New {$single} Name", 'rcno-reviews' );
-			$opts['labels']['not_found']                  = esc_html__( "No {$plural} Found", 'rcno-reviews' );
-			$opts['labels']['parent_item']                = esc_html__( "Parent {$single}", 'rcno-reviews' );
-			$opts['labels']['parent_item_colon']          = esc_html__( "Parent {$single}:", 'rcno-reviews' );
-			$opts['labels']['popular_items']              = esc_html__( "Popular {$plural}", 'rcno-reviews' );
-			$opts['labels']['search_items']               = esc_html__( "Search {$plural}", 'rcno-reviews' );
-			$opts['labels']['separate_items_with_commas'] = esc_html__( "Separate {$plural} with commas", 'rcno-reviews' );
-			$opts['labels']['singular_name']              = esc_html__( $single, 'rcno-reviews' );
-			$opts['labels']['update_item']                = esc_html__( "Update {$single}", 'rcno-reviews' );
-			$opts['labels']['view_item']                  = esc_html__( "View {$single}", 'rcno-reviews' );
+			$opts['labels']['add_new_item']               = sprintf( __( 'Add New %1$s', 'rcno-reviews' ), $single );
+			$opts['labels']['add_or_remove_items']        = sprintf( __( 'Add or remove %1$s', 'rcno-reviews' ), $plural );
+			$opts['labels']['all_items']                  = $plural;
+			$opts['labels']['choose_from_most_used']      = sprintf( __( 'Choose from most used %1$s', 'rcno-reviews' ), $plural );
+			$opts['labels']['edit_item']                  = sprintf( __( 'Edit %1$s', 'rcno-reviews' ), $single );
+			$opts['labels']['menu_name']                  = $plural;
+			$opts['labels']['name']                       = $plural;
+			$opts['labels']['new_item_name']              = sprintf( __( 'New %1$s Name', 'rcno-reviews' ), $single );
+			$opts['labels']['not_found']                  = sprintf( __( 'No %1$s Found', 'rcno-reviews' ), $plural );
+			$opts['labels']['parent_item']                = sprintf( __( 'Parent %1$s', 'rcno-reviews' ), $single );
+			$opts['labels']['parent_item_colon']          = sprintf( __( 'Parent %1$s', 'rcno-reviews' ), $single );
+			$opts['labels']['popular_items']              = sprintf( __( 'Popular %1$s', 'rcno-reviews' ), $plural );
+			$opts['labels']['search_items']               = sprintf( __( 'Search %1$s', 'rcno-reviews' ), $plural );
+			$opts['labels']['separate_items_with_commas'] = sprintf( __( 'Separate %1$s with commas', 'rcno-reviews' ), $plural );
+			$opts['labels']['singular_name']              = $single;
+			$opts['labels']['update_item']                = sprintf( __( 'Update %1$s', 'rcno-reviews' ), $single );
+			$opts['labels']['view_item']                  = sprintf( __( 'View %1$s', 'rcno-reviews' ), $single );
 
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
@@ -598,7 +598,7 @@ class Rcno_Reviews_Admin {
 
 		add_menu_page(
 			__( 'Recencio Book Reviews', $this->plugin_name ),
-			__( 'Reviews', $this->plugin_name ),
+			__( 'Reviews', 'rcno-reviews' ),
 			'manage_options',
 			$this->plugin_name,
 			array( $this, 'display_plugin_admin_page' )
@@ -607,7 +607,7 @@ class Rcno_Reviews_Admin {
 		add_submenu_page(
 			'edit.php?post_type=rcno_review',
 			__( 'Recencio Book Reviews', $this->plugin_name ),
-			__( 'Settings', $this->plugin_name ),
+			__( 'Settings', 'rcno-reviews' ),
 			'manage_options',
 			$this->plugin_name,
 			array( $this, 'display_plugin_admin_page' )

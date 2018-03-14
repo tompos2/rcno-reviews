@@ -265,7 +265,10 @@ class Rcno_Template_Tags {
 
 		// Use the book title because most users wont edit it form the file upload screen.
 		$book_title = $review['rcno_book_title'][0];
-		$book_alt   = $review['rcno_reviews_book_cover_alt'][0];
+		$book_alt   = ! empty( $review['rcno_reviews_book_cover_alt'][0] ) ?
+			$review['rcno_reviews_book_cover_alt'][0] :
+			get_post_meta( $attachment_id, '_wp_attachment_image_alt', true);
+
 
 		$book_title = $book_title ? esc_attr( $book_title ) : __( 'No Cover Available', 'rcno-reviews' );
 		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no-book-cover-available', 'rcno-reviews' );
@@ -311,7 +314,6 @@ class Rcno_Template_Tags {
 
 		// Get the taxonomy.
 		$tax = get_taxonomy( $taxonomy );
-
 		$out = '';
 
 		/**
@@ -557,15 +559,51 @@ class Rcno_Template_Tags {
 		if ( mb_strlen( $excerpt ) > $length ) {
 			$sub_ex   = mb_substr( $excerpt, 0, $length - 5 );
 			$ex_words = explode( ' ', $sub_ex );
-			$ex_cut   = - ( mb_strlen( $ex_words[ count( $ex_words ) - 1 ] ) );
+			$ex_cut   = - mb_strlen( $ex_words[ count( $ex_words ) - 1 ] );
 			if ( $ex_cut < 0 ) {
 				return mb_substr( $sub_ex, 0, $ex_cut ) . '...';
-			} else {
-				return $sub_ex . '...';
 			}
-		} else {
-			return $excerpt;
+
+			return $sub_ex . '...';
+
 		}
+
+		return $excerpt;
+	}
+
+	/**
+	* Gets the excerpt of a review by ID
+	*
+	* @since 1.11.0
+	*
+	* @param    $review_id  int     The ID or object of the post to get the excerpt of
+	* @param    $length     int     The length of the excerpt in words
+	* @param    $tags       string  The allowed HTML tags. These will not be stripped out
+	* @param    $extra      string  Text to append to the end of the excerpt
+	*
+	* @return string
+	*/
+	public function _get_the_rcno_book_review_excerpt( $review_id, $length = 30, $tags = '<a><em><strong>', $extra = '...' ) {
+
+		$review = get_post( $review_id );
+
+		if ( null === $review ) {
+			return false;
+		}
+
+		if ( has_excerpt( $review->ID ) ) {
+			$review_excerpt = $review->post_excerpt;
+			return apply_filters( 'the_content', $review_excerpt );
+		}
+
+		$review_excerpt = $review->post_content;
+		$review_excerpt   = strip_shortcodes( strip_tags( $review_excerpt, $tags ) );
+		$review_excerpt   = preg_split( '/\b/', $review_excerpt, $length * 2 + 1 );
+		$excerpt_waste    = array_pop( $review_excerpt );
+		$review_excerpt   = implode( $review_excerpt );
+		$review_excerpt   .= $extra;
+
+		return apply_filters( 'the_content', $review_excerpt );
 	}
 
 	/**
