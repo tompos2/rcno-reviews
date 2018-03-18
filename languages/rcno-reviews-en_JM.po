@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2018-03-13 15:14-0500\n"
-"PO-Revision-Date: 2018-03-13 15:19-0500\n"
+"POT-Creation-Date: 2018-03-14 15:58-0500\n"
+"PO-Revision-Date: 2018-03-14 16:05-0500\n"
 "Last-Translator: w33zy <wzy@outlook.com>\n"
 "Language-Team: English (Jamaica)\n"
 "Language: en_JM\n"
@@ -1036,7 +1036,7 @@ msgstr "%s ago"
 #: admin/views/rcno-general-info-metabox.php:23
 #: public/class-rcno-template-tags.php:705
 #: public/widgets/class-rcno-reviews-book-grid.php:189
-#: public/widgets/class-rcno-reviews-book-slider.php:209
+#: public/widgets/class-rcno-reviews-book-slider.php:208
 msgid "Title"
 msgstr "Title"
 
@@ -1391,18 +1391,18 @@ msgid "A widget to display a grid of reviewed books"
 msgstr "A widget to display a grid of reviewed books"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:190
-#: public/widgets/class-rcno-reviews-book-slider.php:208
+#: public/widgets/class-rcno-reviews-book-slider.php:207
 msgid "Date"
 msgstr "Date"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:191
-#: public/widgets/class-rcno-reviews-book-slider.php:210
+#: public/widgets/class-rcno-reviews-book-slider.php:209
 #: public/widgets/class-rcno-reviews-tag-cloud.php:212
 msgid "Random"
 msgstr "Random"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:197
-#: public/widgets/class-rcno-reviews-book-slider.php:217
+#: public/widgets/class-rcno-reviews-book-slider.php:216
 #: public/widgets/class-rcno-reviews-currently-reading.php:195
 #: public/widgets/class-rcno-reviews-recent-reviews.php:188
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:206
@@ -1410,13 +1410,13 @@ msgid "Title (optional)"
 msgstr "Title (optional)"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:205
-#: public/widgets/class-rcno-reviews-book-slider.php:225
+#: public/widgets/class-rcno-reviews-book-slider.php:224
 #: public/widgets/class-rcno-reviews-recent-reviews.php:196
 msgid "Number of Reviews:"
 msgstr "Number of Reviews:"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:215
-#: public/widgets/class-rcno-reviews-book-slider.php:235
+#: public/widgets/class-rcno-reviews-book-slider.php:234
 #: public/widgets/class-rcno-reviews-tag-cloud.php:262
 msgid "Order:"
 msgstr "Order:"
@@ -1429,7 +1429,7 @@ msgstr "Rcno Book Slider"
 msgid "A widget to display a reviewed book slider"
 msgstr "A widget to display a reviewed book slider"
 
-#: public/widgets/class-rcno-reviews-book-slider.php:247
+#: public/widgets/class-rcno-reviews-book-slider.php:246
 msgid "Slide Duration:"
 msgstr "Slide Duration:"
 

@@ -144,7 +144,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 					    $review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 					?>
                     <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-						<?php $review->the_rcno_book_cover( $review_id ); ?>
+						<?php $review->the_rcno_book_cover( $review_id, 'full' ); ?>
                     </a>
 
 				<?php } ?>
