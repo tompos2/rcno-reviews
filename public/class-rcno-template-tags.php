@@ -58,6 +58,15 @@ class Rcno_Template_Tags {
 	protected $private_score;
 
 	/**
+	 * The book meta data keys.
+	 *
+	 * @since    1.11.0
+	 * @access   protected
+	 * @var      array $meta_keys An array of all the meta keys used by the plugin
+	 */
+	protected $meta_keys;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
@@ -68,6 +77,22 @@ class Rcno_Template_Tags {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+
+		$this->meta_keys = array(
+			'rcno_book_illustrator',
+			'rcno_book_pub_date',
+			'rcno_book_pub_format',
+			'rcno_book_pub_edition',
+			'rcno_book_page_count',
+			'rcno_book_series_number',
+			'rcno_book_gr_review',
+			'rcno_book_gr_id',
+			'rcno_book_isbn13',
+			'rcno_book_isbn',
+			'rcno_book_asin',
+			'rcno_book_gr_url',
+			'rcno_book_title'
+		);
 	}
 
 
@@ -109,7 +134,7 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_full_book_details( $review_id, $size = 'medium' ) {
 		$review = get_post_custom( $review_id );
 
-		$taxonomies = get_post_taxonomies( $review_id );
+		$taxonomies = apply_filters( 'rcno_review_taxonomies', get_post_taxonomies( $review_id ) );
 
 		$out = '';
 		$out .= '<div class="rcno-full-book">';
@@ -124,8 +149,11 @@ class Rcno_Template_Tags {
 			$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true );
 		}
 
-		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', 'div' );
-		$out .= $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', 'div' );
+		foreach ( $this->meta_keys as $meta_key ) {
+			if ( in_array( $meta_key, array( 'rcno_book_pub_date', 'rcno_book_page_count' ), true )) {
+				$out .= $this->get_the_rcno_book_meta( $review_id, $meta_key, 'div' );
+			}
+		}
 
 		$out .= '</div>';
 
