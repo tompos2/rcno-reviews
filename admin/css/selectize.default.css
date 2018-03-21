@@ -133,6 +133,7 @@
 
 .selectize-control {
     position: relative;
+    width: 70%;
 }
 
 .selectize-dropdown,

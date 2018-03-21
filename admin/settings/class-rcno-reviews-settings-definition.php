@@ -20,6 +20,7 @@
 class Rcno_Reviews_Settings_Definition {
 
 	public static $plugin_name = 'rcno-reviews';
+	public static $template;
 
 	public function __construct() {
 
@@ -87,6 +88,7 @@ class Rcno_Reviews_Settings_Definition {
 	public static function get_settings() {
 
 		require_once 'class-rcno-reviews-get-templates.php';
+		self::$template = new Rcno_Template_Tags( RCNO_PLUGIN_NAME, RCNO_PLUGIN_VER );
 
 		$settings[] = array();
 
@@ -493,6 +495,12 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => __( 'Embedded Review Links', 'rcno-reviews' ),
 					'desc' => __( 'Enable clickable title links on embedded book reviews.', 'rcno-reviews' ),
 					'type' => 'checkbox',
+				),
+				'rcno_book_details_meta'  => array(
+					'name' => __( 'Book Detail Items', 'rcno-reviews' ),
+					'desc' => __( 'Book details that should appear in book reviews.', 'rcno-reviews' ),
+					'options' => self::$template->get_rcno_book_meta_keys(),
+					'type'    => 'multi_select',
 				),
 				'spacer-8'                => array(
 					'name' => '',

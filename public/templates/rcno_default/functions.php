@@ -17,15 +17,3 @@ function rcno_default_styles() {
 function rcno_default_scripts() {
 	wp_enqueue_script( 'rcno-default-script', plugin_dir_url( __FILE__ ) . 'default-script.js', array( 'jquery' ), '1.0.0', true );
 }
-
-add_filter( 'rcno_review_taxonomies', function( $taxonomies ) {
-	$categories = array( 'category', 'post_tag' );
-
-	foreach ( $categories as $category ) {
-		if ( in_array( $category, $taxonomies, true ) ) {
-			$taxonomies = array_diff( $taxonomies, array( $category ) );
-			$taxonomies[] = $category;
-		}
-	}
-	return $taxonomies;
-} );

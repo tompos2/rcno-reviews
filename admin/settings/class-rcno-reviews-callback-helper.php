@@ -532,6 +532,39 @@ class Rcno_Reviews_Callback_Helper {
 	}
 
 	/**
+	 * Multiple Select Callback
+	 *
+	 * Renders the multiple select fields.
+	 *
+	 * @since    1.11.0
+	 *
+	 * @param    array $args Arguments passed by the setting.
+	 *
+	 * @return    void
+	 */
+	public function multi_select_callback( $args ) {
+
+		$values = Rcno_Reviews_Option::get_option( $args['id'] );
+
+		$html = '<select ' . $this->get_id_attribute( $args['id'] ) . ' name="rcno_reviews_settings[' . $args['id'] . '][]" ' .  ' multiple />';
+
+		foreach ( $args['options'] as $option => $option_name ) {
+			if ( in_array( $option, $values, true ) ) {
+				$selected = 'selected="selected"';
+			} else {
+				$selected = '';
+			}
+			$html     .= '<option value="' . $option . '" ' . $selected . '>' . $option_name . '</option>';
+		}
+
+		$html .= '</select>';
+		$html .= '<br />';
+		$html .= $this->get_label_for( $args['id'], $args['desc'] );
+
+		echo $html;
+	}
+
+	/**
 	 * Rich Editor Callback
 	 *
 	 * Renders rich editor fields.

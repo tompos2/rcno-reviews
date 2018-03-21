@@ -139,6 +139,12 @@
 			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
 		} );
 
+		$( '#rcno_reviews_settings\\[rcno_book_details_meta\\]' ).selectize( {
+			create: false,
+			plugins: ['remove_button', 'restore_on_backspace'],
+		} );
+
+
 		// Adds and removes 'checked' class on review template selection
 		$( '.template-label-image' ).on( 'click', function() {
 			var x = $( this );

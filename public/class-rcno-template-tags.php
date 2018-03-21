@@ -58,15 +58,6 @@ class Rcno_Template_Tags {
 	protected $private_score;
 
 	/**
-	 * The book meta data keys.
-	 *
-	 * @since    1.11.0
-	 * @access   protected
-	 * @var      array $meta_keys An array of all the meta keys used by the plugin
-	 */
-	protected $meta_keys;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
@@ -77,22 +68,6 @@ class Rcno_Template_Tags {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
-		$this->meta_keys = array(
-			'rcno_book_illustrator',
-			'rcno_book_pub_date',
-			'rcno_book_pub_format',
-			'rcno_book_pub_edition',
-			'rcno_book_page_count',
-			'rcno_book_series_number',
-			'rcno_book_gr_review',
-			'rcno_book_gr_id',
-			'rcno_book_isbn13',
-			'rcno_book_isbn',
-			'rcno_book_asin',
-			'rcno_book_gr_url',
-			'rcno_book_title'
-		);
 	}
 
 
@@ -118,9 +93,55 @@ class Rcno_Template_Tags {
 
 	}
 
+	/**
+	 * Retrieves a list of all the metadata keys and taxonomy taxonomy slugs
+	 * for a review.
+	 *
+	 * @since 1.11.0
+	 *
+	 * @return array
+	 */
+	public function get_rcno_book_meta_keys() {
+
+		$taxonomies = array();
+
+		$built_taxonomies = array();
+		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_builtin_taxonomy', false )) {
+			$built_taxonomies = array(
+				'category' => __( 'Category', 'rcno-reviews' ),
+				'post_tag' => __( 'Tag', 'rcno-reviews' ),
+			);
+		}
+
+		$meta_keys = array(
+			'rcno_book_illustrator'   => __( 'Illustrator', 'rcno-reviews' ),
+			'rcno_book_pub_date'      => __( 'Published', 'rcno-reviews' ),
+			'rcno_book_pub_format'    => __( 'Format', 'rcno-reviews' ),
+			'rcno_book_pub_edition'   => __( 'Edition', 'rcno-reviews' ),
+			'rcno_book_page_count'    => __( 'Page Count', 'rcno-reviews' ),
+			'rcno_book_series_number' => __( 'Series Number', 'rcno-reviews' ),
+			'rcno_book_gr_review'     => __( 'Goodreads Rating', 'rcno-reviews' ),
+			'rcno_book_gr_id'         => __( 'Goodreads ID', 'rcno-reviews' ),
+			'rcno_book_isbn13'        => __( 'ISBN13', 'rcno-reviews' ),
+			'rcno_book_isbn'          => __( 'ISBN', 'rcno-reviews' ),
+			'rcno_book_asin'          => __( 'ASIN', 'rcno-reviews' ),
+			'rcno_book_gr_url'        => __( 'Goodreads URL', 'rcno-reviews' ),
+			'rcno_book_title'         => __( 'Title', 'rcno-reviews' ),
+		);
+
+		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+		$custom_taxonomies = explode( ',', $custom_taxonomies );
+
+		foreach ( $custom_taxonomies as $taxonomy ) {
+			$taxonomies['rcno_' . strtolower( $taxonomy )] = $taxonomy;
+		}
+
+		return array_merge( $built_taxonomies, $taxonomies, $meta_keys );
+	}
+
 	/******************************************************************************
 	 * FULL BOOK DETAILS TEMPLATE TAGS
-	 *******************************************************************************/
+	 ******************************************************************************/
 	/**
 	 * Generates the book details box.
 	 *
@@ -132,9 +153,13 @@ class Rcno_Template_Tags {
 	 * @return string
 	 */
 	public function get_the_rcno_full_book_details( $review_id, $size = 'medium' ) {
-		$review = get_post_custom( $review_id );
 
-		$taxonomies = apply_filters( 'rcno_review_taxonomies', get_post_taxonomies( $review_id ) );
+		$selected_meta  = apply_filters( 'rcno_book_details_meta_keys', Rcno_Reviews_Option::get_option( 'rcno_book_details_meta', false ) );
+		$book_meta_keys = array_keys( $this->get_rcno_book_meta_keys() );
+
+		if ( ! $selected_meta ) {
+			return false;
+		}
 
 		$out = '';
 		$out .= '<div class="rcno-full-book">';
@@ -145,13 +170,10 @@ class Rcno_Template_Tags {
 
 		$out .= '<div class="rcno-full-book-details">';
 
-		foreach ( $taxonomies as $taxonomy ) {
-			$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, true );
-		}
-
-		foreach ( $this->meta_keys as $meta_key ) {
-			if ( in_array( $meta_key, array( 'rcno_book_pub_date', 'rcno_book_page_count' ), true )) {
-				$out .= $this->get_the_rcno_book_meta( $review_id, $meta_key, 'div' );
+		foreach ( $selected_meta as $key ) {
+			if ( in_array( $key, $book_meta_keys, true )) {
+				$out .= $this->get_the_rcno_taxonomy_terms( $review_id, $key, true );
+				$out .= $this->get_the_rcno_book_meta( $review_id, $key, 'div' );
 			}
 		}
 
