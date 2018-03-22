@@ -99,10 +99,14 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.11.0
 	 *
+	 * @param string   $out Output are keys, values or both.
+	 * @param  int     $limit Output are keys, values or both.
+	 *
 	 * @return array
 	 */
-	public function get_rcno_book_meta_keys() {
+	public function get_rcno_book_meta_keys( $out = 'all', $limit = 100 ) {
 
+		$meta_data = array();
 		$taxonomies = array();
 
 		$built_taxonomies = array();
@@ -136,7 +140,17 @@ class Rcno_Template_Tags {
 			$taxonomies['rcno_' . strtolower( $taxonomy )] = $taxonomy;
 		}
 
-		return array_merge( $built_taxonomies, $taxonomies, $meta_keys );
+		if ( 'all' === $out ) {
+			$meta_data = array_slice( array_merge( $built_taxonomies, $taxonomies, $meta_keys ), 0, $limit );
+		}
+		if ( 'keys' === $out  ) {
+			$meta_data = array_slice( array_keys( array_merge( $built_taxonomies, $taxonomies, $meta_keys ) ), 0, $limit );
+		}
+		if ( 'values' === $out ) {
+			$meta_data = array_slice( array_values( array_merge( $built_taxonomies, $taxonomies, $meta_keys ) ), 0, $limit );
+		}
+
+		return $meta_data;
 	}
 
 	/******************************************************************************
@@ -154,8 +168,9 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_full_book_details( $review_id, $size = 'medium' ) {
 
-		$selected_meta  = apply_filters( 'rcno_book_details_meta_keys', Rcno_Reviews_Option::get_option( 'rcno_book_details_meta', false ) );
-		$book_meta_keys = array_keys( $this->get_rcno_book_meta_keys() );
+		$default_meta   = implode( ',', $this->get_rcno_book_meta_keys( 'keys', 8 ) );
+		$selected_meta  = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_book_details_meta', $default_meta ) );
+		$book_meta_keys = $this->get_rcno_book_meta_keys( 'keys' );
 
 		if ( ! $selected_meta ) {
 			return false;
@@ -227,7 +242,6 @@ class Rcno_Template_Tags {
 
 		$book_rating          = (float) $review['rcno_admin_rating'][0];
 		$background           = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
-		// $colour               = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' );
 
 		if ( false === $display) {
 			return $book_rating;
@@ -243,21 +257,6 @@ class Rcno_Template_Tags {
 			$output .= '</div>';
 			$output .= '</div>';
 		}
-
-		// TODO: Remove later. Left this here for future reference.
-		/*$script = "
-			jQuery( '.rcno-admin-rating .rating-" . $review_id . "' ).starRating({
-				initialRating: parseFloat( " . $book_rating ." ),
-				emptyColor: '". $background ."',
-				activeColor: '". $colour ."',
-				useGradient: false,
-				strokeWidth: 0,
-				readOnly: true,
-			});
-		";*/
-
-		// This is the only way I can think of getting the review ID to the JS function
-		// wp_add_inline_script( 'rcno-star-rating', $script );
 
 		return $output;
 	}
@@ -622,7 +621,7 @@ class Rcno_Template_Tags {
 	}
 
 	/**
-	* Gets the excerpt of a review by ID
+	* Gets a better version of excerpt of a review by ID
 	*
 	* @since 1.11.0
 	*
@@ -633,7 +632,7 @@ class Rcno_Template_Tags {
 	*
 	* @return string
 	*/
-	public function _get_the_rcno_book_review_excerpt( $review_id, $length = 30, $tags = '<a><em><strong>', $extra = '...' ) {
+	public function get_the_better_rcno_book_review_excerpt( $review_id, $length = 35, $tags = '<a><em><strong>', $extra = '...' ) {
 
 		$review = get_post( $review_id );
 
@@ -654,6 +653,22 @@ class Rcno_Template_Tags {
 		$review_excerpt   .= $extra;
 
 		return apply_filters( 'the_content', $review_excerpt );
+	}
+
+	/**
+	 * Prints a better version of excerpt of a review by ID
+	 *
+	 * @since 1.11.0
+	 *
+	 * @param    $review_id  int     The ID or object of the post to get the excerpt of
+	 * @param    $length     int     The length of the excerpt in words
+	 * @param    $tags       string  The allowed HTML tags. These will not be stripped out
+	 * @param    $extra      string  Text to append to the end of the excerpt
+	 *
+	 * @return void
+	 */
+	public function the_better_rcno_book_review_excerpt( $review_id, $length = 35, $tags = '<a><em><strong>', $extra = '...' ) {
+		echo $this->get_the_better_rcno_book_review_excerpt( $review_id, $length, $tags, $extra );
 	}
 
 	/**

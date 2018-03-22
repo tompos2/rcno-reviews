@@ -226,6 +226,7 @@ class Rcno_Reviews_Admin {
 	public function enqueue_scripts() {
 		global $post;
 		$review_id = ( null !== $post ) ? $post->ID : '';
+		$template  = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -260,7 +261,7 @@ class Rcno_Reviews_Admin {
 			'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
 			'rcno_admin_rating'            => get_post_meta( $review_id, 'rcno_admin_rating', true ),
 			'rcno_settings_reset_msg'      => __( 'Your settings have been reset, please reload the page to see them.', 'rcno-reviews' ),
-
+			'rcno_book_meta_keys'          => $template->get_rcno_book_meta_keys( 'all' ),
 		) );
 	}
 

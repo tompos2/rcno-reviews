@@ -139,9 +139,19 @@
 			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
 		} );
 
+		var book_meta_keys = [];
+		$.each(my_script_vars.rcno_book_meta_keys, function( key, value ) {
+			book_meta_keys.push( {key: key, value: value } );
+		});
+
 		$( '#rcno_reviews_settings\\[rcno_book_details_meta\\]' ).selectize( {
+			maxItems: null,
+			valueField: 'key',
+			labelField: 'value',
+			searchField: 'value',
+			options: book_meta_keys,
 			create: false,
-			plugins: ['remove_button', 'restore_on_backspace'],
+			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop'],
 		} );
 
 

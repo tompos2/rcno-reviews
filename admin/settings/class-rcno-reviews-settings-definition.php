@@ -498,9 +498,9 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				'rcno_book_details_meta'  => array(
 					'name' => __( 'Book Detail Items', 'rcno-reviews' ),
-					'desc' => __( 'Book details that should appear in book reviews.', 'rcno-reviews' ),
-					'options' => self::$template->get_rcno_book_meta_keys(),
-					'type'    => 'multi_select',
+					'desc' => __( 'Book details that should appear in book reviews. You also rearrange their order here', 'rcno-reviews' ),
+					'std'  => implode( ',', self::$template->get_rcno_book_meta_keys( 'keys', 8 ) ),
+					'type' => 'text',
 				),
 				'spacer-8'                => array(
 					'name' => '',

@@ -3,18 +3,19 @@ Contributors: Kemory Grubb
 Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
+Requires PHP: 5.6.25
 Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Recencio Book Reviews is a powerful and very flexible tool to manage your blog’s book review collection. It was designed with the book reviewer in mind and created for easy
-and fast usage.
+Recencio Book Reviews is a powerful and very flexible tool for managing your blog’s book review collection.
+It was designed with the book reviewer in mind and was built to be fast, easy and customizable.
 
 == Description ==
 
-Recencio Book Reviews is a powerful and very flexible tool to manage your blog’s book review collection. It was designed with the book reviewer in mind and created for easy
-and fast usage. The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
+Recencio Book Reviews is a powerful and very flexible tool for managing your blog’s book review collection. It was designed with the book reviewer in mind and was built to be fast, easy and customizable.
+The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
 This plugin basically adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
 Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. As creating new book taxonomies is easy it’s up to
 you which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
@@ -76,100 +77,21 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial plugin release.
+= 1.11.0 =
+* Users are now able to select and reorder the book metadata they want displayed on reviews
+* We are now using a better function to handle the display of review excerpts
 
-= 1.0.1 =
-* Fixed an issue with white color stars on a white background on initial install.
+= 1.10.1 =
+* Updated admin translation strings
 
-= 1.0.2 =
-* Fixed an issue where templates stop working before plugin folder name got changed.
+= 1.10.0 =
+* Made some adjustments to the way custom taxonomies are auto-generated. This may break custom taxonomies with custom slugs
+* Added the correct name formatting for translation files
+* Added an option to add new articles for the sorting of titles alphabetically, useful for foreign languages
+* Fixed the potential of a fatal PHP error if shortcode is included twice on a page
 
-= 1.0.3 =
-* Generate a book author's URL if one is not provided by site owner
-* Cleaned up the 'Rcno_Reviews_Rest_API' class
-
-= 1.0.5 =
-* fixed an error when fetching a taxonomy with an error, updated to v1.0.5
-
-= 1.0.6 =
-* Moved flush rewrite rule function to better handle plugin activation.
-* Added flush rewrite rule function to run on plugin deactivation.
-* Better handle taxonomy slugs.
-* Better handle multiple user added taxonomies.
-* Adjusted the styling of the recent book review widget
-
-= 1.0.7 =
-* Fixed issue with comments not showing when comment ratings is disabled.
-
-= 1.0.8 =
-* Moved all admin scripts to footer and added version numbers
-
-= 1.0.9 =
-* Fixed an error in the review shortcodes file cause by the differences between Windows and Unix use of '/'
-
-= 1.0.10 =
-* Fixed regression from last patch
-
-= 1.1.10 =
-* Added an option to display book covers on the book reviews index page
-
-= 1.2.11 =
-* Added an new "currently reading" widget
-* Added an setting page option to list 'uncountable' words in users native language. These words wont be singularized or pluralized by the plugin
-
-= 1.3.0 =
-* Added an option to ignore articles when sorting titles
-
-= 1.4.0 =
-* Add book covers to the review posts admin column
-* Fixed an issue with removing custom taxonomies from the review posts admin column
-
-= 1.5.0 =
-* Add a new review calendar widget
-
-= 1.5.1 =
-* Fixed an issue with the incorrect API path for the Currently Reading dashboard widget
-* Set Book Grid widget to default to 9 book for a balanced layout
-* Set Recent Reviews widget to sort reviews by most recent and fixed review count option
-
-= 1.6.0 =
-* Added a book review grid index page, via MacyJS for a masonary layout
-* Merged Owl Carousel theme file with main file, for reduced file load
-* Book cover now uses book title meta, as most users don't provide one on file upload
-* Fixed the styling of headers on the main review index page
-
-= 1.6.1 =
-* Refactored the custom template functions
-* Cleaned up various classes
-
-= 1.6.2 =
-* Fixed a bug in last update that was remove content on homepage,
-    see: https://wordpress.org/support/topic/strange-issue-after-new-update/
-
-= 1.6.3 =
-* Redesigned the progress bar on the currently reading widget.
-* Refactored the home page content to take into consideration the 'read more' tag.
-
-= 1.7.0 =
-* Added new "Books in this Series" feature
-* Redesigned the taxonomy index pages to use use book covers
-* Moved index page setting to their own section on option page
-* Refactored the book description to use a filter
-* Added the post type slug to the custom taxonomy URLS
-* Removed comment rating scripts and styles from posts that are not reviews
-
-= 1.7.1 =
-* Fixed a bug with CPT slug not taking a pluralized form in some foreign languages
-
-= 1.8.0 =
-* Added 3 new shortcodes: [rcno-book-list], [rcno-review-box] and [rcno-purchase-links]
-
-= 1.8.1 =
-* Fixed an issue in how best and worst ratings are calculated for the "Reviews" schema; thanks @kimoves
-
-= 1.8.2 =
-* Added an "after review" action to use for tying in the use of additional 3rd party content below reviews
+= 1.9.1 =
+* Added a new option to use clickable title links when reviews are embedded in regular posts
 
 = 1.9.0 =
 * Added an option to import and export plugin settings
@@ -179,14 +101,97 @@ Please open a new topic on the plugin's WordPress.org support page
 * Fixed an issue with the review calendar display on months with 7 days in week 4
 * Fixed an issue with 3rd party plugins displaying twice when using the 'the_content' filter
 
-= 1.9.1 =
-* Added a new option to use clickable title links when reviews are embedded in regular posts
+= 1.8.2 =
+* Added an "after review" action to use for tying in the use of additional 3rd party content below reviews
 
-= 1.10.0 =
-* Made some adjustments to the way custom taxonomies are auto-generated. This may break custom taxonomies with custom slugs
-* Added the correct name formatting for translation files
-* Added an option to add new articles for the sorting of titles alphabetically, useful for foreign languages
-* Fixed the potential of a fatal PHP error if shortcode is included twice on a page
+= 1.8.1 =
+* Fixed an issue in how best and worst ratings are calculated for the "Reviews" schema; thanks @kimoves
 
-= 1.10.1 =
-* Updated admin translation strings
+= 1.8.0 =
+* Added 3 new shortcodes: [rcno-book-list], [rcno-review-box] and [rcno-purchase-links]
+
+= 1.7.1 =
+* Fixed a bug with CPT slug not taking a pluralized form in some foreign languages
+
+= 1.7.0 =
+* Added new "Books in this Series" feature
+* Redesigned the taxonomy index pages to use use book covers
+* Moved index page setting to their own section on option page
+* Refactored the book description to use a filter
+* Added the post type slug to the custom taxonomy URLS
+* Removed comment rating scripts and styles from posts that are not reviews
+
+= 1.6.3 =
+* Redesigned the progress bar on the currently reading widget
+* Refactored the home page content to take into consideration the 'read more' tag
+
+= 1.6.2 =
+* Fixed a bug in last update that was remove content on homepage,
+    see: https://wordpress.org/support/topic/strange-issue-after-new-update/
+
+= 1.6.1 =
+* Refactored the custom template functions
+* Cleaned up various classes
+
+= 1.6.0 =
+* Added a book review grid index page, via MacyJS for a masonary layout
+* Merged Owl Carousel theme file with main file, for reduced file load
+* Book cover now uses book title meta, as most users don't provide one on file upload
+* Fixed the styling of headers on the main review index page
+
+= 1.5.1 =
+* Fixed an issue with the incorrect API path for the Currently Reading dashboard widget
+* Set Book Grid widget to default to 9 book for a balanced layout
+* Set Recent Reviews widget to sort reviews by most recent and fixed review count option
+
+= 1.5.0 =
+* Add a new review calendar widget
+
+= 1.4.0 =
+* Add book covers to the review posts admin column
+* Fixed an issue with removing custom taxonomies from the review posts admin column
+
+= 1.3.0 =
+* Added an option to ignore articles when sorting titles
+
+= 1.2.11 =
+* Added an new "currently reading" widget
+* Added an setting page option to list 'uncountable' words in users native language. These words wont be singularized or pluralized by the plugin
+
+= 1.1.10 =
+* Added an option to display book covers on the book reviews index page
+
+= 1.0.10 =
+* Fixed regression from last patch
+
+= 1.0.9 =
+* Fixed an error in the review shortcodes file cause by the differences between Windows and Unix use of '/'
+
+= 1.0.8 =
+* Moved all admin scripts to footer and added version numbers
+
+= 1.0.7 =
+* Fixed issue with comments not showing when comment ratings is disabled
+
+= 1.0.6 =
+* Moved flush rewrite rule function to better handle plugin activation.
+* Added flush rewrite rule function to run on plugin deactivation.
+* Better handle taxonomy slugs.
+* Better handle multiple user added taxonomies.
+* Adjusted the styling of the recent book review widget
+
+= 1.0.5 =
+* fixed an error when fetching a taxonomy with an error, updated to v1.0.5
+
+= 1.0.3 =
+* Generate a book author's URL if one is not provided by site owner
+* Cleaned up the 'Rcno_Reviews_Rest_API' class
+
+= 1.0.2 =
+* Fixed an issue where templates stop working before plugin folder name got changed
+
+= 1.0.1 =
+* Fixed an issue with white color stars on a white background on initial install
+
+= 1.0.0 =
+* Initial plugin release

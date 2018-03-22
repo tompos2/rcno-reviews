@@ -20,13 +20,19 @@
 
 ?>
 
-
 <?php
 
+	/**
+	 * Displaying the book review title is normally done by the theme as post_title().
+	 * However, if the review is embedded, we need to do it here.
+	 */
 	$review->the_rcno_review_title( $review_id );
 
-	$review->the_rcno_book_review_excerpt( $review_id );
-	//echo $review->rcno_excerpt( $review_id );
+	if ( $review->is_review_embedded() ) {
+		$review->the_better_rcno_book_review_excerpt( $review_id );
+	} else {
+		$review->the_rcno_book_review_content( $review_id );
+	}
 
 	echo '<!--- Recencio Book Reviews --->';
 
