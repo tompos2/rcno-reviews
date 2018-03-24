@@ -476,7 +476,7 @@ class Rcno_Reviews_Admin {
 
 			register_taxonomy( $tax_name, 'rcno_review', $opts );
 
-			flush_rewrite_rules( false ); // @TODO: For dev only.
+			//flush_rewrite_rules( false ); // @FIXME: For dev only.
 		}
 	}
 
