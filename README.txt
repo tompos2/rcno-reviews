@@ -76,6 +76,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+= 1.11.1 =
+* Fixed a debug issue with `flush_rewrite_rules`
+* Fixed a issue with fetch book data from remote API
 
 = 1.11.0 =
 * Users are now able to select and reorder the book metadata they want displayed on reviews

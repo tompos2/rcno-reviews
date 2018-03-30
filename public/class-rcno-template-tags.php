@@ -397,10 +397,11 @@ class Rcno_Template_Tags {
 	 * @param string $taxonomy	The custom taxonomy to print the HTML tags for.
 	 * @param bool   $label		Whether or not to print the taxonomy label.
 	 * @param string $sep		The separator used for multiple taxonomies.
+	 * @param bool   $link		Whether or not to create linkable taxonomy terms.
 	 *
 	 * @return null|string
 	 */
-	public function get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = ', ' ) {
+	public function get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = ', ', $link = true ) {
 
 		$out = '';
 
@@ -420,6 +421,9 @@ class Rcno_Template_Tags {
 			$tax_label = Rcno_Pluralize_Helper::singularize( $tax_label );
 		}
 
+		if ( ! $link && ! is_wp_error( $terms ) ) {
+			$terms = strip_tags( $terms );
+		}
 
 		$prefix = '';
 
@@ -446,11 +450,12 @@ class Rcno_Template_Tags {
 	 * @param string $taxonomy	The custom taxonomy to print the HTML tags for.
 	 * @param bool   $label		Whether or not to print the taxonomy label.
 	 * @param string $sep		The separator used for multiple taxonomies.
+	 * @param bool   $link		Whether or not to create linkable taxonomy terms.
 	 *
 	 * @return void
 	 */
-	public function the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = ', ' ) {
-		echo $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label, $sep );
+	public function the_rcno_taxonomy_terms( $review_id, $taxonomy, $label = false, $sep = ', ', $link = true  ) {
+		echo $this->get_the_rcno_taxonomy_terms( $review_id, $taxonomy, $label, $sep, $link );
 	}
 
 	/**
@@ -806,9 +811,9 @@ class Rcno_Template_Tags {
 				}
 
 				return $out;
-			} else {
-				return '';
 			}
+
+			return '';
 		}
 
 		return null;
