@@ -355,7 +355,7 @@ function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true,
 
 	// See how much we should pad in the beginning
 	$pad = calendar_week_mod( date( 'w', $unixmonth ) - $week_begins );
-	if ( 0 !== $pad ) {
+	if ( (int) $pad !== 0 ) {
 		$calendar_output .= "\n\t\t" . '<td colspan="' . esc_attr( $pad ) . '" class="pad">&nbsp;</td>';
 	}
 

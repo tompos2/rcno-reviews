@@ -76,6 +76,10 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.11.2 =
+* Fixed display bug in review calendar widget (an extra cell padding was being added to 1st week of March)
+
 = 1.11.1 =
 * Fixed a debug issue with `flush_rewrite_rules`
 * Fixed a issue with fetch book data from remote API
