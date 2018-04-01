@@ -23,6 +23,7 @@
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-book-list-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-review-box-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-purchase-links-shortcode.php';
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-isotope-grid-shortcode.php';
 
 class Rcno_Reviews_Shortcodes {
 
@@ -72,6 +73,15 @@ class Rcno_Reviews_Shortcodes {
 	public $purchase_links;
 
 	/**
+	 * The object contain the purchase links shortcode object.
+	 *
+	 * @since    1.12.0
+	 * @access   public
+	 * @var      Rcno_Isotope_Grid_Shortcode $isotope_grid The class instance.
+	 */
+	public $isotope_grid;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
@@ -83,9 +93,10 @@ class Rcno_Reviews_Shortcodes {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		$this->book_list  = new Rcno_Book_List_Shortcode( $plugin_name, $version );
-		$this->review_box = new Rcno_Review_Box_Shortcode( $plugin_name, $version );
-		$this->purchase_links = new Rcno_Purchase_Links_Shortcode( $plugin_name, $version );
+		$this->book_list        = new Rcno_Book_List_Shortcode( $plugin_name, $version );
+		$this->review_box       = new Rcno_Review_Box_Shortcode( $plugin_name, $version );
+		$this->purchase_links   = new Rcno_Purchase_Links_Shortcode( $plugin_name, $version );
+		$this->isotope_grid     = new Rcno_Isotope_Grid_Shortcode( $plugin_name, $version );
 	}
 
 	/**

@@ -75,4 +75,16 @@
 
   });
 
+	$(function() {
+		var $iso_grid = $('.rcno-isotope-grid-container').isotope({
+			itemSelector: '.rcno-isotope-grid-item',
+			layoutMode: 'fitRows',
+		});
+		$('.rcno-isotope-grid-select').on('change', function(  ) {
+			console.log( $(this).val() );
+			var filterValue = $(this).val();
+			$iso_grid.isotope({ filter: filterValue });
+		});
+	});
+
 })(jQuery);

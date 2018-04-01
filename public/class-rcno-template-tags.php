@@ -462,7 +462,7 @@ class Rcno_Template_Tags {
 	 * Generates a list of all the taxonomy and terms attached to a review post.
 	 *
 	 * @param int    $review_id The current review's post ID.
-	 * @param string $label     Whether or not to print the taxonomy label.
+	 * @param bool   $label     Whether or not to print the taxonomy label.
 	 * @param string $sep       The separator used for multiple taxonomies.
 	 *
 	 * @return string
@@ -485,13 +485,49 @@ class Rcno_Template_Tags {
 	 * Prints a list of all the taxonomy and terms attached to a review post.
 	 *
 	 * @param int    $review_id The current review's post ID.
-	 * @param string $label     Whether or not to print the taxonomy label.
+	 * @param bool   $label     Whether or not to print the taxonomy label.
 	 * @param string $sep       The separator used for multiple taxonomies.
 	 *
 	 * @return void
 	 */
 	public function the_rcno_taxonomy_list( $review_id, $label, $sep ) {
 		echo $this->get_the_rcno_taxonomy_list( $review_id, $label, $sep );
+	}
+
+
+	/** ****************************************************************************
+	 * TAXONOMY ITEMS
+	 *******************************************************************************/
+
+	/**
+	 * Creates a space separated list of all taxonomy terms for review.
+	 *
+	 * This is useful for adding CSS class names for all taxonomy terms attached to a review,
+	 * E.g. 'elise-kova steam-punk loom-saga'
+	 *
+	 * @param int       $review_id  The current review's post ID.
+	 * @param array     $taxonomies  The current review's post ID.
+	 * @param string    $output     The returned output type.
+	 *
+	 * @return mixed
+	 */
+	public function get_the_rcno_taxonomy_items( $review_id, array $taxonomies, $output = 'string' ) {
+
+		$out = array();
+
+		foreach ( $taxonomies as $tax_value ) {
+			$tax = 'rcno_' . strtolower( $tax_value );
+			// First we convert spaces to dashes.
+			// Then we remove the href tags added by 'get_the_term_list'.
+			// The we convert to lowercase.
+			$out[] = preg_replace( '/[^A-Za-z0-9-]+/', '-', strip_tags( strtolower( get_the_term_list( $review_id, $tax, '', ' ', '' ) ) ) );
+		}
+
+		if ( 'string' === $output ) {
+			return implode( ' ', $out );
+		}
+
+		return $out;
 	}
 
 	/** ****************************************************************************

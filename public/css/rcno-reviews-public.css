@@ -280,3 +280,11 @@
     /* stroke: #000; */
     stroke-linejoin: round;
 }
+
+.rcno-isotope-grid-item {
+    width: 20%;
+}
+
+.rcno-isotope-grid-item p {
+    display: none;
+}
