@@ -282,8 +282,9 @@
 }
 
 .rcno-isotope-grid-item {
-    width: 85px;
+    width: 150px;
     margin: 0 10px 10px 0;
+    overflow: hidden;
 }
 
 .rcno-isotope-grid-item p {

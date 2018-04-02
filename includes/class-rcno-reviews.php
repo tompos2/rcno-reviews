@@ -442,7 +442,7 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-book-list', array( $plugin_shortcodes->book_list, 'rcno_do_book_list_shortcode' ) );
 		add_shortcode( 'rcno-review-box', array( $plugin_shortcodes->review_box, 'rcno_do_review_box_shortcode' ) );
 		add_shortcode( 'rcno-purchase-links', array( $plugin_shortcodes->purchase_links, 'rcno_do_purchase_links_shortcode' ) );
-		add_shortcode( 'rcno-isotope-grid', array( $plugin_shortcodes->isotope_grid, 'rcno_do_isotope_grid_shortcode' ) );
+		add_shortcode( 'rcno-sortable-grid', array( $plugin_shortcodes->isotope_grid, 'rcno_do_isotope_grid_shortcode' ) );
 
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );

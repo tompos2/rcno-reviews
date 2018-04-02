@@ -289,34 +289,38 @@ class Rcno_Template_Tags {
 	 * @param int    $review_id		The current review's post ID.
 	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
 	 * @param bool   $wrapper	Whether to wrap the image URL in the 'img' HTML tag.
+	 * @param bool   $original	Whether to use the original uploaded image.
 	 *
 	 * @return bool|string
 	 */
-	public function get_the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true ) {
+	public function get_the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true, $original = false ) {
 		$review = get_post_custom( $review_id );
+		$attachment_id = null;
 
 		if ( ! isset( $review['rcno_reviews_book_cover_src'] ) ) {
 			return false;
 		}
 
-		$book_src      = $review['rcno_reviews_book_cover_src'][0];
-		$attachment_id = $this->wpcom_vip_attachment_url_to_postid( $book_src );
-		$book_src      = wp_get_attachment_image_url( $attachment_id, $size );
+		$og_book_src = $review['rcno_reviews_book_cover_src'][0];
+		$book_src    = $og_book_src;
 
-		if ( false === (bool) $book_src ) {
+		if ( ! $original ) {
+			$attachment_id = $this->wpcom_vip_attachment_url_to_postid( $og_book_src );
+			$book_src      = wp_get_attachment_image_url( $attachment_id, $size );
+		}
+
+		if ( ! $book_src ) {
 			$book_src = Rcno_Reviews_Option::get_option( 'rcno_default_cover', plugin_dir_url( __FILE__ ) . 'images/no-cover.jpg' );
 		}
 
-		if ( false === $wrapper ) {
+		if ( ! $wrapper ) {
 			return $book_src;
 		}
 
 		// Use the book title because most users wont edit it form the file upload screen.
 		$book_title = $review['rcno_book_title'][0];
 		$book_alt   = ! empty( $review['rcno_reviews_book_cover_alt'][0] ) ?
-			$review['rcno_reviews_book_cover_alt'][0] :
-			get_post_meta( $attachment_id, '_wp_attachment_image_alt', true);
-
+			$review['rcno_reviews_book_cover_alt'][0] : $book_title;
 
 		$book_title = $book_title ? esc_attr( $book_title ) : __( 'No Cover Available', 'rcno-reviews' );
 		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no-book-cover-available', 'rcno-reviews' );
@@ -339,11 +343,12 @@ class Rcno_Template_Tags {
 	 * @param int    $review_id		The current review's post ID.
 	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
 	 * @param bool   $wrapper	Whether to wrap the image URL in the 'img' HTML tag.
+	 * @param bool   $original	Whether to use the original uploaded image.
 	 *
 	 * @return void
 	 */
-	public function the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true ) {
-		echo $this->get_the_rcno_book_cover( $review_id, $size, $wrapper );
+	public function the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true, $original = false ) {
+		echo $this->get_the_rcno_book_cover( $review_id, $size, $wrapper, $original );
 	}
 
 
@@ -517,10 +522,6 @@ class Rcno_Template_Tags {
 
 		foreach ( $taxonomies as $taxonomy ) {
 			$tax_slug = 'rcno_' . strtolower( $taxonomy );
-			// First we convert spaces to dashes.
-			// Then we remove the href tags added by 'get_the_term_list'.
-			// The we convert to lowercase.
-			//$out[] = preg_replace( '/[^A-Za-z0-9-]+/', '-', strip_tags( strtolower( get_the_term_list( $review_id, $tax, '', ' ', '' ) ) ) );
 			$taxonomy_data = wp_get_post_terms( $review_id, $tax_slug );
 			if ( ! empty( $taxonomy_data ) && ! is_wp_error( $taxonomy_data ) ) {
 				$taxonomy_values[] = (array) $taxonomy_data;
@@ -1745,6 +1746,53 @@ class Rcno_Template_Tags {
 			return false;
 		}
 		return $id;
+	}
+
+	/**
+	 * This generate an array of terms for each taxonomy attached to a specific term.
+	 *
+	 * This function is based on the WP `get_body_class` function.
+	 *
+	 * @since 1.12.0
+	 *
+	 * @see https://goo.gl/QrCqnd
+	 * @param int $review_id The post ID of the current review.
+	 *
+	 * @return array
+	 */
+	public function get_rcno_review_html_classes( $review_id ) {
+		$review = get_post( $review_id );
+
+		if ( null === $review ) {
+			return array();
+		}
+
+		$classes = array();
+
+		$classes[] = 'review-' . $review->ID;
+
+		// All public taxonomies
+		$taxonomies = get_taxonomies( array( 'public' => true ) );
+		foreach ( (array) $taxonomies as $taxonomy ) {
+			if ( is_object_in_taxonomy( $review->post_type, $taxonomy ) ) {
+				foreach ( (array) get_the_terms( $review->ID, $taxonomy ) as $term ) {
+					if ( empty( $term->slug ) ) {
+						continue;
+					}
+
+					$term_class = sanitize_html_class( $term->slug, $term->term_id );
+					if ( is_numeric( $term_class ) || ! trim( $term_class, '-' ) ) {
+						$term_class = $term->term_id;
+					}
+
+					$classes[] = $term_class;
+				}
+			}
+		}
+
+		$classes = apply_filters( 'rcno_review_html_classes', $classes );
+
+		return array_unique( array_map( 'esc_attr', $classes ) );
 	}
 
 }

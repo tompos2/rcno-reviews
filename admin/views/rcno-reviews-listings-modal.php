@@ -48,6 +48,11 @@
                            id="rcno-modal-scl-mode-grid"/>
                     <label for="rcno-modal-scl-mode-grid"><b><?php esc_html_e( 'Embed book review grid', 'rcno-reviews' ); ?></b></label>
                 </li>
+                <li>
+                    <input type="radio" value="rcno-reviews-isotope" name="rcno-modal-scl-mode"
+                           id="rcno-modal-scl-mode-isotope"/>
+                    <label for="rcno-modal-scl-mode-isotope"><b><?php esc_html_e( 'Embed sortable book review grid', 'rcno-reviews' ); ?></b></label>
+                </li>
 			</ul>
 		</div>
 		<div class="submitbox">

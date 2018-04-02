@@ -42,13 +42,6 @@ if ( $posts && count( $posts ) > 0 ) {
 		usort( $books, 'cmp' );
 	}
 
-	/*$buttons = '<div class="button-group filter-button-group">';
-	$buttons .= '<button data-filter="*">' . __( 'Show All', 'rcno-reviews') . '</button>';
-	foreach ( $custom_taxonomies as $taxon ) {
-		$buttons .= '<button data-filter="' . strtolower( $taxon ) .'">' . $taxon . '</button>';
-	}
-	$buttons .= '</div>';*/
-
 	$select = '';
 	$select .= '<div class="rcno-isotope-grid-select-container">';
 	foreach ( $custom_taxonomies as $taxon ) {
@@ -73,14 +66,10 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		// Add the entry for the post.
 		$out .= '<div class="rcno-isotope-grid-item ';
-		$out .= implode( ' ', $template->get_the_rcno_taxonomy_items( $book['ID'], $custom_taxonomies ) );
+		$out .= implode( ' ', $template->get_rcno_review_html_classes( $book['ID'] ) );
 		$out .= '">';
 		$out .= '<a href="' . get_permalink( $book['ID'] ) . '">';
-
-		// Pick the 'medium' book cover size
-		$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true );
-
-		$out .= '<p>' . $book['unsorted_title'] . '</p>';
+		$out .= $template->get_the_rcno_book_cover( $book['ID'], 'medium', true, true );
 		$out .= '</a></div>';
 
 		// Increment the counter.

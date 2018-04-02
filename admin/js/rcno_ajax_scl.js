@@ -11,7 +11,8 @@ var rcnoListingsSc;
 (function ($) {
     var editor,
         inputs = {},
-        isTouch = ( 'ontouchend' in document );
+        isTouch = ( 'ontouchend' in document ),
+        body = $('body');
 
     rcnoListingsSc = {
         timeToTriggerRiver: 150,
@@ -46,13 +47,13 @@ var rcnoListingsSc;
                 event.preventDefault();
                 rcnoListingsSc.close();
             });
-            $('body').on('click', '#review-taxonomy', function (event) {
+            body.on('click', '#review-taxonomy', function (event) {
                 event.preventDefault();
                 $('input:radio[name=rcno-modal-scl-mode]')[0].checked = true;
             });
 
             /* Button to open the modal dialog */
-            $('body').on('click', '#rcno-add-listings-button', function (event) {
+            body.on('click', '#rcno-add-listings-button', function (event) {
                 editor_id = jQuery('#rcno-add-listings-button').attr("data_editor");
                 window.rcnoListingsSc.open(editor_id);
             });
@@ -60,7 +61,6 @@ var rcnoListingsSc;
 
         open: function (editorId) {
             var ed;
-
 
             rcnoListingsSc.range = null;
 
@@ -194,6 +194,9 @@ var rcnoListingsSc;
                 case 'rcno-reviews-grid':
                     out += "rcno-reviews-grid";
                     break;
+				case 'rcno-reviews-isotope':
+					out += "rcno-sortable-grid";
+					break;
                 default:
                     alert( 'Error' + sel.val());
                     return;
@@ -239,6 +242,9 @@ var rcnoListingsSc;
                 case 'rcno-reviews-grid':
                     out += "rcno-reviews-grid";
                     break;
+				case 'rcno-reviews-isotope':
+					out += "rcno-sortable-grid";
+					break;
                 default:
                     alert( 'Error:' + sel.val() );
                     return;

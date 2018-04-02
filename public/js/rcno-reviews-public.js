@@ -76,16 +76,18 @@
   });
 
 	$(function() {
-		var $iso_grid = $('.rcno-isotope-grid-container').isotope({
-			itemSelector: '.rcno-isotope-grid-item',
-			layoutMode: 'masonry',
-		});
-		var select = $('.rcno-isotope-grid-select');
-		select.on('change', function(  ) {
-			var filterValue = $(this).val();
-			$iso_grid.isotope({ filter: filterValue });
-			select.not($(this)).prop('selectedIndex',0);
-		});
+		if ( window.Isotope !== undefined ) {
+			var $iso_grid = $( '.rcno-isotope-grid-container' ).isotope( {
+				itemSelector: '.rcno-isotope-grid-item',
+				layoutMode: 'masonry',
+			} );
+			var select = $( '.rcno-isotope-grid-select' );
+			select.on( 'change', function() {
+				var filterValue = $( this ).val();
+				$iso_grid.isotope( {filter: filterValue} );
+				select.not( $( this ) ).prop( 'selectedIndex', 0 );
+			} );
+		}
 	});
 
 })(jQuery);
