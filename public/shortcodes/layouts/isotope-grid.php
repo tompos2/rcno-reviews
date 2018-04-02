@@ -50,9 +50,10 @@ if ( $posts && count( $posts ) > 0 ) {
 	$buttons .= '</div>';*/
 
 	$select = '';
+	$select .= '<div class="rcno-isotope-grid-select-container">';
 	foreach ( $custom_taxonomies as $taxon ) {
 		$terms = $categories = get_terms( 'rcno_' . strtolower( $taxon ), 'orderby=count&order=DESC&hide_empty=1' );
-		$select .= '<div class="rcno-isotope-grid-select-container">';
+		$select .= '<div class="rcno-isotope-grid-select-wrapper">';
 		$select .= '<label for="rcno-isotope-grid-select">' . $taxon . '</label>';
 		$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
 		$select .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $taxon ) . '</option>';
@@ -62,6 +63,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		$select .= '</select>';
 		$select .= '</div>';
 	}
+	$select .= '</div>';
 
 
 	$out .= '<div id="rcno-isotope-grid-container" class="rcno-isotope-grid-container">';
@@ -71,7 +73,7 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		// Add the entry for the post.
 		$out .= '<div class="rcno-isotope-grid-item ';
-		$out .= $template->get_the_rcno_taxonomy_items( $book['ID'], $custom_taxonomies );
+		$out .= implode( ' ', $template->get_the_rcno_taxonomy_items( $book['ID'], $custom_taxonomies ) );
 		$out .= '">';
 		$out .= '<a href="' . get_permalink( $book['ID'] ) . '">';
 
@@ -87,8 +89,9 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Close the last list.
 	$out .= '</div>';
 
+	// This is where everything is printed.
 	echo $select;
-	echo $out; // This is where everything is printed.
+	echo $out;
 
 } else {
 	// No book reviews.

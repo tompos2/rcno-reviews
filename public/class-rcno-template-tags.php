@@ -300,13 +300,12 @@ class Rcno_Template_Tags {
 		}
 
 		$book_src      = $review['rcno_reviews_book_cover_src'][0];
-		$attachment_id = attachment_url_to_postid( $book_src );
+		$attachment_id = $this->wpcom_vip_attachment_url_to_postid( $book_src );
 		$book_src      = wp_get_attachment_image_url( $attachment_id, $size );
 
 		if ( false === (bool) $book_src ) {
 			$book_src = Rcno_Reviews_Option::get_option( 'rcno_default_cover', plugin_dir_url( __FILE__ ) . 'images/no-cover.jpg' );
 		}
-
 
 		if ( false === $wrapper ) {
 			return $book_src;
@@ -511,20 +510,33 @@ class Rcno_Template_Tags {
 	 *
 	 * @return mixed
 	 */
-	public function get_the_rcno_taxonomy_items( $review_id, array $taxonomies, $output = 'string' ) {
+	public function get_the_rcno_taxonomy_items( $review_id, array $taxonomies, $output = 'slug' ) {
 
 		$out = array();
+		$taxonomy_values = array();
 
-		foreach ( $taxonomies as $tax_value ) {
-			$tax = 'rcno_' . strtolower( $tax_value );
+		foreach ( $taxonomies as $taxonomy ) {
+			$tax_slug = 'rcno_' . strtolower( $taxonomy );
 			// First we convert spaces to dashes.
 			// Then we remove the href tags added by 'get_the_term_list'.
 			// The we convert to lowercase.
-			$out[] = preg_replace( '/[^A-Za-z0-9-]+/', '-', strip_tags( strtolower( get_the_term_list( $review_id, $tax, '', ' ', '' ) ) ) );
+			//$out[] = preg_replace( '/[^A-Za-z0-9-]+/', '-', strip_tags( strtolower( get_the_term_list( $review_id, $tax, '', ' ', '' ) ) ) );
+			$taxonomy_data = wp_get_post_terms( $review_id, $tax_slug );
+			if ( ! empty( $taxonomy_data ) && ! is_wp_error( $taxonomy_data ) ) {
+				$taxonomy_values[] = (array) $taxonomy_data;
+			}
 		}
 
-		if ( 'string' === $output ) {
-			return implode( ' ', $out );
+		if ( 'slug' === $output ) {
+			foreach ( $taxonomy_values as $tax_val ) {
+				$out[] = $tax_val[0]->slug;
+				if ( count( $tax_val ) > 1 ) {
+					foreach ( $tax_val as $val ) {
+						$out[] = $val->slug;
+					}
+				}
+			}
+			return $out;
 		}
 
 		return $out;
@@ -1707,6 +1719,32 @@ class Rcno_Template_Tags {
 
 	public function series_string_cmp( $a, $b ) {
 		return strcasecmp( $a['series'], $b['series'] );
+	}
+
+	public function wpcom_vip_attachment_url_to_postid( $url ){
+
+		$id = wp_cache_get( 'wpcom_vip_attachment_url_post_id_' . md5( $url ) );
+
+		if ( false === $id ){
+			$id = attachment_url_to_postid( $url );
+			if ( empty( $id ) ){
+				wp_cache_set( 'wpcom_vip_attachment_url_post_id_' . md5( $url ),
+					'not_found',
+					'default',
+					12 * HOUR_IN_SECONDS + mt_rand( 0, 4 * HOUR_IN_SECONDS )
+				);
+			}else {
+				wp_cache_set(
+					'wpcom_vip_attachment_url_post_id_' . md5( $url ),
+					$id,
+					'default',
+					24 * HOUR_IN_SECONDS + mt_rand( 0, 12 * HOUR_IN_SECONDS )
+				);
+			}
+		} else if( 'not_found' === $id ){
+			return false;
+		}
+		return $id;
 	}
 
 }

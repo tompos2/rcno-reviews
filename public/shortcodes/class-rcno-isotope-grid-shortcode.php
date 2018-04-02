@@ -53,7 +53,7 @@ class Rcno_Isotope_Grid_Shortcode {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		$this->plugin_public = new Rcno_Reviews_Public( $plugin_name, $version );
+		//$this->plugin_public = new Rcno_Reviews_Public( $plugin_name, $version );
 	}
 
 	public function rcno_do_isotope_grid_shortcode( $options ) {

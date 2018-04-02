@@ -282,9 +282,38 @@
 }
 
 .rcno-isotope-grid-item {
-    width: 20%;
+    width: 85px;
+    margin: 0 10px 10px 0;
 }
 
 .rcno-isotope-grid-item p {
     display: none;
+}
+
+.rcno-isotope-grid-select-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 0 2em 0;
+}
+
+.rcno-isotope-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.rcno-isotope-grid-select-wrapper {
+    /* flex: 0 1 25%; */
+    margin: 0 1em 1em 0;
+}
+
+
+.rcno-isotope-grid-select-wrapper label {
+    display: none;
+}
+
+select.rcno-isotope-grid-select {
+    font-size: 14px;
+    padding: 5px;
 }
