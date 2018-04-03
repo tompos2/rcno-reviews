@@ -13,8 +13,8 @@
 /**
  * Creates the shortcodes used for isotope grid.
  *
- *
  * @since      1.12.0
+ *
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/includes
  * @author     wzyMedia <wzy@outlook.com>
@@ -40,31 +40,33 @@ class Rcno_Isotope_Grid_Shortcode {
 	private $version;
 
 	/**
-	 * The version of this plugin.
+	 * The Rcno_Template_Tags class
 	 *
 	 * @since    1.12.0
 	 * @access   private
-	 * @var      string $plugin_public The current version of this plugin.
+	 * @var      Rcno_Template_Tags $template The current version of this plugin.
 	 */
-	private $plugin_public;
+	private $template;
 
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		//$this->plugin_public = new Rcno_Reviews_Public( $plugin_name, $version );
+		$this->template = new Rcno_Template_Tags( $this->plugin_name, $this->version  );
 	}
 
 	public function rcno_do_isotope_grid_shortcode( $options ) {
 
 		// Set default values for options not set explicitly.
 		$options = shortcode_atts( array(
-			'headers' => 1,
+			'selectors' => 1,
+			'width'     => 120,
+			'height'    => 220
 		), $options );
 
 		// The actual rendering is done by a special function.
-		$output = $this->rcno_render_isotope_grid( $options['headers'] );
+		$output = $this->rcno_render_isotope_grid( $options );
 
 		// We are enqueuing the previously registered script.
 		wp_enqueue_script( 'isotope-grid' );
@@ -91,6 +93,7 @@ class Rcno_Isotope_Grid_Shortcode {
 				global $post;
 				$posts[] = $post;
 			}
+			wp_reset_postdata();
 		}
 
 		// Included once, as adding the shortcode twice to a page with case a PHP fatal error.
@@ -106,5 +109,10 @@ class Rcno_Isotope_Grid_Shortcode {
 
 		// Return the rendered content.
 		return $content;
+	}
+
+	// Used in 'usort' to sort alphabetically by book title.
+	private function cmp( $a, $b ) {
+		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
 	}
 }
