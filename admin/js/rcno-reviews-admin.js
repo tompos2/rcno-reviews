@@ -239,6 +239,7 @@
 
 			// Read the JSON data returned from the Media Uploader.
 			var json = file_frame.state().get( 'selection' ).first().toJSON();
+			console.log(json);
 
 			// First, make sure that we have the URL of an image to display.
 			if ( 0 > $.trim( json.url.length ) ) {
@@ -251,6 +252,7 @@
 			.attr( 'src', json.url )
 			.attr( 'alt', json.caption )
 			.attr( 'title', json.title )
+			.attr( 'data-id', json.id )
 			.show()
 			.parent()
 			.removeClass( 'hidden' );
@@ -262,6 +264,7 @@
 			$( '#rcno-reviews-book-cover-src' ).val( json.url );
 			$( '#rcno-reviews-book-cover-title' ).val( json.title );
 			$( '#rcno-reviews-book-cover-alt' ).val( json.alt );
+			$( '#rcno-reviews-book-cover-id' ).val( json.id );
 
 		} );
 
