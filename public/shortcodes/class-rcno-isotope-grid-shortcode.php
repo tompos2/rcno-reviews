@@ -79,8 +79,7 @@ class Rcno_Isotope_Grid_Shortcode {
 		// Set default values for options not set explicitly.
 		$options = shortcode_atts( array(
 			'selectors' => 1,
-			'width'     => 120,
-			'height'    => 220,
+			'width'     => 150,
 			'exclude'   => ''
 		), $options );
 

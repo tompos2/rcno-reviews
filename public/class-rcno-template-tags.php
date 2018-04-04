@@ -295,7 +295,7 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true, $original = false ) {
 		$review = get_post_custom( $review_id );
-		$attachment_id = null;
+		$attachment_id = isset( $review['rcno_reviews_book_cover_id'] ) ? $review['rcno_reviews_book_cover_id'][0] : 0;
 
 		if ( ! isset( $review['rcno_reviews_book_cover_src'] ) ) {
 			return false;
@@ -305,7 +305,9 @@ class Rcno_Template_Tags {
 		$book_src    = $og_book_src;
 
 		if ( ! $original ) {
-			$attachment_id = $this->better_attachment_url_to_post_id( $og_book_src );
+			if ( 0 === $attachment_id ) {
+				$attachment_id = $this->better_attachment_url_to_post_id( $og_book_src );
+			}
 			$book_src      = wp_get_attachment_image_url( $attachment_id, $size );
 		}
 

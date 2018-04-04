@@ -3,7 +3,7 @@ Contributors: Kemory Grubb
 Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
-Requires PHP: 5.6.0
+Requires PHP: 5.6.25
 Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
@@ -79,6 +79,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.12.0 =
 * Added sortable grid of book reviews via the Isotope JS library
+* Store book cover attachment ID to review meta for improved performance
+* Added a new Upgrader class to handle post-update functions
+* Normalized the minimum rating a book can receive as per the Google Rich Snippets spec
 
 = 1.11.2 =
 * Fixed display bug in review calendar widget (an extra cell padding was being added to 1st week of March)

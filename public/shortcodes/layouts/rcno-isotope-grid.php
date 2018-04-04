@@ -67,11 +67,10 @@ if ( $posts && count( $posts ) > 0 ) {
 		$out .= '<div class="rcno-isotope-grid-item ';
 		$out .= implode( ' ', $this->template->get_rcno_review_html_classes( $book['ID'] ) );
 		$out .= '" ';
-		//$out .= 'style="width:' . $options['width'] . 'px; height:' . $options['height'] . 'px;"';
 		$out .= 'style="width:' . $options['width'] . 'px;"';
 		$out .= '>';
 		$out .= '<a href="' . get_permalink( $book['ID'] ) . '">';
-		$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'medium', true, true );
+		$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'medium', true );
 		$out .= '</a></div>';
 
 		// Increment the counter.
