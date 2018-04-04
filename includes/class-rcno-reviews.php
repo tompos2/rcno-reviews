@@ -77,6 +77,8 @@ class Rcno_Reviews {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
+		$this->upgrade_plugin();
+
 		$this->define_taxonomy_hook();
 
 		$this->define_template_hooks();
@@ -147,6 +149,8 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public.php';
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-template-tags.php';
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-rcno-reviews-public-ratings.php';
+
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-upgrader.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the author taxonomy area.
@@ -323,6 +327,19 @@ class Rcno_Reviews {
 
 		// Removes the default behaviour of scrolling to the more tag.
 		$this->loader->add_filter( 'the_content_more_link', $plugin_public, 'rcno_reviews_remove_more_link_scroll' );
+	}
+
+	/**
+	 * Run after the WP upgrader process completes.
+	 *
+	 * @since    1.12.0
+	 * @access   private
+	 */
+	private function upgrade_plugin() {
+
+		$updater = new Rcno_Reviews_Upgrader( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'upgrader_process_complete', $updater, 'rcno_upgrade_function', 10, 2 );
 	}
 
 	/**
