@@ -305,7 +305,7 @@ class Rcno_Template_Tags {
 		$book_src    = $og_book_src;
 
 		if ( ! $original ) {
-			$attachment_id = $this->wpcom_vip_attachment_url_to_postid( $og_book_src );
+			$attachment_id = $this->better_attachment_url_to_post_id( $og_book_src );
 			$book_src      = wp_get_attachment_image_url( $attachment_id, $size );
 		}
 
@@ -1570,13 +1570,22 @@ class Rcno_Template_Tags {
 		$bk_pub_date  = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
 		$priv_score   = $this->rcno_get_review_score( $review_id );
 		$pub_rating   = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
+		$admin_rating = $this->get_the_rcno_admin_book_rating( $review_id, false );
 
 		$data['@context']      = 'http://schema.org';
 		$data['@type']         = 'Review';
 		$data['author']        = array(
 			'@type'  => 'Person',
 			'name'   => $reviewer,
-			'sameAs' => $reviewer_url,
+			'sameAs' => array(
+				$reviewer_url,
+				get_the_author_meta( 'facebook' ),
+				get_the_author_meta( 'twitter' ),
+				get_the_author_meta( 'googleplus' ),
+				get_the_author_meta( 'linkedin' ),
+				get_the_author_meta( 'instagram' ),
+				get_the_author_meta( 'pinterest' )
+			),
 		);
 		$data['url']           = $review_url;
 		$data['datePublished'] = $review_date;
@@ -1610,7 +1619,7 @@ class Rcno_Template_Tags {
 				'@type'       => 'Rating',
 				'worstRating' => 1,
 				'bestRating'  => 5,
-				'ratingValue' => $this->get_the_rcno_admin_book_rating( $review_id, false ),
+				'ratingValue' => $admin_rating < 1 ? 1 : $admin_rating,
 			);
 		}
 		if ( $pub_rating->rcno_rating_info( 'count' ) > 0 ) {
@@ -1722,21 +1731,26 @@ class Rcno_Template_Tags {
 		return strcasecmp( $a['series'], $b['series'] );
 	}
 
-	public function wpcom_vip_attachment_url_to_postid( $url ){
+	/**
+	 * @param $url
+	 *
+	 * @return bool|int|mixed
+	 */
+	public function better_attachment_url_to_post_id( $url ){
 
-		$id = wp_cache_get( 'wpcom_vip_attachment_url_post_id_' . md5( $url ) );
+		$id = wp_cache_get( 'better_attachment_url_to_post_id_' . md5( $url ) );
 
 		if ( false === $id ){
 			$id = attachment_url_to_postid( $url );
 			if ( empty( $id ) ){
-				wp_cache_set( 'wpcom_vip_attachment_url_post_id_' . md5( $url ),
+				wp_cache_set( 'better_attachment_url_to_post_id_' . md5( $url ),
 					'not_found',
 					'default',
 					12 * HOUR_IN_SECONDS + mt_rand( 0, 4 * HOUR_IN_SECONDS )
 				);
 			}else {
 				wp_cache_set(
-					'wpcom_vip_attachment_url_post_id_' . md5( $url ),
+					'better_attachment_url_to_post_id_' . md5( $url ),
 					$id,
 					'default',
 					24 * HOUR_IN_SECONDS + mt_rand( 0, 12 * HOUR_IN_SECONDS )

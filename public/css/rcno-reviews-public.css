@@ -317,3 +317,8 @@ select.rcno-isotope-grid-select {
     font-size: 14px;
     padding: 5px;
 }
+
+.rcno-isotope-grid-select.reset {
+    cursor: pointer;
+    padding: 6px 0 0 0;
+}

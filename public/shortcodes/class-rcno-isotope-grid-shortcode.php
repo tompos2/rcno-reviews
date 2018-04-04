@@ -22,24 +22,6 @@
 class Rcno_Isotope_Grid_Shortcode {
 
 	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string $plugin_name The ID of this plugin.
-	 */
-	private $plugin_name;
-
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string $version The current version of this plugin.
-	 */
-	private $version;
-
-	/**
 	 * The Rcno_Template_Tags class
 	 *
 	 * @since    1.12.0
@@ -48,21 +30,58 @@ class Rcno_Isotope_Grid_Shortcode {
 	 */
 	private $template;
 
+	/**
+	 * An array of the variables used by the shortcode template
+	 *
+	 * @since    1.12.0
+	 * @access   private
+	 * @var      array $variables The current version of this plugin.
+	 */
+	private $variables;
+
+	/**
+	 * Rcno_Isotope_Grid_Shortcode constructor.
+	 *
+	 * @since 1.12.0
+	 * @param $plugin_name
+	 * @param $version
+	 */
 	public function __construct( $plugin_name, $version ) {
 
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
-
-		$this->template = new Rcno_Template_Tags( $this->plugin_name, $this->version  );
+		$this->template = new Rcno_Template_Tags( $plugin_name, $version  );
+		$this->variables = $this->rcno_get_shortcode_variables();
 	}
 
+	/**
+	 * Fetches all the variables to be used in template and add them to an array.
+	 *
+	 * @since 1.12.0
+	 * @return array
+	 */
+	private function rcno_get_shortcode_variables() {
+		$variables = array();
+		$variables['ignore_articles'] = (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
+		$variables['articles_list'] = str_replace( ',', '|', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) )
+									. '|\d+';
+		$variables['custom_taxonomies'] = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
+		return $variables;
+	}
+
+	/**
+	 * Return the actual shortcode code used the WP.
+	 *
+	 * @since 1.12.0
+	 * @param $options
+	 * @return string
+	 */
 	public function rcno_do_isotope_grid_shortcode( $options ) {
 
 		// Set default values for options not set explicitly.
 		$options = shortcode_atts( array(
 			'selectors' => 1,
 			'width'     => 120,
-			'height'    => 220
+			'height'    => 220,
+			'exclude'   => ''
 		), $options );
 
 		// The actual rendering is done by a special function.
@@ -74,6 +93,13 @@ class Rcno_Isotope_Grid_Shortcode {
 		return do_shortcode( $output );
 	}
 
+	/**
+	 * * Do the render of the shortcode contents via the template file.
+	 *
+	 * @since 1.12.0
+	 * @param $options
+	 * @return string
+	 */
 	public function rcno_render_isotope_grid( $options ) {
 
 		// Get an alphabetically ordered list of all reviews.
@@ -96,8 +122,15 @@ class Rcno_Isotope_Grid_Shortcode {
 			wp_reset_postdata();
 		}
 
-		// Included once, as adding the shortcode twice to a page with case a PHP fatal error.
-		include_once __DIR__ . '/layouts/isotope-grid.php';
+		// This will check for a template file inside the theme folder.
+		$template_path = get_query_template( 'rcno-isotope-grid' );
+
+		// If no such file exists, use the default template for the shortcode.
+		if ( empty( $template_path ) ) {
+			$template_path = __DIR__ . '/layouts/rcno-isotope-grid.php';
+		}
+
+		include $template_path;
 
 		// Render the content using that file.
 		$content = ob_get_contents();
@@ -111,8 +144,15 @@ class Rcno_Isotope_Grid_Shortcode {
 		return $content;
 	}
 
-	// Used in 'usort' to sort alphabetically by book title.
-	private function cmp( $a, $b ) {
+	/**
+	 * Utility function used by `usort` to sort titles alphabetically
+	 *
+	 * @since 1.12.0
+	 * @param $a
+	 * @param $b
+	 * @return int
+	 */
+	protected function sort_by_title( $a, $b ) {
 		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
 	}
 }

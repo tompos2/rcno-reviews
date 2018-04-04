@@ -49,7 +49,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		$out .= '<div class="rcno-book-grid-item"><a href="' . get_permalink( $book['ID'] ) . '">';
 
 		// Pick the 'medium' book cover size
-		$out .= $template->get_the_rcno_book_cover( $book['ID'], 'medium', true );
+		$out .= $template->get_the_rcno_book_cover( $book['ID'], 'medium', true, true );
 
 		$out .= '<p>' . $book['unsorted_title'] . '</p>';
 		$out .= '</a></div>';

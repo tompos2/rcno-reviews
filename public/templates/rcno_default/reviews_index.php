@@ -83,7 +83,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		$out .= '<li><a href="' . get_permalink( $book['ID'] ) . '">';
 
 		if ( Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false ) ) {
-			$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true );
+			$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true, false );
 		}
 
 		$out .= '<p>' . $book['title'] . '</p>';

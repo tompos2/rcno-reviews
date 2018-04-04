@@ -2,12 +2,15 @@
 
 /**
  * Render a list of all book reviews as an Isotope grid
+ *
+ * Available variables:
+ * array $posts
+ * array $options
+ * Rcno_Isotope_Grid_Shortcode $this
+ *
+ * Available functions:
+ * sort_by_title()
  */
-
-$ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
-$articles_list   = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) );
-$articles_list   = implode( '|', $articles_list ) . '|\d+'; // @TODO: Figure out a better way to handle this.
-$custom_taxonomies = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
 
 // Create an empty output variable.
 $out = '';
@@ -24,36 +27,36 @@ if ( $posts && count( $posts ) > 0 ) {
 		$book_details = get_post_custom( $book->ID );
 		$unsorted_title = $book_details['rcno_book_title'][0];
 		$sorted_title = $unsorted_title;
-		if ( $ignore_articles ) {
-			$sorted_title = preg_replace( '/^('. $articles_list .') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
+		if ( $this->variables['ignore_articles'] ) {
+			$sorted_title = preg_replace( '/^('. $this->variables['articles_list'] .') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
 		}
 		$books[] = array(
 			'ID'    => $book->ID,
 			'sorted_title' => $sorted_title,
 			'unsorted_title' => $unsorted_title,
 		);
-		usort( $books, array( $this, 'cmp' ) );
+		usort( $books, array( $this, 'sort_by_title' ) );
 	}
 
 	$select = '';
 	if ( $options['selectors'] ) {
 		$select .= '<div class="rcno-isotope-grid-select-container">';
-		foreach ( $custom_taxonomies as $taxon ) {
-			$terms = $categories = get_terms( 'rcno_' . strtolower( $taxon ), 'orderby=count&order=DESC&hide_empty=1' );
+		$taxonomies = array_diff( $this->variables['custom_taxonomies'], explode( ',', $options['exclude'] )  );
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = $categories = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=count&order=DESC&hide_empty=1' );
 			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
-			$select .= '<label for="rcno-isotope-grid-select">' . $taxon . '</label>';
+			$select .= '<label for="rcno-isotope-grid-select">' . $taxonomy . '</label>';
 			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
-			$select .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $taxon ) . '</option>';
+			$select .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $taxonomy ) . '</option>';
 			foreach ( $terms as $term ) {
 				$select .= '<option value="'. '.' . $term->slug . '">' . $term->name . '</option>';
 			}
 			$select .= '</select>';
 			$select .= '</div>';
 		}
+		$select .= '<span class="dashicons dashicons-image-rotate rcno-isotope-grid-select reset"></span>';
 		$select .= '</div>';
 	}
-
-
 
 	$out .= '<div id="rcno-isotope-grid-container" class="rcno-isotope-grid-container">';
 

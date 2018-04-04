@@ -87,6 +87,9 @@
 				$iso_grid.isotope( {filter: filterValue} );
 				select.not( $( this ) ).prop( 'selectedIndex', 0 );
 			} );
+			$('.rcno-isotope-grid-select.reset').on('click', function() {
+				$iso_grid.isotope( {filter: '*'} );
+			});
 		}
 	});
 
