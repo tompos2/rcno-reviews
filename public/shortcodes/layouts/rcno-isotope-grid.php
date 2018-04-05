@@ -65,13 +65,17 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		// Add the entry for the post.
 		$out .= '<div class="rcno-isotope-grid-item ';
-		$out .= implode( ' ', $this->template->get_rcno_review_html_classes( $book['ID'] ) );
-		$out .= '" ';
+		$out .= implode( ' ', $this->template->get_rcno_review_html_classes( $book['ID'] ) ) . '" ';
 		$out .= 'style="width:' . $options['width'] . 'px;"';
 		$out .= '>';
+		if ( $options['rating'] ) {
+			$out .= $this->template->get_the_rcno_admin_book_rating( $book['ID'] );
+		}
 		$out .= '<a href="' . get_permalink( $book['ID'] ) . '">';
-		$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'medium', true );
-		$out .= '</a></div>';
+		// $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
+		$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true );
+		$out .= '</a>';
+		$out .= '</div>';
 
 		// Increment the counter.
 		$i ++;

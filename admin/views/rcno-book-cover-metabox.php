@@ -7,7 +7,7 @@
 	$cover_id    = absint( get_post_meta( $review->ID, 'rcno_reviews_book_cover_id', true ) );
 	?>
 
-    <div id="rcno-reviews-book-cover-container" class="hidden">
+    <div id="rcno-reviews-book-cover-container" class="hidden rcno-reviews-book-cover-container">
         <img src="<?php echo $cover_src; ?>"
              alt="<?php echo $cover_alt; ?>"
              title="<?php echo $cover_title; ?>"
@@ -16,13 +16,13 @@
     </div>
 
     <p class="hide-if-no-js">
-        <a href="javascript:" id="rcno-add-book-cover" class="rcno-reviews-book-cover">
+        <a title="<?php _e( 'Add Book Cover', 'rcno-reviews' ) ?>" href="javascript:" id="rcno-add-book-cover" class="rcno-reviews-book-cover">
 			<?php _e( 'Add Book Cover', 'rcno-reviews' ) ?>
         </a>
     </p><!-- .hide-if-no-js -->
 
     <p class="hide-if-no-js hidden">
-        <a title="Remove Footer Image" href="javascript:" id="rcno-remove-book-cover">
+        <a title="<?php _e( 'Remove Book Cover', 'rcno-reviews' ) ?>" href="javascript:" id="rcno-remove-book-cover">
 			<?php _e( 'Remove Book Cover', 'rcno-reviews' ) ?>
         </a>
     </p><!-- .hide-if-no-js -->

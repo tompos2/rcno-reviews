@@ -322,3 +322,19 @@ select.rcno-isotope-grid-select {
     cursor: pointer;
     padding: 6px 0 0 0;
 }
+
+.rcno-isotope-grid-item .rcno-admin-rating {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.rcno-isotope-grid-item .rcno-admin-rating .stars {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.rcno-isotope-grid-item .rcno-admin-rating .jq-star {
+    width: 1em;
+}

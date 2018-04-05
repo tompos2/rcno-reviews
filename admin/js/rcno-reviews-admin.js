@@ -204,10 +204,8 @@
 		 * rather than creating a new instance.
 		 */
 		if ( undefined !== file_frame ) {
-
 			file_frame.open();
 			return;
-
 		}
 
 		/**
@@ -221,11 +219,13 @@
 		 *
 		 * We're also not allowing the user to select more than one image.
 		 */
-		file_frame = wp.media.frames.file_frame = wp.media( {
-			frame: 'post',
-			state: 'insert',
+		file_frame = wp.media.frames.file_frame = wp.media({
+			title: 'Upload Book Cover',
+			button: {
+				text: 'Use this image'
+			},
 			multiple: false
-		} );
+		});
 
 		/**
 		 * Setup an event handler for what to do when an image has been
@@ -235,11 +235,10 @@
 		 * the file_frame, we need to make sure that the handler is attached
 		 * to the insert event.
 		 */
-		file_frame.on( 'insert', function() {
+		file_frame.on( 'select', function() {
 
 			// Read the JSON data returned from the Media Uploader.
 			var json = file_frame.state().get( 'selection' ).first().toJSON();
-			console.log(json);
 
 			// First, make sure that we have the URL of an image to display.
 			if ( 0 > $.trim( json.url.length ) ) {
@@ -260,34 +259,38 @@
 			// Next, hide the anchor responsible for allowing the user to select an image
 			$( '#rcno-add-book-cover' ).hide();
 			$( '#rcno-remove-book-cover' ).parent().removeClass( 'hidden' );
-
 			$( '#rcno-reviews-book-cover-src' ).val( json.url );
 			$( '#rcno-reviews-book-cover-title' ).val( json.title );
 			$( '#rcno-reviews-book-cover-alt' ).val( json.alt );
 			$( '#rcno-reviews-book-cover-id' ).val( json.id );
-
 		} );
+
+		// To use the 'Insert from URL' feature.
+		file_frame.state('embed').on( 'select', function() {
+			var state = file_frame.state(),
+				type = state.get('type'),
+				embed = state.props.toJSON();
+
+			// SHOW JSON for embeded URL
+			console.log(embed);
+		});
 
 		// Now display the actual file_frame
 		file_frame.open();
-
 	}
 
 	function resetUploadForm( $ ) {
 
 		// First, we'll hide the image
-		$( '#rcno-reviews-book-cover-container' )
-		.children( 'img' )
-		.hide();
-
-		$( '#rcno-add-book-cover' )
-		.parent()
-		.show();
+		$('#rcno-reviews-book-cover-container').children('img').hide();
+		$('#rcno-add-book-cover').parent().show();
 
 		// Finally, we add the 'hidden' class back to this anchor's parent
-		$( '#rcno-remove-book-cover' )
-		.addClass( 'hidden' );
-
+		$('#rcno-remove-book-cover').addClass('hidden');
+		$('#rcno-reviews-book-cover-src').val('');
+		$('#rcno-reviews-book-cover-title').val('');
+		$('#rcno-reviews-book-cover-alt').val('');
+		$('#rcno-reviews-book-cover-id').val('');
 	}
 
 	function renderFeaturedImage( $ ) {
@@ -296,23 +299,14 @@
 		 * Then we need to display the image and the reset link.
 		 */
 		if ( '' !== $.trim( $( '#rcno-reviews-book-cover-src' ).val() ) ) {
-
 			$( '#rcno-reviews-book-cover-container' ).removeClass( 'hidden' );
-
-			$( '#rcno-add-book-cover' )
-			.parent()
-			.hide();
-
-			$( '#rcno-remove-book-cover' )
-			.parent()
-			.removeClass( 'hidden' );
-
+			$( '#rcno-add-book-cover' ).parent().hide();
+			$( '#rcno-remove-book-cover' ).parent().removeClass( 'hidden' );
 		}
 
 	}
 
 	$( function() {
-
 		renderFeaturedImage( $ );
 
 		$( '#rcno-add-book-cover' ).on( 'click', function( e ) {
@@ -327,12 +321,10 @@
 
 			// Remove the image, toggle the anchors.
 			resetUploadForm( $ );
-
 		} );
 	} );
 
 	$( function() {
-
 		$( '#rcno-star-rating' ).starRating({
 			initialRating: parseFloat( my_script_vars.rcno_admin_rating ),
 			starSize: 25,
@@ -347,9 +339,6 @@
 				$( '#rcno_admin_rating' ).val( currentRating );
 			}
 		});
-
-	} );
-
-
+	});
 
 } )( jQuery );
