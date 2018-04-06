@@ -77,6 +77,10 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.12.1 =
+* Caught an error with non-object being returned in taxonomy list with sortable grid page
+* Update translation files with new strings
+
 = 1.12.0 =
 * Added sortable grid of book reviews via the Isotope JS library
 * Store book cover attachment ID to review meta for improved performance
