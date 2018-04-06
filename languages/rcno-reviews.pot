@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: "
 "Recencio Pot v1.0.0\n"
 "POT-Creation-Date: "
-"2018-03-21 20:21-0500\n"
+"2018-04-06 14:51-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your "
 "Name <you@example.com>\n"
@@ -99,118 +99,118 @@ msgid ""
 "invalid or not set"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:263
+#: admin/class-rcno-reviews-admin.php:264
 msgid ""
 "Your settings have been "
 "reset, please reload the "
 "page to see them."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:337
-#: admin/class-rcno-reviews-admin.php:344
+#: admin/class-rcno-reviews-admin.php:338
+#: admin/class-rcno-reviews-admin.php:345
 #, php-format
 msgid "New %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:338
-#: admin/class-rcno-reviews-admin.php:445
+#: admin/class-rcno-reviews-admin.php:339
+#: admin/class-rcno-reviews-admin.php:446
 #, php-format
 msgid "Add New %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:340
-#: admin/class-rcno-reviews-admin.php:449
+#: admin/class-rcno-reviews-admin.php:341
+#: admin/class-rcno-reviews-admin.php:450
 #, php-format
 msgid "Edit %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:345
-#: admin/class-rcno-reviews-admin.php:453
+#: admin/class-rcno-reviews-admin.php:346
+#: admin/class-rcno-reviews-admin.php:454
 #, php-format
 msgid "No %1$s Found"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:346
+#: admin/class-rcno-reviews-admin.php:347
 #, php-format
 msgid ""
 "No %1$s Found in Trash"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:347
+#: admin/class-rcno-reviews-admin.php:348
 #, php-format
 msgid "Parent %1$s :"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:348
-#: admin/class-rcno-reviews-admin.php:457
+#: admin/class-rcno-reviews-admin.php:349
+#: admin/class-rcno-reviews-admin.php:458
 #, php-format
 msgid "Search %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:350
-#: admin/class-rcno-reviews-admin.php:461
+#: admin/class-rcno-reviews-admin.php:351
+#: admin/class-rcno-reviews-admin.php:462
 #, php-format
 msgid "View %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:377
+#: admin/class-rcno-reviews-admin.php:378
 msgid "Author"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:446
+#: admin/class-rcno-reviews-admin.php:447
 #, php-format
 msgid "Add or remove %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:448
+#: admin/class-rcno-reviews-admin.php:449
 #, php-format
 msgid ""
 "Choose from most used "
 "%1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:452
+#: admin/class-rcno-reviews-admin.php:453
 #, php-format
 msgid "New %1$s Name"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:454
 #: admin/class-rcno-reviews-admin.php:455
+#: admin/class-rcno-reviews-admin.php:456
 #, php-format
 msgid "Parent %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:456
+#: admin/class-rcno-reviews-admin.php:457
 #, php-format
 msgid "Popular %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:458
+#: admin/class-rcno-reviews-admin.php:459
 #, php-format
 msgid ""
 "Separate %1$s with commas"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:460
+#: admin/class-rcno-reviews-admin.php:461
 #, php-format
 msgid "Update %1$s"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:513
+#: admin/class-rcno-reviews-admin.php:514
 msgid ""
 "Things to remember when "
 "adding or editing a book "
 "review:"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:515
+#: admin/class-rcno-reviews-admin.php:516
 msgid ""
 "Specify the correct "
 "genre such as Mystery, "
 "or Historic."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:516
+#: admin/class-rcno-reviews-admin.php:517
 msgid ""
 "Specify the correct "
 "writer of the book "
@@ -220,14 +220,14 @@ msgid ""
 "this book review."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:518
+#: admin/class-rcno-reviews-admin.php:519
 msgid ""
 "If you want to schedule "
 "the book review to be "
 "published in the future:"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:520
+#: admin/class-rcno-reviews-admin.php:521
 msgid ""
 "Under the Publish "
 "module, click on the "
@@ -235,7 +235,7 @@ msgid ""
 "Publish."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:521
+#: admin/class-rcno-reviews-admin.php:522
 msgid ""
 "Change the date to the "
 "date to actual publish "
@@ -243,16 +243,16 @@ msgid ""
 "on Ok."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:523
+#: admin/class-rcno-reviews-admin.php:524
 msgid ""
 "For more information: "
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:524
+#: admin/class-rcno-reviews-admin.php:525
 msgid "Support Forums"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:527
+#: admin/class-rcno-reviews-admin.php:528
 msgid ""
 "This is the help screen "
 "displaying the table of "
@@ -260,81 +260,81 @@ msgid ""
 "created."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:580
+#: admin/class-rcno-reviews-admin.php:581
 msgid "Book Cover LG"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:581
+#: admin/class-rcno-reviews-admin.php:582
 msgid "Book Cover SM"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:601
-#: admin/class-rcno-reviews-admin.php:610
+#: admin/class-rcno-reviews-admin.php:602
+#: admin/class-rcno-reviews-admin.php:611
 msgid ""
 "Recencio Book Reviews"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:602
+#: admin/class-rcno-reviews-admin.php:603
 msgid "Reviews"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:611
-#: admin/class-rcno-reviews-admin.php:631
+#: admin/class-rcno-reviews-admin.php:612
+#: admin/class-rcno-reviews-admin.php:632
 msgid "Settings"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:757
+#: admin/class-rcno-reviews-admin.php:758
 msgid "Cover"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:908
-#: admin/class-rcno-reviews-admin.php:911
-msgid "Review updated."
-msgstr ""
-
 #: admin/class-rcno-reviews-admin.php:909
-msgid ""
-"Custom field updated."
+#: admin/class-rcno-reviews-admin.php:912
+msgid "Review updated."
 msgstr ""
 
 #: admin/class-rcno-reviews-admin.php:910
 msgid ""
+"Custom field updated."
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:911
+msgid ""
 "Custom field deleted."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:913
+#: admin/class-rcno-reviews-admin.php:914
 msgid ""
 "Review restored to "
 "revision from "
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:914
+#: admin/class-rcno-reviews-admin.php:915
 msgid "Review published."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:915
+#: admin/class-rcno-reviews-admin.php:916
 msgid "Review saved."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:916
-msgid "Review submitted."
-msgstr ""
-
 #: admin/class-rcno-reviews-admin.php:917
-msgid ""
-"Review scheduled for: "
+msgid "Review submitted."
 msgstr ""
 
 #: admin/class-rcno-reviews-admin.php:918
 msgid ""
+"Review scheduled for: "
+msgstr ""
+
+#: admin/class-rcno-reviews-admin.php:919
+msgid ""
 "Review draft updated."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:924
+#: admin/class-rcno-reviews-admin.php:925
 msgid "View review"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:930
+#: admin/class-rcno-reviews-admin.php:931
 msgid "Preview review"
 msgstr ""
 
@@ -412,7 +412,7 @@ msgid "General Settings"
 msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:103
-#: admin/settings/class-rcno-reviews-settings-definition.php:658
+#: admin/settings/class-rcno-reviews-settings-definition.php:677
 msgid "Slug"
 msgstr ""
 
@@ -568,7 +568,7 @@ msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:202
 #: public/class-rcno-template-tags.php:128
-#: public/class-rcno-template-tags.php:765
+#: public/class-rcno-template-tags.php:821
 msgid "Goodreads ID"
 msgstr ""
 
@@ -593,7 +593,7 @@ msgstr ""
 #: admin/settings/class-rcno-reviews-settings-definition.php:212
 #: admin/views/rcno-general-info-metabox.php:34
 #: public/class-rcno-template-tags.php:121
-#: public/class-rcno-template-tags.php:758
+#: public/class-rcno-template-tags.php:814
 msgid "Illustrator"
 msgstr ""
 
@@ -639,7 +639,7 @@ msgstr ""
 #: admin/settings/class-rcno-reviews-settings-definition.php:232
 #: admin/views/rcno-general-info-metabox.php:78
 #: public/class-rcno-template-tags.php:126
-#: public/class-rcno-template-tags.php:763
+#: public/class-rcno-template-tags.php:819
 msgid "Series Number"
 msgstr ""
 
@@ -653,7 +653,7 @@ msgstr ""
 #: admin/settings/class-rcno-reviews-settings-definition.php:237
 #: admin/views/rcno-general-info-metabox.php:89
 #: public/class-rcno-template-tags.php:125
-#: public/class-rcno-template-tags.php:762
+#: public/class-rcno-template-tags.php:818
 msgid "Page Count"
 msgstr ""
 
@@ -665,7 +665,7 @@ msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:242
 #: public/class-rcno-template-tags.php:127
-#: public/class-rcno-template-tags.php:764
+#: public/class-rcno-template-tags.php:820
 msgid "Goodreads Rating"
 msgstr ""
 
@@ -1148,14 +1148,41 @@ msgid ""
 msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:590
-msgid "Uncountable Words"
+msgid "JSON-LD Schemas"
 msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:594
-msgid "Word List"
+msgid ""
+"Disable Review Schema"
 msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:595
+msgid ""
+"Disable the output of "
+"the review JSON-LD "
+"schema markup"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:599
+msgid "Disable Book Schema"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:600
+msgid ""
+"Disable the output of "
+"the book JSON-LD schema "
+"markup"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:609
+msgid "Uncountable Words"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:613
+msgid "Word List"
+msgstr ""
+
+#: admin/settings/class-rcno-reviews-settings-definition.php:614
 msgid ""
 "Create a list of words "
 "that have no plural or "
@@ -1163,73 +1190,73 @@ msgid ""
 "\"sheep, fish\""
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:599
+#: admin/settings/class-rcno-reviews-settings-definition.php:618
 msgid ""
 "Disable Pluralization"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:600
+#: admin/settings/class-rcno-reviews-settings-definition.php:619
 msgid ""
 "Disable the automatic "
 "pluralization of words "
 "used in the settings"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:609
+#: admin/settings/class-rcno-reviews-settings-definition.php:628
 msgid ""
 "Import/Export Settings"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:613
+#: admin/settings/class-rcno-reviews-settings-definition.php:632
 msgid "Import Settings"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:614
+#: admin/settings/class-rcno-reviews-settings-definition.php:633
 msgid ""
 "Import your previously "
 "saved plugin settings."
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:619
+#: admin/settings/class-rcno-reviews-settings-definition.php:638
 msgid "Export Settings"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:620
+#: admin/settings/class-rcno-reviews-settings-definition.php:639
 msgid ""
 "Save the plugin settings "
 "to a file on your "
 "computer."
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:652
+#: admin/settings/class-rcno-reviews-settings-definition.php:671
 msgid "Label"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:653
+#: admin/settings/class-rcno-reviews-settings-definition.php:672
 msgid ""
 "Place the label of the "
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:659
+#: admin/settings/class-rcno-reviews-settings-definition.php:678
 msgid ""
 "Place the slug of the "
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:665
+#: admin/settings/class-rcno-reviews-settings-definition.php:684
 msgid "Hierarchical"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:666
+#: admin/settings/class-rcno-reviews-settings-definition.php:685
 msgid ""
 "Is this custom taxonomy "
 "hierarchical?"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:670
+#: admin/settings/class-rcno-reviews-settings-definition.php:689
 msgid "Show in table"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:671
+#: admin/settings/class-rcno-reviews-settings-definition.php:690
 msgid ""
 "Show this custom "
 "taxonomy on the admin "
@@ -1254,11 +1281,13 @@ msgid ""
 "page."
 msgstr ""
 
-#: admin/views/rcno-book-cover-metabox.php:18
+#: admin/views/rcno-book-cover-metabox.php:19
+#: admin/views/rcno-book-cover-metabox.php:20
 msgid "Add Book Cover"
 msgstr ""
 
-#: admin/views/rcno-book-cover-metabox.php:24
+#: admin/views/rcno-book-cover-metabox.php:25
+#: admin/views/rcno-book-cover-metabox.php:26
 msgid "Remove Book Cover"
 msgstr ""
 
@@ -1293,7 +1322,7 @@ msgstr ""
 
 #: admin/views/rcno-general-info-metabox.php:23
 #: public/class-rcno-template-tags.php:133
-#: public/class-rcno-template-tags.php:770
+#: public/class-rcno-template-tags.php:826
 #: public/widgets/class-rcno-reviews-book-grid.php:189
 #: public/widgets/class-rcno-reviews-book-slider.php:208
 msgid "Title"
@@ -1309,7 +1338,7 @@ msgstr ""
 
 #: admin/views/rcno-general-info-metabox.php:67
 #: public/class-rcno-template-tags.php:124
-#: public/class-rcno-template-tags.php:761
+#: public/class-rcno-template-tags.php:817
 msgid "Edition"
 msgstr ""
 
@@ -1319,13 +1348,13 @@ msgstr ""
 
 #: admin/views/rcno-general-info-metabox.php:110
 #: public/class-rcno-template-tags.php:129
-#: public/class-rcno-template-tags.php:766
+#: public/class-rcno-template-tags.php:822
 msgid "ISBN13"
 msgstr ""
 
 #: admin/views/rcno-general-info-metabox.php:120
 #: public/class-rcno-template-tags.php:131
-#: public/class-rcno-template-tags.php:768
+#: public/class-rcno-template-tags.php:824
 msgid "ASIN"
 msgstr ""
 
@@ -1364,16 +1393,22 @@ msgid ""
 "Embed book review grid"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:55
+#: admin/views/rcno-reviews-listings-modal.php:54
+msgid ""
+"Embed sortable book "
+"review grid"
+msgstr ""
+
+#: admin/views/rcno-reviews-listings-modal.php:60
 #: admin/views/rcno-reviews-modal.php:79
 msgid "Cancel"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:59
-#: includes/class-rcno-reviews-shortcodes.php:329
-#: includes/class-rcno-reviews-shortcodes.php:330
-#: includes/class-rcno-reviews-shortcodes.php:436
-#: includes/class-rcno-reviews-shortcodes.php:437
+#: admin/views/rcno-reviews-listings-modal.php:64
+#: includes/class-rcno-reviews-shortcodes.php:340
+#: includes/class-rcno-reviews-shortcodes.php:341
+#: includes/class-rcno-reviews-shortcodes.php:447
+#: includes/class-rcno-reviews-shortcodes.php:448
 msgid "Insert"
 msgstr ""
 
@@ -1449,39 +1484,39 @@ msgid ""
 "data from GoodReads"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:256
-#: public/class-rcno-template-tags.php:972
-#: public/class-rcno-template-tags.php:1094
+#: includes/class-rcno-reviews-shortcodes.php:267
+#: public/class-rcno-template-tags.php:1028
+#: public/class-rcno-template-tags.php:1150
 #: public/shortcodes/class-rcno-book-list-shortcode.php:95
 msgid ""
 "Books in this series: "
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:285
-#: includes/class-rcno-reviews-shortcodes.php:286
+#: includes/class-rcno-reviews-shortcodes.php:296
+#: includes/class-rcno-reviews-shortcodes.php:297
 msgid "Add Review"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:327
-#: includes/class-rcno-reviews-shortcodes.php:434
+#: includes/class-rcno-reviews-shortcodes.php:338
+#: includes/class-rcno-reviews-shortcodes.php:445
 msgid "No title"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:328
-#: includes/class-rcno-reviews-shortcodes.php:435
+#: includes/class-rcno-reviews-shortcodes.php:339
+#: includes/class-rcno-reviews-shortcodes.php:446
 msgid "Review"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:393
-#: includes/class-rcno-reviews-shortcodes.php:394
+#: includes/class-rcno-reviews-shortcodes.php:404
+#: includes/class-rcno-reviews-shortcodes.php:405
 msgid "Add Listing"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:454
+#: includes/class-rcno-reviews-shortcodes.php:465
 msgid "Shortcodes Help"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:469
+#: includes/class-rcno-reviews-shortcodes.php:480
 msgid "Shortcodes"
 msgstr ""
 
@@ -1499,22 +1534,22 @@ msgid "Tag"
 msgstr ""
 
 #: public/class-rcno-template-tags.php:122
-#: public/class-rcno-template-tags.php:759
+#: public/class-rcno-template-tags.php:815
 msgid "Published"
 msgstr ""
 
 #: public/class-rcno-template-tags.php:123
-#: public/class-rcno-template-tags.php:760
+#: public/class-rcno-template-tags.php:816
 msgid "Format"
 msgstr ""
 
 #: public/class-rcno-template-tags.php:130
-#: public/class-rcno-template-tags.php:767
+#: public/class-rcno-template-tags.php:823
 msgid "ISBN"
 msgstr ""
 
 #: public/class-rcno-template-tags.php:132
-#: public/class-rcno-template-tags.php:769
+#: public/class-rcno-template-tags.php:825
 msgid "Goodreads URL"
 msgstr ""
 
@@ -1522,25 +1557,25 @@ msgstr ""
 msgid "out of 5 stars"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:322
+#: public/class-rcno-template-tags.php:327
 msgid "No Cover Available"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:323
+#: public/class-rcno-template-tags.php:328
 msgid ""
 "no-book-cover-available"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:1045
+#: public/class-rcno-template-tags.php:1101
 msgid ""
 "No entries found for the "
 msgstr ""
 
-#: public/class-rcno-template-tags.php:1047
+#: public/class-rcno-template-tags.php:1103
 msgid " taxonomy."
 msgstr ""
 
-#: public/class-rcno-template-tags.php:1262
+#: public/class-rcno-template-tags.php:1318
 msgid "Overall Score"
 msgstr ""
 
@@ -1702,6 +1737,11 @@ msgid ""
 "box shortcode:"
 msgstr ""
 
+#: public/shortcodes/layouts/rcno-isotope-grid.php:50
+msgid "Select"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:94
 #: public/templates/rcno_default/reviews_grid.php:67
 #: public/templates/rcno_default/reviews_index.php:105
 msgid ""

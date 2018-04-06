@@ -43,13 +43,15 @@ if ( $posts && count( $posts ) > 0 ) {
 		$select .= '<div class="rcno-isotope-grid-select-container">';
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], explode( ',', $options['exclude'] )  );
 		foreach ( $taxonomies as $taxonomy ) {
-			$terms = $categories = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=count&order=DESC&hide_empty=1' );
+			$terms = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=count&order=DESC&hide_empty=1' );
 			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
 			$select .= '<label for="rcno-isotope-grid-select">' . $taxonomy . '</label>';
 			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
 			$select .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $taxonomy ) . '</option>';
 			foreach ( $terms as $term ) {
-				$select .= '<option value="'. '.' . $term->slug . '">' . $term->name . '</option>';
+				if( is_object( $term ) ) {
+					$select .= '<option value="' . '.' . $term->slug . '">' . $term->name . '</option>';
+				}
 			}
 			$select .= '</select>';
 			$select .= '</div>';
