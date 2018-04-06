@@ -179,6 +179,8 @@ class Rcno_Reviews_Admin {
 		 * class.
 		 */
 
+		wp_enqueue_style( $this->plugin_name . 'minicolors-css', plugin_dir_url( __FILE__ ) . 'css/minicolors.css', array(), $this->version,
+			'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-admin.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-modal.css', $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.default.css', '0.12.4', 'all' );
@@ -243,12 +245,11 @@ class Rcno_Reviews_Admin {
 		// Add the media uploader.
 		wp_enqueue_media();
 
-		// Add the color picker css file.
-		wp_enqueue_style( 'wp-color-picker' );
-
+		wp_enqueue_script( $this->plugin_name . '-minicolors-js', plugin_dir_url( __FILE__ ) . 'js/minicolors.min.js', array( 'jquery' ), '2.2.6',
+		true );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array(
 			'jquery',
-			'wp-color-picker',
+			$this->plugin_name . '-minicolors-js',
 		), $this->version, true );
 		wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', true );
 		wp_enqueue_script( 'star-rating-svg', plugin_dir_url( __FILE__ ) . 'js/star-rating-svg.js', array( 'jquery' ), '1.2.0', true );

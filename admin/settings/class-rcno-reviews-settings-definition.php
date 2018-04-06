@@ -586,6 +586,25 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'spacer',
 				),
 
+				'advanced_tab_header_5' => array(
+					'name' => '<strong>' . __( 'JSON-LD Schemas', 'rcno-reviews' ) . '</strong>',
+					'type' => 'header',
+				),
+				'rcno_disable_review_schema' => array(
+					'name' => __( 'Disable Review Schema', 'rcno-reviews' ),
+					'desc' => __( 'Disable the output of the review JSON-LD schema markup', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
+				'rcno_disable_book_schema' => array(
+					'name' => __( 'Disable Book Schema', 'rcno-reviews' ),
+					'desc' => __( 'Disable the output of the book JSON-LD schema markup', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
+				'spacer-13'             => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
+
 				'advanced_tab_header_3' => array(
 					'name' => '<strong>' . __( 'Uncountable Words', 'rcno-reviews' ) . '</strong>',
 					'type' => 'header',

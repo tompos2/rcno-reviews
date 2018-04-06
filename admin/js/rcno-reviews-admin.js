@@ -115,7 +115,14 @@
 		} );
 
 		// Adds default WP color picker UI to settings page
-		$( '.rcno-color-input' ).wpColorPicker();
+		$( '.rcno-color-input' ).minicolors({
+			format: 'rgb',
+			opacity: true,
+			swatches: [
+				'#F44336', '#E91E63', '#9C27B0', '#673AB7', '#2196F3', '#03A9F4', '#00BCD4',
+				'#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
+			]
+		});
 
 		// Adds selectize.js support to text boxes on settings page
 		$( '#rcno_reviews_settings\\[rcno_taxonomy_selection\\]' ).selectize( {

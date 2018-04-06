@@ -83,6 +83,9 @@ Please open a new topic on the plugin's WordPress.org support page
 * Added a new Upgrader class to handle post-update functions
 * Normalized the minimum rating a book can receive as per the Google Rich Snippets spec
 * Re-worked the book cover upload modal to only allow image upload or media gallery select
+* Settings page color picker now supports RGBA colors for transparency
+* Moved aggregate rating item to inside reviewed item schema
+* Added setting to disable the book or review JSON-LD schema markups from book reviews
 
 = 1.11.2 =
 * Fixed display bug in review calendar widget (an extra cell padding was being added to 1st week of March)

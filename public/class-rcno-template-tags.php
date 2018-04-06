@@ -1526,7 +1526,7 @@ class Rcno_Template_Tags {
 	public function the_rcno_book_schema_data( $review_id ) {
 
 		// If we are on the homepage don't display this.
-		if ( ! is_single()  ) {
+		if ( ! is_single() || Rcno_Reviews_Option::get_option( 'rcno_disable_book_schema', false ) ) {
 			return false;
 		}
 
@@ -1581,12 +1581,6 @@ class Rcno_Template_Tags {
 			'name'   => $reviewer,
 			'sameAs' => array(
 				$reviewer_url,
-				get_the_author_meta( 'facebook' ),
-				get_the_author_meta( 'twitter' ),
-				get_the_author_meta( 'googleplus' ),
-				get_the_author_meta( 'linkedin' ),
-				get_the_author_meta( 'instagram' ),
-				get_the_author_meta( 'pinterest' )
 			),
 		);
 		$data['url']           = $review_url;
@@ -1609,6 +1603,15 @@ class Rcno_Template_Tags {
 			),
 			'datePublished' => date( 'c', $bk_pub_date ),
 		);
+		if ( $pub_rating->rcno_rating_info( 'count' ) > 0 ) {
+			$data['itemReviewed']['aggregateRating'] = array(
+				'@type'         => 'AggregateRating',
+				'worstRating'   => 1,
+				'bestRating'    => 5,
+				'ratingValue'   => $pub_rating->rcno_rating_info( 'avg' ),
+				'ratingCount'   => $pub_rating->rcno_rating_info( 'count' ),
+			);
+		}
 		if ( $priv_score ) {
 			$data['reviewRating'] = array(
 				'@type'       => 'Rating',
@@ -1622,15 +1625,6 @@ class Rcno_Template_Tags {
 				'worstRating' => 1,
 				'bestRating'  => 5,
 				'ratingValue' => $admin_rating < 1 ? 1 : $admin_rating,
-			);
-		}
-		if ( $pub_rating->rcno_rating_info( 'count' ) > 0 ) {
-			$data['aggregateRating'] = array(
-				'@type'         => 'AggregateRating',
-				'worstRating'   => 1,
-				'bestRating'    => 5,
-				'ratingValue'   => $pub_rating->rcno_rating_info( 'avg' ),
-				'ratingCount'   => $pub_rating->rcno_rating_info( 'count' ),
 			);
 		}
 
@@ -1651,7 +1645,7 @@ class Rcno_Template_Tags {
 	public function the_rcno_review_schema_data( $review_id ) {
 
 		// If we are on the homepage don't display this.
-		if ( ! is_single() ) {
+		if ( ! is_single() || Rcno_Reviews_Option::get_option( 'rcno_disable_review_schema', false ) ) {
 			return false;
 		}
 
