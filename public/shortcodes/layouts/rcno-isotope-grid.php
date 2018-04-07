@@ -86,8 +86,11 @@ if ( $posts && count( $posts ) > 0 ) {
 	$out .= '</div>';
 
 	// This is where everything is printed.
-	echo $select;
-	echo $out;
+	// We are checking if we are on a page because the following error occurs in production, sometimes.
+	// Warning: Cannot modify header information - headers already sent.
+	if ( is_singular() ) {
+		echo $select . $out;
+	}
 
 } else {
 	// No book reviews.

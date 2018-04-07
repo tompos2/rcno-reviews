@@ -331,7 +331,8 @@ class Rcno_Template_Tags {
 		$out .= '<img src="' . esc_attr( $book_src ) . '" ';
 		$out .= 'title="' . $book_title . '" ';
 		$out .= 'alt="' . $book_alt . '" ';
-		$out .= 'class="rcno-book-cover"';
+		$out .= 'class="rcno-book-cover" ';
+		$out .= 'data-rcno-attachment-id="' . (int) $attachment_id . '"';
 		$out .= '>';
 
 		return $out;
