@@ -93,7 +93,7 @@ class Rcno_Book_List_Shortcode {
 			'taxonomy'  => 'series',
 			'number'    => true,
 			'header'    => __( 'Books in this series: ', 'rcno-reviews' )
-		), $atts );
+		), $atts, 'rcno-book-list' );
 
 		// The actual rendering is done inside the Rcno_Template_Tags class.
 		$output = $this->template->get_the_rcno_book_list( $atts['id'], $atts['taxonomy'], $atts['number'], $atts['header'] );

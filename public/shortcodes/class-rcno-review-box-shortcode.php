@@ -90,7 +90,7 @@ class Rcno_Review_Box_Shortcode {
 		// Set default values for options not set explicitly.
 		$atts = shortcode_atts( array(
 			'id'        => $review_id,
-		), $atts );
+		), $atts, 'rcno-review-box' );
 
 		// The actual rendering is done inside the Rcno_Template_Tags class.
 		$output = $this->template->get_the_rcno_review_box( $atts['id'] );

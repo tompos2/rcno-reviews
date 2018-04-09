@@ -91,7 +91,7 @@ class Rcno_Purchase_Links_Shortcode {
 		$atts = shortcode_atts( array(
 			'id'        => $review_id,
 			'label'    => true
-		), $atts );
+		), $atts, 'rcno-purchase-links' );
 
 		// The actual rendering is done inside the Rcno_Template_Tags class.
 		$output = $this->template->get_the_rcno_book_purchase_links( $atts['id'], $atts['label'] );

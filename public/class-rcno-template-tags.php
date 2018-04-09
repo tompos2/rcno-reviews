@@ -938,7 +938,7 @@ class Rcno_Template_Tags {
 			$links .= '<span class="buy-link-label">' . esc_html( $links_label ) . '</span> ';
 		}
 
-		foreach ( $purchase_links as $value ) {
+		foreach ( (array) $purchase_links as $value ) {
 			$links .= '<a href="' . esc_url( $value['link'] ) . '" class="rcno-purchase-links '
 			          . sanitize_html_class( $value['store'] ) . '"' . ' style="background:' . $background . '; color:' . $txt_color . '"' . 'target="_blank" rel="noopener nofollow"' . ' >';
 			$links .= esc_html( $stores[ $value['store'] ] );
@@ -1281,7 +1281,7 @@ class Rcno_Template_Tags {
 		}
 
 		// Disables the review score box displaying on frontend book reviews.
-		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
+		if ( ! Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
 			return false;
 		}
 
@@ -1378,8 +1378,11 @@ class Rcno_Template_Tags {
 			return false;
 		}
 
+		$background = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_background' );
+		$accent     = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_accent' );
+
 		// Disables the review score badge displaying on frontend book reviews.
-		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
+		if ( ! Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box' ) ) {
 			return false;
 		}
 
@@ -1392,11 +1395,11 @@ class Rcno_Template_Tags {
 
 		$rating_criteria_count = count( $rating_criteria );
 
-		$output      = '';
+		$out      = '';
 		$score_array = array();
 
 		if ( $rating_criteria ) {
-			foreach ( $rating_criteria as $criteria ) {
+			foreach ( (array) $rating_criteria as $criteria ) {
 				$score_array[] = $criteria['score'];
 			}
 		}
@@ -1405,13 +1408,16 @@ class Rcno_Template_Tags {
 		$final_score = $final_score / $rating_criteria_count;
 		$final_score = number_format( $final_score, 1, '.', '' );
 
-		$output .= '<div class="rcno-review-badge review-badge-' . $rating_type . '">';
-		$output .= '<div class="score">';
-		$output .= $this->rcno_calc_review_score( $final_score, $rating_type, true );
-		$output .= '</div>';
-		$output .= '</div>';
+		$out .= '<div class="rcno-review-badge review-badge-' . $rating_type . '" ';
+		$out .= 'style="background-color: ' . $accent . '"';
+		$out .= '>';
+		$out .= '<div class="score">';
+		$out .= $this->rcno_calc_review_score( $final_score, $rating_type, true );
+		$out .= '</div>';
+		$out .= '<p>' . __( 'Review Score', 'rcno-reviews' ) . '</p>';
+		$out .= '</div>';
 
-		return $output;
+		return $out;
 	}
 
 	/**

@@ -23,7 +23,7 @@
 }
 
 #rcno-review-score-box .review-summary {
-    margin: 0 0 .5em 0;
+    margin: 0 0 0.5em 0;
 }
 
 #rcno-review-score-box .review-summary .review-text h2 {
@@ -77,7 +77,8 @@
     color: #FFC107;
 }
 
-#rcno-review-score-box .review-summary .overall-score {
+#rcno-review-score-box .review-summary .overall-score,
+.rcno-review-badge {
     width: 120px;
     height: 120px;
     background: green;
@@ -89,13 +90,30 @@
     margin: 0 15px 0 0;
 }
 
-#rcno-review-score-box .review-summary .overall-score .overall {
+.rcno-review-badge {
+    padding: 5px 5px 0 5px;
+}
+
+#rcno-review-score-box .review-summary .overall-score .overall,
+.rcno-review-badge .score {
     color: #fff;
     font-size: 55px;
     font-weight: 800;
     display: block;
     line-height: 1;
     padding: 10px;
+}
+
+.rcno-review-badge p {
+    font-size: 11px;
+    width: 100%;
+    text-transform: uppercase;
+    margin: 0;
+    color: #fff;
+    background-color: #000;
+    padding: 6px 0;
+    text-align: center;
+    line-height: 1;
 }
 
 #rcno-review-score-box .review-summary .overall-score .overall-text {

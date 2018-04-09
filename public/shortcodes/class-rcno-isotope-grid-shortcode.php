@@ -82,7 +82,7 @@ class Rcno_Isotope_Grid_Shortcode {
 			'width'     => 85,
 			'exclude'   => '',
 			'rating'   => 1
-		), $options );
+		), $options, 'rcno-sortable-grid' );
 
 		// The actual rendering is done by a special function.
 		$output = $this->rcno_render_isotope_grid( $options );
