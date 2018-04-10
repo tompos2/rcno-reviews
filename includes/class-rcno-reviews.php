@@ -95,6 +95,8 @@ class Rcno_Reviews {
 
 		$this->cleanup_transients();
 
+		$this->get_extensions();
+
 	}
 
 	/**
@@ -180,6 +182,8 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-rest-api.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'admin/class-rcno-currently-reading.php';
+
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-extensions.php';
 
 		$this->loader = new Rcno_Reviews_Loader();
 	}
@@ -524,6 +528,23 @@ class Rcno_Reviews {
 		$transients = new Rcno_Reviews_Transients_Cleanup( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'save_post', $transients, 'rcno_delete_template_tags_transients' );
+	}
+
+	/**
+	 * Get and load all the extra extensions.
+	 *
+	 * @since    1.12.0
+	 * @access   private
+	 */
+	private function get_extensions() {
+
+		$extensions = new Rcno_Reviews_Extentions( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'admin_menu', $extensions, 'rcno_add_extensions_page' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $extensions, 'rcno_extension_admin_scripts' );
+		$this->loader->add_action( 'wp_ajax_rcno_activate_extension_ajax', $extensions, 'rcno_activate_extension_ajax' );
+		$this->loader->add_action( 'wp_ajax_rcno_deactivate_extension_ajax', $extensions, 'rcno_deactivate_extension_ajax' );
+		$this->loader->add_action( 'rcno_reviews_loaded', $extensions, 'rcno_load_extensions' );
 	}
 
 	/**

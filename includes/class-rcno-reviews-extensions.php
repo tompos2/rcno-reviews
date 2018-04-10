@@ -1,0 +1,272 @@
+<?php
+/**
+ * Define the plugin's extension functionality
+ *
+ *
+ * @link       https://wzymedia.com
+ * @since      1.14.0
+ *
+ * @package    Rcno_Reviews
+ * @subpackage Rcno_Reviews/includes
+ */
+
+/**
+ * Define the plugin's extension functionality
+ *
+ * Loads and defines the internationalization files for this plugin
+ * so that it is ready for translation.
+ *
+ * @since      1.14.0
+ * @package    Rcno_Reviews
+ * @subpackage Rcno_Reviews/includes
+ * @author     wzyMedia <wzy@outlook.com>
+ */
+class Rcno_Reviews_Extentions {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.14.0
+	 * @access   private
+	 * @var      string $plugin_name The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.14.0
+	 * @access   private
+	 * @var      string $version The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * Load the plugin text domain for translation.
+	 *
+	 * @since    1.14.0
+	 *
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version     The version of this plugin.
+	 */
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
+		$this->version     = $version;
+	}
+
+	/**
+	 * Get all the registered extensions through a filter
+	 */
+	public function rcno_get_extensions() {
+		return apply_filters( 'rcno_reviews_extensions', array() );
+	}
+
+	/**
+	 * Get all activated extensions
+	 */
+	public function rcno_get_active_extensions() {
+		return Rcno_Reviews_Option::get_option( 'rcno_reviews_active_extensions', array() );
+	}
+
+	/**
+	 * Enable the 'Extensions' menu option on the settings page
+	 *
+	 * @since 1.14.0
+	 * @return void
+	 */
+	public function rcno_add_extensions_page() {
+
+		add_submenu_page(
+			'edit.php?post_type=rcno_review', // Put your cpt slug if you have one
+			__( 'Recencio Extensions', 'rcno-reviews' ),
+			__( 'Extensions', 'rcno-reviews' ),
+			'manage_options',
+			'rcno_extensions',
+			array( $this, 'rcno_render_extensions_page' ) );
+	}
+
+	public function rcno_render_extensions_page() {
+
+		// Get all extensions
+		$all_extensions = $this->rcno_get_extensions();
+		// Get active extensions
+		$active_extensions = $this->rcno_get_active_extensions();
+		?>
+		<div class="wrap">
+			<h1><?php echo get_admin_page_title(); ?></h1>
+			<h4><?php _e( 'All Recencio Review Extensions. Choose which to use then activate it.', 'rcno-reviews' ); ?></h4>
+
+			<div class="wp-list-table widefat plugin-install">
+				<div id="the-list">
+					<?php
+					if ( $all_extensions ) {
+						foreach ( $all_extensions as $slug => $class ) {
+							if ( ! class_exists( $class ) ) {
+								continue;
+							}
+							// Instantiate each extension
+							$extension_object = new $class();
+							// We will use this object to get the title, description and image of the extension.
+							?>
+							<div class="plugin-card plugin-card-<?php echo $slug; ?>">
+								<div class="plugin-card-top">
+									<div class="name column-name">
+										<h3>
+											<?php echo esc_html( $extension_object->title ); ?>
+											<img src="<?php echo esc_attr( $extension_object->image ); ?>"
+                                                 class="plugin-icon"
+                                                 alt="<?php echo esc_attr( $extension_object->id ) ?>">
+										</h3>
+									</div>
+									<div class="desc column-description">
+										<p><?php echo esc_html( $extension_object->desc ); ?></p>
+									</div>
+								</div>
+								<div class="plugin-card-bottom">
+									<?php
+									// Use the buttons from our Abstract class to create the buttons
+									// Can be overwritten by each integration if needed.
+									$extension_object->buttons( $active_extensions );
+									?>
+								</div>
+							</div>
+							<?php
+						}
+					}
+					?>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * @param $hook_suffix
+	 *
+	 * @return mixed
+	 */
+	public function rcno_extension_admin_scripts( $hook_suffix ) {
+
+		if ( 'rcno_review_page_rcno_extensions' !== $hook_suffix ) {
+			return false;
+		}
+
+		wp_register_script( $this->plugin_name . '-admin-extensions-js', RCNO_PLUGIN_URI . '/admin/js/rcno-extension-admin.js',
+			array( 'jquery' ), $this->version, true );
+		wp_localize_script(
+			$this->plugin_name . '-admin-extensions-js',
+			'rcno_extension_admin',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'rcno-extension-admin-nonce' ),
+				'text'     => array(
+					'activate'   => __( 'Activate', 'rcno-reviews' ),
+					'deactivate' => __( 'Deactivate', 'rcno-reviews' ),
+				),
+			) );
+		wp_enqueue_script( $this->plugin_name . '-admin-extensions-js' ); // TODO: This should go somewhere else.
+	}
+
+	/**
+	 * Activating the Extension through AJAX
+	 *
+	 * @return void
+	 */
+	public function rcno_activate_extension_ajax() {
+
+		// Check if there is a nonce and if it is, verify it. Otherwise throw an error
+		if ( ! isset( $_POST[ 'nonce' ] ) || ! wp_verify_nonce( $_POST[ 'nonce' ], 'rcno-extension-admin-nonce' ) ) {
+
+			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
+			die();
+		}
+
+		// If we don't have an extension id, don't process any further.
+		if ( ! isset( $_POST[ 'extension' ] ) ) {
+			wp_send_json_error( array( 'message' => __( 'No Extension was Sent', 'rcno-reviews' ) ) );
+			die();
+		}
+		// The extension to activate
+		$extension         = $_POST[ 'extension' ];
+		$active_extensions = $this->rcno_get_active_extensions();
+		// If that extension is already active, don't process it further.
+		// If the extension is not active yet, let's try to activate it.
+		if ( ! isset( $active_extensions[ $extension ] ) ) {
+			// Let's get all the registered extensions.
+			$extensions = $this->rcno_get_extensions();
+			// Check if we have that extensions registered.
+			if ( isset( $extensions[ $extension ] ) ) {
+				// Put it in the active extensions array
+				$active_extensions[ $extension ] = $extensions[ $extension ];
+				// Trigger an action so some plugins can also process some data here.
+				do_action( 'rcno_reviews' . $extension . '_extension_activated' );
+				// Update the active extensions.
+				Rcno_Reviews_Option::update_option( 'rcno_reviews_active_extensions', $active_extensions );
+				wp_send_json_success( array( 'message' => __( 'Activated', 'rcno-reviews' ) ) );
+				die();
+			}
+
+		} else {
+			// Our extension is already active.
+			wp_send_json_success( array( 'message' => __( 'Already Activated', 'rcno-reviews' ) ) );
+			die();
+		}
+		// Extension might not be registered.
+		wp_send_json_error( array( 'message' => __( 'Nothing Happened', 'rcno-reviews' ) ) );
+		die();
+	}
+
+	/**
+	 * Deactivating the Integration through AJAX
+	 *
+	 * @return void
+	 */
+	public function rcno_deactivate_extension_ajax() {
+		// Check if there is a nonce and if it is, verify it. Otherwise throw an error
+		if ( ! isset( $_POST[ 'nonce' ] )|| ! wp_verify_nonce( $_POST[ 'nonce' ], 'rcno-extension-admin-nonce' ) ) {
+
+			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
+			die();
+		}
+		// If we don't have an extension id, don't process any further.
+		if ( ! isset( $_POST[ 'extension' ] ) ) {
+			wp_send_json_error( array( 'message' => __( 'No Integration Sent', 'rcno-reviews' ) ) );
+			die();
+		}
+		// The extension to activate
+		$extension         = $_POST[ 'extension' ];
+		$active_extensions = $this->rcno_get_active_extensions();
+		// If that extension is already deactivated, don't process it further.
+		// If the extension is active, let's try to deactivate it.
+		if ( isset( $active_extensions[ $extension ] ) ) {
+			// Remove the extension from the active extensions.
+			unset( $active_extensions[ $extension ] );
+			do_action( 'rcno_reviews' . $extension . '_extension_activated' );
+			// Update the active extensions.
+			Rcno_Reviews_Option::update_option( 'rcno_reviews_active_extensions', $active_extensions );
+			wp_send_json_success( array( 'message' => __( 'Deactivated', 'rcno-reviews' ) ) );
+			die();
+		} else {
+			wp_send_json_error( array( 'message' => __( 'Not Activated', 'rcno-reviews' ) ) );
+			die();
+		}
+		wp_send_json_error( array( 'message' => __( 'Nothing Happened', 'rcno-reviews' ) ) );
+		die();
+	}
+
+	public function rcno_load_extensions() {
+		$active_extensions = $this->rcno_get_active_extensions();
+		if( $active_extensions ) {
+			foreach( $active_extensions as $slug => $extension ) {
+				if( ! class_exists( $extension ) ) {
+					continue;
+				}
+				$extension = new $extension();
+				$extension->load();
+			}
+		}
+	}
+
+
+}
