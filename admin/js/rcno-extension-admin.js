@@ -3,7 +3,7 @@
 	$( document ).on( 'click', '.button-extension-activate', function( e ){
 		e.preventDefault();
 		// Get the current extension ID
-		var extension = $(this).attr('data-integration'),
+		var extension = $(this).attr('data-extension'),
 			$this = $(this);
 
 		if( extension ) {
@@ -21,9 +21,9 @@
 					if( resp.success ) {
 						// On success, add the deactivate class and remove the activate class.
 						// Also remove the primary class so we have a gray button and not a blue one.
-						$this.addClass('button-integration-deactivate')
+						$this.addClass('button-extension-deactivate')
 						.addClass('button-default')
-						.removeClass('button-integration-activate')
+						.removeClass('button-extension-activate')
 						.removeClass('button-primary')
 						.html( rcno_extension_admin.text.deactivate );
 					}
@@ -36,7 +36,7 @@
 	$( document ).on( 'click', '.button-extension-deactivate', function( e ){
 		e.preventDefault();
 
-		var extension = $(this).attr('data-integration'),
+		var extension = $(this).attr('data-extension'),
 			$this = $(this);
 		if( extension ) {
 			$.ajax({
@@ -50,9 +50,9 @@
 				},
 				success: function(resp) {
 					if( resp.success ) {
-						$this.removeClass('button-integration-deactivate')
+						$this.removeClass('button-extension-deactivate')
 						.removeClass('button-default')
-						.addClass('button-integration-activate')
+						.addClass('button-extension-activate')
 						.addClass('button-primary')
 						.html( rcno_extension_admin.text.activate );
 					}

@@ -95,7 +95,15 @@ class Rcno_Reviews_Extentions {
 		?>
 		<div class="wrap">
 			<h1><?php echo get_admin_page_title(); ?></h1>
-			<h4><?php _e( 'All Recencio Review Extensions. Choose which to use then activate it.', 'rcno-reviews' ); ?></h4>
+			<h4><?php _e( 'All Recencio Review Extensions. Choose which you want to use, then activate it.', 'rcno-reviews' ); ?></h4>
+
+            <?php if ( 0 === count( $all_extensions ) ) : ?>
+                <div class="wp-list-table widefat plugin-install">
+                    <h2 style="text-align: center; margin: 5em 0 0 0; font-size: 30px">
+	                    <?php _e( 'No extensions are installed or activated.', 'rcno-reviews' ); ?>
+                    </h2>
+                </div>
+            <?php endif; ?>
 
 			<div class="wp-list-table widefat plugin-install">
 				<div id="the-list">
@@ -242,7 +250,7 @@ class Rcno_Reviews_Extentions {
 		if ( isset( $active_extensions[ $extension ] ) ) {
 			// Remove the extension from the active extensions.
 			unset( $active_extensions[ $extension ] );
-			do_action( 'rcno_reviews' . $extension . '_extension_activated' );
+			do_action( 'rcno_reviews' . $extension . '_extension_deactivated' );
 			// Update the active extensions.
 			Rcno_Reviews_Option::update_option( 'rcno_reviews_active_extensions', $active_extensions );
 			wp_send_json_success( array( 'message' => __( 'Deactivated', 'rcno-reviews' ) ) );
