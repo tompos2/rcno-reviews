@@ -538,7 +538,7 @@ class Rcno_Reviews {
 	 */
 	private function get_extensions() {
 
-		$extensions = new Rcno_Reviews_Extentions( $this->get_plugin_name(), $this->get_version() );
+		$extensions = new Rcno_Reviews_Extensions( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_menu', $extensions, 'rcno_add_extensions_page' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $extensions, 'rcno_extension_admin_scripts' );

@@ -48,11 +48,11 @@ abstract class Abstract_Rcno_Extension {
 	public $settings = false;
 
 	/**
-	 * Integration Settings page action
+	 * The URL used to invoke thickbox
 	 *
 	 * @var string
 	 */
-	public $action = '';
+	public $thickbox_url = '';
 
 	/**
 	 * Load method used to create hooks to extend or apply new features
@@ -61,16 +61,6 @@ abstract class Abstract_Rcno_Extension {
 	public function load() {
 	}
 
-	public function settings_page() {
-		$url = add_query_arg( array(
-			'action'    => $this->action,
-			'TB_iframe' => 'true',
-			'width'     => '600',
-			'height'    => '400'
-		), admin_url( 'admin.php' ) );
-
-		return $url;
-	}
 
 	/**
 	 * Buttons to be shown on the Extensions screen
@@ -82,12 +72,16 @@ abstract class Abstract_Rcno_Extension {
 	public function buttons( $extension ) {
 		if ( ! isset( $extension[ $this->id ] ) ) { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
-                    class="button button-primary button-extension-activate"><?php _e( 'Activate', 'rcno-reviews' ); ?></button>
+                    class="button button-primary button-extension-activate">
+                <?php _e( 'Activate', 'rcno-reviews' ); ?>
+            </button>
 		<?php } else { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
-                    class="button button-default button-extension-deactivate"><?php _e( 'Deactivate', 'rcno-reviews' ); ?></button>
+                    class="button button-default button-extension-deactivate">
+                <?php _e( 'Deactivate', 'rcno-reviews' ); ?>
+            </button>
             <?php if ( $this->settings ) { ?>
-                <a href="<?php echo $this->settings_page() ?>" class="button button-primary thickbox"><?php _e( 'Settings', 'rcno-reviews' ); ?></a>
+                <a href="<?php echo $this->thickbox_url ?>" class="button button-primary thickbox"><?php _e( 'Settings', 'rcno-reviews' ); ?></a>
             <?php } ?>
 		<?php }	?>
 

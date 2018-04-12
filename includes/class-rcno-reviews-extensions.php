@@ -21,7 +21,7 @@
  * @subpackage Rcno_Reviews/includes
  * @author     wzyMedia <wzy@outlook.com>
  */
-class Rcno_Reviews_Extentions {
+class Rcno_Reviews_Extensions {
 
 	/**
 	 * The ID of this plugin.
@@ -146,7 +146,7 @@ class Rcno_Reviews_Extentions {
 				</div>
 			</div>
 		</div>
-		<?php
+		<?php do_action( 'rcno_extensions_settings_page_footer' );
 	}
 
 	/**
