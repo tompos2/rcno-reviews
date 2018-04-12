@@ -26,6 +26,8 @@
 						.removeClass('button-extension-activate')
 						.removeClass('button-primary')
 						.html( rcno_extension_admin.text.deactivate );
+						$('.button-extension-settings').show('fast');
+						location.reload();
 					}
 				}
 			});
@@ -55,6 +57,7 @@
 						.addClass('button-extension-activate')
 						.addClass('button-primary')
 						.html( rcno_extension_admin.text.activate );
+						$('.button-extension-settings').hide('fast');
 					}
 				}
 			});

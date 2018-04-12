@@ -75,13 +75,21 @@ abstract class Abstract_Rcno_Extension {
                     class="button button-primary button-extension-activate">
                 <?php _e( 'Activate', 'rcno-reviews' ); ?>
             </button>
+			<?php if ( $this->settings ) { ?>
+                <a href="<?php echo $this->thickbox_url ?>" 
+                   class="button button-primary thickbox button-extension-settings" style="display: none;">
+					<?php _e( 'Settings', 'rcno-reviews' ); ?>
+                </a>
+			<?php } ?>
 		<?php } else { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
                     class="button button-default button-extension-deactivate">
                 <?php _e( 'Deactivate', 'rcno-reviews' ); ?>
             </button>
             <?php if ( $this->settings ) { ?>
-                <a href="<?php echo $this->thickbox_url ?>" class="button button-primary thickbox"><?php _e( 'Settings', 'rcno-reviews' ); ?></a>
+                <a href="<?php echo $this->thickbox_url ?>" class="button button-primary thickbox button-extension-settings">
+                    <?php _e( 'Settings', 'rcno-reviews' ); ?>
+                </a>
             <?php } ?>
 		<?php }	?>
 
