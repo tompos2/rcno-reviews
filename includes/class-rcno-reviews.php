@@ -117,6 +117,8 @@ class Rcno_Reviews {
 	 */
 	private function load_dependencies() {
 
+		require_once plugin_dir_path( __DIR__ ) . 'includes/abstracts/Abstract_Rcno_Extension.php';
+
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -544,7 +546,7 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'admin_enqueue_scripts', $extensions, 'rcno_extension_admin_scripts' );
 		$this->loader->add_action( 'wp_ajax_rcno_activate_extension_ajax', $extensions, 'rcno_activate_extension_ajax' );
 		$this->loader->add_action( 'wp_ajax_rcno_deactivate_extension_ajax', $extensions, 'rcno_deactivate_extension_ajax' );
-		$this->loader->add_action( 'rcno_reviews_loaded', $extensions, 'rcno_load_extensions' );
+		$this->loader->add_action( 'wp_loaded', $extensions, 'rcno_load_extensions', 99 );
 	}
 
 	/**

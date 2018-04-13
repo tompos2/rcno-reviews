@@ -75,8 +75,6 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-rcno-reviews.php';
  * @since    1.0.0
  */
 function run_rcno_reviews() {
-
-	//require_once plugin_dir_path( __FILE__ ) . 'includes/abstracts/Abstract_Rcno_Extension.php';
 	$plugin = new Rcno_Reviews();
 	$plugin->run();
 	do_action( 'rcno_reviews_loaded' );

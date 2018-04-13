@@ -117,7 +117,7 @@ class Rcno_Reviews_Extensions {
 							$extension_object = new $class();
 							// We will use this object to get the title, description and image of the extension.
 							?>
-							<div class="plugin-card plugin-card-<?php echo $slug; ?>">
+							<div class="plugin-card plugin-card-<?php echo esc_attr( $slug ); ?>">
 								<div class="plugin-card-top">
 									<div class="name column-name">
 										<h3>
@@ -185,7 +185,6 @@ class Rcno_Reviews_Extensions {
 
 		// Check if there is a nonce and if it is, verify it. Otherwise throw an error
 		if ( ! isset( $_POST[ 'nonce' ] ) || ! wp_verify_nonce( $_POST[ 'nonce' ], 'rcno-extension-admin-nonce' ) ) {
-
 			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
 			die();
 		}
@@ -196,7 +195,7 @@ class Rcno_Reviews_Extensions {
 			die();
 		}
 		// The extension to activate
-		$extension         = $_POST[ 'extension' ];
+		$extension         = sanitize_text_field( $_POST[ 'extension' ] );
 		$active_extensions = $this->rcno_get_active_extensions();
 		// If that extension is already active, don't process it further.
 		// If the extension is not active yet, let's try to activate it.
@@ -233,7 +232,6 @@ class Rcno_Reviews_Extensions {
 	public function rcno_deactivate_extension_ajax() {
 		// Check if there is a nonce and if it is, verify it. Otherwise throw an error
 		if ( ! isset( $_POST[ 'nonce' ] )|| ! wp_verify_nonce( $_POST[ 'nonce' ], 'rcno-extension-admin-nonce' ) ) {
-
 			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
 			die();
 		}
@@ -243,7 +241,7 @@ class Rcno_Reviews_Extensions {
 			die();
 		}
 		// The extension to activate
-		$extension         = $_POST[ 'extension' ];
+		$extension         = sanitize_text_field( $_POST[ 'extension' ] );
 		$active_extensions = $this->rcno_get_active_extensions();
 		// If that extension is already deactivated, don't process it further.
 		// If the extension is active, let's try to deactivate it.
