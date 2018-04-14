@@ -48,13 +48,6 @@ abstract class Abstract_Rcno_Extension {
 	public $settings = false;
 
 	/**
-	 * The URL used to invoke thickbox
-	 *
-	 * @var string
-	 */
-	public $thickbox_url = '';
-
-	/**
 	 * Load method used to create hooks to extend or apply new features
 	 * This method will be called only on active extensions
 	 */
@@ -87,9 +80,11 @@ abstract class Abstract_Rcno_Extension {
                 <?php _e( 'Deactivate', 'rcno-reviews' ); ?>
             </button>
             <?php if ( $this->settings ) { ?>
-                <a href="<?php echo $this->thickbox_url ?>" class="button button-primary thickbox button-extension-settings">
+                <button type="button" data-extension="<?php echo $this->id; ?>"
+                        class="button button-primary button-extension-settings"
+                        data-micromodal-trigger="<?php echo $this->id; ?>">
                     <?php _e( 'Settings', 'rcno-reviews' ); ?>
-                </a>
+                </button>
             <?php } ?>
 		<?php }	?>
 
