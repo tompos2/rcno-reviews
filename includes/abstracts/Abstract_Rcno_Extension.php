@@ -69,10 +69,12 @@ abstract class Abstract_Rcno_Extension {
                 <?php _e( 'Activate', 'rcno-reviews' ); ?>
             </button>
 			<?php if ( $this->settings ) { ?>
-                <a href="<?php echo $this->thickbox_url ?>" 
-                   class="button button-primary thickbox button-extension-settings" style="display: none;">
+                <button type="button" data-extension="<?php echo $this->id; ?>"
+                        class="button button-primary button-extension-settings"
+                        data-micromodal-trigger="<?php echo $this->id; ?>"
+                        style="display: none">
 					<?php _e( 'Settings', 'rcno-reviews' ); ?>
-                </a>
+                </button>
 			<?php } ?>
 		<?php } else { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"

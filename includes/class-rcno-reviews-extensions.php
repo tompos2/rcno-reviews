@@ -57,6 +57,8 @@ class Rcno_Reviews_Extensions {
 
 	/**
 	 * Get all the registered extensions through a filter
+     * @since 1.14.0
+     * @return array
 	 */
 	public function rcno_get_extensions() {
 		return apply_filters( 'rcno_reviews_extensions', array() );
@@ -64,6 +66,8 @@ class Rcno_Reviews_Extensions {
 
 	/**
 	 * Get all activated extensions
+     * @since 1.14.0
+     * @return array
 	 */
 	public function rcno_get_active_extensions() {
 		return Rcno_Reviews_Option::get_option( 'rcno_reviews_active_extensions', array() );
@@ -87,7 +91,6 @@ class Rcno_Reviews_Extensions {
 	}
 
 	public function rcno_render_extensions_page() {
-
 		// Get all extensions
 		$all_extensions = $this->rcno_get_extensions();
 		// Get active extensions
@@ -273,6 +276,5 @@ class Rcno_Reviews_Extensions {
 			}
 		}
 	}
-
 
 }
