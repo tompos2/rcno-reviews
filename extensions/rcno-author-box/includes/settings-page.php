@@ -25,6 +25,15 @@
 							</td>
 						</tr>
 
+                        <tr valign="top">
+                            <th scope="row"></th>
+                            <td>
+                                <p>
+                                    <?php echo 'Visit your user <a href="' . get_edit_user_link() . '">profile page</a> to add your social media account information'; ?>
+                                </p>
+                            </td>
+                        </tr>
+
 						<tr valign="top">
 							<th scope="row"><?php _e( 'Facebook', 'rcno-reviews' ); ?></th>
 							<td>
@@ -37,7 +46,7 @@
                                         />
                                     </div>
                                     <div class="rcno-settings-text-wrapper">
-                                        <input type="text"
+                                        <input type="hidden"
                                                name="rcno_author_box_options[facebook_url]"
                                                class="rcno-settings-text"
                                                value="<?php echo esc_attr( $this->get_setting( 'facebook_url' ) ); ?>"
@@ -59,7 +68,7 @@
                                         />
                                     </div>
                                     <div class="rcno-settings-text-wrapper">
-                                        <input type="text"
+                                        <input type="hidden"
                                                name="rcno_author_box_options[twitter_url]"
                                                class="rcno-settings-text"
                                                value="<?php echo esc_attr( $this->get_setting( 'twitter_url' ) ); ?>"
@@ -81,7 +90,7 @@
                                         />
                                     </div>
                                     <div class="rcno-settings-text-wrapper">
-                                        <input type="text"
+                                        <input type="hidden"
                                                name="rcno_author_box_options[google_url]"
                                                class="rcno-settings-text"
                                                value="<?php echo esc_attr( $this->get_setting( 'google_url' ) ); ?>"
@@ -103,7 +112,7 @@
                                         />
                                     </div>
                                     <div class="rcno-settings-text-wrapper">
-                                        <input type="text"
+                                        <input type="hidden"
                                                name="rcno_author_box_options[linkedin_url]"
                                                class="rcno-settings-text"
                                                value="<?php echo esc_attr( $this->get_setting( 'linkedin_url' ) ); ?>"
@@ -125,7 +134,7 @@
                                         />
                                     </div>
                                     <div class="rcno-settings-text-wrapper">
-                                        <input type="text"
+                                        <input type="hidden"
                                                name="rcno_author_box_options[tumblr_url]"
                                                class="rcno-settings-text"
                                                value="<?php echo esc_attr( $this->get_setting( 'tumblr_url' ) ); ?>"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2018-04-06 14:51-0500\n"
-"PO-Revision-Date: 2018-04-06 14:52-0500\n"
+"POT-Creation-Date: 2018-04-23 08:51-0500\n"
+"PO-Revision-Date: 2018-04-23 08:52-0500\n"
 "Last-Translator: w33zy <wzy@outlook.com>\n"
 "Language-Team: English (Jamaica)\n"
 "Language: en_JM\n"
@@ -17,7 +17,7 @@ msgstr ""
 "esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
 "_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.0.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: admin/class-rcno-admin-book-cover.php:57
@@ -47,6 +47,7 @@ msgid "5 Star Rating"
 msgstr "5 Star Rating"
 
 #: admin/class-rcno-admin-review-score.php:65
+#: public/class-rcno-template-tags.php:1417
 msgid "Review Score"
 msgstr "Review Score"
 
@@ -222,6 +223,9 @@ msgstr "Reviews"
 
 #: admin/class-rcno-reviews-admin.php:612
 #: admin/class-rcno-reviews-admin.php:632
+#: extensions/rcno-author-box/includes/settings-page.php:6
+#: includes/abstracts/Abstract_Rcno_Extension.php:76
+#: includes/abstracts/Abstract_Rcno_Extension.php:88
 msgid "Settings"
 msgstr "Settings"
 
@@ -460,7 +464,7 @@ msgstr "Show the ASIN field for book reviews?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:202
 #: public/class-rcno-template-tags.php:128
-#: public/class-rcno-template-tags.php:821
+#: public/class-rcno-template-tags.php:822
 msgid "Goodreads ID"
 msgstr "Goodreads ID"
 
@@ -480,7 +484,7 @@ msgstr "Show the book's URL field for book reviews?"
 #: admin/settings/class-rcno-reviews-settings-definition.php:212
 #: admin/views/rcno-general-info-metabox.php:34
 #: public/class-rcno-template-tags.php:121
-#: public/class-rcno-template-tags.php:814
+#: public/class-rcno-template-tags.php:815
 msgid "Illustrator"
 msgstr "Illustrator"
 
@@ -515,7 +519,7 @@ msgstr "Show the book's published edition for reviews?"
 #: admin/settings/class-rcno-reviews-settings-definition.php:232
 #: admin/views/rcno-general-info-metabox.php:78
 #: public/class-rcno-template-tags.php:126
-#: public/class-rcno-template-tags.php:819
+#: public/class-rcno-template-tags.php:820
 msgid "Series Number"
 msgstr "Series Number"
 
@@ -526,7 +530,7 @@ msgstr "Show the book's number in the series for reviews?"
 #: admin/settings/class-rcno-reviews-settings-definition.php:237
 #: admin/views/rcno-general-info-metabox.php:89
 #: public/class-rcno-template-tags.php:125
-#: public/class-rcno-template-tags.php:818
+#: public/class-rcno-template-tags.php:819
 msgid "Page Count"
 msgstr "Page Count"
 
@@ -536,7 +540,7 @@ msgstr "Show the book's page count for reviews?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:242
 #: public/class-rcno-template-tags.php:127
-#: public/class-rcno-template-tags.php:820
+#: public/class-rcno-template-tags.php:821
 msgid "Goodreads Rating"
 msgstr "Goodreads Rating"
 
@@ -1074,7 +1078,7 @@ msgstr "%s ago"
 
 #: admin/views/rcno-general-info-metabox.php:23
 #: public/class-rcno-template-tags.php:133
-#: public/class-rcno-template-tags.php:826
+#: public/class-rcno-template-tags.php:827
 #: public/widgets/class-rcno-reviews-book-grid.php:189
 #: public/widgets/class-rcno-reviews-book-slider.php:208
 msgid "Title"
@@ -1090,7 +1094,7 @@ msgstr "Published Format"
 
 #: admin/views/rcno-general-info-metabox.php:67
 #: public/class-rcno-template-tags.php:124
-#: public/class-rcno-template-tags.php:817
+#: public/class-rcno-template-tags.php:818
 msgid "Edition"
 msgstr "Edition"
 
@@ -1100,13 +1104,13 @@ msgstr "Goodreads ID"
 
 #: admin/views/rcno-general-info-metabox.php:110
 #: public/class-rcno-template-tags.php:129
-#: public/class-rcno-template-tags.php:822
+#: public/class-rcno-template-tags.php:823
 msgid "ISBN13"
 msgstr "ISBN13"
 
 #: admin/views/rcno-general-info-metabox.php:120
 #: public/class-rcno-template-tags.php:131
-#: public/class-rcno-template-tags.php:824
+#: public/class-rcno-template-tags.php:825
 msgid "ASIN"
 msgstr "ASIN"
 
@@ -1210,13 +1214,113 @@ msgstr ""
 msgid "Include Shortcut"
 msgstr "Include Shortcut"
 
+#: extensions/rcno-author-box/includes/author-box.php:67
+msgid "View all reviews by"
+msgstr "View all reviews by"
+
+#: extensions/rcno-author-box/includes/settings-page.php:18
+msgid "Author box title"
+msgstr "Author box title"
+
+#: extensions/rcno-author-box/includes/settings-page.php:32
+msgid "Visit your user <a href=\""
+msgstr ""
+
+#: extensions/rcno-author-box/includes/settings-page.php:38
+msgid "Facebook"
+msgstr "Facebook"
+
+#: extensions/rcno-author-box/includes/settings-page.php:60
+msgid "Twitter"
+msgstr "Twitter"
+
+#: extensions/rcno-author-box/includes/settings-page.php:82
+msgid "Google+"
+msgstr "Google+"
+
+#: extensions/rcno-author-box/includes/settings-page.php:104
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: extensions/rcno-author-box/includes/settings-page.php:126
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: extensions/rcno-author-box/rcno-author-box.php:13
+msgid "Author Box"
+msgstr "Author Box"
+
+#: extensions/rcno-author-box/rcno-author-box.php:14
+msgid "Adds a post author box below book reviews"
+msgstr "Adds a post author box below book reviews"
+
+#: includes/abstracts/Abstract_Rcno_Extension.php:69
+#: includes/class-rcno-reviews-extensions.php:176
+msgid "Activate"
+msgstr "Activate"
+
+#: includes/abstracts/Abstract_Rcno_Extension.php:82
+#: includes/class-rcno-reviews-extensions.php:177
+msgid "Deactivate"
+msgstr "Deactivate"
+
 #: includes/class-rcno-goodreads-api.php:108
 msgid "There was an error fetch data from GoodReads"
 msgstr "There was an error fetch data from GoodReads"
 
+#: includes/class-rcno-reviews-extensions.php:87
+msgid "Extensions"
+msgstr "Extensions"
+
+#: includes/class-rcno-reviews-extensions.php:101
+msgid ""
+"All Recencio Review Extensions. Choose which you want to use, then activate "
+"it."
+msgstr ""
+"All Recencio Review Extensions. Choose which you want to use, then activate "
+"it."
+
+#: includes/class-rcno-reviews-extensions.php:106
+msgid "No extensions are installed or activated."
+msgstr "No extensions are installed or activated."
+
+#: includes/class-rcno-reviews-extensions.php:194
+#: includes/class-rcno-reviews-extensions.php:241
+msgid "Something went wrong!"
+msgstr "Something went wrong!"
+
+#: includes/class-rcno-reviews-extensions.php:200
+msgid "No extension data was sent"
+msgstr "No extension data was sent"
+
+#: includes/class-rcno-reviews-extensions.php:219
+msgid "Activated"
+msgstr "Activated"
+
+#: includes/class-rcno-reviews-extensions.php:225
+msgid "Already activated"
+msgstr "Already activated"
+
+#: includes/class-rcno-reviews-extensions.php:229
+#: includes/class-rcno-reviews-extensions.php:266
+msgid "Nothing happened"
+msgstr "Nothing happened"
+
+#: includes/class-rcno-reviews-extensions.php:246
+msgid "No extension data sent"
+msgstr "No extension data sent"
+
+#: includes/class-rcno-reviews-extensions.php:260
+msgid "Deactivated"
+msgstr "Deactivated"
+
+#: includes/class-rcno-reviews-extensions.php:263
+msgid "Not activated"
+msgstr "Not activated"
+
 #: includes/class-rcno-reviews-shortcodes.php:267
-#: public/class-rcno-template-tags.php:1028
-#: public/class-rcno-template-tags.php:1150
+#: public/class-rcno-template-tags.php:1029
+#: public/class-rcno-template-tags.php:1151
 #: public/shortcodes/class-rcno-book-list-shortcode.php:95
 msgid "Books in this series: "
 msgstr "Books in this series: "
@@ -1262,22 +1366,22 @@ msgid "Tag"
 msgstr "Tag"
 
 #: public/class-rcno-template-tags.php:122
-#: public/class-rcno-template-tags.php:815
+#: public/class-rcno-template-tags.php:816
 msgid "Published"
 msgstr "Published"
 
 #: public/class-rcno-template-tags.php:123
-#: public/class-rcno-template-tags.php:816
+#: public/class-rcno-template-tags.php:817
 msgid "Format"
 msgstr "Format"
 
 #: public/class-rcno-template-tags.php:130
-#: public/class-rcno-template-tags.php:823
+#: public/class-rcno-template-tags.php:824
 msgid "ISBN"
 msgstr "ISBN"
 
 #: public/class-rcno-template-tags.php:132
-#: public/class-rcno-template-tags.php:825
+#: public/class-rcno-template-tags.php:826
 msgid "Goodreads URL"
 msgstr "Goodreads URL"
 
@@ -1293,15 +1397,15 @@ msgstr "No Cover Available"
 msgid "no-book-cover-available"
 msgstr "no-book-cover-available"
 
-#: public/class-rcno-template-tags.php:1101
+#: public/class-rcno-template-tags.php:1102
 msgid "No entries found for the "
 msgstr "No entries found for the "
 
-#: public/class-rcno-template-tags.php:1103
+#: public/class-rcno-template-tags.php:1104
 msgid " taxonomy."
 msgstr " taxonomy."
 
-#: public/class-rcno-template-tags.php:1318
+#: public/class-rcno-template-tags.php:1319
 msgid "Overall Score"
 msgstr "Overall Score"
 
@@ -1432,7 +1536,7 @@ msgstr "Examples of the review box shortcode"
 msgid "Select"
 msgstr "Select"
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:94
+#: public/shortcodes/layouts/rcno-isotope-grid.php:97
 #: public/templates/rcno_default/reviews_grid.php:67
 #: public/templates/rcno_default/reviews_index.php:105
 msgid "There are no book reviews to display."

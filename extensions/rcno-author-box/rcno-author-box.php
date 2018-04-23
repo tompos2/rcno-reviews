@@ -10,8 +10,8 @@ class Rcno_Author_Box extends Abstract_Rcno_Extension {
 	public function __construct() {
 		$this->id       = 'rcno_author_box';
 		$this->image    = plugin_dir_url( __FILE__ ) . 'assets/images/rcno-author-box-icon.png';
-		$this->title    = __( 'Author Box', 'wzy-media' );
-		$this->desc     = __( 'Adds a post author box below book reviews', 'rcno-reviews' );
+		$this->title    = __( 'Author Box', 'rcno-reviews' );
+		$this->desc     = __( 'Adds a review author box below your published book reviews. Please visit your website\'s user profile page to add your social media profile information.', 'rcno-reviews' );
 		$this->settings = true;
 	}
 
@@ -40,7 +40,7 @@ class Rcno_Author_Box extends Abstract_Rcno_Extension {
 	 * Add WordPress filters are called here.
 	 */
 	private function add_filters() {
-
+		add_filter( 'user_contactmethods', array( $this, 'add_social_media_fields' ) );
 	}
 
 	/**
@@ -105,6 +105,25 @@ class Rcno_Author_Box extends Abstract_Rcno_Extension {
 	 */
 	public function render_settings_page() {
 		include __DIR__ . '/includes/settings-page.php';
+	}
+
+
+	/**
+	 * Adds new social media profile fields to edit user screen
+	 *
+	 * @param array $profile_fields
+	 *
+	 * @return array
+	 */
+	public function add_social_media_fields( $profile_fields ) {
+		// Add new fields
+		$profile_fields['facebook'] = 'Facebook URL';
+		$profile_fields['twitter']  = 'Twitter Username';
+		$profile_fields['google']   = 'Google+ URL';
+		$profile_fields['linkedin'] = 'LinkedIn URL';
+		$profile_fields['tumblr']   = 'Tumblr URL';
+
+		return $profile_fields;
 	}
 
 	/**

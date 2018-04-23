@@ -197,7 +197,7 @@ class Rcno_Reviews_Extensions {
 
 		// If we don't have an extension id, don't process any further.
 		if ( ! isset( $_POST[ 'extension' ] ) ) {
-			wp_send_json_error( array( 'message' => __( 'No Extension was Sent', 'rcno-reviews' ) ) );
+			wp_send_json_error( array( 'message' => __( 'No extension data was sent', 'rcno-reviews' ) ) );
 			die();
 		}
 		// The extension to activate
@@ -222,11 +222,11 @@ class Rcno_Reviews_Extensions {
 
 		} else {
 			// Our extension is already active.
-			wp_send_json_success( array( 'message' => __( 'Already Activated', 'rcno-reviews' ) ) );
+			wp_send_json_success( array( 'message' => __( 'Already activated', 'rcno-reviews' ) ) );
 			die();
 		}
 		// Extension might not be registered.
-		wp_send_json_error( array( 'message' => __( 'Nothing Happened', 'rcno-reviews' ) ) );
+		wp_send_json_error( array( 'message' => __( 'Nothing happened', 'rcno-reviews' ) ) );
 		die();
 	}
 
@@ -243,7 +243,7 @@ class Rcno_Reviews_Extensions {
 		}
 		// If we don't have an extension id, don't process any further.
 		if ( ! isset( $_POST[ 'extension' ] ) ) {
-			wp_send_json_error( array( 'message' => __( 'No Integration Sent', 'rcno-reviews' ) ) );
+			wp_send_json_error( array( 'message' => __( 'No extension data sent', 'rcno-reviews' ) ) );
 			die();
 		}
 		// The extension to activate
@@ -260,10 +260,10 @@ class Rcno_Reviews_Extensions {
 			wp_send_json_success( array( 'message' => __( 'Deactivated', 'rcno-reviews' ) ) );
 			die();
 		} else {
-			wp_send_json_error( array( 'message' => __( 'Not Activated', 'rcno-reviews' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Not activated', 'rcno-reviews' ) ) );
 			die();
 		}
-		wp_send_json_error( array( 'message' => __( 'Nothing Happened', 'rcno-reviews' ) ) );
+		wp_send_json_error( array( 'message' => __( 'Nothing happened', 'rcno-reviews' ) ) );
 		die();
 	}
 

@@ -42,6 +42,7 @@ And, all of the above is SEO friendly by way of validated JSON+LD metadata for t
 * 5 custom widgets such as a book cover slider and book cover grid
 * site visitor rating system via the builtin comment form, or disable it if you want to
 * basic support of the new WP REST API system
+* extendable 3rd party extension/module system for easy creation of new features
 * have you book reviews show up in your site's RSS feed
 * create book purchase links using your own affiliate code
 * have your site visitors/reader leave a 5 rating via the comment form
@@ -76,6 +77,11 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.14.0 =
+* Added new "Extensions" feature to allow the easier addition of new features by 3rd party developers
+* Added new "Author Box" extension. More extensions coming soon, e.g., Social media share buttons
+* New social media profile fields added to WordPress user profile page
 
 = 1.12.1 =
 * Caught an error with non-object being returned in taxonomy list with sortable grid page

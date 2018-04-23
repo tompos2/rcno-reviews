@@ -53,5 +53,6 @@
     position: relative;
     border-radius: 50%;
     color: #fff;
+    box-shadow: none;
 }
 
