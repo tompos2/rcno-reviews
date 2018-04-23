@@ -1,0 +1,18 @@
+document.addEventListener('DOMContentLoaded', function(){
+    MicroModal.init();
+}, false);
+
+
+
+$(function() {
+    $( '.rcno-color-select' ).minicolors({
+        position: 'top left',
+        letterCase: 'uppercase',
+        //format: 'rgb',
+        //opacity: true,
+        /*swatches: [
+            '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#2196F3', '#03A9F4', '#00BCD4',
+            '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
+        ]*/
+    });
+});

@@ -70,7 +70,7 @@ abstract class Abstract_Rcno_Extension {
             </button>
 			<?php if ( $this->settings ) { ?>
                 <button type="button" data-extension="<?php echo $this->id; ?>"
-                        class="button button-primary button-extension-settings"
+                        class="button button-primary <?php echo $this->id; ?>-settings"
                         data-micromodal-trigger="<?php echo $this->id; ?>"
                         style="display: none">
 					<?php _e( 'Settings', 'rcno-reviews' ); ?>
@@ -83,7 +83,7 @@ abstract class Abstract_Rcno_Extension {
             </button>
             <?php if ( $this->settings ) { ?>
                 <button type="button" data-extension="<?php echo $this->id; ?>"
-                        class="button button-primary button-extension-settings"
+                        class="button button-primary <?php echo $this->id; ?>-settings"
                         data-micromodal-trigger="<?php echo $this->id; ?>">
                     <?php _e( 'Settings', 'rcno-reviews' ); ?>
                 </button>

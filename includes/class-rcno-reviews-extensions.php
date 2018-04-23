@@ -82,8 +82,8 @@ class Rcno_Reviews_Extensions {
 	public function rcno_add_extensions_page() {
 
 		add_submenu_page(
-			'edit.php?post_type=rcno_review', // Put your cpt slug if you have one
-			__( 'Recencio Extensions', 'rcno-reviews' ),
+			'edit.php?post_type=rcno_review',
+			'Recencio Extensions',
 			__( 'Extensions', 'rcno-reviews' ),
 			'manage_options',
 			'rcno_extensions',
@@ -163,10 +163,11 @@ class Rcno_Reviews_Extensions {
 			return false;
 		}
 
-		wp_register_script( $this->plugin_name . '-admin-extensions-js', RCNO_PLUGIN_URI . '/admin/js/rcno-extension-admin.js',
+		wp_enqueue_script( 'rcno-micromodal-script', RCNO_PLUGIN_URI . 'admin/js/micromodal.min.js', array(), '0.3.2', true );
+		wp_enqueue_script( 'rcno-extensions-admin-script', RCNO_PLUGIN_URI . 'admin/js/rcno-extension-admin.js',
 			array( 'jquery' ), $this->version, true );
 		wp_localize_script(
-			$this->plugin_name . '-admin-extensions-js',
+			'rcno-extensions-admin-script',
 			'rcno_extension_admin',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -176,7 +177,9 @@ class Rcno_Reviews_Extensions {
 					'deactivate' => __( 'Deactivate', 'rcno-reviews' ),
 				),
 			) );
-		wp_enqueue_script( $this->plugin_name . '-admin-extensions-js' ); // TODO: This should go somewhere else.
+		wp_enqueue_style( 'rcno-micromodal-styles', RCNO_PLUGIN_URI . 'admin/css/micromodal.css', array(), $this->version  );
+
+		return true;
 	}
 
 	/**

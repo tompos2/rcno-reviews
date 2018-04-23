@@ -186,6 +186,7 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'admin/class-rcno-currently-reading.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-extensions.php';
+		require_once plugin_dir_path( __DIR__ ) . 'extensions/rcno-author-box/rcno-author-box.php';
 
 		$this->loader = new Rcno_Reviews_Loader();
 	}
@@ -410,7 +411,7 @@ class Rcno_Reviews {
 	}
 
 	/**
-	 * Register all of the hooks related to the public-facing WP REST API  functionalities.
+	 * Register all of the hooks related to the public-facing WP REST API  functionality.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -434,13 +435,13 @@ class Rcno_Reviews {
 	 */
 	private function define_external_hooks() {
 
-		$goodreads   = new Rcno_Goodreads_API();
-		$googlebooks = new Rcno_Reviews_GoogleBooks_API( $this->get_plugin_name(), $this->get_version() );
+		$goodreads    = new Rcno_Goodreads_API();
+		$google_books = new Rcno_Reviews_GoogleBooks_API( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $goodreads, 'rcno_enqueue_gr_scripts' );
 		//$this->loader->add_action( 'wp_ajax_save_post_meta', $goodreads, 'gr_ajax_save_post_meta' );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $googlebooks, 'rcno_enqueue_gb_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $google_books, 'rcno_enqueue_gb_scripts' );
 	}
 
 
@@ -547,6 +548,9 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'wp_ajax_rcno_activate_extension_ajax', $extensions, 'rcno_activate_extension_ajax' );
 		$this->loader->add_action( 'wp_ajax_rcno_deactivate_extension_ajax', $extensions, 'rcno_deactivate_extension_ajax' );
 		$this->loader->add_action( 'wp_loaded', $extensions, 'rcno_load_extensions' );
+
+		$author_box = new Rcno_Author_Box();
+		$this->loader->add_filter( 'rcno_reviews_extensions', $author_box, 'add_author_box_extension' );
 	}
 
 	/**
