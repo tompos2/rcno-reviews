@@ -243,6 +243,11 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
+				'rcno_show_book_cover_url'                   => array(
+					'name' => __( 'Book Cover Custom URL', 'rcno-reviews' ),
+					'desc' => __( 'Show the custom book cover URL field?', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
 				'spacer2'                               => array(
 					'name' => '',
 					'type' => 'spacer',

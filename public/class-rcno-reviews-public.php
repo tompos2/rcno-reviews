@@ -168,10 +168,8 @@ class Rcno_Reviews_Public {
 				return;
 			}
 
-			$reviews_on_homepage = Rcno_Reviews_Option::get_option( 'rcno_reviews_on_homepage' );
-
 			// Add 'rcno_review' CPT to homepage if set in options.
-			if ( true === (bool) $reviews_on_homepage ) {
+			if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_on_homepage' ) ) {
 				if ( is_home() || $query->is_home() || $query->is_front_page() ) {
 					$this->rcno_add_review_to_query( $query );
 				}
@@ -486,6 +484,7 @@ class Rcno_Reviews_Public {
 				global $post;
 				$posts[] = $post;
 			}
+			wp_reset_postdata();
 		}
 
 		// Include the taxonomy file.
@@ -548,6 +547,7 @@ class Rcno_Reviews_Public {
 				global $post;
 				$posts[] = $post;
 			}
+			wp_reset_postdata();
 		}
 
 		// Include the taxonomy file.

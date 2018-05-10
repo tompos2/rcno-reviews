@@ -78,6 +78,11 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.15.0 =
+* Added an option for adding custom links to book covers in single reviews
+* Fixed a bug where the comment form was displayed on pages with certain shortcodes
+* Minor style fixes
+
 = 1.14.0 =
 * Added new "Extensions" feature to allow the easier addition of new features by 3rd party developers
 * Added new "Author Box" extension. More extensions coming soon, e.g., Social media share buttons

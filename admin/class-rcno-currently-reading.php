@@ -304,7 +304,4 @@ class Rcno_Currently_Reading {
 
 		return rest_ensure_response( $this->rcno_get_currently_reading_progress() );
 	}
-
-
-
 }

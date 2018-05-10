@@ -4,7 +4,7 @@
  * Render a list of all book reviews.
  */
 
-$template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+$template        = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 $ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
 $articles_list   = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) );
 $articles_list   = implode( '|', $articles_list ) . '|\d+'; // @TODO: Figure out a better way to handle this.

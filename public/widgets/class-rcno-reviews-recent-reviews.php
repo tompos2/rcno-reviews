@@ -95,15 +95,14 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		echo $before_widget;
 
 		// Output the title (if we have any).
-		if ( $instance['title'] ) {
+		if ( isset( $instance['title'] ) ) {
 			echo $before_title . sanitize_text_field( $instance['title'] ) . $after_title;
 		}
 
 		// Begin frontend output.
 		$query_args     = array(
 			'post_type'      => 'rcno_review',
-			'posts_per_page' => (int) $instance['review_count'],
-			//'orderby'        => 'rand',
+			'posts_per_page' => isset( $instance['review_count'] ) ? (int) $instance['review_count'] : 5,
 		);
 		$recent_reviews = new WP_Query( $query_args );
 

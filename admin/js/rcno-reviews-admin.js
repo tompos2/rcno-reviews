@@ -26,7 +26,7 @@
 			.open();
 		} );
 
-		// Settings page up load button
+		// Settings page upload button
 		$( '#rcno_settings_export' ).on( 'click', function( e ) {
 			e.preventDefault();
 			$.ajax( {
@@ -246,6 +246,7 @@
 
 			// Read the JSON data returned from the Media Uploader.
 			var json = file_frame.state().get( 'selection' ).first().toJSON();
+			console.log(json);
 
 			// First, make sure that we have the URL of an image to display.
 			if ( 0 > $.trim( json.url.length ) ) {
@@ -256,7 +257,7 @@
 			$( '#rcno-reviews-book-cover-container' )
 			.children( 'img' )
 			.attr( 'src', json.url )
-			.attr( 'alt', json.caption )
+			.attr( 'alt', json.alt )
 			.attr( 'title', json.title )
 			.attr( 'data-id', json.id )
 			.show()
@@ -290,7 +291,7 @@
 
 		// First, we'll hide the image
 		$('#rcno-reviews-book-cover-container').children('img').hide();
-		$('#rcno-add-book-cover').parent().show();
+		$('#rcno-add-book-cover').show();
 
 		// Finally, we add the 'hidden' class back to this anchor's parent
 		$('#rcno-remove-book-cover').addClass('hidden');

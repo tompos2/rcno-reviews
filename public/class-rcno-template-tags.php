@@ -58,6 +58,15 @@ class Rcno_Template_Tags {
 	protected $private_score;
 
 	/**
+	 * The book meta keys used by the plugin
+	 *
+	 * @since    1.15.0
+	 * @access   public
+	 * @var      array $meta_keys An array of all the meta keys.
+	 */
+	public $meta_keys;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
@@ -68,6 +77,22 @@ class Rcno_Template_Tags {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+
+		$this->meta_keys = array(
+			'rcno_book_illustrator'   => __( 'Illustrator', 'rcno-reviews' ),
+			'rcno_book_pub_date'      => __( 'Published', 'rcno-reviews' ),
+			'rcno_book_pub_format'    => __( 'Format', 'rcno-reviews' ),
+			'rcno_book_pub_edition'   => __( 'Edition', 'rcno-reviews' ),
+			'rcno_book_page_count'    => __( 'Page Count', 'rcno-reviews' ),
+			'rcno_book_series_number' => __( 'Series Number', 'rcno-reviews' ),
+			'rcno_book_gr_review'     => __( 'Goodreads Rating', 'rcno-reviews' ),
+			'rcno_book_gr_id'         => __( 'Goodreads ID', 'rcno-reviews' ),
+			'rcno_book_isbn13'        => __( 'ISBN13', 'rcno-reviews' ),
+			'rcno_book_isbn'          => __( 'ISBN', 'rcno-reviews' ),
+			'rcno_book_asin'          => __( 'ASIN', 'rcno-reviews' ),
+			'rcno_book_gr_url'        => __( 'Goodreads URL', 'rcno-reviews' ),
+			'rcno_book_title'         => __( 'Title', 'rcno-reviews' ),
+		);
 	}
 
 
@@ -117,22 +142,7 @@ class Rcno_Template_Tags {
 			);
 		}
 
-		$meta_keys = array(
-			'rcno_book_illustrator'   => __( 'Illustrator', 'rcno-reviews' ),
-			'rcno_book_pub_date'      => __( 'Published', 'rcno-reviews' ),
-			'rcno_book_pub_format'    => __( 'Format', 'rcno-reviews' ),
-			'rcno_book_pub_edition'   => __( 'Edition', 'rcno-reviews' ),
-			'rcno_book_page_count'    => __( 'Page Count', 'rcno-reviews' ),
-			'rcno_book_series_number' => __( 'Series Number', 'rcno-reviews' ),
-			'rcno_book_gr_review'     => __( 'Goodreads Rating', 'rcno-reviews' ),
-			'rcno_book_gr_id'         => __( 'Goodreads ID', 'rcno-reviews' ),
-			'rcno_book_isbn13'        => __( 'ISBN13', 'rcno-reviews' ),
-			'rcno_book_isbn'          => __( 'ISBN', 'rcno-reviews' ),
-			'rcno_book_asin'          => __( 'ASIN', 'rcno-reviews' ),
-			'rcno_book_gr_url'        => __( 'Goodreads URL', 'rcno-reviews' ),
-			'rcno_book_title'         => __( 'Title', 'rcno-reviews' ),
-		);
-
+		$meta_keys         = $this->meta_keys;
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
 
@@ -171,6 +181,11 @@ class Rcno_Template_Tags {
 		$default_meta   = implode( ',', $this->get_rcno_book_meta_keys( 'keys', 8 ) );
 		$selected_meta  = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_book_details_meta', $default_meta ) );
 		$book_meta_keys = $this->get_rcno_book_meta_keys( 'keys' );
+		$custom_url     = ! empty( get_post_meta( $review_id, 'rcno_reviews_book_cover_url', true ) )
+						  ? get_post_meta( $review_id, 'rcno_reviews_book_cover_url', true )
+						  : '';
+		$enable_custom_link = apply_filters( 'rcno_book_cover_enable_custom_link', is_single() );
+		$rel_attributes     = apply_filters( 'rcno_custom_link_alt_tags', array( 'nofollow', 'noopener' ) );
 
 		if ( ! $selected_meta ) {
 			return false;
@@ -179,7 +194,17 @@ class Rcno_Template_Tags {
 		$out = '';
 		$out .= '<div class="rcno-full-book">';
 		$out .= '<div class="rcno-full-book-cover">';
-		$out .= $this->get_the_rcno_book_cover( $review_id, $size );
+
+		if ( '' !== $custom_url && $enable_custom_link ) {
+			$out .= '<a href="' . esc_url( $custom_url ) . '" ';
+			$out .= 'target="_blank" rel="' . implode( ' ', $rel_attributes ) . '" ';
+			$out .= '/>';
+			$out .= $this->get_the_rcno_book_cover( $review_id, $size );
+			$out .= '</a>';
+		} else {
+			$out .= $this->get_the_rcno_book_cover( $review_id, $size );
+		}
+
 		$out .= $this->get_the_rcno_admin_book_rating( $review_id );
 		$out .= '</div>';
 
@@ -240,8 +265,8 @@ class Rcno_Template_Tags {
 			return false;
 		}
 
-		$book_rating          = (float) $review['rcno_admin_rating'][0];
-		$background           = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
+		$book_rating = (float) $review['rcno_admin_rating'][0];
+		$background  = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
 
 		if ( false === $display) {
 			return $book_rating;
@@ -424,7 +449,7 @@ class Rcno_Template_Tags {
 
 		$tax_label = $tax->labels->name;
 
-		if ( count( $counts ) === 1 ) { // If we have only 1 term singularize the label name.
+		if ( count( $counts ) === 1 ) { // If we have only 1 term singular-ize the label name.
 			$tax_label = Rcno_Pluralize_Helper::singularize( $tax_label );
 		}
 
@@ -809,23 +834,8 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '', $label = true ) {
 
-		$review = get_post_custom( $review_id );
-
-		$meta_keys = array(
-			'rcno_book_illustrator'   => __( 'Illustrator', 'rcno-reviews' ),
-			'rcno_book_pub_date'      => __( 'Published', 'rcno-reviews' ),
-			'rcno_book_pub_format'    => __( 'Format', 'rcno-reviews' ),
-			'rcno_book_pub_edition'   => __( 'Edition', 'rcno-reviews' ),
-			'rcno_book_page_count'    => __( 'Page Count', 'rcno-reviews' ),
-			'rcno_book_series_number' => __( 'Series Number', 'rcno-reviews' ),
-			'rcno_book_gr_review'     => __( 'Goodreads Rating', 'rcno-reviews' ),
-			'rcno_book_gr_id'         => __( 'Goodreads ID', 'rcno-reviews' ),
-			'rcno_book_isbn13'        => __( 'ISBN13', 'rcno-reviews' ),
-			'rcno_book_isbn'          => __( 'ISBN', 'rcno-reviews' ),
-			'rcno_book_asin'          => __( 'ASIN', 'rcno-reviews' ),
-			'rcno_book_gr_url'        => __( 'Goodreads URL', 'rcno-reviews' ),
-			'rcno_book_title'         => __( 'Title', 'rcno-reviews' ),
-		);
+		$review    = get_post_custom( $review_id );
+		$meta_keys = $this->meta_keys;
 
 		$wrappers = array(
 			'',
@@ -1301,7 +1311,7 @@ class Rcno_Template_Tags {
 
 		$score_array = array();
 
-		foreach ( $rating_criteria as $criteria ) {
+		foreach ( (array) $rating_criteria as $criteria ) {
 			$score_array[] = $criteria['score'];
 		}
 
@@ -1324,7 +1334,7 @@ class Rcno_Template_Tags {
 		$output .= '</div>';
 		$output .= '</div>';
 		$output .= '<ul>';
-		foreach ( $rating_criteria as $criteria ) {
+		foreach ( (array) $rating_criteria as $criteria ) {
 			$percentage_score = ( $criteria['score'] / 5 ) * 100;
 
 			if ( $criteria['label'] ) {
@@ -1452,7 +1462,7 @@ class Rcno_Template_Tags {
 		$scores        = array();
 
 		if ( $review_scores ) {
-			foreach ( $review_scores as $score ) {
+			foreach ( (array) $review_scores as $score ) {
 				$scores[] = $score['score'];
 			}
 		}
@@ -1473,17 +1483,17 @@ class Rcno_Template_Tags {
 
 		$data = array();
 
-		$book_title = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
-		$book_fmt = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false );
-		$book_author = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) );
+		$book_title      = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
+		$book_fmt        = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false );
+		$book_author     = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) );
 		$book_review_url = get_post_permalink( $review_id );
-		$book_pub_date = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
-		$book_genre = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
-		$book_publisher = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) );
-		$book_isbn = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
-		$book_edtn = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false );
-		$book_pc = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
-		$book_ext_url = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false );
+		$book_pub_date   = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
+		$book_genre      = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
+		$book_publisher  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) );
+		$book_isbn       = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
+		$book_edtn       = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false );
+		$book_pc         = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
+		$book_ext_url    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false );
 
 		$book_aut_url = '';
 		$author_terms = get_the_terms( $review_id, 'rcno_author' );
