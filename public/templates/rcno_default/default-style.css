@@ -23,7 +23,23 @@
 }
 
 #rcno-review-score-box .review-summary {
-    margin: 0 0 0.5em 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 0 0 5px 0;
+}
+
+#rcno-review-score-box .review-summary .overall-score,
+.rcno-review-badge {
+    width: 120px;
+    height: 120px;
+    background: green;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin: 0 10px 10px 0;
+    flex: 1 1 auto;
 }
 
 #rcno-review-score-box .review-summary .review-text h2 {
@@ -31,8 +47,8 @@
 }
 
 #rcno-review-score-box .review-summary .review-text {
-    width: calc(100% - 150px);
     display: inline-block;
+    flex: 1 1 75%;
 }
 
 #rcno-review-score-box .review-summary .review-text p {
@@ -77,19 +93,6 @@
     color: #FFC107;
 }
 
-#rcno-review-score-box .review-summary .overall-score,
-.rcno-review-badge {
-    width: 120px;
-    height: 120px;
-    background: green;
-    padding: 5px;
-    text-align: center;
-    display: inline-block;
-    position: relative;
-    float: left;
-    margin: 0 15px 0 0;
-}
-
 .rcno-review-badge {
     padding: 5px 5px 0 5px;
 }
@@ -97,7 +100,7 @@
 #rcno-review-score-box .review-summary .overall-score .overall,
 .rcno-review-badge .score {
     color: #fff;
-    font-size: 55px;
+    font-size: 3.5em;
     font-weight: 800;
     display: block;
     line-height: 1;
@@ -127,6 +130,7 @@
     padding: 10px 7px;
     background: black;
     left: 0;
+    width: 100%;
 }
 
 #rcno-review-score-box .review-summary .overall-text {
@@ -209,7 +213,9 @@
 }
 
 .rcno-purchase-links-container a {
-    padding: 5px;
+    padding: 2px 10px;
+    display: inline-block;
+    margin: 0 0 5px 0;
 }
 
 ul.rcno-alphabet-navigation {
@@ -237,6 +243,10 @@ ul.rcno-taxlist li {
     .rcno-full-book-cover {
         width: 100%;
         margin: 0 0 1em 0;
+    }
+
+    #rcno-review-score-box .review-summary .overall-score {
+        margin-right: 0;
     }
 
 }

@@ -219,7 +219,7 @@ class Rcno_Reviews {
 		$plugin_admin = new Rcno_Reviews_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		// Creates the book review custom post type.
-		$this->loader->add_action( 'init', $plugin_admin, 'rcno_review_posttype' );
+		$this->loader->add_action( 'init', $plugin_admin, 'rcno_review_post_type' );
 
 		// Creates the book review custom taxonomy.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_custom_taxonomy' );

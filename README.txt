@@ -24,7 +24,7 @@ Of course you can use all the WordPress goodies you know from posts on book revi
 Despite it’s simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t
 need can be deactivated and are hidden from the UI. You can even create your own book review template files to gain complete control the look and feel of book reviews.
 
-And, all of the above is SEO friendly by way of validated JSON+LD metadata for the 'Book' and 'Review' schema markup.
+And, all of the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
 
 = Features =
 
@@ -37,7 +37,7 @@ And, all of the above is SEO friendly by way of validated JSON+LD metadata for t
 * use default post categories and tags on book reviews as well, or disable them if you want to
 * access reviews by alphabetical indices of review title or taxonomy entries such as book author or book publisher
 * include book reviews in your normal posts or pages using shortcodes
-* search engine friendly book review output using schema.org‘s review and book metadata as JSON+LD
+* search engine friendly book review output using schema.org‘s review and book metadata as JSON-LD
 * choose between 4 different templates to determine how your book review should look or create your own custom layout
 * 5 custom widgets such as a book cover slider and book cover grid
 * site visitor rating system via the builtin comment form, or disable it if you want to
@@ -77,6 +77,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.15.1 =
+* Made some adjustments to the review box styling for the default template
 
 = 1.15.0 =
 * Added an option for adding custom links to book covers in single reviews

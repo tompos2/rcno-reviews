@@ -112,7 +112,7 @@ class Rcno_Reviews_Admin {
 	public $buy_links;
 
 	/**
-	 * Instance of the Rcno_Admin_Buy_Links class handling the purchase links.
+	 * An array of uncountable words such as sheep.
 	 *
 	 * @since  1.7.1
 	 * @access public
@@ -277,7 +277,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @return  void
 	 */
-	public function rcno_review_posttype() {
+	public function rcno_review_post_type() {
 
 		$cap_type = 'post';
 		$cpt_name = 'rcno_review';

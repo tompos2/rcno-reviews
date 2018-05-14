@@ -1281,7 +1281,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @param  int $review_id	The current review's post ID.
 	 *
-	 * @return string|null|false
+	 * @return string|false
 	 */
 	public function get_the_rcno_review_box( $review_id ) {
 
@@ -1297,12 +1297,13 @@ class Rcno_Template_Tags {
 
 		$background = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_background' );
 		$accent     = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_accent' );
+		$accent_2     = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_accent_2' );
 
 		$rating_type     = get_post_meta( $review_id, 'rcno_review_score_type', true );
 		$rating_criteria = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
 
 		if ( '' === $rating_criteria ) {
-			return null; // We are not doing anything if a review score has not been set.
+			return false; // We are not doing anything if a review score has not been set.
 		}
 
 		$rating_criteria_count = count( $rating_criteria );
@@ -1317,16 +1318,16 @@ class Rcno_Template_Tags {
 
 
 		$final_score = array_sum( $score_array );
-		$final_score = $final_score / $rating_criteria_count;
+		$final_score /= $rating_criteria_count; // $final_score / $rating_criteria_count
 		$final_score = number_format( $final_score, 1, '.', '' );
 
 
 		$output = '';
 		$output .= '<div id="rcno-review-score-box" style="background:' . $background . '">';
 		$output .= '<div class="review-summary">';
-		$output .= '<div class="overall-score" style="background:' . $accent . '">';
+		$output .= '<div class="overall-score" style="background:' . $accent . ';">';
 		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
-		$output .= '<span class="overall-text">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
+		$output .= '<span class="overall-text" style="background: ' . $accent_2 . ';">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
 		$output .= '<h2 class="review-title">' . $review_box_title . '</h2>';
@@ -1415,7 +1416,7 @@ class Rcno_Template_Tags {
 		}
 
 		$final_score = array_sum( $score_array );
-		$final_score = $final_score / $rating_criteria_count;
+		$final_score /= $rating_criteria_count; // $final_score / $rating_criteria_count
 		$final_score = number_format( $final_score, 1, '.', '' );
 
 		$out .= '<div class="rcno-review-badge review-badge-' . $rating_type . '" ';
