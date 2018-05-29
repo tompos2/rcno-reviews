@@ -140,7 +140,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 /* ucc_get_calendar() :: Extends get_calendar() by including custom post types.
  * Derived from get_calendar() code in /wp-includes/general-template.php.
  */
-function ucc_get_calendar( $post_types = array(), $initial = true, $echo = true, $regular_posts = false ) {
+function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $regular_posts = false ) {
 	global $wpdb, $m, $monthnum, $year, $wp_locale, $posts;
 	$custom_post_type = get_post_type_object( 'rcno_review' );
 

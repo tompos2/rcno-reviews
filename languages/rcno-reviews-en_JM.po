@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2018-05-09 15:42-0500\n"
-"PO-Revision-Date: 2018-05-09 15:43-0500\n"
+"POT-Creation-Date: 2018-05-28 18:47-0500\n"
+"PO-Revision-Date: 2018-05-28 18:47-0500\n"
 "Last-Translator: w33zy <wzy@outlook.com>\n"
 "Language-Team: English (Jamaica)\n"
 "Language: en_JM\n"
@@ -47,7 +47,9 @@ msgid "5 Star Rating"
 msgstr "5 Star Rating"
 
 #: admin/class-rcno-admin-review-score.php:65
-#: public/class-rcno-template-tags.php:1427
+#: admin/class-rcno-reviews-admin.php:1282
+#: admin/class-rcno-reviews-admin.php:1287
+#: public/class-rcno-template-tags.php:1429
 msgid "Review Score"
 msgstr "Review Score"
 
@@ -278,6 +280,31 @@ msgstr "View review"
 msgid "Preview review"
 msgstr "Preview review"
 
+#: admin/class-rcno-reviews-admin.php:1224
+msgid ""
+"When you leave a review on this site, we will store your provided name, "
+"email\n"
+"        address, IP address, review text and review rating to our website. \n"
+"        \n"
+"        Example.com may chose to share your review text, \n"
+"        review rating and name with Google for the express purpose of "
+"enabling Structured Data \n"
+"        markup for our reviews on their search result pages."
+msgstr ""
+"When you leave a review on this site, we will store your provided name, "
+"email\n"
+"        address, IP address, review text and review rating to our website. \n"
+"        \n"
+"        Example.com may chose to share your review text, \n"
+"        review rating and name with Google for the express purpose of "
+"enabling Structured Data \n"
+"        markup for our reviews on their search result pages."
+
+#: admin/class-rcno-reviews-admin.php:1367
+#: admin/class-rcno-reviews-admin.php:1384
+msgid "Recencio Book Reviews Plugin"
+msgstr "Recencio Book Reviews Plugin"
+
 #: admin/settings/class-rcno-reviews-callback-helper.php:63
 #, php-format
 msgid "The callback function used for <strong>%s</strong> setting is missing."
@@ -294,19 +321,19 @@ msgstr "Options for %s multicheck is missing."
 msgid "Options for <strong>%s</strong> radio is missing."
 msgstr "Options for %s radio is missing."
 
-#: admin/settings/class-rcno-reviews-callback-helper.php:619
+#: admin/settings/class-rcno-reviews-callback-helper.php:614
 msgid ""
 "Upload \n"
 "\t\tFile"
 msgstr "Upload File"
 
-#: admin/settings/class-rcno-reviews-callback-helper.php:641
+#: admin/settings/class-rcno-reviews-callback-helper.php:636
 msgid ""
 "Download \n"
 "\t\tFile"
 msgstr "Download File"
 
-#: admin/settings/class-rcno-reviews-callback-helper.php:665
+#: admin/settings/class-rcno-reviews-callback-helper.php:660
 msgid "Download File"
 msgstr "Download File"
 
@@ -1026,7 +1053,7 @@ msgstr "Show in table"
 msgid "Show this custom taxonomy on the admin table"
 msgstr "Show this custom taxonomy on the admin table"
 
-#: admin/settings/class-rcno-reviews-settings.php:130
+#: admin/settings/class-rcno-reviews-settings.php:127
 msgid "Please enter 2 or more lower-case characters."
 msgstr "Please enter 2 or more lower-case characters."
 
@@ -1324,8 +1351,8 @@ msgid "Not activated"
 msgstr "Not activated"
 
 #: includes/class-rcno-reviews-shortcodes.php:267
-#: public/class-rcno-template-tags.php:1039
-#: public/class-rcno-template-tags.php:1161
+#: public/class-rcno-template-tags.php:1040
+#: public/class-rcno-template-tags.php:1162
 #: public/shortcodes/class-rcno-book-list-shortcode.php:95
 msgid "Books in this series: "
 msgstr "Books in this series: "
@@ -1398,15 +1425,15 @@ msgstr "No Cover Available"
 msgid "no-book-cover-available"
 msgstr "no-book-cover-available"
 
-#: public/class-rcno-template-tags.php:1112
+#: public/class-rcno-template-tags.php:1113
 msgid "No entries found for the "
 msgstr "No entries found for the "
 
-#: public/class-rcno-template-tags.php:1114
+#: public/class-rcno-template-tags.php:1115
 msgid " taxonomy."
 msgstr " taxonomy."
 
-#: public/class-rcno-template-tags.php:1329
+#: public/class-rcno-template-tags.php:1331
 msgid "Overall Score"
 msgstr "Overall Score"
 
@@ -1533,11 +1560,11 @@ msgstr "The review ID, defaults to the review post."
 msgid "Examples of the review box shortcode:"
 msgstr "Examples of the review box shortcode"
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:50
+#: public/shortcodes/layouts/rcno-isotope-grid.php:51
 msgid "Select"
 msgstr "Select"
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:97
+#: public/shortcodes/layouts/rcno-isotope-grid.php:98
 #: public/templates/rcno_default/reviews_grid.php:67
 #: public/templates/rcno_default/reviews_index.php:105
 msgid "There are no book reviews to display."

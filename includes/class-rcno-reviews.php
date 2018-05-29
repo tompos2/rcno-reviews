@@ -224,6 +224,11 @@ class Rcno_Reviews {
 		// Creates the book review custom taxonomy.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_custom_taxonomy' );
 
+		// GDPR Support.
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'rcno_add_privacy_policy_content' );
+		$this->loader->add_filter( 'wp_privacy_personal_data_exporters', $plugin_admin, 'register_rcno_data_exporter', 10 );
+		$this->loader->add_filter( 'wp_privacy_personal_data_erasers', $plugin_admin, 'register_rcno_data_eraser', 9 );
+
 		// Creates date archive rewrite rules.
 		$this->loader->add_action( 'generate_rewrite_rules', $plugin_admin, 'rcno_date_archives_rewrite_rules' );
 
@@ -560,6 +565,7 @@ class Rcno_Reviews {
 	 */
 	public function run() {
 		$this->loader->run();
+		do_action( 'rcno_reviews_loaded' );
 	}
 
 	/**

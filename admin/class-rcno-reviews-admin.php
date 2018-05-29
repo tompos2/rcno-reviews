@@ -1209,4 +1209,182 @@ SQL;
 		wp_die();
 	}
 
+	/**
+	 * Adds example text site owners can use for their privacy policy text.
+	 *
+	 * @since 1.16.0
+	 *
+	 * @return void
+	 */
+	public function rcno_add_privacy_policy_content() {
+		if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
+			return;
+		}
+
+		$content = __( 'When you leave a review on this site, we will store your provided name, email
+        address, IP address, review text and review rating to our website. 
+        
+        Example.com may chose to share your review text, 
+        review rating and name with Google for the express purpose of enabling Structured Data 
+        markup for our reviews on their search result pages.', 'rcno-reviews' );
+
+		wp_add_privacy_policy_content(
+			'Recencio Book Reviews',
+			wp_kses_post( wpautop( $content, false ) )
+		);
+	}
+
+	/**
+	 * Adds the review score to the information that can be requested in GDPR compliance.
+	 *
+	 * @since 1.16.0
+	 *
+	 * @param string    $email_address
+	 * @param int       $page
+	 *
+	 * @return array
+	 */
+	public function rcno_data_exporter( $email_address, $page = 1 ) {
+		$number = 500; // Limit us to avoid timing out
+		$page = (int) $page;
+
+		$export_items = array();
+
+		$comments = get_comments(
+			array(
+				'author_email' => $email_address,
+				'number'       => $number,
+				'paged'        => $page,
+				'order_by'     => 'comment_ID',
+				'order'        => 'ASC',
+			)
+		);
+
+		foreach ( (array) $comments as $comment ) {
+			$review_score = get_comment_meta( $comment->comment_ID, 'rcno_review_comment_rating', true );
+
+			// Only add review score data to the export if it has been set.
+			if ( 0 !== $review_score ) {
+				// Most item IDs should look like postType-postID
+				// If you don't have a post, comment or other ID to work with,
+				// use a unique value to avoid having this item's export
+				// combined in the final report with other items of the same id
+				$item_id = "comment-{$comment->comment_ID}";
+
+				// Core group IDs include 'comments', 'posts', etc.
+				// But you can add your own group IDs as needed
+				$group_id = 'review_score';
+
+				// Optional group label. Core provides these for core groups.
+				// If you define your own group, the first exporter to
+				// include a label will be used as the group label in the
+				// final exported report
+				$group_label = __( 'Review Score', 'rcno-reviews' );
+
+				// Plugins can add as many items in the item data array as they want
+				$data = array(
+					array(
+						'name' => __( 'Review Score', 'rcno-reviews' ),
+						'value' => $review_score
+					)
+				);
+
+				$export_items[] = array(
+					'group_id' => $group_id,
+					'group_label' => $group_label,
+					'item_id' => $item_id,
+					'data' => $data,
+				);
+			}
+		}
+
+		// Tell core if we have more comments to work on still
+		$done = count( $comments ) < $number;
+		return array(
+			'data' => $export_items,
+			'done' => $done,
+		);
+	}
+
+	/**
+	 * Adds the review score to the information that can be erased in GDPR compliance.
+	 *
+	 * @since 1.16.0
+	 *
+	 * @param string    $email_address
+	 * @param int       $page
+	 *
+	 * @return array
+	 */
+	public function rcno_data_eraser( $email_address, $page = 1 ) {
+		$number = 500; // Limit us to avoid timing out
+		$page = (int) $page;
+
+		$comments = get_comments(
+			array(
+				'author_email' => $email_address,
+				'number'       => $number,
+				'paged'        => $page,
+				'order_by'     => 'comment_ID',
+				'order'        => 'ASC',
+				'include_unapproved' => true
+			)
+		);
+
+		$items_removed = false;
+
+		foreach ( (array) $comments as $comment ) {
+			$review_score  = get_comment_meta( $comment->comment_ID, 'rcno_review_comment_rating', true );
+
+			if ( 0 !== $review_score) {
+				update_comment_meta( $comment->comment_ID, 'rcno_review_comment_rating', 0 );
+				$items_removed = true;
+			}
+		}
+
+		// Tell core if we have more comments to work on still
+		$done = count( $comments ) < $number;
+
+		return array(
+			'items_removed'  => $items_removed,
+			'items_retained' => false, // always false in this example
+			'messages'       => array(), // no messages in this example
+			'done'           => $done,
+		);
+	}
+
+	/**
+	 * Registers our data exporter.
+	 *
+	 * @since 1.16.0
+	 *
+	 * @param array    $exporters
+	 *
+	 * @return array
+	 */
+	public function register_rcno_data_exporter( $exporters ) {
+		$exporters['recencio-book-reviews'] = array(
+			'exporter_friendly_name' => __( 'Recencio Book Reviews Plugin', 'rcno-reviews' ),
+			'callback' => array( $this, 'rcno_data_exporter' ),
+		);
+		return $exporters;
+	}
+
+	/**
+	 * Registers our data eraser.
+	 *
+	 * @since 1.16.0
+	 *
+	 * @param array    $erasers
+	 *
+	 * @return array
+	 */
+	public function register_rcno_data_eraser( $erasers ) {
+		$erasers['recencio-book-reviews'] = array(
+			'eraser_friendly_name' => __( 'Recencio Book Reviews Plugin', 'rcno-reviews' ),
+			'callback'             => array( $this, 'rcno_data_eraser' ),
+		);
+		return $erasers;
+	}
+
 }

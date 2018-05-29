@@ -307,7 +307,6 @@ class Rcno_Reviews_Callback_Helper {
 	public function text_callback( $args ) {
 
 		$this->input_type_callback( 'text', $args );
-
 	}
 
 	/**
@@ -350,7 +349,6 @@ class Rcno_Reviews_Callback_Helper {
 	public function email_callback( $args ) {
 
 		$this->input_type_callback( 'email', $args );
-
 	}
 
 	/**
@@ -367,7 +365,6 @@ class Rcno_Reviews_Callback_Helper {
 	public function url_callback( $args ) {
 
 		$this->input_type_callback( 'url', $args );
-
 	}
 
 	/**
@@ -384,7 +381,6 @@ class Rcno_Reviews_Callback_Helper {
 	public function password_callback( $args ) {
 
 		$this->input_type_callback( 'password', $args );
-
 	}
 
 	/**
@@ -488,9 +484,8 @@ class Rcno_Reviews_Callback_Helper {
 
 		$value = Rcno_Reviews_Option::get_option( $args['id'], $args['std'] );
 
-
 		$html = '<textarea ';
-		$html .= 'class="rcno-css-box"';
+		$html .= 'class="rcno-css-box" ';
 		$html .= 'cols="100" rows="10" ';
 		$html .= $this->get_id_and_name_attributes( $args['id'] ) . '>';
 		$html .= esc_textarea( stripslashes( $value ) );
@@ -519,7 +514,7 @@ class Rcno_Reviews_Callback_Helper {
 
 		$html = '<select ' . $this->get_id_and_name_attributes( $args['id'] ) . '/>';
 
-		foreach ( $args['options'] as $option => $option_name ) {
+		foreach ( (array) $args['options'] as $option => $option_name ) {
 			$selected = selected( $option, $value, false );
 			$html     .= '<option value="' . $option . '" ' . $selected . '>' . $option_name . '</option>';
 		}
@@ -548,7 +543,7 @@ class Rcno_Reviews_Callback_Helper {
 
 		$html = '<select ' . $this->get_id_attribute( $args['id'] ) . ' name="rcno_reviews_settings[' . $args['id'] . '][]" ' .  ' multiple />';
 
-		foreach ( $args['options'] as $option => $option_name ) {
+		foreach ( (array) $args['options'] as $option => $option_name ) {
 			if ( in_array( $option, $values, true ) ) {
 				$selected = 'selected="selected"';
 			} else {

@@ -16,10 +16,12 @@ It was designed with the book reviewer in mind and was built to be fast, easy an
 
 Recencio Book Reviews is a powerful and very flexible tool for managing your blog’s book review collection. It was designed with the book reviewer in mind and was built to be fast, easy and customizable.
 The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
+
 This plugin basically adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
 Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. As creating new book taxonomies is easy it’s up to
 you which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
 the custom widgets to create tag clouds or top ten lists.
+
 Of course you can use all the WordPress goodies you know from posts on book reviews as well: images, videos and comments.
 Despite it’s simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t
 need can be deactivated and are hidden from the UI. You can even create your own book review template files to gain complete control the look and feel of book reviews.
@@ -47,6 +49,7 @@ And, all of the above is SEO friendly by way of validated JSON-LD metadata for t
 * create book purchase links using your own affiliate code
 * have your site visitors/reader leave a 5 rating via the comment form
 * translation ready
+* GDPR compliant
 
 == Installation ==
 
@@ -77,6 +80,11 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.16.0 =
+* Added GDPR support and compliance
+* Trimmed API keys to prevent issues with extra spaces
+* Re-worked the Isotope grid page to use taxonomy label to avoid i18n issues
 
 = 1.15.1 =
 * Made some adjustments to the review box styling for the default template

@@ -89,6 +89,9 @@
 			} );
 			$('.rcno-isotope-grid-select.reset').on('click', function() {
 				$iso_grid.isotope( {filter: '*'} );
+                select.each(function() {
+                    $(this).prop( 'selectedIndex', 0 );
+                });
 			});
 		}
 	});

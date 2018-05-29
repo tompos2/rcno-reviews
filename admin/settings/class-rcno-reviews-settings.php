@@ -68,12 +68,9 @@ class Rcno_Reviews_Settings {
 	 */
 	public function __construct( $plugin_name, $settings_callback, $settings_sanitization ) {
 
-		$this->plugin_name = $plugin_name;
-
-		$this->callback = $settings_callback;
-
-		$this->sanitization = $settings_sanitization;
-
+		$this->plugin_name         = $plugin_name;
+		$this->callback            = $settings_callback;
+		$this->sanitization        = $settings_sanitization;
 		$this->registered_settings = Rcno_Reviews_Settings_Definition::get_settings();
 	}
 
@@ -99,7 +96,7 @@ class Rcno_Reviews_Settings {
 				'rcno_reviews_settings_' . $tab
 			);
 
-			foreach ( $settings as $key => $option ) {
+			foreach ( (array) $settings as $key => $option ) {
 
 				$_name = isset( $option['name'] ) ? $option['name'] : $key;
 
@@ -127,7 +124,7 @@ class Rcno_Reviews_Settings {
 						'class'   => $key . ' rcno-table-' . $option['type'],
 						'accept'  => isset( $option['accept'] ) ? $option['accept'] : 'image/*',
 						'pattern' => isset( $option['pattern'] ) ? $option['pattern'] : '{2,}',
-						'title' => isset( $option['title'] ) ? $option['title'] : __( 'Please enter 2 or more lower-case characters.', 'rcno-reviews' ),
+						'title'   => isset( $option['title'] ) ? $option['title'] : __( 'Please enter 2 or more lower-case characters.', 'rcno-reviews' ),
 					)
 				);
 			} // end foreach

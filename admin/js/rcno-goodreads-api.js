@@ -44,7 +44,7 @@
 
 			var ajx_gif = $( '.rcno-ajax-loading' );
 			var book_isbn = $( '#rcno_book_isbn' ).val().trim();
-			var api_key = gr_options.api_key;
+			var api_key = gr_options.api_key.trim();
 			// https://www.goodreads.com/book/isbn/0441172717?key=################
 			var url = 'https://www.goodreads.com/book/isbn/' + book_isbn +
 				'?key=' + api_key;

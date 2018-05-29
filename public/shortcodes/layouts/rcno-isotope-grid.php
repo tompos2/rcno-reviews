@@ -44,10 +44,11 @@ if ( $posts && count( $posts ) > 0 ) {
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], explode( ',', $options['exclude'] )  );
 		foreach ( $taxonomies as $taxonomy ) {
 			$terms = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=count&order=DESC&hide_empty=1' );
+			$_taxonomy = get_taxonomy( 'rcno_' . strtolower( $taxonomy ) ); // Using the label to avoid i18n issues.
 			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
-			$select .= '<label for="rcno-isotope-grid-select">' . $taxonomy . '</label>';
+			$select .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->label . '</label>';
 			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
-			$select .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $taxonomy ) . '</option>';
+			$select .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $_taxonomy->label ) . '</option>';
 			foreach ( $terms as $term ) {
 				if( is_object( $term ) ) {
 					$select .= '<option value="' . '.' . $term->slug . '">' . $term->name . '</option>';

@@ -793,6 +793,7 @@ class Rcno_Template_Tags {
 			$review_content .= wpautop( get_post_field( 'post_content', $review_id ) );
 		} else {
 			$review_content .= wpautop( get_the_content( $read_more ) );
+			// $review_content .= apply_filters( 'the_content', get_the_content() ); // TODO: look into this.
 		}
 
 		$review_content .= '</div>';

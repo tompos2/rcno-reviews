@@ -16,7 +16,7 @@
  * Plugin Name:       Recencio Book Reviews
  * Plugin URI:        https://recencio.com
  * Description:       A powerful and very flexible tool to manage your blog’s book review collection. Designed with the book reviewer in mind.
- * Version:           1.15.1
+ * Version:           1.16.0
  * Author:            wzyMedia
  * Author URI:        https://wzymedia.com
  * License:           GPL-2.0+
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'RCNO_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 define( 'RCNO_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RCNO_PLUGIN_URI',  plugin_dir_url( __FILE__ ) );
-define( 'RCNO_PLUGIN_VER',  '1.15.1' );
+define( 'RCNO_PLUGIN_VER',  '1.16.0' );
 define( 'RCNO_PLUGIN_NAME', 'rcno-reviews' );
 
 /**
@@ -77,7 +77,6 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-rcno-reviews.php';
 function run_rcno_reviews() {
 	$plugin = new Rcno_Reviews();
 	$plugin->run();
-	do_action( 'rcno_reviews_loaded' );
 }
 
 run_rcno_reviews();
