@@ -8,8 +8,6 @@
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/admin/views
  */
-
-
 ?>
 
 <div class="book-general-info-metaboxes">
@@ -147,5 +145,7 @@
 		<?php endif; ?>
 
 	</div>
+
+    <?php do_action( 'rcno_after_general_info_metabox' ) ?>
 
 </div>

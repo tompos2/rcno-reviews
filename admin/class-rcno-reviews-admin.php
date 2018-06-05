@@ -818,7 +818,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @return array
 	 */
-	public function rcno_query_admin_columns( $clauses, $wp_query ) {
+	public function rcno_sort_admin_columns_by_taxonomy( $clauses, $wp_query ) {
 
 		global $wpdb;
 
@@ -841,6 +841,39 @@ SQL;
 		}
 
 		return $clauses;
+	}
+
+	public function rcno_add_taxonomy_to_admin_search_join( $join ) {
+		global $pagenow, $wpdb;
+
+		// I want the filter only when performing a search on edit page of Custom Post Type named "rcno_review".
+		if ( 'edit.php' === $pagenow  && 'rcno_review' === $_GET['post_type'] && ! empty( $_GET['s'] ) && is_admin() ) {
+			$join .= 'LEFT JOIN ' . $wpdb->term_relationships . ' ON ' . $wpdb->posts . '.ID = ' . $wpdb->term_relationships . '.post_id ';
+		}
+
+		return $join;
+	}
+
+	public function rcno_add_taxonomy_to_admin_search_where( $where ) {
+		global $pagenow, $wpdb;
+
+		// I want the filter only when performing a search on edit page of Custom Post Type named "rcno_review".
+		if ( 'edit.php' === $pagenow && 'rcno_review' === $_GET['post_type'] && ! empty( $_GET['s'] ) && is_admin() ) {
+			$where = preg_replace(
+				"/\(\s*" . $wpdb->posts . ".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+				"(" . $wpdb->posts . ".post_title LIKE $1) OR (" . $wpdb->term_relationships . ".term_taxonomy_id LIKE $1)", $where );
+		}
+
+		return $where;
+	}
+
+	public function rcno_add_taxonomy_to_admin_search_group( $groupby ) {
+		global $pagenow, $wpdb;
+		if ( is_admin() && $pagenow === 'edit.php' && $_GET['post_type'] === 'rcno_review' && $_GET['s'] !== '' ) {
+			$groupby = "$wpdb->posts.ID";
+		}
+
+		return $groupby;
 	}
 
 
@@ -1385,6 +1418,25 @@ SQL;
 			'callback'             => array( $this, 'rcno_data_eraser' ),
 		);
 		return $erasers;
+	}
+
+	public function rcno_add_page_states( $states, $post ) {
+
+		$rcno_shortcodes = array(
+			'rcno-sortable-grid',
+			'rcno-reviews-grid',
+			'rcno-tax-list',
+			'rcno-reviews-index',
+			'rcno-reviews'
+		);
+
+		foreach ( $rcno_shortcodes as $rcno_shortcode ) {
+			if ( has_shortcode( $post->post_content, $rcno_shortcode ) ) {
+				$states['recencio'] = 'Recencio'; // No need for i18n as it is a brand name.
+			}
+		}
+
+		return $states;
 	}
 
 }

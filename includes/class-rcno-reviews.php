@@ -187,6 +187,7 @@ class Rcno_Reviews {
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-extensions.php';
 		require_once plugin_dir_path( __DIR__ ) . 'extensions/rcno-author-box/rcno-author-box.php';
+		require_once plugin_dir_path( __DIR__ ) . 'extensions/rcno-custom-user-metadata/rcno-custom-user-metadata.php';
 
 		$this->loader = new Rcno_Reviews_Loader();
 	}
@@ -300,7 +301,12 @@ class Rcno_Reviews {
 		$this->loader->add_filter( 'manage_rcno_review_posts_columns', $plugin_admin, 'rcno_add_remove_admin_columns' );
 		$this->loader->add_filter( 'manage_edit-rcno_review_sortable_columns', $plugin_admin, 'rcno_sort_admin_columns' );
 		$this->loader->add_filter( 'manage_rcno_review_posts_custom_column', $plugin_admin, 'rcno_add_image_column_content', 10, 2 );
-		$this->loader->add_filter( 'posts_clauses', $plugin_admin, 'rcno_query_admin_columns', 10, 2 );
+		$this->loader->add_filter( 'posts_clauses', $plugin_admin, 'rcno_sort_admin_columns_by_taxonomy', 10, 2 );
+
+		// Add custom taxonomies to admin column searching.
+		//$this->loader->add_filter( 'posts_join', $plugin_admin, 'rcno_add_taxonomy_to_admin_search_join' );
+		//$this->loader->add_filter( 'posts_where', $plugin_admin, 'rcno_add_taxonomy_to_admin_search_where' );
+		//$this->loader->add_filter( 'posts_groupby', $plugin_admin, 'rcno_add_taxonomy_to_admin_search_group' );
 
 		$this->loader->add_action( 'wp_ajax_reset_all_options', $plugin_admin, 'reset_all_options' );
 
@@ -309,6 +315,8 @@ class Rcno_Reviews {
 
 		// Add an update message.
 		//$this->loader->add_action( 'in_plugin_update_message-' . RCNO_PLUGIN_FILE, $plugin_admin, 'rcno_update_message_warning', 20, 2 );
+
+		$this->loader->add_filter( 'display_post_states', $plugin_admin, 'rcno_add_page_states', 20, 2 );
 	}
 
 	/**
@@ -556,6 +564,9 @@ class Rcno_Reviews {
 
 		$author_box = new Rcno_Author_Box();
 		$this->loader->add_filter( 'rcno_reviews_extensions', $author_box, 'add_author_box_extension' );
+
+		$custom_user_metadata = new Rcno_Custom_User_Metadata();
+		$this->loader->add_filter( 'rcno_reviews_extensions', $custom_user_metadata, 'add_custom_user_metadata_extension' );
 	}
 
 	/**

@@ -81,6 +81,11 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.17.0 =
+* Added a new "Custom User Metadata" extension
+* Add 'page states' feature to identify pages using Recencio shortcodes
+* Fixed a regression bug in the calendar widget
+
 = 1.16.0 =
 * Added GDPR support and compliance
 * Trimmed API keys to prevent issues with extra spaces

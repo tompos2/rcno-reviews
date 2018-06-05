@@ -142,7 +142,7 @@ class Rcno_Template_Tags {
 			);
 		}
 
-		$meta_keys         = $this->meta_keys;
+		$meta_keys         = apply_filters( 'rcno_all_book_meta_keys', $this->meta_keys );
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
 
@@ -353,7 +353,7 @@ class Rcno_Template_Tags {
 		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no-book-cover-available', 'rcno-reviews' );
 
 		$out = '';
-		$out .= '<img src="' . esc_attr( $book_src ) . '" ';
+		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ) ) . '" ';
 		$out .= 'title="' . $book_title . '" ';
 		$out .= 'alt="' . $book_alt . '" ';
 		$out .= 'class="rcno-book-cover" ';
@@ -560,7 +560,7 @@ class Rcno_Template_Tags {
 			foreach ( $taxonomy_values as $tax_val ) {
 				$out[] = $tax_val[0]->slug;
 				if ( count( $tax_val ) > 1 ) {
-					foreach ( $tax_val as $val ) {
+					foreach ( (array) $tax_val as $val ) {
 						$out[] = $val->slug;
 					}
 				}
@@ -647,7 +647,7 @@ class Rcno_Template_Tags {
 		$out = '';
 
 		// Render the description only if it is not empty.
-		if ( ! empty( $book_description ) ) {
+		if ( '' !==  $book_description ) {
 			$out .= '<div class="rcno-book-description">';
 			$out .= apply_filters( 'rcno_book_description', $book_description );
 			$out .= '</div>';
@@ -836,7 +836,8 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '', $label = true ) {
 
 		$review    = get_post_custom( $review_id );
-		$meta_keys = $this->meta_keys;
+		$meta_keys = apply_filters( 'rcno_all_book_meta_keys', $this->meta_keys );
+		$url = '@(http(s)?)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@';
 
 		$wrappers = array(
 			'',
@@ -865,7 +866,11 @@ class Rcno_Template_Tags {
 					$out .= $meta_keys[ $meta_key ] . ': ';
 				}
 
-				$out .= sanitize_text_field( $review[ $meta_key ][0] );
+				//$out .= sanitize_text_field( $review[ $meta_key ][0] );
+				$out .= preg_replace(
+					$url, '<a href="http$2://$4" target="_blank" rel="noopener">$0</a>',
+					sanitize_text_field( $review[ $meta_key ][0] )
+				);
 
 				if ( '' === $wrapper ) {
 					$out .= '';
@@ -1147,7 +1152,7 @@ class Rcno_Template_Tags {
 					'title'      => get_the_title(),
 					'link'       => get_the_permalink(),
 					'series_num' => null !== $series_num ? (int) $series_num : 0,
-					'series'     => isset( $series[0]->slug ) ? $series[0]->slug : '',
+					'series'     => null !== $series[0]->slug ? $series[0]->slug : '',
 				);
 				usort( $book_data, array( $this, 'series_integer_cmp' ) ); // Group books by series number,
 				usort( $book_data, array( $this, 'series_string_cmp' ) );  // then by series slug.

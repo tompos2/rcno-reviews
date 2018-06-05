@@ -85,7 +85,8 @@ button.button.reset-button {
     width: 100%;
 }
 
-.book-general-metabox-1 {
+.book-general-metabox-1,
+.book-general-metabox-2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -152,6 +153,18 @@ button.button.reset-button {
 
 .review-score-metabox-container {
     display: flex;
+}
+
+.book-general-metabox-2 {
+    background: #f7f7f7;
+    padding: 5px 10px 0 10px;
+}
+
+.book-general-metabox-2 .metabox {
+    display: inline-block;
+    position: relative;
+    margin: 0 5px 1em 0;
+    width: 24%;
 }
 
 .review-score-rating-enable,

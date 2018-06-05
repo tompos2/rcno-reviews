@@ -87,7 +87,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
                     if ( ! $posttype_enabled ) {
 					    ucc_get_calendar( array( 'rcno_review' ) );
 				    } else {
-					    ucc_get_calendar( '', true, true, true  );
+					    ucc_get_calendar( array(), true, true, true  );
                     }
                 ?>
             </div>
