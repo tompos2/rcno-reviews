@@ -41,7 +41,9 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 	 * Add WordPress filters are called here.
 	 */
 	private function add_filters() {
-		add_filter( 'rcno_all_book_meta_keys', array( $this, 'add_custom_meta_to_settings' ) );
+		if ( '' !== $this->get_setting( 'custom_user_metaboxes' ) ) {
+			add_filter( 'rcno_all_book_meta_keys', array( $this, 'add_custom_meta_to_settings' ) );
+		}
 	}
 
 	/**

@@ -866,11 +866,18 @@ class Rcno_Template_Tags {
 					$out .= $meta_keys[ $meta_key ] . ': ';
 				}
 
-				//$out .= sanitize_text_field( $review[ $meta_key ][0] );
-				$out .= preg_replace(
-					$url, '<a href="http$2://$4" target="_blank" rel="noopener">$0</a>',
-					sanitize_text_field( $review[ $meta_key ][0] )
-				);
+				// Set this filter to 'false' if we want to skip converting link text
+				// to anchor tags. Useful for using URLs for book cover image.
+				if ( apply_filters( 'rcno_skip_url_conversion', true ) ) {
+					$out .= preg_replace(
+						$url, '<a href="http$2://$4" target="_blank" rel="noopener">$0</a>',
+						sanitize_text_field( $review[ $meta_key ][0] )
+					);
+				} else {
+					$out .= sanitize_text_field( $review[ $meta_key ][0] );
+				}
+
+
 
 				if ( '' === $wrapper ) {
 					$out .= '';

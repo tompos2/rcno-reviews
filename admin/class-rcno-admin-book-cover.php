@@ -117,6 +117,7 @@ class Rcno_Admin_Book_Cover {
 			update_post_meta( $review_id, 'rcno_reviews_book_cover_url', $cover_url );
 		}
 
+		do_action( 'rcno_save_admin_book_cover_metadata' );
 	}
 
 }
