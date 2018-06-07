@@ -85,6 +85,8 @@ Please open a new topic on the plugin's WordPress.org support page
 * Added a new "Custom User Metadata" extension
 * Add 'page states' feature to identify pages using Recencio shortcodes
 * Fixed a regression bug in the calendar widget
+* Fixed a bug with RSS feeds for book reviews
+* Removed comment rating stars markup from comment RSS feeds
 
 = 1.16.0 =
 * Added GDPR support and compliance

@@ -513,7 +513,7 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'comment_form_before_fields', $public_ratings, 'rcno_comment_ratings_form' );
 		$this->loader->add_action( 'comment_form_logged_in_after', $public_ratings, 'rcno_comment_ratings_form' );
 
-		$this->loader->add_filter( 'comment_text', $public_ratings, 'display_comment_rating', 9 );
+		$this->loader->add_filter( 'comment_text', $public_ratings, 'rcno_display_comment_rating', 9 );
 	}
 
 	/**

@@ -196,7 +196,7 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	public function rcno_comment_ratings_form() {
 
-		if ( is_singular( 'rcno_review' ) && $this->enable_rating ) {
+		if ( $this->enable_rating && is_singular( 'rcno_review' ) ) {
 
 			$star = '<li class="empty"><span class="l"></span><span class="r"></span></li>';
 
@@ -484,21 +484,21 @@ class Rcno_Reviews_Public_Rating {
 	/**
 	 * Add the star rating above the displayed comment.
 	 *
-	 * @param $content
+	 * @param $comment
 	 *
 	 * @return string|bool
 	 */
-	public function display_comment_rating( $content ) {
+	public function rcno_display_comment_rating( $comment ) {
 
-		if ( $this->enable_rating && is_singular( 'rcno_review' ) ) {
+		if ( $this->enable_rating && is_singular( 'rcno_review' ) && ! is_comment_feed() ) {
 			$out = '';
 			$out .= $this->the_comment_rating();
-			$out .= $content;
+			$out .= $comment;
 
 			return $out;
 		}
 
-		return $content;
+		return $comment;
 	}
 
 }

@@ -351,7 +351,7 @@ class Rcno_Reviews_Admin {
 		$opts['labels']['view_item']          = sprintf( __( 'View %1$s', 'rcno-reviews' ), $single );
 
 		$opts['rewrite']['ep_mask']    = EP_PERMALINK;
-		$opts['rewrite']['feeds']      = false;
+		$opts['rewrite']['feeds']      = true;
 		$opts['rewrite']['pages']      = true;
 		$opts['rewrite']['slug']       = __( $cpt_slug, 'rcno-reviews' );
 		$opts['rewrite']['with_front'] = false;
