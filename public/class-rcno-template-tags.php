@@ -847,6 +847,9 @@ class Rcno_Template_Tags {
 			'h1',
 			'h2',
 			'h3',
+			'h4',
+			'h5',
+			'h6',
 		);
 
 		if ( '' === $meta_key || ! array_key_exists( $meta_key, $meta_keys ) || ! in_array( $wrapper, $wrappers, true ) ) {
@@ -863,21 +866,19 @@ class Rcno_Template_Tags {
 				}
 
 				if ( $label ) {
-					$out .= $meta_keys[ $meta_key ] . ': ';
+					$out .= '<span class="rcno-meta-key">' . $meta_keys[ $meta_key ] . ': ' . '</span>';
 				}
 
 				// Set this filter to 'false' if we want to skip converting link text
 				// to anchor tags. Useful for using URLs for book cover image.
 				if ( apply_filters( 'rcno_skip_url_conversion', true ) ) {
-					$out .= preg_replace(
+					$out .= '<span class="rcno-meta-value">' . preg_replace(
 						$url, '<a href="http$2://$4" target="_blank" rel="noopener">$0</a>',
 						sanitize_text_field( $review[ $meta_key ][0] )
-					);
+					) . '</span>';
 				} else {
-					$out .= sanitize_text_field( $review[ $meta_key ][0] );
+					$out .= '<span class="rcno-meta-value">' . sanitize_text_field( $review[ $meta_key ][0] ) . '</span>';
 				}
-
-
 
 				if ( '' === $wrapper ) {
 					$out .= '';
