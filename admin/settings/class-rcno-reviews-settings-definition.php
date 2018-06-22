@@ -136,7 +136,7 @@ class Rcno_Reviews_Settings_Definition {
 						'archive_display_full'    => __( 'The entire book review', 'rcno-reviews' ),
 						'archive_display_excerpt' => __( 'Only excerpt of the review', 'rcno-reviews' ),
 					),
-					'type'    => 'select',
+					'type'    => 'radio',
 				),
 				'spacer_0'                      => array(
 					'name' => '',
@@ -455,7 +455,7 @@ class Rcno_Reviews_Settings_Definition {
 						'last_name_first_name' => __( 'LastName, FirstName', 'rcno-reviews' ),
 						'first_name_last_name' => __( 'FirstName LastName', 'rcno-reviews' ),
 					),
-					'type'    => 'select',
+					'type'    => 'radio',
 				),
 				'spacer-7-1'                        => array(
 					'name' => '',
@@ -541,7 +541,7 @@ class Rcno_Reviews_Settings_Definition {
 						'google-books' => __( 'Google Books® API', 'rcno-reviews' ),
 						'good-reads'   => __( 'Goodreads® API', 'rcno-reviews' ),
 					),
-					'type'    => 'select',
+					'type'    => 'radio',
 				),
 				'spacer-8'               => array(
 					'name' => '',
