@@ -654,6 +654,7 @@ class Rcno_Reviews_Settings_Definition {
 
 		);
 
+		// Adds each custom taxonomy's options via a foreach loop
 		$custom_taxonomies = new Rcno_Reviews_Admin( RCNO_PLUGIN_NAME, RCNO_PLUGIN_VER );
 		$_custom_taxonomies = $custom_taxonomies->rcno_get_custom_taxonomies();
 		foreach (  $_custom_taxonomies as $tax ) {
@@ -693,6 +694,11 @@ class Rcno_Reviews_Settings_Definition {
 			'rcno_' . $tax['settings_key'] . '_show'         => array(
 				'name' => __( 'Show in table', 'rcno-reviews' ),
 				'desc' => __( 'Show this custom taxonomy on the admin table', 'rcno-reviews' ),
+				'type' => 'checkbox',
+			),
+			'rcno_' . $tax['settings_key'] . '_filter'         => array(
+				'name' => __( 'Show filter', 'rcno-reviews' ),
+				'desc' => __( 'Show a drop-down filter for this taxonomy on the admin table', 'rcno-reviews' ),
 				'type' => 'checkbox',
 			),
 			'spacer' . $tax['settings_key']                 => array(

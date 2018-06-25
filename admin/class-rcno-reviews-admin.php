@@ -876,6 +876,52 @@ SQL;
 		return $groupby;
 	}
 
+	public function rcno_filter_post_type_by_taxonomy() {
+		global $typenow;
+		$taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+		$taxonomies = explode( ',', $taxonomies );
+
+		if ( $typenow === 'rcno_review' ) {
+			foreach ( $taxonomies as $taxonomy ) {
+				$taxonomy = 'rcno_' . strtolower( $taxonomy );
+				if ( Rcno_Reviews_Option::get_option( $taxonomy . '_filter' ) ) {
+					$selected      = isset( $_GET[ $taxonomy ] ) ? $_GET[ $taxonomy ] : '';
+					$info_taxonomy = get_taxonomy( $taxonomy );
+					wp_dropdown_categories( array(
+						'show_option_all' => __( "All {$info_taxonomy->label}", 'rcno-review' ),
+						'taxonomy'        => $taxonomy,
+						'name'            => $taxonomy,
+						'orderby'         => 'name',
+						'selected'        => $selected,
+						'show_count'      => true,
+						'hide_empty'      => true,
+					) );
+				}
+
+			}
+		}
+	}
+
+	public function rcno_convert_id_to_term_in_query( $query ) {
+		global $pagenow;
+		$taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
+		$taxonomies = explode( ',', $taxonomies );
+
+		foreach ( $taxonomies as $taxonomy ) {
+			$q_vars    = &$query->query_vars;
+			$taxonomy = 'rcno_' . strtolower( $taxonomy );
+			if ( $pagenow === 'edit.php' && isset( $q_vars['post_type'], $q_vars[ $taxonomy ] )
+			     && $q_vars['post_type'] === 'rcno_review'
+			     && is_numeric( $q_vars[ $taxonomy ] )
+			     && $q_vars[ $taxonomy ] !== 0 ) {
+				$term                = get_term_by( 'id', $q_vars[ $taxonomy ], $taxonomy );
+				if ( $term ) {
+					$q_vars[ $taxonomy ] = $term->slug;
+				}
+			}
+		}
+	}
+
 
 	/**
 	 * Adds book reviews to the 'Recent Activity' Dashboard widget

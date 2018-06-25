@@ -308,6 +308,9 @@ class Rcno_Reviews {
 		//$this->loader->add_filter( 'posts_where', $plugin_admin, 'rcno_add_taxonomy_to_admin_search_where' );
 		//$this->loader->add_filter( 'posts_groupby', $plugin_admin, 'rcno_add_taxonomy_to_admin_search_group' );
 
+		$this->loader->add_filter( 'restrict_manage_posts', $plugin_admin, 'rcno_filter_post_type_by_taxonomy' );
+		$this->loader->add_filter( 'parse_query', $plugin_admin, 'rcno_convert_id_to_term_in_query' );
+
 		$this->loader->add_action( 'wp_ajax_reset_all_options', $plugin_admin, 'reset_all_options' );
 
 		$this->loader->add_action( 'wp_ajax_rcno_settings_export', $plugin_admin, 'rcno_settings_export' );
