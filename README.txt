@@ -81,6 +81,13 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.18.0 =
+* Added taxonomy drop-down filters to the reviews admin column
+* Currently reading widget now resets values when 'Finished' is checked
+* Currently reading widget now uses a smaller book cover size
+* Added span tags around book meta keys and values when displayed on the frontend
+* Changed settings page select drop-downs to radio buttons for improved UX
+
 = 1.17.0 =
 * Added a new "Custom User Metadata" extension
 * Add 'page states' feature to identify pages using Recencio shortcodes
