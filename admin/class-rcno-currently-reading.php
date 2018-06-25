@@ -181,6 +181,7 @@ class Rcno_Currently_Reading {
 				unset( $progress[ $key ] );
 			}
 		}
+
 		if ( $progress['finished_book'] ) {
 			return update_option( $this->widget_id, array() );
 		}

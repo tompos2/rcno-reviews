@@ -123,9 +123,15 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
                             <img src="<?php echo $most_recent['book_cover'] ?>" alt="book-cover" />
                             <div class="progress-bar" style="width: <?php echo $percentage;?>%"></div>
                         </div>
+			        <?php else: ?>
+                        <div class="progress-bar-container">
+                            <div style="min-height: 100px; background-color: #ecf7f9"></div>
+                            <div class="progress-bar" style="width: <?php echo $percentage;?>%"></div>
+                        </div>
 				    <?php endif; ?>
-                    <span><?php echo sprintf( '%s/%s', $most_recent['current_page'], $most_recent['num_of_pages'] )
-                        ?></span>
+                    <span>
+                        <?php echo sprintf( '%s/%s', $most_recent['current_page'], $most_recent['num_of_pages'] ); ?>
+                    </span>
                 </div>
 
                 <div class="book-progress">

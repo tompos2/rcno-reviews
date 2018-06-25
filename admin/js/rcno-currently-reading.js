@@ -28,25 +28,23 @@
       method: 'POST',
       url: currently_reading.api.url,
       beforeSend: function (xhr) {
-
         xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
-
       },
       data: data
     })
 
     .then(function (r) {
-
       $('#feedback').html('<p id="message" class="updated notice notice-success">' + currently_reading.strings.saved + '</p>');
 
       // @see https://stackoverflow.com/questions/3357553/how-do-i-store-an-array-in-localstorage
       var last_response = r[r.length - 1];
       localStorage.setItem( 'rcno_currently_reading_progress', JSON.stringify( last_response ) );
-
+      if (data.finished_book) {
+          window.document.location = window.document.URL;
+      }
     })
 
     .fail(function (r) {
-
       var message = currently_reading.strings.error;
 
       if (r.status !== 200) {
@@ -54,7 +52,6 @@
       }
 
       $('#feedback').html('<p id="message" class="updated error notice-error">' + message + '</p>');
-
     });
 
   });
@@ -73,8 +70,11 @@
     })
       .on('select', function () {
         var attachment = cover_uploader.state().get('selection').first().toJSON();
-        $('#rcno_currently_reading_upload_field').val(attachment.url);
-        $('.book-upload-container').html('<img src="' + attachment.url + '" style="width: 100px" />');
+        console.log( attachment );
+        $('#rcno_currently_reading_upload_field').val(attachment.sizes['rcno-book-cover-sm'].url);
+        $('.book-upload-container').html(
+            '<img src="' + attachment.sizes['rcno-book-cover-sm'].url + '" style="width: 100px" />'
+        );
       })
       .open();
   });
