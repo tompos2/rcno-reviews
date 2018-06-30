@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.18.1 =
+* Fixed a display bug with overlapping images in IsotopeJS grids
+
 = 1.18.0 =
 * Added taxonomy drop-down filters to the reviews admin column
 * Currently reading widget now resets values when 'Finished' is checked
