@@ -88,6 +88,7 @@ class Rcno_Isotope_Grid_Shortcode {
 		$output = $this->rcno_render_isotope_grid( $options );
 
 		// We are enqueuing the previously registered script.
+		wp_enqueue_script( 'images-loaded' );
 		wp_enqueue_script( 'isotope-grid' );
 
 		return do_shortcode( $output );

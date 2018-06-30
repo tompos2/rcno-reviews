@@ -57,7 +57,7 @@ if ( $posts && count( $posts ) > 0 ) {
 			$select .= '</select>';
 			$select .= '</div>';
 		}
-		$select .= '<span class="dashicons dashicons-image-rotate rcno-isotope-grid-select reset"></span>';
+		$select .= '<span class="rcno-isotope-grid-select reset">&olarr;</span>';
 		$select .= '</div>';
 	}
 

@@ -106,6 +106,7 @@ class Rcno_Reviews_Public {
 
 		// We are only registering the script, not calling it.
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );
+		wp_register_script( 'images-loaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array(), '4.1.4', true );
 		wp_register_script( 'isotope-grid', plugin_dir_url( __FILE__ ) . 'js/isotope.pkgd.min.js', array(), '3.0.5', true );
 
 		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
