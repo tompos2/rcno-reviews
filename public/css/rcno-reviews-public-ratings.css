@@ -1,8 +1,9 @@
 .rating {
     overflow: hidden;
-    margin: -5px 0 0 0 !important;
-    display: block;
-    background: #fff
+    margin: 11px 0 -6px 0 !important;
+    display: inline-block;
+    background: #f1f1f1;
+    /* line-height: 1; */
 }
 
 .rating li {

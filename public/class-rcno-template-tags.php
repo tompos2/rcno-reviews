@@ -1153,7 +1153,7 @@ class Rcno_Template_Tags {
 
 		if ( $data->have_posts() ) {
 			while ( $data->have_posts() ) : $data->the_post();
-				$series_num  = $this->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false );
+				$series_num  = strip_tags( $this->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false ) );
 				$series      = get_the_terms( get_the_ID(), apply_filters( 'rcno_group_books_by_taxonomy', 'rcno_series' ));
 				$book_data[] = array(
 					'ID'         => get_the_ID(),
@@ -1322,7 +1322,7 @@ class Rcno_Template_Tags {
 
 		$rating_criteria_count = count( $rating_criteria );
 		$review_summary        = $this->get_the_rcno_book_review_excerpt( $review_id );
-		$review_box_title      = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
+		$review_box_title      = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) );
 
 		$score_array = array();
 
@@ -1498,17 +1498,17 @@ class Rcno_Template_Tags {
 
 		$data = array();
 
-		$book_title      = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
-		$book_fmt        = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false );
+		$book_title      = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) );
+		$book_fmt        = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ) );
 		$book_author     = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) );
 		$book_review_url = get_post_permalink( $review_id );
-		$book_pub_date   = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
+		$book_pub_date   = strtotime( strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) ) );
 		$book_genre      = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
 		$book_publisher  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) );
-		$book_isbn       = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
-		$book_edtn       = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false );
-		$book_pc         = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false );
-		$book_ext_url    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false );
+		$book_isbn       = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) );
+		$book_edtn       = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ) );
+		$book_pc         = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false ) );
+		$book_ext_url    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false ) );
 
 		$book_aut_url = '';
 		$author_terms = get_the_terms( $review_id, 'rcno_author' );
@@ -1587,8 +1587,8 @@ class Rcno_Template_Tags {
 		$site_url     = get_bloginfo( 'url' );
 		$description  = $this->get_the_rcno_book_review_excerpt( $review_id );
 		$language     = get_bloginfo( 'language' );
-		$book_name    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false );
-		$book_isbn    = $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false );
+		$book_name    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) );
+		$book_isbn    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) );
 		$book_author  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) );
 
 		$book_aut_url = '';
@@ -1601,7 +1601,7 @@ class Rcno_Template_Tags {
 			$book_aut_url = 'https://www.goodreads.com/book/author/' . str_replace( ' ', '+', $book_author );
 		}
 
-		$bk_pub_date  = strtotime( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) );
+		$bk_pub_date  = strtotime( strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) ) );
 		$priv_score   = $this->rcno_get_review_score( $review_id );
 		$pub_rating   = new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
 		$admin_rating = $this->get_the_rcno_admin_book_rating( $review_id, false );

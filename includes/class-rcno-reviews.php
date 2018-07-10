@@ -186,8 +186,6 @@ class Rcno_Reviews {
 		require_once plugin_dir_path( __DIR__ ) . 'admin/class-rcno-currently-reading.php';
 
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-rcno-reviews-extensions.php';
-		require_once plugin_dir_path( __DIR__ ) . 'extensions/rcno-author-box/rcno-author-box.php';
-		require_once plugin_dir_path( __DIR__ ) . 'extensions/rcno-custom-user-metadata/rcno-custom-user-metadata.php';
 
 		$this->loader = new Rcno_Reviews_Loader();
 	}
@@ -564,12 +562,6 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'wp_ajax_rcno_activate_extension_ajax', $extensions, 'rcno_activate_extension_ajax' );
 		$this->loader->add_action( 'wp_ajax_rcno_deactivate_extension_ajax', $extensions, 'rcno_deactivate_extension_ajax' );
 		$this->loader->add_action( 'wp_loaded', $extensions, 'rcno_load_extensions' );
-
-		$author_box = new Rcno_Author_Box();
-		$this->loader->add_filter( 'rcno_reviews_extensions', $author_box, 'add_author_box_extension' );
-
-		$custom_user_metadata = new Rcno_Custom_User_Metadata();
-		$this->loader->add_filter( 'rcno_reviews_extensions', $custom_user_metadata, 'add_custom_user_metadata_extension' );
 	}
 
 	/**

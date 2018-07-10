@@ -158,7 +158,7 @@ class Rcno_Author_Box extends Abstract_Rcno_Extension {
 		return $settings;
 	}
 
-	public function add_author_box_extension( $extensions ) {
+	public function add_extension( $extensions ) {
 		$extensions['rcno_author_box'] = 'Rcno_Author_Box';
 		return $extensions;
 	}

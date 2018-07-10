@@ -150,7 +150,7 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 		return $settings;
 	}
 
-	public function add_custom_user_metadata_extension( $extensions ) {
+	public function add_extension( $extensions ) {
 		$extensions['rcno_custom_user_metadata'] = 'Rcno_Custom_User_Metadata';
 		return $extensions;
 	}

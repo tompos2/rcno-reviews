@@ -53,6 +53,30 @@ class Rcno_Reviews_Extensions {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+
+		$this->rcno_include_extensions();
+	}
+
+	/**
+	 * Includes the files needed for our extension classes. Then we instantiate
+     * the class and run the 'add_extension' method via a filter.
+     *
+     * @since 1.19.0
+     * @return void
+	 */
+	private function rcno_include_extensions() {
+		$dirs = array_filter( glob( RCNO_EXT_DIR . '*' ), 'is_dir' );
+		foreach ( $dirs as $ext ) {
+		    $file = $ext . DIRECTORY_SEPARATOR . basename( $ext ) . '.php';
+		    if ( is_file( $file ) ) {
+			    include $file;
+
+			    // Break folder name into array on '-', uppercase 1st letter, then combine using '_'.
+			    $class = implode( '_', array_map( 'ucfirst', explode( '-', basename( $ext ) ) ) );
+			    $extension = new $class();
+			    add_filter( 'rcno_reviews_extensions', array( $extension, 'add_extension' ) );
+            }
+		}
 	}
 
 	/**
