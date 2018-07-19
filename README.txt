@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.19.0 =
+* Added the option to the limit index page shortcode to specific category `[rcno-reviews-index category="review"]`
+
 = 1.18.1 =
 * Fixed a display bug with overlapping images in IsotopeJS grids
 

@@ -210,11 +210,12 @@ class Rcno_Reviews_Shortcodes {
 
 		// Set default values for options not set explicitly.
 		$options = shortcode_atts( array(
-			'headers' => 1,
+			'headers'  => 1,
+			'category' => null,
 		), $options );
 
 		// The actual rendering is done by a special function.
-		$output = $plugin_public->rcno_render_review_index( $options['headers'] );
+		$output = $plugin_public->rcno_render_review_index( $options['headers'], $options['category'] );
 
 		return do_shortcode( $output );
 	}
