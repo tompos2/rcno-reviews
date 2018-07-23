@@ -1,5 +1,5 @@
 === Recencio Book Reviews ===
-Contributors: Kemory Grubb
+Contributors: w33zy
 Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
@@ -80,6 +80,11 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.20.0 =
+* Moved the Micromodal init call to the `rcno-extensions-admin` script so it is always called
+* Fixed a bug with the usage of the 'posts_clauses' filter
+* The filterable book grid now lists drop-down items in alphabetical order
 
 = 1.19.0 =
 * Added the option to the limit index page shortcode to specific category `[rcno-reviews-index category="review"]`

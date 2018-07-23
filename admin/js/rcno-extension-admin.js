@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function(){
+    MicroModal.init();
+}, false);
+
 (function($){
 
 	$( document ).on( 'click', '.button-extension-activate', function( e ){
@@ -64,6 +68,5 @@
 		}
 
 	});
-
 
 })(jQuery);

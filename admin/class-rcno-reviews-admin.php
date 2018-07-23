@@ -822,6 +822,10 @@ class Rcno_Reviews_Admin {
 
 		global $wpdb;
 
+		if ( ! is_post_type_archive( 'rcno_review' ) && ! is_blog_admin() ) {
+			return $clauses;
+		}
+
 		if ( isset( $wp_query->query['orderby'] ) && preg_match( '/taxonomy-rcno_/', $wp_query->query['orderby'] ) ) {
 			$taxonomy = str_replace( 'taxonomy-', '', $wp_query->query['orderby'] );
 
@@ -831,7 +835,7 @@ LEFT OUTER JOIN {$wpdb->term_taxonomy} USING (term_taxonomy_id)
 LEFT OUTER JOIN {$wpdb->terms} USING (term_id)
 SQL;
 			$clauses['where']   .= "AND (taxonomy = '" . $taxonomy . "' OR taxonomy IS NULL)";
-			$clauses['groupby'] = "object_id";
+			$clauses['groupby'] = 'object_id';
 			$clauses['orderby'] = "GROUP_CONCAT({$wpdb->terms}.name ORDER BY name ASC)";
 			if ( strtoupper( $wp_query->get( 'order' ) ) === 'ASC' ) {
 				$clauses['orderby'] .= 'ASC';

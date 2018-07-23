@@ -43,7 +43,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		$select .= '<div class="rcno-isotope-grid-select-container">';
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], explode( ',', $options['exclude'] )  );
 		foreach ( $taxonomies as $taxonomy ) {
-			$terms = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=count&order=DESC&hide_empty=1' );
+			$terms = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=name&order=ASC&hide_empty=1' );
 			$_taxonomy = get_taxonomy( 'rcno_' . strtolower( $taxonomy ) ); // Using the label to avoid i18n issues.
 			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
 			$select .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->label . '</label>';
