@@ -112,7 +112,7 @@ class Rcno_Reviews_Public {
 		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 
 			$covers_index_page = '';
-			$star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
+			$star_color     = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
 			$usr_custom_css = Rcno_Reviews_Option::get_option( 'rcno_custom_styling', '' );
 			if ( Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false ) ) {
 				$covers_index_page = '

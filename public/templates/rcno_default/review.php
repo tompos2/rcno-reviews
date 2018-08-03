@@ -27,7 +27,7 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 
 ?>
 
-<?php $template->the_rcno_review_title( $review_id ) ?>
+<?php $template->the_rcno_review_title( $review_id ); ?>
 
 <?php do_action( 'before_rcno_book_review' ); ?>
 
@@ -36,6 +36,8 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 	<?php
 
 	$template->the_rcno_full_book_details( $review_id, 'full' );
+
+	do_action( 'after_rcno_book_details' );
 
 	if ( $review_score_enable && 'top' === $review_score_position ) {
 		$template->the_rcno_review_box( $review_id );

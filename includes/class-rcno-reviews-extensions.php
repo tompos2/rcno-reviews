@@ -47,7 +47,7 @@ class Rcno_Reviews_Extensions {
 	 * @since    1.14.0
 	 *
 	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
+	 * @param string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -59,39 +59,41 @@ class Rcno_Reviews_Extensions {
 
 	/**
 	 * Includes the files needed for our extension classes. Then we instantiate
-     * the class and run the 'add_extension' method via a filter.
-     *
-     * @since 1.19.0
-     * @return void
+	 * the class and run the 'add_extension' method via a filter.
+	 *
+	 * @since 1.19.0
+	 * @return void
 	 */
 	private function rcno_include_extensions() {
 		$dirs = array_filter( glob( RCNO_EXT_DIR . '*' ), 'is_dir' );
 		foreach ( $dirs as $ext ) {
-		    $file = $ext . DIRECTORY_SEPARATOR . basename( $ext ) . '.php';
-		    if ( is_file( $file ) ) {
-			    include $file;
+			$file = $ext . DIRECTORY_SEPARATOR . basename( $ext ) . '.php';
+			if ( is_file( $file ) ) {
+				include $file;
 
-			    // Break folder name into array on '-', uppercase 1st letter, then combine using '_'.
-			    $class = implode( '_', array_map( 'ucfirst', explode( '-', basename( $ext ) ) ) );
-			    $extension = new $class();
-			    add_filter( 'rcno_reviews_extensions', array( $extension, 'add_extension' ) );
-            }
+				// Break folder name into array on '-', uppercase 1st letter, then combine using '_'.
+				$class     = implode( '_', array_map( 'ucfirst', explode( '-', basename( $ext ) ) ) );
+				$extension = new $class();
+				add_filter( 'rcno_reviews_extensions', array( $extension, 'add_extension' ) );
+			}
 		}
 	}
 
 	/**
-	 * Get all the registered extensions through a filter
-     * @since 1.14.0
-     * @return array
+	 * Get all the registered extensions through a filter.
+	 *
+	 * @since 1.14.0
+	 * @return array
 	 */
 	public function rcno_get_extensions() {
 		return apply_filters( 'rcno_reviews_extensions', array() );
 	}
 
 	/**
-	 * Get all activated extensions
-     * @since 1.14.0
-     * @return array
+	 * Get all activated extensions.
+	 *
+	 * @since 1.14.0
+	 * @return array
 	 */
 	public function rcno_get_active_extensions() {
 		return Rcno_Reviews_Option::get_option( 'rcno_reviews_active_extensions', array() );
@@ -111,7 +113,8 @@ class Rcno_Reviews_Extensions {
 			__( 'Extensions', 'rcno-reviews' ),
 			'manage_options',
 			'rcno_extensions',
-			array( $this, 'rcno_render_extensions_page' ) );
+			array( $this, 'rcno_render_extensions_page' )
+		);
 	}
 
 	public function rcno_render_extensions_page() {
@@ -120,20 +123,20 @@ class Rcno_Reviews_Extensions {
 		// Get active extensions
 		$active_extensions = $this->rcno_get_active_extensions();
 		?>
-		<div class="wrap">
-			<h1><?php echo get_admin_page_title(); ?></h1>
-			<h4><?php _e( 'All Recencio Review Extensions. Choose which you want to use, then activate it.', 'rcno-reviews' ); ?></h4>
+        <div class="wrap">
+        <h1><?php echo get_admin_page_title(); ?></h1>
+            <h4><?php _e( 'All Recencio Review Extensions. Choose which you want to use, then activate it.', 'rcno-reviews' ); ?></h4>
 
-            <?php if ( 0 === count( $all_extensions ) ) : ?>
+			<?php if ( 0 === count( $all_extensions ) ) : ?>
                 <div class="wp-list-table widefat plugin-install">
                     <h2 style="text-align: center; margin: 5em 0 0 0; font-size: 30px">
-	                    <?php _e( 'No extensions are installed or activated.', 'rcno-reviews' ); ?>
+						<?php _e( 'No extensions are installed or activated.', 'rcno-reviews' ); ?>
                     </h2>
                 </div>
-            <?php endif; ?>
+			<?php endif; ?>
 
-			<div class="wp-list-table widefat plugin-install">
-				<div id="the-list">
+            <div class="wp-list-table widefat plugin-install">
+                <div id="the-list">
 					<?php
 					if ( $all_extensions ) {
 						foreach ( $all_extensions as $slug => $class ) {
@@ -144,36 +147,37 @@ class Rcno_Reviews_Extensions {
 							$extension_object = new $class();
 							// We will use this object to get the title, description and image of the extension.
 							?>
-							<div class="plugin-card plugin-card-<?php echo esc_attr( $slug ); ?>">
-								<div class="plugin-card-top">
-									<div class="name column-name">
-										<h3>
+                            <div class="plugin-card plugin-card-<?php echo esc_attr( $slug ); ?>">
+                                <div class="plugin-card-top">
+                                    <div class="name column-name">
+                                        <h3>
 											<?php echo esc_html( $extension_object->title ); ?>
-											<img src="<?php echo esc_attr( $extension_object->image ); ?>"
+                                            <img src="<?php echo esc_attr( $extension_object->image ); ?>"
                                                  class="plugin-icon"
                                                  alt="<?php echo esc_attr( $extension_object->id ) ?>">
-										</h3>
-									</div>
-									<div class="desc column-description">
-										<p><?php echo esc_html( $extension_object->desc ); ?></p>
-									</div>
-								</div>
-								<div class="plugin-card-bottom">
+                                        </h3>
+                                    </div>
+                                    <div class="desc column-description">
+                                        <p><?php echo esc_html( $extension_object->desc ); ?></p>
+                                    </div>
+                                </div>
+                                <div class="plugin-card-bottom">
 									<?php
 									// Use the buttons from our Abstract class to create the buttons
 									// Can be overwritten by each integration if needed.
 									$extension_object->buttons( $active_extensions );
 									?>
-								</div>
-							</div>
+                                </div>
+                            </div>
 							<?php
 						}
 					}
 					?>
-				</div>
-			</div>
-		</div>
-		<?php do_action( 'rcno_extensions_settings_page_footer' );
+                </div>
+            </div>
+        </div>
+		<?php
+		do_action( 'rcno_extensions_settings_page_footer' );
 	}
 
 	/**
@@ -200,8 +204,9 @@ class Rcno_Reviews_Extensions {
 					'activate'   => __( 'Activate', 'rcno-reviews' ),
 					'deactivate' => __( 'Deactivate', 'rcno-reviews' ),
 				),
-			) );
-		wp_enqueue_style( 'rcno-micromodal-styles', RCNO_PLUGIN_URI . 'admin/css/micromodal.css', array(), $this->version  );
+			)
+		);
+		wp_enqueue_style( 'rcno-micromodal-styles', RCNO_PLUGIN_URI . 'admin/css/micromodal.css', array(), $this->version );
 
 		return true;
 	}
@@ -214,18 +219,18 @@ class Rcno_Reviews_Extensions {
 	public function rcno_activate_extension_ajax() {
 
 		// Check if there is a nonce and if it is, verify it. Otherwise throw an error
-		if ( ! isset( $_POST[ 'nonce' ] ) || ! wp_verify_nonce( $_POST[ 'nonce' ], 'rcno-extension-admin-nonce' ) ) {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rcno-extension-admin-nonce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
 			die();
 		}
 
 		// If we don't have an extension id, don't process any further.
-		if ( ! isset( $_POST[ 'extension' ] ) ) {
+		if ( ! isset( $_POST['extension'] ) ) {
 			wp_send_json_error( array( 'message' => __( 'No extension data was sent', 'rcno-reviews' ) ) );
 			die();
 		}
 		// The extension to activate
-		$extension         = sanitize_text_field( $_POST[ 'extension' ] );
+		$extension         = sanitize_text_field( $_POST['extension'] );
 		$active_extensions = $this->rcno_get_active_extensions();
 		// If that extension is already active, don't process it further.
 		// If the extension is not active yet, let's try to activate it.
@@ -243,7 +248,6 @@ class Rcno_Reviews_Extensions {
 				wp_send_json_success( array( 'message' => __( 'Activated', 'rcno-reviews' ) ) );
 				die();
 			}
-
 		} else {
 			// Our extension is already active.
 			wp_send_json_success( array( 'message' => __( 'Already activated', 'rcno-reviews' ) ) );
@@ -261,17 +265,17 @@ class Rcno_Reviews_Extensions {
 	 */
 	public function rcno_deactivate_extension_ajax() {
 		// Check if there is a nonce and if it is, verify it. Otherwise throw an error
-		if ( ! isset( $_POST[ 'nonce' ] )|| ! wp_verify_nonce( $_POST[ 'nonce' ], 'rcno-extension-admin-nonce' ) ) {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rcno-extension-admin-nonce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
 			die();
 		}
 		// If we don't have an extension id, don't process any further.
-		if ( ! isset( $_POST[ 'extension' ] ) ) {
+		if ( ! isset( $_POST['extension'] ) ) {
 			wp_send_json_error( array( 'message' => __( 'No extension data sent', 'rcno-reviews' ) ) );
 			die();
 		}
 		// The extension to activate
-		$extension         = sanitize_text_field( $_POST[ 'extension' ] );
+		$extension         = sanitize_text_field( $_POST['extension'] );
 		$active_extensions = $this->rcno_get_active_extensions();
 		// If that extension is already deactivated, don't process it further.
 		// If the extension is active, let's try to deactivate it.
@@ -283,19 +287,17 @@ class Rcno_Reviews_Extensions {
 			Rcno_Reviews_Option::update_option( 'rcno_reviews_active_extensions', $active_extensions );
 			wp_send_json_success( array( 'message' => __( 'Deactivated', 'rcno-reviews' ) ) );
 			die();
-		} else {
-			wp_send_json_error( array( 'message' => __( 'Not activated', 'rcno-reviews' ) ) );
-			die();
 		}
-		wp_send_json_error( array( 'message' => __( 'Nothing happened', 'rcno-reviews' ) ) );
+
+		wp_send_json_error( array( 'message' => __( 'Not activated', 'rcno-reviews' ) ) );
 		die();
 	}
 
 	public function rcno_load_extensions() {
 		$active_extensions = $this->rcno_get_active_extensions();
-		if( $active_extensions ) {
-			foreach( $active_extensions as $slug => $extension ) {
-				if( ! class_exists( $extension ) ) {
+		if ( $active_extensions ) {
+			foreach ( $active_extensions as $slug => $extension ) {
+				if ( ! class_exists( $extension ) ) {
 					continue;
 				}
 				$extension = new $extension();

@@ -81,6 +81,10 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.21.0 =
+* Added a social sharing extension to share your book reviews on social media networks.
+* Added the WP Codemirror library for the CSS box in our settings page.
+
 = 1.20.0 =
 * Moved the Micromodal init call to the `rcno-extensions-admin` script so it is always called
 * Fixed a bug with the usage of the 'posts_clauses' filter

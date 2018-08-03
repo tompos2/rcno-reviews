@@ -145,14 +145,9 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 	 */
 	public function sanitize_settings( array $settings ) {
 		foreach ( $settings as $key => $value ) {
-			$settings[$key] = sanitize_text_field( $value );
+			$settings[ $key ] = sanitize_text_field( $value );
 		}
 		return $settings;
-	}
-
-	public function add_extension( $extensions ) {
-		$extensions['rcno_custom_user_metadata'] = 'Rcno_Custom_User_Metadata';
-		return $extensions;
 	}
 
 }

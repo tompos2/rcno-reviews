@@ -92,4 +92,16 @@ abstract class Abstract_Rcno_Extension {
 
 		<?php
 	}
+
+	/**
+	 * Adds the extension to the list of registered extensions.
+	 *
+	 * @param array $extensions The currently registered extensions.
+	 *
+	 * @return array
+	 */
+	public function add_extension( $extensions ) {
+		$extensions[ $this->id ] = get_class( $this );
+		return $extensions;
+	}
 }

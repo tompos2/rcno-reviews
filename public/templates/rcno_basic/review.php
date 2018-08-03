@@ -27,7 +27,7 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 
 ?>
 
-<?php $template->the_rcno_review_title( $review_id ) ?>
+<?php $template->the_rcno_review_title( $review_id ); ?>
 
 <?php do_action( 'before_rcno_book_review' ); ?>
 

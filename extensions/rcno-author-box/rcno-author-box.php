@@ -153,14 +153,9 @@ class Rcno_Author_Box extends Abstract_Rcno_Extension {
 	 */
 	public function sanitize_settings( array $settings ) {
 		foreach ( $settings as $key => $value ) {
-			$settings[$key] = sanitize_text_field( $value );
+			$settings[ $key ] = sanitize_text_field( $value );
 		}
 		return $settings;
-	}
-
-	public function add_extension( $extensions ) {
-		$extensions['rcno_author_box'] = 'Rcno_Author_Box';
-		return $extensions;
 	}
 
 }

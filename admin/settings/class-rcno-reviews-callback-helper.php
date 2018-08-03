@@ -287,7 +287,6 @@ class Rcno_Reviews_Callback_Helper {
 			$html .= '</label>';
 			$html .= '<br/>';
 			$html .= '</div>';
-
 		}
 
 		echo $html;

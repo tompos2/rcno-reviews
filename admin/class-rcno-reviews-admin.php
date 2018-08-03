@@ -53,7 +53,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var	   Rcno_Admin_Description_Meta	$description_meta
+	 * @var Rcno_Admin_Description_Meta $description_meta
 	 */
 	public $description_meta;
 
@@ -62,7 +62,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var	   Rcno_Admin_ISBN	$book_isbn;
+	 * @var Rcno_Admin_ISBN $book_isbn
 	 */
 	public $book_isbn;
 
@@ -71,7 +71,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var	   Rcno_Admin_Book_Cover    $book_cover
+	 * @var Rcno_Admin_Book_Cover  $book_cover
 	 */
 	public $book_cover;
 
@@ -153,8 +153,8 @@ class Rcno_Reviews_Admin {
 		$this->book_review_rating = new Rcno_Admin_Review_Rating( $this->plugin_name, $this->version );
 		$this->buy_links          = new Rcno_Admin_Buy_Links( $this->plugin_name, $this->version );
 
-		$this->uncountable        = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
-		$this->no_pluralize       = Rcno_Reviews_Option::get_option( 'rcno_disable_pluralization', false );
+		$this->uncountable  = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_no_pluralization' ) );
+		$this->no_pluralize = Rcno_Reviews_Option::get_option( 'rcno_disable_pluralization', false );
 	}
 
 	/**
@@ -220,30 +220,27 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 *
+	 * @param string $hook
+	 *
 	 * @uses     wp_enqueue_media() For using the builtin media uploader functionality.
 	 * @uses     wp_enqueue_style()
 	 * @uses     wp_enqueue_script()
 	 * @uses     wp_localize_script()
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts( $hook ) {
 		global $post;
 		$review_id = ( null !== $post ) ? $post->ID : '';
 		$template  = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Rcno_Reviews_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Rcno_Reviews_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		// Add the media uploader.
 		wp_enqueue_media();
+
+		// Enqueue assets needed by the code editor.
+		if ( 'toplevel_page_rcno-reviews' === $hook ) {
+			wp_enqueue_code_editor( array(
+				'type' => 'text/css',
+			) );
+		}
 
 		wp_enqueue_script( $this->plugin_name . '-minicolors-js', plugin_dir_url( __FILE__ ) . 'js/minicolors.min.js', array( 'jquery' ), '2.2.6',
 		true );
