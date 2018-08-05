@@ -75,6 +75,7 @@
 						review_title.val(
 							book.GoodreadsResponse.book.title
 						);
+						$('#title-prompt-text').addClass('screen-reader-text');
 
 						if( typeof book.GoodreadsResponse.book.work.original_title === 'object') {
 							title.val(

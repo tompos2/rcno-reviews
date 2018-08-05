@@ -5,6 +5,7 @@
  * @link       https://wzymedia.com
  * @since      1.0.0
  *
+ * @var \WP_Post $review
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/admin/views
  */

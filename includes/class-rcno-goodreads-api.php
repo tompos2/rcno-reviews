@@ -55,9 +55,9 @@ class Rcno_GoodReads_API {
 
 			global $post;
 
-			if ( $hook === 'post-new.php' || $hook === 'post.php' ) {
+			if ( 'post-new.php' === $hook || 'post.php' === $hook ) {
 				if ( 'rcno_review' === $post->post_type ) {
-					wp_enqueue_script( 'goodreads-script', plugin_dir_url( __FILE__ ) . '../admin/js/rcno-goodreads-api.js', array( 'jquery' ), '1.0.0', true );
+					wp_enqueue_script( 'goodreads-script', plugin_dir_url( __FILE__ ) . '../admin/js/rcno-goodreads-api.js', array( 'jquery' ), '1.0.0', false );
 					wp_localize_script( 'goodreads-script', 'gr_options', array(
 						'api_key' => $this->key,
 					) );
