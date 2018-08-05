@@ -81,6 +81,13 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.21.2 =
+* Fixed a bug affecting the "Add Book Cover" button on the review edit page.
+* Fixed a bug affecting the loading of 3rd party JS libraries.
+
+= 1.21.1 =
+* Fixed a bug affecting the "fetch" feature.
+
 = 1.21.0 =
 * Added a social sharing extension to share your book reviews on social media networks.
 * Added the WP Codemirror library for the CSS box in our settings page.

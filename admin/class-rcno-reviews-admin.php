@@ -236,7 +236,7 @@ class Rcno_Reviews_Admin {
 		wp_enqueue_media();
 
 		// Enqueue assets needed by the code editor.
-		if ( 'toplevel_page_rcno-reviews' === $hook ) {
+		if ( 'toplevel_page_rcno-reviews' === $hook || 'rcno_review_page_rcno_extensions' === $hook ) {
 			wp_enqueue_code_editor( array(
 				'type' => 'text/css',
 			) );

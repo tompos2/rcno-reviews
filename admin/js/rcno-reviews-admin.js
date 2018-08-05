@@ -114,54 +114,6 @@
 			}
 		} );
 
-		// Adds default WP color picker UI to settings page
-		$( '.rcno-color-input' ).minicolors({
-			format: 'rgb',
-			opacity: true,
-			swatches: [
-				'#F44336', '#E91E63', '#9C27B0', '#673AB7', '#2196F3', '#03A9F4', '#00BCD4',
-				'#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
-			]
-		});
-
-		// Adds selectize.js support to text boxes on settings page
-		$( '#rcno_reviews_settings\\[rcno_taxonomy_selection\\]' ).selectize( {
-			create: true,
-			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
-		} );
-
-		$( '#rcno_reviews_settings\\[rcno_store_purchase_links\\]' )
-		.selectize( {
-			create: true,
-			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
-		} );
-
-		$( '#rcno_reviews_settings\\[rcno_no_pluralization\\]' ).selectize( {
-			create: true,
-			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
-		} );
-
-		$( '#rcno_reviews_settings\\[rcno_reviews_ignored_articles_list\\]' ).selectize( {
-			create: true,
-			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
-		} );
-
-		var book_meta_keys = [];
-		$.each(my_script_vars.rcno_book_meta_keys, function( key, value ) {
-			book_meta_keys.push( {key: key, value: value } );
-		});
-
-		$( '#rcno_reviews_settings\\[rcno_book_details_meta\\]' ).selectize( {
-			maxItems: null,
-			valueField: 'key',
-			labelField: 'value',
-			searchField: 'value',
-			options: book_meta_keys,
-			create: false,
-			plugins: ['remove_button', 'restore_on_backspace', 'drag_drop'],
-		} );
-
-
 		// Adds and removes 'checked' class on review template selection
 		$( '.template-label-image' ).on( 'click', function() {
 			var x = $( this );
@@ -349,19 +301,77 @@
 		});
 	});
 
-	// Codemirror settings for the CSS box in our settings page.
-    $( function() {
-        var editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
-        editorSettings.codemirror = _.extend(
-            {},
-            editorSettings.codemirror,
-            {
-                indentUnit: 2,
-                tabSize: 2,
-                mode: 'css',
+    // Adds default WP color picker UI to settings page
+	if ( 'undefined' !== typeof $.minicolors ) {
+        $( '.rcno-color-input' ).minicolors({
+            format: 'rgb',
+            opacity: true,
+            swatches: [
+                '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#2196F3', '#03A9F4', '#00BCD4',
+                '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
+            ]
+        });
+	}
+
+
+
+    // Adds selectize.js support to text boxes on settings page
+    if ( 'undefined' !== typeof window.Selectize ) {
+        $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]').selectize({
+            create: true,
+            plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+        });
+
+        $('#rcno_reviews_settings\\[rcno_store_purchase_links\\]')
+            .selectize({
+                create: true,
+                plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+            });
+
+        $('#rcno_reviews_settings\\[rcno_no_pluralization\\]').selectize({
+            create: true,
+            plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+        });
+
+        $('#rcno_reviews_settings\\[rcno_reviews_ignored_articles_list\\]').selectize({
+            create: true,
+            plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+        });
+
+        var book_meta_keys = [];
+        $.each(my_script_vars.rcno_book_meta_keys, function (key, value) {
+            book_meta_keys.push({key: key, value: value});
+        });
+
+        $('#rcno_reviews_settings\\[rcno_book_details_meta\\]').selectize({
+            maxItems: null,
+            valueField: 'key',
+            labelField: 'value',
+            searchField: 'value',
+            options: book_meta_keys,
+            create: false,
+            plugins: ['remove_button', 'restore_on_backspace', 'drag_drop'],
+        });
+    }
+
+    // Codemirror settings for the CSS box in our settings page.
+    if ( 'undefined' !== typeof wp.codeEditor ) {
+        $(function () {
+            var css_box = $('.rcno-css-box');
+            var editorSettings = wp.codeEditor.defaultSettings ? _.clone(wp.codeEditor.defaultSettings) : {};
+            editorSettings.codemirror = _.extend(
+                {},
+                editorSettings.codemirror,
+                {
+                    indentUnit: 2,
+                    tabSize: 2,
+                    mode: 'css',
+                }
+            );
+            if(css_box.length > 0) {
+                var editor = wp.codeEditor.initialize(css_box, editorSettings);
             }
-        );
-        var editor = wp.codeEditor.initialize( $('.rcno-css-box'), editorSettings );
-    });
+        });
+    }
 
 } )( jQuery );
