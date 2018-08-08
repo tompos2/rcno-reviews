@@ -87,9 +87,12 @@
 							);
 						}
 
-						tinymce.get( 'rcno_book_description' ).setContent(
-							book.GoodreadsResponse.book.description
-						);
+						if ( book.GoodreadsResponse.book.description ) {
+                            tinymce.get( 'rcno_book_description' ).setContent(
+                                book.GoodreadsResponse.book.description
+                            );
+						}
+
 
 						author.val(
 							book.GoodreadsResponse.book.authors.author.name
