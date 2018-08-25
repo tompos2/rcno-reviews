@@ -17,7 +17,7 @@ It was designed with the book reviewer in mind and was built to be fast, easy an
 Recencio Book Reviews is a powerful and very flexible tool for managing your blog’s book review collection. It was designed with the book reviewer in mind and was built to be fast, easy and customizable.
 The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
 
-This plugin basically adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
+This plugin adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
 Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. As creating new book taxonomies is easy it’s up to
 you which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
 the custom widgets to create tag clouds or top ten lists.
@@ -27,6 +27,8 @@ Despite it’s simplicity, it’s giving book reviewer, administrators, designer
 need can be deactivated and are hidden from the UI. You can even create your own book review template files to gain complete control the look and feel of book reviews.
 
 And, all of the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
+
+[](http://coderisk.com/wp/plugin/recencio-book-reviews/RIPS-2MW_cuqKVA)
 
 = Features =
 
@@ -80,6 +82,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.21.3 =
+* Added Code Risk verification tag
 
 = 1.21.2 =
 * Fixed a bug affecting the "Add Book Cover" button on the review edit page.
