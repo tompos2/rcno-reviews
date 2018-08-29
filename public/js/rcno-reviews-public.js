@@ -77,6 +77,8 @@
 
 	$(function() {
 		if ( window.Isotope !== undefined ) {
+
+            var qsRegex;
             var $grid = $('.rcno-isotope-grid-container').imagesLoaded( function() {
                 // init Isotope after all images have loaded
                 $grid.isotope({
@@ -95,8 +97,33 @@
                 select.each(function() {
                     $(this).prop( 'selectedIndex', 0 );
                 });
+                $('.rcno-isotope-grid-search').val('');
 			});
+
+            var $search = $('.rcno-isotope-grid-search').keyup( debounce( function() {
+                qsRegex = new RegExp( $search.val(), 'gi' );
+                $grid.isotope({
+                    filter: function () {
+                        return qsRegex ? $(this).context.className.match( qsRegex ) : true;
+                    }
+                });
+            }, 200 ) );
 		}
+
+        // Debounce so filtering doesn't happen every millisecond
+        function debounce( fn, threshold ) {
+            var timeout;
+            threshold = threshold || 100;
+            return function debounced() {
+                clearTimeout( timeout );
+                var args = arguments;
+                var _this = this;
+                function delayed() {
+                    fn.apply( _this, args );
+                }
+                timeout = setTimeout( delayed, threshold );
+            };
+        }
 	});
 
 })(jQuery);

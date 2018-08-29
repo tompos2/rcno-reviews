@@ -24,15 +24,15 @@ if ( $posts && count( $posts ) > 0 ) {
 
 	// Loop through each post, book title from post-meta and work on book title.
 	foreach ( $posts as $book ) {
-		$book_details = get_post_custom( $book->ID );
+		$book_details   = get_post_custom( $book->ID );
 		$unsorted_title = $book_details['rcno_book_title'][0];
-		$sorted_title = $unsorted_title;
+		$sorted_title   = $unsorted_title;
 		if ( $this->variables['ignore_articles'] ) {
-			$sorted_title = preg_replace( '/^('. $this->variables['articles_list'] .') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
+			$sorted_title = preg_replace( '/^(' . $this->variables['articles_list'] . ') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
 		}
 		$books[] = array(
-			'ID'    => $book->ID,
-			'sorted_title' => $sorted_title,
+			'ID'             => $book->ID,
+			'sorted_title'   => $sorted_title,
 			'unsorted_title' => $unsorted_title,
 		);
 		usort( $books, array( $this, 'sort_by_title' ) );
@@ -40,17 +40,24 @@ if ( $posts && count( $posts ) > 0 ) {
 
 	$select = '';
 	if ( $options['selectors'] ) {
+		$exclude = explode( ',', strtolower( $options['exclude'] ) );
 		$select .= '<div class="rcno-isotope-grid-select-container">';
-		$taxonomies = array_diff( $this->variables['custom_taxonomies'], explode( ',', $options['exclude'] )  );
+
+		if ( $options['search'] ) {
+			$select .= '<input type="text" class="rcno-isotope-grid-search rcno-isotope-grid-select-wrapper" placeholder="'
+			              . __( 'Search...', 'rcno-reviews' ) . '" />';
+		}
+
+		$taxonomies = array_diff( $this->variables['custom_taxonomies'], $exclude );
 		foreach ( $taxonomies as $taxonomy ) {
-			$terms = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=name&order=ASC&hide_empty=1' );
+			$terms     = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=name&order=ASC&hide_empty=1' );
 			$_taxonomy = get_taxonomy( 'rcno_' . strtolower( $taxonomy ) ); // Using the label to avoid i18n issues.
-			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
-			$select .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->label . '</label>';
-			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
-			$select .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $_taxonomy->label ) . '</option>';
+			$select   .= '<div class="rcno-isotope-grid-select-wrapper">';
+			$select   .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->label . '</label>';
+			$select   .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
+			$select   .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $_taxonomy->label ) . '</option>';
 			foreach ( $terms as $term ) {
-				if( is_object( $term ) ) {
+				if ( is_object( $term ) ) {
 					$select .= '<option value="' . '.' . $term->slug . '">' . $term->name . '</option>';
 				}
 			}
@@ -68,6 +75,7 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		// Add the entry for the post.
 		$out .= '<div class="rcno-isotope-grid-item ';
+		$out .= sanitize_title( $this->template->get_the_rcno_book_meta( $book['ID'], 'rcno_book_title', '', false ) ) . ' ';
 		$out .= implode( ' ', $this->template->get_rcno_review_html_classes( $book['ID'] ) ) . '" ';
 		$out .= 'style="width:' . $options['width'] . 'px;"';
 		$out .= '>';
@@ -92,7 +100,6 @@ if ( $posts && count( $posts ) > 0 ) {
 	if ( is_singular() ) {
 		echo $select . $out;
 	}
-
 } else {
 	// No book reviews.
 	esc_html_e( 'There are no book reviews to display.', 'rcno-reviews' );

@@ -281,6 +281,12 @@
     stroke-linejoin: round;
 }
 
+.rcno-isotope-grid-search {
+    width: 12em;
+    font-size: 13px;
+    padding: 5px;
+}
+
 .rcno-isotope-grid-item {
     margin: 0 10px 10px 0;
     overflow: hidden;

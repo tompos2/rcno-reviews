@@ -28,8 +28,6 @@ need can be deactivated and are hidden from the UI. You can even create your own
 
 And, all of the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
 
-[](http://coderisk.com/wp/plugin/recencio-book-reviews/RIPS-2MW_cuqKVA)
-
 = Features =
 
 * custom post type for book reviews
@@ -82,6 +80,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.22.0 =
+* Added a reactive search bar to the "sortable grid" feature.
 
 = 1.21.3 =
 * Added Code Risk verification tag
