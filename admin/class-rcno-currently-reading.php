@@ -66,9 +66,9 @@ class Rcno_Currently_Reading {
 	 */
 	public function __construct( $plugin_name, $version ) {
 
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
-		$this->widget_id   = 'rcno_currently_reading';
+		$this->plugin_name      = $plugin_name;
+		$this->version          = $version;
+		$this->widget_id        = 'rcno_currently_reading';
 		$this->default_progress = array(
 			array(
 				'book_cover'       => '',
@@ -79,7 +79,7 @@ class Rcno_Currently_Reading {
 				'progress_comment' => '',
 				'last_updated'     => '',
 				'finished_book'    => 0,
-			)
+			),
 		);
 	}
 
@@ -97,15 +97,15 @@ class Rcno_Currently_Reading {
 		if ( null !== $screen && 'dashboard' === $screen->id ) {
 
 			wp_enqueue_script( $this->widget_id, plugin_dir_url( __DIR__ ) . 'admin/js/rcno-currently-reading.js',
-				array( 'jquery' ), '1.5.1', true );
+			array( 'jquery' ), '1.5.1', true );
 			wp_localize_script( $this->widget_id, 'currently_reading', array(
-				'api' => array(
+				'api'     => array(
 					'url'   => esc_url_raw( rest_url( 'rcno/v1/currently-reading' ) ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
 				),
 				'strings' => array(
 					'saved' => __( 'Progress updated', 'rcno-reviews' ),
-					'error' => __( 'Error', 'rcno-reviews' )
+					'error' => __( 'Error', 'rcno-reviews' ),
 				),
 			) );
 
@@ -156,11 +156,11 @@ class Rcno_Currently_Reading {
 
 		$current_progress = get_option( $this->widget_id, array() );
 
-		if( ! is_array( $current_progress ) || empty( $current_progress ) ){
+		if ( ! is_array( $current_progress ) || empty( $current_progress ) ) {
 			return $this->default_progress;
 		}
 
-		return wp_parse_args( $current_progress, $this->default_progress );
+		return $current_progress;
 	}
 
 	/**
@@ -171,23 +171,30 @@ class Rcno_Currently_Reading {
 	 * @param   array   $progress   The progress data sent from dash widget.
 	 * @return  boolean
 	 */
-	public function rcno_save_currently_reading_progress( array $progress ) { // @TODO: Check for empty values.
+	public function rcno_save_currently_reading_progress( array $progress ) {
 
-		$_progress = get_option( $this->widget_id, array() );
+		$saved_progress = get_option( $this->widget_id, array() );
 
 		// Remove any non-allowed indexes before save.
-		foreach ( $progress as $key => $value ){
+		foreach ( $progress as $key => $value ) {
 			if ( ! array_key_exists( $key, $this->default_progress[0] ) ) {
 				unset( $progress[ $key ] );
 			}
+		}
+
+		if ( ! empty( $saved_progress ) ) {
+			$update_count               = count( $saved_progress );
+			$progress['progress_index'] = $saved_progress[ $update_count - 1 ]['progress_index'] + 1;
+		} else {
+			$progress['progress_index'] = 1;
 		}
 
 		if ( $progress['finished_book'] ) {
 			return update_option( $this->widget_id, array() );
 		}
 
-		$_progress[] = $progress; // Append our most recent progress to the existing data.
-		return update_option( $this->widget_id, $_progress );
+		$saved_progress[] = $progress; // Append our most recent progress to the existing data.
+		return update_option( $this->widget_id, $saved_progress );
 	}
 
 	/**
@@ -197,30 +204,30 @@ class Rcno_Currently_Reading {
 
 		register_rest_route( 'rcno/v1', '/currently-reading',
 			array(
-				'methods'              => 'POST',
-				'callback'             => array( $this, 'update_progress' ),
-				'args'                 => array(
-					'book_cover' => array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'update_progress' ),
+				'args'                => array(
+					'book_cover'       => array(
 						'type'              => 'string',
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'book_title' => array(
+					'book_title'       => array(
 						'type'              => 'string',
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'book_author' => array(
+					'book_author'      => array(
 						'type'              => 'string',
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'current_page'   => array(
+					'current_page'     => array(
 						'type'              => 'integer',
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 					),
-					'num_of_pages'   => array(
+					'num_of_pages'     => array(
 						'type'              => 'integer',
 						'required'          => true,
 						'sanitize_callback' => 'absint',
@@ -230,12 +237,12 @@ class Rcno_Currently_Reading {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'last_updated' => array(
+					'last_updated'     => array(
 						'type'              => 'string',
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'finished_book' => array(
+					'finished_book'    => array(
 						'type'              => 'integer',
 						'required'          => true,
 						'sanitize_callback' => 'absint',
@@ -247,9 +254,9 @@ class Rcno_Currently_Reading {
 
 		register_rest_route( 'rcno/v1', '/currently-reading',
 			array(
-				'methods'              => 'GET',
-				'callback'             => array( $this, 'get_progress' ),
-				'args'                 => array(),
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_progress' ),
+				'args'                => array(),
 				'permission_callback' => array( $this, 'permissions' ),
 			)
 		);
@@ -272,9 +279,9 @@ class Rcno_Currently_Reading {
 	 */
 	public function update_progress( WP_REST_Request $request ) {
 
-		$rest_nonce = $request->get_header('x_wp_nonce');
+		$rest_nonce = $request->get_header( 'x_wp_nonce' );
 
-		if( ! $rest_nonce || ! wp_verify_nonce( $rest_nonce, 'wp_rest' ) ) {
+		if ( ! $rest_nonce || ! wp_verify_nonce( $rest_nonce, 'wp_rest' ) ) {
 			return new WP_REST_Response( new WP_Error( 'rest_security_invalid_nonce', __( 'Security nonce is invalid or not set' ),
 				array( 'status' => 403 ) ), 403 );
 		}
@@ -302,6 +309,13 @@ class Rcno_Currently_Reading {
 	 * @return string
 	 */
 	public function get_progress( WP_REST_Request $request ) {
+
+		$rest_nonce = $request->get_header( 'x_wp_nonce' );
+
+		if ( ! $rest_nonce || ! wp_verify_nonce( $rest_nonce, 'wp_rest' ) ) {
+			return new WP_REST_Response( new WP_Error( 'rest_security_invalid_nonce', __( 'Security nonce is invalid or not set' ),
+				array( 'status' => 403 ) ), 403 );
+		}
 
 		return rest_ensure_response( $this->rcno_get_currently_reading_progress() );
 	}

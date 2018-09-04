@@ -14,14 +14,14 @@
     }
 
     var data = {
-      book_cover: cover,
-      book_title: $('#rcno_currently_reading_book_title').val(),
-      book_author: $('#rcno_currently_reading_book_author').val(),
-      current_page: $('#rcno_current_page_number').val(),
-      num_of_pages: $('#rcno_current_num_pages').val(),
+      book_cover:       cover,
+      book_title:       $('#rcno_currently_reading_book_title').val(),
+      book_author:      $('#rcno_currently_reading_book_author').val(),
+      current_page:     $('#rcno_current_page_number').val(),
+      num_of_pages:     $('#rcno_current_num_pages').val(),
       progress_comment: $('#rcno_currently_reading_book_comment').val(),
-      last_updated: JSON.parse(JSON.stringify(new Date())),
-      finished_book: finished
+      last_updated:     JSON.parse(JSON.stringify(new Date())),
+      finished_book:    finished
     };
 
     $.ajax({
@@ -38,7 +38,7 @@
 
       // @see https://stackoverflow.com/questions/3357553/how-do-i-store-an-array-in-localstorage
       var last_response = r[r.length - 1];
-      localStorage.setItem( 'rcno_currently_reading_progress', JSON.stringify( last_response ) );
+      localStorage.removeItem( 'rcno_all_updates');
       if (data.finished_book) {
           window.document.location = window.document.URL;
       }
