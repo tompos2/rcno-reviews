@@ -13,7 +13,7 @@ const CurrentlyReading = {
     },
     computed: {
         percentage: function () {
-            return Math.round((this.all_updates[this.curr_index].current_page / 
+            return Math.round((this.all_updates[this.curr_index].current_page /
                 this.all_updates[this.curr_index].num_of_pages) * 100);
         },
         completed: function () {
@@ -22,7 +22,6 @@ const CurrentlyReading = {
     },
     methods: {
         fetchData: function () {
-
             if (localStorage.getItem('rcno_all_updates')) {
                 const data       = JSON.parse(localStorage.getItem('rcno_all_updates'));
                 this.all_updates = data;
@@ -33,22 +32,27 @@ const CurrentlyReading = {
                 return;
             }
 
-            fetch('http://rcno.local/wp-json/rcno/v1/currently-reading', {
-                headers: new Headers({
-                    method: 'GET',
-                    'X-WP-Nonce': rcno_currently_reading.nonce
-                })
-            }).then(function(response) {
-                return response.json();
-            }).then(function (data) {
-                this.all_updates = data;
-                this.curr_index  = data.length - 1;
-                this.is_loading  = false;
-                this.data_source = 'remote-server';
+            jQuery.ajax({
+                method: 'GET',
+                url: currently_reading.api.url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
+                },
+            })
+            .then(function (data) {
+                _this.all_updates = data;
+                _this.curr_update = data[data.length - 1];
+                _this.curr_index  = data.length - 1;
+                _this.is_loading  = false;
+                _this.data_source = 'remote-server';
 
                 localStorage.setItem('rcno_all_updates', JSON.stringify(data));
-            }.bind(this)).catch(function(err) {
-                console.log(err)
+            })
+            .fail(function (res) {
+                if (res.status !== 200) {
+                    _this.message = currently_reading.strings.error;
+                    console.log(res);
+                }
             });
         },
         previous: function () {

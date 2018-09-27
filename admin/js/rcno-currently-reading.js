@@ -1,82 +1,186 @@
-(function ($) {
+const AdminCurrentlyReading = {
+    template: '#admin-reading-template',
+    data () {
+        return {
+            all_updates: [],
+            curr_update: {
+                book_cover:       '',
+                book_title:       '',
+                book_author:      '',
+                current_page:     '',
+                num_of_pages:     '',
+                progress_comment: '',
+                last_updated:     '',
+                finished_book:    false
+            },
+            curr_index:  null,
+            is_loading:  true,
+            message:     '',
+            data_source: '',
+        };
+    },
+    created () {
+        this.fetchData();
+    },
+    mounted () {
+    },
+    computed: {
+        disabled: function () {
+            return this.all_updates.length > 1 || this.curr_update.progress_index >= 1;
+        },
+        percentage: function () {
+            return Math.round((this.all_updates[this.curr_index].current_page /
+                this.all_updates[this.curr_index].num_of_pages) * 100);
+        },
+        time_ago: function () {
+            var time = this.curr_update.last_updated;
+            switch (typeof time) {
+                case 'number':
+                    break;
+                case 'string':
+                    time = +new Date(time);
+                    break;
+                case 'object':
+                    if (time.constructor === Date) time = time.getTime();
+                    break;
+                default:
+                    time = +new Date();
+            }
+            var time_formats = [
+                [60, 'seconds', 1], // 60
+                [120, '1 minute ago', '1 minute from now'], // 60*2
+                [3600, 'minutes', 60], // 60*60, 60
+                [7200, '1 hour ago', '1 hour from now'], // 60*60*2
+                [86400, 'hours', 3600], // 60*60*24, 60*60
+                [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
+                [604800, 'days', 86400], // 60*60*24*7, 60*60*24
+                [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
+                [2419200, 'weeks', 604800], // 60*60*24*7*4, 60*60*24*7
+                [4838400, 'Last month', 'Next month'], // 60*60*24*7*4*2
+                [29030400, 'months', 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
+                [58060800, 'Last year', 'Next year'], // 60*60*24*7*4*12*2
+                [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
+                [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
+                [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
+            ];
+            var seconds = (+new Date() - time) / 1000,
+                token = 'ago',
+                list_choice = 1;
 
-  $('#rcno_currently_reading_form').on('submit', function (e) {
-    e.preventDefault();
+            if (Math.floor(seconds) == 0) {
+                return 'Just now'
+            }
+            if (seconds < 0) {
+                seconds = Math.abs(seconds);
+                token = 'from now';
+                list_choice = 2;
+            }
+            var i = 0,
+                format;
+            while (format = time_formats[i++])
+                if (seconds < format[0]) {
+                    if (typeof format[2] == 'string')
+                        return format[list_choice];
+                    else
+                        return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
+                }
+            return time;
+        }
+    },
+    methods: {
+        fetchData: function () {
 
-    var finished = 0;
-    if ($('#rcno_currently_reading_finished').is(":checked")) {
-      finished = 1;
+            var _this = this;
+
+            if (localStorage.getItem('rcno_all_updates')) {
+                const data       = JSON.parse(localStorage.getItem('rcno_all_updates'));
+                this.all_updates = data;
+                this.curr_update = data[data.length - 1];
+                this.curr_index  = data.length - 1;
+                this.is_loading  = false;
+                this.data_source = 'local-storage';
+
+                return;
+            }
+
+            jQuery.ajax({
+                method: 'GET',
+                url: currently_reading.api.url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
+                },
+            })
+            .then(function (data) {
+                _this.all_updates = data;
+                _this.curr_update = data[data.length - 1];
+                _this.curr_index  = data.length - 1;
+                _this.is_loading  = false;
+                _this.data_source = 'remote-server';
+
+                localStorage.setItem('rcno_all_updates', JSON.stringify(data));
+            })
+            .fail(function (res) {
+                if (res.status !== 200) {
+                    _this.message = currently_reading.strings.error;
+                    console.log(res);
+                }
+            });
+        },
+        submitData: function () {
+            var _this = this;
+            _this.curr_update.last_updated = JSON.parse(JSON.stringify(new Date()));
+
+            jQuery.ajax({
+                method: 'POST',
+                url: currently_reading.api.url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
+                },
+                data: _this.curr_update
+            })
+            .then(function (res) {
+                if (_this.curr_update.finished_book) {
+                    _this.curr_update.book_cover       = '';
+                    _this.curr_update.book_title       = '';
+                    _this.curr_update.book_author      = '';
+                    _this.curr_update.current_page     = '';
+                    _this.curr_update.num_of_pages     = '';
+                    _this.curr_update.progress_comment = '';
+                    _this.curr_update.last_updated     = '';
+                    _this.curr_update.finished_book    = false;
+                }
+                _this.message = currently_reading.strings.saved;
+                localStorage.removeItem('rcno_all_updates');
+            })
+            .fail(function (res) {
+                if (res.status !== 200) {
+                    _this.message = currently_reading.strings.error;
+                    console.log(res);
+                }
+            });
+
+        },
+        uploadCover: function () {
+            var cover_uploader = wp.media({
+                title: 'Currently Reading Book Cover',
+                button: {
+                    text: 'Use File'
+                },
+                multiple: false
+            })
+            .on('select', function () {
+                var attachment = cover_uploader.state().get('selection').first().toJSON();
+                this.curr_update.book_cover = attachment.sizes['rcno-book-cover-sm'].url;
+            }.bind(this))
+            .open();
+        }
     }
+};
 
-    var cover = $('#rcno_currently_reading_upload_field').val();
-    if (cover === undefined) {
-      cover = $('#rcno_currently_reading_cover').attr('src');
-    }
+const app = new Vue({
+    el: '#admin-currently-reading',
+    components: {
+        'admin-currently-reading': AdminCurrentlyReading,
+    },
+});
 
-    var data = {
-      book_cover:       cover,
-      book_title:       $('#rcno_currently_reading_book_title').val(),
-      book_author:      $('#rcno_currently_reading_book_author').val(),
-      current_page:     $('#rcno_current_page_number').val(),
-      num_of_pages:     $('#rcno_current_num_pages').val(),
-      progress_comment: $('#rcno_currently_reading_book_comment').val(),
-      last_updated:     JSON.parse(JSON.stringify(new Date())),
-      finished_book:    finished
-    };
-
-    $.ajax({
-      method: 'POST',
-      url: currently_reading.api.url,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
-      },
-      data: data
-    })
-
-    .then(function (r) {
-      $('#feedback').html('<p id="message" class="updated notice notice-success">' + currently_reading.strings.saved + '</p>');
-
-      // @see https://stackoverflow.com/questions/3357553/how-do-i-store-an-array-in-localstorage
-      var last_response = r[r.length - 1];
-      localStorage.removeItem( 'rcno_all_updates');
-      if (data.finished_book) {
-          window.document.location = window.document.URL;
-      }
-    })
-
-    .fail(function (r) {
-      var message = currently_reading.strings.error;
-
-      if (r.status !== 200) {
-        message = r.responseJSON.message;
-      }
-
-      $('#feedback').html('<p id="message" class="updated error notice-error">' + message + '</p>');
-    });
-
-  });
-
-
-  // Currently reading book cover button.
-  $('.rcno_currently_upload_button').on('click', function (e) {
-    e.preventDefault();
-
-    var cover_uploader = wp.media({
-      title: 'Currently Reading Book Cover',
-      button: {
-        text: 'Use File'
-      },
-      multiple: false  // Set this to true to allow multiple files to be selected
-    })
-      .on('select', function () {
-        var attachment = cover_uploader.state().get('selection').first().toJSON();
-        console.log( attachment );
-        $('#rcno_currently_reading_upload_field').val(attachment.sizes['rcno-book-cover-sm'].url);
-        $('.book-upload-container').html(
-            '<img src="' + attachment.sizes['rcno-book-cover-sm'].url + '" style="width: 100px" />'
-        );
-      })
-      .open();
-  });
-
-})(jQuery);

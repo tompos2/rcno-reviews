@@ -179,8 +179,7 @@ class Rcno_Reviews_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name . 'minicolors-css', plugin_dir_url( __FILE__ ) . 'css/minicolors.css', array(), $this->version,
-			'all' );
+		wp_enqueue_style( $this->plugin_name . 'minicolors-css', plugin_dir_url( __FILE__ ) . 'css/minicolors.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-admin.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-modal.css', $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.default.css', '0.12.4', 'all' );
@@ -234,6 +233,8 @@ class Rcno_Reviews_Admin {
 
 		// Add the media uploader.
 		wp_enqueue_media();
+
+		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
 
 		// Enqueue assets needed by the code editor.
 		if ( 'toplevel_page_rcno-reviews' === $hook || 'rcno_review_page_rcno_extensions' === $hook ) {
@@ -366,10 +367,10 @@ class Rcno_Reviews_Admin {
 	 */
 	public function rcno_get_custom_taxonomies() {
 
-		$taxonomies = array();
+		$taxonomies        = array();
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
-		$author = __( 'Author', 'rcno-reviews' );
+		$author            = __( 'Author', 'rcno-reviews' );
 
 		if ( ! in_array( $author, $custom_taxonomies, true ) ) {
 			// This is book review plugin, the book author taxonomy must always be present.

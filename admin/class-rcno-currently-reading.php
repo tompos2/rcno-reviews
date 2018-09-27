@@ -78,7 +78,7 @@ class Rcno_Currently_Reading {
 				'num_of_pages'     => 1,
 				'progress_comment' => '',
 				'last_updated'     => '',
-				'finished_book'    => 0,
+				'finished_book'    => false,
 			),
 		);
 	}
@@ -96,8 +96,9 @@ class Rcno_Currently_Reading {
 
 		if ( null !== $screen && 'dashboard' === $screen->id ) {
 
+			wp_enqueue_script( 'rcno-vuejs' );
 			wp_enqueue_script( $this->widget_id, plugin_dir_url( __DIR__ ) . 'admin/js/rcno-currently-reading.js',
-			array( 'jquery' ), '1.5.1', true );
+			array( 'jquery', 'rcno-vuejs' ), '1.5.1', true );
 			wp_localize_script( $this->widget_id, 'currently_reading', array(
 				'api'     => array(
 					'url'   => esc_url_raw( rest_url( 'rcno/v1/currently-reading' ) ),
@@ -243,9 +244,9 @@ class Rcno_Currently_Reading {
 						'sanitize_callback' => 'sanitize_text_field',
 					),
 					'finished_book'    => array(
-						'type'              => 'integer',
+						'type'              => 'boolean',
 						'required'          => true,
-						'sanitize_callback' => 'absint',
+						'sanitize_callback' => array( $this, 'sanitize_bool' ),
 					),
 				),
 				'permission_callback' => array( $this, 'permissions' ),
@@ -264,10 +265,13 @@ class Rcno_Currently_Reading {
 
 	/**
 	 * Check request permissions
-	 *
+	 * @param WP_REST_Request $request Full data about the request.
 	 * @return bool
 	 */
-	public function permissions() {
+	public function permissions( $request ) {
+		if ( 'GET' === $request->get_method() ) {
+			return true;
+		}
 		return current_user_can( 'manage_options' );
 	}
 
@@ -318,5 +322,9 @@ class Rcno_Currently_Reading {
 		}
 
 		return rest_ensure_response( $this->rcno_get_currently_reading_progress() );
+	}
+
+	public function sanitize_bool( $var ) {
+		return filter_var( $var, FILTER_VALIDATE_BOOLEAN );
 	}
 }

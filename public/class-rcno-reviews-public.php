@@ -105,7 +105,7 @@ class Rcno_Reviews_Public {
 		) );
 
 		// We are only registering the script, not calling it.
-		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.js', array(), '2.5.17', true );
+		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
 
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );
 		wp_register_script( 'images-loaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array(), '4.1.4', true );

@@ -46,13 +46,13 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'recent-reviews',
-			'description' => esc_html__( 'A widget to display the most recent book reviews.', 'rcno-reviews' )
+			'description' => esc_html__( 'A widget to display the most recent book reviews.', 'rcno-reviews' ),
 		);
 
 		// Set up the widget control options.
 		$this->control_options = array(
 			'width'  => 325,
-			'height' => 350
+			'height' => 350,
 		);
 
 	}
@@ -74,16 +74,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 *
 	 * @since 0.6.0
 	 */
-	public function widget( $sidebar, $instance ) {
-		extract( $sidebar );
-
-		/* Set the $args for wp_tag_cloud() to the $instance array. */
-		$args = $instance;
-
-		/**
-		 *  Get and parse the arguments, defaults have been set during saving (hopefully)
-		 */
-		extract( $args, EXTR_SKIP );
+	public function widget( $args, $instance ) {
 
 		// If there is an error, stop and return
 		if ( ! empty( $instance['error'] ) ) {
@@ -92,11 +83,11 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 
 		// Output the theme's $before_widget wrapper.
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		// Output the title (if we have any).
 		if ( isset( $instance['title'] ) ) {
-			echo $before_title . sanitize_text_field( $instance['title'] ) . $after_title;
+			echo $args['before_title'] . sanitize_text_field( $instance['title'] ) . $args['after_title'];
 		}
 
 		// Begin frontend output.
@@ -110,26 +101,26 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			while ( $recent_reviews->have_posts() ) {
 
 				$recent_reviews->the_post(); ?>
-                <div class="rcno-recent-review">
+				<div class="rcno-recent-review">
 
 					<?php
 					$review_id = get_the_ID();
 					$review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 					?>
 
-                    <div class="widget-book-cover">
+					<div class="widget-book-cover">
 						<?php $review->the_rcno_book_cover( $review_id, 'rcno-book-cover-sm' ); ?>
 						<?php $review->the_rcno_admin_book_rating( $review_id ); ?>
-                    </div>
-                    <div class="widget-book-details">
-                        <a href="<?php the_permalink(); ?>"><h3><?php the_title(); ?></h3></a>
+					</div>
+					<div class="widget-book-details">
+						<a href="<?php the_permalink(); ?>"><h3><?php the_title(); ?></h3></a>
 						<?php $review->the_rcno_taxonomy_terms( $review_id, 'rcno_author', true ); ?>
 						<?php echo $review->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'div', true ); ?>
-						<?php echo '<p>' . substr( wp_strip_all_tags( $review->get_the_rcno_book_review_content( $review_id ), true ), 0, 150 ) . '</p>'; ?>
-                        <div class="clear"></div>
-                    </div>
+						<?php echo '<p>' . substr( wp_strip_all_tags( strip_shortcodes( $review->get_the_rcno_book_review_content( $review_id ) ), true ), 0, 150 ) . '</p>'; ?>
+						<div class="clear"></div>
+					</div>
 
-                </div>
+				</div>
 
 				<?php
 			}
@@ -138,7 +129,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		wp_reset_postdata();
 
 		// Close the theme's widget wrapper.
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	/**
@@ -158,7 +149,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		$instance['review_count'] = absint( $new_instance['review_count'] );
 
 
-		// and now we return new values and wordpress do all work for you
+		// Now we return new values and WordPress do all work for you.
 		return $instance;
 	}
 
@@ -182,23 +173,23 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		$review_count = sanitize_key( $instance['review_count'] );
 
 		?>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?> ">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
 				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
-            </label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-                   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
-        </p>
+			</label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
+				   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
+		</p>
 
-        <p>
-            <label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
 				<?php _e( 'Number of Reviews:', 'rcno-reviews' ); ?>
-            </label>
-            <input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
-                   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
-                   value="<?php echo esc_attr( $review_count ); ?>"
-                   style="width:50px;" min="1" max="100" pattern="[0-9]"/>
-        </p>
+			</label>
+			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
+				   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
+				   value="<?php echo esc_attr( $review_count ); ?>"
+				   style="width:50px;" min="1" max="100" pattern="[0-9]"/>
+		</p>
 
 		<?php
 	}
