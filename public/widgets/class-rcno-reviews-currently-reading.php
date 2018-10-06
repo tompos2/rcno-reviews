@@ -37,7 +37,6 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 			$this->widget_options,
 			$this->control_options
 		);
-
 	}
 
 	private function set_widget_options() {
@@ -53,26 +52,32 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 			'width'  => 325,
 			'height' => 350,
 		);
-
 	}
 
 	/**
 	 * Enqueue the necessary scripts and styles if the widget is enabled.
+	 *
+	 * @return void
 	 */
 	public function enqueue_scripts() {
-
+		wp_enqueue_script( 'rcno-vuejs' );
+		wp_enqueue_script( 'rcno-currently-reading', RCNO_PLUGIN_URI . 'public/js/rcno-currently-reading.js', array( 'rcno-vuejs' ), '1.0.0', true );
+		wp_localize_script( 'rcno-currently-reading', 'rcno_currently_reading', array(
+			'nonce'     => wp_create_nonce( 'wp_rest' ),
+			'completed' => __( 'completed', 'rcno-reviews' ),
+		) );
 	}
 
 	/**
-	 * Register our book slider widget and enqueue the relevant scripts.
+	 * Register our currently widget and enqueue the relevant scripts.
 	 */
 	public function rcno_register_currently_reading_widget() {
 		if ( ! Rcno_Reviews_Option::get_option( 'rcno_show_currently_reading_widget' ) ) {
-		    return;
-        }
+			return;
+		}
 
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-        register_widget( 'Rcno_Reviews_Currently_Reading' );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		register_widget( 'Rcno_Reviews_Currently_Reading' );
 	}
 
 	/**
@@ -80,79 +85,159 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 	 *
 	 * @since 1.1.10
 	 *
-	 * @param   array   $sidebar
+	 * @param   array   $args
 	 * @param   array   $instance
-	 * @return  string
+	 * @return  void
 	 */
-	public function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+	public function widget( $args, $instance ) {
 
-		/* Set the $args for wp_tag_cloud() to the $instance array. */
-		$args = $instance;
 
-		/**
-		 *  Get and parse the arguments, defaults have been set during saving (hopefully)
-		 */
-		extract( $args, EXTR_SKIP );
 
-		// If there is an error, stop and return
-		if ( ! empty( $instance[ 'error' ] ) ) {
+		// If there is an error, stop and return.
+		if ( ! empty( $instance['error'] ) ) {
 			return;
 		}
 
-
 		// Output the theme's $before_widget wrapper.
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		// Output the title (if we have any).
-		if ( $instance && $instance[ 'title' ] ) {
-			echo $before_title . sanitize_text_field( $instance[ 'title' ] ) . $after_title;
+		if ( $instance && $instance['title'] ) {
+			echo $args['before_title'] . sanitize_text_field( $instance['title'] ) . $args['after_title'];
 		}
 
-		$progress = get_option( 'rcno_currently_reading', array() );
-		$most_recent = end($progress);
+		$progress    = get_option( 'rcno_currently_reading', array() );
+		$most_recent = end( $progress );
 		$percentage  = isset( $most_recent['num_of_pages'] ) ? round( ( $most_recent['current_page'] / $most_recent['num_of_pages'] ) * 100 ) : 0;
 		?>
 
-        <?php if( $most_recent['book_title'] && $most_recent['book_author']) : ?>
+		<?php if ( $most_recent['book_title'] && $most_recent['book_author'] ) : ?>
 
-            <div class="rcno-currently-reading-widget-fe">
-                <div class="book-cover" title="<?php echo sprintf('%d%% %s', $percentage, __( 'completed', 'rcno-reviews' ) ); ?>">
-			        <?php if( $most_recent['book_cover'] ) : ?>
-                        <div class="progress-bar-container">
-                            <img src="<?php echo $most_recent['book_cover'] ?>" alt="book-cover" />
-                            <div class="progress-bar" style="width: <?php echo $percentage;?>%"></div>
-                        </div>
-			        <?php else: ?>
-                        <div class="progress-bar-container">
-                            <div style="min-height: 100px; background-color: #ecf7f9"></div>
-                            <div class="progress-bar" style="width: <?php echo $percentage;?>%"></div>
-                        </div>
-				    <?php endif; ?>
-                    <span>
-                        <?php echo sprintf( '%s/%s', $most_recent['current_page'], $most_recent['num_of_pages'] ); ?>
-                    </span>
-                </div>
+			<div id="currently-reading">
+				<currently-reading>
+					<div class="rcno-currently-loading">
+						<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+					</div>
+				</currently-reading>
+			</div>
 
-                <div class="book-progress">
-                    <h3 class="book-title"><?php echo $most_recent['book_title'] ?></h3>
-                    <p class="book-author"><?php echo sprintf( '%s %s', __( 'by', 'rcno-reviews' ),
-                            $most_recent['book_author'] ); ?></p>
-                    <p class="book-comment"><?php echo $most_recent['progress_comment'] ?></p>
-                </div>
-            </div>
-            <div class="rcno-review-coming-soon">
-                <p><?php echo sanitize_text_field( $instance[ 'review_coming_soon' ] ); ?></p>
-            </div>
+			<template id="reading-template">
+				<div id="rcno-currently-reading" :data-source="data_source">
+					<div class="rcno-currently-reading-widget-fe">
+						<div class="book-cover" :title="completed">
+							<?php if ( $most_recent['book_cover'] ) : ?>
+								<div class="progress-bar-container">
+									<img src="<?php echo $most_recent['book_cover']; ?>" alt="book-cover" />
+									<div v-if="is_loading" class="progress-bar foo" style="width: <?php echo $percentage; ?>%"></div>
+									<div v-else class="progress-bar" :style="{ width: percentage + '%' }"></div>
+								</div>
+							<?php else : ?>
+								<div class="progress-bar-container">
+									<div style="min-height: 100px; background-color: #ecf7f9"></div>
+									<div v-if="is_loading" class="progress-bar" style="width: <?php echo $percentage; ?>%"></div>
+									<div v-else class="progress-bar" :style="{ width: percentage + '%'}"></div>
+								</div>
+							<?php endif; ?>
+							<span v-if="is_loading"><?php echo sprintf( '%s/%s', $most_recent['current_page'], $most_recent['num_of_pages'] ); ?></span>
+							<span v-else>{{ all_updates[curr_index].current_page + '/' + all_updates[curr_index].num_of_pages }}</span>
+						</div>
+						<div class="book-progress">
+							<h3 class="book-title"><?php echo $most_recent['book_title']; ?></h3>
+							<p class="book-author"><?php echo sprintf( '%s %s', __( 'by', 'rcno-reviews' ), $most_recent['book_author'] ); ?></p>
+
+							<p v-if="is_loading" class="book-comment" key="default"><?php echo $most_recent['progress_comment']; ?></p>
+							<p v-else class="book-comment" key="update">{{ all_updates[curr_index].progress_comment }}</p>
+
+							<div class="book-progress-btn">
+								<span :disabled="curr_index == 0" @click="previous">Previous</span> <> <span :disabled="curr_index == all_updates.length - 1" @click="next">Next</span>
+							</div>
+						</div>
+					</div>
+					<div class="rcno-review-coming-soon">
+						<p><?php echo sanitize_text_field( $instance['review_coming_soon'] ); ?></p>
+					</div>
+				</div>				
+			</template>
+
+			<style>
+				.book-progress-btn span {
+						cursor: pointer;
+				}
+				.book-progress-btn span[disabled] {
+						color: #ccc;
+				}
+				.rcno-currently-loading {
+					width: 100%;
+					min-height: 150px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				.lds-ellipsis {
+					display: inline-block;
+					position: relative;
+					width: 64px;
+					height: 64px;
+				}
+				.lds-ellipsis div {
+					position: absolute;
+					top: 27px;
+					width: 11px;
+					height: 11px;
+					border-radius: 50%;
+					background: #f1f1f1;
+					animation-timing-function: cubic-bezier(0, 1, 1, 0);
+				}
+				.lds-ellipsis div:nth-child(1) {
+					left: 6px;
+					animation: lds-ellipsis1 0.6s infinite;
+				}
+				.lds-ellipsis div:nth-child(2) {
+					left: 6px;
+					animation: lds-ellipsis2 0.6s infinite;
+				}
+				.lds-ellipsis div:nth-child(3) {
+					left: 26px;
+					animation: lds-ellipsis2 0.6s infinite;
+				}
+				.lds-ellipsis div:nth-child(4) {
+					left: 45px;
+					animation: lds-ellipsis3 0.6s infinite;
+				}
+				@keyframes lds-ellipsis1 {
+					0% {
+						transform: scale(0);
+					}
+					100% {
+						transform: scale(1);
+					}
+				}
+				@keyframes lds-ellipsis3 {
+					0% {
+						transform: scale(1);
+					}
+					100% {
+						transform: scale(0);
+					}
+				}
+				@keyframes lds-ellipsis2 {
+					0% {
+						transform: translate(0, 0);
+					}
+					100% {
+						transform: translate(19px, 0);
+					}
+				}
+			</style>
 
 		<?php else : ?>
 
-            <p><?php echo sanitize_text_field( $instance[ 'no_currently_reading' ] ); ?></p>
+			<p><?php echo sanitize_text_field( $instance['no_currently_reading'] ); ?></p>
 
 		<?php endif; ?>
 
 		<?php
-            echo $after_widget; // Close the theme's widget wrapper.
+		echo $args['after_widget']; // Close the theme's widget wrapper.
 	}
 
 	/**
@@ -168,15 +253,12 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 		// Fill current state with old data to be sure we not loose anything
 		$instance = $old_instance;
 
-		// Set the instance to the new instance.
-		//$instance = $new_instance;
-
 		// Check and sanitize all inputs.
-		$instance[ 'title' ]                = strip_tags( $new_instance[ 'title' ] );
-		$instance[ 'no_currently_reading' ] = strip_tags( $new_instance[ 'no_currently_reading' ] );
-		$instance[ 'review_coming_soon' ]   = strip_tags( $new_instance[ 'review_coming_soon' ] );
+		$instance['title']                = strip_tags( $new_instance['title'] );
+		$instance['no_currently_reading'] = strip_tags( $new_instance['no_currently_reading'] );
+		$instance['review_coming_soon']   = strip_tags( $new_instance['review_coming_soon'] );
 
-		// and now we return new values and wordpress do all work for you.
+		// and now we return new values and WordPress do all work for you.
 		return $instance;
 	}
 
@@ -191,34 +273,31 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 	public function form( $instance ) {
 
 		// Element options.
-		$title                = ! empty( $instance[ 'title'] ) ? sanitize_text_field( $instance[ 'title' ] ) : '';
-		$no_currently_reading = ! empty( $instance[ 'no_currently_reading'] ) ? sanitize_text_field( $instance[ 'no_currently_reading' ] ) : esc_html__( 'No currently reading book right now.', 'rcno-reviews' );
-		$review_coming_soon   = ! empty( $instance[ 'review_coming_soon'] ) ? sanitize_text_field( $instance[ 'review_coming_soon' ] ) : esc_html__( 'Review coming soon!', 'rcno-reviews' );
+		$title                = ! empty( $instance['title'] ) ? sanitize_text_field( $instance['title'] ) : '';
+		$no_currently_reading = ! empty( $instance['no_currently_reading'] ) ? sanitize_text_field( $instance['no_currently_reading'] ) : esc_html__( 'No currently reading book right now.', 'rcno-reviews' );
+		$review_coming_soon   = ! empty( $instance['review_coming_soon'] ) ? sanitize_text_field( $instance['review_coming_soon'] ) : esc_html__( 'Review coming soon!', 'rcno-reviews' );
 
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
 				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
 			</label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-			       name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title; ?>"/>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title; ?>"/>
 		</p>
 
-        <p>
-            <label for="<?php echo $this->get_field_id( 'no_currently_reading' ); ?> ">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'no_currently_reading' ); ?> ">
 				<?php _e( 'No currently reading book', 'rcno-reviews' ); ?>
-            </label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'no_currently_reading' ); ?>"
-                   name="<?php echo $this->get_field_name( 'no_currently_reading' ); ?>" value="<?php echo esc_attr( $no_currently_reading ) ?>"/>
-        </p>
+			</label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'no_currently_reading' ); ?>" name="<?php echo $this->get_field_name( 'no_currently_reading' ); ?>" value="<?php echo esc_attr( $no_currently_reading ); ?>"/>
+		</p>
 
-        <p>
-            <label for="<?php echo $this->get_field_id( 'review_coming_soon' ); ?> ">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'review_coming_soon' ); ?> ">
 				<?php _e( 'Review coming soon', 'rcno-reviews' ); ?>
-            </label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'review_coming_soon' ); ?>"
-                   name="<?php echo $this->get_field_name( 'review_coming_soon' ); ?>" value="<?php echo esc_attr( $review_coming_soon ) ?>"/>
-        </p>
+			</label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'review_coming_soon' ); ?>" name="<?php echo $this->get_field_name( 'review_coming_soon' ); ?>" value="<?php echo esc_attr( $review_coming_soon ); ?>"/>
+		</p>
 
 		<?php
 	}

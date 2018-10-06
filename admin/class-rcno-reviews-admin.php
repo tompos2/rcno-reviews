@@ -348,13 +348,12 @@ class Rcno_Reviews_Admin {
 		$opts['rewrite']['ep_mask']    = EP_PERMALINK;
 		$opts['rewrite']['feeds']      = true;
 		$opts['rewrite']['pages']      = true;
-		$opts['rewrite']['slug']       = __( $cpt_slug, 'rcno-reviews' );
+		$opts['rewrite']['slug']       = $cpt_slug;
 		$opts['rewrite']['with_front'] = false;
 
 		$opts = apply_filters( 'rcno_review_cpt_options', $opts );
 
 		register_post_type( strtolower( $cpt_name ), $opts );
-
 	}
 
 	/**
