@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.23.1 =
+* Fix missing update for "Current Reading" widget in last update.
+
 = 1.23.0 =
 * Rewrote the "Currently Reading" widget using VueJS. The widget now supports multiple progress updates.
 * The "Review Reviews" widget now strips shortcodes from the book's description.
