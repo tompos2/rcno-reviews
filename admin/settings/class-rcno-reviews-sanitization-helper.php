@@ -313,7 +313,7 @@ class Rcno_Reviews_Sanitization_Helper {
 	 */
 	public function sanitize_cssbox_field( $input ) {
 
-		require 'class-rcno-reviews-css-tidy.php';
+		require_once 'class-rcno-reviews-css-tidy.php';
 
 		$csstidy = new csstidy();
 		$csstidy->set_cfg( 'remove_bslash', false );

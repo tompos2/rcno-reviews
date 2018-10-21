@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.23.2 =
+* Fixed a bug where the class 'csstidy_print' can be declared twice.
+
 = 1.23.1 =
 * Fix missing update for "Current Reading" widget in last update.
 

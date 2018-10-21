@@ -76,14 +76,14 @@ define( 'DEFAULT_AT', 41 );
  *
  * @version 1.0
  */
-require( 'csstidy/class.csstidy_print.php' );
+require_once 'csstidy/class.csstidy_print.php';
 
 /**
  * Contains a class for optimising CSS code
  *
  * @version 1.0
  */
-require( 'csstidy/class.csstidy_optimise.php' );
+require_once 'csstidy/class.csstidy_optimise.php';
 
 /**
  * CSS Parser class
