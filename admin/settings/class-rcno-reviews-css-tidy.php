@@ -98,7 +98,7 @@ require_once 'csstidy/class.csstidy_optimise.php';
  * @author  Florian Schmitz (floele at gmail dot com) 2005-2006
  * @version 1.5.5
  */
-class csstidy {
+class CSSTidy {
 
 	/**
 	 * Saves the parsed CSS. This array is empty if preserve_css is on.
@@ -117,7 +117,7 @@ class csstidy {
 	/**
 	 * Printer class
 	 *
-	 * @see    csstidy_print
+	 * @see    CSSTidy_Print
 	 * @var object
 	 * @access public
 	 */
@@ -125,7 +125,7 @@ class csstidy {
 	/**
 	 * Optimiser class
 	 *
-	 * @see    csstidy_optimise
+	 * @see    CSSTidy_Optimise
 	 * @var object
 	 * @access private
 	 */
@@ -249,7 +249,7 @@ class csstidy {
 	 * @var array
 	 * @access private
 	 */
-	public $str_char = array();
+	public $str_char   = array();
 	public $cur_string = array();
 	/**
 	 * Status from which the parser switched to ic or instr
@@ -300,7 +300,7 @@ class csstidy {
 	 *
 	 * @var string
 	 */
-	public $tokens_list = "";
+	public $tokens_list = '';
 
 	/**
 	 * Various CSS Data for CSSTidy
@@ -317,46 +317,46 @@ class csstidy {
 	 */
 	public function __construct() {
 		$data = array();
-		include( 'csstidy/data.inc.php' );
+		include 'csstidy/data.inc.php';
 		$this->data = $data;
 
-		$this->settings[ 'remove_bslash' ]        = true;
-		$this->settings[ 'compress_colors' ]      = true;
-		$this->settings[ 'compress_font-weight' ] = true;
-		$this->settings[ 'lowercase_s' ]          = false;
+		$this->settings['remove_bslash']        = true;
+		$this->settings['compress_colors']      = true;
+		$this->settings['compress_font-weight'] = true;
+		$this->settings['lowercase_s']          = false;
 		/*
 			1 common shorthands optimization
 			2 + font property optimization
 			3 + background property optimization
 		 */
-		$this->settings[ 'optimise_shorthands' ]    = 1;
-		$this->settings[ 'remove_last_;' ]          = true;
-		$this->settings[ 'space_before_important' ] = false;
+		$this->settings['optimise_shorthands']    = 1;
+		$this->settings['remove_last_;']          = true;
+		$this->settings['space_before_important'] = false;
 		/* rewrite all properties with low case, better for later gzip OK, safe*/
-		$this->settings[ 'case_properties' ] = 1;
-		/* sort properties in alpabetic order, better for later gzip
-		 * but can cause trouble in case of overiding same propertie or using hack
+		$this->settings['case_properties'] = 1;
+		/* sort properties in alphabetic order, better for later gzip
+		 * but can cause trouble in case of overriding same properties or using hack
 		 */
-		$this->settings[ 'sort_properties' ] = false;
+		$this->settings['sort_properties'] = false;
 		/*
 			1, 3, 5, etc -- enable sorting selectors inside @media: a{}b{}c{}
 			2, 5, 8, etc -- enable sorting selectors inside one CSS declaration: a,b,c{}
-			preserve order by default cause it can break functionnality
+			preserve order by default cause it can break functionality
 		 */
-		$this->settings[ 'sort_selectors' ] = 0;
-		/* is dangeroues to be used: CSS is broken sometimes */
-		$this->settings[ 'merge_selectors' ] = 0;
+		$this->settings['sort_selectors'] = 0;
+		/* is dangerous to be used: CSS is broken sometimes */
+		$this->settings['merge_selectors'] = 0;
 		/* preserve or not browser hacks */
-		$this->settings[ 'discard_invalid_selectors' ]  = false;
-		$this->settings[ 'discard_invalid_properties' ] = false;
-		$this->settings[ 'css_level' ]                  = 'CSS3.0';
-		$this->settings[ 'preserve_css' ]               = false;
-		$this->settings[ 'timestamp' ]                  = false;
-		$this->settings[ 'template' ]                   = ''; // say that propertie exist
+		$this->settings['discard_invalid_selectors']  = false;
+		$this->settings['discard_invalid_properties'] = false;
+		$this->settings['css_level']                  = 'CSS3.0';
+		$this->settings['preserve_css']               = false;
+		$this->settings['timestamp']                  = false;
+		$this->settings['template']                   = ''; // say that properties exist
 		$this->set_cfg( 'template', 'default' ); // call load_template
-		$this->optimise = new csstidy_optimise( $this );
+		$this->optimise = new CSSTidy_Optimise( $this );
 
-		$this->tokens_list = &$this->data[ 'csstidy' ][ 'tokens' ];
+		$this->tokens_list = &$this->data['csstidy']['tokens'];
 	}
 
 	/**
@@ -424,14 +424,14 @@ class csstidy {
 				$this->settings[ $setprop ] = $setval;
 			}
 			if ( array_key_exists( 'template', $setting ) ) {
-				$this->_load_template( $this->settings[ 'template' ] );
+				$this->_load_template( $this->settings['template'] );
 			}
 
 			return true;
 		} elseif ( isset( $this->settings[ $setting ] ) && $value !== '' ) {
 			$this->settings[ $setting ] = $value;
-			if ( $setting === 'template' ) {
-				$this->_load_template( $this->settings[ 'template' ] );
+			if ( 'template' === $setting ) {
+				$this->_load_template( $this->settings['template'] );
 			}
 
 			return true;
@@ -650,12 +650,12 @@ class csstidy {
 		@setlocale( LC_ALL, 'C' );
 
 		// PHP bug? Settings need to be refreshed in PHP4
-		$this->print    = new csstidy_print( $this );
-		$this->optimise = new csstidy_optimise( $this );
+		$this->print    = new CSSTidy_Print( $this );
+		$this->optimise = new CSSTidy_Optimise( $this );
 
-		$all_properties           = &$this->data[ 'csstidy' ][ 'all_properties' ];
-		$at_rules                 = &$this->data[ 'csstidy' ][ 'at_rules' ];
-		$quoted_string_properties = &$this->data[ 'csstidy' ][ 'quoted_string_properties' ];
+		$all_properties           = &$this->data['csstidy']['all_properties'];
+		$at_rules                 = &$this->data['csstidy']['at_rules'];
+		$quoted_string_properties = &$this->data['csstidy']['quoted_string_properties'];
 
 		$this->css              = array();
 		$this->print->input_css = $string;

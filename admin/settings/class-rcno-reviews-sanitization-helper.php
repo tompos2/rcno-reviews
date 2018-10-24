@@ -315,7 +315,7 @@ class Rcno_Reviews_Sanitization_Helper {
 
 		require_once 'class-rcno-reviews-css-tidy.php';
 
-		$csstidy = new csstidy();
+		$csstidy = new CSSTidy();
 		$csstidy->set_cfg( 'remove_bslash', false );
 		$csstidy->set_cfg( 'compress_colors', false );
 		$csstidy->set_cfg( 'compress_font-weight', false );

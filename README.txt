@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.23.3 =
+* See v1.23.2
+
 = 1.23.2 =
 * Fixed a bug where the class 'csstidy_print' can be declared twice.
 
