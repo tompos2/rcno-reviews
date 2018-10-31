@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.24.0 =
+* Added a filter to the 'get_the_rcno_book_cover()' to force a specific book cover size.
+
 = 1.23.3 =
 * See v1.23.2
 

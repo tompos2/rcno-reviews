@@ -319,8 +319,9 @@ class Rcno_Template_Tags {
 	 * @return bool|string
 	 */
 	public function get_the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true, $original = false ) {
-		$review = get_post_custom( $review_id );
+		$review        = get_post_custom( $review_id );
 		$attachment_id = isset( $review['rcno_reviews_book_cover_id'] ) ? $review['rcno_reviews_book_cover_id'][0] : 0;
+		$size          = apply_filters( 'rcno_book_cover_size', $size );
 
 		if ( ! isset( $review['rcno_reviews_book_cover_src'] ) ) {
 			return false;
@@ -356,7 +357,7 @@ class Rcno_Template_Tags {
 		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ) ) . '" ';
 		$out .= 'title="' . $book_title . '" ';
 		$out .= 'alt="' . $book_alt . '" ';
-		$out .= 'class="rcno-book-cover" ';
+		$out .= 'class="rcno-book-cover ' . $size . '" ';
 		$out .= 'data-rcno-attachment-id="' . (int) $attachment_id . '"';
 		$out .= '>';
 
