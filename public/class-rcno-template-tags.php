@@ -178,12 +178,11 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_full_book_details( $review_id, $size = 'medium' ) {
 
+		$book_cover_url = get_post_meta( $review_id, 'rcno_reviews_book_cover_url', true );
 		$default_meta   = implode( ',', $this->get_rcno_book_meta_keys( 'keys', 8 ) );
 		$selected_meta  = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_book_details_meta', $default_meta ) );
 		$book_meta_keys = $this->get_rcno_book_meta_keys( 'keys' );
-		$custom_url     = ! empty( get_post_meta( $review_id, 'rcno_reviews_book_cover_url', true ) )
-						  ? get_post_meta( $review_id, 'rcno_reviews_book_cover_url', true )
-						  : '';
+		$custom_url     = ! empty( $book_cover_url ) ? $book_cover_url : '';
 		$enable_custom_link = apply_filters( 'rcno_book_cover_enable_custom_link', is_single() );
 		$rel_attributes     = apply_filters( 'rcno_custom_link_alt_tags', array( 'nofollow', 'noopener' ) );
 
