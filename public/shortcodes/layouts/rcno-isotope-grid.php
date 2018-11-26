@@ -45,7 +45,7 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		if ( $options['search'] ) {
 			$select .= '<input type="text" class="rcno-isotope-grid-search rcno-isotope-grid-select-wrapper" placeholder="'
-			              . __( 'Search...', 'rcno-reviews' ) . '" />';
+						. __( 'Search...', 'rcno-reviews' ) . '" />';
 		}
 
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], $exclude );

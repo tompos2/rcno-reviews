@@ -106,7 +106,6 @@ class Rcno_Reviews_Public {
 
 		// We are only registering the script, not calling it.
 		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
-
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );
 		wp_register_script( 'images-loaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array(), '4.1.4', true );
 		wp_register_script( 'isotope-grid', plugin_dir_url( __FILE__ ) . 'js/isotope.pkgd.min.js', array(), '3.0.5', true );
@@ -430,6 +429,8 @@ class Rcno_Reviews_Public {
 			$terms = false;
 		}
 
+		ob_start();
+
 		// Include the taxonomy file.
 		include_once __DIR__ . '/class-rcno-template-tags.php';
 
@@ -451,8 +452,8 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed     $headers	Whether or not to show a first letter navigation header before each item.
-	 * @param string    $category	The category to limit this index page to.
+	 * @param mixed     $headers Whether or not to show a first letter navigation header before each item.
+	 * @param string    $category The category to limit this index page to.
 	 *
 	 * @return string $content
 	 */
@@ -478,7 +479,7 @@ class Rcno_Reviews_Public {
 			'orderby'        => 'post_title',
 			'order'          => 'ASC',
 			'posts_per_page' => - 1,
-			'category_name'  => $category
+			'category_name'  => $category,
 		);
 		$query = new WP_Query( $args );
 		$posts = array();
@@ -491,6 +492,8 @@ class Rcno_Reviews_Public {
 			}
 			wp_reset_postdata();
 		}
+
+		ob_start();
 
 		// Include the taxonomy file.
 		include_once __DIR__ . '/class-rcno-template-tags.php';
@@ -507,70 +510,6 @@ class Rcno_Reviews_Public {
 		// Return the rendered content.
 		return $content;
 	}
-
-
-	/**
-	 * Render a grid of all reviews alphabetically using the layout's reviews_grid.php file
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param mixed $headers	Whether or not to show a first letter navigation header before each item.
-	 *
-	 * @return string $content
-	 */
-	public function rcno_render_review_grid( $headers = false ) {
-		// Create empty output variable.
-		$output = '';
-
-		// Get the layout's include path.
-		$include_path = $this->rcno_get_the_layout() . 'reviews_grid.php';
-
-		if ( ! file_exists( $include_path ) ) {
-			// If the layout does not provide an taxonomy file, use the default one.
-			$include_path = plugin_dir_path( __FILE__ ) . 'templates/rcno_default/reviews_grid.php';
-		}
-
-		/**
-		 * Set review_post to false for template tags.
-		 */
-		$review_post = false;
-
-		// Get an alphabetically ordered list of all reviews.
-		$args  = array(
-			'post_type'      => 'rcno_review',
-			'post_status'    => 'publish',
-			'orderby'        => 'post_title',
-			'order'          => 'ASC',
-			'posts_per_page' => - 1,
-		);
-		$query = new WP_Query( $args );
-		$posts = array();
-
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				global $post;
-				$posts[] = $post;
-			}
-			wp_reset_postdata();
-		}
-
-		// Include the taxonomy file.
-		require_once __DIR__ . '/class-rcno-template-tags.php';
-
-		// Included once, as adding the shortcode twice to a page with case a PHP fatal error.
-		include_once $include_path;
-
-		// Render the content using that file.
-		$content = ob_get_contents();
-
-		// Finish rendering.
-		ob_end_clean();
-
-		// Return the rendered content.
-		return $content;
-	}
-
 
 	/**
 	 * Get the path to the layout file depending on the layout options.

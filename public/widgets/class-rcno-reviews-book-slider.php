@@ -47,13 +47,13 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'book-slider',
-			'description' => esc_html__( 'A widget to display a reviewed book slider', 'rcno-reviews' )
+			'description' => esc_html__( 'A widget to display a reviewed book slider', 'rcno-reviews' ),
 		);
 
 		// Set up the widget control options.
 		$this->control_options = array(
 			'width'  => 325,
-			'height' => 350
+			'height' => 350,
 		);
 
 	}
@@ -63,17 +63,17 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	 */
 	public function enqueue_scripts() {
 		$widget_settings = $this->get_settings();
-		$slide_duration = 5;
+		$slide_duration  = 5;
 
 		// Because we don't know where in the array the setting will be.
 		foreach ( $widget_settings as $setting ) {
-		    if ( isset( $setting['slide_duration'] ) ) {
-			    $slide_duration = $setting['slide_duration'];
-            }
-        }
+			if ( isset( $setting['slide_duration'] ) ) {
+				$slide_duration = $setting['slide_duration'];
+			}
+		}
 
-		wp_enqueue_style( 'owl-carousel-main', RCNO_PLUGIN_URI . 'public/css/owl.carousel.min.css', array(), '1.0.0', 'all' );
-		wp_enqueue_script( 'owl-carousel-script', RCNO_PLUGIN_URI . 'public/js/owl.carousel.min.js', array( 'jquery' ), '1.0.0', true );
+		wp_register_style( 'owl-carousel-main', RCNO_PLUGIN_URI . 'public/css/owl.carousel.min.css', array(), '1.0.0', 'all' );
+		wp_register_script( 'owl-carousel-script', RCNO_PLUGIN_URI . 'public/js/owl.carousel.min.js', array( 'jquery' ), '1.0.0', true );
 		wp_localize_script( 'owl-carousel-script', 'owl_carousel_options', array(
 			'duration' => absint( $slide_duration ),
 		) );
@@ -98,16 +98,10 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	 *
 	 * @since 0.6.0
 	 */
-	function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+	public function widget( $args, $instance ) {
 
-		/* Set the $args for wp_tag_cloud() to the $instance array. */
-		$args = $instance;
-
-		/**
-		 *  Get and parse the arguments, defaults have been set during saving (hopefully)
-		 */
-		extract( $args, EXTR_SKIP );
+		wp_enqueue_style( 'owl-carousel-main' );
+		wp_enqueue_script( 'owl-carousel-script' );
 
 		// If there is an error, stop and return
 		if ( ! empty( $instance['error'] ) ) {
@@ -116,11 +110,11 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 
 
 		// Output the theme's $before_widget wrapper.
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		// Output the title (if we have any).
 		if ( isset( $instance['title'] ) ) {
-			echo $before_title . sanitize_text_field( $instance['title'] ) . $after_title;
+			echo $args['before_title'] . sanitize_text_field( $instance['title'] ) . $args['after_title'];
 		}
 
 		// Begin frontend output.
@@ -134,28 +128,30 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 
 		if ( $recent_reviews->have_posts() ) { ?>
 
-            <div class="rcno-book-slider-container owl-carousel">
+			<div class="rcno-book-slider-container owl-carousel">
 
-				<?php while ( $recent_reviews->have_posts() ) {
-					$recent_reviews->the_post(); ?>
+				<?php
+                    while ( $recent_reviews->have_posts() ) {
+					$recent_reviews->the_post();
+				?>
 
 					<?php
-					    $review_id = get_the_ID();
-					    $review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+						$review_id = get_the_ID();
+						$review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
 					?>
-                    <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+					<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 						<?php $review->the_rcno_book_cover( $review_id, 'full' ); ?>
-                    </a>
+					</a>
 
 				<?php } ?>
-            </div>
+			</div>
 
 		<?php }
 
 		wp_reset_postdata();
 
 		// Close the theme's widget wrapper.
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	/**
@@ -163,7 +159,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	 *
 	 * @since 0.8.0
 	 */
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		// Fill current state with old data to be sure we not loose anything
 		$instance = $old_instance;
 
@@ -177,7 +173,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		$instance['slide_duration'] = absint( $new_instance['slide_duration'] );
 
 
-		// and now we return new values and wordpress do all work for you
+		// Now we return new values and WordPress do all work for you.
 		return $instance;
 	}
 
@@ -186,7 +182,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 	 *
 	 * @since 0.8.0
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		global $slide_duration;
 		// Set up the default form values.
@@ -194,7 +190,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 			'title'          => '',
 			'review_count'   => 5,
 			'order'          => 'ASC',
-			'slide_duration' => 5
+			'slide_duration' => 5,
 		);
 
 		// Merge the user-selected arguments with the defaults.
@@ -211,45 +207,45 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		$slide_duration = absint( $instance['slide_duration'] );
 
 		?>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?> ">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
 				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
-            </label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-                   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
-        </p>
+			</label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
+				   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
+		</p>
 
-        <p>
-            <label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
 				<?php _e( 'Number of Reviews:', 'rcno-reviews' ); ?>
-            </label>
-            <input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
-                   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
-                   value="<?php echo esc_attr( $review_count ); ?>"
-                   style="width:50px;" min="1" max="100" pattern="[0-9]"/>
-        </p>
+			</label>
+			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
+				   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
+				   value="<?php echo esc_attr( $review_count ); ?>"
+				   style="width:50px;" min="1" max="100" pattern="[0-9]"/>
+		</p>
 
-        <p>
-            <label for="<?php echo $this->get_field_id( 'order' ); ?>">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'order' ); ?>">
 				<?php _e( "Order:", 'rcno-reviews' ); ?>
-            </label>
-            <select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
-                    name="<?php echo $this->get_field_name( 'order' ); ?>" style="width:100px">
+			</label>
+			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
+					name="<?php echo $this->get_field_name( 'order' ); ?>" style="width:100px">
 				<?php foreach ( $order as $option_value => $option_label ) { ?>
-                    <option value="<?php echo $option_value; ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo $option_label; ?></option>
+					<option value="<?php echo $option_value; ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo $option_label; ?></option>
 				<?php } ?>
-            </select>
-        </p>
+			</select>
+		</p>
 
-        <p>
-            <label for="<?php echo $this->get_field_id( 'slide_duration' ); ?>">
+		<p>
+			<label for="<?php echo $this->get_field_id( 'slide_duration' ); ?>">
 				<?php _e( 'Slide Duration:', 'rcno-reviews' ); ?>
-            </label>
-            <input type="number" class="widefat" id="<?php echo $this->get_field_id( 'slide_duration' ); ?>"
-                   name="<?php echo $this->get_field_name( 'slide_duration' ); ?>"
-                   value="<?php echo esc_attr( $slide_duration ); ?>"
-                   style="width:50px;" min="1" max="60" pattern="[0-9]"/>
-        </p>
+			</label>
+			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'slide_duration' ); ?>"
+				   name="<?php echo $this->get_field_name( 'slide_duration' ); ?>"
+				   value="<?php echo esc_attr( $slide_duration ); ?>"
+				   style="width:50px;" min="1" max="60" pattern="[0-9]"/>
+		</p>
 
 		<?php
 	}

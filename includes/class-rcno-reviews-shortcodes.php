@@ -24,6 +24,7 @@ include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-book-list-shortcode.php
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-review-box-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-purchase-links-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-isotope-grid-shortcode.php';
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-grid-shortcode.php';
 
 class Rcno_Reviews_Shortcodes {
 
@@ -82,6 +83,15 @@ class Rcno_Reviews_Shortcodes {
 	public $isotope_grid;
 
 	/**
+	 * The object contain the purchase links shortcode object.
+	 *
+	 * @since    1.12.0
+	 * @access   public
+	 * @var      Rcno_Grid_Shortcode $masonry_grid The class instance.
+	 */
+	public $masonry_grid;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
@@ -93,10 +103,11 @@ class Rcno_Reviews_Shortcodes {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		$this->book_list        = new Rcno_Book_List_Shortcode( $plugin_name, $version );
-		$this->review_box       = new Rcno_Review_Box_Shortcode( $plugin_name, $version );
-		$this->purchase_links   = new Rcno_Purchase_Links_Shortcode( $plugin_name, $version );
-		$this->isotope_grid     = new Rcno_Isotope_Grid_Shortcode( $plugin_name, $version );
+		$this->book_list      = new Rcno_Book_List_Shortcode( $plugin_name, $version );
+		$this->review_box     = new Rcno_Review_Box_Shortcode( $plugin_name, $version );
+		$this->purchase_links = new Rcno_Purchase_Links_Shortcode( $plugin_name, $version );
+		$this->isotope_grid   = new Rcno_Isotope_Grid_Shortcode( $plugin_name, $version );
+		$this->masonry_grid   = new Rcno_Grid_Shortcode( $plugin_name, $version );
 	}
 
 	/**
@@ -129,7 +140,7 @@ class Rcno_Reviews_Shortcodes {
 
 		if ( 'n/a' !== $options['id'] ) {
 
-			 //Get random post
+			//Get random post
 			if ( 'random' === $options['id'] ) {
 
 				$posts = get_posts( array(
@@ -140,19 +151,19 @@ class Rcno_Reviews_Shortcodes {
 				$review_post = $posts[ array_rand( $posts ) ];
 			} else {
 
-				 // Get post by id.
+				// Get post by id.
 				$review_post = get_post( (int) $options['id'] );
 			}
 
-			if ( null !== $review_post && $review_post->post_type === 'rcno_review' ) {
+			if ( null !== $review_post && 'rcno_review' === $review_post->post_type ) {
 				$output               = '';
 				$review               = get_post_custom( $review_post->ID );
 				$GLOBALS['review_id'] = $review_post->ID; // Set review ID for retrieval in embedded reviews.
 
 				if ( 1 === (int) $options['nodesc'] ) {
 					// Embed without description.
-					$templ = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
-					$output   = $templ->get_the_rcno_full_book_details( (int) $options['id'] );
+					$templ  = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+					$output = $templ->get_the_rcno_full_book_details( (int) $options['id'] );
 				} elseif ( 0 === (int) $options['excerpt'] ) {
 					// Embed complete review.
 					$output = $plugin_public->rcno_render_review_content( $review_post );
@@ -160,13 +171,14 @@ class Rcno_Reviews_Shortcodes {
 					// Embed excerpt only.
 					$output = $plugin_public->rcno_render_review_excerpt( $review_post );
 				}
-
 			} else {
 				$output = '';
 			}
 
 			return do_shortcode( $output );
 		}
+
+		return '';
 	}
 
 
@@ -221,32 +233,6 @@ class Rcno_Reviews_Shortcodes {
 	}
 
 	/**
-	 * Do the shortcode 'rcno-index' and render a list of all reviews
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param mixed $options
-	 * @return string
-	 */
-	public function rcno_do_reviews_grid_shortcode( $options ) {
-
-		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
-
-		// Set default values for options not set explicitly.
-		$options = shortcode_atts( array(
-			'headers' => 1,
-		), $options );
-
-		// The actual rendering is done by a special function.
-		$output = $plugin_public->rcno_render_review_grid( $options['headers'] );
-
-		// We are enqueuing the previously registered script.
-		wp_enqueue_script( 'macy-masonary-grid' );
-
-		return do_shortcode( $output );
-	}
-
-	/**
 	 * Do the shortcode 'rcno-book-series' and render a list of all books
 	 * in a series.
 	 *
@@ -255,9 +241,10 @@ class Rcno_Reviews_Shortcodes {
 	 * @param mixed $options
 	 * @return string
 	 */
-	public function rcno_do_book_series_shortcode( $options ) { // @TODO: To be deprecated
+	public function rcno_do_book_series_shortcode( $options ) {
+		// @TODO: To be deprecated
 
-		$template = new Rcno_Template_Tags( $this->plugin_name, $this->version );
+		$template  = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 		$review_id = get_the_ID();
 
 		// Set default values for options not set explicitly.
@@ -265,7 +252,7 @@ class Rcno_Reviews_Shortcodes {
 			'review_id' => $review_id,
 			'taxonomy'  => 'rcno_series',
 			'number'    => true,
-			'header'    => __( 'Books in this series: ', 'rcno-reviews' )
+			'header'    => __( 'Books in this series: ', 'rcno-reviews' ),
 		), $options );
 
 		// The actual rendering is done by a special function.
@@ -376,11 +363,13 @@ class Rcno_Reviews_Shortcodes {
 		$json = array();
 
 		foreach ( $reviews as $review ) {
-			$json[] = array( 'id' => $review->ID, 'title' => $review->post_title );
+			$json[] = array(
+				'id'    => $review->ID,
+				'title' => $review->post_title,
+			);
 		}
 
 		wp_send_json( $json );
-		die();
 	}
 
 
@@ -433,7 +422,7 @@ class Rcno_Reviews_Shortcodes {
 		global $post_type;
 
 		// Only load on pages where it is necessary.
-		if ( 'page' !== $post_type) {
+		if ( 'page' !== $post_type ) {
 			return;
 		}
 
@@ -462,8 +451,8 @@ class Rcno_Reviews_Shortcodes {
 	 */
 	public function rcno_reviews_shortcodes_tab() {
 
-		$screen    = get_current_screen();
-		$help_text = '<h3>' . __( 'Shortcodes Help', 'rcno-reviews' ) . '</h3>';
+		$screen     = get_current_screen();
+		$help_text  = '<h3>' . __( 'Shortcodes Help', 'rcno-reviews' ) . '</h3>';
 		$help_text .= $this->book_list->rcno_get_help_text();
 		$help_text .= $this->review_box->rcno_get_help_text();
 		$help_text .= $this->purchase_links->rcno_get_help_text();

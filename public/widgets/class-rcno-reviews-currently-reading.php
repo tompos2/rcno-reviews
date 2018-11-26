@@ -91,8 +91,6 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-
-
 		// If there is an error, stop and return.
 		if ( ! empty( $instance['error'] ) ) {
 			return;

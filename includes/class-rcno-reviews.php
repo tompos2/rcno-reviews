@@ -473,7 +473,6 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-reviews', array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
 		add_shortcode( 'rcno-tax-list', array( $plugin_shortcodes, 'rcno_do_taxlist_shortcode' ) );
 		add_shortcode( 'rcno-reviews-index', array( $plugin_shortcodes, 'rcno_do_reviews_index_shortcode' ) );
-		add_shortcode( 'rcno-reviews-grid', array( $plugin_shortcodes, 'rcno_do_reviews_grid_shortcode' ) );
 		add_shortcode( 'rcno-book-series', array( $plugin_shortcodes, 'rcno_do_book_series_shortcode' ) );
 
 		$this->loader->add_action( 'admin_head', $plugin_shortcodes, 'rcno_reviews_shortcodes_tab' );
@@ -481,6 +480,7 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-review-box', array( $plugin_shortcodes->review_box, 'rcno_do_review_box_shortcode' ) );
 		add_shortcode( 'rcno-purchase-links', array( $plugin_shortcodes->purchase_links, 'rcno_do_purchase_links_shortcode' ) );
 		add_shortcode( 'rcno-sortable-grid', array( $plugin_shortcodes->isotope_grid, 'rcno_do_isotope_grid_shortcode' ) );
+		add_shortcode( 'rcno-reviews-grid', array( $plugin_shortcodes->masonry_grid, 'do_masonry_grid_shortcode' ) );
 
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );

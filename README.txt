@@ -81,8 +81,11 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.25.0 =
+* Fixed a bug with shortcodes not rendering correctly on pages.
+
 = 1.24.1 =
-* Fixed a fatal PHP error when evaluating a function inside 'empty()'
+* Fixed a fatal PHP error when evaluating a function inside 'empty()'.
 
 = 1.24.0 =
 * Added a filter to the 'get_the_rcno_book_cover()' to force a specific book cover size.
