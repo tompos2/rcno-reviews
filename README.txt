@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.26.0 =
+* Disable support for the new Gutenberg editor.
+
 = 1.25.0 =
 * Fixed a bug with shortcodes not rendering correctly on pages.
 

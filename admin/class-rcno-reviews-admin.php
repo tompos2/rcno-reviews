@@ -480,8 +480,8 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param WP_Post $post	The post object of the current review.
-	 * @param array  $box	The metaboxes attached to the current post object.
+	 * @param WP_Post $post The post object of the current review.
+	 * @param array $box The metaboxes attached to the current post object.
 	 *
 	 * @return void
 	 */
@@ -617,13 +617,13 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param array $links	The links below the entry on the plugin list field.
+	 * @param array $links The links below the entry on the plugin list field.
 	 *
 	 * @return array $links
 	 */
 	public function add_action_links( $links ) {
 
-		$links['settings'] = '<a href="' . admin_url( 'admin.php?page=' . $this->plugin_name ) . '">' . __( 'Settings',	$this->plugin_name ) . '</a>';
+		$links['settings'] = '<a href="' . admin_url( 'admin.php?page=' . $this->plugin_name ) . '">' . __( 'Settings',	'rcno-reviews' ) . '</a>';
 
 		return $links;
 	}
@@ -739,7 +739,7 @@ class Rcno_Reviews_Admin {
 	 * @since 1.0.0
 	 *
 	 * @see   https://stackoverflow.com/a/3354804/3513481
-	 * @param array $columns	An array of the columns in the admin reviews page.
+	 * @param array $columns An array of the columns in the admin reviews page.
 	 *
 	 * @return array
 	 */
@@ -761,7 +761,7 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $columns	An array of the columns in the admin reviews page.
+	 * @param array $columns An array of the columns in the admin reviews page.
 	 *
 	 * @return array
 	 */
@@ -1481,6 +1481,27 @@ SQL;
 		}
 
 		return $states;
+	}
+
+	/**
+	 * Add option to enable or disable Gutenberg support.
+	 *
+	 * @since 1.26.0
+	 *
+	 * @param bool $use_block_editor
+	 * @param string $post_type
+	 *
+	 * @return bool
+	 */
+	public function rcno_enable_gutenberg_support( $use_block_editor, $post_type ) {
+
+		$enable = Rcno_Reviews_Option::get_option( 'rcno_reviews_in_gutenberg' );
+
+		if ( 'rcno_review' === $post_type ) {
+			return $enable;
+		}
+
+		return $use_block_editor;
 	}
 
 }

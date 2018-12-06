@@ -318,6 +318,9 @@ class Rcno_Reviews {
 		//$this->loader->add_action( 'in_plugin_update_message-' . RCNO_PLUGIN_FILE, $plugin_admin, 'rcno_update_message_warning', 20, 2 );
 
 		$this->loader->add_filter( 'display_post_states', $plugin_admin, 'rcno_add_page_states', 20, 2 );
+
+		// Enable or disable Gutenberg support.
+		$this->loader->add_filter( 'use_block_editor_for_post_type', $plugin_admin, 'rcno_enable_gutenberg_support', 10, 2 );
 	}
 
 	/**
