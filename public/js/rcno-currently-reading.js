@@ -13,11 +13,15 @@ const CurrentlyReading = {
     },
     computed: {
         percentage: function () {
-            return Math.round((this.all_updates[this.curr_index].current_page /
-                this.all_updates[this.curr_index].num_of_pages) * 100);
+            if (this.all_updates.length !== 0) {
+                return Math.round((this.all_updates[this.curr_index].current_page /
+                    this.all_updates[this.curr_index].num_of_pages) * 100);
+            }
         },
         completed: function () {
-            return this.percentage + '% ' + rcno_currently_reading.completed;
+            if (this.all_updates.length !== 0) {
+                return this.percentage + '% ' + rcno_currently_reading.completed;
+            }
         }
     },
     methods: {
@@ -31,29 +35,31 @@ const CurrentlyReading = {
 
                 return;
             }
+            if ( typeof currently_reading !== 'undefined' ) {
+                jQuery.ajax({
+                    method: 'GET',
+                    url: currently_reading.api.url,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
+                    },
+                })
+                .then(function (data) {
+                    _this.all_updates = data;
+                    _this.curr_update = data[data.length - 1];
+                    _this.curr_index  = data.length - 1;
+                    _this.is_loading  = false;
+                    _this.data_source = 'remote-server';
 
-            jQuery.ajax({
-                method: 'GET',
-                url: currently_reading.api.url,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-WP-Nonce', currently_reading.api.nonce);
-                },
-            })
-            .then(function (data) {
-                _this.all_updates = data;
-                _this.curr_update = data[data.length - 1];
-                _this.curr_index  = data.length - 1;
-                _this.is_loading  = false;
-                _this.data_source = 'remote-server';
+                    localStorage.setItem('rcno_all_updates', JSON.stringify(data));
+                })
+                .fail(function (res) {
+                    if (res.status !== 200) {
+                        _this.message = currently_reading.strings.error;
+                        console.log(res);
+                    }
+                });
+            }
 
-                localStorage.setItem('rcno_all_updates', JSON.stringify(data));
-            })
-            .fail(function (res) {
-                if (res.status !== 200) {
-                    _this.message = currently_reading.strings.error;
-                    console.log(res);
-                }
-            });
         },
         previous: function () {
             if (this.curr_index > 0) {
@@ -74,4 +80,3 @@ const app = new Vue({
         'currently-reading': CurrentlyReading,
     },
 });
-
