@@ -440,7 +440,7 @@ class Rcno_Template_Tags {
 		$terms = get_the_term_list( $review_id, $taxonomy, '<span class="rcno-tax-term">', $sep, '</span>' );
 		$tax   = get_taxonomy( $taxonomy );
 
-		if ( false === $tax || false === $terms ) {
+		if ( false === $tax || false === $terms || is_wp_error( $terms ) ) {
 			return null;
 		}
 
@@ -1123,9 +1123,7 @@ class Rcno_Template_Tags {
 		if ( false === $tax || is_wp_error( $tax ) ) {
 			$out .= '<div class="rcno-books-error">';
 			$out .= '<p>';
-			$out .= __('No entries found for the ', 'rcno-reviews');
-			$out .= '<em>"' . $taxonomy . '"</em>';
-			$out .= __( ' taxonomy.', 'rcno-reviews' );
+			$out .= sprintf( __( 'No entries found for the "%s" taxonomy.', 'rcno-reviews' ), $taxonomy );
 			$out .= '</p>';
 			$out .= '</div>';
 

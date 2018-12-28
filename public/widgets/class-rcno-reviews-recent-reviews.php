@@ -54,14 +54,13 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			'width'  => 325,
 			'height' => 350,
 		);
-
 	}
 
 	/**
 	 * Register our widget, un-register the builtin widget.
 	 */
 	public function rcno_register_recent_reviews_widget() {
-		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_show_recent_reviews_widget' ) ) {
+		if ( ! Rcno_Reviews_Option::get_option( 'rcno_show_recent_reviews_widget' ) ) {
 			return false;
 		}
 		register_widget( 'Rcno_Reviews_Recent_Reviews' );
@@ -71,7 +70,8 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
-	 *
+	 * @param array $args
+	 * @param array $instance
 	 * @since 0.6.0
 	 */
 	public function widget( $args, $instance ) {
@@ -92,7 +92,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		// Begin frontend output.
 		$query_args     = array(
-			'post_type'      => 'rcno_review',
+			'post_type'      => true === $instance['regular_posts'] ? array( 'post', 'rcno_review' ) : 'rcno_review',
 			'posts_per_page' => isset( $instance['review_count'] ) ? (int) $instance['review_count'] : 5,
 		);
 		$recent_reviews = new WP_Query( $query_args );
@@ -136,18 +136,20 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 * Updates the widget control options for the particular instance of the widget.
 	 *
 	 * @since 0.8.0
+	 * @param object $new_instance
+	 * @param object $old_instance
+	 *
+	 * @return object
 	 */
 	public function update( $new_instance, $old_instance ) {
+
 		// Fill current state with old data to be sure we not loose anything
 		$instance = $old_instance;
 
-		// Set the instance to the new instance.
-		//$instance = $new_instance;
-
 		// Check and sanitize all inputs.
-		$instance['title']        = strip_tags( $new_instance['title'] );
-		$instance['review_count'] = absint( $new_instance['review_count'] );
-
+		$instance['title']         = strip_tags( $new_instance['title'] );
+		$instance['review_count']  = absint( $new_instance['review_count'] );
+		$instance['regular_posts'] = isset( $new_instance['regular_posts'] ) ? (bool) $new_instance['regular_posts'] : false;
 
 		// Now we return new values and WordPress do all work for you.
 		return $instance;
@@ -157,20 +159,27 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 * Displays the widget control options in the Widgets admin screen.
 	 *
 	 * @since 0.8.0
+	 *
+	 * @param object $instance
+	 *
+	 * @return void
+	 *
 	 */
 	public function form( $instance ) {
-		/* Set up the default form values. */
+		// Set up the default form values.
 		$defaults = array(
-			'title'        => '',
-			'review_count' => 5,
+			'title'         => '',
+			'review_count'  => 5,
+			'regular_posts' => false,
 		);
 
-		/* Merge the user-selected arguments with the defaults. */
-		$instance = wp_parse_args( (array) $instance, $defaults );
+		// Merge the user-selected arguments with the defaults.
+		$instance = wp_parse_args( $instance, $defaults );
 
-		/* element options. */
-		$title        = sanitize_text_field( $instance['title'] );
-		$review_count = sanitize_key( $instance['review_count'] );
+		// Element options.
+		$title         = sanitize_text_field( $instance['title'] );
+		$review_count  = sanitize_key( $instance['review_count'] );
+		$regular_posts = (bool) $instance['regular_posts'];
 
 		?>
 		<p>
@@ -178,7 +187,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-				   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
+				name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>"/>
 		</p>
 
 		<p>
@@ -186,9 +195,18 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 				<?php _e( 'Number of Reviews:', 'rcno-reviews' ); ?>
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
-				   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
-				   value="<?php echo esc_attr( $review_count ); ?>"
-				   style="width:50px;" min="1" max="100" pattern="[0-9]"/>
+				name="<?php echo $this->get_field_name( 'review_count' ); ?>"
+				value="<?php echo esc_attr( $review_count ); ?>"
+				style="width:50px;" min="1" max="100" pattern="[0-9]"/>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'regular_posts' ); ?>">
+				<?php _e( 'Show regular posts:', 'rcno-reviews' ); ?>
+			</label>
+			<input type="checkbox" class="widefat" id="<?php echo $this->get_field_id( 'regular_posts' ); ?>"
+				name="<?php echo $this->get_field_name( 'regular_posts' ); ?>"
+				value="1" <?php checked( '1', $regular_posts ); ?> />
 		</p>
 
 		<?php

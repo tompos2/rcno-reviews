@@ -20,7 +20,7 @@ function integer_cmp( $a, $b ) {
 // Create an empty output variable.
 $out = '';
 
-if ( $terms ) {
+if ( $terms && ! is_wp_error( $terms ) ) {
 	if ( count( $terms ) > 0 ) {
 
 		if ( 'rcno_author' === $taxonomy && 'last_name_first_name' === $sort_name ) {

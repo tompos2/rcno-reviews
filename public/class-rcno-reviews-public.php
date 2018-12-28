@@ -545,7 +545,10 @@ class Rcno_Reviews_Public {
 	 * @return int modified excerpt length.
 	 */
 	public function rcno_reviews_excerpt_length( $length ) {
-		return (int) Rcno_Reviews_Option::get_option( 'rcno_excerpt_word_count', '55' );
+		if ( 'rcno_review' === get_post_type() ) {
+			return (int) Rcno_Reviews_Option::get_option( 'rcno_excerpt_word_count', '55' );
+		}
+		return $length;
 	}
 
 	/**
