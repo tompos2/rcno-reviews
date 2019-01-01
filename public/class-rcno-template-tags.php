@@ -678,12 +678,17 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @see https://developer.wordpress.org/reference/functions/get_the_excerpt/#user-contributed-notes
+	 *
 	 * @param int $review_id	The current review's post ID.
 	 * @param int $length		The maximum character length of the excerpt.
 	 *
 	 * @return string
 	 */
 	public function get_the_rcno_book_review_excerpt( $review_id, $length = 200 ) {
+
+		setup_postdata( $review_id ); // See note by Mikko Saari.
+
 		$excerpt = get_the_excerpt( $review_id );
 		$length ++;
 

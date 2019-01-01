@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.26.3 =
+* Fixed a bug where an embedded review without an excerpt returns an empty string instead of an auto-excerpt.
+
 = 1.26.2 =
 * Added a check to make sure we are only affecting excerpt length of reviews in the RSS feed.
 * Catch an error when users use a taxonomy shortcode where the term is custom and not recognized.
