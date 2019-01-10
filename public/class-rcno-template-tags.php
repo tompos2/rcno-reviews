@@ -649,7 +649,7 @@ class Rcno_Template_Tags {
 		// Render the description only if it is not empty.
 		if ( '' !==  $book_description ) {
 			$out .= '<div class="rcno-book-description">';
-			$out .= apply_filters( 'rcno_book_description', $book_description );
+			$out .= apply_filters( 'rcno_book_description', $book_description, $review_id );
 			$out .= '</div>';
 		}
 

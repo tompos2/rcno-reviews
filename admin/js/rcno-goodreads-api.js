@@ -46,15 +46,15 @@
 			var book_isbn = $( '#rcno_book_isbn' ).val().trim();
 			var api_key = gr_options.api_key.trim();
 			// https://www.goodreads.com/book/isbn/0441172717?key=################
-			var url = 'https://www.goodreads.com/book/isbn/' + book_isbn +
-				'?key=' + api_key;
+			var url = 'https://www.goodreads.com/book/isbn/' + book_isbn + '?key=' + api_key;
 
 			$.ajax( {
-				url: 'https://query.yahooapis.com/v1/public/yql',
-				type: 'GET',
+				url: my_script_vars.ajaxURL,
+				type: 'POST',
 				data: {
-					q: 'select * from xml where url="' + url + '"',
-					format: 'json'
+					action: 'rcno_gr_remote_get',
+					gr_url: url,
+                    gr_nonce: my_script_vars.rcno_gr_remote_get_nonce
 				},
 				beforeSend: function() {
 					ajx_gif.show();
@@ -62,9 +62,10 @@
 				complete: function() {
 					ajx_gif.hide();
 				},
-				success: function( grDoc ) {
-					console.log( grDoc.query.results ); //@TODO: Disable in production.
-					var book = grDoc.query.results;
+				success: function( res ) {
+                    var json = $.xml2json(res.data.body);
+                    console.log( json.GoodreadsResponse.book );
+					var book = json.GoodreadsResponse.book;
 
 					if ( book.error ) {
 
@@ -73,51 +74,49 @@
 					} else {
 
 						review_title.val(
-							book.GoodreadsResponse.book.title
+							book.title
 						);
 						$('#title-prompt-text').addClass('screen-reader-text');
 
-						if( typeof book.GoodreadsResponse.book.work.original_title === 'object') {
+						if( typeof book.work.original_title === 'object') {
 							title.val(
-								book.GoodreadsResponse.book.title
+								book.title
 							);
 						} else {
 							title.val(
-								book.GoodreadsResponse.book.work.original_title
+								book.work.original_title
 							);
 						}
 
-						if ( book.GoodreadsResponse.book.description ) {
+						if ( book.description ) {
                             tinymce.get( 'rcno_book_description' ).setContent(
-                                book.GoodreadsResponse.book.description
+                                book.description
                             );
 						}
 
 
 						author.val(
-							book.GoodreadsResponse.book.authors.author.name
+							book.authors.author.name
 						);
 
-						if ( $.isArray(
-								book.GoodreadsResponse.book.popular_shelves.shelf ) ) {
+						if ( $.isArray(	book.popular_shelves.shelf ) ) {
 							genre.val(
 								$.upCase(
-									book.GoodreadsResponse.book.popular_shelves.shelf['0'].name )
+									book.popular_shelves.shelf["0"].$.name )
 							);
 						}
 
-						if ( typeof book.GoodreadsResponse.book.series_works ===
-							'object' ) {
+						if ( typeof book.series_works === 'object' ) {
 							if ( $.isArray(
-									book.GoodreadsResponse.book.series_works.series_work ) ) {
+									book.series_works.series_work ) ) {
 								series.val(
 									$.sanitize(
-										book.GoodreadsResponse.book.series_works.series_work['0'].series.title )
+										book.series_works.series_work['0'].series.title )
 								);
 							} else {
 								series.val(
 									$.sanitize(
-										book.GoodreadsResponse.book.series_works.series_work.series.title )
+										book.series_works.series_work.series.title )
 								);
 							}
 						} else {
@@ -125,53 +124,50 @@
 						}
 
 						publisher.val(
-							book.GoodreadsResponse.book.publisher
+							book.publisher
 						);
 
-						var year = parseInt(
-							book.GoodreadsResponse.book.publication_year );
-						var month = parseInt(
-							book.GoodreadsResponse.book.publication_month );
-						var day = parseInt(
-							book.GoodreadsResponse.book.publication_day );
+						var year = parseInt( book.publication_year );
+						var month = parseInt(book.publication_month );
+						var day = parseInt(book.publication_day );
 						pub_date.val( month + '/' + day + '/' + year );
 
 						pub_fmt.val(
-							book.GoodreadsResponse.book.format
+							book.format
 						);
 
 						pub_edt.val(
-							book.GoodreadsResponse.book.edition_information
+							book.edition_information
 						);
 
 						p_count.val(
-							book.GoodreadsResponse.book.num_pages
+							book.num_pages
 						);
 
-						if( book.GoodreadsResponse.book.series_works === 'object' ) {
+						if( typeof book.series_works === 'object' ) {
 							s_number.val(
-								book.GoodreadsResponse.book.series_works.series_work.user_position
+								book.series_works.series_work.user_position
 							);
 						}
 
 						gr_rvw.val(
-							book.GoodreadsResponse.book.average_rating
+							book.average_rating
 						);
 
 						gr_id.val(
-							book.GoodreadsResponse.book.id
+							book.id
 						);
 
 						isbn13.val(
-							book.GoodreadsResponse.book.isbn13
+							book.isbn13
 						);
 
 						asin.val(
-							book.GoodreadsResponse.book.asin
+							book.asin
 						);
 
 						gr_url.val(
-							book.GoodreadsResponse.book.url
+							book.url
 						);
 
 					}

@@ -338,6 +338,11 @@
             plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
         });
 
+        $('#rcno_reviews_settings\\[rcno_custom_review_score_criteria\\]').selectize({
+            create: true,
+            plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
+        });
+
         var book_meta_keys = [];
         $.each(my_script_vars.rcno_book_meta_keys, function (key, value) {
             book_meta_keys.push({key: key, value: value});

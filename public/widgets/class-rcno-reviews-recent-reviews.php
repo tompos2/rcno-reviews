@@ -92,7 +92,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		// Begin frontend output.
 		$query_args     = array(
-			'post_type'      => true === $instance['regular_posts'] ? array( 'post', 'rcno_review' ) : 'rcno_review',
+			'post_type'      => ( isset( $instance['regular_posts'] ) && true === $instance['regular_posts'] ) ? array( 'post', 'rcno_review' ) : 'rcno_review',
 			'posts_per_page' => isset( $instance['review_count'] ) ? (int) $instance['review_count'] : 5,
 		);
 		$recent_reviews = new WP_Query( $query_args );

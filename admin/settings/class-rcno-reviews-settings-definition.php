@@ -1,7 +1,6 @@
 <?php
 /**
  *
- *
  * @link       http://example.com
  * @since      1.0.0
  *
@@ -347,7 +346,22 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'The second accent color for the review score box?', 'rcno-reviews' ),
 					'type' => 'color',
 				),
-				'spacer-1'                              => array(
+				'spacer-0' => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
+				'rcno_enable_custom_review_score_criteria'            => array(
+					'name' => __( 'Fixed Review Criteria', 'rcno-reviews' ),
+					'desc' => __( 'Enable the use of fixed custom review criteria fields', 'rcno-reviews' ),
+					'type' => 'checkbox',
+				),
+				'rcno_custom_review_score_criteria'             => array(
+					'name' => __( 'Custom Criteria List', 'rcno-reviews' ),
+					'desc' => __( 'List of custom fields to use for review criteria.', 'rcno-reviews' ),
+					'std'  => 'Plot,Characters,World',
+					'type' => 'text',
+				),
+				'spacer-1' => array(
 					'name' => '',
 					'type' => 'spacer',
 				),

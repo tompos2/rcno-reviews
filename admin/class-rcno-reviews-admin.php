@@ -246,6 +246,8 @@ class Rcno_Reviews_Admin {
 		}
 
 
+		wp_enqueue_script( 'xml2json', plugin_dir_url( __FILE__ ) . 'js/xml2json.js', array( 'jquery', 'rcno-reviews' ), '1.0.0', true );
+
 		wp_enqueue_script( 'star-rating-svg', plugin_dir_url( __FILE__ ) . 'js/star-rating-svg.js', array( 'jquery' ), '1.2.0', true );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, true );
 
@@ -255,6 +257,7 @@ class Rcno_Reviews_Admin {
 			'rcno_reset_nonce'             => wp_create_nonce( 'rcno-rest-nonce' ),
 			'rcno_settings_download_nonce' => wp_create_nonce( 'rcno-settings-download-nonce' ),
 			'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
+			'rcno_gr_remote_get_nonce'     => wp_create_nonce( 'rcno-gr-remote-get-nonce' ),
 			'rcno_admin_rating'            => get_post_meta( $review_id, 'rcno_admin_rating', true ),
 			'rcno_settings_reset_msg'      => __( 'Your settings have been reset, please reload the page to see them.', 'rcno-reviews' ),
 			'rcno_book_meta_keys'          => $template->get_rcno_book_meta_keys( 'all' ),
@@ -1502,6 +1505,24 @@ SQL;
 		}
 
 		return $use_block_editor;
+	}
+
+	public function rcno_gr_remote_get( ) {
+
+		check_ajax_referer( 'rcno-gr-remote-get-nonce', 'gr_nonce' );
+
+		if ( empty( $_POST['action'] ) || 'rcno_gr_remote_get' !== $_POST['action'] ) {
+			wp_send_json_error( array(
+				'message' => 'Invalid post action sent.'
+			), 500 );
+			return;
+		}
+
+		$gr_url = esc_url_raw( $_POST['gr_url'] );
+		$data = wp_remote_get( $gr_url );
+
+		wp_send_json_success( $data );
+
 	}
 
 }

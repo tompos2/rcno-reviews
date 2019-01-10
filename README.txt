@@ -70,7 +70,7 @@ Please open a new topic on the plugin's WordPress.org support page
 == Screenshots ==
 
 1. Choose from a choice of 4 builtin book review templates, or create your own inside your current theme
-2. Enable or disable the user comment rating feature. Also an option to disable each custom widget
+2. Example of reviews with correct rich snippet markup on the Google search result page
 3. Remove or add your own list of stores to purchase books from
 4. New book review admin page
 5. Custom WordPress widgets
@@ -80,6 +80,10 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.27.0 =
+* Added option for fixed review criteria options.
+* Rewrote book data fetching feature.
 
 = 1.26.3 =
 * Fixed a bug where an embedded review without an excerpt returns an empty string instead of an auto-excerpt.
