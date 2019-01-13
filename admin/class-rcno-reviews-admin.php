@@ -1507,6 +1507,9 @@ SQL;
 		return $use_block_editor;
 	}
 
+	/**
+	 * @return bool|void
+	 */
 	public function rcno_gr_remote_get( ) {
 
 		check_ajax_referer( 'rcno-gr-remote-get-nonce', 'gr_nonce' );
@@ -1519,10 +1522,14 @@ SQL;
 		}
 
 		$gr_url = esc_url_raw( $_POST['gr_url'] );
-		$data = wp_remote_get( $gr_url );
+		$data = wp_safe_remote_get( $gr_url );
+
+		if ( is_wp_error( $data ) ) {
+			wp_send_json_error();
+			return;
+		}
 
 		wp_send_json_success( $data );
-
 	}
 
 }

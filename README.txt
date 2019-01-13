@@ -69,8 +69,8 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Screenshots ==
 
-1. Choose from a choice of 4 builtin book review templates, or create your own inside your current theme
-2. Example of reviews with correct rich snippet markup on the Google search result page
+1. Example of reviews with correct rich snippet markup on the Google search result page
+2. Choose from a choice of 4 builtin book review templates, or create your own inside your current theme
 3. Remove or add your own list of stores to purchase books from
 4. New book review admin page
 5. Custom WordPress widgets
