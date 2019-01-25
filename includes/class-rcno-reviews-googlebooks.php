@@ -76,8 +76,8 @@ class Rcno_Reviews_GoogleBooks_API {
 	public function rcno_enqueue_gb_scripts( $hook ) {
 
 		// Disables the enqueuing of the Goodreads script on review edit screen.
-		if ( true === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_googlebooks' )
-		     && 'google-books' === Rcno_Reviews_Option::get_option( 'rcno_external_book_api' )
+		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_googlebooks' )
+			&& 'google-books' === Rcno_Reviews_Option::get_option( 'rcno_external_book_api' )
 		) {
 
 			global $post;
@@ -85,9 +85,13 @@ class Rcno_Reviews_GoogleBooks_API {
 			if ( 'post-new.php' === $hook || 'post.php' === $hook ) {
 				if ( 'rcno_review' === $post->post_type ) {
 					wp_enqueue_script( 'googlebooks-script', plugin_dir_url( __FILE__ ) . '../admin/js/rcno-reviews-google-books.js', array( 'jquery' ), '1.0.0', false );
-					wp_localize_script( 'googlebooks-script', 'gb_options', array(
-						'api_key' => $this->key,
-					) );
+					wp_localize_script(
+						'googlebooks-script',
+						'gb_options',
+						array(
+							'api_key' => $this->key,
+						)
+					);
 				}
 			}
 		}

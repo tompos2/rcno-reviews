@@ -23,7 +23,7 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Create an empty array to take the book details.
 	$books = array();
 
-	// Used in 'usort' to sort alphabetically by book title.
+	/* Used in 'usort' to sort alphabetically by book title. */
 	function cmp( $a, $b ) {
 		return strcasecmp( $a['title'], $b['title'] );
 	}
@@ -31,13 +31,13 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Loop through each post, book title from post-meta and work on book title.
 	foreach ( $posts as $book ) {
 		$book_details = get_post_custom( $book->ID );
-		$title = $book_details['rcno_book_title'];
+		$book_title   = $book_details['rcno_book_title'];
 		if ( $ignore_articles ) {
-			$title = preg_replace( '/^('. $articles_list .') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
+			$book_title = preg_replace( '/^(' . $articles_list . ') (.+)/', '$2, $1', $book_details['rcno_book_title'] ); // phpcs:ignore
 		}
 		$books[] = array(
 			'ID'    => $book->ID,
-			'title' => $title[0],
+			'title' => $book_title[0],
 		);
 		usort( $books, 'cmp' );
 	}
@@ -47,9 +47,9 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		if ( $index_headers && ( (bool) $headers ) ) { // Add first letter headlines for easier navigation.
 
-			if( '' === $book['title'] ) {
+			if ( '' === $book['title'] ) {
 				echo 'One of your books is missing its title.';
-				return new WP_Error('A book title is missing.');
+				return new WP_Error( 'A book title is missing.' );
 			}
 
 			// Get the first letter (without special chars).
@@ -98,7 +98,7 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Output the rendered list.
 	echo '<a name="top"></a>';
 	$template->the_rcno_alphabet_nav_bar( $letters );
-	echo $out;
+	echo $out; // phpcs:ignore
 	$template->the_rcno_alphabet_nav_bar( $letters );
 } else {
 	// No book reviews.

@@ -1522,7 +1522,7 @@ SQL;
 		}
 
 		$gr_url = esc_url_raw( $_POST['gr_url'] );
-		$data = wp_safe_remote_get( $gr_url );
+		$data = wp_safe_remote_get( $gr_url, array( 'user-agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36' ) );
 
 		if ( is_wp_error( $data ) ) {
 			wp_send_json_error();
