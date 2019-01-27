@@ -1,18 +1,22 @@
 <?php
 
-
 if ( ! class_exists( 'Abstract_Rcno_Extension' ) ) {
 	return;
 }
 
+/**
+ * Class Rcno_Custom_User_Metadata
+ */
 class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 
+	/**
+	 * Rcno_Custom_User_Metadata constructor.
+	 */
 	public function __construct() {
 		$this->id       = 'rcno_custom_user_metadata';
 		$this->image    = plugin_dir_url( __FILE__ ) . 'assets/images/rcno-custom-user-metadata.png';
 		$this->title    = __( 'Custom User Metadata', 'rcno-reviews' );
-		$this->desc     = __( 'Add your own custom metadata fields to the book details section of a reviewed book. 
-		Please remember to enable the new fields on the frontend.', 'rcno-reviews' );
+		$this->desc     = __( 'Add your own custom metadata fields to the book details section of a reviewed book. Please remember to enable the new fields on the frontend.', 'rcno-reviews' );
 		$this->settings = true;
 	}
 
@@ -22,7 +26,7 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 	 * @return int
 	 */
 	protected function the_review_id() {
-		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
+		if ( isset( $GLOBALS['review_id'] ) && '' !== $GLOBALS['review_id'] ) {
 			return $GLOBALS['review_id'];
 		}
 		return get_post()->ID;
@@ -69,8 +73,13 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 		include __DIR__ . '/includes/custom-user-metadata-fields.php';
 	}
 
+	/**
+	 * Saves the new custom metabox data
+	 *
+	 * @return void
+	 */
 	public function save_custom_metabox_to_general_info() {
-		$data = $_POST;
+		$data            = $_POST;
 		$custom_metadata = explode( ',', $this->get_setting( 'custom_user_metaboxes' ) );
 
 		foreach ( $custom_metadata as $custom_meta ) {

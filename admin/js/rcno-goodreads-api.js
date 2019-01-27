@@ -42,6 +42,8 @@
 			var asin = $( '#rcno_book_asin' );
 			var gr_url = $( '#rcno_book_gr_url' );
 
+			var gr_cover_url = $( '#gr-book-cover-url' );
+
 			var ajx_gif = $( '.rcno-ajax-loading' );
 			var book_isbn = $( '#rcno_book_isbn' ).val().trim();
 			var api_key = gr_options.api_key.trim();
@@ -169,6 +171,8 @@
 						gr_url.val(
 							book.url
 						);
+
+						gr_cover_url.val( book.image_url )
 
 					}
 
