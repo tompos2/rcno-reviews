@@ -117,38 +117,6 @@ class Rcno_Admin_Book_Cover {
 			update_post_meta( $review_id, 'rcno_reviews_book_cover_url', $cover_url );
 		}
 
-		/*if ( isset( $data['rcno_reviews_gr_cover_url'] ) && '' !== $data['rcno_reviews_gr_cover_url'] ) {
-
-			$old_url = get_post_meta( $review_id, 'rcno_reviews_gr_cover_url', true );
-
-			if ( $old_url === $data['rcno_reviews_gr_cover_url'] ) {
-				return;
-			}
-
-			// Fetch and Store the Image.
-			$image_url = esc_url( $data['rcno_reviews_gr_cover_url'] );
-			$get       = wp_remote_get( $image_url, array( 'user-agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36' ) );
-			$type      = wp_remote_retrieve_header( $get, 'content-type' );
-			$mirror    = wp_upload_bits( rawurldecode( basename( $image_url ) ), null, wp_remote_retrieve_body( $get ) );
-
-			if ( false !== $mirror['error'] ) {
-				return;
-			}
-
-			// Attachment options.
-			$attachment = array(
-				'post_title'     => basename( $image_url ),
-				'post_mime_type' => $type,
-			);
-
-			// Add the image to your media library and set as featured image.
-			$attach_id   = wp_insert_attachment( $attachment, $mirror['file'], $review_id );
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $image_url );
-			wp_update_attachment_metadata( $attach_id, $attach_data );
-			update_post_meta( $review_id, 'rcno_reviews_gr_cover_url', $image_url );
-			set_post_thumbnail( $review_id, $attach_id );
-		}*/
-
 		do_action( 'rcno_save_admin_book_cover_metadata' );
 	}
 

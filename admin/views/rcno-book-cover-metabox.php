@@ -13,7 +13,7 @@
 		alt="<?php echo esc_attr( $cover_alt ); ?>"
 		title="<?php echo esc_attr( $cover_title ); ?>"
 		data-id="<?php echo esc_attr( $cover_id ); ?>"
-		style="max-width: 100%"/>
+		style="width: 100%"/>
 	<?php if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_show_book_cover_url', false ) ) { ?>
 		<input type="text" id="rcno-reviews-book-cover-url" name="rcno_reviews_book_cover_url"
 			value="<?php echo esc_attr( $cover_url ); ?>"

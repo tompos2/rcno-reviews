@@ -76,7 +76,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		// If there is an error, stop and return
+		// If there is an error, stop and return.
 		if ( ! empty( $instance['error'] ) ) {
 			return;
 		}

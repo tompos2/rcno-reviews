@@ -1040,7 +1040,6 @@ SQL;
 	 *
 	 * @since 1.5.0
 	 * @see goo.gl/RYqinL
-
 	 *
 	 * @param $wp_rewrite
 	 *

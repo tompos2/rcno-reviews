@@ -172,7 +172,19 @@
 							book.url
 						);
 
-						gr_cover_url.val( book.image_url )
+						gr_cover_url.val( book.image_url );
+
+                        // After that, set the properties of the image and display it.
+                        $( '#rcno-reviews-book-cover-container' )
+                            .children( 'img' )
+                            .attr( 'src', book.image_url )
+                            .show()
+                            .parent()
+                            .removeClass( 'hidden' );
+
+                        // Next, hide the anchor responsible for allowing the user to select an image
+                        $( '#rcno-add-book-cover' ).hide();
+                        $( '#rcno-remove-book-cover' ).parent().removeClass( 'hidden' );
 
 					}
 

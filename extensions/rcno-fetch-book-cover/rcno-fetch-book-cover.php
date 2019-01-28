@@ -76,37 +76,40 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 		$data      = $_POST; // phpcs:ignore
 		$review_id = $this->the_review_id();
 
-		if ( isset( $data['rcno_reviews_gr_cover_url'] ) && '' !== $data['rcno_reviews_gr_cover_url'] ) {
+		if ( isset( $data['rcno_reviews_gr_cover_url'] ) ) {
 
-			// https://images.gr-assets.com/books/1416342611m/34532.jpg.
-			$url     = preg_split( '/[\/]+/', $data['rcno_reviews_gr_cover_url'] );
-			$new_url = $url[0] . '//' . $url[1] . '/' . $url[2] . '/' . str_replace( 'm', 'l', $url[3] ) . '/' . $url[4];
+			$new_url = $data['rcno_reviews_gr_cover_url'];
 			$old_url = get_post_meta( $review_id, 'rcno_reviews_gr_cover_url', true );
 
 			if ( $old_url === $new_url ) {
-				return;
+				return false;
+			}
+
+			if ( '' === $new_url ) {
+				return delete_post_meta( $review_id, 'rcno_reviews_gr_cover_url' );
 			}
 
 			// Fetch and Store the Image.
-			$image_url = $new_url;
+			$image_url = preg_replace( '/([\d])m\//', '$1l/', $data['rcno_reviews_gr_cover_url'] );
+			$file_name = sanitize_file_name( strtolower( $data['rcno_book_title'] ) ) . '.' . pathinfo( basename( $image_url ), PATHINFO_EXTENSION );
 			$get       = wp_remote_get( $image_url, array( 'user-agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36' ) );
 			$type      = wp_remote_retrieve_header( $get, 'content-type' );
-			$mirror    = wp_upload_bits( rawurldecode( basename( $image_url ) ), null, wp_remote_retrieve_body( $get ) );
+			$mirror    = wp_upload_bits( $file_name, null, wp_remote_retrieve_body( $get ) );
 
 			if ( false !== $mirror['error'] ) {
-				return;
+				return false;
 			}
 
 			// Attachment options.
 			$attachment = array(
-				'post_title'     => basename( $image_url ),
+				'post_title'     => sanitize_text_field( $data['rcno_book_title'] ),
 				'post_mime_type' => $type,
 			);
 
 			// Add the image to your media library and set as featured image.
 			$attach_id = wp_insert_attachment( $attachment, $mirror['file'], $review_id );
 			if ( 0 === $attach_id || is_wp_error( $attach_id ) ) {
-				return;
+				return false;
 			}
 			$attach_data = wp_generate_attachment_metadata( $attach_id, $image_url );
 			wp_update_attachment_metadata( $attach_id, $attach_data );

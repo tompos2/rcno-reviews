@@ -231,7 +231,7 @@
 				type = state.get('type'),
 				embed = state.props.toJSON();
 
-			// SHOW JSON for embeded URL
+			// Show JSON for embedded URL
 			console.log(embed);
 		});
 
@@ -251,6 +251,7 @@
 		$('#rcno-reviews-book-cover-title').val('');
 		$('#rcno-reviews-book-cover-alt').val('');
 		$('#rcno-reviews-book-cover-id').val('');
+		$('#gr-book-cover-url').val('');
 	}
 
 	function renderFeaturedImage( $ ) {
