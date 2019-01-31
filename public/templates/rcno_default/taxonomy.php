@@ -10,10 +10,12 @@ $index_headers   = Rcno_Reviews_Option::get_option( 'rcno_reviews_index_headers'
 $book_covers     = Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false );
 
 function string_cmp( $a, $b ) {
+
 	return strcasecmp( $a['name'], $b['name'] );
 }
 
 function integer_cmp( $a, $b ) {
+
 	return $a['series'] - $b['series'];
 }
 
@@ -64,8 +66,8 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 		// Walk through all the terms to build alphabet navigation.
 		foreach ( $_terms as $value ) {
 
-			$all_titles = array();
-			$all_ids = array();
+			$all_titles  = array();
+			$all_ids     = array();
 			$review_data = array();
 			// Get term meta data.
 			$term_meta = get_term_meta( $value['ID'] );
@@ -73,13 +75,13 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 			$title = ucfirst( $value['name'] );
 
 			$custom_args = array(
-				'post_type' => 'rcno_review',
-				'tax_query' => array(
-				  array(
-				      'taxonomy' => $value['taxonomy'],
-				      'field'    => 'slug',
-				      'terms'    => $value['slug'],
-				  ),
+				'post_type'      => 'rcno_review',
+				'tax_query'      => array(
+					array(
+						'taxonomy' => $value['taxonomy'],
+						'field'    => 'slug',
+						'terms'    => $value['slug'],
+					),
 				),
 				'posts_per_page' => 100,
 			);
@@ -88,12 +90,12 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) : $query->the_post();
-					$series = $template->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false );
-					$review_data[]   = array(
+					$series        = $template->get_the_rcno_book_meta( get_the_ID(), 'rcno_book_series_number', '', false );
+					$review_data[] = array(
 						'ID'     => get_the_ID(),
 						'title'  => get_the_title(),
 						'link'   => get_the_permalink(),
-						'series' => null !== $series ? (int) $series : 0
+						'series' => null !== $series ? (int) $series : 0,
 					);
 					usort( $review_data, 'integer_cmp' );
 				endwhile;
@@ -139,17 +141,17 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 			$out .= '</a>';
 
 			$out .= '<div class="' . ( empty( $book_covers ) ? 'titles-container' : 'books-container' ) . '">';
-			foreach ( $review_data as $_data) {
+			foreach ( $review_data as $_data ) {
 
 				if ( $book_covers ) {
 					$out .= '<div class="book-cover-container">';
-					$out .= '<a href="' . $_data[ 'link' ] . '">';
+					$out .= '<a href="' . $_data['link'] . '">';
 					$out .= $template->get_the_rcno_book_cover( $_data['ID'], 'rcno-book-cover-sm' );
 					$out .= '</a>';
 					$out .= '</div>';
 				} else {
 					$out .= '<div class="book-title-container">';
-					$out .= '<a href="' . $_data['link'] .'">';
+					$out .= '<a href="' . $_data['link'] . '">';
 					$out .= $template->get_the_rcno_book_meta( $_data['ID'], 'rcno_book_title', 'p', false );
 					$out .= '</a>';
 					$out .= '</div>';

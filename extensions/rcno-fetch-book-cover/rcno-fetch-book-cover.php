@@ -23,7 +23,7 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 		$this->id       = 'rcno_fetch_book_cover';
 		$this->image    = plugin_dir_url( __FILE__ ) . 'assets/images/rcno-fetch-book-cover.png';
 		$this->title    = __( 'Fetch Book Cover', 'rcno-reviews' );
-		$this->desc     = __( 'Automatically downloads and add\'s a book cover to a review.', 'rcno-reviews' );
+		$this->desc     = __( 'Automatically downloads and attach a book cover to a book review.', 'rcno-reviews' );
 		$this->settings = false;
 	}
 

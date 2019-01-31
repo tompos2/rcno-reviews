@@ -81,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.28.0 =
+* Added a new extension that fetches and adds book cover to reviews.
+
 = 1.27.0 =
 * Added option for fixed review criteria options.
 * Rewrote book data fetching feature.

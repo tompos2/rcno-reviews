@@ -209,9 +209,6 @@ class Rcno_Reviews_Admin {
 			';
 			wp_add_inline_style( $this->plugin_name, $custom_css );
 		}
-
-
-
 	}
 
 	/**
