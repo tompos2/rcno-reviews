@@ -99,10 +99,14 @@ class Rcno_Reviews_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( 'rcno-star-rating', plugin_dir_url( __FILE__ ) . 'js/rcno-star-rating.js', array( 'jquery' ), $this->version, true );
-		wp_localize_script( 'rcno-star-rating', 'rcno_star_rating_vars', array(
-			'background_colour' => Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' ),
-			'star_colour'       => Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' ),
-		) );
+		wp_localize_script(
+			'rcno-star-rating',
+			'rcno_star_rating_vars',
+			array(
+				'background_colour' => Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' ),
+				'star_colour'       => Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' ),
+			)
+		);
 
 		// We are only registering the script, not calling it.
 		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
@@ -400,8 +404,8 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $taxonomy	The custom taxonomy the list is being generated for.
-	 * @param bool   $headers	Whether or not to show a first letter navigation header before each item.
+	 * @param string $taxonomy The custom taxonomy the list is being generated for.
+	 * @param bool   $headers  Whether or not to show a first letter navigation header before each item.
 	 *
 	 * @return string $content
 	 */
@@ -452,8 +456,8 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed     $headers Whether or not to show a first letter navigation header before each item.
-	 * @param string    $category The category to limit this index page to.
+	 * @param mixed  $headers Whether or not to show a first letter navigation header before each item.
+	 * @param string $category The category to limit this index page to.
 	 *
 	 * @return string $content
 	 */

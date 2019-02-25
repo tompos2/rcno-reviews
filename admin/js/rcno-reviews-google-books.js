@@ -90,9 +90,14 @@
                             book.items["0"].volumeInfo.canonicalVolumeLink
                         );
 
-                        tinymce.get('rcno_book_description').setContent(
-                            book.items["0"].volumeInfo.description
-                        );
+                        if (typeof tinymce !== 'undefined') {
+                            tinymce.get('rcno_book_description').setContent(
+                                book.items["0"].volumeInfo.description
+                            );
+                        } else {
+                            $('#rcno_book_description').html(book.items["0"].volumeInfo.description);
+                        }
+
 
                     }
                 },

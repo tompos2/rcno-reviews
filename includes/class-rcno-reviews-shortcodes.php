@@ -13,8 +13,8 @@
 /**
  * Creates the shortcodes used for book reviews.
  *
- *
  * @since      1.0.0
+ *
  * @package    Rcno_Reviews
  * @subpackage Rcno_Reviews/includes
  * @author     wzyMedia <wzy@outlook.com>
@@ -115,7 +115,7 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed $options
+	 * @param mixed $options The shortcode options.
 	 *
 	 * @return string
 	 */
@@ -126,11 +126,14 @@ class Rcno_Reviews_Shortcodes {
 		/**
 		 * Set default values for options not set explicitly.
 		 */
-		$options = shortcode_atts( array(
-			'id'      => 'n/a',
-			'excerpt' => 0,
-			'nodesc'  => 0,
-		), $options );
+		$options = shortcode_atts(
+			array(
+				'id'      => 'n/a',
+				'excerpt' => 0,
+				'nodesc'  => 0,
+			),
+			$options
+		);
 
 		/**
 		 * Define variable for the post object
@@ -140,13 +143,15 @@ class Rcno_Reviews_Shortcodes {
 
 		if ( 'n/a' !== $options['id'] ) {
 
-			//Get random post
+			// Get random review.
 			if ( 'random' === $options['id'] ) {
 
-				$posts = get_posts( array(
-					'post_type' => 'rcno_review',
-					'nopaging'  => true,
-				) );
+				$posts = get_posts(
+					array(
+						'post_type' => 'rcno_review',
+						'nopaging'  => true,
+					)
+				);
 
 				$review_post = $posts[ array_rand( $posts ) ];
 			} else {
@@ -188,7 +193,8 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed $options
+	 * @param  mixed $options The shortcode options.
+	 *
 	 * @return string
 	 */
 	public function rcno_do_taxlist_shortcode( $options ) {
@@ -196,10 +202,13 @@ class Rcno_Reviews_Shortcodes {
 		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
 
 		// Set default values for options not set explicitly.
-		$options = shortcode_atts( array(
-			'headers' => 1,
-			'tax'     => 'n/a',
-		), $options );
+		$options = shortcode_atts(
+			array(
+				'headers' => 1,
+				'tax'     => 'n/a',
+			),
+			$options
+		);
 
 		// The actual rendering is done by a special function.
 		$output = $plugin_public->rcno_render_taxlist( $options['tax'], $options['headers'] );
@@ -213,7 +222,8 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed $options
+	 * @param mixed $options The shortcode options.
+	 *
 	 * @return string
 	 */
 	public function rcno_do_reviews_index_shortcode( $options ) {
@@ -221,10 +231,13 @@ class Rcno_Reviews_Shortcodes {
 		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
 
 		// Set default values for options not set explicitly.
-		$options = shortcode_atts( array(
-			'headers'  => 1,
-			'category' => null,
-		), $options );
+		$options = shortcode_atts(
+			array(
+				'headers'  => 1,
+				'category' => null,
+			),
+			$options
+		);
 
 		// The actual rendering is done by a special function.
 		$output = $plugin_public->rcno_render_review_index( $options['headers'], $options['category'] );
@@ -238,22 +251,26 @@ class Rcno_Reviews_Shortcodes {
 	 *
 	 * @since 1.7.0
 	 *
-	 * @param mixed $options
+	 * @param mixed $options The shortcode options.
+	 *
 	 * @return string
 	 */
 	public function rcno_do_book_series_shortcode( $options ) {
-		// @TODO: To be deprecated
 
+		// @TODO: To be deprecated
 		$template  = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 		$review_id = get_the_ID();
 
 		// Set default values for options not set explicitly.
-		$options = shortcode_atts( array(
-			'review_id' => $review_id,
-			'taxonomy'  => 'rcno_series',
-			'number'    => true,
-			'header'    => __( 'Books in this series: ', 'rcno-reviews' ),
-		), $options );
+		$options = shortcode_atts(
+			array(
+				'review_id' => $review_id,
+				'taxonomy'  => 'rcno_series',
+				'number'    => true,
+				'header'    => __( 'Books in this series: ', 'rcno-reviews' ),
+			),
+			$options
+		);
 
 		// The actual rendering is done by a special function.
 		$output = $template->get_the_rcno_books_in_series( $options['review_id'], $options['taxonomy'], $options['number'], $options['header'] );
@@ -262,13 +279,13 @@ class Rcno_Reviews_Shortcodes {
 	}
 
 	/**
-	 ************************ SHORTCODE FOR REVIEW *****************************
+	 * *********************** SHORTCODE FOR REVIEW *****************************
 	 */
 
 	/**
 	 * Add a button for the shortcode dialog above the editor just as "Add Media"
 	 *
-	 * @param string $editor_id
+	 * @param string $editor_id The post editor's ID.
 	 *
 	 * @return void
 	 */
@@ -279,7 +296,8 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		printf( '<a href="#" id="rcno-add-review-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
+		printf(
+			'<a href="#" id="rcno-add-review-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
 			esc_attr( $editor_id ),
 			esc_attr__( 'Add Review', 'rcno-reviews' ),
 			esc_html__( 'Add Review', 'rcno-reviews' )
@@ -288,7 +306,9 @@ class Rcno_Reviews_Shortcodes {
 
 	/**
 	 * Function to load the modal overlay in the footer
+	 *
 	 * @global string $post_type
+	 *
 	 * @return void
 	 */
 	public function rcno_load_in_admin_footer_scr() {
@@ -303,36 +323,43 @@ class Rcno_Reviews_Shortcodes {
 
 	/**
 	 * Function to load the scripts needed for the ajax part in shortcode dialog
+	 *
 	 * @global string $post_type
 	 *
-	 * @param string  $hook
+	 * @param string $hook The post editors admin screen hook.
 	 *
 	 * @return void
 	 */
 	public function rcno_load_ajax_scripts_scr( $hook ) {
 		global $post_type;
 
-		// Only load on pages where it is necessary:
+		// Only load on pages where it is necessary.
 		if ( ! in_array( $post_type, array( 'page', 'post' ), true ) ) {
 			return;
 		}
 
 		wp_enqueue_script( 'rcno_ajax_scr', plugin_dir_url( __DIR__ ) . 'admin/js/rcno_ajax_scr.js', array( 'jquery' ), $this->version, true );
-		wp_localize_script( 'rcno_ajax_scr', 'rcno_vars', array(
+		wp_localize_script(
+			'rcno_ajax_scr',
+			'rcno_vars',
+			array(
 				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)
 		);
-		wp_localize_script( 'rcno_ajax_scr', 'rcnoReviewsScL10n', array(
-			'noTitle' => __( 'No title', 'rcno-reviews' ),
-			'review'  => __( 'Review', 'rcno-reviews' ),
-			'save'    => __( 'Insert', 'rcno-reviews' ),
-			'update'  => __( 'Insert', 'rcno-reviews' ),
-		) );
+		wp_localize_script(
+			'rcno_ajax_scr',
+			'rcnoReviewsScL10n',
+			array(
+				'noTitle' => __( 'No title', 'rcno-reviews' ),
+				'review'  => __( 'Review', 'rcno-reviews' ),
+				'save'    => __( 'Insert', 'rcno-reviews' ),
+				'update'  => __( 'Insert', 'rcno-reviews' ),
+			)
+		);
 	}
 
 	/**
 	 * Process the data from the shortcode include dialog
-	 *
 	 */
 	public function rcno_process_ajax_scr() {
 		check_ajax_referer( 'rcno-ajax-nonce', 'rcno_ajax_nonce' );
@@ -340,7 +367,7 @@ class Rcno_Reviews_Shortcodes {
 		$args = array();
 
 		if ( isset( $_POST['search'] ) ) {
-			$args['s'] = wp_unslash( $_POST['search'] );
+			$args['s'] = sanitize_text_field( wp_unslash( $_POST['search'] ) );
 		} else {
 			$args['s'] = '';
 		}
@@ -352,13 +379,15 @@ class Rcno_Reviews_Shortcodes {
 		);
 		$query['offset'] = $args['pagenum'] > 1 ? $query['posts_per_page'] * ( $args['pagenum'] - 1 ) : 0;
 
-		$reviews = get_posts( array(
-			's'              => $args['s'],
-			'post_type'      => 'rcno_review',
-			'posts_per_page' => $query['posts_per_page'],
-			'offset'         => $query['offset'],
-			'orderby'        => 'post_date',
-		) );
+		$reviews = get_posts(
+			array(
+				's'              => $args['s'],
+				'post_type'      => 'rcno_review',
+				'posts_per_page' => $query['posts_per_page'],
+				'offset'         => $query['offset'],
+				'orderby'        => 'post_date',
+			)
+		);
 
 		$json = array();
 
@@ -374,12 +403,13 @@ class Rcno_Reviews_Shortcodes {
 
 
 	/**
-	 *********************** SHORTCODE FOR REVIEW LISTINGS ****************************
+	 * ********************** SHORTCODE FOR REVIEW LISTINGS ****************************
 	 */
+
 	/**
 	 * Add a button for the shortcode dialog above the editor just as "Add Media"
 	 *
-	 * @param string $editor_id
+	 * @param string $editor_id The post editors ID.
 	 *
 	 * @return string
 	 */
@@ -389,7 +419,8 @@ class Rcno_Reviews_Shortcodes {
 			return;
 		}
 
-		printf( '<a href="#" id="rcno-add-listings-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
+		printf(
+			'<a href="#" id="rcno-add-listings-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
 			esc_attr( $editor_id ),
 			esc_attr__( 'Add Listing', 'rcno-reviews' ),
 			esc_html__( 'Add Listing', 'rcno-reviews' )
@@ -398,7 +429,9 @@ class Rcno_Reviews_Shortcodes {
 
 	/**
 	 * Function to load the modal overlay in the footer
+	 *
 	 * @global string $post_type
+	 *
 	 * @return void
 	 */
 	public function rcno_load_in_admin_footer_scl() {
@@ -412,9 +445,10 @@ class Rcno_Reviews_Shortcodes {
 
 	/**
 	 * Function to load the scripts needed for the ajax part in shortcode dialog
+	 *
 	 * @global string $post_type
 	 *
-	 * @param string  $hook
+	 * @param string $hook The post editors admin screen hook.
 	 *
 	 * @return void
 	 */
@@ -427,16 +461,23 @@ class Rcno_Reviews_Shortcodes {
 		}
 
 		wp_enqueue_script( 'rcno_ajax_scl', plugin_dir_url( __DIR__ ) . 'admin/js/rcno_ajax_scl.js', array( 'jquery' ), $this->version, true );
-		wp_localize_script( 'rcno_ajax_scl', 'rcno_vars', array(
+		wp_localize_script(
+			'rcno_ajax_scl',
+			'rcno_vars',
+			array(
 				'rcno_ajax_nonce' => wp_create_nonce( 'rcno-ajax-nonce' ),
 			)
 		);
-		wp_localize_script( 'rcno_ajax_scl', 'rcnoListingsScL10n', array(
-			'noTitle' => __( 'No title', 'rcno-reviews' ),
-			'review'  => __( 'Review', 'rcno-reviews' ),
-			'save'    => __( 'Insert', 'rcno-reviews' ),
-			'update'  => __( 'Insert', 'rcno-reviews' ),
-		) );
+		wp_localize_script(
+			'rcno_ajax_scl',
+			'rcnoListingsScL10n',
+			array(
+				'noTitle' => __( 'No title', 'rcno-reviews' ),
+				'review'  => __( 'Review', 'rcno-reviews' ),
+				'save'    => __( 'Insert', 'rcno-reviews' ),
+				'update'  => __( 'Insert', 'rcno-reviews' ),
+			)
+		);
 	}
 
 	/**

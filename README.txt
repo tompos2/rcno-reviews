@@ -4,7 +4,7 @@ Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
-Tested up to: 5.0
+Tested up to: 5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -80,6 +80,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.29.0 =
+* Fixed JavaScript error when TinyMCE is disabled.
 
 = 1.28.0 =
 * Added a new extension that fetches and adds book cover to reviews.

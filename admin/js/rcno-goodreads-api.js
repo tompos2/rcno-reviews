@@ -91,9 +91,13 @@
 						}
 
 						if ( book.description ) {
-                            tinymce.get( 'rcno_book_description' ).setContent(
-                                book.description
-                            );
+							if (typeof tinymce !== 'undefined') {
+								tinymce.get( 'rcno_book_description' ).setContent(
+									book.description
+								);
+							} else {
+								$('#rcno_book_description').html(book.description);
+							}
 						}
 
 
