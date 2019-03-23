@@ -333,7 +333,7 @@ class Rcno_Template_Tags {
 			if ( 0 === $attachment_id ) {
 				$attachment_id = $this->better_attachment_url_to_post_id( $og_book_src );
 			}
-			$book_src      = wp_get_attachment_image_url( $attachment_id, $size );
+			$book_src = wp_get_attachment_image_url( $attachment_id, $size );
 		}
 
 		if ( ! $book_src ) {

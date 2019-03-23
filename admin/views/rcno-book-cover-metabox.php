@@ -1,11 +1,10 @@
 <?php
-	$cover_src   = get_post_meta( $review->ID, 'rcno_reviews_book_cover_src', true );
-	$cover_alt   = get_post_meta( $review->ID, 'rcno_reviews_book_cover_alt', true );
-	$cover_title = get_post_meta( $review->ID, 'rcno_reviews_book_cover_title', true );
-	$cover_id    = absint( get_post_meta( $review->ID, 'rcno_reviews_book_cover_id', true ) );
-	$cover_url   = get_post_meta( $review->ID, 'rcno_reviews_book_cover_url', true );
-
-	$gr_cover_url = get_post_meta( $review->ID, 'rcno_reviews_gr_cover_url', true );
+$cover_src    = get_post_meta( $review->ID, 'rcno_reviews_book_cover_src', true );
+$cover_alt    = get_post_meta( $review->ID, 'rcno_reviews_book_cover_alt', true );
+$cover_title  = get_post_meta( $review->ID, 'rcno_reviews_book_cover_title', true );
+$cover_id     = absint( get_post_meta( $review->ID, 'rcno_reviews_book_cover_id', true ) );
+$cover_url    = get_post_meta( $review->ID, 'rcno_reviews_book_cover_url', true );
+$gr_cover_url = get_post_meta( $review->ID, 'rcno_reviews_gr_cover_url', true );
 ?>
 
 <div id="rcno-reviews-book-cover-container" class="hidden rcno-reviews-book-cover-container">
@@ -14,7 +13,7 @@
 		title="<?php echo esc_attr( $cover_title ); ?>"
 		data-id="<?php echo esc_attr( $cover_id ); ?>"
 		style="width: 100%"/>
-	<?php if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_show_book_cover_url', false ) ) { ?>
+	<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_book_cover_url' ) ) { ?>
 		<input type="text" id="rcno-reviews-book-cover-url" name="rcno_reviews_book_cover_url"
 			value="<?php echo esc_attr( $cover_url ); ?>"
 			placeholder="<?php esc_attr_e( 'Custom URL', 'rcno-reviews' ); ?>"

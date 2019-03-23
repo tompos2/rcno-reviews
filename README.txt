@@ -81,6 +81,10 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.30.0 =
+* Fixed an issue where a book cover's file name can be blank.
+* Fixed an issue where the book cover view file was reverted to an earlier version.
+
 = 1.29.0 =
 * Fixed JavaScript error when TinyMCE is disabled.
 

@@ -485,6 +485,7 @@ class Rcno_GoodReads_API {
 
 	public function gr_ajax_save_post_meta() {
 
+		$success   = false;
 		$review_id = (int) $_POST[ 'review_id' ];
 		$gr_isbn   = (int) $_POST[ 'gr_isbn' ];
 
@@ -496,11 +497,11 @@ class Rcno_GoodReads_API {
 		}
 
 		if ( update_post_meta( $review_id, 'rcno_book_description', strip_tags( $gr_description ) ) ) {
-			$success = 1;
+			$success = true;
 		}
 
 		if ( update_post_meta( $review_id, 'rcno_book_isbn', $gr_isbn ) ) {
-			$success = 1;
+			$success = true;
 		}
 
 		if ( $success ) {

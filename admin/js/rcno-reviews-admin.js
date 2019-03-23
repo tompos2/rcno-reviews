@@ -251,7 +251,6 @@
 		$('#rcno-reviews-book-cover-title').val('');
 		$('#rcno-reviews-book-cover-alt').val('');
 		$('#rcno-reviews-book-cover-id').val('');
-		$('#gr-book-cover-url').val('');
 	}
 
 	function renderFeaturedImage( $ ) {
@@ -313,8 +312,6 @@
             ]
         });
 	}
-
-
 
     // Adds selectize.js support to text boxes on settings page
     if ( 'undefined' !== typeof window.Selectize ) {

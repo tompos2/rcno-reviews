@@ -81,6 +81,11 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 			$new_url = $data['rcno_reviews_gr_cover_url'];
 			$old_url = get_post_meta( $review_id, 'rcno_reviews_gr_cover_url', true );
 
+			// If the API returns with a `nophoto` exit early.
+			if ( false !== stripos( $data['rcno_reviews_gr_cover_url'], 'nophoto' ) ) {
+				return false;
+			}
+
 			if ( $old_url === $new_url ) {
 				return false;
 			}
@@ -90,8 +95,9 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 			}
 
 			// Fetch and Store the Image.
+			$_filename = ! empty( $data['rcno_book_title'] ) ? $data['rcno_book_title'] : $review_id . '-' . $data['rcno_book_isbn'];
 			$image_url = preg_replace( '/([\d])m\//', '$1l/', $data['rcno_reviews_gr_cover_url'] );
-			$file_name = sanitize_file_name( strtolower( $data['rcno_book_title'] ) ) . '.' . pathinfo( basename( $image_url ), PATHINFO_EXTENSION );
+			$file_name = sanitize_file_name( strtolower( $_filename ) ) . '.' . pathinfo( basename( $image_url ), PATHINFO_EXTENSION );
 			$get       = wp_remote_get( $image_url, array( 'user-agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36' ) );
 			$type      = wp_remote_retrieve_header( $get, 'content-type' );
 			$mirror    = wp_upload_bits( $file_name, null, wp_remote_retrieve_body( $get ) );
