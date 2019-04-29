@@ -139,7 +139,7 @@ class Rcno_GoodReads_API {
 	 *
 	 * @return \SimpleXMLElement|string
 	 */
-	protected function getData( $url, $params = [], $append = false, $raw = true ) {
+	protected function getData( $url, $params = array(), $append = false, $raw = true ) {
 		/* Generate Url with http query */
 		$url = $this->generateURL( $url, $params, $append );
 
