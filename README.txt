@@ -83,7 +83,7 @@ Please open a new topic on the plugin's WordPress.org support page
 == Changelog ==
 
 = 1.30.1 =
-* Made the recipe index more descriptive with error messages.
+* Made the review index more descriptive with error messages.
 
 = 1.30.0 =
 * Fixed an issue where a book cover's file name can be blank.

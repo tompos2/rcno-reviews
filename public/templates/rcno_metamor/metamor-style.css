@@ -229,6 +229,7 @@ ul.rcno-alphabet-navigation {
 
 ul.rcno-alphabet-navigation li {
     flex: 0 1 20px;
+    list-style: none;
 }
 
 ul.rcno-taxlist li {
