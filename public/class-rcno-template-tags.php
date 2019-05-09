@@ -635,7 +635,7 @@ class Rcno_Template_Tags {
 	 * @since 1.0.0
 	 * @return string
 	 */
-	private function get_the_rcno_book_description( $review_id, $word_count = 75, $strip_tags = true ) {
+	public function get_the_rcno_book_description( $review_id, $word_count = 75, $strip_tags = true ) {
 
 		$review = get_post_custom( $review_id );
 		$book_description = $review['rcno_book_description'][0];

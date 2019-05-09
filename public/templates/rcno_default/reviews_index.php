@@ -48,8 +48,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		if ( $index_headers && ( (bool) $headers ) ) { // Add first letter headlines for easier navigation.
 
 			if ( '' === $book['title'] ) {
-				echo 'One of your books is missing its title.';
-				return new WP_Error( 'A book title is missing.' );
+				echo '<p>' . sprintf( __( 'There is a missing book title on review ID %d', 'rcno-reviews' ), $book['ID'] ) . '</p>';
 			}
 
 			// Get the first letter (without special chars).

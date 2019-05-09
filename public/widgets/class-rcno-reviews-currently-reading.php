@@ -147,7 +147,7 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 							<p v-else class="book-comment" key="update">{{ all_updates[curr_index].progress_comment }}</p>
 
 							<div class="book-progress-btn">
-								<span :disabled="curr_index == 0" @click="previous">Previous</span> <> <span :disabled="curr_index == all_updates.length - 1" @click="next">Next</span>
+								<span :disabled="curr_index == 0" @click="previous"><?php _e( 'Previous', 'rcno-reviews' ); ?></span> <> <span :disabled="curr_index == all_updates.length - 1" @click="next"><?php _e( 'Next', 'rcno-reviews' ); ?></span>
 							</div>
 						</div>
 					</div>

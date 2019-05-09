@@ -61,7 +61,8 @@ And, all of the above is SEO friendly by way of validated JSON-LD metadata for t
 
 = I am getting a 404 page when I visit a book review =
 
-Try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.
+Try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything. Also, make sure you are using the singular form of the word you are
+using for your custom slug. So, instead of "books", use "book" or instead of "lists" use "list".
 
 = How can I get support for this plugin =
 
@@ -80,6 +81,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.30.1 =
+* Made the recipe index more descriptive with error messages.
 
 = 1.30.0 =
 * Fixed an issue where a book cover's file name can be blank.
