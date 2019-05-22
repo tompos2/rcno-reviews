@@ -26,11 +26,10 @@ if ( 'google-books' === $external_api ) {
     <input type="text" name="rcno_book_isbn" id="rcno_book_isbn" size="20"
            value="<?php echo sanitize_text_field( $isbn ); ?>"/>
 	<?php if ( 'no-3rd-party' !== $external_api ) : ?>
-        <button href="#" class="button rcno-isbn-fetch <?php echo $external_api; ?>" title="">Fetch <span
-                    class="rcno-ajax-loading"></span></button>
+        <button href="#" class="button rcno-isbn-fetch <?php echo $external_api; ?>" title="">Fetch <span class="rcno-ajax-loading"></span></button>
 	<?php endif; ?>
 	<?php wp_nonce_field( 'rcno_save_book_isbn_metadata', 'rcno_isbn_nonce' ); ?>
     <div class="book-isbn-metabox-error">
-        <p><?php _e( 'Your book was not found on ' . $external_api_name, 'rcno-reviews' ) ?></p>
+        <p><?php printf( __( 'Your book was not found on %s', 'rcno-reviews' ), $external_api_name ); ?></p>
     </div>
 </div>

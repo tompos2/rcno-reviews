@@ -73,35 +73,26 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
 	 *
-	 * @since 0.6.0
+	 * @param array $args     Display arguments including 'before_title', 'after_title', 'before_widget', and 'after_widget'.
+	 * @param array $instance The settings for the particular instance of the widget.
+	 *
+	 * @return void
 	 */
-	function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+	public function widget( $args, $instance ) {
 
-		/* Set the $args for wp_tag_cloud() to the $instance array. */
-		$args = $instance;
-
-		/**
-		 *  Get and parse the arguments, defaults have been set during saving (hopefully)
-		 */
-		extract( $args, EXTR_SKIP );
-
-		/**
-		 * If there is an error, stop and return
-		 */
-		if ( isset( $instance['error'] ) && $instance['error'] ) {
+		// If there is an error, stop and return.
+		if ( ! empty( $instance['error'] ) ) {
 			return;
 		}
 
-
 		/* Output the theme's $before_widget wrapper. */
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		/**
 		 * Output the title (if we have any)
 		 */
 		if ( $instance['title'] ) {
-			echo $before_title . sanitize_text_field( $instance['title'] ) . $after_title;
+			echo $args['before_title'] . sanitize_text_field( $instance['title'] ) . $args['after_title'];
 		}
 
 		if ( empty( $instance['taxonomy'] ) ) {
@@ -111,7 +102,15 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		/**
 		 * Put together the list of terms
 		 */
-		$terms = get_terms( $instance['taxonomy'], $args );
+		$terms = get_terms(
+			$instance['taxonomy'],
+			array(
+				'orderby'    => $instance['order_by'],
+				'order'      => $instance['order'],
+				'hide_empty' => $instance['hide_empty'],
+				'number'     => $instance['item_count'],
+			)
+		);
 		if ( count( $terms ) > 0 ) {
 			echo '<ul class="taglist">';
 			foreach ( $terms as $term ) {
@@ -136,15 +135,18 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		/**
 		 *  Close the theme's widget wrapper.
 		 */
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	/**
 	 * Updates the widget control options for the particular instance of the widget.
 	 *
-	 * @since 0.8.0
+	 * @param array $new_instance New settings for this instance as input by the user via WP_Widget::form().
+	 * @param array $old_instance Old settings for this instance.
+	 *
+	 * @return array
 	 */
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		// Fill current state with old data to be sure we not loose anything
 		$instance = $old_instance;
 
@@ -157,10 +159,10 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		$instance['item_count']   = absint( $new_instance['item_count'] );
 		$instance['order_by']     = strip_tags( $new_instance['order_by'] );
 		$instance['order']        = strip_tags( $new_instance['order'] );
-		$instance['show_count']   = boolval( $new_instance['show_count'] );
+		$instance['show_count']   = isset( $new_instance['show_count'] ) ? (bool) $new_instance['show_count'] : false;
 		$instance['before_count'] = strip_tags( $new_instance['before_count'] );
 		$instance['after_count']  = strip_tags( $new_instance['after_count'] );
-		$instance['hide_empty']   = boolval( $new_instance['hide_empty'] );
+		$instance['hide_empty']   = isset( $new_instance['hide_empty'] ) ? (bool) $new_instance['hide_empty'] : false;
 		//$instance['exclude']        = trim( $new_instance['exclude'] );
 
 		// and now we return new values and wordpress do all work for you
@@ -170,9 +172,11 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 	/**
 	 * Displays the widget control options in the Widgets admin screen.
 	 *
-	 * @since 0.8.0
+	 * @param array $instance Current settings.
+	 *
+	 * @return void
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 		// Set up the default form values.
 		$defaults = array(
 			'title'        => '',

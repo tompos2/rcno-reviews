@@ -9,15 +9,13 @@ $sort_name       = Rcno_Reviews_Option::get_option( 'rcno_reviews_sort_names' );
 $index_headers   = Rcno_Reviews_Option::get_option( 'rcno_reviews_index_headers' );
 $book_covers     = Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false );
 
-function string_cmp( $a, $b ) {
-
+$string_cmp = function ( $a, $b ) {
 	return strcasecmp( $a['name'], $b['name'] );
-}
+};
 
-function integer_cmp( $a, $b ) {
-
+$integer_cmp = function ( $a, $b ) {
 	return $a['series'] - $b['series'];
-}
+};
 
 // Create an empty output variable.
 $out = '';
@@ -54,7 +52,7 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 				'slug'     => $value->slug,
 				'taxonomy' => $value->taxonomy,
 			);
-			usort( $_terms, 'string_cmp' );
+			usort( $_terms, $string_cmp );
 		}
 
 		// Create an index i to compare the number in the list and check for first and last item.
@@ -97,7 +95,7 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 						'link'   => get_the_permalink(),
 						'series' => null !== $series ? (int) $series : 0,
 					);
-					usort( $review_data, 'integer_cmp' );
+					usort( $review_data, $integer_cmp );
 				endwhile;
 			}
 

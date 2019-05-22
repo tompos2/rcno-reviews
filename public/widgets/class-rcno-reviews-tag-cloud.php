@@ -25,10 +25,6 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct() {
 
@@ -76,34 +72,38 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
 	 *
-	 * @since 0.6.0
+	 * @param array $args     Display arguments including 'before_title', 'after_title', 'before_widget', and 'after_widget'.
+	 * @param array $instance The settings for the particular instance of the widget.
+	 *
+	 * @return void
 	 */
-	function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+	public function widget( $args, $instance ) {
 
-		// Set the $args for wp_tag_cloud() to the $instance array.
-		$args = $instance;
+		// If there is an error, stop and return.
+		if ( ! empty( $instance['error'] ) ) {
+			return;
+		}
 
 		// Make sure empty callbacks aren't passed for custom functions.
-		$args['topic_count_text_callback']  = ! empty( $args['topic_count_text_callback'] ) ? $args['topic_count_text_callback'] : 'default_topic_count_text';
-		$args['topic_count_scale_callback'] = ! empty( $args['topic_count_scale_callback'] ) ? $args['topic_count_scale_callback'] : 'default_topic_count_scale';
+		$instance['topic_count_text_callback']  = ! empty( $instance['topic_count_text_callback'] ) ? $instance['topic_count_text_callback'] : 'default_topic_count_text';
+		$instance['topic_count_scale_callback'] = ! empty( $instance['topic_count_scale_callback'] ) ? $instance['topic_count_scale_callback'] : 'default_topic_count_scale';
 
 		// If the separator is empty, set it to the default new line.
-		$args['separator'] = ! empty( $args['separator'] ) ? $args['separator'] : "\n";
+		$instance['separator'] = ! empty( $instance['separator'] ) ? $instance['separator'] : "\n";
 
 		// Overwrite the echo argument.
-		$args['echo'] = false;
+		$instance['echo'] = false;
 
 		// Output the theme's $before_widget wrapper.
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		// If a title was input by the user, display it.
 		if ( ! empty( $instance['title'] ) ) {
-			echo $before_title . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $after_title;
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
 		}
 
 		// Get the tag cloud.
-		$tags = str_replace( array( "\r", "\n", "\t" ), ' ', wp_tag_cloud( $args ) );
+		$tags = str_replace( array( "\r", "\n", "\t" ), ' ', wp_tag_cloud( $instance ) );
 
 		// If $format should be flat, wrap it in the <p> element.
 		if ( 'flat' === $instance['format'] ) {
@@ -112,48 +112,38 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 			foreach ( (array) $instance['taxonomy'] as $tax ) {
 				$classes[] = sanitize_html_class( "{$tax}-cloud" );
 			}
-			$tags = '<p class="' . join( $classes, ' ' ) . '">' . $tags . '</p>';
+			$tags = '<p class="' . implode( ' ', $classes ) . '">' . $tags . '</p>';
 		}
 
 		// Output the tag cloud.
 		echo $tags;
 
 		// Close the theme's widget wrapper.
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	/**
 	 * Updates the widget control options for the particular instance of the widget.
 	 *
-	 * @since 1.0.0
+	 * @param array $new_instance New settings for this instance as input by the user via WP_Widget::form().
+	 * @param array $old_instance Old settings for this instance.
+	 *
+	 * @return array
 	 */
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+	public function update( $new_instance, $old_instance ) {
 
-		// Set the instance to the new instance.
-		$instance = $new_instance;
+		$instance = $old_instance;
 
 		$instance['title']                      = strip_tags( $new_instance['title'] );
 		$instance['smallest']                   = strip_tags( $new_instance['smallest'] );
 		$instance['largest']                    = strip_tags( $new_instance['largest'] );
 		$instance['number']                     = strip_tags( $new_instance['number'] );
 		$instance['separator']                  = strip_tags( $new_instance['separator'] );
-		$instance['name__like']                 = strip_tags( $new_instance['name__like'] );
-		$instance['search']                     = strip_tags( $new_instance['search'] );
-		$instance['child_of']                   = strip_tags( $new_instance['child_of'] );
-		$instance['parent']                     = strip_tags( $new_instance['parent'] );
-		$instance['topic_count_text_callback']  = strip_tags( $new_instance['topic_count_text_callback'] );
-		$instance['topic_count_scale_callback'] = strip_tags( $new_instance['topic_count_scale_callback'] );
-		$instance['include']                    = preg_replace( '/[^0-9,]/', '', $new_instance['include'] );
-		$instance['exclude']                    = preg_replace( '/[^0-9,]/', '', $new_instance['exclude'] );
 		$instance['unit']                       = $new_instance['unit'];
 		$instance['format']                     = $new_instance['format'];
 		$instance['orderby']                    = $new_instance['orderby'];
 		$instance['order']                      = $new_instance['order'];
-		$instance['taxonomy']                   = $new_instance['taxonomy'];
-		$instance['link']                       = $new_instance['link'];
-		$instance['pad_counts']                 = ( isset( $new_instance['pad_counts'] ) ? 1 : 0 );
-		$instance['hide_empty']                 = ( isset( $new_instance['hide_empty'] ) ? 1 : 0 );
+		$instance['taxonomy']                   = isset( $new_instance['taxonomy'] ) ? $new_instance['taxonomy'] : 'post_tag';
 
 		return $instance;
 	}
@@ -161,9 +151,11 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 	/**
 	 * Displays the widget control options in the Widgets admin screen.
 	 *
-	 * @since 1.0.0
+	 * @param array $instance Current settings.
+	 *
+	 * @return void
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		// Set up the default form values.
 		$defaults = array(
@@ -181,7 +173,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 			'separator'                  => ' ',
 			'child_of'                   => '',
 			'parent'                     => '',
-			'taxonomy'                   => array( 'post_tag' ),
+			'taxonomy'                   => 'post_tag',
 			'hide_empty'                 => 1,
 			'pad_counts'                 => false,
 			'search'                     => '',
@@ -229,7 +221,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
         <div class="rcno-widget-controls columns-2 column-first">
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>">
-					<?php _e( 'Title:', 'rcno-reviews' ); ?>
+					<?php _e( 'Title', 'rcno-reviews' ); ?>
                 </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                        name="<?php echo $this->get_field_name( 'title' ); ?>"
@@ -237,7 +229,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>">
-					<?php _e( "Taxonomy:", 'rcno-reviews' ); ?>
+					<?php _e( 'Taxonomy', 'rcno-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'taxonomy' ); ?>"
                         name="<?php echo $this->get_field_name( 'taxonomy' ); ?>[]" size="4" multiple="multiple">
@@ -248,7 +240,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'format' ); ?>">
-					<?php _e( "Format:", 'rcno-reviews' ); ?>
+					<?php _e( 'Format', 'rcno-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'format' ); ?>"
                         name="<?php echo $this->get_field_name( 'format' ); ?>">
@@ -259,7 +251,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'order' ); ?>">
-					<?php _e( "Order:", 'rcno-reviews' ); ?>
+					<?php _e( 'Order', 'rcno-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
                         name="<?php echo $this->get_field_name( 'order' ); ?>">
@@ -270,7 +262,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'orderby' ); ?>">
-					<?php _e( "Order by:", 'rcno-reviews' ); ?>
+					<?php _e( 'Order by', 'rcno-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>"
                         name="<?php echo $this->get_field_name( 'orderby' ); ?>">
@@ -292,7 +284,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>-->
             <p>
                 <label for="<?php echo $this->get_field_id( 'number' ); ?>">
-					<?php _e( "Number:", 'rcno-reviews' ); ?>
+					<?php _e( 'Number', 'rcno-reviews' ); ?>:
                 </label>
                 <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>"
                        name="<?php echo $this->get_field_name( 'number' ); ?>"
@@ -300,7 +292,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'largest' ); ?>">
-					<?php _e( "Largest:", 'rcno-reviews' ); ?>
+					<?php _e( 'Largest', 'rcno-reviews' ); ?>:
                 </label>
                 <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'largest' ); ?>"
                        name="<?php echo $this->get_field_name( 'largest' ); ?>"
@@ -308,7 +300,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'smallest' ); ?>">
-					<?php _e( "Smallest:", 'rcno-reviews' ); ?>
+					<?php _e( 'Smallest', 'rcno-reviews' ); ?>:
                 </label>
                 <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'smallest' ); ?>"
                        name="<?php echo $this->get_field_name( 'smallest' ); ?>"
@@ -316,7 +308,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'unit' ); ?>">
-					<?php _e( "Unit:", 'rcno-reviews' ); ?>
+					<?php _e( 'Unit', 'rcno-reviews' ); ?>:
                 </label>
                 <select class="smallfat" id="<?php echo $this->get_field_id( 'unit' ); ?>"
                         name="<?php echo $this->get_field_name( 'unit' ); ?>">
@@ -327,7 +319,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'separator' ); ?>">
-					<?php _e( "Separator:", 'rcno-reviews' ); ?>
+					<?php _e( 'Separator', 'rcno-reviews' ); ?>:
                 </label>
                 <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'separator' ); ?>"
                        name="<?php echo $this->get_field_name( 'separator' ); ?>"

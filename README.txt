@@ -4,7 +4,7 @@ Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -81,6 +81,10 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.31.0 =
+* Fixed PHP warning message in Taxonomy List widget.
+* Switched comparison function to use closure to avoid calling the same function twice.
 
 = 1.30.1 =
 * Made the review index more descriptive with error messages.
