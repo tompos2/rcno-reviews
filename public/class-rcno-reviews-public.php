@@ -176,9 +176,12 @@ class Rcno_Reviews_Public {
 
 			// Add 'rcno_review' CPT to homepage if set in options.
 			if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_on_homepage' ) ) {
-				if ( is_home() || $query->is_home() || $query->is_front_page() ) {
-					$this->rcno_add_review_to_query( $query );
+				if ( is_object( $query ) ) {
+					if ( is_home() || $query->is_home() || $query->is_front_page() ) {
+						$this->rcno_add_review_to_query( $query );
+					}
 				}
+
 			}
 			// Every other page.
 			if ( is_category() || is_tag() || is_author() || is_date() ) {
