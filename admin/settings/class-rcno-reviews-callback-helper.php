@@ -609,8 +609,9 @@ class Rcno_Reviews_Callback_Helper {
 		$html .= 'class="' . $args['size'] . '-text ' . 'rcno_reviews_upload_field" ';
 		$html .= ' value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 
-		$html .= '<span>&nbsp;<input type="button" id="' . $args['id'] . '" class="' . 'rcno_reviews_settings_upload_button ' . $args['id'] . ' button-secondary" value="' .
-		         __( 'Upload File', 'rcno-reviews' ) . '"/></span><br>';
+		$html .= '<span>&nbsp;<input type="button" id="' . $args['id'] . '" 
+		class="' . 'rcno_reviews_settings_upload_button ' . $args['id'] . ' button-secondary" 
+		value="' . __( 'Upload File', 'rcno-reviews' ) . '"/></span><br>';
 
 		$html .= $this->get_label_for( $args['id'], $args['desc'] );
 
@@ -630,8 +631,9 @@ class Rcno_Reviews_Callback_Helper {
 	 */
 	public function download_callback( $args ) {
 
-		$html = '<input type="button" id="' . $args['id'] . '" class="' . 'rcno_reviews_settings_download_button ' . $args['id'] . ' button-secondary" value="' .
-		        __( 'Download  File', 'rcno-reviews' ) . '"/><br>';
+		$html = '<input type="button" id="' . $args['id'] . '" 
+		class="' . 'rcno_reviews_settings_download_button ' . $args['id'] . ' button-secondary" 
+		value="' . __( 'Download File', 'rcno-reviews' ) . '"/><br>';
 
 		$html .= $this->get_label_for( $args['id'], $args['desc'] );
 
@@ -651,8 +653,9 @@ class Rcno_Reviews_Callback_Helper {
 	 */
 	public function file_callback( $args ) {
 
-		$html = '<input type="file" id="' . $args['id'] . '" class="' . 'rcno_reviews_settings_file_button ' . $args['id'] . ' file-button" value="' .
-		        __( 'Download File', 'rcno-reviews' ) . '" accept="' . $args['accept'] . '" /><br>';
+		$html = '<input type="file" id="' . $args['id'] . '" 
+		class="' . 'rcno_reviews_settings_file_button ' . $args['id'] . ' file-button" 
+		value="' . __( 'Download File', 'rcno-reviews' ) . '" accept="' . $args['accept'] . '" /><br>';
 
 		$html .= $this->get_label_for( $args['id'], $args['desc'] );
 
