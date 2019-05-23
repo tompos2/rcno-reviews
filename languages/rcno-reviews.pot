@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio "
 "Pot v1.0.0\n"
-"POT-Creation-Date: 2019-05-09 "
-"14:19-0500\n"
+"POT-Creation-Date: 2019-05-13 "
+"13:09-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your Name "
 "<you@example.com>\n"
@@ -1871,8 +1871,6 @@ msgstr ""
 #: public/shortcodes/layouts/rcno-isotope-grid.php:105
 #: public/templates/rcno_default/reviews_grid.php:67
 #: public/templates/rcno_default/reviews_index.php:104
-#: public/templates/rcno_metamor/reviews_grid.php:67
-#: public/templates/rcno_metamor/reviews_index.php:104
 msgid ""
 "There are no book reviews to "
 "display."
@@ -1953,7 +1951,6 @@ msgid "Select"
 msgstr ""
 
 #: public/templates/rcno_default/reviews_index.php:51
-#: public/templates/rcno_metamor/reviews_index.php:51
 #, php-format
 msgid ""
 "There is a missing book title "
@@ -1961,14 +1958,12 @@ msgid ""
 msgstr ""
 
 #: public/templates/rcno_default/taxonomy.php:180
-#: public/templates/rcno_metamor/taxonomy.php:180
 msgid ""
 "There are no terms in this "
 "taxonomy."
 msgstr ""
 
 #: public/templates/rcno_default/taxonomy.php:185
-#: public/templates/rcno_metamor/taxonomy.php:185
 msgid ""
 "Error: No taxonomy set for this "
 "list!"
@@ -2080,14 +2075,6 @@ msgstr ""
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:144
 msgid "by"
-msgstr ""
-
-#: public/widgets/class-rcno-reviews-currently-reading.php:150
-msgid "Previous"
-msgstr ""
-
-#: public/widgets/class-rcno-reviews-currently-reading.php:150
-msgid "Next"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:275

@@ -85,6 +85,7 @@ Please open a new topic on the plugin's WordPress.org support page
 = 1.31.0 =
 * Fixed PHP warning message in Taxonomy List widget.
 * Switched comparison function to use closure to avoid calling the same function twice.
+* Added the Hungarian translation provided by
 
 = 1.30.1 =
 * Made the review index more descriptive with error messages.

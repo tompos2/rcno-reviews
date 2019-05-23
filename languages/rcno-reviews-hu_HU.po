@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Recencio Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
 "POT-Creation-Date: 2018-05-28 18:47-0500\n"
-"PO-Revision-Date: 2018-05-28 18:47-0500\n"
+"PO-Revision-Date: 2019-05-22 13:49-0500\n"
 "Last-Translator: w33zy <wzy@outlook.com>\n"
 "Language-Team: English (Jamaica)\n"
 "Language: en_JM\n"
@@ -13,15 +13,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
-"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-rcno-admin-book-cover.php:57
-#: admin/views/rcno-currently-reading-dash-widget.php:31
+#: admin/class-rcno-admin-book-cover.php:57 admin/views/rcno-currently-reading-dash-widget.php:31
 msgid "Book Cover"
 msgstr "Könyvborító"
 
@@ -41,15 +38,11 @@ msgstr "Általános információ"
 msgid "ISBN Number"
 msgstr "ISBN szám"
 
-#: admin/class-rcno-admin-review-rating.php:61
-#: admin/settings/class-rcno-reviews-settings-definition.php:299
+#: admin/class-rcno-admin-review-rating.php:61 admin/settings/class-rcno-reviews-settings-definition.php:299
 msgid "5 Star Rating"
 msgstr "5 csillagos minősítés"
 
-#: admin/class-rcno-admin-review-score.php:65
-#: admin/class-rcno-reviews-admin.php:1282
-#: admin/class-rcno-reviews-admin.php:1287
-#: public/class-rcno-template-tags.php:1429
+#: admin/class-rcno-admin-review-score.php:65 admin/class-rcno-reviews-admin.php:1282 admin/class-rcno-reviews-admin.php:1287 public/class-rcno-template-tags.php:1429
 msgid "Review Score"
 msgstr "Értékelés pontszáma"
 
@@ -61,8 +54,7 @@ msgstr "Frissítve"
 msgid "Error"
 msgstr "Hiba"
 
-#: admin/class-rcno-currently-reading.php:131
-#: admin/settings/class-rcno-reviews-settings-definition.php:413
+#: admin/class-rcno-currently-reading.php:131 admin/settings/class-rcno-reviews-settings-definition.php:413
 msgid "Currently Reading"
 msgstr "Jelenleg olvasás alatt"
 
@@ -74,26 +66,22 @@ msgstr "A biztonsági nonce (egyszeri érték) érvénytelen vagy nincs beállí
 msgid "Your settings have been reset, please reload the page to see them."
 msgstr "A beállításokat alaphelyzetbe állította, kérjük, töltse újra az oldalt, hogy megtekinthesse őket."
 
-#: admin/class-rcno-reviews-admin.php:338
-#: admin/class-rcno-reviews-admin.php:345
+#: admin/class-rcno-reviews-admin.php:338 admin/class-rcno-reviews-admin.php:345
 #, php-format
 msgid "New %1$s"
 msgstr "Új %1$s"
 
-#: admin/class-rcno-reviews-admin.php:339
-#: admin/class-rcno-reviews-admin.php:446
+#: admin/class-rcno-reviews-admin.php:339 admin/class-rcno-reviews-admin.php:446
 #, php-format
 msgid "Add New %1$s"
 msgstr "Új %1$s hozzáadása"
 
-#: admin/class-rcno-reviews-admin.php:341
-#: admin/class-rcno-reviews-admin.php:450
+#: admin/class-rcno-reviews-admin.php:341 admin/class-rcno-reviews-admin.php:450
 #, php-format
 msgid "Edit %1$s"
 msgstr "%1$s szerkesztése"
 
-#: admin/class-rcno-reviews-admin.php:346
-#: admin/class-rcno-reviews-admin.php:454
+#: admin/class-rcno-reviews-admin.php:346 admin/class-rcno-reviews-admin.php:454
 #, php-format
 msgid "No %1$s Found"
 msgstr "%1$s nem található"
@@ -108,14 +96,12 @@ msgstr "%1$s nem található a kukában"
 msgid "Parent %1$s :"
 msgstr "Szülő %1$s :"
 
-#: admin/class-rcno-reviews-admin.php:349
-#: admin/class-rcno-reviews-admin.php:458
+#: admin/class-rcno-reviews-admin.php:349 admin/class-rcno-reviews-admin.php:458
 #, php-format
 msgid "Search %1$s"
 msgstr "%1$s keresése"
 
-#: admin/class-rcno-reviews-admin.php:351
-#: admin/class-rcno-reviews-admin.php:462
+#: admin/class-rcno-reviews-admin.php:351 admin/class-rcno-reviews-admin.php:462
 #, php-format
 msgid "View %1$s"
 msgstr "%1$s megtekintése"
@@ -139,8 +125,7 @@ msgstr "Válasszon a leggyakrabban használt %1$s közül"
 msgid "New %1$s Name"
 msgstr "Új %1$s név"
 
-#: admin/class-rcno-reviews-admin.php:455
-#: admin/class-rcno-reviews-admin.php:456
+#: admin/class-rcno-reviews-admin.php:455 admin/class-rcno-reviews-admin.php:456
 #, php-format
 msgid "Parent %1$s"
 msgstr "Szülő %1$s"
@@ -166,29 +151,23 @@ msgstr "A könyvajánló hozzáadásakor vagy szerkesztésénél megjegyezendő 
 
 #: admin/class-rcno-reviews-admin.php:516
 msgid "Specify the correct genre such as Mystery, or Historic."
-msgstr "Adja meg a megfelelő műfajt, mint például "kaland" vagy "történelmi"."
+msgstr "Adja meg a megfelelő műfajt, mint például \"kaland\" vagy \"történelmi\"."
 
 #: admin/class-rcno-reviews-admin.php:517
-msgid ""
-"Specify the correct writer of the book review. Remember that the Author "
-"module refers to you, the author of this book review."
-msgstr "Adja meg a könyvajánló helyes íróját. Ne feledje, hogy a Szerző modul Önre hivatkozik, a könyvajánló szerzőjére.
-"
+msgid "Specify the correct writer of the book review. Remember that the Author module refers to you, the author of this book review."
+msgstr "Adja meg a könyvajánló helyes íróját. Ne feledje, hogy a Szerző modul Önre hivatkozik, a könyvajánló szerzőjére"
 
 #: admin/class-rcno-reviews-admin.php:519
 msgid "If you want to schedule the book review to be published in the future:"
-msgstr "Ha azt szeretné, hogy valamikor a jövőben automatikusan közzé legyen téve a könyvajánló:
-"
+msgstr "Ha azt szeretné, hogy valamikor a jövőben automatikusan közzé legyen téve a könyvajánló"
 
 #: admin/class-rcno-reviews-admin.php:521
 msgid "Under the Publish module, click on the Edit link next to Publish."
 msgstr "A Közzététel modul alatt kattintson a Közzététel melletti Szerkesztés hivatkozásra."
 
 #: admin/class-rcno-reviews-admin.php:522
-msgid ""
-"Change the date to the date to actual publish this article, then click on Ok."
-msgstr "Módosítsa a dátumot a tényleges közzététel dátumára, majd kattintson az OK gombra.
-"
+msgid "Change the date to the date to actual publish this article, then click on Ok."
+msgstr "Módosítsa a dátumot a tényleges közzététel dátumára, majd kattintson az OK gombra"
 
 #: admin/class-rcno-reviews-admin.php:524
 msgid "For more information: "
@@ -199,9 +178,7 @@ msgid "Support Forums"
 msgstr "Támogatási fórumok"
 
 #: admin/class-rcno-reviews-admin.php:528
-msgid ""
-"This is the help screen displaying the table of book reviews you have "
-"created."
+msgid "This is the help screen displaying the table of book reviews you have created."
 msgstr "Ez a súgó képernyő, amely megjeleníti a létrehozott könyvajánlók listáját."
 
 #: admin/class-rcno-reviews-admin.php:581
@@ -212,8 +189,7 @@ msgstr "Nagyméretű könyvborító"
 msgid "Book Cover SM"
 msgstr "Kisméretű könyvborító"
 
-#: admin/class-rcno-reviews-admin.php:602
-#: admin/class-rcno-reviews-admin.php:611
+#: admin/class-rcno-reviews-admin.php:602 admin/class-rcno-reviews-admin.php:611
 msgid "Recencio Book Reviews"
 msgstr "Recencio Könyvajánlók"
 
@@ -221,11 +197,7 @@ msgstr "Recencio Könyvajánlók"
 msgid "Reviews"
 msgstr "Vélemények"
 
-#: admin/class-rcno-reviews-admin.php:612
-#: admin/class-rcno-reviews-admin.php:632
-#: extensions/rcno-author-box/includes/settings-page.php:6
-#: includes/abstracts/Abstract_Rcno_Extension.php:76
-#: includes/abstracts/Abstract_Rcno_Extension.php:88
+#: admin/class-rcno-reviews-admin.php:612 admin/class-rcno-reviews-admin.php:632 extensions/rcno-author-box/includes/settings-page.php:6 includes/abstracts/Abstract_Rcno_Extension.php:76 includes/abstracts/Abstract_Rcno_Extension.php:88
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -233,8 +205,7 @@ msgstr "Beállítások"
 msgid "Cover"
 msgstr "Borító"
 
-#: admin/class-rcno-reviews-admin.php:909
-#: admin/class-rcno-reviews-admin.php:912
+#: admin/class-rcno-reviews-admin.php:909 admin/class-rcno-reviews-admin.php:912
 msgid "Review updated."
 msgstr "A könyvajánló frissítve."
 
@@ -280,18 +251,15 @@ msgstr "Könyvajánló előnézete"
 
 #: admin/class-rcno-reviews-admin.php:1224
 msgid ""
-"When you leave a review on this site, we will store your provided name, "
-"email\n"
+"When you leave a review on this site, we will store your provided name, email\n"
 "        address, IP address, review text and review rating to our website. \n"
 "        \n"
 "        Example.com may chose to share your review text, \n"
-"        review rating and name with Google for the express purpose of "
-"enabling Structured Data \n"
+"        review rating and name with Google for the express purpose of enabling Structured Data \n"
 "        markup for our reviews on their search result pages."
-msgstr "Ha könyvajánlót ír az oldalon, akkor tároljuk a megadott nevét, e-mail címét, IP-címét, \ t n A(z) example.com úgy dönthet, hogy megosztja szövegét, értékelését és a nevét a Google-val, hogy lehetővé tegye a könyvajánlóink megjelenítését eredményoldalain."
+msgstr "Ha könyvajánlót ír az oldalon, akkor tároljuk a megadott nevét, e-mail címét, IP-címét, \\ t n A(z) example.com úgy dönthet, hogy megosztja szövegét, értékelését és a nevét a Google-val, hogy lehetővé tegye a könyvajánlóink megjelenítését eredményoldalain."
 
-#: admin/class-rcno-reviews-admin.php:1367
-#: admin/class-rcno-reviews-admin.php:1384
+#: admin/class-rcno-reviews-admin.php:1367 admin/class-rcno-reviews-admin.php:1384
 msgid "Recencio Book Reviews Plugin"
 msgstr "Recencio könyvajánló kiegészítő"
 
@@ -305,8 +273,7 @@ msgstr "A(z) %s beállításaihoz használt callback funkció hiányzik."
 msgid "Options for <strong>%s</strong> multicheck is missing."
 msgstr "Hiányoznak a beállítások a(z) %s ellenőrzéséhez."
 
-#: admin/settings/class-rcno-reviews-callback-helper.php:203
-#: admin/settings/class-rcno-reviews-callback-helper.php:248
+#: admin/settings/class-rcno-reviews-callback-helper.php:203 admin/settings/class-rcno-reviews-callback-helper.php:248
 #, php-format
 msgid "Options for <strong>%s</strong> radio is missing."
 msgstr "Hiányoznak a beállítások a(z) %s rádiógombhoz."
@@ -359,8 +326,7 @@ msgstr "Speciális beállítások"
 msgid "General Settings"
 msgstr "Általános beállítások"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:103
-#: admin/settings/class-rcno-reviews-settings-definition.php:682
+#: admin/settings/class-rcno-reviews-settings-definition.php:103 admin/settings/class-rcno-reviews-settings-definition.php:682
 msgid "Slug"
 msgstr "Slug"
 
@@ -378,10 +344,8 @@ msgstr "404-es hiba"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:113
 msgid ""
-"If you've set up everything correctly here but now WordPress is giving you "
-"an 404 (not found) error,\n"
-"\t\t\t\t\t try flushing your permalink settings. Visit Settings -> "
-"Permalinks and just save without changing anything."
+"If you've set up everything correctly here but now WordPress is giving you an 404 (not found) error,\n"
+"\t\t\t\t\t try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything."
 msgstr "Ha mindent helyesen állított be, de a WordPress 404-es (nem található) hibát ad, próbálkozzon a permalink beállításainak frissítésével. Látogasson el a Beállítások -> Permalinkek elemre, és minden változtatás nélkül mentsen."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:118
@@ -476,8 +440,7 @@ msgstr "ASIN szám"
 msgid "Show the ASIN field for book reviews?"
 msgstr "Megjeleníti az ASIN mezőt a könyvajánlókhoz?"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:202
-#: public/class-rcno-template-tags.php:89
+#: admin/settings/class-rcno-reviews-settings-definition.php:202 public/class-rcno-template-tags.php:89
 msgid "Goodreads ID"
 msgstr "Goodreads azonosító"
 
@@ -485,8 +448,7 @@ msgstr "Goodreads azonosító"
 msgid "Show the Goodreads book ID field for book reviews?"
 msgstr "Megjeleníti a Goodreads könyv-azonosítót a könyvajánlóknál?"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:207
-#: admin/views/rcno-general-info-metabox.php:142
+#: admin/settings/class-rcno-reviews-settings-definition.php:207 admin/views/rcno-general-info-metabox.php:142
 msgid "Book URL"
 msgstr "Könyv URL"
 
@@ -494,9 +456,7 @@ msgstr "Könyv URL"
 msgid "Show the book's URL field for book reviews?"
 msgstr "Megjeleníti a könyv URL-mezőjét a könyvajánlóknál?"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:212
-#: admin/views/rcno-general-info-metabox.php:34
-#: public/class-rcno-template-tags.php:82
+#: admin/settings/class-rcno-reviews-settings-definition.php:212 admin/views/rcno-general-info-metabox.php:34 public/class-rcno-template-tags.php:82
 msgid "Illustrator"
 msgstr "Illusztrátor"
 
@@ -528,9 +488,7 @@ msgstr "Megjelent kiadás"
 msgid "Show the book's published edition for reviews?"
 msgstr "Megjeleníti a megjelent kiadást a könyvajánlóknál?"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:232
-#: admin/views/rcno-general-info-metabox.php:78
-#: public/class-rcno-template-tags.php:87
+#: admin/settings/class-rcno-reviews-settings-definition.php:232 admin/views/rcno-general-info-metabox.php:78 public/class-rcno-template-tags.php:87
 msgid "Series Number"
 msgstr "Sorszám"
 
@@ -538,9 +496,7 @@ msgstr "Sorszám"
 msgid "Show the book's number in the series for reviews?"
 msgstr "Megjeleníti a könyv sorszámát a sorozatban a könyvajánlóknál?"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:237
-#: admin/views/rcno-general-info-metabox.php:89
-#: public/class-rcno-template-tags.php:86
+#: admin/settings/class-rcno-reviews-settings-definition.php:237 admin/views/rcno-general-info-metabox.php:89 public/class-rcno-template-tags.php:86
 msgid "Page Count"
 msgstr "Oldalszám"
 
@@ -548,8 +504,7 @@ msgstr "Oldalszám"
 msgid "Show the book's page count for reviews?"
 msgstr "Megjeleníti a könyv oldalszámát a könyvajánlóknál?"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:242
-#: public/class-rcno-template-tags.php:88
+#: admin/settings/class-rcno-reviews-settings-definition.php:242 public/class-rcno-template-tags.php:88
 msgid "Goodreads Rating"
 msgstr "Goodreads értékelés"
 
@@ -601,8 +556,7 @@ msgstr "Szöveg szín"
 msgid "Text color for the purchase button."
 msgstr "A vásárlás gombjának színe."
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:284
-#: admin/settings/class-rcno-reviews-settings-definition.php:331
+#: admin/settings/class-rcno-reviews-settings-definition.php:284 admin/settings/class-rcno-reviews-settings-definition.php:331
 msgid "Background Color"
 msgstr "Háttérszín"
 
@@ -631,9 +585,7 @@ msgid "Star Background Color"
 msgstr "Csillag háttérszín"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:310
-msgid ""
-"Background color for the 5 star rating. (Delete existing value for "
-"transparent background)"
+msgid "Background color for the 5 star rating. (Delete existing value for transparent background)"
 msgstr "Az 5 csillagos minősítés háttérszíne. (Az átlátszó háttér meglévő értékének törlése)"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:322
@@ -750,8 +702,7 @@ msgstr "Használja az Rcno Jelenleg Olvasott widgetet?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:418
 msgid "Review Calendar"
-msgstr "Könyvajánló Naptár
-"
+msgstr "Könyvajánló Naptá"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:419
 msgid "Use the Rcno Review Calendar widget?"
@@ -783,7 +734,7 @@ msgstr "Cikkek figyelmen kívül hagyása"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:442
 msgid "Ignore articles when sorting titles. (e.g. \"The\", \"A\", \"An\")"
-msgstr "A cikkek rendezése során figyelmen kívül hagyja a cikkeket. (pl. "A", "Az", "Egy")"
+msgstr "A cikkek rendezése során figyelmen kívül hagyja a cikkeket. (pl. \"A\", \"Az\", \"Egy\")"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:446
 msgid "Article List"
@@ -835,12 +786,11 @@ msgstr "További szöveg olvasása"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:487
 msgid "The review excerpt 'Read more' tag."
-msgstr "A könyvajánló kivonat "Tovább..." címke."
+msgstr "A könyvajánló kivonat \"Tovább...\" címke."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:492
 msgid "Review excerpt word count"
-msgstr "Könyvajánló kivonat szavak száma
-"
+msgstr "Könyvajánló kivonat szavak szám"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:493
 msgid "Max: 500, Min: 20"
@@ -859,9 +809,7 @@ msgid "Book Detail Items"
 msgstr "Részletek a könyvről"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:506
-msgid ""
-"Book details that should appear in book reviews. You also rearrange their "
-"order here"
+msgid "Book details that should appear in book reviews. You also rearrange their order here"
 msgstr "Részletek, amiknek meg kell jelenniük a könyvajánlókban. Itt  rendezheti a sorrendjüket."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:516
@@ -885,9 +833,7 @@ msgid "External Book API"
 msgstr "Külső könyv API"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:538
-msgid ""
-"Select which 3rd party API is used to fetch book data.<br />The "
-"corresponding option must also be enabled below."
+msgid "Select which 3rd party API is used to fetch book data.<br />The corresponding option must also be enabled below."
 msgstr "Válassza ki, hogy melyik külső API-t használja a könyvadatok letöltéséhez. A megfelelő opciót lejjebb is engedélyeznie kell."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:540
@@ -918,9 +864,7 @@ msgstr "A külső Google Books® API hozzáférés engedélyezése."
 msgid "Google Books® API Key"
 msgstr "Google Könyvek® API kulcs"
 
-#: admin/settings/class-rcno-reviews-settings-definition.php:562
-#: admin/settings/class-rcno-reviews-settings-definition.php:581
-#: admin/settings/class-rcno-reviews-settings-definition.php:586
+#: admin/settings/class-rcno-reviews-settings-definition.php:562 admin/settings/class-rcno-reviews-settings-definition.php:581 admin/settings/class-rcno-reviews-settings-definition.php:586
 msgid "Available at: "
 msgstr "Elérhető:"
 
@@ -973,9 +917,7 @@ msgid "Word List"
 msgstr "Szólista"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:619
-msgid ""
-"Create a list of words that have no plural or singular form e.g. \"sheep, "
-"fish\""
+msgid "Create a list of words that have no plural or singular form e.g. \"sheep, fish\""
 msgstr "Készítsen listát azokról a szavakról, amelyeknek nincs többes vagy egyes száma, pl."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:623
@@ -1024,8 +966,7 @@ msgstr "hierachikus"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:690
 msgid "Is this custom taxonomy hierarchical?"
-msgstr "Az egyedi taxonómia hierarchikus?
-"
+msgstr "Az egyedi taxonómia hierarchikus"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:694
 msgid "Show in table"
@@ -1044,21 +985,18 @@ msgid "Author's URL"
 msgstr "A szerző URL-címe"
 
 #: admin/views/rcno-author-taxonomy-metabox.php:11
-msgid ""
-"Please provide a link pointing to the author's official website or fan page."
+msgid "Please provide a link pointing to the author's official website or fan page."
 msgstr "Kérjük, adjon meg egy linket, amely a szerző hivatalos honlapjára vagy rajongói oldalára mutat."
 
 #: admin/views/rcno-book-cover-metabox.php:20
 msgid "Custom URL"
 msgstr "Egyéni URL"
 
-#: admin/views/rcno-book-cover-metabox.php:26
-#: admin/views/rcno-book-cover-metabox.php:27
+#: admin/views/rcno-book-cover-metabox.php:26 admin/views/rcno-book-cover-metabox.php:27
 msgid "Add Book Cover"
 msgstr "Könyvborító hozzáadása"
 
-#: admin/views/rcno-book-cover-metabox.php:32
-#: admin/views/rcno-book-cover-metabox.php:33
+#: admin/views/rcno-book-cover-metabox.php:32 admin/views/rcno-book-cover-metabox.php:33
 msgid "Remove Book Cover"
 msgstr "Könyvborító eltávolítása"
 
@@ -1091,10 +1029,7 @@ msgstr "Befejezett"
 msgid "%s ago"
 msgstr "%s ezelőtt"
 
-#: admin/views/rcno-general-info-metabox.php:23
-#: public/class-rcno-template-tags.php:94
-#: public/widgets/class-rcno-reviews-book-grid.php:189
-#: public/widgets/class-rcno-reviews-book-slider.php:208
+#: admin/views/rcno-general-info-metabox.php:23 public/class-rcno-template-tags.php:94 public/widgets/class-rcno-reviews-book-grid.php:189 public/widgets/class-rcno-reviews-book-slider.php:208
 msgid "Title"
 msgstr "Cím"
 
@@ -1106,8 +1041,7 @@ msgstr "Kiadás dátuma"
 msgid "Publication Format"
 msgstr "Kiadás formátuma"
 
-#: admin/views/rcno-general-info-metabox.php:67
-#: public/class-rcno-template-tags.php:85
+#: admin/views/rcno-general-info-metabox.php:67 public/class-rcno-template-tags.php:85
 msgid "Edition"
 msgstr "Kiadás"
 
@@ -1115,13 +1049,11 @@ msgstr "Kiadás"
 msgid "GoodReads ID"
 msgstr "GoodReads azonosító"
 
-#: admin/views/rcno-general-info-metabox.php:110
-#: public/class-rcno-template-tags.php:90
+#: admin/views/rcno-general-info-metabox.php:110 public/class-rcno-template-tags.php:90
 msgid "ISBN13"
 msgstr "ISBN13"
 
-#: admin/views/rcno-general-info-metabox.php:120
-#: public/class-rcno-template-tags.php:92
+#: admin/views/rcno-general-info-metabox.php:120 public/class-rcno-template-tags.php:92
 msgid "ASIN"
 msgstr "ASIN"
 
@@ -1157,16 +1089,11 @@ msgstr "Könyvajánló rács beágyazása"
 msgid "Embed sortable book review grid"
 msgstr "A rendezhető könyvajánló-rács beágyazása"
 
-#: admin/views/rcno-reviews-listings-modal.php:60
-#: admin/views/rcno-reviews-modal.php:79
+#: admin/views/rcno-reviews-listings-modal.php:60 admin/views/rcno-reviews-modal.php:79
 msgid "Cancel"
 msgstr "Törlés"
 
-#: admin/views/rcno-reviews-listings-modal.php:64
-#: includes/class-rcno-reviews-shortcodes.php:340
-#: includes/class-rcno-reviews-shortcodes.php:341
-#: includes/class-rcno-reviews-shortcodes.php:447
-#: includes/class-rcno-reviews-shortcodes.php:448
+#: admin/views/rcno-reviews-listings-modal.php:64 includes/class-rcno-reviews-shortcodes.php:340 includes/class-rcno-reviews-shortcodes.php:341 includes/class-rcno-reviews-shortcodes.php:447 includes/class-rcno-reviews-shortcodes.php:448
 msgid "Insert"
 msgstr "Beillesztés"
 
@@ -1179,8 +1106,7 @@ msgid "Close"
 msgstr "Bezárás"
 
 #: admin/views/rcno-reviews-modal.php:25
-msgid ""
-"Choose the review you want to include from the list below or search for it."
+msgid "Choose the review you want to include from the list below or search for it."
 msgstr "Válassza ki azt a könyvajánlót, amelyet az alábbi listából szeretne felvenni, vagy keresse meg."
 
 #: admin/views/rcno-reviews-modal.php:29
@@ -1213,9 +1139,7 @@ msgstr "Beágyazás leírás nélkül"
 
 #: admin/views/rcno-reviews-modal.php:69
 #, php-format
-msgid ""
-"%1sCreate a new review.%2s (This will open a new tab and you will need to "
-"return here for including the review)"
+msgid "%1sCreate a new review.%2s (This will open a new tab and you will need to return here for including the review)"
 msgstr "%1sÚj könyvajánló létrehozása.%2s (Ez egy új fület nyit, és vissza kell jönni ide a könyvajánló beillesztéséhez.)"
 
 #: admin/views/rcno-reviews-modal.php:82
@@ -1255,19 +1179,14 @@ msgid "Author Box"
 msgstr "Szerző mező"
 
 #: extensions/rcno-author-box/rcno-author-box.php:14
-msgid ""
-"Adds a review author box below your published book reviews. Please visit "
-"your website's user profile page to add your social media profile "
-"information."
+msgid "Adds a review author box below your published book reviews. Please visit your website's user profile page to add your social media profile information."
 msgstr "Hozzáad egy könyvajánló szerző mezőt a közzétett könyvajánlók alá. A közösségi média oldalaink profilinformációit weboldalunk falhasználói profil oldalán lehet beállítani."
 
-#: includes/abstracts/Abstract_Rcno_Extension.php:69
-#: includes/class-rcno-reviews-extensions.php:176
+#: includes/abstracts/Abstract_Rcno_Extension.php:69 includes/class-rcno-reviews-extensions.php:176
 msgid "Activate"
 msgstr "Aktiválás"
 
-#: includes/abstracts/Abstract_Rcno_Extension.php:82
-#: includes/class-rcno-reviews-extensions.php:177
+#: includes/abstracts/Abstract_Rcno_Extension.php:82 includes/class-rcno-reviews-extensions.php:177
 msgid "Deactivate"
 msgstr "Kikapcsolás"
 
@@ -1280,17 +1199,14 @@ msgid "Extensions"
 msgstr "Kiegészítők"
 
 #: includes/class-rcno-reviews-extensions.php:101
-msgid ""
-"All Recencio Review Extensions. Choose which you want to use, then activate "
-"it."
+msgid "All Recencio Review Extensions. Choose which you want to use, then activate it."
 msgstr "Minden Recencio könyvajánlók kiegészítő. Válassza ki, melyiket szeretné használni, majd aktiválja."
 
 #: includes/class-rcno-reviews-extensions.php:106
 msgid "No extensions are installed or activated."
 msgstr "Nincsenek kiegészítők telepítve vagy aktiválva."
 
-#: includes/class-rcno-reviews-extensions.php:194
-#: includes/class-rcno-reviews-extensions.php:241
+#: includes/class-rcno-reviews-extensions.php:194 includes/class-rcno-reviews-extensions.php:241
 msgid "Something went wrong!"
 msgstr "Valami elromlott!"
 
@@ -1306,8 +1222,7 @@ msgstr "Aktív"
 msgid "Already activated"
 msgstr "Már aktivált"
 
-#: includes/class-rcno-reviews-extensions.php:229
-#: includes/class-rcno-reviews-extensions.php:266
+#: includes/class-rcno-reviews-extensions.php:229 includes/class-rcno-reviews-extensions.php:266
 msgid "Nothing happened"
 msgstr "Nem történt semmi"
 
@@ -1323,30 +1238,23 @@ msgstr "Deaktivált"
 msgid "Not activated"
 msgstr "Nincs aktiválva"
 
-#: includes/class-rcno-reviews-shortcodes.php:267
-#: public/class-rcno-template-tags.php:1040
-#: public/class-rcno-template-tags.php:1162
-#: public/shortcodes/class-rcno-book-list-shortcode.php:95
+#: includes/class-rcno-reviews-shortcodes.php:267 public/class-rcno-template-tags.php:1040 public/class-rcno-template-tags.php:1162 public/shortcodes/class-rcno-book-list-shortcode.php:95
 msgid "Books in this series: "
 msgstr "Könyvek ebben a sorozatban:"
 
-#: includes/class-rcno-reviews-shortcodes.php:296
-#: includes/class-rcno-reviews-shortcodes.php:297
+#: includes/class-rcno-reviews-shortcodes.php:296 includes/class-rcno-reviews-shortcodes.php:297
 msgid "Add Review"
 msgstr "Könyvajánló hozzáadása"
 
-#: includes/class-rcno-reviews-shortcodes.php:338
-#: includes/class-rcno-reviews-shortcodes.php:445
+#: includes/class-rcno-reviews-shortcodes.php:338 includes/class-rcno-reviews-shortcodes.php:445
 msgid "No title"
 msgstr "Nincs cím"
 
-#: includes/class-rcno-reviews-shortcodes.php:339
-#: includes/class-rcno-reviews-shortcodes.php:446
+#: includes/class-rcno-reviews-shortcodes.php:339 includes/class-rcno-reviews-shortcodes.php:446
 msgid "Review"
 msgstr "Könyvajánló"
 
-#: includes/class-rcno-reviews-shortcodes.php:404
-#: includes/class-rcno-reviews-shortcodes.php:405
+#: includes/class-rcno-reviews-shortcodes.php:404 includes/class-rcno-reviews-shortcodes.php:405
 msgid "Add Listing"
 msgstr "Listázás hozzáadása"
 
@@ -1416,27 +1324,19 @@ msgstr "A Könyvlista rövid kódja"
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:114
 msgid ""
-"This shortcode creates a graphical list of books belonging to a particular "
-"custom taxonomy. \n"
-"\t\t\t\t\t\t\t\tIf the chosen custom taxonomy only has 1 reviewed book, "
-"nothing will be displayed when rendering the content of this shortcode on "
-"the frontend. \n"
+"This shortcode creates a graphical list of books belonging to a particular custom taxonomy. \n"
+"\t\t\t\t\t\t\t\tIf the chosen custom taxonomy only has 1 reviewed book, nothing will be displayed when rendering the content of this shortcode on the frontend. \n"
 "\t\t\t\t\t\t\t\t"
 msgstr "A rövid kód egy grafikus listát hoz létre egy adott taxonómiához tartozó könyvekből. Ha a választott taxonómiában csak egy könyv van, semmi nem fog megjelenni a rövid kód kiértékelése után a felületen."
 
-#: public/shortcodes/class-rcno-book-list-shortcode.php:120
-#: public/shortcodes/class-rcno-purchase-links-shortcode.php:116
-#: public/shortcodes/class-rcno-review-box-shortcode.php:115
+#: public/shortcodes/class-rcno-book-list-shortcode.php:120 public/shortcodes/class-rcno-purchase-links-shortcode.php:116 public/shortcodes/class-rcno-review-box-shortcode.php:115
 msgid "The default shortcode."
 msgstr "Az alapértelmezett rövid kód."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:123
 msgid ""
-"The shortcode uses a couple of parameters that can be changed or left at the "
-"default values. \n"
-"\t\t\t\t\t\t\t\tIf the default values are being used, then it is not "
-"necessary to include them in the shortcode. The default values are listed "
-"below: "
+"The shortcode uses a couple of parameters that can be changed or left at the default values. \n"
+"\t\t\t\t\t\t\t\tIf the default values are being used, then it is not necessary to include them in the shortcode. The default values are listed below: "
 msgstr "A rövid kód pár paramétert használ, melyeket meg lehet változtatni, vagy az alapértelmezett értékeken hagyni. Ha az alapértelmezett értékeket választjuk, nem kell beírnunk őket a rövid kódba. Az alapértelmezett értékek lent vannak felsorolva:"
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:131
@@ -1444,21 +1344,16 @@ msgid "The post/review ID, defaults to the current review post."
 msgstr "A bejegyzés / könyvajánló azonosító, alapértelmezés szerint az aktuális könyvajánló."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:135
-msgid ""
-"The custom taxonomy to display the book list for, defaults to the the "
-"\"series\" taxonomy."
-msgstr "Az egyéni taxonómia, melyhez a könyvlistát megjelenítjük (alapértelmezés szerint: "sorozat")."
+msgid "The custom taxonomy to display the book list for, defaults to the the \"series\" taxonomy."
+msgstr "Az egyéni taxonómia, melyhez a könyvlistát megjelenítjük (alapértelmezés szerint: \"sorozat\")."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:140
-msgid ""
-"Whether to display the book series number. Defaults to \"yes\", use 0 for "
-"\"no\"."
-msgstr "A könyv sorozatszámának megjelenítése. Az alapértelmezett értékek: "igen", 0 a "nem" esetén."
+msgid "Whether to display the book series number. Defaults to \"yes\", use 0 for \"no\"."
+msgstr "A könyv sorozatszámának megjelenítése. Az alapértelmezett értékek: \"igen\", 0 a \"nem\" esetén."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:145
-msgid ""
-"The header text for the book list, defaults to \"Books in this series:\""
-msgstr "A könyvlistához tartozó fejléc szöveg (alapértelmezés szerint: "Könyvek ebben a sorozatban"):"
+msgid "The header text for the book list, defaults to \"Books in this series:\""
+msgstr "A könyvlistához tartozó fejléc szöveg (alapértelmezés szerint: \"Könyvek ebben a sorozatban\"):"
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:152
 msgid "Examples of the book list shortcode:"
@@ -1469,11 +1364,7 @@ msgid "The Purchase Links shortcode"
 msgstr "A Vásárlási hivatkozások rövid kódja"
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:112
-msgid ""
-"This shortcode display the book purchase links in reviews or regular posts. "
-"This shortcode only needs the ID parameter if it is inserted into a regular "
-"post. If the shortcode is used in a regular post, the ID of the review it is "
-"attached to is needed."
+msgid "This shortcode display the book purchase links in reviews or regular posts. This shortcode only needs the ID parameter if it is inserted into a regular post. If the shortcode is used in a regular post, the ID of the review it is attached to is needed."
 msgstr "Ez a rövid kód megjeleníti a könyvvásárlási hivatkozásokat az ajánlókban vagy a posztokban. A kódhoz csak akkor szükséges az azonosító paraméter, ha azt általános bejegyzésbe helyezzük. Ha könyvajánlásba, akkor a könyvajánlás ID-je, melybe beszúrtuk, szintén szükséges."
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:121
@@ -1481,9 +1372,7 @@ msgid "The review ID the purchase link is attached to"
 msgstr "A könyvajánló azonosítója (ID), melyhez a vásárlási hivatkozás tartozik"
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:125
-msgid ""
-"Whether to display the purchase links label. Defaults to 'yes', use 0 for "
-"'no'."
+msgid "Whether to display the purchase links label. Defaults to 'yes', use 0 for 'no'."
 msgstr "Megjelenjen-e a vásárlási hivatkozások címkéje. Alapértelmezett: igen. Használjuk a 0-t, ha 'nem'."
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:132
@@ -1495,11 +1384,7 @@ msgid "The Review Box shortcode"
 msgstr "Könyvajánló értékelő doboz (rövid)kód"
 
 #: public/shortcodes/class-rcno-review-box-shortcode.php:111
-msgid ""
-"This shortcode display the book review score box in reviews or regular "
-"posts. This shortcode only needs the ID parameter if it is inserted into a "
-"regular post. If the shortcode is used in a regular post, the ID of the "
-"review it is attached to is needed."
+msgid "This shortcode display the book review score box in reviews or regular posts. This shortcode only needs the ID parameter if it is inserted into a regular post. If the shortcode is used in a regular post, the ID of the review it is attached to is needed."
 msgstr "Ez a kód jeleníti meg a könyvajánlás értékelő pontszámát a posztokban. A kód számára csak az azonosító (ID paraméter) szükséges, ha általános posztba szúrjuk be. Ha könyvajánlásba, akkor a könyvajánlás ID-je, melybe beszúrtuk, szintén szükséges."
 
 #: public/shortcodes/class-rcno-review-box-shortcode.php:120
@@ -1514,9 +1399,7 @@ msgstr "Példák a könyvajánló mező rövid kódjára:"
 msgid "Select"
 msgstr "Választ"
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:98
-#: public/templates/rcno_default/reviews_grid.php:67
-#: public/templates/rcno_default/reviews_index.php:105
+#: public/shortcodes/layouts/rcno-isotope-grid.php:98 public/templates/rcno_default/reviews_grid.php:67 public/templates/rcno_default/reviews_index.php:105
 msgid "There are no book reviews to display."
 msgstr "Nincsenek megjeleníthető könyvajánlók."
 
@@ -1536,34 +1419,24 @@ msgstr "Rcno Könyv Rács"
 msgid "A widget to display a grid of reviewed books"
 msgstr "Egy widget, mely rácsszerűen jeleníti meg a könyvismertetőket"
 
-#: public/widgets/class-rcno-reviews-book-grid.php:190
-#: public/widgets/class-rcno-reviews-book-slider.php:207
+#: public/widgets/class-rcno-reviews-book-grid.php:190 public/widgets/class-rcno-reviews-book-slider.php:207
 msgid "Date"
 msgstr "Dátum"
 
-#: public/widgets/class-rcno-reviews-book-grid.php:191
-#: public/widgets/class-rcno-reviews-book-slider.php:209
-#: public/widgets/class-rcno-reviews-tag-cloud.php:212
+#: public/widgets/class-rcno-reviews-book-grid.php:191 public/widgets/class-rcno-reviews-book-slider.php:209 public/widgets/class-rcno-reviews-tag-cloud.php:212
 msgid "Random"
 msgstr "Véletlenszerű"
 
-#: public/widgets/class-rcno-reviews-book-grid.php:197
-#: public/widgets/class-rcno-reviews-book-slider.php:216
-#: public/widgets/class-rcno-reviews-currently-reading.php:195
-#: public/widgets/class-rcno-reviews-recent-reviews.php:187
+#: public/widgets/class-rcno-reviews-book-grid.php:197 public/widgets/class-rcno-reviews-book-slider.php:216 public/widgets/class-rcno-reviews-currently-reading.php:195 public/widgets/class-rcno-reviews-recent-reviews.php:187
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:206
 msgid "Title (optional)"
 msgstr "Cím (opcionális):"
 
-#: public/widgets/class-rcno-reviews-book-grid.php:205
-#: public/widgets/class-rcno-reviews-book-slider.php:224
-#: public/widgets/class-rcno-reviews-recent-reviews.php:195
+#: public/widgets/class-rcno-reviews-book-grid.php:205 public/widgets/class-rcno-reviews-book-slider.php:224 public/widgets/class-rcno-reviews-recent-reviews.php:195
 msgid "Number of Reviews:"
 msgstr "Könyvajánlók száma:"
 
-#: public/widgets/class-rcno-reviews-book-grid.php:215
-#: public/widgets/class-rcno-reviews-book-slider.php:234
-#: public/widgets/class-rcno-reviews-tag-cloud.php:262
+#: public/widgets/class-rcno-reviews-book-grid.php:215 public/widgets/class-rcno-reviews-book-slider.php:234 public/widgets/class-rcno-reviews-tag-cloud.php:262
 msgid "Order:"
 msgstr "Sorrend:"
 
@@ -1587,8 +1460,7 @@ msgstr "Rcno Könyvajánló Naptár"
 msgid "A widget displaying a calendar of book reviews"
 msgstr "Egy widget, mely naptáron jeleníti meg a könyvajánlókat"
 
-#: public/widgets/class-rcno-reviews-calendar.php:127
-#: public/widgets/class-rcno-reviews-tag-cloud.php:232
+#: public/widgets/class-rcno-reviews-calendar.php:127 public/widgets/class-rcno-reviews-tag-cloud.php:232
 msgid "Title:"
 msgstr "Cím"
 
@@ -1606,8 +1478,7 @@ msgstr "%1$s %2$s"
 msgid "Calendar"
 msgstr "Naptár"
 
-#: public/widgets/class-rcno-reviews-calendar.php:291
-#: public/widgets/class-rcno-reviews-calendar.php:299
+#: public/widgets/class-rcno-reviews-calendar.php:291 public/widgets/class-rcno-reviews-calendar.php:299
 #, php-format
 msgid "View reviews for %1$s %2$s"
 msgstr "Könyvajánlók megtekintése ehhez: %1$s %2$s"
@@ -1634,8 +1505,7 @@ msgstr "Nincs jelenleg olvasott könyv."
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:190
 msgid "Review coming soon!"
-msgstr "Könyvajánló hamarosan!
-"
+msgstr "Könyvajánló hamarosan"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:203
 msgid "No currently reading book"
@@ -1653,14 +1523,12 @@ msgstr "Rcno Legutóbbi ajánlások"
 msgid "A widget to display the most recent book reviews."
 msgstr "Egy widget, amely megjeleníti a legutóbbi könyvajánlásokat."
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:40
-#: public/widgets/class-rcno-reviews-tag-cloud.php:170
+#: public/widgets/class-rcno-reviews-tag-cloud.php:40 public/widgets/class-rcno-reviews-tag-cloud.php:170
 msgid "Rcno Tag Cloud"
-msgstr "Rcno "tag" felhő"
+msgstr "Rcno \"tag\" felhő"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:52
-msgid ""
-"An advanced widget that gives you total control over the output of your tags."
+msgid "An advanced widget that gives you total control over the output of your tags."
 msgstr "Egy fejlett widget, amely teljes ellenőrzést nyújt a címkék kimenete felett."
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:205
@@ -1679,13 +1547,11 @@ msgstr "Növekvő"
 msgid "Descending"
 msgstr "Csökkenő"
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:216
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:242
+#: public/widgets/class-rcno-reviews-tag-cloud.php:216 public/widgets/class-rcno-reviews-taxonomy-list.php:242
 msgid "Count"
 msgstr "Darab"
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:217
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:239
+#: public/widgets/class-rcno-reviews-tag-cloud.php:217 public/widgets/class-rcno-reviews-taxonomy-list.php:239
 msgid "Name"
 msgstr "Név"
 
@@ -1726,9 +1592,7 @@ msgid "Rcno Taxonomy List"
 msgstr "Rcno taxonómia lista"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:50
-msgid ""
-"An advanced widget that gives you total control over the output of your book "
-"review taxonomies."
+msgid "An advanced widget that gives you total control over the output of your book review taxonomies."
 msgstr "Egy fejlett widget, amely teljes ellenőrzést nyújt a könyvajánlások taxonómiáinak kimenete felett."
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:133
@@ -1765,4 +1629,3 @@ msgstr "Üres kifejezések elrejtése"
 
 #~ msgid "Adds a post author box below book reviews"
 #~ msgstr "Adds a post author box below book reviews"
-
