@@ -38,8 +38,8 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 
 			<thead>
 			<tr>
-				<th width="25%">Store</th>
-				<th width="65%">Link</th>
+				<th width="25%"><?php _e( 'Store', 'rcno-reviews' ); ?></th>
+				<th width="65%"><?php _e( 'Link', 'rcno-reviews' ); ?></th>
 				<th width="10%"></th>
 			</tr>
 			</thead>
@@ -63,7 +63,7 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 								echo esc_html( $field['link'] );
 							} ?>"/>
                         </td>
-						<td><a class="button remove-link" href="#">Remove</a></td>
+						<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 					</tr>
 					<?php
 				}
@@ -74,37 +74,34 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 					<td>
 						<select name="store[]" title="Store" style="width: 100%">
 							<?php foreach ( $stores as $key => $value ) : ?>
-								<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $value );
-								?></option>
+								<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $value ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</td>
 					<td><input type="text" class="widefat" name="link[]" title="Purchase Link"/></td>
-					<td><a class="button remove-link" href="#">Remove</a></td>
+					<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 				</tr>
 				<tr>
 					<td>
 						<select name="store[]" title="Store" style="width: 100%">
 							<?php foreach ( $stores as $key => $value ) : ?>
-								<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $value );
-								?></option>
+								<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $value ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</td>
 					<td><input type="text" class="widefat" name="link[]"/></td>
-					<td><a class="button remove-link" href="#">Remove</a></td>
+					<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 				</tr>
 				<tr>
 					<td>
 						<select name="store[]" title="Store" style="width: 100%">
 							<?php foreach ( $stores as $key => $value ) : ?>
-								<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $value );
-								?></option>
+								<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $value ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</td>
 					<td><input type="text" class="widefat" name="link[]"/></td>
-					<td><a class="button remove-link" href="#">Remove</a></td>
+					<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 				</tr>
 			<?php endif; ?>
 
@@ -118,13 +115,13 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 					</select>
 				</td>
 				<td><input type="text" class="widefat" name="link[]"/></td>
-				<td><a class="button remove-link" href="#">Remove</a></td>
+				<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 			</tr>
 			</tbody>
 
 		</table>
-		<p style="margin:0;font-size:10px;text-align:right;">Select and enter your affiliate purchase links here.</p>
-		<p><a id="add-link" class="button button-primary" href="#">Add New Link</a></p>
+		<p style="margin:0;font-size:10px;text-align:right;"><?php _e( 'Select and enter your affiliate purchase links here.', 'rcno-reviews' ); ?></p>
+		<p><a id="add-link" class="button button-primary" href="#"><?php _e( 'Add New Link', 'rcno-reviews' ); ?></a></p>
 
 	</div>
 

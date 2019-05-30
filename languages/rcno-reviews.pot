@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio "
 "Pot v1.0.0\n"
-"POT-Creation-Date: 2019-05-13 "
-"13:09-0500\n"
+"POT-Creation-Date: 2019-05-27 "
+"09:22-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your Name "
 "<you@example.com>\n"
@@ -37,7 +37,7 @@ msgstr ""
 "_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "Language: en_US\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: "
 "*.js\n"
@@ -371,19 +371,12 @@ msgid ""
 "radio is missing."
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-callback-helper.php:613
-msgid ""
-"Upload \n"
-"\t\tFile"
+#: admin/settings/class-rcno-reviews-callback-helper.php:614
+msgid "Upload File"
 msgstr ""
 
-#: admin/settings/class-rcno-reviews-callback-helper.php:635
-msgid ""
-"Download \n"
-"\t\tFile"
-msgstr ""
-
-#: admin/settings/class-rcno-reviews-callback-helper.php:659
+#: admin/settings/class-rcno-reviews-callback-helper.php:636
+#: admin/settings/class-rcno-reviews-callback-helper.php:658
 msgid "Download File"
 msgstr ""
 
@@ -437,7 +430,7 @@ msgid ""
 msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:111
-msgid "404s errors"
+msgid "404 errors"
 msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:112
@@ -1220,6 +1213,7 @@ msgid ""
 msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:696
+#: admin/views/rcno-review-score-metabox.php:77
 msgid "Label"
 msgstr ""
 
@@ -1320,6 +1314,7 @@ msgstr ""
 #: public/class-rcno-template-tags.php:94
 #: public/widgets/class-rcno-reviews-book-grid.php:189
 #: public/widgets/class-rcno-reviews-book-slider.php:204
+#: public/widgets/class-rcno-reviews-tag-cloud.php:224
 msgid "Title"
 msgstr ""
 
@@ -1354,7 +1349,16 @@ msgstr ""
 msgid "Average"
 msgstr ""
 
+#: admin/views/rcno-review-score-metabox.php:36
+msgid "Enable Rating Box"
+msgstr ""
+
+#: admin/views/rcno-review-score-metabox.php:44
+msgid "Rating Type"
+msgstr ""
+
 #: admin/views/rcno-review-score-metabox.php:47
+#: public/widgets/class-rcno-reviews-tag-cloud.php:287
 msgid "Number"
 msgstr ""
 
@@ -1364,6 +1368,10 @@ msgstr ""
 
 #: admin/views/rcno-review-score-metabox.php:53
 msgid "Stars"
+msgstr ""
+
+#: admin/views/rcno-review-score-metabox.php:59
+msgid "Rating Box Position"
 msgstr ""
 
 #: admin/views/rcno-review-score-metabox.php:62
@@ -1376,9 +1384,33 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: admin/views/rcno-reviews-isbn-metabox.php:34
+#: admin/views/rcno-review-score-metabox.php:78
+msgid "Score"
+msgstr ""
+
+#: admin/views/rcno-review-score-metabox.php:107
+#: admin/views/rcno-review-score-metabox.php:131
+#: admin/views/rcno-review-score-metabox.php:137
+#: admin/views/rcno-review-score-metabox.php:143
+#: admin/views/rcno-review-score-metabox.php:151
+msgid "Remove"
+msgstr ""
+
+#: admin/views/rcno-review-score-metabox.php:156
 msgid ""
-"Your book was not found on "
+"Label: The name of criteria | "
+"Score: A number value between 0 "
+"- 5, in increments of 0.1"
+msgstr ""
+
+#: admin/views/rcno-review-score-metabox.php:158
+msgid "Add Criteria"
+msgstr ""
+
+#: admin/views/rcno-reviews-isbn-metabox.php:33
+#, php-format
+msgid ""
+"Your book was not found on %s"
 msgstr ""
 
 #: admin/views/rcno-reviews-listings-modal.php:17
@@ -1390,6 +1422,7 @@ msgid "Embed taxonomy index"
 msgstr ""
 
 #: admin/views/rcno-reviews-listings-modal.php:28
+#: public/widgets/class-rcno-reviews-tag-cloud.php:232
 msgid "Taxonomy"
 msgstr ""
 
@@ -1659,6 +1692,7 @@ msgid ""
 "from GoodReads"
 msgstr ""
 
+#: includes/class-rcno-reviews-extensions.php:112
 #: includes/class-rcno-reviews-extensions.php:113
 msgid "Extensions"
 msgstr ""
@@ -1753,6 +1787,7 @@ msgid "Published"
 msgstr ""
 
 #: public/class-rcno-template-tags.php:84
+#: public/widgets/class-rcno-reviews-tag-cloud.php:243
 msgid "Format"
 msgstr ""
 
@@ -1871,6 +1906,8 @@ msgstr ""
 #: public/shortcodes/layouts/rcno-isotope-grid.php:105
 #: public/templates/rcno_default/reviews_grid.php:67
 #: public/templates/rcno_default/reviews_index.php:104
+#: public/templates/rcno_metamor/reviews_grid.php:67
+#: public/templates/rcno_metamor/reviews_index.php:104
 msgid ""
 "There are no book reviews to "
 "display."
@@ -1951,19 +1988,22 @@ msgid "Select"
 msgstr ""
 
 #: public/templates/rcno_default/reviews_index.php:51
+#: public/templates/rcno_metamor/reviews_index.php:51
 #, php-format
 msgid ""
 "There is a missing book title "
 "on review ID %d"
 msgstr ""
 
-#: public/templates/rcno_default/taxonomy.php:180
+#: public/templates/rcno_default/taxonomy.php:178
+#: public/templates/rcno_metamor/taxonomy.php:180
 msgid ""
 "There are no terms in this "
 "taxonomy."
 msgstr ""
 
-#: public/templates/rcno_default/taxonomy.php:185
+#: public/templates/rcno_default/taxonomy.php:183
+#: public/templates/rcno_metamor/taxonomy.php:185
 msgid ""
 "Error: No taxonomy set for this "
 "list!"
@@ -1986,7 +2026,7 @@ msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-grid.php:191
 #: public/widgets/class-rcno-reviews-book-slider.php:205
-#: public/widgets/class-rcno-reviews-tag-cloud.php:212
+#: public/widgets/class-rcno-reviews-tag-cloud.php:204
 msgid "Random"
 msgstr ""
 
@@ -1994,7 +2034,7 @@ msgstr ""
 #: public/widgets/class-rcno-reviews-book-slider.php:212
 #: public/widgets/class-rcno-reviews-currently-reading.php:281
 #: public/widgets/class-rcno-reviews-recent-reviews.php:187
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:206
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:210
 msgid "Title (optional)"
 msgstr ""
 
@@ -2006,7 +2046,6 @@ msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-grid.php:215
 #: public/widgets/class-rcno-reviews-book-slider.php:230
-#: public/widgets/class-rcno-reviews-tag-cloud.php:262
 msgid "Order:"
 msgstr ""
 
@@ -2035,7 +2074,6 @@ msgid ""
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-calendar.php:127
-#: public/widgets/class-rcno-reviews-tag-cloud.php:232
 msgid "Title:"
 msgstr ""
 
@@ -2077,6 +2115,14 @@ msgstr ""
 msgid "by"
 msgstr ""
 
+#: public/widgets/class-rcno-reviews-currently-reading.php:150
+msgid "Previous"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-currently-reading.php:150
+msgid "Next"
+msgstr ""
+
 #: public/widgets/class-rcno-reviews-currently-reading.php:275
 msgid ""
 "No currently reading book right "
@@ -2109,74 +2155,66 @@ msgstr ""
 msgid "Show regular posts:"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:40
-#: public/widgets/class-rcno-reviews-tag-cloud.php:170
+#: public/widgets/class-rcno-reviews-tag-cloud.php:36
+#: public/widgets/class-rcno-reviews-tag-cloud.php:162
 msgid "Rcno Tag Cloud"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:52
+#: public/widgets/class-rcno-reviews-tag-cloud.php:48
 msgid ""
 "An advanced widget that gives "
 "you total control over the "
 "output of your tags."
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:205
+#: public/widgets/class-rcno-reviews-tag-cloud.php:197
 msgid "Flat"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:206
+#: public/widgets/class-rcno-reviews-tag-cloud.php:198
 msgid "List"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:210
+#: public/widgets/class-rcno-reviews-tag-cloud.php:202
 msgid "Ascending"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:211
+#: public/widgets/class-rcno-reviews-tag-cloud.php:203
 msgid "Descending"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:216
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:242
+#: public/widgets/class-rcno-reviews-tag-cloud.php:208
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:246
 msgid "Count"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:217
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:239
+#: public/widgets/class-rcno-reviews-tag-cloud.php:209
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:243
 msgid "Name"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:240
-msgid "Taxonomy:"
+#: public/widgets/class-rcno-reviews-tag-cloud.php:254
+msgid "Order"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:251
-msgid "Format:"
-msgstr ""
-
-#: public/widgets/class-rcno-reviews-tag-cloud.php:273
-msgid "Order by:"
+#: public/widgets/class-rcno-reviews-tag-cloud.php:265
+msgid "Order by"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:295
-msgid "Number:"
+msgid "Largest"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:303
-msgid "Largest:"
+msgid "Smallest"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:311
-msgid "Smallest:"
+msgid "Unit"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-tag-cloud.php:319
-msgid "Unit:"
-msgstr ""
-
-#: public/widgets/class-rcno-reviews-tag-cloud.php:330
-msgid "Separator:"
+#: public/widgets/class-rcno-reviews-tag-cloud.php:322
+msgid "Separator"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:38
@@ -2191,34 +2229,34 @@ msgid ""
 "taxonomies."
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:133
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:132
 msgid "No terms found"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:214
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:218
 msgid "Taxonomy to display"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:225
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:229
 msgid "Displayed taxonomy count:"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:234
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:238
 msgid "Order items by"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:262
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:266
 msgid "Show count with"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:268
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:272
 msgid "before and"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:274
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:278
 msgid "behind"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-taxonomy-list.php:281
+#: public/widgets/class-rcno-reviews-taxonomy-list.php:285
 msgid "Hide empty terms?"
 msgstr ""

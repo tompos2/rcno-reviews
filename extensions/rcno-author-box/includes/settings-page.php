@@ -29,7 +29,7 @@
                             <th scope="row"></th>
                             <td>
                                 <p>
-                                    <?php echo 'Visit your user <a href="' . get_edit_user_link() . '">profile page</a> to add your social media account information'; ?>
+                                    <?php printf( __( 'Visit your user <a href="%s">profile page</a> to add your social media account information', 'rcno-reviews' ), get_edit_user_link() ); ?>
                                 </p>
                             </td>
                         </tr>

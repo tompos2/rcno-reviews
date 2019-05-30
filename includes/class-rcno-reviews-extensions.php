@@ -109,7 +109,7 @@ class Rcno_Reviews_Extensions {
 
 		add_submenu_page(
 			'edit.php?post_type=rcno_review',
-			'Recencio Extensions',
+			'Recencio ' . __( 'Extensions', 'rcno-reviews' ),
 			__( 'Extensions', 'rcno-reviews' ),
 			'manage_options',
 			'rcno_extensions',

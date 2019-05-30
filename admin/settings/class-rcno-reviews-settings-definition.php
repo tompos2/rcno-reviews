@@ -108,7 +108,7 @@ class Rcno_Reviews_Settings_Definition {
 					'title'   => __( 'Please only use only 1 lower-case word', 'rcno-reviews' ),
 				),
 				'rcno_review_slug_instructions' => array(
-					'name' => __( '404s errors', 'rcno-reviews' ),
+					'name' => __( '404 errors', 'rcno-reviews' ),
 					'desc' => __( 'If you\'ve set up everything correctly here but now WordPress is giving you an 404 (not found) error,
 					 try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', 'rcno-reviews' ),
 					'type' => 'instruction',

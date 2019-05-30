@@ -33,7 +33,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 
 	<div class="review-score-options" style="width:25%; display:inline-block">
 		<div class="review-score-rating-enable">
-			<label for="rcno_review_score_enable">Enable Rating Box</label>
+			<label for="rcno_review_score_enable"><?php _e( 'Enable Rating Box', 'rcno-reviews' ); ?></label>
 			<input type="hidden" id="rcno_review_score_enable" name="rcno_review_score_enable" value="0">
 			<!-- The need for this is weird -->
 			<input type="checkbox" id="rcno_review_score_enable" name="rcno_review_score_enable"
@@ -41,7 +41,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 		</div>
 
 		<div class="review-score-rating-type">
-			<label for="rcno_review_score_type">Rating Type</label>
+			<label for="rcno_review_score_type"><?php _e( 'Rating Type', 'rcno-reviews' ); ?></label>
 			<select id="rcno_review_score_type" name="rcno_review_score_type">
 				<option value="number" <?php selected( $review_score_type, 'number' ); ?>>
 					<?php esc_html_e( 'Number', 'rcno-reviews' ); ?>
@@ -56,7 +56,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 		</div>
 
 		<div class="review-score-rating-position">
-			<label for="rcno_review_score_position">Rating Box Position</label>
+			<label for="rcno_review_score_position"><?php _e( 'Rating Box Position', 'rcno-reviews' ); ?></label>
 			<select id="rcno_review_score_position" name="rcno_review_score_position">
 				<option value="top" <?php selected( $review_score_position, 'top' ); ?>>
 					<?php esc_html_e( 'Top', 'rcno-reviews' ); ?>
@@ -74,8 +74,8 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 
 			<thead>
 			<tr>
-				<th width="40%">Label</th>
-				<th width="40%">Score</th>
+				<th width="40%"><?php _e( 'Label', 'rcno-reviews' ); ?></th>
+				<th width="40%"><?php _e( 'Score', 'rcno-reviews' ); ?></th>
 				<th width="8%"></th>
 			</tr>
 			</thead>
@@ -104,7 +104,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 								<td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]"
 										value="<?php echo ( '' !== $field['score'] ) ? esc_attr( $field['score'] ) : ''; ?>"/></td>
 
-								<td><a class="button remove-row" href="#">Remove</a></td>
+								<td><a class="button remove-row" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 							</tr>
 						<?php endforeach; ?>
 
@@ -128,19 +128,19 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 					<td><input type="text" class="widefat" name="label[]" placeholder="Plot"/></td>
 					<td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]"
 							placeholder="4.2"/></td>
-					<td><a class="button remove-row" href="#">Remove</a></td>
+					<td><a class="button remove-row" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 				</tr>
 				<tr>
 					<td><input type="text" class="widefat" name="label[]" placeholder="Characters"/></td>
 					<td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]"
 							placeholder="3.5"/></td>
-					<td><a class="button remove-row" href="#">Remove</a></td>
+					<td><a class="button remove-row" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 				</tr>
 				<tr>
 					<td><input type="text" class="widefat" name="label[]" placeholder="Pacing"/></td>
 					<td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]"
 							placeholder="2.8"/></td>
-					<td><a class="button remove-row" href="#">Remove</a></td>
+					<td><a class="button remove-row" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 				</tr>
 			<?php endif; ?>
 
@@ -148,15 +148,14 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 			<tr class="empty-row screen-reader-text">
 				<td><input type="text" class="widefat" name="label[]"/></td>
 				<td><input type="number" min="0" max="5" step="0.1" class="widefat" name="score[]"/></td>
-				<td><a class="button remove-row" href="#">Remove</a></td>
+				<td><a class="button remove-row" href="#"><?php _e( 'Remove', 'rcno-reviews' ); ?></a></td>
 			</tr>
 			</tbody>
 
 		</table>
-		<p style="margin:0;font-size:10px;text-align:right;">Label: The name of criteria - Score: A number value between
-			0 - 5, in increments of 0.1</p>
+		<p style="margin:0;font-size:10px;text-align:right;"><?php _e( 'Label: The name of criteria | Score: A number value between 0 - 5, in increments of 0.1', 'rcno-reviews' ); ?></p>
 		<?php if ( ! $use_custom_criteria ) : ?>
-			<p><a id="add-row" class="button button-primary" href="#">Add Criteria</a></p>
+			<p><a id="add-row" class="button button-primary" href="#"><?php _e( 'Add Criteria', 'rcno-reviews' ); ?></a></p>
 		<?php endif; ?>
 
 	</div>
