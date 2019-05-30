@@ -1806,17 +1806,17 @@ class Rcno_Template_Tags {
 	 * @return array
 	 */
 	public function get_rcno_review_html_classes( $review_id ) {
+
 		$review = get_post( $review_id );
 
 		if ( null === $review ) {
 			return array();
 		}
 
-		$classes = array();
-
+		$classes   = array();
 		$classes[] = 'review-' . $review->ID;
 
-		// All public taxonomies
+		// All public taxonomies.
 		$taxonomies = get_taxonomies( array( 'public' => true ) );
 		foreach ( (array) $taxonomies as $taxonomy ) {
 			if ( is_object_in_taxonomy( $review->post_type, $taxonomy ) ) {
@@ -1824,12 +1824,7 @@ class Rcno_Template_Tags {
 					if ( empty( $term->slug ) ) {
 						continue;
 					}
-
 					$term_class = sanitize_html_class( $term->slug, $term->term_id );
-					if ( is_numeric( $term_class ) || ! trim( $term_class, '-' ) ) {
-						$term_class = $term->term_id;
-					}
-
 					$classes[] = $term_class;
 				}
 			}
