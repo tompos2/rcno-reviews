@@ -79,30 +79,23 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 	 * Outputs the widget based on the arguments input through the widget controls.
 	 *
 	 * @since 0.6.0
+	 *
+	 * @param array $args
+	 * @param array $instance
 	 */
-	public function widget( $sidebar, $instance ) {
-		extract( $sidebar );
+	public function widget( $args, $instance ) {
 
-		/* Set the $args for wp_tag_cloud() to the $instance array. */
-		$args = $instance;
-
-		/**
-		 *  Get and parse the arguments, defaults have been set during saving (hopefully)
-		 */
-		extract( $args, EXTR_SKIP );
-
-		// If there is an error, stop and return
-		if ( !empty( $instance['error'] ) ) {
+		// If there is an error, stop and return.
+		if ( ! empty( $instance['error'] ) ) {
 			return;
 		}
 
-
 		// Output the theme's $before_widget wrapper.
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		// Output the title (if we have any).
 		if ( $instance && $instance[ 'title' ] ) {
-			echo $before_title . sanitize_text_field( $instance[ 'title' ] ) . $after_title;
+			echo $args['before_title'] . sanitize_text_field( $instance[ 'title' ] ) . $args['after_title'];
 		}
 
 		// Begin frontend output.
@@ -139,26 +132,27 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		wp_reset_postdata();
 
 		// Close the theme's widget wrapper.
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	/**
 	 * Updates the widget control options for the particular instance of the widget.
 	 *
 	 * @since 0.8.0
+	 *
+	 * @param object $new_instance
+	 * @param object $old_instance
+	 *
+	 * @return object
 	 */
 	public function update( $new_instance, $old_instance ) {
 		// Fill current state with old data to be sure we not loose anything
 		$instance = $old_instance;
 
-		// Set the instance to the new instance.
-		//$instance = $new_instance;
-
 		// Check and sanitize all inputs.
 		$instance['title']        = strip_tags( $new_instance['title'] );
 		$instance['review_count'] = absint( $new_instance['review_count'] );
 		$instance['order']        = strip_tags( $new_instance['order'] );
-
 
 		// and now we return new values and wordpress do all work for you.
 		return $instance;
@@ -168,10 +162,11 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 	 * Displays the widget control options in the Widgets admin screen.
 	 *
 	 * @since 0.8.0
+	 *
+	 * @param object $instance
 	 */
 	public function form( $instance ) {
 
-		global $slide_duration;
 		// Set up the default form values.
 		$defaults = array(
 			'title'        => '',
@@ -202,7 +197,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
-				<?php _e( 'Number of Reviews:', 'rcno-reviews' ); ?>
+				<?php _e( 'Number of Reviews', 'rcno-reviews' ); ?>:
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
 				   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
@@ -212,7 +207,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'order' ); ?>">
-				<?php _e( "Order:", 'rcno-reviews' ); ?>
+				<?php _e( 'Order', 'rcno-reviews' ); ?>:
 			</label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
 					name="<?php echo $this->get_field_name( 'order' ); ?>" style="width:100px">

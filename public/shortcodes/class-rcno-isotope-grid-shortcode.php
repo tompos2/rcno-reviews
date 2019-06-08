@@ -61,8 +61,7 @@ class Rcno_Isotope_Grid_Shortcode {
 	private function rcno_get_shortcode_variables() {
 		$variables                      = array();
 		$variables['ignore_articles']   = (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
-		$variables['articles_list']     = str_replace( ',', '|', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) )
-									. '|\d+';
+		$variables['articles_list']     = str_replace( ',', '|', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) ) . '|\d+';
 		$variables['custom_taxonomies'] = explode( ',', strtolower( Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) ) );
 		return $variables;
 	}
@@ -77,13 +76,18 @@ class Rcno_Isotope_Grid_Shortcode {
 	public function rcno_do_isotope_grid_shortcode( $options ) {
 
 		// Set default values for options not set explicitly.
-		$options = shortcode_atts( array(
-			'selectors' => 1,
-			'search'    => 1,
-			'width'     => 85,
-			'exclude'   => '',
-			'rating'    => 1,
-		), $options, 'rcno-sortable-grid' );
+		$options = shortcode_atts(
+			array(
+				'selectors' => 1,
+				'search'    => 1,
+				'width'     => 85,
+				'height'    => 130,
+				'exclude'   => '',
+				'rating'    => 1,
+			),
+			$options,
+			'rcno-sortable-grid'
+		);
 
 		// The actual rendering is done by a special function.
 		$output = $this->rcno_render_isotope_grid( $options );

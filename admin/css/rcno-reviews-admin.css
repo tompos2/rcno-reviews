@@ -319,7 +319,7 @@ tr.rcno-table-header td {
 }
 
 .book-general-metabox-1 .publication-gr-url {
-    display: none;
+    /* display: none; */
 }
 
 #tab-panel-rcno_reviews_shortcodes_help p {

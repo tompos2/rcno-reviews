@@ -86,6 +86,8 @@
 .rcno-book-grid-container .book-grid-item {
     flex-basis: 85px;
     margin: 2px;
+    height: 125px;
+    overflow: hidden;
 }
 
 .rcno-currently-reading-widget-fe {

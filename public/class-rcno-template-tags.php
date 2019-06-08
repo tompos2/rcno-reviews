@@ -90,9 +90,11 @@ class Rcno_Template_Tags {
 			'rcno_book_isbn13'        => __( 'ISBN13', 'rcno-reviews' ),
 			'rcno_book_isbn'          => __( 'ISBN', 'rcno-reviews' ),
 			'rcno_book_asin'          => __( 'ASIN', 'rcno-reviews' ),
-			'rcno_book_gr_url'        => __( 'Goodreads URL', 'rcno-reviews' ),
+			'rcno_book_gr_url'        => __( 'Book URL', 'rcno-reviews' ),
 			'rcno_book_title'         => __( 'Title', 'rcno-reviews' ),
 		);
+
+		//$this->private_rating = number_format( array_sum( $priv_score ) / count( $priv_score ), 1 )
 	}
 
 
@@ -257,27 +259,21 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_admin_book_rating( $review_id, $display = true ) {
 
-		$output = '';
-		$review = get_post_custom( $review_id );
-
-		if ( empty( $review['rcno_admin_rating'][0] ) ) {
-			return false;
-		}
-
-		$book_rating = (float) $review['rcno_admin_rating'][0];
-		$background  = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
+		$output     = '';
+		$review     = get_post_custom( $review_id );
+		$rating     = '' !== $review['rcno_admin_rating'][0] ? $review['rcno_admin_rating'][0] : 0;
+		$background = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
 
 		if ( false === $display) {
-			return $book_rating;
+			return (float) $rating;
 		}
 
-		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
-
+		if ( $rating && Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box' ) ) {
 			$output .= '<div class="rcno-admin-rating" style="background: ' . $background . '">';
 			$output .= '<div class="stars rating-' . $review_id . '" ';
 			$output .= 'data-review-id="' . $review_id . '" ';
-			$output .= 'data-review-rating="' . $book_rating . '" ';
-			$output .= 'title="' . $book_rating . ' ' . __( 'out of 5 stars', 'rcno-reviews' ) . '">';
+			$output .= 'data-review-rating="' . $rating . '" ';
+			$output .= 'title="' . $rating . ' ' . __( 'out of 5 stars', 'rcno-reviews' ) . '">';
 			$output .= '</div>';
 			$output .= '</div>';
 		}
@@ -350,7 +346,7 @@ class Rcno_Template_Tags {
 			$review['rcno_reviews_book_cover_alt'][0] : $book_title;
 
 		$book_title = $book_title ? esc_attr( $book_title ) : __( 'No Cover Available', 'rcno-reviews' );
-		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no-book-cover-available', 'rcno-reviews' );
+		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no cover is available for this book', 'rcno-reviews' );
 
 		$out = '';
 		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ) ) . '" ';
@@ -862,7 +858,7 @@ class Rcno_Template_Tags {
 		}
 
 		if ( isset( $review[ $meta_key ] ) ) {
-			if ( strlen( $review[ $meta_key ][0] ) > 0 ) {
+			if ( '' !== $review[ $meta_key ][0] ) {
 				$out = '';
 				if ( '' === $wrapper ) {
 					$out .= '';
@@ -874,13 +870,33 @@ class Rcno_Template_Tags {
 					$out .= '<span class="rcno-meta-key">' . $meta_keys[ $meta_key ] . ': ' . '</span>';
 				}
 
-				// Set this filter to 'false' if we want to skip converting link text
-				// to anchor tags. Useful for using URLs for book cover image.
+				/**
+				 * Set this filter to 'false' if we want to skip converting link text
+				 * to anchor tags. Useful for using URLs for book cover image.
+				*/
 				if ( apply_filters( 'rcno_skip_url_conversion', true ) ) {
-					$out .= '<span class="rcno-meta-value">' . preg_replace(
-						$url, '<a href="http$2://$4" target="_blank" rel="noopener">$0</a>',
-						sanitize_text_field( $review[ $meta_key ][0] )
-					) . '</span>';
+					if ( false !== stripos( $review[ $meta_key ][0], 'goodreads' ) ) {
+						$out .= '<span class="rcno-meta-value">'
+								. '<a href="' . sanitize_text_field( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
+								. __( 'GoodReads.com', 'rcno-reviews' )
+								. '</a>'
+								. '</span>';
+					} elseif( false !== stripos( $review[ $meta_key ][0], 'books.google' ) ) {
+						$out .= '<span class="rcno-meta-value">'
+								. '<a href="' . sanitize_text_field( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
+								. __( 'Google Books', 'rcno-reviews' )
+								. '</a>'
+								. '</span>';
+					} else {
+						$out .= '<span class="rcno-meta-value">'
+								. preg_replace(
+									$url,
+									'<a href="http$2://$4" target="_blank" rel="noopener">$0</a>',
+									sanitize_text_field( $review[ $meta_key ][0] )
+								)
+								. '</span>';
+					}
+
 				} else {
 					$out .= '<span class="rcno-meta-value">' . sanitize_text_field( $review[ $meta_key ][0] ) . '</span>';
 				}
@@ -1829,6 +1845,7 @@ class Rcno_Template_Tags {
 				}
 			}
 		}
+		$classes[] = round( $this->get_the_rcno_admin_book_rating( $review_id, false ) );
 
 		$classes = apply_filters( 'rcno_review_html_classes', $classes );
 

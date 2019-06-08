@@ -235,12 +235,14 @@ class Rcno_Reviews_Shortcodes {
 			array(
 				'headers'  => 1,
 				'category' => null,
+				'width'    => 85,
+				'height'   => 130,
 			),
 			$options
 		);
 
 		// The actual rendering is done by a special function.
-		$output = $plugin_public->rcno_render_review_index( $options['headers'], $options['category'] );
+		$output = $plugin_public->rcno_render_review_index( $options );
 
 		return do_shortcode( $output );
 	}

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio "
 "Pot v1.0.0\n"
-"POT-Creation-Date: 2019-05-27 "
-"09:22-0500\n"
+"POT-Creation-Date: 2019-06-08 "
+"10:30-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your Name "
 "<you@example.com>\n"
@@ -71,7 +71,7 @@ msgstr ""
 #: admin/class-rcno-admin-review-score.php:65
 #: admin/class-rcno-reviews-admin.php:1358
 #: admin/class-rcno-reviews-admin.php:1363
-#: public/class-rcno-template-tags.php:1445
+#: public/class-rcno-template-tags.php:1461
 msgid "Review Score"
 msgstr ""
 
@@ -579,6 +579,7 @@ msgstr ""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:211
 #: admin/views/rcno-general-info-metabox.php:140
+#: public/class-rcno-template-tags.php:93
 msgid "Book URL"
 msgstr ""
 
@@ -1286,6 +1287,37 @@ msgstr ""
 msgid "Remove Book Cover"
 msgstr ""
 
+#: admin/views/rcno-buy-links-metabox.php:41
+msgid "Store"
+msgstr ""
+
+#: admin/views/rcno-buy-links-metabox.php:42
+msgid "Link"
+msgstr ""
+
+#: admin/views/rcno-buy-links-metabox.php:66
+#: admin/views/rcno-buy-links-metabox.php:82
+#: admin/views/rcno-buy-links-metabox.php:93
+#: admin/views/rcno-buy-links-metabox.php:104
+#: admin/views/rcno-buy-links-metabox.php:118
+#: admin/views/rcno-review-score-metabox.php:107
+#: admin/views/rcno-review-score-metabox.php:131
+#: admin/views/rcno-review-score-metabox.php:137
+#: admin/views/rcno-review-score-metabox.php:143
+#: admin/views/rcno-review-score-metabox.php:151
+msgid "Remove"
+msgstr ""
+
+#: admin/views/rcno-buy-links-metabox.php:123
+msgid ""
+"Select and enter your affiliate "
+"purchase links here."
+msgstr ""
+
+#: admin/views/rcno-buy-links-metabox.php:124
+msgid "Add New Link"
+msgstr ""
+
 #: admin/views/rcno-currently-reading-dash-widget.php:52
 msgid "Book Title"
 msgstr ""
@@ -1312,7 +1344,7 @@ msgstr ""
 
 #: admin/views/rcno-general-info-metabox.php:21
 #: public/class-rcno-template-tags.php:94
-#: public/widgets/class-rcno-reviews-book-grid.php:189
+#: public/widgets/class-rcno-reviews-book-grid.php:184
 #: public/widgets/class-rcno-reviews-book-slider.php:204
 #: public/widgets/class-rcno-reviews-tag-cloud.php:224
 msgid "Title"
@@ -1388,14 +1420,6 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
-#: admin/views/rcno-review-score-metabox.php:107
-#: admin/views/rcno-review-score-metabox.php:131
-#: admin/views/rcno-review-score-metabox.php:137
-#: admin/views/rcno-review-score-metabox.php:143
-#: admin/views/rcno-review-score-metabox.php:151
-msgid "Remove"
-msgstr ""
-
 #: admin/views/rcno-review-score-metabox.php:156
 msgid ""
 "Label: The name of criteria | "
@@ -1445,10 +1469,10 @@ msgid "Cancel"
 msgstr ""
 
 #: admin/views/rcno-reviews-listings-modal.php:64
-#: includes/class-rcno-reviews-shortcodes.php:355
-#: includes/class-rcno-reviews-shortcodes.php:356
-#: includes/class-rcno-reviews-shortcodes.php:477
-#: includes/class-rcno-reviews-shortcodes.php:478
+#: includes/class-rcno-reviews-shortcodes.php:357
+#: includes/class-rcno-reviews-shortcodes.php:358
+#: includes/class-rcno-reviews-shortcodes.php:479
+#: includes/class-rcno-reviews-shortcodes.php:480
 msgid "Insert"
 msgstr ""
 
@@ -1519,6 +1543,14 @@ msgstr ""
 
 #: extensions/rcno-author-box/includes/settings-page.php:18
 msgid "Author box title"
+msgstr ""
+
+#: extensions/rcno-author-box/includes/settings-page.php:32
+#, php-format
+msgid ""
+"Visit your user <a href=\"%s"
+"\">profile page</a> to add your "
+"social media account information"
 msgstr ""
 
 #: extensions/rcno-author-box/includes/settings-page.php:38
@@ -1743,38 +1775,38 @@ msgstr ""
 msgid "Not activated"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:270
-#: public/class-rcno-template-tags.php:1058
-#: public/class-rcno-template-tags.php:1178
+#: includes/class-rcno-reviews-shortcodes.php:272
+#: public/class-rcno-template-tags.php:1074
+#: public/class-rcno-template-tags.php:1194
 #: public/shortcodes/class-rcno-book-list-shortcode.php:95
 msgid "Books in this series: "
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:302
-#: includes/class-rcno-reviews-shortcodes.php:303
+#: includes/class-rcno-reviews-shortcodes.php:304
+#: includes/class-rcno-reviews-shortcodes.php:305
 msgid "Add Review"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:353
-#: includes/class-rcno-reviews-shortcodes.php:475
+#: includes/class-rcno-reviews-shortcodes.php:355
+#: includes/class-rcno-reviews-shortcodes.php:477
 msgid "No title"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:354
-#: includes/class-rcno-reviews-shortcodes.php:476
+#: includes/class-rcno-reviews-shortcodes.php:356
+#: includes/class-rcno-reviews-shortcodes.php:478
 msgid "Review"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:425
-#: includes/class-rcno-reviews-shortcodes.php:426
+#: includes/class-rcno-reviews-shortcodes.php:427
+#: includes/class-rcno-reviews-shortcodes.php:428
 msgid "Add Listing"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:496
+#: includes/class-rcno-reviews-shortcodes.php:498
 msgid "Shortcodes Help"
 msgstr ""
 
-#: includes/class-rcno-reviews-shortcodes.php:511
+#: includes/class-rcno-reviews-shortcodes.php:513
 msgid "Shortcodes"
 msgstr ""
 
@@ -1795,38 +1827,44 @@ msgstr ""
 msgid "ISBN"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:93
-msgid "Goodreads URL"
-msgstr ""
-
-#: public/class-rcno-template-tags.php:140
+#: public/class-rcno-template-tags.php:142
 msgid "Category"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:141
+#: public/class-rcno-template-tags.php:143
 msgid "Tag"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:280
+#: public/class-rcno-template-tags.php:276
 msgid "out of 5 stars"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:352
+#: public/class-rcno-template-tags.php:348
 msgid "No Cover Available"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:353
-msgid "no-book-cover-available"
+#: public/class-rcno-template-tags.php:349
+msgid ""
+"no cover is available for this "
+"book"
 msgstr ""
 
-#: public/class-rcno-template-tags.php:1131
+#: public/class-rcno-template-tags.php:881
+msgid "GoodReads.com"
+msgstr ""
+
+#: public/class-rcno-template-tags.php:887
+msgid "Google Books"
+msgstr ""
+
+#: public/class-rcno-template-tags.php:1147
 #, php-format
 msgid ""
 "No entries found for the \"%s\" "
 "taxonomy."
 msgstr ""
 
-#: public/class-rcno-template-tags.php:1347
+#: public/class-rcno-template-tags.php:1363
 msgid "Overall Score"
 msgstr ""
 
@@ -1903,9 +1941,9 @@ msgid ""
 msgstr ""
 
 #: public/shortcodes/class-rcno-grid-shortcode.php:172
-#: public/shortcodes/layouts/rcno-isotope-grid.php:105
+#: public/shortcodes/layouts/rcno-isotope-grid.php:124
 #: public/templates/rcno_default/reviews_grid.php:67
-#: public/templates/rcno_default/reviews_index.php:104
+#: public/templates/rcno_default/reviews_index.php:109
 #: public/templates/rcno_metamor/reviews_grid.php:67
 #: public/templates/rcno_metamor/reviews_index.php:104
 msgid ""
@@ -1987,7 +2025,35 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: public/templates/rcno_default/reviews_index.php:51
+#: public/shortcodes/layouts/rcno-isotope-grid.php:70
+msgid "Rating"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:72
+msgid "Select Rating"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:73
+msgid "1 Star"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:74
+msgid "2 Stars"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:75
+msgid "3 Stars"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:76
+msgid "4 Stars"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:77
+msgid "5 Stars"
+msgstr ""
+
+#: public/templates/rcno_default/reviews_index.php:50
 #: public/templates/rcno_metamor/reviews_index.php:51
 #, php-format
 msgid ""
@@ -2019,34 +2085,33 @@ msgid ""
 "reviewed books"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-book-grid.php:190
+#: public/widgets/class-rcno-reviews-book-grid.php:185
 #: public/widgets/class-rcno-reviews-book-slider.php:203
 msgid "Date"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-book-grid.php:191
+#: public/widgets/class-rcno-reviews-book-grid.php:186
 #: public/widgets/class-rcno-reviews-book-slider.php:205
 #: public/widgets/class-rcno-reviews-tag-cloud.php:204
 msgid "Random"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-book-grid.php:197
+#: public/widgets/class-rcno-reviews-book-grid.php:192
 #: public/widgets/class-rcno-reviews-book-slider.php:212
 #: public/widgets/class-rcno-reviews-currently-reading.php:281
-#: public/widgets/class-rcno-reviews-recent-reviews.php:187
+#: public/widgets/class-rcno-reviews-recent-reviews.php:195
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:210
 msgid "Title (optional)"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-book-grid.php:205
-#: public/widgets/class-rcno-reviews-book-slider.php:220
-#: public/widgets/class-rcno-reviews-recent-reviews.php:195
-msgid "Number of Reviews:"
+#: public/widgets/class-rcno-reviews-book-grid.php:200
+#: public/widgets/class-rcno-reviews-recent-reviews.php:203
+msgid "Number of Reviews"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-book-grid.php:215
-#: public/widgets/class-rcno-reviews-book-slider.php:230
-msgid "Order:"
+#: public/widgets/class-rcno-reviews-book-grid.php:210
+#: public/widgets/class-rcno-reviews-tag-cloud.php:254
+msgid "Order"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-slider.php:38
@@ -2057,6 +2122,14 @@ msgstr ""
 msgid ""
 "A widget to display a reviewed "
 "book slider"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:220
+msgid "Number of Reviews:"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-book-slider.php:230
+msgid "Order:"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-slider.php:242
@@ -2151,8 +2224,12 @@ msgid ""
 "recent book reviews."
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-recent-reviews.php:205
-msgid "Show regular posts:"
+#: public/widgets/class-rcno-reviews-recent-reviews.php:213
+msgid "Character count"
+msgstr ""
+
+#: public/widgets/class-rcno-reviews-recent-reviews.php:223
+msgid "Show regular posts"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:36
@@ -2191,10 +2268,6 @@ msgstr ""
 #: public/widgets/class-rcno-reviews-tag-cloud.php:209
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:243
 msgid "Name"
-msgstr ""
-
-#: public/widgets/class-rcno-reviews-tag-cloud.php:254
-msgid "Order"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:265

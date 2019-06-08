@@ -459,12 +459,11 @@ class Rcno_Reviews_Public {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed  $headers Whether or not to show a first letter navigation header before each item.
-	 * @param string $category The category to limit this index page to.
+	 * @param array  $options The shortcode options.
 	 *
 	 * @return string $content
 	 */
-	public function rcno_render_review_index( $headers = false, $category ) {
+	public function rcno_render_review_index( $options ) {
 		// Create empty output variable.
 		$output = '';
 
@@ -486,7 +485,7 @@ class Rcno_Reviews_Public {
 			'orderby'        => 'post_title',
 			'order'          => 'ASC',
 			'posts_per_page' => - 1,
-			'category_name'  => $category,
+			'category_name'  => $options['category'],
 		);
 		$query = new WP_Query( $args );
 		$posts = array();

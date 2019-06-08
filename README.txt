@@ -50,6 +50,7 @@ And, all of the above is SEO friendly by way of validated JSON-LD metadata for t
 * have your site visitors/reader leave a 5 rating via the comment form
 * translation ready
 * GDPR compliant
+* RTL support
 
 == Installation ==
 
@@ -81,6 +82,12 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.32.0 =
+* Fixed an issue where truncated strings had an � character in languages with multi-byte characters
+* Added "width" and "height" parameters to the sortable grid shortcode i.e., `[rcno-sortable-grid width=80 height=115]`
+* Added "width" and "height" parameters to the reviews index shortcode i.e., `[rcno-reviews-index width=120 height=240]`
+* Added a `rating` parameter to enable sorting reviews by star rating in the sortable grid shortcode i.e., `[rcno-sortable-grid rating=1]`
 
 = 1.31.0 =
 * Fixed PHP warning message in Taxonomy List widget.

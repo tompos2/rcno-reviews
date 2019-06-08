@@ -70,8 +70,13 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
+	 *
+	 * @uses \mb_substr()
+	 * @see https://stackoverflow.com/questions/9087502/php-substr-function-with-utf-8-leaves-marks-at-the-end
+	 *
 	 * @param array $args
 	 * @param array $instance
+	 *
 	 * @since 0.6.0
 	 */
 	public function widget( $args, $instance ) {
@@ -80,7 +85,6 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		if ( ! empty( $instance['error'] ) ) {
 			return;
 		}
-
 
 		// Output the theme's $before_widget wrapper.
 		echo $args['before_widget'];
@@ -91,6 +95,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		}
 
 		// Begin frontend output.
+		$char_count     = isset( $instance['char_count'] ) ? (int) $instance['char_count'] : 150;
 		$query_args     = array(
 			'post_type'      => ( isset( $instance['regular_posts'] ) && true === $instance['regular_posts'] ) ? array( 'post', 'rcno_review' ) : 'rcno_review',
 			'posts_per_page' => isset( $instance['review_count'] ) ? (int) $instance['review_count'] : 5,
@@ -116,15 +121,14 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 						<a href="<?php the_permalink(); ?>"><h3><?php the_title(); ?></h3></a>
 						<?php $review->the_rcno_taxonomy_terms( $review_id, 'rcno_author', true ); ?>
 						<?php echo $review->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'div', true ); ?>
-						<?php echo '<p>' . substr( wp_strip_all_tags( strip_shortcodes( $review->get_the_rcno_book_review_content( $review_id ) ), true ), 0, 150 ) . '</p>'; ?>
+						<?php echo '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $review->get_the_rcno_book_review_content( $review_id ) ), true ), 0, $char_count ) . '</p>'; ?>
 						<div class="clear"></div>
 					</div>
 
 				</div>
 
 				<?php
-			}
-		}
+			}		}
 
 		wp_reset_postdata();
 
@@ -136,6 +140,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 * Updates the widget control options for the particular instance of the widget.
 	 *
 	 * @since 0.8.0
+	 *
 	 * @param object $new_instance
 	 * @param object $old_instance
 	 *
@@ -149,6 +154,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		// Check and sanitize all inputs.
 		$instance['title']         = strip_tags( $new_instance['title'] );
 		$instance['review_count']  = absint( $new_instance['review_count'] );
+		$instance['char_count']    = isset( $new_instance['char_count'] ) ? (int) $new_instance['char_count'] : 150;
 		$instance['regular_posts'] = isset( $new_instance['regular_posts'] ) ? (bool) $new_instance['regular_posts'] : false;
 
 		// Now we return new values and WordPress do all work for you.
@@ -170,6 +176,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		$defaults = array(
 			'title'         => '',
 			'review_count'  => 5,
+			'char_count'    => 150,
 			'regular_posts' => false,
 		);
 
@@ -178,13 +185,14 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		// Element options.
 		$title         = sanitize_text_field( $instance['title'] );
-		$review_count  = sanitize_key( $instance['review_count'] );
+		$review_count  = (int) $instance['review_count'];
+		$char_count    = (int) $instance['char_count'];
 		$regular_posts = (bool) $instance['regular_posts'];
 
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
-				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
+				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>:
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 				name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>"/>
@@ -192,7 +200,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
-				<?php _e( 'Number of Reviews:', 'rcno-reviews' ); ?>
+				<?php _e( 'Number of Reviews', 'rcno-reviews' ); ?>:
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
 				name="<?php echo $this->get_field_name( 'review_count' ); ?>"
@@ -201,8 +209,18 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		</p>
 
 		<p>
+			<label for="<?php echo $this->get_field_id( 'char_count' ); ?>">
+				<?php _e( 'Character count', 'rcno-reviews' ); ?>:
+			</label>
+			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'char_count' ); ?>"
+				   name="<?php echo $this->get_field_name( 'char_count' ); ?>"
+				   value="<?php echo esc_attr( $char_count ); ?>"
+				   style="width:50px;" min="50" max="1000" pattern="[0-9]"/>
+		</p>
+
+		<p>
 			<label for="<?php echo $this->get_field_id( 'regular_posts' ); ?>">
-				<?php _e( 'Show regular posts:', 'rcno-reviews' ); ?>
+				<?php _e( 'Show regular posts', 'rcno-reviews' ); ?>:
 			</label>
 			<input type="checkbox" class="widefat" id="<?php echo $this->get_field_id( 'regular_posts' ); ?>"
 				name="<?php echo $this->get_field_name( 'regular_posts' ); ?>"

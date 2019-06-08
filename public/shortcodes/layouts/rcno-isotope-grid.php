@@ -64,6 +64,21 @@ if ( $posts && count( $posts ) > 0 ) {
 			$select .= '</select>';
 			$select .= '</div>';
 		}
+
+		if ( $options['rating'] ) {
+			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
+			$select .= '<label for="rcno-isotope-grid-select">' . __( 'Rating', 'rcno-reviews' ) . '</label>';
+			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
+			$select .= '<option value="*">' . __( 'Select Rating', 'rcno-reviews' ) . '</option>';
+			$select .= '<option value=".1">' . __( '1 Star', 'rcno-reviews' ) . '</option>';
+			$select .= '<option value=".2">' . __( '2 Stars', 'rcno-reviews' ) . '</option>';
+			$select .= '<option value=".3">' . __( '3 Stars', 'rcno-reviews' ) . '</option>';
+			$select .= '<option value=".4">' . __( '4 Stars', 'rcno-reviews' ) . '</option>';
+			$select .= '<option value=".5">' . __( '5 Stars', 'rcno-reviews' ) . '</option>';
+			$select .= '</select>';
+			$select .= '</div>';
+		}
+
 		$select .= '<span class="rcno-isotope-grid-select reset">&olarr;</span>';
 		$select .= '</div>';
 	}
@@ -77,14 +92,18 @@ if ( $posts && count( $posts ) > 0 ) {
 		$out .= '<div class="rcno-isotope-grid-item ';
 		$out .= sanitize_title( $this->template->get_the_rcno_book_meta( $book['ID'], 'rcno_book_title', '', false ) ) . ' ';
 		$out .= implode( ' ', $this->template->get_rcno_review_html_classes( $book['ID'] ) ) . '" ';
-		$out .= 'style="width:' . $options['width'] . 'px;"';
+		$out .= 'style="width:' . $options['width'] . 'px; height:' . $options['height'] . 'px;"';
 		$out .= '>';
 		if ( $options['rating'] ) {
 			$out .= $this->template->get_the_rcno_admin_book_rating( $book['ID'] );
 		}
 		$out .= '<a href="' . get_permalink( $book['ID'] ) . '">';
 		// $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
-		$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true );
+		if ( (int) $options['width'] > 85 ) {
+			$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-lg', true );
+		} else {
+			$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true );
+		}
 		$out .= '</a>';
 		$out .= '</div>';
 

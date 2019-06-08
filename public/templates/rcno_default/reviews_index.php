@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Render a list of all book reviews.
  */
@@ -45,7 +44,7 @@ if ( $posts && count( $posts ) > 0 ) {
 	// Walk through all the books to build alphabet navigation.
 	foreach ( $books as $book ) {
 
-		if ( $index_headers && ( (bool) $headers ) ) { // Add first letter headlines for easier navigation.
+		if ( $index_headers && ( (bool) $options['headers'] ) ) { // Add first letter headlines for easier navigation.
 
 			if ( '' === $book['title'] ) {
 				echo '<p>' . sprintf( __( 'There is a missing book title on review ID %d', 'rcno-reviews' ), $book['ID'] ) . '</p>';
@@ -82,7 +81,13 @@ if ( $posts && count( $posts ) > 0 ) {
 		$out .= '<li><a href="' . get_permalink( $book['ID'] ) . '">';
 
 		if ( Rcno_Reviews_Option::get_option( 'rcno_show_book_covers_index', false ) ) {
-			$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true, false );
+			$out .= '<div class="" style="width:' . $options['width'] . 'px; height:' . $options['height'] . 'px; overflow:hidden;">';
+			if ( (int) $options['width'] > 85 ) {
+				$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-lg', true );
+			} else {
+				$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true );
+			}
+			$out .= '</div>';
 		}
 
 		$out .= '<p>' . $book['title'] . '</p>';
