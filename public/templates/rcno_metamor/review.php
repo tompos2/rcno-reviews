@@ -52,14 +52,14 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 		?>
 	</div>
 	<div class="rcno-book-synopsis">
-		<h3>Summary</h3>
+		<h3><?php echo apply_filters( 'rcno_metamor_summary', __( 'Summary', 'rcno-reviews' ) ); ?></h3>
 		<?php
 			$template->the_rcno_book_description( $review_id );
 		?>
 	</div>
 
 	<div class="rcno-book-review">
-		<h3>Review</h3>
+		<h3><?php echo apply_filters( 'rcno_metamor_summary', __( 'Review', 'rcno-reviews' ) ); ?></h3>
 		<?php
 		$template->the_rcno_book_review_content( $review_id );
 		$template->the_rcno_book_purchase_links( $review_id, true );
