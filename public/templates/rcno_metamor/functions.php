@@ -17,7 +17,3 @@ function rcno_metamor_styles() {
 function rcno_metamor_scripts() {
 	wp_enqueue_script( 'rcno-metamor-script', plugin_dir_url( __FILE__ ) . 'metamor-script.js', array( 'jquery' ), '1.0.0', true );
 }
-
-/*add_filter( 'rcno_book_description', function( $description ) {
-	return wpautop( $description );
-} );*/

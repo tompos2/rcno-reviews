@@ -172,7 +172,7 @@ class Rcno_Reviews_Extensions {
 								</div>
 								<div class="plugin-card-bottom">
 									<?php
-									// Use the buttons from our Abstract class to create the buttons
+									// Use the `buttons` method from our Abstract class to create the buttons
 									// Can be overwritten by each integration if needed.
 									$extension_object->buttons( $active_extensions );
 									?>

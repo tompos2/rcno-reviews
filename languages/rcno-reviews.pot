@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio "
 "Pot v1.0.0\n"
-"POT-Creation-Date: 2019-06-08 "
-"10:30-0500\n"
+"POT-Creation-Date: 2019-07-11 "
+"13:11-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your Name "
 "<you@example.com>\n"
@@ -1794,6 +1794,7 @@ msgstr ""
 
 #: includes/class-rcno-reviews-shortcodes.php:356
 #: includes/class-rcno-reviews-shortcodes.php:478
+#: public/templates/rcno_metamor/review.php:62
 msgid "Review"
 msgstr ""
 
@@ -2073,6 +2074,10 @@ msgstr ""
 msgid ""
 "Error: No taxonomy set for this "
 "list!"
+msgstr ""
+
+#: public/templates/rcno_metamor/review.php:55
+msgid "Summary"
 msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-grid.php:37

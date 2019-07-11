@@ -2,12 +2,18 @@
     display: inline-block;
     margin: 0 1em 0 0;
     float: left;
-    /* width: 70%; */
+    width: 40%;
+}
+
+.rcno-metamor-template .rcno-book-cover img {
+    width: 100%;
+    display: block;
 }
 
 .rcno-metamor-template .rcno-book-meta,
 .rcno-metamor-template .rcno-book-synopsis {
     margin: 0 0 2em 0;
+    /* float: left; */
 }
 
 .rcno-metamor-template .rcno-book-meta {
@@ -17,6 +23,7 @@
 .rcno-metamor-template .rcno-book-meta div {
     display: flex;
     justify-content: center;
+    /* background: #fff !important; */
 }
 
 .rcno-metamor-template .rcno-book-meta div div {

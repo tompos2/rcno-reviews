@@ -31,7 +31,7 @@ class Rcno_Reviews_Get_Templates {
 			if ( $handle = opendir( $dir_name ) ) {
 				// Walk through all folders in that directory:
 				while ( false !== ( $file = readdir( $handle ) ) ) {
-					if ( $file !== '.' && $file !== '..' && $file !== '.svn' ) {
+					if ( $file !== '.' && $file !== '..' && $file !== '.svn' && $file !== '.git' && $file !== '.listing' ) {
 						if ( false !== stripos( $dir_name, 'plugin' ) ) {
 							$base_url = RCNO_PLUGIN_URI . 'public/templates/' . $file;
 							$local    = false;

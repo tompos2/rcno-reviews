@@ -178,12 +178,12 @@
 
 						if ( -1 === book.image_url.indexOf('nophoto') ) {
 
-							gr_cover_url.val( book.image_url );
+							gr_cover_url.val( book.image_url.replace('_SX98_', '_SX300_') );
 
 							// After that, set the properties of the image and display it.
 							$( '#rcno-reviews-book-cover-container' )
 								.children( 'img' )
-								.attr( 'src', book.image_url )
+								.attr( 'src', book.image_url.replace('_SX98_', '_SX300_') )
 								.show()
 								.parent()
 								.removeClass( 'hidden' );

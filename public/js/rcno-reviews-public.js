@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
   'use strict';
 
   /**
@@ -12,14 +12,14 @@
    * This enables you to define handlers, for when the DOM is ready:
    *
    * $(function() {
-	 *
-	 * });
+   *
+   * });
    *
    * When the window is loaded:
    *
    * $( window ).load(function() {
-	 *
-	 * });
+   *
+   * });
    *
    * ...and/or other possibilities.
    *
@@ -29,21 +29,21 @@
    * practising this, we should strive to set a better example in our own work.
    */
 
-  $(function () {
+  $(function() {
     if (typeof owl_carousel_options !== 'undefined') {
 
       $('.rcno-book-slider-container.owl-carousel').owlCarousel({
         items: 1,
         autoplay: true,
         autoplayTimeout: owl_carousel_options.duration * 1000,
-        loop: true
+        loop: true,
       });
     }
 
   });
 
-  $(function () {
-    if ( window.Macy !== undefined ) {
+  $(function() {
+    if (window.Macy !== undefined) {
       Macy({
         container: '#macy-container',
         trueOrder: false,
@@ -54,76 +54,82 @@
           1200: 4,
           940: 3,
           520: 2,
-          400: 1
-        }
+          400: 1,
+        },
       });
     }
   });
 
   $(function() {
-      var stars = $( '.rcno-admin-rating .stars' );
-      $.each(stars, function( index, star ) {
-		  $(star).starRating({
-			  initialRating: $(star).data('review-rating'),
-			  emptyColor: rcno_star_rating_vars.background_colour,
-			  activeColor: rcno_star_rating_vars.star_colour,
-			  useGradient: false,
-			  strokeWidth: 0,
-			  readOnly: true,
-		  });
-	  });
+    var stars = $('.rcno-admin-rating .stars');
+    $.each(stars, function(index, star) {
+      $(star).starRating({
+        initialRating: $(star).data('review-rating'),
+        emptyColor: rcno_star_rating_vars.background_colour,
+        activeColor: rcno_star_rating_vars.star_colour,
+        useGradient: false,
+        strokeWidth: 0,
+        readOnly: true,
+      });
+    });
 
   });
 
-	$(function() {
-		if ( window.Isotope !== undefined ) {
+  $(function() {
 
-            var qsRegex;
-            var $grid = $('.rcno-isotope-grid-container').imagesLoaded( function() {
-                // init Isotope after all images have loaded
-                $grid.isotope({
-                    itemSelector: '.rcno-isotope-grid-item',
-                    layoutMode: 'masonry'
-                });
-            });
-			var select = $( '.rcno-isotope-grid-select' );
-			select.on( 'change', function() {
-				var filterValue = $( this ).val();
-				$grid.isotope( {filter: filterValue} );
-				select.not( $( this ) ).prop( 'selectedIndex', 0 );
-			} );
-			$('.rcno-isotope-grid-select.reset').on('click', function() {
-				$grid.isotope( {filter: '*'} );
-                select.each(function() {
-                    $(this).prop( 'selectedIndex', 0 );
-                });
-                $('.rcno-isotope-grid-search').val('');
-			});
+    if (window.Isotope === undefined || window.imagesLoaded === undefined) {
+      return console.log('IsotopeJS or imagesLoaded did not load properly.');
+    }
 
-            var $search = $('.rcno-isotope-grid-search').keyup( debounce( function() {
-                qsRegex = new RegExp( $search.val(), 'gi' );
-                $grid.isotope({
-                    filter: function () {
-                        return qsRegex ? $(this).context.className.match( qsRegex ) : true;
-                    }
-                });
-            }, 200 ) );
-		}
+    var qsRegex;
+    var $grid = $('.rcno-isotope-grid-container').imagesLoaded(function() {
+      // init Isotope after all images have loaded
+      $grid.isotope({
+        itemSelector: '.rcno-isotope-grid-item',
+        layoutMode: 'masonry',
+      });
+    });
 
-        // Debounce so filtering doesn't happen every millisecond
-        function debounce( fn, threshold ) {
-            var timeout;
-            threshold = threshold || 100;
-            return function debounced() {
-                clearTimeout( timeout );
-                var args = arguments;
-                var _this = this;
-                function delayed() {
-                    fn.apply( _this, args );
-                }
-                timeout = setTimeout( delayed, threshold );
-            };
+    var select = $('.rcno-isotope-grid-select');
+    select.on('change', function() {
+      var filterValue = $(this).val();
+      $grid.isotope({filter: filterValue});
+      select.not($(this)).prop('selectedIndex', 0);
+    });
+
+    $('.rcno-isotope-grid-select.reset').on('click', function() {
+      $grid.isotope({filter: '*'});
+      select.each(function() {
+        $(this).prop('selectedIndex', 0);
+      });
+      $('.rcno-isotope-grid-search').val('');
+    });
+
+    var $search = $('.rcno-isotope-grid-search').keyup(debounce(function() {
+      qsRegex = new RegExp($search.val(), 'gi');
+      $grid.isotope({
+        filter: function() {
+          return qsRegex ? $(this).context.className.match(qsRegex) : true;
+        },
+      });
+    }, 200));
+
+    // Debounce so filtering doesn't happen every millisecond
+    function debounce(fn, threshold) {
+      var timeout;
+      threshold = threshold || 100;
+      return function debounced() {
+        clearTimeout(timeout);
+        var args = arguments;
+        var _this = this;
+
+        function delayed() {
+          fn.apply(_this, args);
         }
-	});
+
+        timeout = setTimeout(delayed, threshold);
+      };
+    }
+  });
 
 })(jQuery);

@@ -353,6 +353,7 @@ class Rcno_Reviews {
 
 		// Removes the default behaviour of scrolling to the more tag.
 		$this->loader->add_filter( 'the_content_more_link', $plugin_public, 'rcno_reviews_remove_more_link_scroll' );
+		$this->loader->add_filter( 'post_class', $plugin_public, 'rcno_add_template_post_class' );
 	}
 
 	/**

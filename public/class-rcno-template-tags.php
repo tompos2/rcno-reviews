@@ -1846,8 +1846,7 @@ class Rcno_Template_Tags {
 			}
 		}
 		$classes[] = round( $this->get_the_rcno_admin_book_rating( $review_id, false ) );
-
-		$classes = apply_filters( 'rcno_review_html_classes', $classes );
+		$classes   = apply_filters( 'rcno_review_html_classes', $classes );
 
 		return array_unique( array_map( 'esc_attr', $classes ) );
 	}

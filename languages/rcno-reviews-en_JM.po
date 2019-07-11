@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2019-06-08 10:31-0500\n"
-"PO-Revision-Date: 2019-06-08 10:31-0500\n"
+"POT-Creation-Date: 2019-07-11 13:11-0500\n"
+"PO-Revision-Date: 2019-07-11 13:11-0500\n"
 "Last-Translator: w33zy <wzy@outlook.com>\n"
 "Language-Team: English (Jamaica)\n"
 "Language: en_JM\n"
@@ -1612,6 +1612,7 @@ msgstr "No title"
 
 #: includes/class-rcno-reviews-shortcodes.php:356
 #: includes/class-rcno-reviews-shortcodes.php:478
+#: public/templates/rcno_metamor/review.php:62
 msgid "Review"
 msgstr "Review"
 
@@ -1883,6 +1884,10 @@ msgstr "There are no terms in this taxonomy"
 #: public/templates/rcno_metamor/taxonomy.php:185
 msgid "Error: No taxonomy set for this list!"
 msgstr "Error: No taxonomy set for this list!"
+
+#: public/templates/rcno_metamor/review.php:55
+msgid "Summary"
+msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-grid.php:37
 msgid "Rcno Book Grid"

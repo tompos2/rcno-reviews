@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Book Reviews\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2019-06-08 10:31-0500\n"
-"PO-Revision-Date: 2019-06-08 10:31-0500\n"
+"POT-Creation-Date: 2019-07-11 13:12-0500\n"
+"PO-Revision-Date: 2019-07-11 13:12-0500\n"
 "Last-Translator: w33zy <wzy@outlook.com>\n"
 "Language-Team: Hungarian (Hungary)\n"
 "Language: hu_HU\n"
@@ -1641,6 +1641,7 @@ msgstr "Nincs cím"
 
 #: includes/class-rcno-reviews-shortcodes.php:356
 #: includes/class-rcno-reviews-shortcodes.php:478
+#: public/templates/rcno_metamor/review.php:62
 msgid "Review"
 msgstr "Könyvajánló"
 
@@ -1910,6 +1911,10 @@ msgstr "Ebben a taxonómiában nincsenek kifejezések."
 #: public/templates/rcno_metamor/taxonomy.php:185
 msgid "Error: No taxonomy set for this list!"
 msgstr "Hiba: Nincs erre a listára beállított taxonómia!"
+
+#: public/templates/rcno_metamor/review.php:55
+msgid "Summary"
+msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-grid.php:37
 msgid "Rcno Book Grid"

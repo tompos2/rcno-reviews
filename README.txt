@@ -83,6 +83,12 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.33.0 =
+* Fixed an issue with wrong book cover size being returned by 3rd party API.
+* Fixed a potential issue where migrating a site running Recencio would cause PHP warnings.
+* Add current review template's name to the WP class for easier debugging.
+* Added the new "Metamor" book review template (WIP).
+
 = 1.32.0 =
 * Fixed an issue where truncated strings had an � character in languages with multi-byte characters
 * Added "width" and "height" parameters to the sortable grid shortcode i.e., `[rcno-sortable-grid width=80 height=115]`

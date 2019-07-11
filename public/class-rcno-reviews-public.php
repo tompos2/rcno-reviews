@@ -589,4 +589,22 @@ class Rcno_Reviews_Public {
 		return preg_replace( '|#more-[0-9]+|', '', $link );
 	}
 
+	/**
+	 * Adds the current review template to the post HTML class
+	 *
+	 * @since 1.32.0
+	 *
+	 * @param string[] $classes An array of body class names.
+	 *
+	 * @return string[]
+	 */
+	public function rcno_add_template_post_class( $classes  ) {
+
+		if ( is_singular( 'rcno_review' ) ) {
+			$classes[] = Rcno_Reviews_Option::get_option( 'rcno_review_template' ) . '_template';
+			return $classes;
+		}
+		return $classes;
+	}
+
 }
