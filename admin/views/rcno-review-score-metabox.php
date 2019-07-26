@@ -34,7 +34,7 @@ wp_nonce_field( 'rcno_repeatable_meta_box_nonce', 'rcno_repeatable_meta_box_nonc
 	<div class="review-score-options" style="width:25%; display:inline-block">
 		<div class="review-score-rating-enable">
 			<label for="rcno_review_score_enable"><?php _e( 'Enable Rating Box', 'rcno-reviews' ); ?></label>
-			<input type="hidden" id="rcno_review_score_enable" name="rcno_review_score_enable" value="0">
+			<input type="hidden" name="rcno_review_score_enable" value="0">
 			<!-- The need for this is weird -->
 			<input type="checkbox" id="rcno_review_score_enable" name="rcno_review_score_enable"
 				value="1" <?php checked( $review_score_enable, '1', true ); ?>>
