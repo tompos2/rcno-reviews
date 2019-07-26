@@ -345,8 +345,8 @@ class Rcno_Template_Tags {
 		$book_alt   = ! empty( $review['rcno_reviews_book_cover_alt'][0] ) ?
 			$review['rcno_reviews_book_cover_alt'][0] : $book_title;
 
-		$book_title = $book_title ? esc_attr( $book_title ) : __( 'No Cover Available', 'rcno-reviews' );
-		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no cover is available for this book', 'rcno-reviews' );
+		$book_title = $book_title ? esc_attr( $book_title ) : __( 'Book Title Unavailable', 'rcno-reviews' );
+		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no title has been provided for this book', 'rcno-reviews' );
 
 		$out = '';
 		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ) ) . '" ';
@@ -1248,7 +1248,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return string
 	 */
-	private function rcno_calc_review_score( $num, $type, $stars = false ) {
+	public function rcno_calc_review_score( $num, $type, $stars = false ) {
 
 		$color = Rcno_Reviews_Option::get_option( 'rcno_show_review_score_box_accent_2', '#ffd700' );
 
@@ -1299,7 +1299,7 @@ class Rcno_Template_Tags {
 				break;
 
 			case 'number';
-				$output = $num;
+				$output = number_format( $num, 1 );
 				break;
 		}
 
