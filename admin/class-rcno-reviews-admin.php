@@ -309,6 +309,7 @@ class Rcno_Reviews_Admin {
 			'author',
 			'comments',
 			'revisions',
+			'publicize'
 		);
 
 		$opts['taxonomies'] = Rcno_Reviews_Option::get_option( 'rcno_enable_builtin_taxonomy' ) ? array(
