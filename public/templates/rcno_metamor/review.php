@@ -39,12 +39,22 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 	<div class="rcno-book-meta">
 		<?php
 			$template->the_rcno_book_meta( $review_id, 'rcno_book_title', 'h2', false );
-			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_author', false, '', true );
+			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_author' );
 		?>
 		<div>
 			<?php
-				$template->the_rcno_taxonomy_terms( $review_id, 'rcno_series', false, '', true );
+				$template->the_rcno_taxonomy_terms( $review_id, 'rcno_series' );
 				$template->the_rcno_book_meta( $review_id, 'rcno_book_series_number', 'div', false );
+			?>
+		</div>
+		<div>
+			<?php
+			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' );
+			?>
+		</div>
+		<div>
+			<?php
+			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_genre' );
 			?>
 		</div>
 		<?php
