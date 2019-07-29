@@ -17,7 +17,7 @@
 }
 
 .rcno-metamor-template .rcno-book-meta {
-    text-align: center;
+    text-align: center !important;
 }
 
 .rcno-metamor-template .rcno-book-meta div {
@@ -258,4 +258,102 @@ ul.rcno-taxlist li {
         margin-right: 0;
     }
 
+}
+
+#rcno-score-box {
+    padding: 10px;
+    border-radius: 4px;
+    position: relative;
+    width: 100%;
+}
+
+#rcno-score-box .review-summary {
+    width: 120px;
+    display: inline-block;
+    border-radius: 3px;
+    margin: 0 10px 0 0;
+}
+
+#rcno-score-box .review-summary .overall-score, .rcno-review-badge {
+    width: 120px;
+    height: 120px;
+    background: green;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    border-radius: 3px;
+}
+
+#rcno-score-box .review-summary .overall-score .overall, .rcno-review-badge .score {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    padding: 10px;
+}
+
+#rcno-score-box span.badge-star {
+    color: #FFC107;
+}
+
+#rcno-score-box .review-summary .overall-score .overall-text {
+    color: #fff;
+    font-size: 13px;
+    display: block;
+    line-height: 1;
+    bottom: 0;
+    text-transform: uppercase;
+    position: absolute;
+    padding: 10px 7px;
+    background: black;
+    left: 0;
+    width: 100%;
+}
+
+#rcno-score-box ul {
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+    clear: right;
+    width: calc(100% - 130px);
+    display: inline-block;
+    float: right;
+}
+
+#rcno-score-box ul li .rcno-score-bar-container {
+    height: 25px;
+    background: #ccc;
+    overflow: hidden;
+    margin: 0 0 0.6em 0;
+    position: relative;
+    border-radius: 3px;
+}
+
+#rcno-score-box ul li .review-score-bar {
+    background: green;
+}
+
+#rcno-score-box ul li .review-score-bar span.score-bar {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 25px;
+    padding: 0 0 0 10px;
+    text-transform: uppercase;
+}
+
+#rcno-score-box ul li .rcno-score-bar-container span.right {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    z-index: 9999;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+
+#rcno-score-box span.badge-star {
+    color: #FFC107;
 }

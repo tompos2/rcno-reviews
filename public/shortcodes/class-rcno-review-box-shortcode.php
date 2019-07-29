@@ -123,7 +123,7 @@ class Rcno_Review_Box_Shortcode {
 		$this->help_text .= '</ul>';
 
 		$this->help_text .= '<p>';
-		$this->help_text .= __( 'Examples of the review box shortcode:', 'rcno-reviews' );
+		$this->help_text .= __( 'Examples of the review box shortcode', 'rcno-reviews' ) . ':';
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';

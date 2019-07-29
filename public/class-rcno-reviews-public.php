@@ -409,10 +409,11 @@ class Rcno_Reviews_Public {
 	 *
 	 * @param string $taxonomy The custom taxonomy the list is being generated for.
 	 * @param bool   $headers  Whether or not to show a first letter navigation header before each item.
+	 * @param bool   $count    Whether or not to show the taxonomy item count.
 	 *
 	 * @return string $content
 	 */
-	public function rcno_render_taxlist( $taxonomy, $headers = false ) {
+	public function rcno_render_taxlist( $taxonomy, $headers = false, $count ) {
 
 		// Create empty output variable.
 		$output = '';

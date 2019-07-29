@@ -43,22 +43,19 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 		?>
 		<div>
 			<?php
-				$template->the_rcno_taxonomy_terms( $review_id, 'rcno_series' );
-				$template->the_rcno_book_meta( $review_id, 'rcno_book_series_number', 'div', false );
+			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_series' );
+			$template->the_rcno_book_meta( $review_id, 'rcno_book_series_number', '', false );
 			?>
 		</div>
-		<div>
-			<?php
-			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' );
-			?>
-		</div>
-		<div>
-			<?php
-			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_genre' );
-			?>
-		</div>
+
 		<?php
-			$template->the_rcno_admin_book_rating( $review_id, true );
+			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' );
+		?>
+		<?php
+			$template->the_rcno_taxonomy_terms( $review_id, 'rcno_genre' );
+		?>
+		<?php
+			$template->the_rcno_admin_book_rating( $review_id );
 		?>
 	</div>
 	<div class="rcno-book-synopsis">

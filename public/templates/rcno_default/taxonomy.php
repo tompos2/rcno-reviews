@@ -136,6 +136,7 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 			$out .= '<div class="rcno-tax-name">';
 			$out .= '<a href="' . get_term_link( $value['ID'] ) . '">';
 			$out .= $title;
+			$out .= $count ? '<span class="rcno-tax-count"> (' . count( $review_data ) . ')</span>' : '';
 			$out .= '</a>';
 
 			$out .= '<div class="' . ( empty( $book_covers ) ? 'titles-container' : 'books-container' ) . '">';

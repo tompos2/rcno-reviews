@@ -83,6 +83,12 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.34.0 =
+* Added a new layout for the "Review Score Box" feature.
+* Added a new parameter `count` for the `[rcno-tax-list]` shortcode.
+* Added support for Jetpack's "publicize" feature.
+* Fixed some display issues with the new review template.
+
 = 1.33.0 =
 * Fixed an issue with wrong book cover size being returned by 3rd party API.
 * Fixed a potential issue where migrating a site running Recencio would cause PHP warnings.

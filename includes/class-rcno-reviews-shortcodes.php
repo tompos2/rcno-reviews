@@ -22,6 +22,7 @@
 
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-book-list-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-review-box-shortcode.php';
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-score-box-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-purchase-links-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-isotope-grid-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-grid-shortcode.php';
@@ -56,13 +57,22 @@ class Rcno_Reviews_Shortcodes {
 	public $book_list;
 
 	/**
-	 * The object contain the book list shortcode object.
+	 * The object contain the book review box shortcode object.
 	 *
 	 * @since    1.8.0
 	 * @access   public
 	 * @var      Rcno_Review_Box_Shortcode $review_box The class instance.
 	 */
 	public $review_box;
+
+	/**
+	 * The object contain the review score shortcode object.
+	 *
+	 * @since    1.34.0
+	 * @access   public
+	 * @var      Rcno_Score_Box_Shortcode $score_box The class instance.
+	 */
+	public $score_box;
 
 	/**
 	 * The object contain the purchase links shortcode object.
@@ -105,6 +115,7 @@ class Rcno_Reviews_Shortcodes {
 
 		$this->book_list      = new Rcno_Book_List_Shortcode( $plugin_name, $version );
 		$this->review_box     = new Rcno_Review_Box_Shortcode( $plugin_name, $version );
+		$this->score_box      = new Rcno_Score_Box_Shortcode( $plugin_name, $version );
 		$this->purchase_links = new Rcno_Purchase_Links_Shortcode( $plugin_name, $version );
 		$this->isotope_grid   = new Rcno_Isotope_Grid_Shortcode( $plugin_name, $version );
 		$this->masonry_grid   = new Rcno_Grid_Shortcode( $plugin_name, $version );
@@ -206,12 +217,13 @@ class Rcno_Reviews_Shortcodes {
 			array(
 				'headers' => 1,
 				'tax'     => 'n/a',
+				'count'   => 0,
 			),
 			$options
 		);
 
 		// The actual rendering is done by a special function.
-		$output = $plugin_public->rcno_render_taxlist( $options['tax'], $options['headers'] );
+		$output = $plugin_public->rcno_render_taxlist( $options['tax'], $options['headers'], $options['count'] );
 
 		return do_shortcode( $output );
 	}
@@ -498,6 +510,7 @@ class Rcno_Reviews_Shortcodes {
 		$help_text  = '<h3>' . __( 'Shortcodes Help', 'rcno-reviews' ) . '</h3>';
 		$help_text .= $this->book_list->rcno_get_help_text();
 		$help_text .= $this->review_box->rcno_get_help_text();
+		$help_text .= $this->score_box->rcno_get_help_text();
 		$help_text .= $this->purchase_links->rcno_get_help_text();
 
 		if ( null !== $screen ) {
