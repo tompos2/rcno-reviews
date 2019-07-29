@@ -83,6 +83,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.34.1 =
+* Patched a missing class method accessor.
+
 = 1.34.0 =
 * Added a new layout for the "Review Score Box" feature.
 * Added a new parameter `count` for the `[rcno-tax-list]` shortcode.
