@@ -127,8 +127,8 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 				</div>
 
-				<?php
-			}		}
+				<?php }
+		}
 
 		wp_reset_postdata();
 

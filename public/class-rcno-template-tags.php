@@ -261,7 +261,7 @@ class Rcno_Template_Tags {
 
 		$output     = '';
 		$review     = get_post_custom( $review_id );
-		$rating     = '' !== $review['rcno_admin_rating'][0] ? $review['rcno_admin_rating'][0] : 0;
+		$rating     = ( isset( $review['rcno_admin_rating'] ) && '' !== $review['rcno_admin_rating'][0] ) ? $review['rcno_admin_rating'][0] : 0;
 		$background = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
 
 		if ( false === $display) {

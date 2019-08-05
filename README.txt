@@ -1,7 +1,7 @@
 === Recencio Book Reviews ===
 Contributors: w33zy
 Donate link: https://paypal.me/wzymedia
-Tags: book reviews, reviews, book library, book ratings, 5 star rating, book critique
+Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
 Tested up to: 5.2
