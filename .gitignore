@@ -4,3 +4,4 @@
 node_modules/
 dist/
 *.psd
+/extensions/rcno-import-export/
