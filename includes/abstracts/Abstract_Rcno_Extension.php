@@ -63,6 +63,9 @@ abstract class Abstract_Rcno_Extension {
 	 * @return void
 	 */
 	public function buttons( $extension ) {
+
+		$extension = (array) $extension; // There is an edge case where this is an object; we need an array.
+
 		if ( ! isset( $extension[ $this->id ] ) ) { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
                     class="button button-primary button-extension-activate">

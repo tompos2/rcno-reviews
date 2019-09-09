@@ -83,6 +83,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.34.2 =
+* Patched a bug where installed extensions are sent as an object instead of array.
+
 = 1.34.1 =
 * Patched a missing class method accessor.
 

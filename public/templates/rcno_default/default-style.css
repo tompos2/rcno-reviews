@@ -322,10 +322,9 @@ ul.rcno-taxlist li {
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    z-index: 9999;
     position: absolute;
     right: 10px;
-    top: 0px;
+    top: 0;
 }
 
 #rcno-score-box span.badge-star {
