@@ -26,6 +26,7 @@ include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-score-box-shortcode.php
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-purchase-links-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-isotope-grid-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-grid-shortcode.php';
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-book-listing-shortcode.php';
 
 class Rcno_Reviews_Shortcodes {
 
@@ -102,6 +103,15 @@ class Rcno_Reviews_Shortcodes {
 	public $masonry_grid;
 
 	/**
+	 * The object contain the purchase links shortcode object.
+	 *
+	 * @since    1.12.0
+	 * @access   public
+	 * @var      Rcno_Book_Listing_Shortcode $book_listing The class instance.
+	 */
+	public $book_listing;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
@@ -119,6 +129,12 @@ class Rcno_Reviews_Shortcodes {
 		$this->purchase_links = new Rcno_Purchase_Links_Shortcode( $plugin_name, $version );
 		$this->isotope_grid   = new Rcno_Isotope_Grid_Shortcode( $plugin_name, $version );
 		$this->masonry_grid   = new Rcno_Grid_Shortcode( $plugin_name, $version );
+		$this->book_listing   = new Rcno_Book_Listing_Shortcode( $plugin_name, $version );
+	}
+
+	public function register_shortcode_styles() {
+
+		$this->book_listing->register_styles();
 	}
 
 	/**
@@ -512,13 +528,9 @@ class Rcno_Reviews_Shortcodes {
 		$help_text .= $this->review_box->rcno_get_help_text();
 		$help_text .= $this->score_box->rcno_get_help_text();
 		$help_text .= $this->purchase_links->rcno_get_help_text();
+		$help_text .= $this->book_listing->rcno_get_help_text();
 
 		if ( null !== $screen ) {
-
-			// Return early if we're not on a book review edit screen.
-			if ( 'rcno_review' !== $screen->post_type ) {
-				return;
-			}
 
 			// Setup help tab args.
 			$args = array(

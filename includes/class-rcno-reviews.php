@@ -492,6 +492,7 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-purchase-links', array( $plugin_shortcodes->purchase_links, 'rcno_do_purchase_links_shortcode' ) );
 		add_shortcode( 'rcno-sortable-grid', array( $plugin_shortcodes->isotope_grid, 'rcno_do_isotope_grid_shortcode' ) );
 		add_shortcode( 'rcno-reviews-grid', array( $plugin_shortcodes->masonry_grid, 'do_masonry_grid_shortcode' ) );
+		add_shortcode( 'rcno-book-listing', array( $plugin_shortcodes->book_listing, 'rcno_do_book_catalogue_shortcode' ) );
 
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
@@ -501,6 +502,8 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_button_scl' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
+
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_shortcodes, 'register_shortcode_styles' );
 	}
 
 	/**

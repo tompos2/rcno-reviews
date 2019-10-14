@@ -83,6 +83,10 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.35.0 =
+* Added filter to book metadata items to allow renaming them via code.
+* Added a new `[rcno-book-listing ids='']` shortcode .
+
 = 1.34.2 =
 * Patched a bug where installed extensions are sent as an object instead of array.
 

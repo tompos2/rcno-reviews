@@ -79,22 +79,20 @@ class Rcno_Template_Tags {
 		$this->version     = $version;
 
 		$this->meta_keys = array(
-			'rcno_book_illustrator'   => __( 'Illustrator', 'rcno-reviews' ),
-			'rcno_book_pub_date'      => __( 'Published', 'rcno-reviews' ),
-			'rcno_book_pub_format'    => __( 'Format', 'rcno-reviews' ),
-			'rcno_book_pub_edition'   => __( 'Edition', 'rcno-reviews' ),
-			'rcno_book_page_count'    => __( 'Page Count', 'rcno-reviews' ),
-			'rcno_book_series_number' => __( 'Series Number', 'rcno-reviews' ),
-			'rcno_book_gr_review'     => __( 'Goodreads Rating', 'rcno-reviews' ),
-			'rcno_book_gr_id'         => __( 'Goodreads ID', 'rcno-reviews' ),
-			'rcno_book_isbn13'        => __( 'ISBN13', 'rcno-reviews' ),
-			'rcno_book_isbn'          => __( 'ISBN', 'rcno-reviews' ),
-			'rcno_book_asin'          => __( 'ASIN', 'rcno-reviews' ),
-			'rcno_book_gr_url'        => __( 'Book URL', 'rcno-reviews' ),
-			'rcno_book_title'         => __( 'Title', 'rcno-reviews' ),
+			'rcno_book_illustrator'   => apply_filters( 'rcno_book_illustrator', __( 'Illustrator', 'rcno-reviews' ) ),
+			'rcno_book_pub_date'      => apply_filters( 'rcno_book_pub_date', __( 'Published', 'rcno-reviews' ) ),
+			'rcno_book_pub_format'    => apply_filters( 'rcno_book_pub_format', __( 'Format', 'rcno-reviews' ) ),
+			'rcno_book_pub_edition'   => apply_filters( 'rcno_book_pub_edition', __( 'Edition', 'rcno-reviews' ) ),
+			'rcno_book_page_count'    => apply_filters( 'rcno_book_page_count', __( 'Page Count', 'rcno-reviews' ) ),
+			'rcno_book_series_number' => apply_filters( 'rcno_book_series_number', __( 'Series Number', 'rcno-reviews' ) ),
+			'rcno_book_gr_review'     => apply_filters( 'rcno_book_gr_review', __( 'Goodreads Rating', 'rcno-reviews' ) ),
+			'rcno_book_gr_id'         => apply_filters( 'rcno_book_gr_id', __( 'Goodreads ID', 'rcno-reviews' ) ),
+			'rcno_book_isbn13'        => apply_filters( 'rcno_book_isbn13', __( 'ISBN13', 'rcno-reviews' ) ),
+			'rcno_book_isbn'          => apply_filters( 'rcno_book_isbn', __( 'ISBN', 'rcno-reviews' ) ),
+			'rcno_book_asin'          => apply_filters( 'rcno_book_asin', __( 'ASIN', 'rcno-reviews' ) ),
+			'rcno_book_gr_url'        => apply_filters( 'rcno_book_gr_url', __( 'Book URL', 'rcno-reviews' ) ),
+			'rcno_book_title'         => apply_filters( 'rcno_book_title', __( 'Title', 'rcno-reviews' ) ),
 		);
-
-		//$this->private_rating = number_format( array_sum( $priv_score ) / count( $priv_score ), 1 )
 	}
 
 
@@ -261,7 +259,7 @@ class Rcno_Template_Tags {
 
 		$output     = '';
 		$review     = get_post_custom( $review_id );
-		$rating     = ( isset( $review['rcno_admin_rating'] ) && '' !== $review['rcno_admin_rating'][0] ) ? $review['rcno_admin_rating'][0] : 0;
+		$rating     = isset( $review['rcno_admin_rating'] ) ? (int) $review['rcno_admin_rating'][0] : 0;
 		$background = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
 
 		if ( false === $display) {
