@@ -19,14 +19,14 @@ The plugin even provides book reviewers the opportunity of earning residual inco
 
 This plugin adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
 Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. As creating new book taxonomies is easy it’s up to
-you which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
+you, which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
 the custom widgets to create tag clouds or top ten lists.
 
-Of course you can use all the WordPress goodies you know from posts on book reviews as well: images, videos and comments.
-Despite it’s simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t
+Of course, you can use all the WordPress goodies you know from posts on book reviews as well: images, videos and comments.
+Despite its simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t
 need can be deactivated and are hidden from the UI. You can even create your own book review template files to gain complete control the look and feel of book reviews.
 
-And, all of the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
+And, all the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
 
 = Features =
 
@@ -34,7 +34,7 @@ And, all of the above is SEO friendly by way of validated JSON-LD metadata for t
 * 100% WordPress theme compatibility
 * automatically fetch book details via its ISBN, or enter manually
 * custom backend to enter book reviews fast
-* your choice of a 5 star rating or a criteria-based scoring system
+* your choice of a 5-star rating. or a criteria-based scoring system
 * builtin book taxonomies such as, Author, Genre, Series and Publisher come predefined, but you can create whatever taxonomy you like.
 * use default post categories and tags on book reviews as well, or disable them if you want to
 * access reviews by alphabetical indices of review title or taxonomy entries such as book author or book publisher
@@ -51,6 +51,10 @@ And, all of the above is SEO friendly by way of validated JSON-LD metadata for t
 * translation ready
 * GDPR compliant
 * RTL support
+
+== Demo ==
+
+[Recencio.com](https://recencio.com/)
 
 == Installation ==
 
@@ -83,12 +87,16 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.36.0 =
+* Prevent displaying a review shortcode inside a review post type.
+* Fixed an issue with the display of half-star reviews.
+
 = 1.35.0 =
 * Added filter to book metadata items to allow renaming them via code.
 * Added a new `[rcno-book-listing ids='']` shortcode .
 
 = 1.34.2 =
-* Patched a bug where installed extensions are sent as an object instead of array.
+* Patched a bug where installed extensions are being sent as an object instead of array.
 
 = 1.34.1 =
 * Patched a missing class method accessor.

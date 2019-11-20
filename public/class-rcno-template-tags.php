@@ -259,7 +259,7 @@ class Rcno_Template_Tags {
 
 		$output     = '';
 		$review     = get_post_custom( $review_id );
-		$rating     = isset( $review['rcno_admin_rating'] ) ? (int) $review['rcno_admin_rating'][0] : 0;
+		$rating     = isset( $review['rcno_admin_rating'] ) ? $review['rcno_admin_rating'][0] : 0;
 		$background = Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' );
 
 		if ( false === $display) {
@@ -270,8 +270,8 @@ class Rcno_Template_Tags {
 			$output .= '<div class="rcno-admin-rating" style="background: ' . $background . '">';
 			$output .= '<div class="stars rating-' . $review_id . '" ';
 			$output .= 'data-review-id="' . $review_id . '" ';
-			$output .= 'data-review-rating="' . $rating . '" ';
-			$output .= 'title="' . $rating . ' ' . __( 'out of 5 stars', 'rcno-reviews' ) . '">';
+			$output .= 'data-review-rating="' . esc_attr( $rating ) . '" ';
+			$output .= 'title="' . esc_attr( $rating ) . ' ' . __( 'out of 5 stars', 'rcno-reviews' ) . '">';
 			$output .= '</div>';
 			$output .= '</div>';
 		}
@@ -306,7 +306,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int    $review_id		The current review's post ID.
 	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
-	 * @param bool   $wrapper	Whether to wrap the image URL in the 'img' HTML tag.
+	 * @param bool   $wrapper	Whether to add the image URL to an '<img />' HTML tag.
 	 * @param bool   $original	Whether to use the original uploaded image.
 	 *
 	 * @return bool|string
@@ -632,7 +632,7 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_book_description( $review_id, $word_count = 75, $strip_tags = true ) {
 
 		$review = get_post_custom( $review_id );
-		$book_description = $review['rcno_book_description'][0];
+		$book_description = isset( $review['rcno_book_description'] ) ? $review['rcno_book_description'][0] : '';
 		if ( apply_filters( 'rcno_book_description_strip_tags', $strip_tags ) ) {
 			$book_description = wp_trim_words( $book_description, apply_filters( 'rcno_book_description_word_count', $word_count ) );
 		}
@@ -681,9 +681,10 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_review_excerpt( $review_id, $length = 200 ) {
 
-		setup_postdata( $review_id ); // See note by Mikko Saari.
+		// setup_postdata( $review_id ); // See note by Mikko Saari.
 
-		$excerpt = get_the_excerpt( $review_id );
+		$review = get_post( $review_id );
+		$excerpt = $review->post_excerpt ?: wp_strip_all_tags( strip_shortcodes( $review->post_content ) );
 		$length ++;
 
 		if ( mb_strlen( $excerpt ) > $length ) {
@@ -1495,6 +1496,9 @@ class Rcno_Template_Tags {
 
 		if ( $review_scores ) {
 			foreach ( (array) $review_scores as $score ) {
+				if ( '' === $score['score'] ) {
+					continue;
+				}
 				$scores[] = $score['score'];
 			}
 		}

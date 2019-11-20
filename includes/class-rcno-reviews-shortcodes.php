@@ -150,6 +150,10 @@ class Rcno_Reviews_Shortcodes {
 
 		$plugin_public = new Rcno_Reviews_Public( $this->plugin_name, $this->version );
 
+		if ( 'rcno_review' === get_post_type() ) {
+			return '<p style="background-color: red; color: white; font-weight: 600; text-align: center;">Unable to display a review shortcode inside a review post</p>';
+		}
+
 		/**
 		 * Set default values for options not set explicitly.
 		 */
