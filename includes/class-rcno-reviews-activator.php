@@ -31,9 +31,16 @@ class Rcno_Reviews_Activator {
 	 */
 	public static function activate() {
 
+		( new Rcno_Reviews_Admin( RCNO_PLUGIN_NAME, RCNO_PLUGIN_VER ) )->rcno_review_post_type();
+
 		flush_rewrite_rules();
 	}
 
+	/**
+	 * Sets the plugins default options.
+	 *
+	 * @return bool
+	 */
 	public static function setup_rcno_settings() {
 		$settings_version = get_option( 'rcno_reviews_settings', null );
 

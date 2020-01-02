@@ -10,7 +10,7 @@
 .owl-carousel{
     display:none;
     width:100%;
-    z-index:1
+    z-index:1;
 }
 .owl-carousel .owl-stage{
     position:relative;
@@ -52,7 +52,7 @@
     display:none
 }
 .no-js .owl-carousel,.owl-carousel.owl-loaded{
-    display:block
+    display:block;
 }
 .owl-carousel .owl-dot,.owl-carousel .owl-nav .owl-next,.owl-carousel .owl-nav .owl-prev{
     cursor:pointer;

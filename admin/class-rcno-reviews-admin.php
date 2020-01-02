@@ -821,7 +821,9 @@ class Rcno_Reviews_Admin {
 			return $clauses;
 		}
 
-		if ( isset( $wp_query->query['orderby'] ) && preg_match( '/taxonomy-rcno_/', $wp_query->query['orderby'] ) ) {
+		if ( isset( $wp_query->query['orderby'] )
+			 && is_string( $wp_query->query['orderby'])
+			 && false !== strpos( $wp_query->query['orderby'], 'taxonomy-rcno_' ) ) {
 			$taxonomy = str_replace( 'taxonomy-', '', $wp_query->query['orderby'] );
 
 			$clauses['join']    .= <<<SQL
@@ -893,7 +895,7 @@ SQL;
 						'orderby'         => 'name',
 						'selected'        => $selected,
 						'show_count'      => true,
-						'hide_empty'      => true,
+						'hide_if_empty'   => true,
 					) );
 				}
 

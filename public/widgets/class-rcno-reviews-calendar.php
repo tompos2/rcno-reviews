@@ -71,9 +71,8 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		$title            = $instance['title'];
-		$posttype_enabled = $instance['posttype_enabled'];
-		//$posttype         = $instance['posttype'];
+		$title            = isset( $instance['title'] ) ? $instance['title'] : '';
+		$posttype_enabled = isset( $instance['posttype_enabled'] ) ? $instance['posttype_enabled'] : '';
 
 		echo $args['before_widget'];
 
@@ -413,7 +412,7 @@ function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $re
 }
 
 function ucc_get_calendar_filter( $content ) {
-	return ucc_get_calendar( '', '', false );
+	return ucc_get_calendar( array(), '', false );
 }
 
 add_filter( 'get_calendar', 'ucc_get_calendar_filter', 10, 2 );

@@ -230,7 +230,9 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 
 		<?php else : ?>
 
-			<p><?php echo sanitize_text_field( $instance['no_currently_reading'] ); ?></p>
+			<?php if ( isset( $instance['no_currently_reading'] ) ) : ?>
+				<p><?php echo sanitize_text_field( $instance['no_currently_reading'] ); ?></p>
+			<?php endif; ?>
 
 		<?php endif; ?>
 
