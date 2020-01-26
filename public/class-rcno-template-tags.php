@@ -788,7 +788,7 @@ class Rcno_Template_Tags {
 		$review_content = '';
 		$review_content .= '<div class="rcno-book-review-content">';
 
-		// We need to check this or we'll get an infinite loop with embedded reviews.
+		// We need to check this, or we'll get an infinite loop with embedded reviews.
 		if ( $this->is_review_embedded() ) {
 			$review_content .= wpautop( get_post_field( 'post_content', $review_id ) );
 		} else {
@@ -1530,6 +1530,7 @@ class Rcno_Template_Tags {
 		$book_edtn       = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ) );
 		$book_pc         = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false ) );
 		$book_ext_url    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false ) );
+		$thumbnail    = $this->get_the_rcno_book_cover( $review_id, 'full', false, false );
 
 		$book_aut_url = '';
 		$author_terms = get_the_terms( $review_id, 'rcno_author' );
@@ -1562,6 +1563,8 @@ class Rcno_Template_Tags {
 				'numberOfPages' => (int) $book_pc,
 		);
 
+		$data['thumbnailUrl'] = $thumbnail;
+
 		$data = apply_filters( 'rcno_book_schema_data_filter', $data );
 
 		return wp_json_encode( $data );
@@ -1574,7 +1577,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int $review_id	The post ID of the current review.
 	 *
-	 * @return false
+	 * @return false|void
 	 */
 	public function the_rcno_book_schema_data( $review_id ) {
 
@@ -1611,6 +1614,7 @@ class Rcno_Template_Tags {
 		$book_name    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) );
 		$book_isbn    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) );
 		$book_author  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) );
+		$thumbnail    = $this->get_the_rcno_book_cover( $review_id, 'full', false, false );
 
 		$book_aut_url = '';
 		$author_terms = get_the_terms( $review_id, 'rcno_author' );
@@ -1680,6 +1684,8 @@ class Rcno_Template_Tags {
 				'ratingValue' => $admin_rating < 1 ? 1 : $admin_rating,
 			);
 		}
+
+		$data['thumbnailUrl'] = $thumbnail;
 
 		$data = apply_filters( 'rcno_review_schema_data_filter', $data );
 

@@ -1,3 +1,7 @@
+#rcno-review-score-box * {
+    box-sizing: border-box;
+}
+
 .rcno-full-book-description::-webkit-scrollbar {
     width: .5em;
 }
@@ -240,6 +244,7 @@ ul.rcno-taxlist li {
     border-radius: 4px;
     position: relative;
     width: 100%;
+    box-sizing: border-box;
 }
 
 #rcno-score-box .review-summary {
@@ -259,6 +264,7 @@ ul.rcno-taxlist li {
     position: relative;
     border-radius: 3px;
     overflow: hidden;
+    /* margin: 0 1em 0 0; */
 }
 
 #rcno-score-box .review-summary .overall-score .overall, .rcno-review-badge .score {

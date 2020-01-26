@@ -127,11 +127,13 @@ class Rcno_Currently_Reading {
 			return;
 		}
 
-		wp_add_dashboard_widget(
-			$this->widget_id,
-			__( 'Currently Reading', 'rcno-reviews' ),
-			array( $this, 'rcno_currently_reading_dashboard_widget' )
-		);
+		if ( current_user_can( 'manage_options' ) ) {
+			wp_add_dashboard_widget(
+				$this->widget_id,
+				__( 'Currently Reading', 'rcno-reviews' ),
+				array( $this, 'rcno_currently_reading_dashboard_widget' )
+			);
+		}
 	}
 
 	/**

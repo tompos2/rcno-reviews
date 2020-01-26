@@ -10,7 +10,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Recencio Book Reviews is a powerful and very flexible tool for managing your blog’s book review collection.
-It was designed with the book reviewer in mind and was built to be fast, easy and customizable.
+It was designed with the book reviewer in mind and built to be fast, easy and customizable.
 
 == Description ==
 
@@ -86,6 +86,10 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.38.0 =
+* Remove 'Currently Reading' widget for non-admin users.
+* Added the 'thumbnailUrl' property to the JSON-LD output.
 
 = 1.37.0 =
 * Finally fixed an issue with not correctly flushing rewrite rules on plugin activation.
