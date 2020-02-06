@@ -34,6 +34,7 @@ And, all the above is SEO friendly by way of validated JSON-LD metadata for the 
 * 100% WordPress theme compatibility
 * automatically fetch book details via its ISBN, or enter manually
 * custom backend to enter book reviews fast
+* easily convert existing posts to reviews
 * your choice of a 5-star rating. or a criteria-based scoring system
 * builtin book taxonomies such as, Author, Genre, Series and Publisher come predefined, but you can create whatever taxonomy you like.
 * use default post categories and tags on book reviews as well, or disable them if you want to
@@ -86,6 +87,11 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.39.0 =
+* A new 'Convert Posts to Reviews' extension to do as its name says.
+* Updated the menu label for 'All Reviews'.
+* Changed 'Activate/Deactivate' on extensions page to 'Enable/Disable' to avoid confusion between WP plugins and Recencio extensions.
 
 = 1.38.0 =
 * Remove 'Currently Reading' widget for non-admin users.
@@ -254,15 +260,15 @@ Please open a new topic on the plugin's WordPress.org support page
 * Normalized the minimum rating a book can receive as per the Google Rich Snippets spec
 * Re-worked the book cover upload modal to only allow image upload or media gallery select
 * Settings page color picker now supports RGBA colors for transparency
-* Moved aggregate rating item to inside reviewed item schema
+* Moved aggregate rating item to inside the reviewed item schema
 * Added setting to disable the book or review JSON-LD schema markups from book reviews
 
 = 1.11.2 =
-* Fixed display bug in review calendar widget (an extra cell padding was being added to 1st week of March)
+* Fixed display bug in review calendar widget (an extra cell padding was added to 1st week of March)
 
 = 1.11.1 =
 * Fixed a debug issue with `flush_rewrite_rules`
-* Fixed a issue with fetch book data from remote API
+* Fixed an issue with fetch book data from remote API
 
 = 1.11.0 =
 * Users are now able to select and reorder the book metadata they want displayed on reviews

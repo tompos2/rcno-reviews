@@ -333,7 +333,7 @@ class Rcno_Reviews_Admin {
 
 		$opts['labels']['add_new']            = sprintf( __( 'New %1$s', 'rcno-reviews' ), $single );
 		$opts['labels']['add_new_item']       = sprintf( __( 'Add New %1$s', 'rcno-reviews' ), $single );
-		$opts['labels']['all_items']          = $plural;
+		$opts['labels']['all_items']          = sprintf( __( 'All %1$s', 'rcno-reviews' ), $plural );
 		$opts['labels']['edit_item']          = sprintf( __( 'Edit %1$s', 'rcno-reviews' ), $single );
 		$opts['labels']['menu_name']          = $plural;
 		$opts['labels']['name']               = $plural;

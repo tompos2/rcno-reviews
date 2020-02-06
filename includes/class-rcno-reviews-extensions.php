@@ -71,7 +71,7 @@ class Rcno_Reviews_Extensions {
 			if ( is_file( $file ) ) {
 				include $file;
 
-				// Break folder name into array on '-', uppercase 1st letter, then combine using '_'.
+				// Break folder name into an array on '-', uppercase 1st letter, then combine using '_'.
 				$class     = implode( '_', array_map( 'ucfirst', explode( '-', basename( $ext ) ) ) );
 				$extension = new $class();
 				add_filter( 'rcno_reviews_extensions', array( $extension, 'add_extension' ) );

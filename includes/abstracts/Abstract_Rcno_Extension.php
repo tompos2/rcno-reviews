@@ -69,7 +69,7 @@ abstract class Abstract_Rcno_Extension {
 		if ( ! isset( $extension[ $this->id ] ) ) { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
                     class="button button-primary button-extension-activate">
-                <?php _e( 'Activate', 'rcno-reviews' ); ?>
+                <?php _e( 'Enable', 'rcno-reviews' ); ?>
             </button>
 			<?php if ( $this->settings ) { ?>
                 <button type="button" data-extension="<?php echo $this->id; ?>"
@@ -82,7 +82,7 @@ abstract class Abstract_Rcno_Extension {
 		<?php } else { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
                     class="button button-default button-extension-deactivate">
-                <?php _e( 'Deactivate', 'rcno-reviews' ); ?>
+                <?php _e( 'Disable', 'rcno-reviews' ); ?>
             </button>
             <?php if ( $this->settings ) { ?>
                 <button type="button" data-extension="<?php echo $this->id; ?>"
