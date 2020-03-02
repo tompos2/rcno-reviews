@@ -258,7 +258,7 @@ class Rcno_Reviews_Public {
 			remove_filter( 'the_content', array( $this, 'rcno_get_review_content' ) );
 
 			$review_post          = get_post();
-			$review               = get_post_custom( $review_post->ID );
+			$review_meta          = get_post_custom( $review_post->ID );
 			$GLOBALS['review_id'] = $review_post->ID;
 			$archive_display      = Rcno_Reviews_Option::get_option( 'rcno_reviews_archive' );
 
@@ -529,14 +529,14 @@ class Rcno_Reviews_Public {
 		// Get the layout chosen.
 		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template' );
 
-		// Get global template from theme.
+		// Get the global template from the theme.
 		$include_path = get_stylesheet_directory() . '/rcno_templates/' . $layout . '/';
 
 		if ( is_dir( $include_path ) && file_exists( $include_path . 'review.php' ) ) {
 			return $include_path;
 		}
 
-		// Get local template from this plugin.
+		// Get the local template from this plugin.
 		$include_path = plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/';
 
 		return $include_path;

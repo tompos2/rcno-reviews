@@ -88,6 +88,11 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.40.0 =
+* Purchase links now show on reviews embedded in pages
+* Recencio related errors only shown on Recencio related pages and the WP dashboard
+* Fixed an issue with a missing reference to jQuery on the extension page
+
 = 1.39.0 =
 * A new 'Convert Posts to Reviews' extension to do as its name says.
 * Updated the menu label for 'All Reviews'.

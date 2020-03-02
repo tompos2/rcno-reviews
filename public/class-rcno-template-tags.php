@@ -949,7 +949,7 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_book_purchase_links( $review_id, $label = false ) {
 
 		// If we are on the homepage don't display this.
-		if ( ! is_single()  ) {
+		if ( ! is_singular( array( 'post', 'page', 'rcno_review' ) ) ) {
 			return false;
 		}
 

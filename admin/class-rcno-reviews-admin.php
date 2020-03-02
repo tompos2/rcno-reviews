@@ -160,9 +160,9 @@ class Rcno_Reviews_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since  1.0.0
 	 *
-	 * @uses     wp_enqueue_style()
+	 * @uses   wp_enqueue_style()
 	 * @return void
 	 */
 	public function enqueue_styles() {
@@ -471,8 +471,6 @@ class Rcno_Reviews_Admin {
 			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );
 
 			register_taxonomy( $tax_name, 'rcno_review', $opts );
-
-			//flush_rewrite_rules( false ); // @FIXME: For dev only.
 		}
 	}
 
@@ -541,7 +539,7 @@ class Rcno_Reviews_Admin {
 		$screen = get_current_screen();
 
 		// Return early if we're not on a book review edit screen.
-		if ( 'rcno_review' !== $screen->post_type ) {
+		if ( $screen && 'rcno_review' !== $screen->post_type ) {
 			return;
 		}
 
@@ -720,15 +718,18 @@ class Rcno_Reviews_Admin {
 	 * @return void
 	 */
 	public function rcno_admin_notice_handler() {
+		$screen = get_current_screen();
 
-		$errors = get_option( 'rcno_admin_errors' );
+		if ( $screen && ( 'rcno_review' === $screen->post_type || 'dashboard' === $screen->id ) ) {
+			$errors = get_option( 'rcno_admin_errors' );
 
-		if ( $errors ) {
-			echo '<div class="error"><p>' . esc_html( $errors ) . '</p></div>';
+			if ( $errors ) {
+				echo '<div class="error"><p>' . esc_html( $errors ) . '</p></div>';
+			}
+
+			// Reset the error option for the next error.
+			update_option( 'rcno_admin_errors', false );
 		}
-
-		// Reset the error option for the next error.
-		update_option( 'rcno_admin_errors', false );
 	}
 
 	/**
@@ -958,7 +959,7 @@ SQL;
 
 			$text = Rcno_Pluralize_Helper::pluralize_if( $published, $post_type->labels->singular_name );
 
-			if ( current_user_can( $post_type->cap->edit_posts ) ) {
+			if ( $post_type && current_user_can( $post_type->cap->edit_posts ) ) {
 				$items[] = sprintf( '<a class="%1$s-count" href="edit.php?post_type=%1$s">%2$s</a>', 'rcno_review', $text ) . "\n";
 			} else {
 				$items[] = sprintf( '<span class="%1$s-count">%2$s</span>', 'rcno_review', $text ) . "\n";
@@ -999,7 +1000,7 @@ SQL;
 			10 => __( 'Review draft updated.', 'rcno-reviews' ),
 		);
 
-		if ( $post_type_object->publicly_queryable && 'rcno_review' === $post_type ) {
+		if ( $post_type_object && $post_type_object->publicly_queryable && 'rcno_review' === $post_type ) {
 			$permalink = get_permalink( $review->ID );
 
 			$view_link                 = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View review', 'rcno-reviews' ) );
@@ -1205,7 +1206,7 @@ SQL;
 	}
 
 	/**
-	 * Adds the book review CPT to the rewrite rules for date archive.
+	 * Sends the current settings as a JSON array
 	 *
 	 * @since 1.9.0
 	 *
@@ -1240,7 +1241,7 @@ SQL;
 	}
 
 	/**
-	 * Adds the book review CPT to the rewrite rules for date archive.
+	 * Import plugin settings
 	 *
 	 * @since 1.9.0
 	 *
@@ -1466,6 +1467,17 @@ SQL;
 		return $erasers;
 	}
 
+	/**
+	 * Adds the `Recencio` page state to posts
+	 * containing our shortcodes
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array   $states
+	 * @param WP_Post $post
+	 *
+	 * @return mixed
+	 */
 	public function rcno_add_page_states( $states, $post ) {
 
 		$rcno_shortcodes = array(
@@ -1525,7 +1537,6 @@ SQL;
 
 		if ( is_wp_error( $data ) ) {
 			wp_send_json_error();
-			return;
 		}
 
 		wp_send_json_success( $data );

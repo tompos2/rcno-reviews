@@ -260,7 +260,7 @@ class Rcno_Reviews {
 		// Load the 'Book Description' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->description_meta, 'rcno_book_description_metabox' );
 
-		// Load the 'ISBN Number' metabox on the review post edit screen.
+		// Load the 'ISBN' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_isbn, 'rcno_book_isbn_metabox' );
 
 		// Load the 'Book Cover' metabox on the review post edit screen.
@@ -272,7 +272,7 @@ class Rcno_Reviews {
 		// Load the 'Review Score' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_review_score, 'rcno_book_review_score_metabox' );
 
-		// Load the '5 Star Rating' metabox on the review post edit screen.
+		// Load the '5-Star Rating' metabox on the review post edit screen.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->book_review_rating, 'rcno_book_review_rating_metabox' );
 
 		// Load the 'Purchase Links' metabox on the review post edit screen.
@@ -293,7 +293,7 @@ class Rcno_Reviews {
 		// Add messages on the book review editor screen.
 		$this->loader->add_filter( 'post_updated_messages', $plugin_admin, 'rcno_updated_review_messages' );
 
-		// Add the help tab to the  review editor screen.
+		// Add the help tab to the review editor screen.
 		$this->loader->add_filter( 'admin_head', $plugin_admin, 'rcno_reviews_help_tab' );
 		$this->loader->add_action( 'contextual_help', $plugin_admin, 'rcno_add_help_text', 10, 3 );
 

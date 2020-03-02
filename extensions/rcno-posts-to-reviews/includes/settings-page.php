@@ -59,10 +59,12 @@
 </style>
 
 <script>
+  (function($) {
     $(function() {
-        $( '#settings-form-text-field' ).selectize( {
-            create: true,
-            plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']
-        } );
+      $('#settings-form-text-field').selectize({
+        create: true,
+        plugins: ['remove_button', 'restore_on_backspace', 'drag_drop'],
+      });
     });
+  })(jQuery);
 </script>
