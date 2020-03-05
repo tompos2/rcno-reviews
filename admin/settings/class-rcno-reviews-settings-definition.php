@@ -89,7 +89,7 @@ class Rcno_Reviews_Settings_Definition {
 		require_once 'class-rcno-reviews-get-templates.php';
 		self::$template = new Rcno_Template_Tags( RCNO_PLUGIN_NAME, RCNO_PLUGIN_VER );
 
-		$settings[] = array();
+		// $settings[] = array();
 
 		$settings = array(
 			// Begin the General Tab.
@@ -188,17 +188,17 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'header',
 				),
 				'rcno_show_isbn'                        => array(
-					'name' => __( 'ISBN number', 'rcno-reviews' ),
+					'name' => __( 'ISBN', 'rcno-reviews' ),
 					'desc' => __( 'Show the ISBN field for book reviews?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_isbn13'                      => array(
-					'name' => __( 'ISBN13 number', 'rcno-reviews' ),
+					'name' => __( 'ISBN13', 'rcno-reviews' ),
 					'desc' => __( 'Show the ISBN13 field for book reviews?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_asin'                        => array(
-					'name' => __( 'ASIN number', 'rcno-reviews' ),
+					'name' => __( 'ASIN', 'rcno-reviews' ),
 					'desc' => __( 'Show the ASIN field for book reviews?', 'rcno-reviews' ),
 					'type' => 'checkbox',
 				),

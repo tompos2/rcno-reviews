@@ -341,7 +341,7 @@ class Rcno_Reviews_Admin {
 		$opts['labels']['new_item']           = sprintf( __( 'New %1$s', 'rcno-reviews' ), $single );
 		$opts['labels']['not_found']          = sprintf( __( 'No %1$s Found', 'rcno-reviews' ), $plural );
 		$opts['labels']['not_found_in_trash'] = sprintf( __( 'No %1$s Found in Trash', 'rcno-reviews' ), $plural );
-		$opts['labels']['parent_item_colon']  = sprintf( __( 'Parent %1$s :', 'rcno-reviews' ), $plural );
+		$opts['labels']['parent_item_colon']  = sprintf( __( 'Parent %1$s', 'rcno-reviews' ), $plural );
 		$opts['labels']['search_items']       = sprintf( __( 'Search %1$s', 'rcno-reviews' ), $plural );
 		$opts['labels']['singular_name']      = $single;
 		$opts['labels']['view_item']          = sprintf( __( 'View %1$s', 'rcno-reviews' ), $single );
@@ -514,7 +514,7 @@ class Rcno_Reviews_Admin {
 				'<li>' . __( 'Under the Publish module, click on the Edit link next to Publish.', 'rcno-reviews' ) . '</li>' .
 				'<li>' . __( 'Change the date to the date to actual publish this article, then click on Ok.', 'rcno-reviews' ) . '</li>' .
 				'</ul>' .
-				'<span><strong>' . __( 'For more information: ', 'rcno-reviews' ) . '</strong></span>' .
+				'<span><strong>' . __( 'For more information', 'rcno-reviews' ) . ': </strong></span>' .
 				'<span>' . '<a href="https://wordpress.org/support/plugin/recencio-book-reviews" target="_blank">' . __( 'Support Forums', 'rcno-reviews' ) . '</a>' . '</span>';
 		} elseif ( 'edit-book' === $screen->id ) {
 			$contextual_help =
@@ -546,7 +546,7 @@ class Rcno_Reviews_Admin {
 		// Setup help tab args.
 		$args = array(
 			'id'      => 'rcno_reviews_help',
-			'title'   => 'Reviews Help',
+			'title'   => __( 'Reviews Help', 'rcno-reviews' ),
 			'content' => '<h3>Recencio Book Reviews</h3><p>Help content</p>',
 		);
 
@@ -592,7 +592,7 @@ class Rcno_Reviews_Admin {
 	public function add_plugin_admin_menu() {
 
 		add_menu_page(
-			__( 'Recencio Book Reviews', $this->plugin_name ),
+			'Recencio ' . __( 'Book Reviews', $this->plugin_name ),
 			__( 'Reviews', 'rcno-reviews' ),
 			'manage_options',
 			$this->plugin_name,
@@ -601,7 +601,7 @@ class Rcno_Reviews_Admin {
 
 		add_submenu_page(
 			'edit.php?post_type=rcno_review',
-			__( 'Recencio Book Reviews', $this->plugin_name ),
+			'Recencio ' . __( 'Book Reviews', $this->plugin_name ),
 			__( 'Settings', 'rcno-reviews' ),
 			'manage_options',
 			$this->plugin_name,

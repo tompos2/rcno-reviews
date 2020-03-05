@@ -1,12 +1,15 @@
+# WordPress Blank Pot
+# Copyright (C) 2014 ...
+# This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2020-03-05 08:32-0500\n"
+"POT-Creation-Date: 2020-03-05 07:48-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kemory Grubb <kemory@wzymedia.com>\n"
 "Language-Team: wzyMedia <hello@wzymedia.com>\n"
-"Language: en_US\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,23 +22,24 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: admin/class-rcno-admin-book-cover.php:57
 #: admin/views/rcno-currently-reading-dash-widget.php:45
 msgid "Book Cover"
-msgstr "Book Cover"
+msgstr "Umschlagsbild"
 
 #: admin/class-rcno-admin-buy-links.php:63
 msgid "Purchase Links"
-msgstr "Purchase Links"
+msgstr "Kauflinks"
 
 #: admin/class-rcno-admin-description-meta.php:59
 msgid "Book Description/Synopsis"
-msgstr "Book Description/Synopsis"
+msgstr "Buchbeschreibung"
 
 #: admin/class-rcno-admin-general-info.php:60
 msgid "General Information"
-msgstr "General Information"
+msgstr "Allgemeine Informationen"
 
 #: admin/class-rcno-admin-isbn.php:67
 #: admin/settings/class-rcno-reviews-settings-definition.php:191
@@ -46,197 +50,198 @@ msgstr "ISBN"
 #: admin/class-rcno-admin-review-rating.php:61
 #: admin/settings/class-rcno-reviews-settings-definition.php:303
 msgid "5 Star Rating"
-msgstr "5 Star Rating"
+msgstr "5-Sterne-Bewertung"
 
 #: admin/class-rcno-admin-review-score.php:65
 #: admin/class-rcno-reviews-admin.php:1362
 #: admin/class-rcno-reviews-admin.php:1367
 #: public/class-rcno-template-tags.php:1460
 msgid "Review Score"
-msgstr "Review Score"
+msgstr "Bewertungsergebnis"
 
 #: admin/class-rcno-currently-reading.php:108
 msgid "Progress updated"
-msgstr "Progress updated"
+msgstr "Fortschritt aktualisiert"
 
 #: admin/class-rcno-currently-reading.php:109
 msgid "Error"
-msgstr "Error"
+msgstr "Fehler"
 
 #: admin/class-rcno-currently-reading.php:133
 #: admin/settings/class-rcno-reviews-settings-definition.php:432
 msgid "Currently Reading"
-msgstr "Currently Reading"
+msgstr "Derzeit lesen"
 
 #: admin/class-rcno-currently-reading.php:291
 #: admin/class-rcno-currently-reading.php:322
 msgid "Security nonce is invalid or not set"
-msgstr "Security nonce is invalid or not set"
+msgstr "Sicherheits Zeichenfolge ist ungültig oder nicht gesetzt"
 
 #: admin/class-rcno-reviews-admin.php:259
 msgid "Your settings have been reset, please reload the page to see them."
-msgstr "Your settings have been reset, please reload the page to see them."
+msgstr ""
+"Ihre Einstellungen wurden zurückgesetzt, bitte laden Sie die Seite neu."
 
 #: admin/class-rcno-reviews-admin.php:334
 #: admin/class-rcno-reviews-admin.php:341
 #, php-format
 msgid "New %1$s"
-msgstr "New %1$s"
+msgstr "Neue %s"
 
 #: admin/class-rcno-reviews-admin.php:335
 #: admin/class-rcno-reviews-admin.php:441
 #, php-format
 msgid "Add New %1$s"
-msgstr "Add New %1$s"
+msgstr "Neues %1$s hinzufügen"
 
 #: admin/class-rcno-reviews-admin.php:336
-#, fuzzy, php-format
-#| msgid "New %1$s"
+#, php-format
 msgid "All %1$s"
-msgstr "New %1$s"
+msgstr "Alle %1$s"
 
 #: admin/class-rcno-reviews-admin.php:337
 #: admin/class-rcno-reviews-admin.php:445
 #, php-format
 msgid "Edit %1$s"
-msgstr "Edit %1$s"
+msgstr "%1$s bearbeiten"
 
 #: admin/class-rcno-reviews-admin.php:342
 #: admin/class-rcno-reviews-admin.php:449
 #, php-format
 msgid "No %1$s Found"
-msgstr "No %1$s Found"
+msgstr "Keine %1$s gefunden"
 
 #: admin/class-rcno-reviews-admin.php:343
 #, php-format
 msgid "No %1$s Found in Trash"
-msgstr "No %1$s Found in Trash"
+msgstr "Keine %1$s Fund im Papierkorb"
 
 #: admin/class-rcno-reviews-admin.php:344
 #: admin/class-rcno-reviews-admin.php:450
 #: admin/class-rcno-reviews-admin.php:451
 #, php-format
 msgid "Parent %1$s"
-msgstr "Parent %1$s"
+msgstr "Eltern %1$s"
 
 #: admin/class-rcno-reviews-admin.php:345
 #: admin/class-rcno-reviews-admin.php:453
 #, php-format
 msgid "Search %1$s"
-msgstr "Search %1$s"
+msgstr "Suche %1$s"
 
 #: admin/class-rcno-reviews-admin.php:347
 #: admin/class-rcno-reviews-admin.php:457
 #, php-format
 msgid "View %1$s"
-msgstr "View %1$s"
+msgstr "Produkt ansehen %1$s"
 
 #: admin/class-rcno-reviews-admin.php:373
 msgid "Author"
-msgstr "Author"
+msgstr "Autor"
 
 #: admin/class-rcno-reviews-admin.php:442
 #, php-format
 msgid "Add or remove %1$s"
-msgstr "Add or remove %1$s"
+msgstr "%1$s hinzufügen oder entfernen"
 
 #: admin/class-rcno-reviews-admin.php:444
 #, php-format
 msgid "Choose from most used %1$s"
-msgstr "Choose from most used %1$s"
+msgstr "Wählen Sie aus den am häufigsten verwendeten %1$s"
 
 #: admin/class-rcno-reviews-admin.php:448
 #, php-format
 msgid "New %1$s Name"
-msgstr "New %1$s Name"
+msgstr "Neuer %1$s Name"
 
 #: admin/class-rcno-reviews-admin.php:452
 #, php-format
 msgid "Popular %1$s"
-msgstr "Popular %1$s"
+msgstr "Beliebt %1$s"
 
 #: admin/class-rcno-reviews-admin.php:454
 #, php-format
 msgid "Separate %1$s with commas"
-msgstr "Separate %1$s with commas"
+msgstr "%1$s mit Kommas trennen"
 
 #: admin/class-rcno-reviews-admin.php:456
 #, php-format
 msgid "Update %1$s"
-msgstr "Update %1$s"
+msgstr "%1$s bearbeiten"
 
 #: admin/class-rcno-reviews-admin.php:507
 msgid "Things to remember when adding or editing a book review:"
-msgstr "Things to remember when adding or editing a book review:"
+msgstr ""
+"Dinge, die Sie beim Hinzufügen oder Bearbeiten einer Buchbesprechung "
+"beachten sollten:"
 
 #: admin/class-rcno-reviews-admin.php:509
 msgid "Specify the correct genre such as Mystery, or Historic."
-msgstr "Specify the correct genre such as Mystery, or Historic."
+msgstr "Geben Sie das richtige Genre wie Mystery, oder Historisch an."
 
 #: admin/class-rcno-reviews-admin.php:510
 msgid ""
 "Specify the correct writer of the book review. Remember that the Author "
 "module refers to you, the author of this book review."
 msgstr ""
-"Specify the correct writer of the book review. Remember that the Author "
-"module refers to you, the author of this book review."
+"Geben Sie den korrekten Autor der Buchbesprechung an. Denken Sie daran, dass "
+"sich das Autorenmodul auf Sie, den Autor dieser Buchbesprechung, bezieht."
 
 #: admin/class-rcno-reviews-admin.php:512
 msgid "If you want to schedule the book review to be published in the future:"
-msgstr "If you want to schedule the book review to be published in the future:"
+msgstr ""
+"Wenn Sie die Veröffentlichung der Buchbesprechung für die Zukunft planen "
+"wollen:"
 
 #: admin/class-rcno-reviews-admin.php:514
 msgid "Under the Publish module, click on the Edit link next to Publish."
-msgstr "Under the Publish module, click on the Edit link next to Publish."
+msgstr ""
+"Unter dem Modul Veröffentlichen auf den Link Bearbeiten neben der "
+"Veröffentlichung klicken."
 
 #: admin/class-rcno-reviews-admin.php:515
 msgid ""
 "Change the date to the date to actual publish this article, then click on Ok."
 msgstr ""
-"Change the date to the date to actual publish this article, then click on OK."
+"Ändern Sie das Datum, um diesen Artikel tatsächlich an diesem Datum zu "
+"veröffentlichen, klicken Sie danach auf Ok."
 
 #: admin/class-rcno-reviews-admin.php:517
-#, fuzzy
-#| msgid "For more information: "
 msgid "For more information"
-msgstr "For more information: "
+msgstr "Für weitere Informationen"
 
 #: admin/class-rcno-reviews-admin.php:518
 msgid "Support Forums"
-msgstr "Support Forums"
+msgstr "Support-Foren"
 
 #: admin/class-rcno-reviews-admin.php:521
 msgid ""
 "This is the help screen displaying the table of book reviews you have "
 "created."
 msgstr ""
-"This is the help screen displaying the table of book reviews you have "
-"created."
+"Dies ist der Hilfebildschirm, auf dem die von Ihnen erstellte Tabelle mit "
+"Buchbesprechungen angezeigt wird."
 
 #: admin/class-rcno-reviews-admin.php:549
-#, fuzzy
-#| msgid "Reviews"
 msgid "Reviews Help"
-msgstr "Reviews"
+msgstr "Bewertungen Hilfe"
 
 #: admin/class-rcno-reviews-admin.php:574
 msgid "Book Cover LG"
-msgstr "Book Cover Large"
+msgstr "Umschlagsbild groß"
 
 #: admin/class-rcno-reviews-admin.php:575
 msgid "Book Cover SM"
-msgstr "Book Cover Small"
+msgstr "Umschlagbild klein"
 
 #: admin/class-rcno-reviews-admin.php:595
 #: admin/class-rcno-reviews-admin.php:604
-#, fuzzy
-#| msgid "Book Review Widgets"
 msgid "Book Reviews"
-msgstr "Book Review Widgets"
+msgstr "Bücherbewertungen"
 
 #: admin/class-rcno-reviews-admin.php:596
 msgid "Reviews"
-msgstr "Reviews"
+msgstr "Bewertungen"
 
 #: admin/class-rcno-reviews-admin.php:605
 #: admin/class-rcno-reviews-admin.php:625
@@ -247,7 +252,7 @@ msgstr "Reviews"
 #: includes/abstracts/Abstract_Rcno_Extension.php:79
 #: includes/abstracts/Abstract_Rcno_Extension.php:91
 msgid "Settings"
-msgstr "Settings"
+msgstr "Einstellungen"
 
 #: admin/class-rcno-reviews-admin.php:754
 msgid "Cover"
@@ -256,47 +261,47 @@ msgstr "Cover"
 #: admin/class-rcno-reviews-admin.php:990
 #: admin/class-rcno-reviews-admin.php:993
 msgid "Review updated."
-msgstr "Review updated."
+msgstr "Bewertung aktualisiert."
 
 #: admin/class-rcno-reviews-admin.php:991
 msgid "Custom field updated."
-msgstr "Custom field updated."
+msgstr "Benutzerdefiniertes Feld aktualisiert."
 
 #: admin/class-rcno-reviews-admin.php:992
 msgid "Custom field deleted."
-msgstr "Custom field deleted."
+msgstr "Benutzerdefiniertes Feld gelöscht."
 
 #: admin/class-rcno-reviews-admin.php:995
 msgid "Review restored to revision from "
-msgstr "Review restored to revision from "
+msgstr "Buchbesprechung für Revision wiederhergestellt von"
 
 #: admin/class-rcno-reviews-admin.php:996
 msgid "Review published."
-msgstr "Review published."
+msgstr "Buchbesprechung veröffentlicht."
 
 #: admin/class-rcno-reviews-admin.php:997
 msgid "Review saved."
-msgstr "Review saved."
+msgstr "Rezension gespeichert."
 
 #: admin/class-rcno-reviews-admin.php:998
 msgid "Review submitted."
-msgstr "Review submitted."
+msgstr "Bewertung gesendet."
 
 #: admin/class-rcno-reviews-admin.php:999
 msgid "Review scheduled for: "
-msgstr "Review scheduled for: "
+msgstr "Buchbesprechung geplant für:"
 
 #: admin/class-rcno-reviews-admin.php:1000
 msgid "Review draft updated."
-msgstr "Review draft updated."
+msgstr "Entwurf der Buchbesprechung aktualisiert."
 
 #: admin/class-rcno-reviews-admin.php:1006
 msgid "View review"
-msgstr "View review"
+msgstr "Bewertung ansehen"
 
 #: admin/class-rcno-reviews-admin.php:1012
 msgid "Preview review"
-msgstr "Preview review"
+msgstr "Vorschau der Buchbesprechung"
 
 #: admin/class-rcno-reviews-admin.php:1304
 msgid ""
@@ -309,64 +314,63 @@ msgid ""
 "enabling Structured Data \n"
 "        markup for our reviews on their search result pages."
 msgstr ""
-"When you leave a review on this site, we will store your provided name, "
-"email\n"
-"        address, IP address, review text and review rating to our website. \n"
+"Wenn Sie eine Buchbesprechung auf dieser Website hinterlassen, werden wir "
+"Ihren angegebenen Namen, Ihre E-Mail-Adresse, IP-Adresse, den "
+"Besprechungstext und die Bewertung auf unserer Website speichern. \n"
 "        \n"
-"        Example.com may chose to share your review text, \n"
-"        review rating and name with Google for the express purpose of "
-"enabling Structured Data \n"
-"        markup for our reviews on their search result pages."
+"        Example.com kann sich dafür entscheiden, Ihre Buchbesprechung, Ihre "
+"Bewertung und Ihren Namen mit Google zu teilen, um die Strukturierte "
+"Datenmarkierung für unsere Bewertungen auf ihren Suchergebnisseiten zu "
+"ermöglichen."
 
 #: admin/class-rcno-reviews-admin.php:1447
 #: admin/class-rcno-reviews-admin.php:1464
 msgid "Recencio Book Reviews Plugin"
-msgstr "Recencio Book Reviews Plugin"
+msgstr "Recencio Buchbesprechungen Plugin"
 
 #: admin/settings/class-rcno-reviews-callback-helper.php:63
 #, php-format
 msgid "The callback function used for <strong>%s</strong> setting is missing."
-msgstr "The callback function used for %s setting is missing."
+msgstr ""
+"Die Rücruf-Funktion, die für die <strong> %s </strong> Einstellung verwendet "
+"wird, fehlt."
 
 #: admin/settings/class-rcno-reviews-callback-helper.php:157
 #, php-format
 msgid "Options for <strong>%s</strong> multicheck is missing."
-msgstr "Options for %s multi-check is missing."
+msgstr "Es fehlen Optionen für <strong> %s </strong> die Mehrfachauswahl."
 
 #: admin/settings/class-rcno-reviews-callback-helper.php:203
 #: admin/settings/class-rcno-reviews-callback-helper.php:248
 #, php-format
 msgid "Options for <strong>%s</strong> radio is missing."
-msgstr "Options for %s radio is missing."
+msgstr ""
+"Es fehlen Optionen für <strong> %s </strong> für die Optionsschaltfläche."
 
 #: admin/settings/class-rcno-reviews-callback-helper.php:614
-#, fuzzy
-#| msgid ""
-#| "Upload \n"
-#| "\t\tFile"
 msgid "Upload File"
-msgstr "Upload File"
+msgstr "Datei hochladen"
 
 #: admin/settings/class-rcno-reviews-callback-helper.php:636
 #: admin/settings/class-rcno-reviews-callback-helper.php:658
 msgid "Download File"
-msgstr "Download File"
+msgstr "Datei runterladen"
 
 #: admin/settings/class-rcno-reviews-sanitization-helper.php:99
 msgid "Settings updated."
-msgstr "Settings updated."
+msgstr "Einstellungen aktualisiert."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:68
 msgid "General"
-msgstr "General"
+msgstr "Allgemein"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:69
 msgid "Taxonomies"
-msgstr "Taxonomies"
+msgstr "Taxonomien"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:70
 msgid "Components"
-msgstr "Components"
+msgstr "Komponenten"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:71
 msgid "Extras"
@@ -374,15 +378,15 @@ msgstr "Extras"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:72
 msgid "Templates"
-msgstr "Templates"
+msgstr "Vorlagen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:73
 msgid "Advanced"
-msgstr "Advanced"
+msgstr "Erweitert"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:98
 msgid "General Settings"
-msgstr "General Settings"
+msgstr "Allgemeine Einstellungen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:102
 #: admin/settings/class-rcno-reviews-settings-definition.php:702
@@ -391,17 +395,15 @@ msgstr "Slug"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:103
 msgid "Book reviews will be available at:"
-msgstr "Book reviews will be available at:"
+msgstr "Buchbeschreibungen sind verfügbar bei:"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:108
 msgid "Please only use only 1 lower-case word"
-msgstr "Please only use only 1 lower-case word"
+msgstr "Bitte nur ein Wort in Kleinbuchstaben verwenden"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:111
-#, fuzzy
-#| msgid "404s errors"
 msgid "404 errors"
-msgstr "404s errors"
+msgstr "404 Fehler"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:112
 msgid ""
@@ -410,89 +412,94 @@ msgid ""
 "\t\t\t\t\t try flushing your permalink settings. Visit Settings -> "
 "Permalinks and just save without changing anything."
 msgstr ""
-"If you've set up everything correctly here but now WordPress is giving you "
-"an 404 (not found) error, try flushing your permalink settings. Visit "
-"Settings -> Permalinks and just save without changing anything."
+"Wenn Sie hier alles korrekt eingestellt haben, aber WordPress Ihnen einen "
+"404 (nicht gefunden) Fehler meldet,\n"
+"\t\t\t\t\t versuchen Sie, Ihre Permalink-Einstellungen zurückzuseten . Gehen "
+"Sie auf Einstellungen -> Permalinks und klicken - ohne Änderungen - auf "
+"\"'Änderungen speichern\"."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:117
 msgid "Reviews on homepage?"
-msgstr "Reviews on homepage?"
+msgstr "Buchbesprechungen auf der Homepage?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:118
 msgid "Should book reviews be shown on homepage?"
-msgstr "Should book reviews be shown on homepage?"
+msgstr "Sollen Buchbesprechungen auf der Homepage angezeigt werden?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:122
 msgid "Reviews in RSS?"
-msgstr "Reviews in RSS?"
+msgstr "Buchbesprechungen als RSS?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:123
 msgid "Should book reviews be shown in the RSS feed.?"
-msgstr "Should book reviews be shown in the RSS feed?"
+msgstr "Buchbesprechungen in den RSS-Feeds anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:127
 msgid "Reviews in REST API?"
-msgstr "Reviews in REST API?"
+msgstr "Buchbesprechungen in der REST-API?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:128
 msgid "Enables basic support for reviews in the WordPress REST API."
-msgstr "Enables basic support for reviews in the WordPress REST API."
+msgstr ""
+"Ermöglicht die grundlegende Unterstützung für Buchbesprechungen in der "
+"WordPress REST API."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:132
 msgid "Reviews archive page"
-msgstr "Reviews archive page"
+msgstr "Buchbesprechungen Archivseite"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:133
 msgid "Show full content or excerpt on archive pages."
-msgstr "Show full content or excerpt on archive pages."
+msgstr ""
+"Zeigen Sie den vollständigen Inhalt oder einen Auszug auf den Archivseiten."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:135
 msgid "The entire book review"
-msgstr "The entire book review"
+msgstr "Die vollständige Buchbesprechung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:136
 msgid "Only excerpt of the review"
-msgstr "Only excerpt of the review"
+msgstr "Nur Auszug aus der Buchbesprechung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:141
 msgid "Gutenberg support"
-msgstr "Gutenberg support"
+msgstr "Gutenberg-Unterstützung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:142
 msgid "Enables support for the new Gutenberg post editor."
-msgstr "Enables support for the new Gutenberg post editor."
+msgstr "Ermöglicht Unterstützung für den neuen Gutenberg-Beitragseditor."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:155
 msgid "Review Taxonomies"
-msgstr "Review Taxonomies"
+msgstr "Buchbesprechung Kategorien"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:159
 msgid "Taxonomy Selection"
-msgstr "Taxonomy Selection"
+msgstr "Taxonomie Auswahl"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:160
 msgid "Create and delete book review taxonomies here."
-msgstr "Create and delete book review taxonomies here."
+msgstr "Kategorien für die Buchbesprechung hier erstellen und löschen."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:169
 msgid "Builtin Taxonomies"
-msgstr "Builtin Taxonomies"
+msgstr "Integrierte Kategorien"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:173
 msgid "Default WP Taxonomy"
-msgstr "Default WP Taxonomy"
+msgstr "Standard WP Kategrorien"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:174
 msgid "Enable the builtin 'category' and 'tags' taxonomies."
-msgstr "Enable the builtin 'category' and 'tags' taxonomies."
+msgstr "Integrierten 'Kategorien' und 'Tags' aktivieren."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:187
 msgid "Book Review Components"
-msgstr "Book Review Components"
+msgstr "Komponenten für Buchbesprechungen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:192
 msgid "Show the ISBN field for book reviews?"
-msgstr "Show the ISBN field for book reviews?"
+msgstr "ISBN bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:196
 #: admin/views/rcno-general-info-metabox.php:108
@@ -502,7 +509,7 @@ msgstr "ISBN13"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:197
 msgid "Show the ISBN13 field for book reviews?"
-msgstr "Show the ISBN13 field for book reviews?"
+msgstr "ISBN13 bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:201
 #: admin/views/rcno-general-info-metabox.php:118
@@ -512,7 +519,7 @@ msgstr "ASIN"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:202
 msgid "Show the ASIN field for book reviews?"
-msgstr "Show the ASIN field for book reviews?"
+msgstr "ASIN bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:206
 #: public/class-rcno-template-tags.php:89
@@ -521,17 +528,17 @@ msgstr "Goodreads ID"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:207
 msgid "Show the Goodreads book ID field for book reviews?"
-msgstr "Show the Goodreads book ID field for book reviews?"
+msgstr "Goodreads-Buch-ID bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:211
 #: admin/views/rcno-general-info-metabox.php:140
 #: public/class-rcno-template-tags.php:93
 msgid "Book URL"
-msgstr "Book URL"
+msgstr "Buch-URL"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:212
 msgid "Show the book's URL field for book reviews?"
-msgstr "Show the book's URL field for book reviews?"
+msgstr "Buch URL bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:216
 #: admin/views/rcno-general-info-metabox.php:32
@@ -541,361 +548,368 @@ msgstr "Illustrator"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:217
 msgid "Show the book's illustrator for reviews?"
-msgstr "Show the book's illustrator for reviews?"
+msgstr "Den Illustrator bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:221
 msgid "Published Date"
-msgstr "Published Date"
+msgstr "Veröffentlichungsdatum"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:222
 msgid "Show the book's published date for reviews?"
-msgstr "Show the book's published date for reviews?"
+msgstr "Veröffentlichungsdatum bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:226
 msgid "Published Format"
-msgstr "Published Format"
+msgstr "Veröffentlichtes Format"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:227
 msgid "Show the book's published format for reviews?"
-msgstr "Show the book's published format for reviews?"
+msgstr "Das Buchformat bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:231
 msgid "Published Edition"
-msgstr "Published Edition"
+msgstr "Veröffentliche Ausgabe"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:232
 msgid "Show the book's published edition for reviews?"
-msgstr "Show the book's published edition for reviews?"
+msgstr "Die Edition bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:236
 #: admin/views/rcno-general-info-metabox.php:76
 #: public/class-rcno-template-tags.php:87
 msgid "Series Number"
-msgstr "Series Number"
+msgstr "Nummer der Serie"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:237
 msgid "Show the book's number in the series for reviews?"
-msgstr "Show the book's number in the series for reviews?"
+msgstr "Reihennummer bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:241
 #: admin/views/rcno-general-info-metabox.php:87
 #: public/class-rcno-template-tags.php:86
 msgid "Page Count"
-msgstr "Page Count"
+msgstr "Seitenanzahl"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:242
 msgid "Show the book's page count for reviews?"
-msgstr "Show the book's page count for reviews?"
+msgstr "Seitenanzahl bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:246
 #: public/class-rcno-template-tags.php:88
 msgid "Goodreads Rating"
-msgstr "Goodreads Rating"
+msgstr "Goodreads Bewertung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:247
 msgid "Show the book's Goodreads rating for reviews?"
-msgstr "Show the book's Goodreads rating for reviews?"
+msgstr "Goordreas Bewertung bei Buchbesprechungen anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:251
 msgid "Book Cover Custom URL"
-msgstr "Book Cover Custom URL"
+msgstr "Benutzerdefinierte Umschlagsbild URL"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:252
 msgid "Show the custom book cover URL field?"
-msgstr "Show the custom book cover URL field?"
+msgstr "Benutzerdefinierte Umschlagsbild URL anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:262
 msgid "Book Purchase Links"
-msgstr "Book Purchase Links"
+msgstr "Kauflinks buchen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:266
 msgid "Enable Purchase Links"
-msgstr "Enable Purchase Links"
+msgstr "Kauflinks aktivieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:267
 msgid "Enable the use of book purchase links"
-msgstr "Enable the use of book purchase links"
+msgstr "Die Verwerndung von Kauflinks aktivieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:271
 msgid "Links Label"
-msgstr "Links Label"
+msgstr "Links-Beschriftung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:272
 msgid "Enter the label shown before purchase links."
-msgstr "Enter the label shown before purchase links."
+msgstr "Beschriftung eingeben, die vor dem Kauflink stehen soll."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:277
 msgid "Store/Shop"
-msgstr "Store/Shop"
+msgstr "Händler/Geschäft"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:278
 msgid "Enter the name of stores to purchase books from."
-msgstr "Enter the name of stores to purchase books from."
+msgstr ""
+"Geben Sie den Namen der Bezugsquellen ein, von denen Bücher gekauft werden "
+"können."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:283
 msgid "Text Color"
-msgstr "Text Color"
+msgstr "Textfarbe"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:284
 msgid "Text color for the purchase button."
-msgstr "Text color for the purchase button."
+msgstr "Textfarbe für die \"Kaufen\"-Schaltfläche."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:288
 #: admin/settings/class-rcno-reviews-settings-definition.php:335
 msgid "Background Color"
-msgstr "Background Color"
+msgstr "Hintergrundfarbe"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:289
 msgid "Background color for the purchase button."
-msgstr "Background color for the purchase button."
+msgstr "Hintergrundfarbe für die \"Kaufen\"-Schaltfläche."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:299
 msgid "Book 5 Star Rating Box"
-msgstr "Book 5 Star Rating Box"
+msgstr "5-Sterne-Bewertung Auswahl"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:304
 msgid "Enable the 5 star rating box?"
-msgstr "Enable the 5 star rating box?"
+msgstr "5-Sterne-Bewertung Auswahl aktivieren?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:308
 msgid "Star Rating Color"
-msgstr "Star Rating Color"
+msgstr "Bewertungsfarbe"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:309
 msgid "The color of the 5 star rating."
-msgstr "The color of the 5 star rating."
+msgstr "Farbe der 5-Sterne-Bewertung."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:313
 msgid "Star Background Color"
-msgstr "Star Background Color"
+msgstr "Stern Hintergrundfarbe"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:314
 msgid ""
 "Background color for the 5 star rating. (Delete existing value for "
 "transparent background)"
 msgstr ""
-"Background color for the 5 star rating. (Delete existing value for "
-"transparent background)"
+"Hintergrundfarbe für die 5-Sterne-Bewertung (vorhandenen Wert für "
+"transparenten Hintergrund löschen)."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:326
 msgid "Book Review Score Box"
-msgstr "Review Score Box"
+msgstr "Buchrezension Score Box"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:330
 msgid "Review Score Box"
-msgstr "Review Score Box"
+msgstr "Rezension Scorebox"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:331
 msgid "Enable the review score box?"
-msgstr "Enable the review score box?"
+msgstr "Das Bewertungsfeld aktivieren?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:336
 msgid "Background Color for the review score box?"
-msgstr "Background Color for the review score box?"
+msgstr "Hintergrundfarbe für die Rezensionsscorebox?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:340
 msgid "Accent Color 1"
-msgstr "Accent Color 1"
+msgstr "Akzentfarbe 1"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:341
 msgid "The first accent color for the review score box?"
-msgstr "The first accent color for the review score box?"
+msgstr "Die erste Akzentfarbe für die Rezensionsscorebox?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:345
 msgid "Accent Color 2"
-msgstr "Accent Color 2"
+msgstr "Akzentfarbe 2"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:346
 msgid "The second accent color for the review score box?"
-msgstr "The second accent color for the review score box?"
+msgstr "Die zweite Akzentfarbe für die Rezensionsscorebox?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:354
 msgid "Fixed Review Criteria"
-msgstr "Fixed Review Criteria"
+msgstr "Fixe Rezensionskriterien"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:355
 msgid "Enable the use of fixed custom review criteria fields"
-msgstr "Enable the use of fixed custom review criteria fields"
+msgstr ""
+"Die Verwendung von fixen individuellen Rezensionskriterienfeldern aktivieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:359
 msgid "Custom Criteria List"
-msgstr "Custom Criteria List"
+msgstr "Individuelle Kriterienliste"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:360
 msgid "List of custom fields to use for review criteria."
-msgstr "List of custom fields to use for review criteria."
+msgstr "Liste der individuellen Felder für Rezensionskriterien."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:377
 msgid "Reader Comment Rating"
-msgstr "Reader Comment Rating"
+msgstr "Leserkommentar Bewertung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:381
 msgid "Comment Ratings"
-msgstr "Comment Ratings"
+msgstr "Kommentarbewertungen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:382
 msgid "Enable reader submitted ratings in the comment form"
-msgstr "Enable reader submitted ratings in the comment form"
+msgstr "Vom Leser übermittelte Bewertungen im Kommentar aktivieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:386
 msgid "Rating Label"
-msgstr "Rating Label"
+msgstr "Bewertungsbeschriftung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:387
 msgid "Enter the label before the comment 5 star rating field"
-msgstr "Enter the label before the comment 5 star rating field"
+msgstr "Die Beschriftung vor dem 5 Sterne Kommentarfeld eingeben"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:388
 msgid "Rate this review: "
-msgstr "Rate this review: "
+msgstr "Diese Rezension bewerten:"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:392
 msgid "Comment Star Color"
-msgstr "Comment Star Color"
+msgstr "Farbe der Kommentar Sterne"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:393
 msgid "Background color for the reader comment 5 star rating"
-msgstr "Background color for the reader comment 5 star rating"
+msgstr "Hintergrundfarbe für den 5-Sterne Kommentar"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:403
 msgid "Book Review Widgets"
-msgstr "Book Review Widgets"
+msgstr "Buchrezension Widgets"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:407
 msgid "Book Slider"
-msgstr "Book Slider"
+msgstr "Buch-Slider"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:408
 msgid "Use the Rcno Book Slider widget?"
-msgstr "Use the Rcno Book Slider widget?"
+msgstr "Das Rcno Buch-Slider Widget verwenden?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:412
 msgid "Book Grid"
-msgstr "Book Grid"
+msgstr "Buch Grid"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:413
 msgid "Use the Rcno Book Grid widget?"
-msgstr "Use the Rcno Book Grid widget?"
+msgstr "Das Rcno Buch-Grid Widget verwenden?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:417
 msgid "Recent Reviews"
-msgstr "Recent Reviews"
+msgstr "Aktuelle Bewertungen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:418
 msgid "Use the Rcno Recent Reviews widget?"
-msgstr "Use the Rcno Recent Reviews widget?"
+msgstr "Das  Widget Rcno Recent Reviews verwenden?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:422
 msgid "Tag Cloud"
-msgstr "Tag Cloud"
+msgstr "Tag-Wolke"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:423
 msgid "Use the Rcno Tag Cloud widget?"
-msgstr "Use the Rcno Tag Cloud widget?"
+msgstr "Das Rcno Tag Cloud Widget verwenden?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:427
 msgid "Taxonomy List"
-msgstr "Taxonomy List"
+msgstr "Taxonomie-Liste"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:428
 msgid "Use the Rcno Taxonomy List widget?"
-msgstr "Use the Rcno Taxonomy List widget?"
+msgstr "Das Rcno Kategorielisten Widget verwenden?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:433
 msgid "Use the Rcno Currently Reading widget?"
-msgstr "Use the Rcno Currently Reading widget?"
+msgstr "Das Rcno \"Wird gerade gelesen\" Widget?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:437
 msgid "Review Calendar"
-msgstr "Review Calendar"
+msgstr "Rezensionskalender"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:438
 msgid "Use the Rcno Review Calendar widget?"
-msgstr "Use the Rcno Review Calendar widget?"
+msgstr "Das Rcno Rezensionskalender Widget verwenden?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:446
 msgid "Index Pages"
-msgstr "Index Pages"
+msgstr "Indexseiten"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:450
 msgid "Navigation headers"
-msgstr "Navigation headers"
+msgstr "Navigationsheader"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:451
 msgid "Display navigation header on index page?"
-msgstr "Display navigation header on index page?"
+msgstr "Navigations-Header auf Indexseite anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:455
 msgid "Book covers"
-msgstr "Book covers"
+msgstr "Buchumschläge"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:456
 msgid "Book covers on review index page?"
-msgstr "Book covers on review index page?"
+msgstr "Buchumschläge auf der Rezensions Indexseite anzeigen?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:460
 msgid "Ignore articles"
-msgstr "Ignore articles"
+msgstr "Artikel ignorieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:461
 msgid "Ignore articles when sorting titles. (e.g. \"The\", \"A\", \"An\")"
-msgstr "Ignore articles when sorting titles. (e.g. \"The\", \"A\", \"An\")"
+msgstr ""
+"Artikel ignorieren wenn nach Titel sortiert wird. (z.B.: \"Die\", \"Ein\", "
+"\"Eine\")"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:465
 msgid "Article List"
-msgstr "Article List"
+msgstr "Artikelliste"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:466
 msgid "The list of articles to ignore in your language"
-msgstr "The list of articles to ignore in your language"
+msgstr "Die Liste der Artikel, die in Ihrer Sprache ignoriert werden sollen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:471
 msgid "Sort author names"
-msgstr "Sort author names"
+msgstr "Autorenname sortieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:472
 msgid "Sort names by first-name or last-name"
-msgstr "Sort names by first-name or last-name"
+msgstr "Namen nach Vor- oder Nachname sortieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:474
 msgid "LastName, FirstName"
-msgstr "LastName, FirstName"
+msgstr "Nachname, Vorname"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:475
 msgid "FirstName LastName"
-msgstr "FirstName LastName"
+msgstr "Vorname Nachname"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:490
 msgid "Review Templates"
-msgstr "Review Templates"
+msgstr "Rezension Vorlage"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:494
 msgid "Book review template"
-msgstr "Book review template"
+msgstr "Buchrezension Vorlage"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:495
 msgid "Select how you want your book reviews to look."
-msgstr "Select how you want your book reviews to look."
+msgstr "Auswählen wie die Buchrezensionen aussehen sollen."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:500
 msgid "Default Book Cover"
-msgstr "Default Book Cover"
+msgstr "Standard Umschlagbild"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:501
 msgid "The default image to use when a book cover isn't uploaded"
-msgstr "The default image to use when a book cover isn't uploaded"
+msgstr ""
+"Standardbild das vewendet werden soll, wenn kein Umschlagbild hochgeladen "
+"wird"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:505
 msgid "Read more text"
-msgstr "Read more text"
+msgstr "'Weiterlesen'-Text"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:506
 msgid "The review excerpt 'Read more' tag."
-msgstr "The review excerpt 'Read more' tag."
+msgstr "Der Review-Auszug 'Read more' -Tag."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:511
 msgid "Review excerpt word count"
-msgstr "Review excerpt word count"
+msgstr "Rezensionsauszug Wortanzahl"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:512
 msgid "Max: 500, Min: 20"
@@ -903,55 +917,58 @@ msgstr "Max: 500, Min: 20"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:519
 msgid "Embedded Review Links"
-msgstr "Embedded Review Links"
+msgstr "Integrierte Rezensions-Links"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:520
 msgid "Enable clickable title links on embedded book reviews."
-msgstr "Enable clickable title links on embedded book reviews."
+msgstr ""
+"Aktivieren Sie anklickbare Titellinks bei eingebetteten Buchrezensionen."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:524
 msgid "Book Detail Items"
-msgstr "Book Detail Items"
+msgstr "Buchdetailelemente"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:525
 msgid ""
 "Book details that should appear in book reviews. You also rearrange their "
 "order here"
 msgstr ""
-"Book details that should appear in book reviews. You also rearrange their "
-"order here"
+"Buchdetails, die in den Buchrezensionen erscheinen sollen. Sie können hier "
+"auch Ihre Reihenfolge ändern"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:535
 msgid "Reviews Custom Styling"
-msgstr "Reviews Custom Styling"
+msgstr "Individuelles Aussehen der Rezensionen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:539
 msgid "Custom styles"
-msgstr "Custom styles"
+msgstr "Individuelle Gestaltung (custom styles)"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:540
 msgid "Add your custom CSS here to fine-tune the look of your book reviews"
-msgstr "Add your custom CSS here to fine-tune the look of your book reviews"
+msgstr ""
+"Fügen Sie hier Ihre eigenen CSS hinzu, um das Aussehen Ihrer Buchrezensionen "
+"zu verfeinern"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:552
 msgid "Book APIs"
-msgstr "Book APIs"
+msgstr "Buch APIs"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:556
 msgid "External Book API"
-msgstr "External Book API"
+msgstr "Externe Buch API"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:557
 msgid ""
 "Select which 3rd party API is used to fetch book data.<br />The "
 "corresponding option must also be enabled below."
 msgstr ""
-"Select which 3rd party API is used to fetch book data. The corresponding "
-"option must also be enabled below."
+"Wählen Sie aus, welche Drittanbieter-API verwendet wird, um Buchdaten "
+"einzuholen.<br/> Die entsprechende Option muss auch unten aktiviert sein."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:559
 msgid "None"
-msgstr "None"
+msgstr "Keine"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:560
 msgid "Google Books® API"
@@ -963,186 +980,184 @@ msgstr "Goodreads® API"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:571
 msgid "Google Books® Settings"
-msgstr "Google Books® Settings"
+msgstr "Google Books®-Einstellungen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:575
 msgid "Enable Google Books®"
-msgstr "Enable Google Books®"
+msgstr "Google Books® aktivieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:576
 msgid "Enable the external Google Books® API access."
-msgstr "Enable the external Google Books® API access."
+msgstr "Aktivieren Sie den externen Google Books®-API-Zugriff."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:580
 msgid "Google Books® API Key"
-msgstr "Google Books® API Key"
+msgstr "Google Books® API Schlüssel"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:581
 #: admin/settings/class-rcno-reviews-settings-definition.php:600
 #: admin/settings/class-rcno-reviews-settings-definition.php:605
 msgid "Available at: "
-msgstr "Available at:  "
+msgstr "Verfügbar bei:"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:590
 msgid "Goodreads® Settings"
-msgstr "Goodreads® Settings"
+msgstr "Goodreads®-Einstellungen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:594
 msgid "Enable Goodreads®"
-msgstr "Enable Goodreads®"
+msgstr "Goodreads® aktivieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:595
 msgid "Enable the external Goodreads® API access."
-msgstr "Enable the external Goodreads® API access."
+msgstr "Aktivieren Sie den externen Goodreads® API-Zugriff."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:599
 msgid "Goodreads® API Key"
-msgstr "Goodreads® API Key"
+msgstr "Goodreads® API Schlüssel"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:604
 msgid "Goodreads® API Secret"
-msgstr "Goodreads® API Secret"
+msgstr "Goodreads® API Geheimschlüssel"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:614
 msgid "JSON-LD Schemas"
-msgstr "JSON-LD Schemas"
+msgstr "JSON-LD-Schemata"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:618
 msgid "Disable Review Schema"
-msgstr "Disable Review Schema"
+msgstr "Rezensionsschema abschalten"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:619
 msgid "Disable the output of the review JSON-LD schema markup"
-msgstr "Disable the output of the review JSON-LD schema markup"
+msgstr ""
+"Deaktivieren Sie die Ausgabe des JSON-LD-Schema-Markups für die Überprüfung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:623
 msgid "Disable Book Schema"
-msgstr "Disable Book Schema"
+msgstr "Buchschema deaktiveren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:624
 msgid "Disable the output of the book JSON-LD schema markup"
-msgstr "Disable the output of the book JSON-LD schema markup"
+msgstr "Deaktivieren Sie die Ausgabe des JSON-LD-Schema-Markups"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:633
 msgid "Uncountable Words"
-msgstr "Uncountable Words"
+msgstr "Unzählige Wörter"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:637
 msgid "Word List"
-msgstr "Word List"
+msgstr "Wortliste"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:638
 msgid ""
 "Create a list of words that have no plural or singular form e.g. \"sheep, "
 "fish\""
 msgstr ""
-"Create a list of words that have no plural or singular form e.g. \"sheep, "
-"fish\""
+"Erstellen Sie eine Liste von Wörtern, die keine Mehr- oder Einzahl haben, z."
+"B. \"Mitarbeiter, Schüler, Artikel, Kabel\""
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:642
 msgid "Disable Pluralization"
-msgstr "Disable Pluralization"
+msgstr "Mehrzahl abschalten"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:643
 msgid "Disable the automatic pluralization of words used in the settings"
-msgstr "Disable the automatic pluralization of words used in the settings"
+msgstr "Die automatische Mehrzahlbildung in den Einstellungen abschalten"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:652
 msgid "Import/Export Settings"
-msgstr "Import/Export Settings"
+msgstr "Einstellungen importieren/exportieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:656
 msgid "Import Settings"
-msgstr "Import Settings"
+msgstr "Einstellungen importieren"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:657
 msgid "Import your previously saved plugin settings."
-msgstr "Import your previously saved plugin settings."
+msgstr "Die zuvor gesicherten Plugin-Einstellungen importieren."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:662
 msgid "Export Settings"
-msgstr "Export Settings"
+msgstr "Export Einstellungen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:663
 msgid "Save the plugin settings to a file on your computer."
-msgstr "Save the plugin settings to a file on your computer."
+msgstr "Die Plugin Einstellungen lokal speichern."
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:696
 #: admin/views/rcno-review-score-metabox.php:77
 msgid "Label"
-msgstr "Label"
+msgstr "Beschriftung"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:697
 msgid "Place the label of the "
-msgstr "Place the label of the "
+msgstr "Platzieren Sie die Beschriftung von "
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:703
 msgid "Place the slug of the "
-msgstr "Place the slug of the "
+msgstr "Platzieren Sie den Slug von "
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:709
 msgid "Hierarchical"
-msgstr "Hierarchical"
+msgstr "Hierarchisch"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:710
 msgid "Is this custom taxonomy hierarchical?"
-msgstr "Is this custom taxonomy hierarchical?"
+msgstr "Ist die individuelle Kategorie hierarchisch?"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:714
 msgid "Show in table"
-msgstr "Show in table"
+msgstr "In Tabelle anzeigen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:715
 msgid "Show this custom taxonomy on the admin table"
-msgstr "Show this custom taxonomy on the admin table"
+msgstr "Zeige die individuelle Kategorie in der Admintabelle"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:719
 msgid "Show filter"
-msgstr "Show filter"
+msgstr "Filter anzeigen"
 
 #: admin/settings/class-rcno-reviews-settings-definition.php:720
 msgid "Show a drop-down filter for this taxonomy on the admin table"
-msgstr "Show a drop-down filter for this taxonomy on the admin table"
+msgstr "Zeige eine Dropdown-Liste für diese Kategorie auf der Admin Tabelle"
 
 #: admin/settings/class-rcno-reviews-settings.php:127
 msgid "Please enter 2 or more lower-case characters."
-msgstr "Please enter 2 or more lower-case characters."
+msgstr "Bitte 2 oder mehr Kleinbuchstaben eingeben."
 
 #: admin/views/rcno-author-taxonomy-metabox.php:7
 msgid "Author's URL"
-msgstr "Author's URL"
+msgstr "URL des Autors"
 
 #: admin/views/rcno-author-taxonomy-metabox.php:11
 msgid ""
 "Please provide a link pointing to the author's official website or fan page."
 msgstr ""
-"Please provide a link pointing to the author's official website or fan page."
+"Bitte geben Sie einen Link an, der auf die offizielle Website des Autors "
+"oder dessen Fan-Seite verweist."
 
 #: admin/views/rcno-book-cover-metabox.php:19
 msgid "Custom URL"
-msgstr "Custom URL"
+msgstr "Benutzerdefinierte URL"
 
 #: admin/views/rcno-book-cover-metabox.php:25
 #: admin/views/rcno-book-cover-metabox.php:26
 msgid "Add Book Cover"
-msgstr "Add Book Cover"
+msgstr "Einband einfügen"
 
 #: admin/views/rcno-book-cover-metabox.php:31
 #: admin/views/rcno-book-cover-metabox.php:32
 msgid "Remove Book Cover"
-msgstr "Remove Book Cover"
+msgstr "Umschlagbild entfernen"
 
 #: admin/views/rcno-buy-links-metabox.php:41
-#, fuzzy
-#| msgid "Store/Shop"
 msgid "Store"
-msgstr "Store/Shop"
+msgstr "Shop"
 
 #: admin/views/rcno-buy-links-metabox.php:42
-#, fuzzy
-#| msgid "LinkedIn"
 msgid "Link"
-msgstr "LinkedIn"
+msgstr "Link"
 
 #: admin/views/rcno-buy-links-metabox.php:66
 #: admin/views/rcno-buy-links-metabox.php:82
@@ -1155,41 +1170,39 @@ msgstr "LinkedIn"
 #: admin/views/rcno-review-score-metabox.php:143
 #: admin/views/rcno-review-score-metabox.php:151
 msgid "Remove"
-msgstr "Remove"
+msgstr "Entfernen"
 
 #: admin/views/rcno-buy-links-metabox.php:123
 msgid "Select and enter your affiliate purchase links here."
-msgstr "Select and enter your affiliate purchase links here."
+msgstr "Wählen Sie hier Ihre Affiliate-Kauflinks aus und geben Sie sie ein."
 
 #: admin/views/rcno-buy-links-metabox.php:124
-#, fuzzy
-#| msgid "Add New %1$s"
 msgid "Add New Link"
-msgstr "Add New %1$s"
+msgstr "Link hinzufügen"
 
 #: admin/views/rcno-currently-reading-dash-widget.php:52
 msgid "Book Title"
-msgstr "Book Title"
+msgstr "Buchtitel"
 
 #: admin/views/rcno-currently-reading-dash-widget.php:54
 msgid "Book Author"
-msgstr "Book Author"
+msgstr "Buchautor"
 
 #: admin/views/rcno-currently-reading-dash-widget.php:56
 msgid "Currently on page "
-msgstr "Currently on page "
+msgstr "Derzeit auf Seite "
 
 #: admin/views/rcno-currently-reading-dash-widget.php:62
 msgid "Comment on progress"
-msgstr "Comment on progress"
+msgstr "Kommentar zum Fortschritt"
 
 #: admin/views/rcno-currently-reading-dash-widget.php:69
 msgid "Update Progress"
-msgstr "Update Progress"
+msgstr "Fortschritt aktualisieren"
 
 #: admin/views/rcno-currently-reading-dash-widget.php:73
 msgid "Finished"
-msgstr "Finished"
+msgstr "Beendet"
 
 #: admin/views/rcno-general-info-metabox.php:21
 #: public/class-rcno-template-tags.php:94
@@ -1198,123 +1211,114 @@ msgstr "Finished"
 #: public/widgets/class-rcno-reviews-search-bar.php:214
 #: public/widgets/class-rcno-reviews-tag-cloud.php:224
 msgid "Title"
-msgstr "Title"
+msgstr "Titel"
 
 #: admin/views/rcno-general-info-metabox.php:43
 msgid "Publication Date"
-msgstr "Published Date"
+msgstr "Publikationsdatum"
 
 #: admin/views/rcno-general-info-metabox.php:54
 msgid "Publication Format"
-msgstr "Published Format"
+msgstr "Format"
 
 #: admin/views/rcno-general-info-metabox.php:65
 #: public/class-rcno-template-tags.php:85
 msgid "Edition"
-msgstr "Edition"
+msgstr "Ausgabe"
 
 #: admin/views/rcno-general-info-metabox.php:98
 msgid "GoodReads ID"
-msgstr "Goodreads ID"
+msgstr "GoodReads ID"
 
 #: admin/views/rcno-general-info-metabox.php:129
 msgid "Average"
-msgstr "Average"
+msgstr "Durchschnittlich"
 
 #: admin/views/rcno-review-score-metabox.php:36
-#, fuzzy
-#| msgid "Enable the 5 star rating box?"
 msgid "Enable Rating Box"
-msgstr "Enable the 5 star rating box?"
+msgstr "Bewertungsfeld aktivieren"
 
 #: admin/views/rcno-review-score-metabox.php:44
-#, fuzzy
-#| msgid "Rating Label"
 msgid "Rating Type"
-msgstr "Rating Label"
+msgstr "Bewertungstyp"
 
 #: admin/views/rcno-review-score-metabox.php:47
 #: public/widgets/class-rcno-reviews-tag-cloud.php:287
 msgid "Number"
-msgstr "Number"
+msgstr "Nummer"
 
 #: admin/views/rcno-review-score-metabox.php:50
-#, fuzzy
-#| msgid "Twitter"
 msgid "Letter"
-msgstr "Twitter"
+msgstr "Buchstaben"
 
 #: admin/views/rcno-review-score-metabox.php:53
 msgid "Stars"
-msgstr "Stars"
+msgstr "Sterne"
 
 #: admin/views/rcno-review-score-metabox.php:59
 msgid "Rating Box Position"
-msgstr "Rating Box Position"
+msgstr "Position der Rating Box"
 
 #: admin/views/rcno-review-score-metabox.php:62
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:49
 msgid "Top"
-msgstr "Top"
+msgstr "Oben"
 
 #: admin/views/rcno-review-score-metabox.php:65
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:60
 msgid "Bottom"
-msgstr "Bottom"
+msgstr "Unten"
 
 #: admin/views/rcno-review-score-metabox.php:78
 msgid "Score"
-msgstr "Score"
+msgstr "Wertung"
 
 #: admin/views/rcno-review-score-metabox.php:156
 msgid ""
 "Label: The name of criteria | Score: A number value between 0 - 5, in "
 "increments of 0.1"
 msgstr ""
-"Label: The name of criteria | Score: A number value between 0 - 5, in "
-"increments of 0.1"
+"Bezeichnung: Der Name der Kriterien Punktzahl: Ein Zahlenwert zwischen 0 und "
+"5 in Schritten von 0,1"
 
 #: admin/views/rcno-review-score-metabox.php:158
-#, fuzzy
-#| msgid "Add Listing"
 msgid "Add Criteria"
-msgstr "Add Listing"
+msgstr "Kriterien hinzufügen"
 
 #: admin/views/rcno-reviews-isbn-metabox.php:33
-#, fuzzy, php-format
-#| msgid "Your book was not found on "
+#, php-format
 msgid "Your book was not found on %s"
-msgstr "Your book was not found on "
+msgstr "Ihr Buch wurde auf %s nicht gefunden"
 
 #: admin/views/rcno-reviews-listings-modal.php:17
 msgid "Insert book review listing"
-msgstr "Insert book review listing"
+msgstr "Liste der Buchrezension einfügen"
 
 #: admin/views/rcno-reviews-listings-modal.php:26
 msgid "Embed taxonomy index"
-msgstr "Embed taxonomy index"
+msgstr "Taxonomie-Index einbetten"
 
 #: admin/views/rcno-reviews-listings-modal.php:28
 #: public/widgets/class-rcno-reviews-tag-cloud.php:232
 msgid "Taxonomy"
-msgstr "Taxonomy"
+msgstr "Taxonomie"
 
 #: admin/views/rcno-reviews-listings-modal.php:44
 msgid "Embed book review index"
-msgstr "Embed book review index"
+msgstr "Buchrezensionsindex einfügen"
 
 #: admin/views/rcno-reviews-listings-modal.php:49
 msgid "Embed book review grid"
-msgstr "Embed book review grid"
+msgstr "Buchrezensionsgrid einfügen"
 
 #: admin/views/rcno-reviews-listings-modal.php:54
 msgid "Embed sortable book review grid"
-msgstr "Embed sortable book review grid"
+msgstr "Sortierbares Buchrezensionsgrid einfügen"
 
 #: admin/views/rcno-reviews-listings-modal.php:60
 #: admin/views/rcno-reviews-modal.php:79
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Abbrechen"
 
 #: admin/views/rcno-reviews-listings-modal.php:64
 #: includes/class-rcno-reviews-shortcodes.php:389
@@ -1322,49 +1326,50 @@ msgstr "Cancel"
 #: includes/class-rcno-reviews-shortcodes.php:511
 #: includes/class-rcno-reviews-shortcodes.php:512
 msgid "Insert"
-msgstr "Insert"
+msgstr "Einfügen"
 
 #: admin/views/rcno-reviews-modal.php:17
 msgid "Insert book review"
-msgstr "Insert book review"
+msgstr "Buchrezension einfügen"
 
 #: admin/views/rcno-reviews-modal.php:19
 msgid "Close"
-msgstr "Close"
+msgstr "Schließen"
 
 #: admin/views/rcno-reviews-modal.php:25
 msgid ""
 "Choose the review you want to include from the list below or search for it."
 msgstr ""
-"Choose the review you want to include from the list below or search for it."
+"Wählen Sie die Bewertung, die Sie einschließen möchten, aus der folgenden "
+"Liste aus oder suchen Sie danach."
 
 #: admin/views/rcno-reviews-modal.php:29
 msgid "Search"
-msgstr "Search"
+msgstr "Suchen"
 
 #: admin/views/rcno-reviews-modal.php:43
 msgid "No search term specified. Showing recent items."
-msgstr "No search term specified. Showing recent items."
+msgstr "Kein Suchbegriff angegeben. Zeige die aktuellesten EInträge."
 
 #: admin/views/rcno-reviews-modal.php:44
 msgid "Search or use up and down arrow keys to select an item."
-msgstr "Search or use up and down arrow keys to select an item."
+msgstr "Suchen oder die Pfeiltasten verwenden um einen Eintrag auszuwählen."
 
 #: admin/views/rcno-reviews-modal.php:51
 msgid "Display options"
-msgstr "Display options"
+msgstr "Anzeige-Optionen"
 
 #: admin/views/rcno-reviews-modal.php:53
 msgid "Display options:"
-msgstr "Display options:"
+msgstr "Anzeige-Optionen:"
 
 #: admin/views/rcno-reviews-modal.php:57
 msgid "Embed excerpt only"
-msgstr "Embed excerpt only"
+msgstr "Nur Auszug einbetten"
 
 #: admin/views/rcno-reviews-modal.php:61
 msgid "Embed <b>without</b> description"
-msgstr "Embed without description"
+msgstr "<b>Ohne</b> Beschreibung einbetten"
 
 #: admin/views/rcno-reviews-modal.php:69
 #, php-format
@@ -1372,20 +1377,20 @@ msgid ""
 "%1sCreate a new review.%2s (This will open a new tab and you will need to "
 "return here for including the review)"
 msgstr ""
-"%1sCreate a new review.%2s (This will open a new tab and you will need to "
-"return here for including the review)"
+"%1s Erstellen Sie eine neue Rezension.%2s (Dies öffnet einen neuen TAB und "
+"Sie müssen hierher zurückkehren um die Rezension einzufügen)"
 
 #: admin/views/rcno-reviews-modal.php:82
 msgid "Include Shortcut"
-msgstr "Include Shortcut"
+msgstr "Kurcode einbinden"
 
 #: extensions/rcno-author-box/includes/author-box.php:67
 msgid "View all reviews by"
-msgstr "View all reviews by"
+msgstr "Alle Rezensionen anzeigen durch"
 
 #: extensions/rcno-author-box/includes/settings-page.php:18
 msgid "Author box title"
-msgstr "Author box title"
+msgstr "Autor Boxentitel"
 
 #: extensions/rcno-author-box/includes/settings-page.php:32
 #, php-format
@@ -1393,8 +1398,8 @@ msgid ""
 "Visit your user <a href=\"%s\">profile page</a> to add your social media "
 "account information"
 msgstr ""
-"Visit your user <a href=\"%s\">profile page</a> to add your social media "
-"account information"
+"Besuchen Sie Ihre <a href=\"%s\">Benutzerprofilseite</a> auf Ihrer Social - "
+"Media - Kontoinformationen hinzufügen"
 
 #: extensions/rcno-author-box/includes/settings-page.php:38
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:15
@@ -1422,7 +1427,7 @@ msgstr "Tumblr"
 
 #: extensions/rcno-author-box/rcno-author-box.php:13
 msgid "Author Box"
-msgstr "Author Box"
+msgstr "Autorenbox"
 
 #: extensions/rcno-author-box/rcno-author-box.php:14
 msgid ""
@@ -1430,14 +1435,14 @@ msgid ""
 "your website's user profile page to add your social media profile "
 "information."
 msgstr ""
-"Adds a review author box below your published book reviews. Please visit "
-"your website's user profile page to add your social media profile "
-"information."
+"Fügt eine Autorenbox der Rezension unter Ihre veröffentlichte Rezension ein. "
+"Bitte besuchen Sie die Benutzerprofil-Seite Ihrer Website, um Ihre "
+"Informationen über das Social Media Profil hinzuzufügen."
 
 #: extensions/rcno-custom-user-metadata/includes/settings-page.php:18
 #: extensions/rcno-posts-to-reviews/includes/settings-page.php:18
 msgid "Custom User Metaboxes"
-msgstr "Custom User Metaboxes"
+msgstr "Indivduelle Benutzer Metaboxen"
 
 #: extensions/rcno-custom-user-metadata/includes/settings-page.php:27
 #: extensions/rcno-posts-to-reviews/includes/settings-page.php:27
@@ -1445,117 +1450,120 @@ msgid ""
 "Please visit the \"Templates\" tab on the Recencio setting page,\n"
 "                             to add your new metadata entries to the frontend"
 msgstr ""
-"Please visit the \"Templates\" tab on the Recencio setting page,\n"
-"                             to add your new metadata entries to the frontend"
+"Verwenden Sie das \"Vorlagen\" Tab auf der Recencio Einstellungen Seite,\n"
+"                             um Ihre neue Metabxo im Frontend hinzuzufügen"
 
 #: extensions/rcno-custom-user-metadata/rcno-custom-user-metadata.php:18
 msgid "Custom User Metadata"
-msgstr "Custom User Metadata"
+msgstr "Benutzerdefinierte Benutzermetadaten"
 
 #: extensions/rcno-custom-user-metadata/rcno-custom-user-metadata.php:19
 msgid ""
 "Add your own custom metadata fields to the book details section of a "
 "reviewed book. Please remember to enable the new fields on the frontend."
 msgstr ""
-"Add your own custom metadata fields to the book details section of a "
-"reviewed book. Please remember to enable the new fields on the frontend."
+"Fügen Sie dem Abschnitt mit den Buchdetails eines überprüften Buches Ihre "
+"eigenen benutzerdefinierten Metadatenfelder hinzu. Bitte denken Sie daran, "
+"die neuen Felder im Frontend zu aktivieren."
 
 #: extensions/rcno-fetch-book-cover/rcno-fetch-book-cover.php:25
 msgid "Fetch Book Cover"
-msgstr "Fetch Book Cover"
+msgstr "Umschlagsbild abrufen"
 
 #: extensions/rcno-fetch-book-cover/rcno-fetch-book-cover.php:26
 msgid "Automatically downloads and attach a book cover to a book review."
-msgstr "Automatically downloads and attach a book cover to a book review."
+msgstr ""
+"Laden Sie automatisch ein Buchcover herunter und fügen Sie ein Buchcover an "
+"eine Rezension an."
 
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:18
 msgid "Convert Posts to Reviews"
-msgstr "Convert Posts to Reviews"
+msgstr "Beiträge in Bewertungen konvertieren"
 
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:19
 msgid ""
 "Converts WordPress posts to Recencio book reviews and Recencio book reviews "
 "to WordPress posts."
 msgstr ""
-"Converts WordPress posts to Recencio book reviews and Recencio book reviews "
-"to WordPress posts."
+"Konvertiert WordPress-Beiträge in Recencio-Buchbesprechungen und Recencio-"
+"Buchbesprechungen in WordPress-Beiträge."
 
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:77
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:91
 msgid "Convert"
-msgstr "Convert"
+msgstr "Konvertieren"
 
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:78
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:200
 msgid "Convert to Review"
-msgstr "Convert to Review"
+msgstr "In Überprüfung konvertieren"
 
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:92
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:217
 msgid "Convert to Post"
-msgstr ""
+msgstr "In Post konvertieren"
 
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:283
 #, php-format
 msgid "%s post converted to a review."
 msgid_plural "%s posts converted to reviews."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s Beitrag in eine Bewertung umgewandelt."
+msgstr[1] "%s Beiträge in Bewertungen umgewandelt."
 
 #: extensions/rcno-posts-to-reviews/rcno-posts-to-reviews.php:292
 #, php-format
 msgid "%s review converted to a post."
 msgid_plural "%s reviews converted to posts."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s Bewertung in einen Beitrag umgewandelt."
+msgstr[1] "%s Bewertungen in Beiträge umgewandelt."
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:61
 msgid "Pinterest"
-msgstr ""
+msgstr "Pinterest"
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:76
 msgid "StumbleUpon"
-msgstr ""
+msgstr "StumbleUpon"
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:107
 msgid "Reddit"
-msgstr ""
+msgstr "Reddit"
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:121
 msgid "Pocket"
-msgstr ""
+msgstr "Tasche"
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:135
 msgid "Digg"
-msgstr ""
+msgstr "Digg"
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:151
 msgid "InstaPaper"
-msgstr ""
+msgstr "InstaPaper"
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:166
 msgid "Buffer"
-msgstr ""
+msgstr "Buffer"
 
 #: extensions/rcno-social-media-sharing/includes/all-buttons.php:179
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:17
 msgid "Share title"
-msgstr "Share title"
+msgstr "Teilen Titel"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:28
 msgid "Social media sites"
-msgstr ""
+msgstr "Social-Media-Websites"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:39
 msgid "Buttons position"
-msgstr ""
+msgstr "Button Position"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:71
 msgid "Both"
-msgstr ""
+msgstr "Beide"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:82
 msgid "Shortcode"
@@ -1563,19 +1571,19 @@ msgstr "Shortcode"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:89
 msgid "Buttons color"
-msgstr ""
+msgstr "Schaltflächen"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:100
 msgid "Twitter username"
-msgstr "Twitter username"
+msgstr "Twitter-Nutzername"
 
 #: extensions/rcno-social-media-sharing/includes/settings-page.php:111
 msgid "Display on home page"
-msgstr "Display on home page"
+msgstr "Auf der Homepage anzeigen"
 
 #: extensions/rcno-social-media-sharing/rcno-social-media-sharing.php:12
 msgid "Social Media Sharing"
-msgstr ""
+msgstr "Teilen in Social Media"
 
 #: extensions/rcno-social-media-sharing/rcno-social-media-sharing.php:13
 msgid ""
@@ -1583,108 +1591,112 @@ msgid ""
 "\t\tJust select the social networks you would to share to, where the buttons "
 "should show up and save your settings."
 msgstr ""
+"Einfache Social Media Teilen Schaltflächen für Ihre Rezensionen. \n"
+"\t\tWählen Sie einfach die sozialen Netzwerke aus, in die Sie sich "
+"austauschen möchten, wo die Schaltflächen angezeigt werden sollen und "
+"speichern Sie Ihre Einstellungen."
 
 #: includes/abstracts/Abstract_Rcno_Extension.php:72
 msgid "Enable"
-msgstr ""
+msgstr "Aktivieren"
 
 #: includes/abstracts/Abstract_Rcno_Extension.php:85
 msgid "Disable"
-msgstr ""
+msgstr "Deaktivieren"
 
 #: includes/class-rcno-goodreads-api.php:108
 msgid "There was an error fetch data from GoodReads"
-msgstr "There was an error fetch data from GoodReads"
+msgstr "Beim Abrufen von Daten von GoodReads ist ein Fehler aufgetreten"
 
 #: includes/class-rcno-reviews-extensions.php:112
 #: includes/class-rcno-reviews-extensions.php:113
 msgid "Extensions"
-msgstr "Extensions"
+msgstr "Erweiterungen"
 
 #: includes/class-rcno-reviews-extensions.php:137
 msgid ""
 "All Recencio Review Extensions. Choose which you want to use, then activate "
 "it."
 msgstr ""
-"All Recencio Review Extensions. Choose which you want to use, then activate "
-"it."
+"Alle Recencio Rezensionserweiterungen. Wählen Sie, welche Sie verwenden "
+"wollen und aktivieren Sie diese."
 
 #: includes/class-rcno-reviews-extensions.php:142
 msgid "No extensions are installed or activated."
-msgstr "No extensions are installed or activated."
+msgstr "Es wurden keine Erweiterungen installiert oder aktiviert."
 
 #: includes/class-rcno-reviews-extensions.php:217
 msgid "Activate"
-msgstr "Activate"
+msgstr "Aktivieren"
 
 #: includes/class-rcno-reviews-extensions.php:218
 msgid "Deactivate"
-msgstr "Deactivate"
+msgstr "Deaktivieren"
 
 #: includes/class-rcno-reviews-extensions.php:236
 #: includes/class-rcno-reviews-extensions.php:282
 msgid "Something went wrong!"
-msgstr "Something went wrong!"
+msgstr "Etwas hat nicht funktioniert!"
 
 #: includes/class-rcno-reviews-extensions.php:242
 msgid "No extension data was sent"
-msgstr "No extension data was sent"
+msgstr "Es wurden keine Erweiterungsdaten gesendet"
 
 #: includes/class-rcno-reviews-extensions.php:261
 msgid "Activated"
-msgstr "Activated"
+msgstr "Aktiviert"
 
 #: includes/class-rcno-reviews-extensions.php:266
 msgid "Already activated"
-msgstr "Already activated"
+msgstr "Bereits aktiviert"
 
 #: includes/class-rcno-reviews-extensions.php:270
 msgid "Nothing happened"
-msgstr "Nothing happened"
+msgstr "Es ist nichts geschehen"
 
 #: includes/class-rcno-reviews-extensions.php:287
 msgid "No extension data sent"
-msgstr "No extension data sent"
+msgstr "Keine Erweiterungsdaten gesendet"
 
 #: includes/class-rcno-reviews-extensions.php:301
 msgid "Deactivated"
-msgstr "Deactivated"
+msgstr "Deaktiviert"
 
 #: includes/class-rcno-reviews-extensions.php:305
 msgid "Not activated"
-msgstr "Not activated"
+msgstr "Nicht aktiviert"
 
 #: includes/class-rcno-reviews-shortcodes.php:304
 #: public/class-rcno-template-tags.php:1073
 #: public/class-rcno-template-tags.php:1193
 #: public/shortcodes/class-rcno-book-list-shortcode.php:95
 msgid "Books in this series: "
-msgstr "Books in this series: "
+msgstr "Bücher in dieser Reihe:"
 
 #: includes/class-rcno-reviews-shortcodes.php:336
 #: includes/class-rcno-reviews-shortcodes.php:337
 msgid "Add Review"
-msgstr "Add Review"
+msgstr "Bewertung hinzufügen"
 
 #: includes/class-rcno-reviews-shortcodes.php:387
 #: includes/class-rcno-reviews-shortcodes.php:509
 msgid "No title"
-msgstr "No title"
+msgstr "Kein Titel"
 
 #: includes/class-rcno-reviews-shortcodes.php:388
 #: includes/class-rcno-reviews-shortcodes.php:510
 #: public/templates/rcno_metamor/review.php:69
 msgid "Review"
-msgstr "Review"
+msgstr "Bewertung"
 
 #: includes/class-rcno-reviews-shortcodes.php:459
 #: includes/class-rcno-reviews-shortcodes.php:460
 msgid "Add Listing"
-msgstr "Add Listing"
+msgstr "Eintrag hinzufügen"
 
 #: includes/class-rcno-reviews-shortcodes.php:530
 msgid "Shortcodes Help"
-msgstr "Shortcodes Help"
+msgstr "Kurzcode Hilfe"
 
 #: includes/class-rcno-reviews-shortcodes.php:542
 msgid "Shortcodes"
@@ -1692,11 +1704,11 @@ msgstr "Shortcodes"
 
 #: public/class-rcno-reviews-public-ratings.php:264
 msgid "I don't know who you are"
-msgstr "I don't know who you are"
+msgstr "Ich weiß nicht, wer Sie sind"
 
 #: public/class-rcno-template-tags.php:83
 msgid "Published"
-msgstr "Published"
+msgstr "Veröffentlicht"
 
 #: public/class-rcno-template-tags.php:84
 #: public/widgets/class-rcno-reviews-tag-cloud.php:243
@@ -1705,52 +1717,46 @@ msgstr "Format"
 
 #: public/class-rcno-template-tags.php:140
 msgid "Category"
-msgstr "Category"
+msgstr "Kategorie"
 
 #: public/class-rcno-template-tags.php:141
 msgid "Tag"
-msgstr "Tag"
+msgstr "Schlagwort"
 
 #: public/class-rcno-template-tags.php:274
 msgid "out of 5 stars"
-msgstr "out of 5 stars"
+msgstr "von 5 Sterne"
 
 #: public/class-rcno-template-tags.php:346
-#, fuzzy
-#| msgid "Book reviews will be available at:"
 msgid "Book Title Unavailable"
-msgstr "Book reviews will be available at:"
+msgstr "Buchtitel nicht verfügbar"
 
 #: public/class-rcno-template-tags.php:347
 msgid "no title has been provided for this book"
-msgstr ""
+msgstr "Für dieses Buch wurde kein Titel angegeben"
 
 #: public/class-rcno-template-tags.php:880
-#, fuzzy
-#| msgid "GoodReads ID"
 msgid "GoodReads.com"
-msgstr "Goodreads ID"
+msgstr "GoodReads.com"
 
 #: public/class-rcno-template-tags.php:886
-#, fuzzy
-#| msgid "Google Books® API"
 msgid "Google Books"
-msgstr "Google Books® API"
+msgstr "Google Books"
 
 #: public/class-rcno-template-tags.php:1146
 #, php-format
 msgid "No entries found for the \"%s\" taxonomy."
-msgstr "No entries found for the \"%s\" taxonomy."
+msgstr "Es wurden keine Einträge für die \" %s\" Kategorie gefunden."
 
 #: public/class-rcno-template-tags.php:1362
 #: public/shortcodes/class-rcno-score-box-shortcode.php:139
 #: public/shortcodes/class-rcno-score-box-shortcode.php:142
 msgid "Overall Score"
-msgstr "Overall Score"
+msgstr "Gesamtpunktzahl"
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:112
 msgid "The Book List shortcode"
-msgstr "The Book List shortcode"
+msgstr "Kurztcode der Buchliste"
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:114
 msgid ""
@@ -1761,10 +1767,12 @@ msgid ""
 "the frontend. \n"
 "\t\t\t\t\t\t\t\t"
 msgstr ""
-"This shortcode creates a graphical list of books belonging to a particular "
-"custom taxonomy. If the chosen custom taxonomy only has 1 reviewed book, "
-"nothing will be displayed when rendering the content of this shortcode on "
-"the frontend"
+"Dieser Kurzcode erstelle eine grafische Liste jener Bücher, die einer "
+"bestimmten individuellen Kategorie zugeordnet sind. \n"
+"\t\t\t\t\t\t\t\tWenn die gewählte Kategorie nur ein rezensiertes Buch "
+"aufweist, wird nichts angezeigt, wenn der Inhalt dieses Kurzcodes für das "
+"Frontend generiert wird. \n"
+"\t\t\t\t\t\t\t\t"
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:120
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:174
@@ -1772,7 +1780,7 @@ msgstr ""
 #: public/shortcodes/class-rcno-review-box-shortcode.php:115
 #: public/shortcodes/class-rcno-score-box-shortcode.php:185
 msgid "The default shortcode."
-msgstr "The default shortcode."
+msgstr "Standard Kurzcode."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:123
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:177
@@ -1783,82 +1791,85 @@ msgid ""
 "necessary to include them in the shortcode. The default values are listed "
 "below: "
 msgstr ""
-"The shortcode uses a couple of parameters that can be changed or left at the "
-"default values. If the default values are being used, then it is not "
-"necessary to include them in the shortcode. The default values are listed "
-"below: "
+"Dieser Kurzcode verwendet einige Parameter, deren Werte entweder geändert "
+"werden können oder nicht. \n"
+"\t\t\t\t\t\t\t\tWerden die Standartwerte benutzt, ist es notwendig diese im "
+"Kurzcode anzuführen. Die Standwertwerte werden unten aufgelistet: "
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:131
 msgid "The post/review ID, defaults to the current review post."
-msgstr "The post/review ID, defaults to the current review post."
+msgstr "Die Beitrags/Rezensions-ID, Standart des aktuellen Rezesionsbeitrags."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:135
 msgid ""
 "The custom taxonomy to display the book list for, defaults to the the "
 "\"series\" taxonomy."
 msgstr ""
-"The custom taxonomy to display the book list for, defaults to the the "
-"\"series\" taxonomy."
+"Die benutzerdefinierte Taxonomie, für die die Buchliste angezeigt werden "
+"soll, ist standardmäßig die Taxonomie \"Serie\"."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:140
 msgid ""
 "Whether to display the book series number. Defaults to \"yes\", use 0 for "
 "\"no\"."
 msgstr ""
-"Whether to display the book series number. Defaults to \"yes\", use 0 for "
-"\"no\"."
+"Ob die Nummer in der Buchreihe angezeigt werden soll. Standardwert ist \"Ja"
+"\", verwenden Sie 0 für \"Nein\"."
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:145
 msgid ""
 "The header text for the book list, defaults to \"Books in this series:\""
 msgstr ""
-"The header text for the book list, defaults to \"Books in this series:\""
+"Der Kopftext für die Bücherliste, Standardeinstellungen zu \"Bücher in "
+"dieser Reihe:\""
 
 #: public/shortcodes/class-rcno-book-list-shortcode.php:152
 msgid "Examples of the book list shortcode:"
-msgstr "Examples of the book list shortcode:"
+msgstr "Beispiele für den Kurzcode der Buchliste:"
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:97
-#, fuzzy
-#| msgid "Read more text"
 msgid "Read more"
-msgstr "Read more text"
+msgstr "Weiterlesen"
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:169
-#, fuzzy
-#| msgid "The Book List shortcode"
 msgid "The Book Listing shortcode"
-msgstr "The Book List shortcode"
+msgstr "Der Shortcode für die Buchliste"
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:171
 msgid ""
 "This shortcode creates a list of books based on the comma separated list of "
 "reviews provided in the \"ids\" parameter."
 msgstr ""
+"Dieser Shortcode erstellt eine Liste von Büchern basierend auf der durch "
+"Kommas getrennten Liste von Rezensionen, die im Parameter \"ids\" angegeben "
+"sind."
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:185
 msgid "This a list of review IDs, separated by commas"
 msgstr ""
+"Dies ist eine Liste von Überprüfungs-IDs, die durch Kommas getrennt sind"
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:189
 msgid "The word count of the book description being displayed. Defaults to 30"
-msgstr ""
+msgstr "Die Wortzahl der angezeigten Buchbeschreibung. Der Standardwert ist 30"
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:193
 msgid ""
 "Adds a heading to the listing of book. Defaults to empty string (not shown)"
 msgstr ""
+"Fügt der Liste des Buches eine Überschrift hinzu. Der Standardwert ist eine "
+"leere Zeichenfolge (nicht gezeigt)."
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:197
 msgid ""
 "The text displayed in the \"read more\" button. Defaults to \"Read more\""
 msgstr ""
+"Der in der Schaltfläche \"Lesen Sie mehr\" angezeigte Text. Der Standardwert "
+"ist \"Weiterlesen\"."
 
 #: public/shortcodes/class-rcno-book-listing-shortcode.php:203
-#, fuzzy
-#| msgid "Examples of the book list shortcode:"
 msgid "Examples of the book listing shortcode:"
-msgstr "Examples of the book list shortcode:"
+msgstr "Beispiele für den Shortcode der Buchliste:"
 
 #: public/shortcodes/class-rcno-grid-shortcode.php:172
 #: public/shortcodes/layouts/rcno-isotope-grid.php:124
@@ -1867,11 +1878,11 @@ msgstr "Examples of the book list shortcode:"
 #: public/templates/rcno_metamor/reviews_grid.php:67
 #: public/templates/rcno_metamor/reviews_index.php:104
 msgid "There are no book reviews to display."
-msgstr "There are no book reviews to display."
+msgstr "Es gibt keine Rezensionen anzuzeigen."
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:110
 msgid "The Purchase Links shortcode"
-msgstr "The Purchase Links shortcode"
+msgstr "Der Kurzcode für die Kauflinks"
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:112
 msgid ""
@@ -1880,30 +1891,31 @@ msgid ""
 "post. If the shortcode is used in a regular post, the ID of the review it is "
 "attached to is needed."
 msgstr ""
-"This shortcode display the book purchase links in reviews or regular posts. "
-"This shortcode only needs the ID parameter if it is inserted into a regular "
-"post. If the shortcode is used in a regular post, the ID of the review it is "
-"attached to is needed."
+"Dieser Shortcode zeigt die Buchkauflinks in Rezensionen oder regulären "
+"Beiträgen an. Dieser Shortcode benötigt den ID-Parameter nur, wenn er in "
+"einen regulären Beitrag eingefügt wird. Wenn der Shortcode in einem "
+"regulären Beitrag verwendet wird, wird die ID der Rezension, an dier er "
+"gebunden ist, benötigt."
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:121
 msgid "The review ID the purchase link is attached to"
-msgstr "The review ID the purchase link is attached to"
+msgstr "Die Rezensions-ID an die der Kauflink gebunden ist"
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:125
 msgid ""
 "Whether to display the purchase links label. Defaults to 'yes', use 0 for "
 "'no'."
 msgstr ""
-"Whether to display the purchase links label. Defaults to 'yes', use 0 for "
-"'no'."
+"Ob die Beschriftung für den Kauflink angezeigt werden soll. "
+"Standardeinstellung ist \"Ja\", 0 für \"Nein\" verwenden."
 
 #: public/shortcodes/class-rcno-purchase-links-shortcode.php:132
 msgid "Examples of the purchase links shortcode:"
-msgstr "Examples of the purchase links shortcode:"
+msgstr "Beispiel für den Kurcode \"Kauflink\":"
 
 #: public/shortcodes/class-rcno-review-box-shortcode.php:109
 msgid "The Review Box shortcode"
-msgstr "The Review Box shortcode"
+msgstr "Der Rezensions Box Kurzcode"
 
 #: public/shortcodes/class-rcno-review-box-shortcode.php:111
 #: public/shortcodes/class-rcno-score-box-shortcode.php:181
@@ -1913,116 +1925,105 @@ msgid ""
 "regular post. If the shortcode is used in a regular post, the ID of the "
 "review it is attached to is needed."
 msgstr ""
-"This shortcode display the book review score box in reviews or regular "
-"posts. This shortcode only needs the ID parameter if it is inserted into a "
-"regular post. If the shortcode is used in a regular post, the ID of the "
-"review it is attached to is needed."
+"Dieser Shortcode zeigt die Buch-Rezensionsscore-Box in Rezensionen oder "
+"regulären Beiträgen an. Dieser Shortcode benötigt den ID-Parameter nur, wenn "
+"er in einen regulären Beitrag eingefügt wird. Wenn der Shortcode in einem "
+"regulären Beitrag verwendet wird, wird die ID der Überprüfung, an die er "
+"gebunden ist, benötigt."
 
 #: public/shortcodes/class-rcno-review-box-shortcode.php:120
 #: public/shortcodes/class-rcno-score-box-shortcode.php:190
 msgid "The review ID, defaults to the review post."
-msgstr "The review ID, defaults to the review post."
+msgstr "Die Rezension ID, Standardeinstellungen für die Rezensionsbeiträge."
 
 #: public/shortcodes/class-rcno-review-box-shortcode.php:126
-#, fuzzy
-#| msgid "Examples of the review box shortcode:"
 msgid "Examples of the review box shortcode"
-msgstr "Examples of the review box shortcode:"
+msgstr "Beispiele für den Shortcode der Überprüfungsbox"
 
 #: public/shortcodes/class-rcno-score-box-shortcode.php:179
-#, fuzzy
-#| msgid "The Review Box shortcode"
 msgid "The Review Score shortcode"
-msgstr "The Review Box shortcode"
+msgstr "Der Shortcode für das Bewertungsergebnis"
 
 #: public/shortcodes/class-rcno-score-box-shortcode.php:196
-#, fuzzy
-#| msgid "Examples of the review box shortcode:"
 msgid "Examples of the review score box shortcode"
-msgstr "Examples of the review box shortcode:"
+msgstr "Beispiele für den Shortcode der Bewertungsliste"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:48
 msgid "Search..."
-msgstr "Search..."
+msgstr "Suche..."
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:58
 msgid "Select"
-msgstr "Select"
+msgstr "Auswählen"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:70
-#, fuzzy
-#| msgid "Rating Label"
 msgid "Rating"
-msgstr "Rating Label"
+msgstr "Bewertung"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:72
-#, fuzzy
-#| msgid "5 Star Rating"
 msgid "Select Rating"
-msgstr "5 Star Rating"
+msgstr "Wählen Sie Bewertung"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:73
 msgid "1 Star"
-msgstr ""
+msgstr "1 Stern"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:74
 msgid "2 Stars"
-msgstr ""
+msgstr "2 Sterne"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:75
 msgid "3 Stars"
-msgstr ""
+msgstr "3 Sterne"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:76
 msgid "4 Stars"
-msgstr ""
+msgstr "4 Sterne"
 
 #: public/shortcodes/layouts/rcno-isotope-grid.php:77
-#, fuzzy
-#| msgid "5 Star Rating"
 msgid "5 Stars"
-msgstr "5 Star Rating"
+msgstr "5 Sterne"
 
 #: public/templates/rcno_default/reviews_index.php:50
 #: public/templates/rcno_metamor/reviews_index.php:51
 #, php-format
 msgid "There is a missing book title on review ID %d"
-msgstr ""
+msgstr "In der Rezensions-ID% d fehlt ein Buchtitel"
 
 #: public/templates/rcno_default/taxonomy.php:179
 #: public/templates/rcno_metamor/taxonomy.php:180
 msgid "There are no terms in this taxonomy."
-msgstr "There are no terms in this taxonomy."
+msgstr "Es gibt keine Einträge in dieser Taxonomie."
 
 #: public/templates/rcno_default/taxonomy.php:184
 #: public/templates/rcno_metamor/taxonomy.php:185
 msgid "Error: No taxonomy set for this list!"
-msgstr "Error: No taxonomy set for this list!"
+msgstr "Fehler: Es wurde keine Kategorie für diese Liste festgelegt!"
 
 #: public/templates/rcno_metamor/review.php:62
 msgid "Summary"
-msgstr ""
+msgstr "Zusammenfassung"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:37
 msgid "Rcno Book Grid"
-msgstr "Rcno Book Grid"
+msgstr "Rcno Buchgrid"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:49
 msgid "A widget to display a grid of reviewed books"
-msgstr "A widget to display a grid of reviewed books"
+msgstr "Ein Widget, um ein Grid von rezensierten Büchern anzuzeigen"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:185
 #: public/widgets/class-rcno-reviews-book-slider.php:203
 #: public/widgets/class-rcno-reviews-search-bar.php:213
 msgid "Date"
-msgstr "Date"
+msgstr "Datum"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:186
 #: public/widgets/class-rcno-reviews-book-slider.php:205
 #: public/widgets/class-rcno-reviews-search-bar.php:215
 #: public/widgets/class-rcno-reviews-tag-cloud.php:204
 msgid "Random"
-msgstr "Random"
+msgstr "Zufällig"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:192
 #: public/widgets/class-rcno-reviews-book-slider.php:212
@@ -2031,60 +2032,56 @@ msgstr "Random"
 #: public/widgets/class-rcno-reviews-search-bar.php:222
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:210
 msgid "Title (optional)"
-msgstr "Title (optional)"
+msgstr "Titel (optional)"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:200
 #: public/widgets/class-rcno-reviews-recent-reviews.php:203
-#, fuzzy
-#| msgid "Number of Reviews:"
 msgid "Number of Reviews"
-msgstr "Number of Reviews:"
+msgstr "Anzahl der Bewertungen"
 
 #: public/widgets/class-rcno-reviews-book-grid.php:210
 #: public/widgets/class-rcno-reviews-tag-cloud.php:254
-#, fuzzy
-#| msgid "Order:"
 msgid "Order"
-msgstr "Order:"
+msgstr "Bestellung"
 
 #: public/widgets/class-rcno-reviews-book-slider.php:38
 msgid "Rcno Book Slider"
-msgstr "Rcno Book Slider"
+msgstr "Rcno Buchslider"
 
 #: public/widgets/class-rcno-reviews-book-slider.php:50
 msgid "A widget to display a reviewed book slider"
-msgstr "A widget to display a reviewed book slider"
+msgstr "Ein Widget zur Anzeige eines rezensierten Buchsliders"
 
 #: public/widgets/class-rcno-reviews-book-slider.php:220
 #: public/widgets/class-rcno-reviews-search-bar.php:230
 msgid "Number of Reviews:"
-msgstr "Number of Reviews:"
+msgstr "Anzahl der Bewertungen:"
 
 #: public/widgets/class-rcno-reviews-book-slider.php:230
 #: public/widgets/class-rcno-reviews-search-bar.php:240
 msgid "Order:"
-msgstr "Order:"
+msgstr "Reihenfolge: "
 
 #: public/widgets/class-rcno-reviews-book-slider.php:242
 #: public/widgets/class-rcno-reviews-search-bar.php:252
 msgid "Slide Duration:"
-msgstr "Slide Duration:"
+msgstr "Slide-Dauer:"
 
 #: public/widgets/class-rcno-reviews-calendar.php:35
 msgid "Rcno Review Calendar"
-msgstr "Rcno Review Calendar"
+msgstr "Rezensionskalender"
 
 #: public/widgets/class-rcno-reviews-calendar.php:46
 msgid "A widget displaying a calendar of book reviews"
-msgstr "A widget displaying a calendar of book reviews"
+msgstr "Ein Widget, das einen Kalender mit Buchrezensionen anzeigt"
 
 #: public/widgets/class-rcno-reviews-calendar.php:126
 msgid "Title:"
-msgstr "Title:"
+msgstr "Titel:"
 
 #: public/widgets/class-rcno-reviews-calendar.php:133
 msgid "Show regular posts?"
-msgstr "Show regular posts?"
+msgstr "Regelmäßige Beiträge anzeigen?"
 
 #: public/widgets/class-rcno-reviews-calendar.php:248
 #, php-format
@@ -2094,81 +2091,77 @@ msgstr "%1$s %2$s"
 
 #: public/widgets/class-rcno-reviews-calendar.php:249
 msgid "Calendar"
-msgstr "Calendar"
+msgstr "Kalender"
 
 #: public/widgets/class-rcno-reviews-calendar.php:290
 #: public/widgets/class-rcno-reviews-calendar.php:298
 #, php-format
 msgid "View reviews for %1$s %2$s"
-msgstr "View reviews for %1$s %2$s"
+msgstr "Buchbesprechungen anzeigen für %1$s %2$s"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:36
 msgid "Rcno Currently Reading"
-msgstr "Rcno Currently Reading"
+msgstr "Anzahl der gegenwärtig gelesenen Bücher"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:47
 msgid "A widget to display your currently reading progress"
-msgstr "A widget to display your currently reading progress"
+msgstr "Ein Widget, um Ihren aktuellen Lesefortschritt anzuzeigen"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:67
 msgid "completed"
-msgstr "completed"
+msgstr "abgeschlossen"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:144
 msgid "by"
-msgstr "by"
+msgstr "von"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:150
 msgid "Previous"
-msgstr ""
+msgstr "Zurück"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:150
 msgid "Next"
-msgstr ""
+msgstr "Weiter"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:277
 msgid "No currently reading book right now."
-msgstr "No currently reading book right now."
+msgstr "Es wird gerade kein Buch gelesen."
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:278
 msgid "Review coming soon!"
-msgstr "Review coming soon!"
+msgstr "Buchbesprechung erscheint bald!"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:290
 msgid "No currently reading book"
-msgstr "No currently reading book"
+msgstr "Es wird gegenwärtig kein Buch gelesen"
 
 #: public/widgets/class-rcno-reviews-currently-reading.php:297
 msgid "Review coming soon"
-msgstr "Review coming soon"
+msgstr "Buchbesprechung erscheint bald"
 
 #: public/widgets/class-rcno-reviews-recent-reviews.php:37
 msgid "Rcno Recent Reviews"
-msgstr "Rcno Recent Reviews"
+msgstr "Anzahl der gegenwärtigen Buchbesprechungen"
 
 #: public/widgets/class-rcno-reviews-recent-reviews.php:49
 msgid "A widget to display the most recent book reviews."
-msgstr "A widget to display the most recent book reviews."
+msgstr "Ein Widget zum Anzeigen der neuesten Buchbesprechungen."
 
 #: public/widgets/class-rcno-reviews-recent-reviews.php:213
 msgid "Character count"
-msgstr ""
+msgstr "Zeichenanzahl"
 
 #: public/widgets/class-rcno-reviews-recent-reviews.php:223
-#, fuzzy
-#| msgid "Show regular posts?"
 msgid "Show regular posts"
-msgstr "Show regular posts?"
+msgstr "Regelmäßige Beiträge anzeigen?"
 
 #: public/widgets/class-rcno-reviews-search-bar.php:36
 msgid "Rcno Search Bar"
-msgstr ""
+msgstr "Rcno Suchleiste"
 
 #: public/widgets/class-rcno-reviews-search-bar.php:50
-#, fuzzy
-#| msgid "A widget displaying a calendar of book reviews"
 msgid "A widget to display a new search bar for book reviews"
-msgstr "A widget displaying a calendar of book reviews"
+msgstr "Ein Widget zum Anzeigen einer neuen Suchleiste für Buchbesprechungen"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:36
 #: public/widgets/class-rcno-reviews-tag-cloud.php:162
@@ -2179,28 +2172,29 @@ msgstr "Rcno Tag Cloud"
 msgid ""
 "An advanced widget that gives you total control over the output of your tags."
 msgstr ""
-"An advanced widget that gives you total control over the output of your tags."
+"Ein erweitertes Widget, mit dem Sie die Ausgabe Ihrer Tags vollständig "
+"steuern können."
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:197
 msgid "Flat"
-msgstr "Flat"
+msgstr "Flach"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:198
 msgid "List"
-msgstr "List"
+msgstr "Liste"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:202
 msgid "Ascending"
-msgstr "Ascending"
+msgstr "Aufsteigend"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:203
 msgid "Descending"
-msgstr "Descending"
+msgstr "Absteigend"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:208
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:246
 msgid "Count"
-msgstr "Count"
+msgstr "Anzahl"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:209
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:243
@@ -2208,34 +2202,24 @@ msgid "Name"
 msgstr "Name"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:265
-#, fuzzy
-#| msgid "Order by:"
 msgid "Order by"
-msgstr "Order by:"
+msgstr "Sortieren nach"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:295
-#, fuzzy
-#| msgid "Largest:"
 msgid "Largest"
-msgstr "Largest:"
+msgstr "Größter"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:303
-#, fuzzy
-#| msgid "Smallest:"
 msgid "Smallest"
-msgstr "Smallest:"
+msgstr "Kleinste"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:311
-#, fuzzy
-#| msgid "Unit:"
 msgid "Unit"
-msgstr "Unit:"
+msgstr "Einheit"
 
 #: public/widgets/class-rcno-reviews-tag-cloud.php:322
-#, fuzzy
-#| msgid "Separator:"
 msgid "Separator"
-msgstr "Separator:"
+msgstr "Separator"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:38
 msgid "Rcno Taxonomy List"
@@ -2246,96 +2230,57 @@ msgid ""
 "An advanced widget that gives you total control over the output of your book "
 "review taxonomies."
 msgstr ""
-"An advanced widget that gives you total control over the output of your book "
-"review taxonomies."
+"Ein fortgeschrittenes Widget, das Ihnen die totale Kontrolle über die "
+"Ausgabe Ihrer Buch-Rezensions Kategorien gibt."
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:132
 msgid "No terms found"
-msgstr "No terms found"
+msgstr "Keine Terme gefunden"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:218
 msgid "Taxonomy to display"
-msgstr "Taxonomy to display"
+msgstr "Anzuzeigende Taxonomie"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:229
 msgid "Displayed taxonomy count:"
-msgstr "Displayed taxonomy count:"
+msgstr "Zähler für angezeigte Kategorien"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:238
 msgid "Order items by"
-msgstr "Order items by"
+msgstr "Einträge ordnen nach"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:266
 msgid "Show count with"
-msgstr "Show count with"
+msgstr "Zeige Anzahl mit"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:272
 msgid "before and"
-msgstr "before and"
+msgstr "davor und"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:278
 msgid "behind"
-msgstr "behind"
+msgstr "danach"
 
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:285
 msgid "Hide empty terms?"
-msgstr "Hide empty terms?"
+msgstr "Leere Begriffe verstecken?"
 
-#~ msgid "ISBN Number"
-#~ msgstr "ISBN Number"
+#~ msgid "ISBN number"
+#~ msgstr "ISBN"
+
+#~ msgid "ISBN13 number"
+#~ msgstr "ISBN13"
+
+#~ msgid "ASIN number"
+#~ msgstr "ASIN"
+
+#~ msgid "Recencio Book Reviews"
+#~ msgstr "Recencio Buchbesprechungen"
 
 #, php-format
 #~ msgid "Parent %1$s :"
-#~ msgstr "Parent %1$s :"
-
-#~ msgid "Recencio Book Reviews"
-#~ msgstr "Recencio"
-
-#~ msgid "ISBN number"
-#~ msgstr "ISBN number"
-
-#~ msgid "ISBN13 number"
-#~ msgstr "ISBN13 number"
-
-#~ msgid "ASIN number"
-#~ msgstr "ASIN number"
+#~ msgstr "Eltern %1$s:"
 
 #, fuzzy
-#~| msgid "Import/Export Settings"
-#~ msgid "Import/Export Reviews"
-#~ msgstr "Import/Export Settings"
-
-#~ msgid "No Cover Available"
-#~ msgstr "No Cover Available"
-
-#~ msgid "Goodreads URL"
-#~ msgstr "Goodreads URL"
-
-#~ msgid "no-book-cover-available"
-#~ msgstr "no-book-cover-available"
-
-#~ msgid "Show regular posts:"
-#~ msgstr "Show regular posts:"
-
-#~ msgid "Taxonomy:"
-#~ msgstr "Taxonomy:"
-
-#~ msgid "Format:"
-#~ msgstr "Format:"
-
-#~ msgid "Number:"
-#~ msgstr "Number:"
-
-#~ msgid ""
-#~ "Download \n"
-#~ "\t\tFile"
-#~ msgstr "Download File"
-
-#~ msgid "%s ago"
-#~ msgstr "%s ago"
-
-#~ msgid " taxonomy."
-#~ msgstr " taxonomy."
-
-#~ msgid "Adds a post author box below book reviews"
-#~ msgstr "Adds a post author box below book reviews"
+#~ msgid "ISBN Number"
+#~ msgstr "ISBN-Nummer"
