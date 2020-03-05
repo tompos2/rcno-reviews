@@ -21,10 +21,8 @@ class Rcno_Author_Box extends Abstract_Rcno_Extension {
 	 * @return int
 	 */
 	protected function the_review_id() {
-		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
-			return $GLOBALS['review_id'];
-		}
-		return get_post()->ID;
+
+		return ! empty( $GLOBALS['review_id'] ) ? $GLOBALS['review_id'] : get_post()->ID;
 	}
 
 	/**

@@ -36,7 +36,16 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 	public function load() {
 		$this->add_filters();
 		$this->add_actions();
+		$this->add_shortcodes();
 		return true;
+	}
+
+	/**
+	 * Add WordPress shortcodes are called here.
+	 */
+	private function add_shortcodes() {
+		// TODO: Implement a shortcode to display custom meta
+		// add_shortcode( 'rcno_custom_meta', array( $this, 'display_shortcode' ) );
 	}
 
 	/**
@@ -90,6 +99,37 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 	}
 
 	/**
+	 * Display our shortcodes
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	public function display_shortcode( $atts ) {
+		$out  = '';
+		$key  = $index = 'rcno_' . sanitize_key( $atts['name'] ) . '_meta';
+		$data = get_post_meta( $this->the_review_id(), $key, true );
+		$atts = shortcode_atts(
+			array(
+				'name' => '',
+				'tag'  => 'p'
+			),
+			$atts,
+			'rcno_custom_meta'
+		);
+
+		if ( $atts['name'] ) {
+			$out .= '<div class="rcno">';
+			$out .= '<' . $atts['tag'] . '>';
+			$out .= esc_html( $data ?: 'NO DATA FOUND' );
+			$out .= '</' . $atts['tag'] . '>';
+			$out .= '</div>';
+		}
+
+		return $out;
+	}
+
+	/**
 	 * Registers the settings to be stored to the WP Options table.
 	 */
 	public function register_settings() {
@@ -133,7 +173,7 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 	 *
 	 * @return mixed
 	 */
-	protected function get_setting( $key, $default = '' ) {
+	public function get_setting( $key, $default = '' ) {
 
 		if ( empty( $key ) ) {
 			return $default;
