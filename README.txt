@@ -57,6 +57,22 @@ And, all the above is SEO friendly by way of validated JSON-LD metadata for the 
 
 [Recencio.com](https://recencio.com/)
 
+== Languages ==
+
+Recencio Book Reviews is currently available in the following languages
+
+* English
+* German
+
+For the following languages translations are partly available:
+
+* French
+* Spanish
+* Hungarian
+
+Please help [translating](https://translate.wordpress.org/projects/wp-plugins/recipepress-reloaded) the plugin. It's now easier than ever before on
+[translate.wordpress.org](https://translate.wordpress.org)
+
 == Installation ==
 
 1. Upload `rcno-reviews` folder to your website's `/wp-content/plugins/` folder

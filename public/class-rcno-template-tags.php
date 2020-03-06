@@ -1070,7 +1070,7 @@ class Rcno_Template_Tags {
 		if ( ! empty( $book_data ) ) {
 
 			// Set header to a false value to use the default string.
-			$header = ! empty( $header ) ? $header : __( 'Books in this series: ', 'rcno-reviews' );
+			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'rcno-reviews' ) . ': ';
 
 			$out .= '<div class="rcno-book-series-container">';
 			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
@@ -1190,7 +1190,7 @@ class Rcno_Template_Tags {
 		if ( ! empty( $book_data ) && count( $book_data ) > 1 ) {
 
 			// Set header to a false value to use the default string.
-			$header = ! empty( $header ) ? $header : __( 'Books in this series: ', 'rcno-reviews' );
+			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'rcno-reviews' ) . ': ';
 
 			$out .= '<div class="rcno-book-series-container">';
 			$out .= '<h5>' . esc_attr( $header ) . '</h5>';

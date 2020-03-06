@@ -46,7 +46,7 @@
 
 		<div id="post-body" class="metabox-holder">
 
-			<div id="postbox-container" class="postbox-container">
+			<div id="postbox-container" class="rcno postbox-container" style="width: 100%">
 
 				<?php do_meta_boxes( 'rcno_reviews_settings_' . $active_tab, 'normal', $active_tab ); ?>
 

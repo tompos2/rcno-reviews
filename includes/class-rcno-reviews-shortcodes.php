@@ -301,7 +301,7 @@ class Rcno_Reviews_Shortcodes {
 				'review_id' => $review_id,
 				'taxonomy'  => 'rcno_series',
 				'number'    => true,
-				'header'    => __( 'Books in this series: ', 'rcno-reviews' ),
+				'header'    => __( 'Books in this series', 'rcno-reviews' ),
 			),
 			$options
 		);

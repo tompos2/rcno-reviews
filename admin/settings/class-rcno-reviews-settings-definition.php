@@ -385,7 +385,7 @@ class Rcno_Reviews_Settings_Definition {
 				'rcno_comment_rating_label'       => array(
 					'name' => __( 'Rating Label', 'rcno-reviews' ),
 					'desc' => __( 'Enter the label before the comment 5 star rating field', 'rcno-reviews' ),
-					'std'  => __( 'Rate this review: ', 'rcno-reviews' ),
+					'std'  => __( 'Rate this review', 'rcno-reviews' ),
 					'type' => 'text',
 				),
 				'rcno_comment_rating_star_color'  => array(
@@ -685,6 +685,13 @@ class Rcno_Reviews_Settings_Definition {
 		return self::apply_tab_slug_filters( $settings );
 	}
 
+	/**
+	 * Handles the custom taxonomy section
+	 *
+	 * @param array $tax
+	 *
+	 * @return array
+	 */
 	public static function taxonomy_options( $tax ) {
 
 		$opts = array(
