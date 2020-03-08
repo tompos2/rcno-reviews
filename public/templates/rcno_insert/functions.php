@@ -27,7 +27,7 @@ function rcno_insert_book_details( $content ) {
 		$review_id = get_the_ID();
 	}
 
-	$template = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+	$template = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 
 	if ( is_single() && is_singular( 'rcno_review' ) ) {
 		$content_block = explode( '<p>', $content );

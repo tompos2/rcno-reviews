@@ -35,7 +35,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-taxonomy-list',
-			__( 'Rcno Taxonomy List', 'rcno-reviews' ),
+			__( 'Rcno Taxonomy List', 'recencio-book-reviews' ),
 			$this->widget_options,
 			$this->control_options
 		);
@@ -47,7 +47,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'taxonomy_list',
-			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your book review taxonomies.', 'rcno-reviews' )
+			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your book review taxonomies.', 'recencio-book-reviews' )
 		);
 
 		// Set up the widget control options.
@@ -129,7 +129,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 			}
 			echo '</ul>';
 		} else {
-			echo '<p class="tag-list tag-list-warning">' . __( 'No terms found', 'rcno-reviews' ) . '</p>';
+			echo '<p class="tag-list tag-list-warning">' . __( 'No terms found', 'recencio-book-reviews' ) . '</p>';
 		}
 
 		/**
@@ -207,7 +207,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 		?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?> ">
-				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
+				<?php _e( 'Title (optional)', 'recencio-book-reviews' ); ?>
             </label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                    name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
@@ -215,7 +215,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 
         <p>
             <label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>">
-				<?php _e( 'Taxonomy to display', 'rcno-reviews' ); ?>
+				<?php _e( 'Taxonomy to display', 'recencio-book-reviews' ); ?>
             </label>
             <select class="widefat" id="<?php echo $this->get_field_id( 'taxonomy' ); ?>"
                     name="<?php echo $this->get_field_name( 'taxonomy' ); ?>" size="4" multiple="false">
@@ -226,7 +226,7 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'item_count' ); ?>">
-				<?php _e( 'Displayed taxonomy count:', 'rcno-reviews' ); ?>
+				<?php _e( 'Displayed taxonomy count:', 'recencio-book-reviews' ); ?>
             </label>
             <input type="number" class="widefat" id="<?php echo $this->get_field_id( 'item_count' ); ?>"
                    name="<?php echo $this->get_field_name( 'item_count' ); ?>"
@@ -235,15 +235,15 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'order_by' ); ?>">
-				<?php _e( 'Order items by', 'rcno-reviews' ); ?>
+				<?php _e( 'Order items by', 'recencio-book-reviews' ); ?>
             </label>
             <select id="<?php echo $this->get_field_id( 'order_by' ); ?>"
                     name="<?php echo $this->get_field_name( 'order_by' ); ?>" class="widefat" style="width:100px;">
                 <option value="name" <?php echo selected( $order_by, 'name', false ) ?> >
-					<?php _e( 'Name', 'rcno-reviews' ); ?>
+					<?php _e( 'Name', 'recencio-book-reviews' ); ?>
                 </option>
                 <option value="count" <?php echo selected( $order_by, 'count', false ); ?> >
-					<?php _e( 'Count', 'rcno-reviews' ); ?>
+					<?php _e( 'Count', 'recencio-book-reviews' ); ?>
                 </option>
             </select>
             <label for="<?php echo $this->get_field_id( 'order' ); ?>">
@@ -263,26 +263,26 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
             <input type="checkbox" class="widefat" id="<?php echo $this->get_field_id( 'show_count' ); ?>"
                    name="<?php echo $this->get_field_name( 'show_count' ); ?>" <?php checked( $show_count ); ?> />
             <label for="<?php echo $this->get_field_id( 'show_count' ); ?>">
-				<?php _e( 'Show count with', 'rcno-reviews' ); ?>
+				<?php _e( 'Show count with', 'recencio-book-reviews' ); ?>
             </label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'before_count' ); ?>"
                    name="<?php echo $this->get_field_name( 'before_count' ); ?>"
                    value="<?php echo esc_attr( $before_count ); ?>" style="width:20px;"/>
             <label for="<?php echo $this->get_field_id( 'before_count' ); ?>">
-				<?php _e( 'before and', 'rcno-reviews' ); ?>
+				<?php _e( 'before and', 'recencio-book-reviews' ); ?>
             </label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'after_count' ); ?>"
                    name="<?php echo $this->get_field_name( 'after_count' ); ?>"
                    value="<?php echo esc_attr( $after_count ); ?>" style="width:20px;"/>
             <label for="<?php echo $this->get_field_id( 'after_count' ); ?>">
-				<?php _e( 'behind', 'rcno-reviews' ); ?>
+				<?php _e( 'behind', 'recencio-book-reviews' ); ?>
             </label>
         </p>
         <p>
             <input type="checkbox" class="widefat" id="<?php echo $this->get_field_id( 'hide_empty' ); ?>"
                    name="<?php echo $this->get_field_name( 'hide_empty' ); ?>" <?php checked( $hide_empty ); ?> />
             <label for="<?php echo $this->get_field_id( 'hide_empty' ); ?>">
-				<?php _e( 'Hide empty terms?', 'rcno-reviews' ); ?>
+				<?php _e( 'Hide empty terms?', 'recencio-book-reviews' ); ?>
             </label>
         </p>
 		<?php

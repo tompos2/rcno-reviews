@@ -109,8 +109,8 @@ class Rcno_Reviews_Extensions {
 
 		add_submenu_page(
 			'edit.php?post_type=rcno_review',
-			'Recencio ' . __( 'Extensions', 'rcno-reviews' ),
-			__( 'Extensions', 'rcno-reviews' ),
+			'Recencio ' . __( 'Extensions', 'recencio-book-reviews' ),
+			__( 'Extensions', 'recencio-book-reviews' ),
 			'manage_options',
 			'rcno_extensions',
 			array( $this, 'rcno_render_extensions_page' )
@@ -134,12 +134,12 @@ class Rcno_Reviews_Extensions {
 		?>
 		<div class="wrap">
 		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<h4><?php esc_html_e( 'All Recencio Review Extensions. Choose which you want to use, then activate it.', 'rcno-reviews' ); ?></h4>
+			<h4><?php esc_html_e( 'All Recencio Review Extensions. Choose which you want to use, then enable it.', 'recencio-book-reviews' ); ?></h4>
 
 			<?php if ( 0 === count( $all_extensions ) ) : ?>
 				<div class="wp-list-table widefat plugin-install">
 					<h2 style="text-align: center; margin: 5em 0 0 0; font-size: 30px">
-						<?php esc_html_e( 'No extensions are installed or activated.', 'rcno-reviews' ); ?>
+						<?php esc_html_e( 'No extensions are installed or enabled.', 'recencio-book-reviews' ); ?>
 					</h2>
 				</div>
 			<?php endif; ?>
@@ -214,8 +214,8 @@ class Rcno_Reviews_Extensions {
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'rcno-extension-admin-nonce' ),
 				'text'     => array(
-					'activate'   => __( 'Activate', 'rcno-reviews' ),
-					'deactivate' => __( 'Deactivate', 'rcno-reviews' ),
+					'activate'   => __( 'Enable', 'recencio-book-reviews' ),
+					'deactivate' => __( 'Disable', 'recencio-book-reviews' ),
 				),
 			)
 		);
@@ -233,13 +233,13 @@ class Rcno_Reviews_Extensions {
 
 		// Check if there is a nonce and if it is, verify it. Otherwise throw an error.
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rcno-extension-admin-nonce' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'recencio-book-reviews' ) ) );
 			die();
 		}
 
 		// If we don't have an extension id, don't process any further.
 		if ( ! isset( $_POST['extension'] ) ) {
-			wp_send_json_error( array( 'message' => __( 'No extension data was sent', 'rcno-reviews' ) ) );
+			wp_send_json_error( array( 'message' => __( 'No extension data was sent', 'recencio-book-reviews' ) ) );
 			die();
 		}
 		// The extension to activate.
@@ -258,16 +258,16 @@ class Rcno_Reviews_Extensions {
 				do_action( 'rcno_reviews' . $extension . '_extension_activated' );
 				// Update the active extensions.
 				Rcno_Reviews_Option::update_option( 'rcno_reviews_active_extensions', $active_extensions );
-				wp_send_json_success( array( 'message' => __( 'Activated', 'rcno-reviews' ) ) );
+				wp_send_json_success( array( 'message' => __( 'Enabled', 'recencio-book-reviews' ) ) );
 				die();
 			}
 		} else {
 			// Our extension is already active.
-			wp_send_json_success( array( 'message' => __( 'Already activated', 'rcno-reviews' ) ) );
+			wp_send_json_success( array( 'message' => __( 'Already enabled', 'recencio-book-reviews' ) ) );
 			die();
 		}
 		// Extension might not be registered.
-		wp_send_json_error( array( 'message' => __( 'Nothing happened', 'rcno-reviews' ) ) );
+		wp_send_json_error( array( 'message' => __( 'Nothing happened', 'recencio-book-reviews' ) ) );
 		die();
 	}
 
@@ -277,14 +277,14 @@ class Rcno_Reviews_Extensions {
 	 * @return void
 	 */
 	public function rcno_deactivate_extension_ajax() {
-		// Check if there is a nonce and if it is, verify it. Otherwise throw an error.
+		// Check if there is a nonce and if it is, verify it. Otherwise, throw an error.
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rcno-extension-admin-nonce' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'rcno-reviews' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'recencio-book-reviews' ) ) );
 			die();
 		}
 		// If we don't have an extension id, don't process any further.
 		if ( ! isset( $_POST['extension'] ) ) {
-			wp_send_json_error( array( 'message' => __( 'No extension data sent', 'rcno-reviews' ) ) );
+			wp_send_json_error( array( 'message' => __( 'No extension data sent', 'recencio-book-reviews' ) ) );
 			die();
 		}
 		// The extension to activate.
@@ -298,11 +298,11 @@ class Rcno_Reviews_Extensions {
 			do_action( 'rcno_reviews' . $extension . '_extension_deactivated' );
 			// Update the active extensions.
 			Rcno_Reviews_Option::update_option( 'rcno_reviews_active_extensions', $active_extensions );
-			wp_send_json_success( array( 'message' => __( 'Deactivated', 'rcno-reviews' ) ) );
+			wp_send_json_success( array( 'message' => __( 'Disabled', 'recencio-book-reviews' ) ) );
 			die();
 		}
 
-		wp_send_json_error( array( 'message' => __( 'Not activated', 'rcno-reviews' ) ) );
+		wp_send_json_error( array( 'message' => __( 'Not enabled', 'recencio-book-reviews' ) ) );
 		die();
 	}
 

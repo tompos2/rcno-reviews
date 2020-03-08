@@ -3,7 +3,7 @@
  * Render a list of all book reviews.
  */
 
-$template        = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+$template        = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 $ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
 $articles_list   = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_reviews_ignored_articles_list', 'The,A,An' ) );
 $articles_list   = implode( '|', $articles_list ) . '|\d+'; // @TODO: Figure out a better way to handle this.
@@ -47,7 +47,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		if ( $index_headers && ( (bool) $options['headers'] ) ) { // Add first letter headlines for easier navigation.
 
 			if ( '' === $book['title'] ) {
-				echo '<p>' . sprintf( __( 'There is a missing book title on review ID %d', 'rcno-reviews' ), $book['ID'] ) . '</p>';
+				echo '<p>' . sprintf( __( 'There is a missing book title on review ID %d', 'recencio-book-reviews' ), $book['ID'] ) . '</p>';
 			}
 
 			// Get the first letter (without special chars).
@@ -106,5 +106,5 @@ if ( $posts && count( $posts ) > 0 ) {
 	$template->the_rcno_alphabet_nav_bar( $letters );
 } else {
 	// No book reviews.
-	esc_html_e( 'There are no book reviews to display.', 'rcno-reviews' );
+	esc_html_e( 'There are no book reviews to display.', 'recencio-book-reviews' );
 }

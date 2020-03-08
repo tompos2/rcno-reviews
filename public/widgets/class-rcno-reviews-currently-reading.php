@@ -33,7 +33,7 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-currently-reading',
-			__( 'Rcno Currently Reading', 'rcno-reviews' ),
+			__( 'Rcno Currently Reading', 'recencio-book-reviews' ),
 			$this->widget_options,
 			$this->control_options
 		);
@@ -44,7 +44,7 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'current-reading',
-			'description' => esc_html__( 'A widget to display your currently reading progress', 'rcno-reviews' ),
+			'description' => esc_html__( 'A widget to display your currently reading progress', 'recencio-book-reviews' ),
 		);
 
 		// Set up the widget control options.
@@ -64,7 +64,7 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 		wp_enqueue_script( 'rcno-currently-reading', RCNO_PLUGIN_URI . 'public/js/rcno-currently-reading.js', array( 'rcno-vuejs' ), '1.0.0', true );
 		wp_localize_script( 'rcno-currently-reading', 'rcno_currently_reading', array(
 			'nonce'     => wp_create_nonce( 'wp_rest' ),
-			'completed' => __( 'completed', 'rcno-reviews' ),
+			'completed' => __( 'completed', 'recencio-book-reviews' ),
 		) );
 	}
 
@@ -141,13 +141,13 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 						</div>
 						<div class="book-progress">
 							<h3 class="book-title"><?php echo $most_recent['book_title']; ?></h3>
-							<p class="book-author"><?php echo sprintf( '%s %s', __( 'by', 'rcno-reviews' ), $most_recent['book_author'] ); ?></p>
+							<p class="book-author"><?php echo sprintf( '%s %s', __( 'by', 'recencio-book-reviews' ), $most_recent['book_author'] ); ?></p>
 
 							<p v-if="is_loading" class="book-comment" key="default"><?php echo $most_recent['progress_comment']; ?></p>
 							<p v-else class="book-comment" key="update">{{ all_updates[curr_index].progress_comment }}</p>
 
 							<div class="book-progress-btn">
-								<span :disabled="curr_index == 0" @click="previous"><?php _e( 'Previous', 'rcno-reviews' ); ?></span> <> <span :disabled="curr_index == all_updates.length - 1" @click="next"><?php _e( 'Next', 'rcno-reviews' ); ?></span>
+								<span :disabled="curr_index == 0" @click="previous"><?php _e( 'Previous', 'recencio-book-reviews' ); ?></span> <> <span :disabled="curr_index == all_updates.length - 1" @click="next"><?php _e( 'Next', 'recencio-book-reviews' ); ?></span>
 							</div>
 						</div>
 					</div>
@@ -274,27 +274,27 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 
 		// Element options.
 		$title                = ! empty( $instance['title'] ) ? sanitize_text_field( $instance['title'] ) : '';
-		$no_currently_reading = ! empty( $instance['no_currently_reading'] ) ? sanitize_text_field( $instance['no_currently_reading'] ) : esc_html__( 'No currently reading book right now.', 'rcno-reviews' );
-		$review_coming_soon   = ! empty( $instance['review_coming_soon'] ) ? sanitize_text_field( $instance['review_coming_soon'] ) : esc_html__( 'Review coming soon!', 'rcno-reviews' );
+		$no_currently_reading = ! empty( $instance['no_currently_reading'] ) ? sanitize_text_field( $instance['no_currently_reading'] ) : esc_html__( 'No currently reading book right now.', 'recencio-book-reviews' );
+		$review_coming_soon   = ! empty( $instance['review_coming_soon'] ) ? sanitize_text_field( $instance['review_coming_soon'] ) : esc_html__( 'Review coming soon!', 'recencio-book-reviews' );
 
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
-				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
+				<?php _e( 'Title (optional)', 'recencio-book-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title; ?>"/>
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'no_currently_reading' ); ?> ">
-				<?php _e( 'No currently reading book', 'rcno-reviews' ); ?>
+				<?php _e( 'No currently reading book', 'recencio-book-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'no_currently_reading' ); ?>" name="<?php echo $this->get_field_name( 'no_currently_reading' ); ?>" value="<?php echo esc_attr( $no_currently_reading ); ?>"/>
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'review_coming_soon' ); ?> ">
-				<?php _e( 'Review coming soon', 'rcno-reviews' ); ?>
+				<?php _e( 'Review coming soon', 'recencio-book-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'review_coming_soon' ); ?>" name="<?php echo $this->get_field_name( 'review_coming_soon' ); ?>" value="<?php echo esc_attr( $review_coming_soon ); ?>"/>
 		</p>

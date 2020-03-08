@@ -58,7 +58,7 @@ class Rcno_Admin_Review_Rating {
 
 			add_meta_box(
 				'rcno_book_review_rating_metabox',
-				__( '5 Star Rating', 'rcno-reviews' ),
+				__( '5 Star Rating', 'recencio-book-reviews' ),
 				array( $this, 'do_rcno_book_review_rating_metabox' ),
 				'rcno_review',
 				'side',

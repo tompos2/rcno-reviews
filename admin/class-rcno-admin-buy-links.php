@@ -60,7 +60,7 @@ class Rcno_Admin_Buy_Links {
 
 		add_meta_box(
 			'rcno_book_buy_links_metabox',
-			__( 'Purchase Links', 'rcno-reviews' ),
+			__( 'Purchase Links', 'recencio-book-reviews' ),
 			array( $this, 'do_rcno_book_buy_links_metabox' ),
 			'rcno_review',
 			'normal',

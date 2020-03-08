@@ -35,7 +35,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-book-slider',
-			__( 'Rcno Book Slider', 'rcno-reviews' ),
+			__( 'Rcno Book Slider', 'recencio-book-reviews' ),
 			$this->widget_options,
 			$this->control_options
 		);
@@ -47,7 +47,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'book-slider',
-			'description' => esc_html__( 'A widget to display a reviewed book slider', 'rcno-reviews' ),
+			'description' => esc_html__( 'A widget to display a reviewed book slider', 'recencio-book-reviews' ),
 		);
 
 		// Set up the widget control options.
@@ -137,7 +137,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 
 					<?php
 						$review_id = get_the_ID();
-						$review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+						$review    = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 					?>
 					<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 						<?php $review->the_rcno_book_cover( $review_id, 'full' ); ?>
@@ -200,16 +200,16 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 		$title          = sanitize_text_field( $instance['title'] );
 		$review_count   = absint( $instance['review_count'] );
 		$order          = array(
-			'date'  => esc_attr__( 'Date', 'rcno-reviews' ),
-			'title' => esc_attr__( 'Title', 'rcno-reviews' ),
-			'rand'  => esc_attr__( 'Random', 'rcno-reviews' ),
+			'date'  => esc_attr__( 'Date', 'recencio-book-reviews' ),
+			'title' => esc_attr__( 'Title', 'recencio-book-reviews' ),
+			'rand'  => esc_attr__( 'Random', 'recencio-book-reviews' ),
 		);
 		$slide_duration = absint( $instance['slide_duration'] );
 
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
-				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
+				<?php _e( 'Title (optional)', 'recencio-book-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 				   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
@@ -217,7 +217,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
-				<?php _e( 'Number of Reviews:', 'rcno-reviews' ); ?>
+				<?php _e( 'Number of Reviews:', 'recencio-book-reviews' ); ?>
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
 				   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
@@ -227,7 +227,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'order' ); ?>">
-				<?php _e( "Order:", 'rcno-reviews' ); ?>
+				<?php _e( 'Order:', 'recencio-book-reviews' ); ?>
 			</label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
 					name="<?php echo $this->get_field_name( 'order' ); ?>" style="width:100px">
@@ -239,7 +239,7 @@ class Rcno_Reviews_Book_Slider extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'slide_duration' ); ?>">
-				<?php _e( 'Slide Duration:', 'rcno-reviews' ); ?>
+				<?php _e( 'Slide Duration:', 'recencio-book-reviews' ); ?>
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'slide_duration' ); ?>"
 				   name="<?php echo $this->get_field_name( 'slide_duration' ); ?>"

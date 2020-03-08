@@ -92,7 +92,7 @@ class Rcno_Book_List_Shortcode {
 			'id'        => $review_id,
 			'taxonomy'  => 'series',
 			'number'    => true,
-			'header'    => __( 'Books in this series', 'rcno-reviews' ) . ': ',
+			'header'    => __( 'Books in this series', 'recencio-book-reviews' ) . ': ',
 		), $atts, 'rcno-book-list' );
 
 		// The actual rendering is done inside the Rcno_Template_Tags class.
@@ -109,47 +109,47 @@ class Rcno_Book_List_Shortcode {
 	 */
 	public function rcno_set_help_text() {
 
-		$this->help_text = '<h4>' . __( 'The Book List shortcode', 'rcno-reviews' ) . '</h4>';
+		$this->help_text = '<h4>' . __( 'The Book List shortcode', 'recencio-book-reviews' ) . '</h4>';
 		$this->help_text .= '<p>';
 		$this->help_text .= __( 'This shortcode creates a graphical list of books belonging to a particular custom taxonomy. 
 								If the chosen custom taxonomy only has 1 reviewed book, nothing will be displayed when rendering the content of this shortcode on the frontend. 
 								',
-								'rcno-reviews' );
+								'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
-		$this->help_text .= '<code>' . '[rcno-book-list]' . '</code> ' . __('The default shortcode.', 'rcno-reviews');
+		$this->help_text .= '<code>' . '[rcno-book-list]' . '</code> ' . __('The default shortcode.', 'recencio-book-reviews');
 		$this->help_text .= '<p>';
 
 		$this->help_text .= __( 'The shortcode uses a couple of parameters that can be changed or left at the default values. 
 								If the default values are being used, then it is not necessary to include them in the shortcode. The default values are listed below: ',
-								'rcno-reviews' );
+								'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'id' . '</code> ' . __( 'The post/review ID, defaults to the current review post.', 'rcno-reviews' );
+		$this->help_text .= '<code>' . 'id' . '</code> ' . __( 'The post/review ID, defaults to the current review post.', 'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
 		$this->help_text .= '<code>' . 'taxonomy' . '</code> ' . __( 'The custom taxonomy to display the book list for, defaults to the the "series" taxonomy.',
-																	'rcno-reviews' );
+																	'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
 		$this->help_text .= '<code>' . 'number' . '</code> ' . __( 'Whether to display the book series number. Defaults to "yes", use 0 for "no".',
-																	'rcno-reviews');
+																	'recencio-book-reviews');
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
 		$this->help_text .= '<code>' . 'header' . '</code> ' . __( 'The header text for the book list, defaults to "Books in this series:"',
-																	'rcno-reviews' );
+																	'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '</ul>';
 
 		$this->help_text .= '<p>';
-		$this->help_text .= __( 'Examples of the book list shortcode:', 'rcno-reviews' );
+		$this->help_text .= __( 'Examples of the book list shortcode:', 'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';

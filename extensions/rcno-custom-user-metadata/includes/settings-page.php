@@ -3,7 +3,7 @@
 		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="settings-page-wrap-title" >
 			<header class="modal__header">
 				<h2 id="settings-page-wrap-title" class="modal__title">
-					<?php printf( '%s %s', $this->title, __( 'Settings', 'rcno-reviews' ) ); ?>
+					<?php printf( '%s %s', $this->title, __( 'Settings', 'recencio-book-reviews' ) ); ?>
 				</h2>
 				<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
 			</header>
@@ -15,7 +15,7 @@
 					<div class="settings-form">
 
                         <label for="settings-form-text-field">
-                            <?php _e( 'Custom User Metaboxes', 'rcno-reviews' ); ?>
+                            <?php _e( 'Custom User Metaboxes', 'recencio-book-reviews' ); ?>
                         </label>
                         <input type="text"
                                name="rcno_custom_user_metadata_options[custom_user_metaboxes]"
@@ -25,7 +25,7 @@
                         />
                         <p>
                             <?php _e( 'Please visit the "Templates" tab on the Recencio setting page,
-                             to add your new metadata entries to the frontend', 'rcno-reviews' ); ?>
+                             to add your new metadata entries to the frontend', 'recencio-book-reviews' ); ?>
                         </p>
 
 					</div>

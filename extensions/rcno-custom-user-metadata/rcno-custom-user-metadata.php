@@ -15,8 +15,8 @@ class Rcno_Custom_User_Metadata extends Abstract_Rcno_Extension {
 	public function __construct() {
 		$this->id       = 'rcno_custom_user_metadata';
 		$this->image    = plugin_dir_url( __FILE__ ) . 'assets/images/rcno-custom-user-metadata.png';
-		$this->title    = __( 'Custom User Metadata', 'rcno-reviews' );
-		$this->desc     = __( 'Add your own custom metadata fields to the book details section of a reviewed book. Please remember to enable the new fields on the frontend.', 'rcno-reviews' );
+		$this->title    = __( 'Custom User Metadata', 'recencio-book-reviews' );
+		$this->desc     = __( 'Add your own custom metadata fields to the book details section of a reviewed book. Please remember to enable the new fields on the frontend.', 'recencio-book-reviews' );
 		$this->settings = true;
 	}
 

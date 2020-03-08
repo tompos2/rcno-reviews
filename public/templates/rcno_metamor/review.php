@@ -16,7 +16,7 @@ if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
 	$review_id = get_post()->ID;
 }
 
-$plugin_name = 'rcno-reviews';
+$plugin_name = 'recencio-book-reviews';
 $version     = '1.0.0';
 
 $review_score_enable   = (bool) get_post_meta( $review_id, 'rcno_review_score_enable', true );
@@ -59,14 +59,14 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 		?>
 	</div>
 	<div class="rcno-book-synopsis">
-		<h3><?php echo apply_filters( 'rcno_metamor_summary', __( 'Summary', 'rcno-reviews' ) ); ?></h3>
+		<h3><?php echo apply_filters( 'rcno_metamor_summary', __( 'Summary', 'recencio-book-reviews' ) ); ?></h3>
 		<?php
 			$template->the_rcno_book_description( $review_id );
 		?>
 	</div>
 
 	<div class="rcno-book-review">
-		<h3><?php echo apply_filters( 'rcno_metamor_summary', __( 'Review', 'rcno-reviews' ) ); ?></h3>
+		<h3><?php echo apply_filters( 'rcno_metamor_summary', __( 'Review', 'recencio-book-reviews' ) ); ?></h3>
 		<?php
 		$template->the_rcno_book_review_content( $review_id );
 		$template->the_rcno_book_purchase_links( $review_id, true );

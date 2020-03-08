@@ -70,8 +70,8 @@ For the following languages translations are partly available:
 * Spanish
 * Hungarian
 
-Please help [translating](https://translate.wordpress.org/projects/wp-plugins/recipepress-reloaded) the plugin. It's now easier than ever before on
-[translate.wordpress.org](https://translate.wordpress.org)
+Please help [translating](https://translate.wordpress.org/projects/wp-plugins/recencio-book-reviews/) the plugin.
+This is one of the best ways to contribute to the growth and development of this plugin.
 
 == Installation ==
 
@@ -103,6 +103,10 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.41.0 =
+* Refactored the translation feature to better comply with WordPress' i18n standards
+* Thanks to @chrillebln for assisting with the DE translation
 
 = 1.40.0 =
 * Purchase links now show on reviews embedded in pages

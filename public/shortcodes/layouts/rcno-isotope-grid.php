@@ -45,7 +45,7 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		if ( $options['search'] ) {
 			$select .= '<input type="text" class="rcno-isotope-grid-search rcno-isotope-grid-select-wrapper" placeholder="'
-						. __( 'Search...', 'rcno-reviews' ) . '" />';
+						. __( 'Search...', 'recencio-book-reviews' ) . '" />';
 		}
 
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], $exclude );
@@ -55,7 +55,7 @@ if ( $posts && count( $posts ) > 0 ) {
 			$select   .= '<div class="rcno-isotope-grid-select-wrapper">';
 			$select   .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->label . '</label>';
 			$select   .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
-			$select   .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'rcno-reviews' ), $_taxonomy->label ) . '</option>';
+			$select   .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'recencio-book-reviews' ), $_taxonomy->label ) . '</option>';
 			foreach ( $terms as $term ) {
 				if ( is_object( $term ) ) {
 					$select .= '<option value="' . '.' . $term->slug . '">' . $term->name . '</option>';
@@ -67,14 +67,14 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		if ( $options['rating'] ) {
 			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
-			$select .= '<label for="rcno-isotope-grid-select">' . __( 'Rating', 'rcno-reviews' ) . '</label>';
+			$select .= '<label for="rcno-isotope-grid-select">' . __( 'Rating', 'recencio-book-reviews' ) . '</label>';
 			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
-			$select .= '<option value="*">' . __( 'Select Rating', 'rcno-reviews' ) . '</option>';
-			$select .= '<option value=".1">' . __( '1 Star', 'rcno-reviews' ) . '</option>';
-			$select .= '<option value=".2">' . __( '2 Stars', 'rcno-reviews' ) . '</option>';
-			$select .= '<option value=".3">' . __( '3 Stars', 'rcno-reviews' ) . '</option>';
-			$select .= '<option value=".4">' . __( '4 Stars', 'rcno-reviews' ) . '</option>';
-			$select .= '<option value=".5">' . __( '5 Stars', 'rcno-reviews' ) . '</option>';
+			$select .= '<option value="*">' . __( 'Select Rating', 'recencio-book-reviews' ) . '</option>';
+			$select .= '<option value=".1">' . __( '1 Star', 'recencio-book-reviews' ) . '</option>';
+			$select .= '<option value=".2">' . __( '2 Stars', 'recencio-book-reviews' ) . '</option>';
+			$select .= '<option value=".3">' . __( '3 Stars', 'recencio-book-reviews' ) . '</option>';
+			$select .= '<option value=".4">' . __( '4 Stars', 'recencio-book-reviews' ) . '</option>';
+			$select .= '<option value=".5">' . __( '5 Stars', 'recencio-book-reviews' ) . '</option>';
 			$select .= '</select>';
 			$select .= '</div>';
 		}
@@ -121,5 +121,5 @@ if ( $posts && count( $posts ) > 0 ) {
 	}
 } else {
 	// No book reviews.
-	esc_html_e( 'There are no book reviews to display.', 'rcno-reviews' );
+	esc_html_e( 'There are no book reviews to display.', 'recencio-book-reviews' );
 }

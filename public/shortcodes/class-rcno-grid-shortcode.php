@@ -169,7 +169,7 @@ class Rcno_Grid_Shortcode {
 
 		}
 
-		return esc_html__( 'There are no book reviews to display.', 'rcno-reviews' );
+		return esc_html__( 'There are no book reviews to display.', 'recencio-book-reviews' );
 	}
 
 	/**

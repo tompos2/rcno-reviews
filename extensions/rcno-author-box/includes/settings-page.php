@@ -3,7 +3,7 @@
 		<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="settings-page-wrap-title" >
 			<header class="modal__header">
 				<h2 id="settings-page-wrap-title" class="modal__title">
-					<?php printf( '%s %s', $this->title, __( 'Settings', 'rcno-reviews' ) ); ?>
+					<?php printf( '%s %s', $this->title, __( 'Settings', 'recencio-book-reviews' ) ); ?>
 				</h2>
 				<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
 			</header>
@@ -15,7 +15,7 @@
 					<table class="form-table">
 
 						<tr valign="top">
-							<th scope="row"><?php _e( 'Author box title', 'rcno-reviews' ); ?></th>
+							<th scope="row"><?php _e( 'Author box title', 'recencio-book-reviews' ); ?></th>
 							<td>
 								<input type="text"
 								       name="rcno_author_box_options[author_box_title]"
@@ -29,13 +29,13 @@
                             <th scope="row"></th>
                             <td>
                                 <p>
-                                    <?php printf( __( 'Visit your user <a href="%s">profile page</a> to add your social media account information', 'rcno-reviews' ), get_edit_user_link() ); ?>
+                                    <?php printf( __( 'Visit your user <a href="%s">profile page</a> to add your social media account information', 'recencio-book-reviews' ), get_edit_user_link() ); ?>
                                 </p>
                             </td>
                         </tr>
 
 						<tr valign="top">
-							<th scope="row"><?php _e( 'Facebook', 'rcno-reviews' ); ?></th>
+							<th scope="row"><?php _e( 'Facebook', 'recencio-book-reviews' ); ?></th>
 							<td>
                                 <div class="rcno-settings-text-group">
                                     <div class="rcno-settings-text-wrapper">
@@ -57,7 +57,7 @@
 						</tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Twitter', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Twitter', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <div class="rcno-settings-text-group">
                                     <div class="rcno-settings-text-wrapper">
@@ -79,7 +79,7 @@
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Google+', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Google+', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <div class="rcno-settings-text-group">
                                     <div class="rcno-settings-text-wrapper">
@@ -101,7 +101,7 @@
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'LinkedIn', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'LinkedIn', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <div class="rcno-settings-text-group">
                                     <div class="rcno-settings-text-wrapper">
@@ -123,7 +123,7 @@
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Tumblr', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Tumblr', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <div class="rcno-settings-text-group">
                                     <div class="rcno-settings-text-wrapper">

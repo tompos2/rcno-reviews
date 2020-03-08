@@ -32,7 +32,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-calendar',
-			__( 'Rcno Review Calendar', 'rcno-reviews' ),
+			__( 'Rcno Review Calendar', 'recencio-book-reviews' ),
 			$this->widget_options,
 			$this->control_options
 		);
@@ -43,7 +43,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'rcno-review-calendar',
-			'description' => esc_html__( 'A widget displaying a calendar of book reviews', 'rcno-reviews' ),
+			'description' => esc_html__( 'A widget displaying a calendar of book reviews', 'recencio-book-reviews' ),
 		);
 
 		// Set up the widget control options.
@@ -130,7 +130,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
         <p>
             <input id="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>" name="<?php echo $this->get_field_name( 'posttype_enabled' ); ?>"
                    type="checkbox" value="1" <?php checked( '1', $posttype_enabled ); ?>/>
-            <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show regular posts?', 'rcno-reviews' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'posttype_enabled' ); ?>"><?php _e( 'Show regular posts?', 'recencio-book-reviews' ); ?></label>
         </p>
 		<?php
 	}

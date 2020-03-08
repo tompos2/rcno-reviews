@@ -124,7 +124,7 @@ class Rcno_Reviews_Settings {
 						'class'   => $key . ' rcno-table-' . $option['type'],
 						'accept'  => isset( $option['accept'] ) ? $option['accept'] : 'image/*',
 						'pattern' => isset( $option['pattern'] ) ? $option['pattern'] : '{2,}',
-						'title'   => isset( $option['title'] ) ? $option['title'] : __( 'Please enter 2 or more lower-case characters.', 'rcno-reviews' ),
+						'title'   => isset( $option['title'] ) ? $option['title'] : __( 'Please enter 2 or more lower-case characters.', 'recencio-book-reviews' ),
 					)
 				);
 			} // end foreach

@@ -198,7 +198,7 @@ class Rcno_Reviews_Shortcodes {
 
 				if ( 1 === (int) $options['nodesc'] ) {
 					// Embed without description.
-					$templ  = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+					$templ  = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 					$output = $templ->get_the_rcno_full_book_details( (int) $options['id'] );
 				} elseif ( 0 === (int) $options['excerpt'] ) {
 					// Embed complete review.
@@ -301,7 +301,7 @@ class Rcno_Reviews_Shortcodes {
 				'review_id' => $review_id,
 				'taxonomy'  => 'rcno_series',
 				'number'    => true,
-				'header'    => __( 'Books in this series', 'rcno-reviews' ),
+				'header'    => __( 'Books in this series', 'recencio-book-reviews' ),
 			),
 			$options
 		);
@@ -333,8 +333,8 @@ class Rcno_Reviews_Shortcodes {
 		printf(
 			'<a href="#" id="rcno-add-review-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
 			esc_attr( $editor_id ),
-			esc_attr__( 'Add Review', 'rcno-reviews' ),
-			esc_html__( 'Add Review', 'rcno-reviews' )
+			esc_attr__( 'Add Review', 'recencio-book-reviews' ),
+			esc_html__( 'Add Review', 'recencio-book-reviews' )
 		);
 	}
 
@@ -384,10 +384,10 @@ class Rcno_Reviews_Shortcodes {
 			'rcno_ajax_scr',
 			'rcnoReviewsScL10n',
 			array(
-				'noTitle' => __( 'No title', 'rcno-reviews' ),
-				'review'  => __( 'Review', 'rcno-reviews' ),
-				'save'    => __( 'Insert', 'rcno-reviews' ),
-				'update'  => __( 'Insert', 'rcno-reviews' ),
+				'noTitle' => __( 'No title', 'recencio-book-reviews' ),
+				'review'  => __( 'Review', 'recencio-book-reviews' ),
+				'save'    => __( 'Insert', 'recencio-book-reviews' ),
+				'update'  => __( 'Insert', 'recencio-book-reviews' ),
 			)
 		);
 	}
@@ -456,8 +456,8 @@ class Rcno_Reviews_Shortcodes {
 		printf(
 			'<a href="#" id="rcno-add-listings-button" class="rcno-icon button" data-editor="%s" title="%s">%s</a>',
 			esc_attr( $editor_id ),
-			esc_attr__( 'Add Listing', 'rcno-reviews' ),
-			esc_html__( 'Add Listing', 'rcno-reviews' )
+			esc_attr__( 'Add Listing', 'recencio-book-reviews' ),
+			esc_html__( 'Add Listing', 'recencio-book-reviews' )
 		);
 	}
 
@@ -506,10 +506,10 @@ class Rcno_Reviews_Shortcodes {
 			'rcno_ajax_scl',
 			'rcnoListingsScL10n',
 			array(
-				'noTitle' => __( 'No title', 'rcno-reviews' ),
-				'review'  => __( 'Review', 'rcno-reviews' ),
-				'save'    => __( 'Insert', 'rcno-reviews' ),
-				'update'  => __( 'Insert', 'rcno-reviews' ),
+				'noTitle' => __( 'No title', 'recencio-book-reviews' ),
+				'review'  => __( 'Review', 'recencio-book-reviews' ),
+				'save'    => __( 'Insert', 'recencio-book-reviews' ),
+				'update'  => __( 'Insert', 'recencio-book-reviews' ),
 			)
 		);
 	}
@@ -527,7 +527,7 @@ class Rcno_Reviews_Shortcodes {
 	public function rcno_reviews_shortcodes_tab() {
 
 		$screen     = get_current_screen();
-		$help_text  = '<h3>' . __( 'Shortcodes Help', 'rcno-reviews' ) . '</h3>';
+		$help_text  = '<h3>' . __( 'Shortcodes Help', 'recencio-book-reviews' ) . '</h3>';
 		$help_text .= $this->book_list->rcno_get_help_text();
 		$help_text .= $this->review_box->rcno_get_help_text();
 		$help_text .= $this->score_box->rcno_get_help_text();
@@ -539,7 +539,7 @@ class Rcno_Reviews_Shortcodes {
 			// Setup help tab args.
 			$args = array(
 				'id'      => 'rcno_reviews_shortcodes_help',
-				'title'   => __( 'Shortcodes', 'rcno-reviews' ),
+				'title'   => __( 'Shortcodes', 'recencio-book-reviews' ),
 				'content' => $help_text,
 			);
 

@@ -54,7 +54,7 @@ class Rcno_Admin_Book_Cover {
 		// Add editor metabox for the book cover.
 		add_meta_box(
 			'rcno_book_cover_metabox',
-			__( 'Book Cover', 'rcno-reviews' ),
+			__( 'Book Cover', 'recencio-book-reviews' ),
 			array( $this, 'do_rcno_book_cover_metabox' ),
 			'rcno_review',
 			'side',

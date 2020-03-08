@@ -14,7 +14,7 @@
                     <?php do_settings_sections( 'rcno-social-media-sharing' ); ?>
                     <table class="form-table">
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Share title', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Share title', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <input type="text"
                                        name="rcno_social_media_sharing_options[share_buttons_title]"
@@ -25,7 +25,7 @@
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Social media sites', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Social media sites', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <input type="text"
                                        name="rcno_social_media_sharing_options[social_media_sites]"
@@ -36,7 +36,7 @@
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Buttons position', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Buttons position', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <span class="radio-button-wrapper">
                                     <input type="radio"
@@ -46,7 +46,7 @@
                                            value="1"
                                             <?php checked( $this->get_setting( 'buttons_position' ), 1 ); ?>
                                     />
-                                    <label for="top-position"><?php _e( 'Top', 'rcno-reviews' ); ?></label>
+                                    <label for="top-position"><?php _e( 'Top', 'recencio-book-reviews' ); ?></label>
                                 </span>
 
                                 <span class="radio-button-wrapper">
@@ -57,7 +57,7 @@
                                            value="2"
                                         <?php checked( $this->get_setting( 'buttons_position' ), 2 ); ?>
                                     />
-                                    <label for="bottom-position"><?php _e( 'Bottom', 'rcno-reviews' ); ?></label>
+                                    <label for="bottom-position"><?php _e( 'Bottom', 'recencio-book-reviews' ); ?></label>
                                 </span>
 
                                 <span class="radio-button-wrapper">
@@ -68,7 +68,7 @@
                                            value="3"
                                         <?php checked( $this->get_setting( 'buttons_position' ), 3 ); ?>
                                     />
-                                    <label for="top-bottom-position"><?php _e( 'Both', 'rcno-reviews' ); ?></label>
+                                    <label for="top-bottom-position"><?php _e( 'Both', 'recencio-book-reviews' ); ?></label>
                                 </span>
 
                                 <span class="radio-button-wrapper">
@@ -79,14 +79,14 @@
                                            value="4"
 	                                    <?php checked( $this->get_setting( 'buttons_position' ), 4 ); ?>
                                     />
-                                    <label for="none-position"><?php _e( 'Shortcode', 'rcno-reviews' ); ?></label>
+                                    <label for="none-position"><?php _e( 'Shortcode', 'recencio-book-reviews' ); ?></label>
                                     <small style="display:none;"> [rcno-sharing]</small>
                                 </span>
                             </td>
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Buttons color', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Buttons color', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <input type="text"
                                        name="rcno_social_media_sharing_options[buttons_color]"
@@ -97,7 +97,7 @@
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Twitter username', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Twitter username', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <input type="text"
                                        name="rcno_social_media_sharing_options[twitter_username]"
@@ -108,7 +108,7 @@
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><?php _e( 'Display on home page', 'rcno-reviews' ); ?></th>
+                            <th scope="row"><?php _e( 'Display on home page', 'recencio-book-reviews' ); ?></th>
                             <td>
                                 <input type="checkbox"
                                        name="rcno_social_media_sharing_options[display_on_homepage]"

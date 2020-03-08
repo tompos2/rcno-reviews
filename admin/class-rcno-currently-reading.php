@@ -105,8 +105,8 @@ class Rcno_Currently_Reading {
 					'nonce' => wp_create_nonce( 'wp_rest' ),
 				),
 				'strings' => array(
-					'saved' => __( 'Progress updated', 'rcno-reviews' ),
-					'error' => __( 'Error', 'rcno-reviews' ),
+					'saved' => __( 'Progress updated', 'recencio-book-reviews' ),
+					'error' => __( 'Error', 'recencio-book-reviews' ),
 				),
 			) );
 
@@ -130,7 +130,7 @@ class Rcno_Currently_Reading {
 		if ( current_user_can( 'manage_options' ) ) {
 			wp_add_dashboard_widget(
 				$this->widget_id,
-				__( 'Currently Reading', 'rcno-reviews' ),
+				__( 'Currently Reading', 'recencio-book-reviews' ),
 				array( $this, 'rcno_currently_reading_dashboard_widget' )
 			);
 		}

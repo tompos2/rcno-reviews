@@ -107,29 +107,29 @@ class Rcno_Purchase_Links_Shortcode {
 	 */
 	public function rcno_set_help_text() {
 
-		$this->help_text = '<h4>' . __( 'The Purchase Links shortcode', 'rcno-reviews' ) . '</h4>';
+		$this->help_text = '<h4>' . __( 'The Purchase Links shortcode', 'recencio-book-reviews' ) . '</h4>';
 		$this->help_text .= '<p>';
 		$this->help_text .= __( 'This shortcode display the book purchase links in reviews or regular posts. This shortcode only needs the ID parameter if it is inserted into a regular post. If the shortcode is used in a regular post, the ID of the review it is attached to is needed.',
-								'rcno-reviews' );
+								'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
-		$this->help_text .= '<code>' . '[rcno-purchase-links]' . '</code> ' . __('The default shortcode.', 'rcno-reviews');
+		$this->help_text .= '<code>' . '[rcno-purchase-links]' . '</code> ' . __('The default shortcode.', 'recencio-book-reviews');
 
 		$this->help_text .= '<ul>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'id' . '</code> ' . __( 'The review ID the purchase link is attached to', 'rcno-reviews' );
+		$this->help_text .= '<code>' . 'id' . '</code> ' . __( 'The review ID the purchase link is attached to', 'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
 		$this->help_text .= '<code>' . 'label' . '</code> ' . __( 'Whether to display the purchase links label. Defaults to \'yes\', use 0 for \'no\'.',
-																	'rcno-reviews');
+																	'recencio-book-reviews');
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '</ul>';
 
 		$this->help_text .= '<p>';
-		$this->help_text .= __( 'Examples of the purchase links shortcode:', 'rcno-reviews' );
+		$this->help_text .= __( 'Examples of the purchase links shortcode:', 'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';

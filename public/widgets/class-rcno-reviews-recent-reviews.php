@@ -34,7 +34,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-recent-reviews',
-			__( 'Rcno Recent Reviews', 'rcno-reviews' ),
+			__( 'Rcno Recent Reviews', 'recencio-book-reviews' ),
 			$this->widget_options,
 			$this->control_options
 		);
@@ -46,7 +46,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'recent-reviews',
-			'description' => esc_html__( 'A widget to display the most recent book reviews.', 'rcno-reviews' ),
+			'description' => esc_html__( 'A widget to display the most recent book reviews.', 'recencio-book-reviews' ),
 		);
 
 		// Set up the widget control options.
@@ -110,7 +110,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 					<?php
 					$review_id = get_the_ID();
-					$review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+					$review    = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 					?>
 
 					<div class="widget-book-cover">
@@ -192,7 +192,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
-				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>:
+				<?php _e( 'Title (optional)', 'recencio-book-reviews' ); ?>:
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 				name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>"/>
@@ -200,7 +200,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
-				<?php _e( 'Number of Reviews', 'rcno-reviews' ); ?>:
+				<?php _e( 'Number of Reviews', 'recencio-book-reviews' ); ?>:
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
 				name="<?php echo $this->get_field_name( 'review_count' ); ?>"
@@ -210,7 +210,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'char_count' ); ?>">
-				<?php _e( 'Character count', 'rcno-reviews' ); ?>:
+				<?php _e( 'Character count', 'recencio-book-reviews' ); ?>:
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'char_count' ); ?>"
 				   name="<?php echo $this->get_field_name( 'char_count' ); ?>"
@@ -220,7 +220,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'regular_posts' ); ?>">
-				<?php _e( 'Show regular posts', 'rcno-reviews' ); ?>:
+				<?php _e( 'Show regular posts', 'recencio-book-reviews' ); ?>:
 			</label>
 			<input type="checkbox" class="widefat" id="<?php echo $this->get_field_id( 'regular_posts' ); ?>"
 				name="<?php echo $this->get_field_name( 'regular_posts' ); ?>"

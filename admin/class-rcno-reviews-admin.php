@@ -216,12 +216,14 @@ class Rcno_Reviews_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param string $hook
-	 *
 	 * @uses     wp_enqueue_media() For using the builtin media uploader functionality.
 	 * @uses     wp_enqueue_style()
 	 * @uses     wp_enqueue_script()
 	 * @uses     wp_localize_script()
+	 *
+	 * @param string $hook
+	 *
+	 * @return void
 	 */
 	public function enqueue_scripts( $hook ) {
 		global $post;
@@ -234,7 +236,7 @@ class Rcno_Reviews_Admin {
 		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
 
 		// Enqueue assets needed by the code editor.
-		if ( 'toplevel_page_rcno-reviews' === $hook || 'rcno_review_page_rcno_extensions' === $hook ) {
+		if ( 'toplevel_page_recencio-book-reviews' === $hook || 'rcno_review_page_rcno_extensions' === $hook ) {
 			wp_enqueue_code_editor( array(
 				'type' => 'text/css',
 			) );
@@ -242,9 +244,7 @@ class Rcno_Reviews_Admin {
 			wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', true );
 		}
 
-
-		wp_enqueue_script( 'xml2json', plugin_dir_url( __FILE__ ) . 'js/xml2json.js', array( 'jquery', 'rcno-reviews' ), '1.0.0', true );
-
+		wp_enqueue_script( 'xml2json', plugin_dir_url( __FILE__ ) . 'js/xml2json.js', array( 'jquery', 'recencio-book-reviews' ), '1.0.0', true );
 		wp_enqueue_script( 'star-rating-svg', plugin_dir_url( __FILE__ ) . 'js/star-rating-svg.js', array( 'jquery' ), '1.2.0', true );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, true );
 
@@ -256,7 +256,7 @@ class Rcno_Reviews_Admin {
 			'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
 			'rcno_gr_remote_get_nonce'     => wp_create_nonce( 'rcno-gr-remote-get-nonce' ),
 			'rcno_admin_rating'            => get_post_meta( $review_id, 'rcno_admin_rating', true ),
-			'rcno_settings_reset_msg'      => __( 'Your settings have been reset, please reload the page to see them.', 'rcno-reviews' ),
+			'rcno_settings_reset_msg'      => __( 'Your settings have been reset, please reload the page to see them.', 'recencio-book-reviews' ),
 			'rcno_book_meta_keys'          => $template->get_rcno_book_meta_keys( 'all' ),
 		) );
 	}
@@ -276,7 +276,6 @@ class Rcno_Reviews_Admin {
 
 		$cap_type = 'post';
 		$cpt_name = 'rcno_review';
-
 		$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
 		$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $cpt_slug ) );
 		$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $cpt_slug ) );
@@ -331,20 +330,20 @@ class Rcno_Reviews_Admin {
 		$opts['capabilities']['read_post']              = "read_{$cap_type}";
 		$opts['capabilities']['read_private_posts']     = "read_private_{$cap_type}s";
 
-		$opts['labels']['add_new']            = sprintf( __( 'New %1$s', 'rcno-reviews' ), $single );
-		$opts['labels']['add_new_item']       = sprintf( __( 'Add New %1$s', 'rcno-reviews' ), $single );
-		$opts['labels']['all_items']          = sprintf( __( 'All %1$s', 'rcno-reviews' ), $plural );
-		$opts['labels']['edit_item']          = sprintf( __( 'Edit %1$s', 'rcno-reviews' ), $single );
+		$opts['labels']['add_new']            = sprintf( __( 'New %1$s', 'recencio-book-reviews' ), $single );
+		$opts['labels']['add_new_item']       = sprintf( __( 'Add New %1$s', 'recencio-book-reviews' ), $single );
+		$opts['labels']['all_items']          = sprintf( __( 'All %1$s', 'recencio-book-reviews' ), $plural );
+		$opts['labels']['edit_item']          = sprintf( __( 'Edit %1$s', 'recencio-book-reviews' ), $single );
 		$opts['labels']['menu_name']          = $plural;
 		$opts['labels']['name']               = $plural;
 		$opts['labels']['name_admin_bar']     = $single;
-		$opts['labels']['new_item']           = sprintf( __( 'New %1$s', 'rcno-reviews' ), $single );
-		$opts['labels']['not_found']          = sprintf( __( 'No %1$s Found', 'rcno-reviews' ), $plural );
-		$opts['labels']['not_found_in_trash'] = sprintf( __( 'No %1$s Found in Trash', 'rcno-reviews' ), $plural );
-		$opts['labels']['parent_item_colon']  = sprintf( __( 'Parent %1$s', 'rcno-reviews' ), $plural );
-		$opts['labels']['search_items']       = sprintf( __( 'Search %1$s', 'rcno-reviews' ), $plural );
+		$opts['labels']['new_item']           = sprintf( __( 'New %1$s', 'recencio-book-reviews' ), $single );
+		$opts['labels']['not_found']          = sprintf( __( 'No %1$s Found', 'recencio-book-reviews' ), $plural );
+		$opts['labels']['not_found_in_trash'] = sprintf( __( 'No %1$s Found in Trash', 'recencio-book-reviews' ), $plural );
+		$opts['labels']['parent_item_colon']  = sprintf( __( 'Parent %1$s', 'recencio-book-reviews' ), $plural );
+		$opts['labels']['search_items']       = sprintf( __( 'Search %1$s', 'recencio-book-reviews' ), $plural );
 		$opts['labels']['singular_name']      = $single;
-		$opts['labels']['view_item']          = sprintf( __( 'View %1$s', 'rcno-reviews' ), $single );
+		$opts['labels']['view_item']          = sprintf( __( 'View %1$s', 'recencio-book-reviews' ), $single );
 
 		$opts['rewrite']['ep_mask']    = EP_PERMALINK;
 		$opts['rewrite']['feeds']      = true;
@@ -370,7 +369,7 @@ class Rcno_Reviews_Admin {
 		$taxonomies        = array();
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
-		$author            = __( 'Author', 'rcno-reviews' );
+		$author            = __( 'Author', 'recencio-book-reviews' );
 
 		if ( ! in_array( $author, $custom_taxonomies, true ) ) {
 			// This is book review plugin, the book author taxonomy must always be present.
@@ -438,23 +437,23 @@ class Rcno_Reviews_Admin {
 			$opts['capabilities']['edit_terms']   = 'manage_categories';
 			$opts['capabilities']['manage_terms'] = 'manage_categories';
 
-			$opts['labels']['add_new_item']               = sprintf( __( 'Add New %1$s', 'rcno-reviews' ), $single );
-			$opts['labels']['add_or_remove_items']        = sprintf( __( 'Add or remove %1$s', 'rcno-reviews' ), $plural );
+			$opts['labels']['add_new_item']               = sprintf( __( 'Add New %1$s', 'recencio-book-reviews' ), $single );
+			$opts['labels']['add_or_remove_items']        = sprintf( __( 'Add or remove %1$s', 'recencio-book-reviews' ), $plural );
 			$opts['labels']['all_items']                  = $plural;
-			$opts['labels']['choose_from_most_used']      = sprintf( __( 'Choose from most used %1$s', 'rcno-reviews' ), $plural );
-			$opts['labels']['edit_item']                  = sprintf( __( 'Edit %1$s', 'rcno-reviews' ), $single );
+			$opts['labels']['choose_from_most_used']      = sprintf( __( 'Choose from most used %1$s', 'recencio-book-reviews' ), $plural );
+			$opts['labels']['edit_item']                  = sprintf( __( 'Edit %1$s', 'recencio-book-reviews' ), $single );
 			$opts['labels']['menu_name']                  = $plural;
 			$opts['labels']['name']                       = $plural;
-			$opts['labels']['new_item_name']              = sprintf( __( 'New %1$s Name', 'rcno-reviews' ), $single );
-			$opts['labels']['not_found']                  = sprintf( __( 'No %1$s Found', 'rcno-reviews' ), $plural );
-			$opts['labels']['parent_item']                = sprintf( __( 'Parent %1$s', 'rcno-reviews' ), $single );
-			$opts['labels']['parent_item_colon']          = sprintf( __( 'Parent %1$s', 'rcno-reviews' ), $single );
-			$opts['labels']['popular_items']              = sprintf( __( 'Popular %1$s', 'rcno-reviews' ), $plural );
-			$opts['labels']['search_items']               = sprintf( __( 'Search %1$s', 'rcno-reviews' ), $plural );
-			$opts['labels']['separate_items_with_commas'] = sprintf( __( 'Separate %1$s with commas', 'rcno-reviews' ), $plural );
+			$opts['labels']['new_item_name']              = sprintf( __( 'New %1$s Name', 'recencio-book-reviews' ), $single );
+			$opts['labels']['not_found']                  = sprintf( __( 'No %1$s Found', 'recencio-book-reviews' ), $plural );
+			$opts['labels']['parent_item']                = sprintf( __( 'Parent %1$s', 'recencio-book-reviews' ), $single );
+			$opts['labels']['parent_item_colon']          = sprintf( __( 'Parent %1$s', 'recencio-book-reviews' ), $single );
+			$opts['labels']['popular_items']              = sprintf( __( 'Popular %1$s', 'recencio-book-reviews' ), $plural );
+			$opts['labels']['search_items']               = sprintf( __( 'Search %1$s', 'recencio-book-reviews' ), $plural );
+			$opts['labels']['separate_items_with_commas'] = sprintf( __( 'Separate %1$s with commas', 'recencio-book-reviews' ), $plural );
 			$opts['labels']['singular_name']              = $single;
-			$opts['labels']['update_item']                = sprintf( __( 'Update %1$s', 'rcno-reviews' ), $single );
-			$opts['labels']['view_item']                  = sprintf( __( 'View %1$s', 'rcno-reviews' ), $single );
+			$opts['labels']['update_item']                = sprintf( __( 'Update %1$s', 'recencio-book-reviews' ), $single );
+			$opts['labels']['view_item']                  = sprintf( __( 'View %1$s', 'recencio-book-reviews' ), $single );
 
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
@@ -504,21 +503,21 @@ class Rcno_Reviews_Admin {
 
 		if ( 'rcno_review' === $screen->id ) {
 			$contextual_help =
-				'<p>' . __( 'Things to remember when adding or editing a book review:', 'rcno-reviews' ) . '</p>' .
+				'<p>' . __( 'Things to remember when adding or editing a book review:', 'recencio-book-reviews' ) . '</p>' .
 				'<ul>' .
-				'<li>' . __( 'Specify the correct genre such as Mystery, or Historic.', 'rcno-reviews' ) . '</li>' .
-				'<li>' . __( 'Specify the correct writer of the book review. Remember that the Author module refers to you, the author of this book review.', 'rcno-reviews' ) . '</li>' .
+				'<li>' . __( 'Specify the correct genre such as Mystery, or Historic.', 'recencio-book-reviews' ) . '</li>' .
+				'<li>' . __( 'Specify the correct writer of the book review. Remember that the Author module refers to you, the author of this book review.', 'recencio-book-reviews' ) . '</li>' .
 				'</ul>' .
-				'<p>' . __( 'If you want to schedule the book review to be published in the future:', 'rcno-reviews' ) . '</p>' .
+				'<p>' . __( 'If you want to schedule the book review to be published in the future:', 'recencio-book-reviews' ) . '</p>' .
 				'<ul>' .
-				'<li>' . __( 'Under the Publish module, click on the Edit link next to Publish.', 'rcno-reviews' ) . '</li>' .
-				'<li>' . __( 'Change the date to the date to actual publish this article, then click on Ok.', 'rcno-reviews' ) . '</li>' .
+				'<li>' . __( 'Under the Publish module, click on the Edit link next to Publish.', 'recencio-book-reviews' ) . '</li>' .
+				'<li>' . __( 'Change the date to the date to actual publish this article, then click on Ok.', 'recencio-book-reviews' ) . '</li>' .
 				'</ul>' .
-				'<span><strong>' . __( 'For more information', 'rcno-reviews' ) . ': </strong></span>' .
-				'<span>' . '<a href="https://wordpress.org/support/plugin/recencio-book-reviews" target="_blank">' . __( 'Support Forums', 'rcno-reviews' ) . '</a>' . '</span>';
+				'<span><strong>' . __( 'For more information', 'recencio-book-reviews' ) . ': </strong></span>' .
+				'<span>' . '<a href="https://wordpress.org/support/plugin/recencio-book-reviews" target="_blank">' . __( 'Support Forums', 'recencio-book-reviews' ) . '</a>' . '</span>';
 		} elseif ( 'edit-book' === $screen->id ) {
 			$contextual_help =
-				'<p>' . __( 'This is the help screen displaying the table of book reviews you have created.', 'rcno-reviews' ) . '</p>';
+				'<p>' . __( 'This is the help screen displaying the table of book reviews you have created.', 'recencio-book-reviews' ) . '</p>';
 		}
 
 		return $contextual_help;
@@ -546,7 +545,7 @@ class Rcno_Reviews_Admin {
 		// Setup help tab args.
 		$args = array(
 			'id'      => 'rcno_reviews_help',
-			'title'   => __( 'Reviews Help', 'rcno-reviews' ),
+			'title'   => __( 'Reviews Help', 'recencio-book-reviews' ),
 			'content' => '<h3>Recencio Book Reviews</h3><p>Help content</p>',
 		);
 
@@ -571,8 +570,8 @@ class Rcno_Reviews_Admin {
 
 		add_filter( 'image_size_names_choose', function ( $sizes ) {
 			return array_merge( $sizes, array(
-				'rcno-book-cover-lg' => __( 'Book Cover LG', 'rcno-reviews' ),
-				'rcno-book-cover-sm' => __( 'Book Cover SM', 'rcno-reviews' ),
+				'rcno-book-cover-lg' => __( 'Book Cover LG', 'recencio-book-reviews' ),
+				'rcno-book-cover-sm' => __( 'Book Cover SM', 'recencio-book-reviews' ),
 			) );
 		} );
 	}
@@ -593,7 +592,7 @@ class Rcno_Reviews_Admin {
 
 		add_menu_page(
 			'Recencio ' . __( 'Book Reviews', $this->plugin_name ),
-			__( 'Reviews', 'rcno-reviews' ),
+			__( 'Reviews', 'recencio-book-reviews' ),
 			'manage_options',
 			$this->plugin_name,
 			array( $this, 'display_plugin_admin_page' )
@@ -602,7 +601,7 @@ class Rcno_Reviews_Admin {
 		add_submenu_page(
 			'edit.php?post_type=rcno_review',
 			'Recencio ' . __( 'Book Reviews', $this->plugin_name ),
-			__( 'Settings', 'rcno-reviews' ),
+			__( 'Settings', 'recencio-book-reviews' ),
 			'manage_options',
 			$this->plugin_name,
 			array( $this, 'display_plugin_admin_page' )
@@ -622,7 +621,7 @@ class Rcno_Reviews_Admin {
 	 */
 	public function add_action_links( $links ) {
 
-		$links['settings'] = '<a href="' . admin_url( 'admin.php?page=' . $this->plugin_name ) . '">' . __( 'Settings',	'rcno-reviews' ) . '</a>';
+		$links['settings'] = '<a href="' . admin_url( 'admin.php?page=' . $this->plugin_name ) . '">' . __( 'Settings',	'recencio-book-reviews' ) . '</a>';
 
 		return $links;
 	}
@@ -642,7 +641,7 @@ class Rcno_Reviews_Admin {
 
 		$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : $default_tab;
 
-		include_once 'partials/' . $this->plugin_name . '-admin-display.php';
+		include_once 'partials/admin-display.php';
 
 	}
 
@@ -987,29 +986,29 @@ SQL;
 
 		$messages['rcno_review'] = array(
 			0  => '', // Unused. Messages start at index 1.
-			1  => __( 'Review updated.', 'rcno-reviews' ),
-			2  => __( 'Custom field updated.', 'rcno-reviews' ),
-			3  => __( 'Custom field deleted.', 'rcno-reviews' ),
-			4  => __( 'Review updated.', 'rcno-reviews' ),
+			1  => __( 'Review updated.', 'recencio-book-reviews' ),
+			2  => __( 'Custom field updated.', 'recencio-book-reviews' ),
+			3  => __( 'Custom field deleted.', 'recencio-book-reviews' ),
+			4  => __( 'Review updated.', 'recencio-book-reviews' ),
 			/* translators: %s: date and time of the revision */
-			5  => isset( $_GET['revision'] ) ? __( 'Review restored to revision from ', 'rcno-reviews' ) . wp_post_revision_title( (int) $_GET['revision'], false ) : false,
-			6  => __( 'Review published.', 'rcno-reviews' ),
-			7  => __( 'Review saved.', 'rcno-reviews' ),
-			8  => __( 'Review submitted.', 'rcno-reviews' ),
-			9  => __( 'Review scheduled for: ', 'rcno-reviews' ) . date_i18n( get_option( 'date_format' ), strtotime( $review->post_date ) ),
-			10 => __( 'Review draft updated.', 'rcno-reviews' ),
+			5  => isset( $_GET['revision'] ) ? __( 'Review restored to revision from ', 'recencio-book-reviews' ) . wp_post_revision_title( (int) $_GET['revision'], false ) : false,
+			6  => __( 'Review published.', 'recencio-book-reviews' ),
+			7  => __( 'Review saved.', 'recencio-book-reviews' ),
+			8  => __( 'Review submitted.', 'recencio-book-reviews' ),
+			9  => __( 'Review scheduled for: ', 'recencio-book-reviews' ) . date_i18n( get_option( 'date_format' ), strtotime( $review->post_date ) ),
+			10 => __( 'Review draft updated.', 'recencio-book-reviews' ),
 		);
 
 		if ( $post_type_object && $post_type_object->publicly_queryable && 'rcno_review' === $post_type ) {
 			$permalink = get_permalink( $review->ID );
 
-			$view_link                 = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View review', 'rcno-reviews' ) );
+			$view_link                 = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View review', 'recencio-book-reviews' ) );
 			$messages[ $post_type ][1] .= $view_link;
 			$messages[ $post_type ][6] .= $view_link;
 			$messages[ $post_type ][9] .= $view_link;
 
 			$preview_permalink          = add_query_arg( 'preview', 'true', $permalink );
-			$preview_link               = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview review', 'rcno-reviews' ) );
+			$preview_link               = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview review', 'recencio-book-reviews' ) );
 			$messages[ $post_type ][8]  .= $preview_link;
 			$messages[ $post_type ][10] .= $preview_link;
 		}
@@ -1306,7 +1305,7 @@ SQL;
         
         Example.com may chose to share your review text, 
         review rating and name with Google for the express purpose of enabling Structured Data 
-        markup for our reviews on their search result pages.', 'rcno-reviews' );
+        markup for our reviews on their search result pages.', 'recencio-book-reviews' );
 
 		wp_add_privacy_policy_content(
 			'Recencio Book Reviews',
@@ -1359,12 +1358,12 @@ SQL;
 				// If you define your own group, the first exporter to
 				// include a label will be used as the group label in the
 				// final exported report
-				$group_label = __( 'Review Score', 'rcno-reviews' );
+				$group_label = __( 'Review Score', 'recencio-book-reviews' );
 
 				// Plugins can add as many items in the item data array as they want
 				$data = array(
 					array(
-						'name' => __( 'Review Score', 'rcno-reviews' ),
+						'name' => __( 'Review Score', 'recencio-book-reviews' ),
 						'value' => $review_score
 					)
 				);
@@ -1444,7 +1443,7 @@ SQL;
 	 */
 	public function register_rcno_data_exporter( $exporters ) {
 		$exporters['recencio-book-reviews'] = array(
-			'exporter_friendly_name' => __( 'Recencio Book Reviews Plugin', 'rcno-reviews' ),
+			'exporter_friendly_name' => __( 'Recencio Book Reviews Plugin', 'recencio-book-reviews' ),
 			'callback' => array( $this, 'rcno_data_exporter' ),
 		);
 		return $exporters;
@@ -1461,7 +1460,7 @@ SQL;
 	 */
 	public function register_rcno_data_eraser( $erasers ) {
 		$erasers['recencio-book-reviews'] = array(
-			'eraser_friendly_name' => __( 'Recencio Book Reviews Plugin', 'rcno-reviews' ),
+			'eraser_friendly_name' => __( 'Recencio Book Reviews Plugin', 'recencio-book-reviews' ),
 			'callback'             => array( $this, 'rcno_data_eraser' ),
 		);
 		return $erasers;

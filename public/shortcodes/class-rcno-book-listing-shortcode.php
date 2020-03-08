@@ -94,7 +94,7 @@ class Rcno_Book_Listing_Shortcode {
 			'ids'       => '',
 			'wordcount' => 30,
 			'heading'    => '',
-			'readmore'  => __( 'Read more', 'rcno-reviews' ),
+			'readmore'  => __( 'Read more', 'recencio-book-reviews' ),
 		), $atts, 'rcno-book-listing' );
 
 		// The actual rendering is done inside the Rcno_Template_Tags class.
@@ -166,41 +166,41 @@ class Rcno_Book_Listing_Shortcode {
 	 */
 	public function rcno_set_help_text() {
 
-		$this->help_text = '<h4>' . __( 'The Book Listing shortcode', 'rcno-reviews' ) . '</h4>';
+		$this->help_text = '<h4>' . __( 'The Book Listing shortcode', 'recencio-book-reviews' ) . '</h4>';
 		$this->help_text .= '<p>';
-		$this->help_text .= __( 'This shortcode creates a list of books based on the comma separated list of reviews provided in the "ids" parameter.', 'rcno-reviews' );
+		$this->help_text .= __( 'This shortcode creates a list of books based on the comma separated list of reviews provided in the "ids" parameter.', 'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
-		$this->help_text .= '<code>' . '[rcno-book-listing ids=\'\']' . '</code> ' . __('The default shortcode.', 'rcno-reviews');
+		$this->help_text .= '<code>' . '[rcno-book-listing ids=\'\']' . '</code> ' . __('The default shortcode.', 'recencio-book-reviews');
 		$this->help_text .= '<p>';
 
 		$this->help_text .= __( 'The shortcode uses a couple of parameters that can be changed or left at the default values. 
 								If the default values are being used, then it is not necessary to include them in the shortcode. The default values are listed below: ',
-								'rcno-reviews' );
+								'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'ids' . '</code> ' . __( 'This a list of review IDs, separated by commas', 'rcno-reviews' );
+		$this->help_text .= '<code>' . 'ids' . '</code> ' . __( 'This a list of review IDs, separated by commas', 'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'wordcount' . '</code> ' . __( 'The word count of the book description being displayed. Defaults to 30', 'rcno-reviews' );
+		$this->help_text .= '<code>' . 'wordcount' . '</code> ' . __( 'The word count of the book description being displayed. Defaults to 30', 'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'heading' . '</code> ' . __( 'Adds a heading to the listing of book. Defaults to empty string (not shown)', 'rcno-reviews');
+		$this->help_text .= '<code>' . 'heading' . '</code> ' . __( 'Adds a heading to the listing of book. Defaults to empty string (not shown)', 'recencio-book-reviews');
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'readmore' . '</code> ' . __( 'The text displayed in the "read more" button. Defaults to "Read more"', 'rcno-reviews' );
+		$this->help_text .= '<code>' . 'readmore' . '</code> ' . __( 'The text displayed in the "read more" button. Defaults to "Read more"', 'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '</ul>';
 
 		$this->help_text .= '<p>';
-		$this->help_text .= __( 'Examples of the book listing shortcode:', 'rcno-reviews' );
+		$this->help_text .= __( 'Examples of the book listing shortcode:', 'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';

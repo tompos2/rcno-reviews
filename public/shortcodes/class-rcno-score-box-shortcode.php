@@ -136,10 +136,10 @@ class Rcno_Score_Box_Shortcode {
 		$output = '';
 		$output .= '<div id="rcno-score-box" style="background:' . esc_attr( $background ) . '">';
 		$output .= '<div class="review-summary">';
-		$output .= '<div class="overall-score" style="background:' . esc_attr( $accent ) . ';" title="' . sprintf( '%s - %s out of 5', __( 'Overall Score', 'rcno-reviews' ),
+		$output .= '<div class="overall-score" style="background:' . esc_attr( $accent ) . ';" title="' . sprintf( '%s - %s out of 5', __( 'Overall Score', 'recencio-book-reviews' ),
 				$final_score ) . '">';
 		$output .= '<span class="overall">' . $this->template->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
-		$output .= '<span class="overall-text" style="background: ' . $accent_2 . ';">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
+		$output .= '<span class="overall-text" style="background: ' . $accent_2 . ';">' . __( 'Overall Score', 'recencio-book-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '</div>';
 		$output .= '<ul>';
@@ -176,24 +176,24 @@ class Rcno_Score_Box_Shortcode {
 	 */
 	public function rcno_set_help_text() {
 
-		$this->help_text = '<h4>' . __( 'The Review Score shortcode', 'rcno-reviews' ) . '</h4>';
+		$this->help_text = '<h4>' . __( 'The Review Score shortcode', 'recencio-book-reviews' ) . '</h4>';
 		$this->help_text .= '<p>';
 		$this->help_text .= __( 'This shortcode display the book review score box in reviews or regular posts. This shortcode only needs the ID parameter if it is inserted into a regular post. If the shortcode is used in a regular post, the ID of the review it is attached to is needed.',
-								'rcno-reviews' );
+								'recencio-book-reviews' );
 		$this->help_text .= '</p>';
 
-		$this->help_text .= '<code>' . '[rcno-score-box]' . '</code> ' . __('The default shortcode.', 'rcno-reviews');
+		$this->help_text .= '<code>' . '[rcno-score-box]' . '</code> ' . __('The default shortcode.', 'recencio-book-reviews');
 
 		$this->help_text .= '<ul>';
 
 		$this->help_text .= '<li>';
-		$this->help_text .= '<code>' . 'id' . '</code> ' . __( 'The review ID, defaults to the review post.', 'rcno-reviews' );
+		$this->help_text .= '<code>' . 'id' . '</code> ' . __( 'The review ID, defaults to the review post.', 'recencio-book-reviews' );
 		$this->help_text .= '</li>';
 
 		$this->help_text .= '</ul>';
 
 		$this->help_text .= '<p>';
-		$this->help_text .= __( 'Examples of the review score box shortcode', 'rcno-reviews' ) . ':';
+		$this->help_text .= __( 'Examples of the review score box shortcode', 'recencio-book-reviews' ) . ':';
 		$this->help_text .= '</p>';
 
 		$this->help_text .= '<ul>';

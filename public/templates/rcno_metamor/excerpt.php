@@ -13,7 +13,7 @@
 		$review_id = get_post()->ID;
 	}
 
-	$plugin_name = 'rcno-reviews';
+	$plugin_name = 'recencio-book-reviews';
 	$version     = '1.0.0';
 
 	$review = new Rcno_Template_Tags( $plugin_name, $version );

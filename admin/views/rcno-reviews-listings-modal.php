@@ -14,7 +14,7 @@
 	<form id="rcno-modal-form-scl" tabindex="-1">
 		<?php wp_nonce_field( 'rcno-ajax-nonce', 'rcno_ajax_nonce', false ); ?>
 		<div id="rcno-modal-title-scl">
-			<?php esc_html_e( 'Insert book review listing', 'rcno-reviews' ) ?>
+			<?php esc_html_e( 'Insert book review listing', 'recencio-book-reviews' ) ?>
 			<button type="button" id="rcno-modal-close-scl"><span
 						class="screen-reader-text"><?php echo esc_html( 'Close' ); ?></span></button>
 		</div>
@@ -23,9 +23,9 @@
 				<li>
 					<input type="radio" selected="selected" value="rcno-tax-list" id="rcno-modal-scl-mode-tax"
 						   name="rcno-modal-scl-mode"/>
-					<label for="rcno-modal-scl-mode-tax"><b><?php esc_html_e( 'Embed taxonomy index', 'rcno-reviews' ); ?></b></label>
+					<label for="rcno-modal-scl-mode-tax"><b><?php esc_html_e( 'Embed taxonomy index', 'recencio-book-reviews' ); ?></b></label>
 					<div id="rcno-taxonomy-panel">
-						<label><span><?php esc_html_e( 'Taxonomy', 'rcno-reviews' ); ?></span></label>
+						<label><span><?php esc_html_e( 'Taxonomy', 'recencio-book-reviews' ); ?></span></label>
 						<select id="review-taxonomy">
 							<?php if ( Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) ) {
 								$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
@@ -41,27 +41,27 @@
 				<li>
 					<input type="radio" value="rcno-reviews-index" name="rcno-modal-scl-mode"
 						   id="rcno-modal-scl-mode-ind"/>
-					<label for="rcno-modal-scl-mode-ind"><b><?php esc_html_e( 'Embed book review index', 'rcno-reviews' ); ?></b></label>
+					<label for="rcno-modal-scl-mode-ind"><b><?php esc_html_e( 'Embed book review index', 'recencio-book-reviews' ); ?></b></label>
 				</li>
                 <li>
                     <input type="radio" value="rcno-reviews-grid" name="rcno-modal-scl-mode"
                            id="rcno-modal-scl-mode-grid"/>
-                    <label for="rcno-modal-scl-mode-grid"><b><?php esc_html_e( 'Embed book review grid', 'rcno-reviews' ); ?></b></label>
+                    <label for="rcno-modal-scl-mode-grid"><b><?php esc_html_e( 'Embed book review grid', 'recencio-book-reviews' ); ?></b></label>
                 </li>
                 <li>
                     <input type="radio" value="rcno-reviews-isotope" name="rcno-modal-scl-mode"
                            id="rcno-modal-scl-mode-isotope"/>
-                    <label for="rcno-modal-scl-mode-isotope"><b><?php esc_html_e( 'Embed sortable book review grid', 'rcno-reviews' ); ?></b></label>
+                    <label for="rcno-modal-scl-mode-isotope"><b><?php esc_html_e( 'Embed sortable book review grid', 'recencio-book-reviews' ); ?></b></label>
                 </li>
 			</ul>
 		</div>
 		<div class="submitbox">
 			<div id="rcno-modal-cancel-scl">
-				<a class="submitdelete deletion" href="#"><?php esc_html_e( 'Cancel', 'rcno-reviews' ); ?></a>
+				<a class="submitdelete deletion" href="#"><?php esc_html_e( 'Cancel', 'recencio-book-reviews' ); ?></a>
 			</div>
 			<div id="rcno-modal-update-scl">
 				<input type="submit" class="button button-primary" id="rcno-modal-submit-scl"
-					   name="rcno-modal-submit-scl" value="<?php esc_attr_e( 'Insert', 'rcno-reviews' ); ?>">
+					   name="rcno-modal-submit-scl" value="<?php esc_attr_e( 'Insert', 'recencio-book-reviews' ); ?>">
 			</div>
 		</div>
 	</form>

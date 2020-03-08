@@ -16,7 +16,7 @@ if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
 	$review_id = get_post()->ID;
 }
 
-$plugin_name = 'rcno-reviews';
+$plugin_name = 'recencio-book-reviews';
 $version     = '1.0.0';
 
 $review_score_enable   = (bool) get_post_meta( $review_id, 'rcno_review_score_enable', true );

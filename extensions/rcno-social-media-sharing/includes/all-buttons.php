@@ -1,6 +1,6 @@
 <?php
 
-$template          = new Rcno_Template_Tags( 'rcno-reviews', '1.14.0' );
+$template          = new Rcno_Template_Tags( 'recencio-book-reviews', '1.14.0' );
 $selected_buttons  = explode( ',', strtolower( $this->get_setting( 'social_media_sites' ) ) );
 $available_buttons = array();
 $button_color      = $this->get_setting( 'buttons_color' );
@@ -12,7 +12,7 @@ if ( in_array( 'facebook', $selected_buttons, true ) ) {
 	$facebook .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$facebook .= 'style="background: ' . $button_color . '">';
 	$facebook .= '<i class="facebook socicon-facebook"></i>';
-	$facebook .= '<p>' . __( 'Facebook', 'rcno-reviews' ) . '</p>';
+	$facebook .= '<p>' . __( 'Facebook', 'recencio-book-reviews' ) . '</p>';
 	$facebook .= '</a>';
 	$facebook .= '</div>'; // .rcno-facebook-button
 
@@ -28,7 +28,7 @@ if ( in_array( 'twitter', $selected_buttons, true ) ) {
 	$twitter .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$twitter .= 'style="background: ' . $button_color . '">';
 	$twitter .= '<i class="twitter socicon-twitter"></i>';
-	$twitter .= '<p>' . __( 'Twitter', 'rcno-reviews' ) . '</p>';
+	$twitter .= '<p>' . __( 'Twitter', 'recencio-book-reviews' ) . '</p>';
 	$twitter .= '</a>';
 	$twitter .= '</div>'; // .rcno-twitter-button
 
@@ -42,7 +42,7 @@ if ( in_array( 'google+', $selected_buttons, true ) ) {
 	$google .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$google .= 'style="background: ' . $button_color . '">';
 	$google .= '<i class="google socicon-google"></i>';
-	$google .= '<p>' . __( 'Google+', 'rcno-reviews' ) . '</p>';
+	$google .= '<p>' . __( 'Google+', 'recencio-book-reviews' ) . '</p>';
 	$google .= '</a>';
 	$google .= '</div>'; // .rcno-google-button
 
@@ -58,7 +58,7 @@ if ( in_array( 'pinterest', $selected_buttons, true ) ) {
 	$pinterest .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$pinterest .= 'style="background: ' . $button_color . '">';
 	$pinterest .= '<i class="pinterest socicon-pinterest"></i>';
-	$pinterest .= '<p>' . __( 'Pinterest', 'rcno-reviews' ) . '</p>';
+	$pinterest .= '<p>' . __( 'Pinterest', 'recencio-book-reviews' ) . '</p>';
 	$pinterest .= '</a>';
 	$pinterest .= '</div>'; // .rcno-pinterest-button
 
@@ -73,7 +73,7 @@ if ( in_array( 'stumbleupon', $selected_buttons, true ) ) {
 	$stumbleupon .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$stumbleupon .= 'style="background: ' . $button_color . '">';
 	$stumbleupon .= '<i class="stumbleupon socicon-stumbleupon"></i>';
-	$stumbleupon .= '<p>' . __( 'StumbleUpon', 'rcno-reviews' ) . '</p>';
+	$stumbleupon .= '<p>' . __( 'StumbleUpon', 'recencio-book-reviews' ) . '</p>';
 	$stumbleupon .= '</a>';
 	$stumbleupon .= '</div>'; // .rcno-stumble-button
 
@@ -89,7 +89,7 @@ if ( in_array( 'tumblr', $selected_buttons, true ) ) {
 	$tumblr .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$tumblr .= 'style="background: ' . $button_color . '">';
 	$tumblr .= '<i class="tumblr socicon-tumblr"></i>';
-	$tumblr .= '<p>' . __( 'Tumblr', 'rcno-reviews' ) . '</p>';
+	$tumblr .= '<p>' . __( 'Tumblr', 'recencio-book-reviews' ) . '</p>';
 	$tumblr .= '</a>';
 	$tumblr .= '</div>';
 
@@ -104,7 +104,7 @@ if ( in_array( 'reddit', $selected_buttons, true ) ) {
 	$reddit .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$reddit .= 'style="background: ' . $button_color . '">';
 	$reddit .= '<i class="reddit socicon-reddit" ></i>';
-	$reddit .= '<p>' . __( 'Reddit', 'rcno-reviews' ) . '</p>';
+	$reddit .= '<p>' . __( 'Reddit', 'recencio-book-reviews' ) . '</p>';
 	$reddit .= '</a>';
 	$reddit .= '</div>';
 
@@ -118,7 +118,7 @@ if ( in_array( 'pocket', $selected_buttons, true ) ) {
 	$pocket .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$pocket .= 'style="background: ' . $button_color . '">';
 	$pocket .= '<i class="pocket socicon-pocket" ></i>';
-	$pocket .= '<p>' . __( 'Pocket', 'rcno-reviews' ) . '</p>';
+	$pocket .= '<p>' . __( 'Pocket', 'recencio-book-reviews' ) . '</p>';
 	$pocket .= '</a>';
 	$pocket .= '</div>';
 
@@ -132,7 +132,7 @@ if ( in_array( 'digg', $selected_buttons, true ) ) {
 	$digg .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$digg .= 'style="background: ' . $button_color . '">';
 	$digg .= '<i class="digg socicon-digg" ></i>';
-	$digg .= '<p>' . __( 'Digg', 'rcno-reviews' ) . '</p>';
+	$digg .= '<p>' . __( 'Digg', 'recencio-book-reviews' ) . '</p>';
 	$digg .= '</a>';
 	$digg .= '</div>';
 
@@ -148,7 +148,7 @@ if ( in_array( 'instapaper', $selected_buttons, true ) ) {
 	$instapaper .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$instapaper .= 'style="background: ' . $button_color . '">';
 	$instapaper .= '<i class="instapaper socicon-instapaper" ></i>';
-	$instapaper .= '<p>' . __( 'InstaPaper', 'rcno-reviews' ) . '</p>';
+	$instapaper .= '<p>' . __( 'InstaPaper', 'recencio-book-reviews' ) . '</p>';
 	$instapaper .= '</a>';
 	$instapaper .= '</div>';
 
@@ -163,7 +163,7 @@ if ( in_array( 'buffer', $selected_buttons, true ) ) {
 	$buffer .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
 	$buffer .= 'style="background: ' . $button_color . '">';
 	$buffer .= '<i class="buffer socicon-buffer" ></i>';
-	$buffer .= '<p>' . __( 'Buffer', 'rcno-reviews' ) . '</p>';
+	$buffer .= '<p>' . __( 'Buffer', 'recencio-book-reviews' ) . '</p>';
 	$buffer .= '</a>';
 	$buffer .= '</div>';
 
@@ -176,7 +176,7 @@ if ( in_array( 'email', $selected_buttons, true ) ) {
 	$email .= '<a href="mailto:' . get_bloginfo( 'admin_email' ) . '" ';
 	$email .= 'style="background: ' . $button_color . '">';
 	$email .= '<i class="email socicon-mail" ></i>';
-	$email .= '<p>' . __( 'Email', 'rcno-reviews' ) . '</p>';
+	$email .= '<p>' . __( 'Email', 'recencio-book-reviews' ) . '</p>';
 	$email .= '</a>';
 	$email .= '</div>';
 

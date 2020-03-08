@@ -69,26 +69,26 @@ abstract class Abstract_Rcno_Extension {
 		if ( ! isset( $extension[ $this->id ] ) ) { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
                     class="button button-primary button-extension-activate">
-                <?php _e( 'Enable', 'rcno-reviews' ); ?>
+                <?php _e( 'Enable', 'recencio-book-reviews' ); ?>
             </button>
 			<?php if ( $this->settings ) { ?>
                 <button type="button" data-extension="<?php echo $this->id; ?>"
                         class="button button-primary <?php echo $this->id; ?>-settings"
                         data-micromodal-trigger="<?php echo $this->id; ?>"
                         style="display: none">
-					<?php _e( 'Settings', 'rcno-reviews' ); ?>
+					<?php _e( 'Settings', 'recencio-book-reviews' ); ?>
                 </button>
 			<?php } ?>
 		<?php } else { ?>
             <button type="button" data-extension="<?php echo $this->id; ?>"
                     class="button button-default button-extension-deactivate">
-                <?php _e( 'Disable', 'rcno-reviews' ); ?>
+                <?php _e( 'Disable', 'recencio-book-reviews' ); ?>
             </button>
             <?php if ( $this->settings ) { ?>
                 <button type="button" data-extension="<?php echo $this->id; ?>"
                         class="button button-primary <?php echo $this->id; ?>-settings"
                         data-micromodal-trigger="<?php echo $this->id; ?>">
-                    <?php _e( 'Settings', 'rcno-reviews' ); ?>
+                    <?php _e( 'Settings', 'recencio-book-reviews' ); ?>
                 </button>
             <?php } ?>
 		<?php }	?>

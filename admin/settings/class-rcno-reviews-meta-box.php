@@ -68,6 +68,6 @@ class Rcno_Reviews_Meta_Box {
 	 */
 	public function render_meta_box( $active_tab ) {
 
-		require_once plugin_dir_path( __DIR__ ) . 'partials/' . $this->plugin_name . '-meta-box-display.php';
+		require_once plugin_dir_path( __DIR__ ) . 'partials/meta-box-display.php';
 	}
 }

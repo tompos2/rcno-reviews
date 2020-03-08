@@ -30,6 +30,6 @@ if ( 'google-books' === $external_api ) {
 	<?php endif; ?>
 	<?php wp_nonce_field( 'rcno_save_book_isbn_metadata', 'rcno_isbn_nonce' ); ?>
     <div class="book-isbn-metabox-error">
-        <p><?php printf( __( 'Your book was not found on %s', 'rcno-reviews' ), $external_api_name ); ?></p>
+        <p><?php printf( __( 'Your book was not found on %s', 'recencio-book-reviews' ), $external_api_name ); ?></p>
     </div>
 </div>

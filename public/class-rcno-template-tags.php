@@ -79,19 +79,19 @@ class Rcno_Template_Tags {
 		$this->version     = $version;
 
 		$this->meta_keys = array(
-			'rcno_book_illustrator'   => apply_filters( 'rcno_book_illustrator', __( 'Illustrator', 'rcno-reviews' ) ),
-			'rcno_book_pub_date'      => apply_filters( 'rcno_book_pub_date', __( 'Published', 'rcno-reviews' ) ),
-			'rcno_book_pub_format'    => apply_filters( 'rcno_book_pub_format', __( 'Format', 'rcno-reviews' ) ),
-			'rcno_book_pub_edition'   => apply_filters( 'rcno_book_pub_edition', __( 'Edition', 'rcno-reviews' ) ),
-			'rcno_book_page_count'    => apply_filters( 'rcno_book_page_count', __( 'Page Count', 'rcno-reviews' ) ),
-			'rcno_book_series_number' => apply_filters( 'rcno_book_series_number', __( 'Series Number', 'rcno-reviews' ) ),
-			'rcno_book_gr_review'     => apply_filters( 'rcno_book_gr_review', __( 'Goodreads Rating', 'rcno-reviews' ) ),
-			'rcno_book_gr_id'         => apply_filters( 'rcno_book_gr_id', __( 'Goodreads ID', 'rcno-reviews' ) ),
-			'rcno_book_isbn13'        => apply_filters( 'rcno_book_isbn13', __( 'ISBN13', 'rcno-reviews' ) ),
-			'rcno_book_isbn'          => apply_filters( 'rcno_book_isbn', __( 'ISBN', 'rcno-reviews' ) ),
-			'rcno_book_asin'          => apply_filters( 'rcno_book_asin', __( 'ASIN', 'rcno-reviews' ) ),
-			'rcno_book_gr_url'        => apply_filters( 'rcno_book_gr_url', __( 'Book URL', 'rcno-reviews' ) ),
-			'rcno_book_title'         => apply_filters( 'rcno_book_title', __( 'Title', 'rcno-reviews' ) ),
+			'rcno_book_illustrator'   => apply_filters( 'rcno_book_illustrator', __( 'Illustrator', 'recencio-book-reviews' ) ),
+			'rcno_book_pub_date'      => apply_filters( 'rcno_book_pub_date', __( 'Published', 'recencio-book-reviews' ) ),
+			'rcno_book_pub_format'    => apply_filters( 'rcno_book_pub_format', __( 'Format', 'recencio-book-reviews' ) ),
+			'rcno_book_pub_edition'   => apply_filters( 'rcno_book_pub_edition', __( 'Edition', 'recencio-book-reviews' ) ),
+			'rcno_book_page_count'    => apply_filters( 'rcno_book_page_count', __( 'Page Count', 'recencio-book-reviews' ) ),
+			'rcno_book_series_number' => apply_filters( 'rcno_book_series_number', __( 'Series Number', 'recencio-book-reviews' ) ),
+			'rcno_book_gr_review'     => apply_filters( 'rcno_book_gr_review', __( 'Goodreads Rating', 'recencio-book-reviews' ) ),
+			'rcno_book_gr_id'         => apply_filters( 'rcno_book_gr_id', __( 'Goodreads ID', 'recencio-book-reviews' ) ),
+			'rcno_book_isbn13'        => apply_filters( 'rcno_book_isbn13', __( 'ISBN13', 'recencio-book-reviews' ) ),
+			'rcno_book_isbn'          => apply_filters( 'rcno_book_isbn', __( 'ISBN', 'recencio-book-reviews' ) ),
+			'rcno_book_asin'          => apply_filters( 'rcno_book_asin', __( 'ASIN', 'recencio-book-reviews' ) ),
+			'rcno_book_gr_url'        => apply_filters( 'rcno_book_gr_url', __( 'Book URL', 'recencio-book-reviews' ) ),
+			'rcno_book_title'         => apply_filters( 'rcno_book_title', __( 'Title', 'recencio-book-reviews' ) ),
 		);
 	}
 
@@ -107,13 +107,15 @@ class Rcno_Template_Tags {
 		// Get the layout chosen.
 		$layout = Rcno_Reviews_Option::get_option( 'rcno_review_template', 'rcno_default' );
 
-		$include_path = get_stylesheet_directory() . '/rcno_templates/' . $layout . '/functions.php';
+		$external_path = get_stylesheet_directory() . '/rcno_templates/' . $layout . '/functions.php';
+		$local_path    = plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/functions.php';
 
-		if ( file_exists( $include_path ) ) {
-			include_once $include_path;
+		if ( file_exists( $external_path ) ) {
+			include_once $external_path;
+		} elseif ( file_exists( $local_path ) ) {
+			include_once $local_path;
 		} else {
-			// Global layout.
-			include_once plugin_dir_path( __FILE__ ) . 'templates/' . $layout . '/functions.php';
+			include_once plugin_dir_path( __FILE__ ) . 'templates/rcno_default/functions.php';
 		}
 
 	}
@@ -137,8 +139,8 @@ class Rcno_Template_Tags {
 		$built_taxonomies = array();
 		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_builtin_taxonomy', false )) {
 			$built_taxonomies = array(
-				'category' => __( 'Category', 'rcno-reviews' ),
-				'post_tag' => __( 'Tag', 'rcno-reviews' ),
+				'category' => __( 'Category', 'recencio-book-reviews' ),
+				'post_tag' => __( 'Tag', 'recencio-book-reviews' ),
 			);
 		}
 
@@ -271,7 +273,7 @@ class Rcno_Template_Tags {
 			$output .= '<div class="stars rating-' . $review_id . '" ';
 			$output .= 'data-review-id="' . $review_id . '" ';
 			$output .= 'data-review-rating="' . esc_attr( $rating ) . '" ';
-			$output .= 'title="' . esc_attr( $rating ) . ' ' . __( 'out of 5 stars', 'rcno-reviews' ) . '">';
+			$output .= 'title="' . esc_attr( $rating ) . ' ' . __( 'out of 5 stars', 'recencio-book-reviews' ) . '">';
 			$output .= '</div>';
 			$output .= '</div>';
 		}
@@ -312,6 +314,7 @@ class Rcno_Template_Tags {
 	 * @return bool|string
 	 */
 	public function get_the_rcno_book_cover( $review_id, $size = 'medium', $wrapper = true, $original = false ) {
+
 		$review        = get_post_custom( $review_id );
 		$attachment_id = isset( $review['rcno_reviews_book_cover_id'] ) ? $review['rcno_reviews_book_cover_id'][0] : 0;
 		$size          = apply_filters( 'rcno_book_cover_size', $size );
@@ -338,13 +341,13 @@ class Rcno_Template_Tags {
 			return $book_src;
 		}
 
-		// Use the book title because most users wont edit it form the file upload screen.
+		// Use the book title because most users won't edit it from the file upload screen.
 		$book_title = $review['rcno_book_title'][0];
 		$book_alt   = ! empty( $review['rcno_reviews_book_cover_alt'][0] ) ?
 		$review['rcno_reviews_book_cover_alt'][0] : $book_title;
 
-		$book_title = $book_title ? esc_attr( $book_title ) : __( 'Book Title Unavailable', 'rcno-reviews' );
-		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no title has been provided for this book', 'rcno-reviews' );
+		$book_title = $book_title ? esc_attr( $book_title ) : __( 'Book Title Unavailable', 'recencio-book-reviews' );
+		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no title has been provided for this book', 'recencio-book-reviews' );
 
 		$out = '';
 		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ) ) . '" ';
@@ -438,9 +441,7 @@ class Rcno_Template_Tags {
 			return null;
 		}
 
-		//$counts    = wp_get_post_terms( $review_id, $taxonomy );
-		$counts = get_the_terms( $review_id, $taxonomy );
-
+		$counts    = get_the_terms( $review_id, $taxonomy );
 		$tax_label = $tax->labels->name;
 
 		if ( count( $counts ) === 1 ) { // If we have only 1 term singular-ize the label name.
@@ -580,8 +581,8 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_review_title( $review_id ) {
 
+		$out       = '';
 		$clickable = Rcno_Reviews_Option::get_option( 'rcno_reviews_embedded_title_links', false );
-		$out = '';
 
 		if ( $this->is_review_embedded() ) {
 			if ( $clickable ) {
@@ -631,14 +632,13 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_description( $review_id, $word_count = 75, $strip_tags = true ) {
 
-		$review = get_post_custom( $review_id );
+		$out              = '';
+		$review           = get_post_custom( $review_id );
 		$book_description = isset( $review['rcno_book_description'] ) ? $review['rcno_book_description'][0] : '';
+
 		if ( apply_filters( 'rcno_book_description_strip_tags', $strip_tags ) ) {
 			$book_description = wp_trim_words( $book_description, apply_filters( 'rcno_book_description_word_count', $word_count ) );
 		}
-
-		// Create an empty output string.
-		$out = '';
 
 		// Render the description only if it is not empty.
 		if ( '' !==  $book_description ) {
@@ -647,7 +647,6 @@ class Rcno_Template_Tags {
 			$out .= '</div>';
 		}
 
-		// Return the rendered description.
 		return $out;
 	}
 
@@ -683,7 +682,7 @@ class Rcno_Template_Tags {
 
 		// setup_postdata( $review_id ); // See note by Mikko Saari.
 
-		$review = get_post( $review_id );
+		$review  = get_post( $review_id );
 		$excerpt = $review->post_excerpt ?: wp_strip_all_tags( strip_shortcodes( $review->post_content ) );
 		$length ++;
 
@@ -718,16 +717,16 @@ class Rcno_Template_Tags {
 
 		$review = get_post( $review_id );
 
-		if ( null === $review ) {
-			return false;
+		if ( ! $review ) {
+			return '';
 		}
 
 		if ( has_excerpt( $review->ID ) ) {
-			$review_excerpt = $review->post_excerpt;
-			return apply_filters( 'the_content', $review_excerpt );
+
+			return apply_filters( 'the_content', $review->post_excerpt );
 		}
 
-		$review_excerpt = $review->post_content;
+		$review_excerpt   = $review->post_content;
 		$review_excerpt   = strip_shortcodes( strip_tags( $review_excerpt, $tags ) );
 		$review_excerpt   = preg_split( '/\b/', $review_excerpt, $length * 2 + 1 );
 		$excerpt_waste    = array_pop( $review_excerpt );
@@ -783,22 +782,20 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_review_content( $review_id ) {
 
+		$out       = '<div class="rcno-book-review-content">';
 		$read_more = Rcno_Reviews_Option::get_option( 'rcno_excerpt_read_more' );
-
-		$review_content = '';
-		$review_content .= '<div class="rcno-book-review-content">';
 
 		// We need to check this, or we'll get an infinite loop with embedded reviews.
 		if ( $this->is_review_embedded() ) {
-			$review_content .= wpautop( get_post_field( 'post_content', $review_id ) );
+			$out .= wpautop( get_post_field( 'post_content', $review_id ) );
 		} else {
-			$review_content .= wpautop( get_the_content( $read_more ) );
-			// $review_content .= apply_filters( 'the_content', get_the_content() ); // TODO: look into this.
+			$out .= wpautop( get_the_content( $read_more ) );
+			// $out .= apply_filters( 'the_content', get_the_content() ); // TODO: look into this.
 		}
 
-		$review_content .= '</div>';
+		$out .= '</div>';
 
-		return $review_content;
+		return $out;
 	}
 
 	/**
@@ -877,13 +874,13 @@ class Rcno_Template_Tags {
 					if ( false !== stripos( $review[ $meta_key ][0], 'goodreads' ) ) {
 						$out .= '<span class="rcno-meta-value">'
 								. '<a href="' . sanitize_text_field( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
-								. __( 'GoodReads.com', 'rcno-reviews' )
+								. __( 'GoodReads.com', 'recencio-book-reviews' )
 								. '</a>'
 								. '</span>';
 					} elseif( false !== stripos( $review[ $meta_key ][0], 'books.google' ) ) {
 						$out .= '<span class="rcno-meta-value">'
 								. '<a href="' . sanitize_text_field( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
-								. __( 'Google Books', 'rcno-reviews' )
+								. __( 'Google Books', 'recencio-book-reviews' )
 								. '</a>'
 								. '</span>';
 					} else {
@@ -1070,7 +1067,7 @@ class Rcno_Template_Tags {
 		if ( ! empty( $book_data ) ) {
 
 			// Set header to a false value to use the default string.
-			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'rcno-reviews' ) . ': ';
+			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'recencio-book-reviews' ) . ': ';
 
 			$out .= '<div class="rcno-book-series-container">';
 			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
@@ -1143,7 +1140,7 @@ class Rcno_Template_Tags {
 		if ( false === $tax || is_wp_error( $tax ) ) {
 			$out .= '<div class="rcno-books-error">';
 			$out .= '<p>';
-			$out .= sprintf( __( 'No entries found for the "%s" taxonomy.', 'rcno-reviews' ), $taxonomy );
+			$out .= sprintf( __( 'No entries found for the "%s" taxonomy.', 'recencio-book-reviews' ), $taxonomy );
 			$out .= '</p>';
 			$out .= '</div>';
 
@@ -1190,7 +1187,7 @@ class Rcno_Template_Tags {
 		if ( ! empty( $book_data ) && count( $book_data ) > 1 ) {
 
 			// Set header to a false value to use the default string.
-			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'rcno-reviews' ) . ': ';
+			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'recencio-book-reviews' ) . ': ';
 
 			$out .= '<div class="rcno-book-series-container">';
 			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
@@ -1359,7 +1356,7 @@ class Rcno_Template_Tags {
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score" style="background:' . esc_attr( $accent ) . ';">';
 		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
-		$output .= '<span class="overall-text" style="background: ' . $accent_2 . ';">' . __( 'Overall Score', 'rcno-reviews' ) . '</span>';
+		$output .= '<span class="overall-text" style="background: ' . $accent_2 . ';">' . __( 'Overall Score', 'recencio-book-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
 		$output .= '<h2 class="review-title">' . $review_box_title . '</h2>';
@@ -1457,7 +1454,7 @@ class Rcno_Template_Tags {
 		$out .= '<div class="score">';
 		$out .= $this->rcno_calc_review_score( $final_score, $rating_type, true );
 		$out .= '</div>';
-		$out .= '<p>' . __( 'Review Score', 'rcno-reviews' ) . '</p>';
+		$out .= '<p>' . __( 'Review Score', 'recencio-book-reviews' ) . '</p>';
 		$out .= '</div>';
 
 		return $out;

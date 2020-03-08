@@ -33,7 +33,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-tag-cloud',
-			__( 'Rcno Tag Cloud', 'rcno-reviews' ),
+			__( 'Rcno Tag Cloud', 'recencio-book-reviews' ),
 			$this->widget_options,
 			$this->control_options
 		);
@@ -45,7 +45,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'tags',
-			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your tags.', 'rcno-reviews' )
+			'description' => esc_html__( 'An advanced widget that gives you total control over the output of your tags.', 'recencio-book-reviews' )
 		);
 
 		// Set up the widget control options.
@@ -159,7 +159,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 
 		// Set up the default form values.
 		$defaults = array(
-			'title'                      => esc_attr__( 'Rcno Tag Cloud', 'rcno-reviews' ),
+			'title'                      => esc_attr__( 'Rcno Tag Cloud', 'recencio-book-reviews' ),
 			'order'                      => 'ASC',
 			'orderby'                    => 'name',
 			'format'                     => 'flat',
@@ -194,19 +194,19 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 			'objects' );
 
 		$format = array(
-			'flat' => esc_attr__( 'Flat', 'rcno-reviews' ),
-			'list' => esc_attr__( 'List', 'rcno-reviews' )
+			'flat' => esc_attr__( 'Flat', 'recencio-book-reviews' ),
+			'list' => esc_attr__( 'List', 'recencio-book-reviews' )
 		);
 
 		$order = array(
-			'ASC'  => esc_attr__( 'Ascending', 'rcno-reviews' ),
-			'DESC' => esc_attr__( 'Descending', 'rcno-reviews' ),
-			'RAND' => esc_attr__( 'Random', 'rcno-reviews' )
+			'ASC'  => esc_attr__( 'Ascending', 'recencio-book-reviews' ),
+			'DESC' => esc_attr__( 'Descending', 'recencio-book-reviews' ),
+			'RAND' => esc_attr__( 'Random', 'recencio-book-reviews' )
 		);
 
 		$orderby = array(
-			'count' => esc_attr__( 'Count', 'rcno-reviews' ),
-			'name'  => esc_attr__( 'Name', 'rcno-reviews' )
+			'count' => esc_attr__( 'Count', 'recencio-book-reviews' ),
+			'name'  => esc_attr__( 'Name', 'recencio-book-reviews' )
 		);
 
 		$unit = array(
@@ -221,7 +221,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
         <div class="rcno-widget-controls columns-2 column-first">
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>">
-					<?php _e( 'Title', 'rcno-reviews' ); ?>
+					<?php _e( 'Title', 'recencio-book-reviews' ); ?>
                 </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                        name="<?php echo $this->get_field_name( 'title' ); ?>"
@@ -229,7 +229,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>">
-					<?php _e( 'Taxonomy', 'rcno-reviews' ); ?>
+					<?php _e( 'Taxonomy', 'recencio-book-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'taxonomy' ); ?>"
                         name="<?php echo $this->get_field_name( 'taxonomy' ); ?>[]" size="4" multiple="multiple">
@@ -240,7 +240,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'format' ); ?>">
-					<?php _e( 'Format', 'rcno-reviews' ); ?>
+					<?php _e( 'Format', 'recencio-book-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'format' ); ?>"
                         name="<?php echo $this->get_field_name( 'format' ); ?>">
@@ -251,7 +251,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'order' ); ?>">
-					<?php _e( 'Order', 'rcno-reviews' ); ?>
+					<?php _e( 'Order', 'recencio-book-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
                         name="<?php echo $this->get_field_name( 'order' ); ?>">
@@ -262,7 +262,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'orderby' ); ?>">
-					<?php _e( 'Order by', 'rcno-reviews' ); ?>
+					<?php _e( 'Order by', 'recencio-book-reviews' ); ?>
                 </label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>"
                         name="<?php echo $this->get_field_name( 'orderby' ); ?>">
@@ -284,7 +284,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>-->
             <p>
                 <label for="<?php echo $this->get_field_id( 'number' ); ?>">
-					<?php _e( 'Number', 'rcno-reviews' ); ?>:
+					<?php _e( 'Number', 'recencio-book-reviews' ); ?>:
                 </label>
                 <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>"
                        name="<?php echo $this->get_field_name( 'number' ); ?>"
@@ -292,7 +292,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'largest' ); ?>">
-					<?php _e( 'Largest', 'rcno-reviews' ); ?>:
+					<?php _e( 'Largest', 'recencio-book-reviews' ); ?>:
                 </label>
                 <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'largest' ); ?>"
                        name="<?php echo $this->get_field_name( 'largest' ); ?>"
@@ -300,7 +300,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'smallest' ); ?>">
-					<?php _e( 'Smallest', 'rcno-reviews' ); ?>:
+					<?php _e( 'Smallest', 'recencio-book-reviews' ); ?>:
                 </label>
                 <input type="number" class="smallfat code" id="<?php echo $this->get_field_id( 'smallest' ); ?>"
                        name="<?php echo $this->get_field_name( 'smallest' ); ?>"
@@ -308,7 +308,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'unit' ); ?>">
-					<?php _e( 'Unit', 'rcno-reviews' ); ?>:
+					<?php _e( 'Unit', 'recencio-book-reviews' ); ?>:
                 </label>
                 <select class="smallfat" id="<?php echo $this->get_field_id( 'unit' ); ?>"
                         name="<?php echo $this->get_field_name( 'unit' ); ?>">
@@ -319,7 +319,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'separator' ); ?>">
-					<?php _e( 'Separator', 'rcno-reviews' ); ?>:
+					<?php _e( 'Separator', 'recencio-book-reviews' ); ?>:
                 </label>
                 <input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'separator' ); ?>"
                        name="<?php echo $this->get_field_name( 'separator' ); ?>"

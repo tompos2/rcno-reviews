@@ -64,7 +64,7 @@ $out .= '</div>'; // .rcno-author-archive-link
 
 $out .= '<div class="rcno-author-archive-link">';
 $out .= '<a href="' . $author_archive . '" rel="author">';
-$out .= sprintf( '%s %s &rarr;', __( 'View all reviews by', 'rcno-reviews' ), $author );
+$out .= sprintf( '%s %s &rarr;', __( 'View all reviews by', 'recencio-book-reviews' ), $author );
 $out .= '</a>';
 $out .= '</div>'; // .rcno-author-archive-link
 

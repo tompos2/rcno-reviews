@@ -9,9 +9,9 @@ class Rcno_Social_Media_Sharing extends Abstract_Rcno_Extension {
 	public function __construct() {
 		$this->id       = 'rcno_social_media_sharing';
 		$this->image    = plugin_dir_url( __FILE__ ) . 'assets/images/icon.png';
-		$this->title    = __( 'Social Media Sharing', 'rcno-reviews' );
+		$this->title    = __( 'Social Media Sharing', 'recencio-book-reviews' );
 		$this->desc     = __( 'Simple, lightweight social sharing buttons for your book reviews. 
-		Just select the social networks you would to share to, where the buttons should show up and save your settings.', 'rcno-reviews' );
+		Just select the social networks you would to share to, where the buttons should show up and save your settings.', 'recencio-book-reviews' );
 		$this->settings = true;
 	}
 

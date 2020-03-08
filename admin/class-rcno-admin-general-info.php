@@ -57,7 +57,7 @@ class Rcno_Admin_General_Info {
 
 		add_meta_box(
 			'rcno_book_general_info_metabox',
-			__( 'General Information', 'rcno-reviews' ),
+			__( 'General Information', 'recencio-book-reviews' ),
 			array( $this, 'do_rcno_book_general_info_metabox' ),
 			'rcno_review',
 			'normal',

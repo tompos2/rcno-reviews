@@ -10,8 +10,8 @@ class Rcno_Author_Box extends Abstract_Rcno_Extension {
 	public function __construct() {
 		$this->id       = 'rcno_author_box';
 		$this->image    = plugin_dir_url( __FILE__ ) . 'assets/images/rcno-author-box-icon.png';
-		$this->title    = __( 'Author Box', 'rcno-reviews' );
-		$this->desc     = __( 'Adds a review author box below your published book reviews. Please visit your website\'s user profile page to add your social media profile information.', 'rcno-reviews' );
+		$this->title    = __( 'Author Box', 'recencio-book-reviews' );
+		$this->desc     = __( 'Adds a review author box below your published book reviews. Please visit your website\'s user profile page to add your social media profile information.', 'recencio-book-reviews' );
 		$this->settings = true;
 	}
 

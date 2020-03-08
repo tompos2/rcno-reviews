@@ -3,7 +3,7 @@
 
 	$( function() {
 
-		// Settings page up load button
+		// Settings page upload button
 		$( '.rcno_reviews_settings_upload_button.rcno_default_cover' )
 		.on( 'click', function( e ) {
 			e.preventDefault();

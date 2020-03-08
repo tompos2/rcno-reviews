@@ -15,8 +15,8 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 	public function __construct() {
 		$this->id       = 'rcno_posts_to_reviews';
 		$this->image    = plugin_dir_url( __FILE__ ) . 'assets/images/rcno-posts-to-reviews.png';
-		$this->title    = __( 'Convert Posts to Reviews', 'rcno-reviews' );
-		$this->desc     = __( 'Converts WordPress posts to Recencio book reviews and Recencio book reviews to WordPress posts.', 'rcno-reviews' );
+		$this->title    = __( 'Convert Posts to Reviews', 'recencio-book-reviews' );
+		$this->desc     = __( 'Converts WordPress posts to Recencio book reviews and Recencio book reviews to WordPress posts.', 'recencio-book-reviews' );
 		$this->settings = false;
 	}
 
@@ -74,8 +74,8 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 			$actions = array_merge( $actions, array(
 				'convert' => sprintf( '<a href="#" class="convert-to-review" data-post-id="%1$s" data-nonce="%4$s" data-post-type="%5$s" title="%3$s">%2$s</a>',
 					$post_id,
-					__( 'Convert', 'rcno-reviews' ),
-					__( 'Convert to Review', 'rcno-reviews' ),
+					__( 'Convert', 'recencio-book-reviews' ),
+					__( 'Convert to Review', 'recencio-book-reviews' ),
 					$nonce,
 					$post->post_type
 				)
@@ -88,8 +88,8 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 			$actions = array_merge( $actions, array(
 				'convert' => sprintf( '<a href="#" class="convert-to-post" data-post-id="%1$s" data-nonce="%4$s" data-post-type="%5$s" title="%3$s">%2$s</a>',
 					$post_id,
-					__( 'Convert', 'rcno-reviews' ),
-					__( 'Convert to Post', 'rcno-reviews' ),
+					__( 'Convert', 'recencio-book-reviews' ),
+					__( 'Convert to Post', 'recencio-book-reviews' ),
 					$nonce,
 					$post->post_type
 				)
@@ -197,7 +197,7 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 	 */
 	public function post_bulk_actions( $bulk_array ) {
 
-		$bulk_array['convert_to_review'] = __( 'Convert to Review', 'rcno-reviews' );
+		$bulk_array['convert_to_review'] = __( 'Convert to Review', 'recencio-book-reviews' );
 
 		return $bulk_array;
 	}
@@ -214,7 +214,7 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 	 */
 	public function review_bulk_actions( $bulk_array ) {
 
-		$bulk_array['convert_to_post'] = __( 'Convert to Post', 'rcno-reviews' );
+		$bulk_array['convert_to_post'] = __( 'Convert to Post', 'recencio-book-reviews' );
 
 		return $bulk_array;
 	}
@@ -280,7 +280,7 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 		if ( $converted_to_reviews ) {
 			$out .= '<div id="message" class="updated fade notice is-dismissible"><p>';
 			$out .= sprintf(
-				_n( '%s post converted to a review.', '%s posts converted to reviews.', $converted_to_reviews, 'rcno-reviews' ),
+				_n( '%s post converted to a review.', '%s posts converted to reviews.', $converted_to_reviews, 'recencio-book-reviews' ),
 				number_format_i18n( $converted_to_reviews )
 			);
 			$out .= '</p></div>';
@@ -289,7 +289,7 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 		if ( $converted_to_posts ) {
 			$out .= '<div id="message" class="updated fade notice is-dismissible"><p>';
 			$out .= sprintf(
-				_n( '%s review converted to a post.', '%s reviews converted to posts.', $converted_to_posts, 'rcno-reviews' ),
+				_n( '%s review converted to a post.', '%s reviews converted to posts.', $converted_to_posts, 'recencio-book-reviews' ),
 				number_format_i18n( $converted_to_posts )
 			);
 			$out .= '</p></div>';

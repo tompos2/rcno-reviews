@@ -35,7 +35,7 @@ class Rcno_Reviews_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'rcno-reviews',
+			'recencio-book-reviews',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

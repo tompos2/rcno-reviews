@@ -64,7 +64,7 @@ class Rcno_Admin_ISBN {
 
 		add_meta_box(
 			'rcno_book_isbn_metabox',
-			__( 'ISBN', 'rcno-reviews' ),
+			__( 'ISBN', 'recencio-book-reviews' ),
 			array( $this, 'do_rcno_book_isbn_metabox' ),
 			'rcno_review',
 			'side',

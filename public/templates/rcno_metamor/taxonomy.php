@@ -3,7 +3,7 @@
  * Render a list of all terms of this taxonomy
  */
 
-$template        = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+$template        = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 $ignore_articles = Rcno_Reviews_Option::get_option( 'rcno_reviews_ignore_articles' );
 $sort_name       = Rcno_Reviews_Option::get_option( 'rcno_reviews_sort_names' );
 $index_headers   = Rcno_Reviews_Option::get_option( 'rcno_reviews_index_headers' );
@@ -177,10 +177,10 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 
 	} else {
 		// No terms in this taxonomy.
-		esc_html_e( 'There are no terms in this taxonomy.', 'rcno-reviews' );
+		esc_html_e( 'There are no terms in this taxonomy.', 'recencio-book-reviews' );
 	}
 
 } else {
 	// Error: no taxonomy set.
-	esc_html_e( 'Error: No taxonomy set for this list!', 'rcno-reviews' );
+	esc_html_e( 'Error: No taxonomy set for this list!', 'recencio-book-reviews' );
 }

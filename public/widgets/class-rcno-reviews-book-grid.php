@@ -34,7 +34,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		// Create the widget.
 		parent::__construct(
 			'rcno-reviews-book-grid',
-			__( 'Rcno Book Grid', 'rcno-reviews' ),
+			__( 'Rcno Book Grid', 'recencio-book-reviews' ),
 			$this->widget_options,
 			$this->control_options
 		);
@@ -46,7 +46,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		// Set up the widget options.
 		$this->widget_options = array(
 			'classname'   => 'book-grid',
-			'description' => esc_html__( 'A widget to display a grid of reviewed books', 'rcno-reviews' ),
+			'description' => esc_html__( 'A widget to display a grid of reviewed books', 'recencio-book-reviews' ),
 		);
 
 		// Set up the widget control options.
@@ -116,7 +116,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 
 					<?php
 					$review_id = get_the_ID();
-					$review    = new Rcno_Template_Tags( 'rcno-reviews', '1.0.0' );
+					$review    = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 					?>
 					<div class="book-grid-item">
 						<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
@@ -181,15 +181,15 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 		$title        = sanitize_text_field( $instance[ 'title' ] );
 		$review_count = absint( $instance[ 'review_count' ] );
 		$order        = array(
-			'title' => esc_attr__( 'Title', 'rcno-reviews' ),
-			'date'  => esc_attr__( 'Date', 'rcno-reviews' ),
-			'rand'  => esc_attr__( 'Random', 'rcno-reviews' ),
+			'title' => esc_attr__( 'Title', 'recencio-book-reviews' ),
+			'date'  => esc_attr__( 'Date', 'recencio-book-reviews' ),
+			'rand'  => esc_attr__( 'Random', 'recencio-book-reviews' ),
 		);
 
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?> ">
-				<?php _e( 'Title (optional)', 'rcno-reviews' ); ?>
+				<?php _e( 'Title (optional)', 'recencio-book-reviews' ); ?>
 			</label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
 				   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ) ?>"/>
@@ -197,7 +197,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'review_count' ); ?>">
-				<?php _e( 'Number of Reviews', 'rcno-reviews' ); ?>:
+				<?php _e( 'Number of Reviews', 'recencio-book-reviews' ); ?>:
 			</label>
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'review_count' ); ?>"
 				   name="<?php echo $this->get_field_name( 'review_count' ); ?>"
@@ -207,7 +207,7 @@ class Rcno_Reviews_Book_Grid extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'order' ); ?>">
-				<?php _e( 'Order', 'rcno-reviews' ); ?>:
+				<?php _e( 'Order', 'recencio-book-reviews' ); ?>:
 			</label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>"
 					name="<?php echo $this->get_field_name( 'order' ); ?>" style="width:100px">

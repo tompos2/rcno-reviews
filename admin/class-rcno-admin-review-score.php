@@ -62,7 +62,7 @@ class Rcno_Admin_Review_Score {
 
 		add_meta_box(
 			'rcno_book_review_score_metabox',
-			__( 'Review Score', 'rcno-reviews' ),
+			__( 'Review Score', 'recencio-book-reviews' ),
 			array( $this, 'do_rcno_book_review_score_metabox' ),
 			'rcno_review',
 			'normal',

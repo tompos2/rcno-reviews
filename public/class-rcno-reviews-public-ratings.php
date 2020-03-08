@@ -261,7 +261,7 @@ class Rcno_Reviews_Public_Rating {
 		}
 
 		if ( empty( $comment_author ) || empty( $comment_author_email ) ) {
-			wp_die( __( 'I don\'t know who you are', 'rcno-reviews' ) );
+			wp_die( __( 'I don\'t know who you are', 'recencio-book-reviews' ) );
 		}
 
 		update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );

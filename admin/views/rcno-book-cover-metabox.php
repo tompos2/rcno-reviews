@@ -16,20 +16,20 @@ $gr_cover_url = get_post_meta( $review->ID, 'rcno_reviews_gr_cover_url', true );
 	<?php if ( Rcno_Reviews_Option::get_option( 'rcno_show_book_cover_url' ) ) { ?>
 		<input type="text" id="rcno-reviews-book-cover-url" name="rcno_reviews_book_cover_url"
 			value="<?php echo esc_attr( $cover_url ); ?>"
-			placeholder="<?php esc_attr_e( 'Custom URL', 'rcno-reviews' ); ?>"
+			placeholder="<?php esc_attr_e( 'Custom URL', 'recencio-book-reviews' ); ?>"
 			style="width: 100%;"/>
 	<?php } ?>
 </div>
 
 <p class="hide-if-no-js">
-	<a title="<?php esc_attr_e( 'Add Book Cover', 'rcno-reviews' ); ?>" href="javascript:" id="rcno-add-book-cover" class="rcno-reviews-book-cover">
-		<?php esc_html_e( 'Add Book Cover', 'rcno-reviews' ); ?>
+	<a title="<?php esc_attr_e( 'Add Book Cover', 'recencio-book-reviews' ); ?>" href="javascript:" id="rcno-add-book-cover" class="rcno-reviews-book-cover">
+		<?php esc_html_e( 'Add Book Cover', 'recencio-book-reviews' ); ?>
 	</a>
 </p><!-- .hide-if-no-js -->
 
 <p class="hide-if-no-js hidden">
-	<a title="<?php esc_attr_e( 'Remove Book Cover', 'rcno-reviews' ); ?>" href="javascript:" id="rcno-remove-book-cover">
-		<?php esc_html_e( 'Remove Book Cover', 'rcno-reviews' ); ?>
+	<a title="<?php esc_attr_e( 'Remove Book Cover', 'recencio-book-reviews' ); ?>" href="javascript:" id="rcno-remove-book-cover">
+		<?php esc_html_e( 'Remove Book Cover', 'recencio-book-reviews' ); ?>
 	</a>
 </p><!-- .hide-if-no-js -->
 

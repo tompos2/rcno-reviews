@@ -18,7 +18,6 @@
  */
 class Rcno_Reviews_Settings_Definition {
 
-	public static $plugin_name = 'rcno-reviews';
 	public static $template;
 
 	public function __construct() {
@@ -65,12 +64,12 @@ class Rcno_Reviews_Settings_Definition {
 	public static function get_tabs() {
 
 		$tabs = array();
-		$tabs[ 'general_tab' ]    = __( 'General', 'rcno-reviews' );
-		$tabs[ 'taxonomy_tab' ]   = __( 'Taxonomies', 'rcno-reviews' );
-		$tabs[ 'components_tab' ] = __( 'Components', 'rcno-reviews' );
-		$tabs[ 'extras_tab' ]     = __( 'Extras', 'rcno-reviews' );
-		$tabs[ 'templates_tab' ]  = __( 'Templates', 'rcno-reviews' );
-		$tabs[ 'advanced_tab' ]   = __( 'Advanced', 'rcno-reviews' );
+		$tabs[ 'general_tab' ]    = __( 'General', 'recencio-book-reviews' );
+		$tabs[ 'taxonomy_tab' ]   = __( 'Taxonomies', 'recencio-book-reviews' );
+		$tabs[ 'components_tab' ] = __( 'Components', 'recencio-book-reviews' );
+		$tabs[ 'extras_tab' ]     = __( 'Extras', 'recencio-book-reviews' );
+		$tabs[ 'templates_tab' ]  = __( 'Templates', 'recencio-book-reviews' );
+		$tabs[ 'advanced_tab' ]   = __( 'Advanced', 'recencio-book-reviews' );
 
 		return apply_filters( 'rcno_reviews_settings_tabs', $tabs );
 	}
@@ -95,51 +94,51 @@ class Rcno_Reviews_Settings_Definition {
 			// Begin the General Tab.
 			'general_tab'    => array(
 				'general_tab_header_0'          => array(
-					'name' => '<strong>' . __( 'General Settings', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'General Settings', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_review_slug'              => array(
-					'name'    => __( 'Slug', 'rcno-reviews' ),
-					'desc'    => __( 'Book reviews will be available at:', 'rcno-reviews' ) .
+					'name'    => __( 'Slug', 'recencio-book-reviews' ),
+					'desc'    => __( 'Book reviews will be available at:', 'recencio-book-reviews' ) .
 								' <i>' . get_site_url() . '/' . '<b>slug</b>' . '/' . 'a-book-review' . '</i>',
 					'std'     => 'review',
 					'type'    => 'text',
 					'pattern' => '{2,}',
-					'title'   => __( 'Please only use only 1 lower-case word', 'rcno-reviews' ),
+					'title'   => __( 'Please only use only 1 lower-case word', 'recencio-book-reviews' ),
 				),
 				'rcno_review_slug_instructions' => array(
-					'name' => __( '404 errors', 'rcno-reviews' ),
+					'name' => __( '404 errors', 'recencio-book-reviews' ),
 					'desc' => __( 'If you\'ve set up everything correctly here but now WordPress is giving you an 404 (not found) error,
-					 try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', 'rcno-reviews' ),
+					 try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', 'recencio-book-reviews' ),
 					'type' => 'instruction',
 				),
 				'rcno_reviews_on_homepage'      => array(
-					'name' => __( 'Reviews on homepage?', 'rcno-reviews' ),
-					'desc' => __( 'Should book reviews be shown on homepage?', 'rcno-reviews' ),
+					'name' => __( 'Reviews on homepage?', 'recencio-book-reviews' ),
+					'desc' => __( 'Should book reviews be shown on homepage?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_reviews_in_rss'           => array(
-					'name' => __( 'Reviews in RSS?', 'rcno-reviews' ),
-					'desc' => __( 'Should book reviews be shown in the RSS feed.?', 'rcno-reviews' ),
+					'name' => __( 'Reviews in RSS?', 'recencio-book-reviews' ),
+					'desc' => __( 'Should book reviews be shown in the RSS feed.?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_reviews_in_rest'          => array(
-					'name' => __( 'Reviews in REST API?', 'rcno-reviews' ),
-					'desc' => __( 'Enables basic support for reviews in the WordPress REST API.', 'rcno-reviews' ),
+					'name' => __( 'Reviews in REST API?', 'recencio-book-reviews' ),
+					'desc' => __( 'Enables basic support for reviews in the WordPress REST API.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_reviews_archive'          => array(
-					'name'    => __( 'Reviews archive page', 'rcno-reviews' ),
-					'desc'    => __( 'Show full content or excerpt on archive pages.', 'rcno-reviews' ),
+					'name'    => __( 'Reviews archive page', 'recencio-book-reviews' ),
+					'desc'    => __( 'Show full content or excerpt on archive pages.', 'recencio-book-reviews' ),
 					'options' => array(
-						'archive_display_full'    => __( 'The entire book review', 'rcno-reviews' ),
-						'archive_display_excerpt' => __( 'Only excerpt of the review', 'rcno-reviews' ),
+						'archive_display_full'    => __( 'The entire book review', 'recencio-book-reviews' ),
+						'archive_display_excerpt' => __( 'Only excerpt of the review', 'recencio-book-reviews' ),
 					),
 					'type'    => 'radio',
 				),
 				'rcno_reviews_in_gutenberg'     => array(
-					'name' => __( 'Gutenberg support', 'rcno-reviews' ),
-					'desc' => __( 'Enables support for the new Gutenberg post editor.', 'rcno-reviews' ),
+					'name' => __( 'Gutenberg support', 'recencio-book-reviews' ),
+					'desc' => __( 'Enables support for the new Gutenberg post editor.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'spacer_0'                      => array(
@@ -152,12 +151,12 @@ class Rcno_Reviews_Settings_Definition {
 			// Begin taxonomies tab.
 			'taxonomy_tab'   => array(
 				'taxonomy_tab_header_0'        => array(
-					'name' => '<strong>' . __( 'Review Taxonomies', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Review Taxonomies', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_taxonomy_selection'      => array(
-					'name' => __( 'Taxonomy Selection', 'rcno-reviews' ),
-					'desc' => __( 'Create and delete book review taxonomies here.', 'rcno-reviews' ),
+					'name' => __( 'Taxonomy Selection', 'recencio-book-reviews' ),
+					'desc' => __( 'Create and delete book review taxonomies here.', 'recencio-book-reviews' ),
 					'std'  => 'Author',
 					'type' => 'text',
 				),
@@ -166,12 +165,12 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'spacer',
 				),
 				'taxonomy_tab_header_1'        => array(
-					'name' => '<strong>' . __( 'Builtin Taxonomies', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Builtin Taxonomies', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_enable_builtin_taxonomy' => array(
-					'name' => __( 'Default WP Taxonomy', 'rcno-reviews' ),
-					'desc' => __( 'Enable the builtin \'category\' and \'tags\' taxonomies.', 'rcno-reviews' ),
+					'name' => __( 'Default WP Taxonomy', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable the builtin \'category\' and \'tags\' taxonomies.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'spacer_2'                     => array(
@@ -184,72 +183,72 @@ class Rcno_Reviews_Settings_Definition {
 			//Components tab.
 			'components_tab' => array(
 				'components_tab_header_0'               => array(
-					'name' => '<strong>' . __( 'Book Review Components', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Book Review Components', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_show_isbn'                        => array(
-					'name' => __( 'ISBN', 'rcno-reviews' ),
-					'desc' => __( 'Show the ISBN field for book reviews?', 'rcno-reviews' ),
+					'name' => __( 'ISBN', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the ISBN field for book reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_isbn13'                      => array(
-					'name' => __( 'ISBN13', 'rcno-reviews' ),
-					'desc' => __( 'Show the ISBN13 field for book reviews?', 'rcno-reviews' ),
+					'name' => __( 'ISBN13', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the ISBN13 field for book reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_asin'                        => array(
-					'name' => __( 'ASIN', 'rcno-reviews' ),
-					'desc' => __( 'Show the ASIN field for book reviews?', 'rcno-reviews' ),
+					'name' => __( 'ASIN', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the ASIN field for book reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_gr_id'                       => array(
-					'name' => __( 'Goodreads ID', 'rcno-reviews' ),
-					'desc' => __( 'Show the Goodreads book ID field for book reviews?', 'rcno-reviews' ),
+					'name' => __( 'Goodreads ID', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the Goodreads book ID field for book reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_gr_url'                      => array(
-					'name' => __( 'Book URL', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s URL field for book reviews?', 'rcno-reviews' ),
+					'name' => __( 'Book URL', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s URL field for book reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_illustrator'                 => array(
-					'name' => __( 'Illustrator', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s illustrator for reviews?', 'rcno-reviews' ),
+					'name' => __( 'Illustrator', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s illustrator for reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_pub_date'                    => array(
-					'name' => __( 'Published Date', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s published date for reviews?', 'rcno-reviews' ),
+					'name' => __( 'Published Date', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s published date for reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_pub_format'                  => array(
-					'name' => __( 'Published Format', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s published format for reviews?', 'rcno-reviews' ),
+					'name' => __( 'Published Format', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s published format for reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_pub_edition'                 => array(
-					'name' => __( 'Published Edition', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s published edition for reviews?', 'rcno-reviews' ),
+					'name' => __( 'Published Edition', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s published edition for reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_series_number'                  => array(
-					'name' => __( 'Series Number', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s number in the series for reviews?', 'rcno-reviews' ),
+					'name' => __( 'Series Number', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s number in the series for reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_page_count'                  => array(
-					'name' => __( 'Page Count', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s page count for reviews?', 'rcno-reviews' ),
+					'name' => __( 'Page Count', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s page count for reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_gr_rating'                   => array(
-					'name' => __( 'Goodreads Rating', 'rcno-reviews' ),
-					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', 'rcno-reviews' ),
+					'name' => __( 'Goodreads Rating', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the book\'s Goodreads rating for reviews?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_book_cover_url'                   => array(
-					'name' => __( 'Book Cover Custom URL', 'rcno-reviews' ),
-					'desc' => __( 'Show the custom book cover URL field?', 'rcno-reviews' ),
+					'name' => __( 'Book Cover Custom URL', 'recencio-book-reviews' ),
+					'desc' => __( 'Show the custom book cover URL field?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'spacer2'                               => array(
@@ -259,34 +258,34 @@ class Rcno_Reviews_Settings_Definition {
 
 				// Purchase Links.
 				'components_tab_header_3'               => array(
-					'name' => '<strong>' . __( 'Book Purchase Links', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Book Purchase Links', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_enable_purchase_links'            => array(
-					'name' => __( 'Enable Purchase Links', 'rcno-reviews' ),
-					'desc' => __( 'Enable the use of book purchase links', 'rcno-reviews' ),
+					'name' => __( 'Enable Purchase Links', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable the use of book purchase links', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_store_purchase_links_label'       => array(
-					'name' => __( 'Links Label', 'rcno-reviews' ),
-					'desc' => __( 'Enter the label shown before purchase links.', 'rcno-reviews' ),
+					'name' => __( 'Links Label', 'recencio-book-reviews' ),
+					'desc' => __( 'Enter the label shown before purchase links.', 'recencio-book-reviews' ),
 					'std'  => 'Purchase on: ',
 					'type' => 'text',
 				),
 				'rcno_store_purchase_links'             => array(
-					'name' => __( 'Store/Shop', 'rcno-reviews' ),
-					'desc' => __( 'Enter the name of stores to purchase books from.', 'rcno-reviews' ),
+					'name' => __( 'Store/Shop', 'recencio-book-reviews' ),
+					'desc' => __( 'Enter the name of stores to purchase books from.', 'recencio-book-reviews' ),
 					'std'  => 'Amazon,Barnes & Noble,Kobo',
 					'type' => 'text',
 				),
 				'rcno_store_purchase_link_text_color'   => array(
-					'name' => __( 'Text Color', 'rcno-reviews' ),
-					'desc' => __( 'Text color for the purchase button.', 'rcno-reviews' ),
+					'name' => __( 'Text Color', 'recencio-book-reviews' ),
+					'desc' => __( 'Text color for the purchase button.', 'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'rcno_store_purchase_link_background'   => array(
-					'name' => __( 'Background Color', 'rcno-reviews' ),
-					'desc' => __( 'Background color for the purchase button.', 'rcno-reviews' ),
+					'name' => __( 'Background Color', 'recencio-book-reviews' ),
+					'desc' => __( 'Background color for the purchase button.', 'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'spacer'                                => array(
@@ -296,23 +295,23 @@ class Rcno_Reviews_Settings_Definition {
 
 				// 5 Star Rating box.
 				'components_tab_header_4'               => array(
-					'name' => '<strong>' . __( 'Book 5 Star Rating Box', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Book 5 Star Rating Box', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_enable_star_rating_box'           => array(
-					'name' => __( '5 Star Rating', 'rcno-reviews' ),
-					'desc' => __( 'Enable the 5 star rating box?', 'rcno-reviews' ),
+					'name' => __( '5 Star Rating', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable the 5 star rating box?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_star_rating_color'                => array(
-					'name' => __( 'Star Rating Color', 'rcno-reviews' ),
-					'desc' => __( 'The color of the 5 star rating.', 'rcno-reviews' ),
+					'name' => __( 'Star Rating Color', 'recencio-book-reviews' ),
+					'desc' => __( 'The color of the 5 star rating.', 'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'rcno_star_background_color'            => array(
-					'name' => __( 'Star Background Color', 'rcno-reviews' ),
+					'name' => __( 'Star Background Color', 'recencio-book-reviews' ),
 					'desc' => __( 'Background color for the 5 star rating. (Delete existing value for transparent background)',
-						'rcno-reviews' ),
+						'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'spacer5'                               => array(
@@ -323,27 +322,27 @@ class Rcno_Reviews_Settings_Definition {
 
 				// Review score box.
 				'components_tab_header_2'               => array(
-					'name' => '<strong>' . __( 'Book Review Score Box', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Book Review Score Box', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_show_review_score_box'            => array(
-					'name' => __( 'Review Score Box', 'rcno-reviews' ),
-					'desc' => __( 'Enable the review score box?', 'rcno-reviews' ),
+					'name' => __( 'Review Score Box', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable the review score box?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_review_score_box_background' => array(
-					'name' => __( 'Background Color', 'rcno-reviews' ),
-					'desc' => __( 'Background Color for the review score box?', 'rcno-reviews' ),
+					'name' => __( 'Background Color', 'recencio-book-reviews' ),
+					'desc' => __( 'Background Color for the review score box?', 'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'rcno_show_review_score_box_accent'     => array(
-					'name' => __( 'Accent Color 1', 'rcno-reviews' ),
-					'desc' => __( 'The first accent color for the review score box?', 'rcno-reviews' ),
+					'name' => __( 'Accent Color 1', 'recencio-book-reviews' ),
+					'desc' => __( 'The first accent color for the review score box?', 'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'rcno_show_review_score_box_accent_2'   => array(
-					'name' => __( 'Accent Color 2', 'rcno-reviews' ),
-					'desc' => __( 'The second accent color for the review score box?', 'rcno-reviews' ),
+					'name' => __( 'Accent Color 2', 'recencio-book-reviews' ),
+					'desc' => __( 'The second accent color for the review score box?', 'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'spacer-0' => array(
@@ -351,13 +350,13 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'spacer',
 				),
 				'rcno_enable_custom_review_score_criteria'            => array(
-					'name' => __( 'Fixed Review Criteria', 'rcno-reviews' ),
-					'desc' => __( 'Enable the use of fixed custom review criteria fields', 'rcno-reviews' ),
+					'name' => __( 'Fixed Review Criteria', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable the use of fixed custom review criteria fields', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_custom_review_score_criteria'             => array(
-					'name' => __( 'Custom Criteria List', 'rcno-reviews' ),
-					'desc' => __( 'List of custom fields to use for review criteria.', 'rcno-reviews' ),
+					'name' => __( 'Custom Criteria List', 'recencio-book-reviews' ),
+					'desc' => __( 'List of custom fields to use for review criteria.', 'recencio-book-reviews' ),
 					'std'  => 'Plot,Characters,World',
 					'type' => 'text',
 				),
@@ -374,23 +373,23 @@ class Rcno_Reviews_Settings_Definition {
 
 				// Comment 5 star ratings.
 				'extras_tab_header_0'             => array(
-					'name' => '<strong>' . __( 'Reader Comment Rating', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Reader Comment Rating', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_enable_comment_ratings'     => array(
-					'name' => __( 'Comment Ratings', 'rcno-reviews' ),
-					'desc' => __( 'Enable reader submitted ratings in the comment form', 'rcno-reviews' ),
+					'name' => __( 'Comment Ratings', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable reader submitted ratings in the comment form', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_comment_rating_label'       => array(
-					'name' => __( 'Rating Label', 'rcno-reviews' ),
-					'desc' => __( 'Enter the label before the comment 5 star rating field', 'rcno-reviews' ),
-					'std'  => __( 'Rate this review', 'rcno-reviews' ),
+					'name' => __( 'Rating Label', 'recencio-book-reviews' ),
+					'desc' => __( 'Enter the label before the comment 5 star rating field', 'recencio-book-reviews' ),
+					'std'  => __( 'Rate this review', 'recencio-book-reviews' ),
 					'type' => 'text',
 				),
 				'rcno_comment_rating_star_color'  => array(
-					'name' => __( 'Comment Star Color', 'rcno-reviews' ),
-					'desc' => __( 'Background color for the reader comment 5 star rating', 'rcno-reviews' ),
+					'name' => __( 'Comment Star Color', 'recencio-book-reviews' ),
+					'desc' => __( 'Background color for the reader comment 5 star rating', 'recencio-book-reviews' ),
 					'type' => 'color',
 				),
 				'spacer-6'                        => array(
@@ -400,42 +399,42 @@ class Rcno_Reviews_Settings_Definition {
 
 				// Custom widgets.
 				'extras_tab_header_1'             => array(
-					'name' => '<strong>' . __( 'Book Review Widgets', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Book Review Widgets', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_show_book_slider_widget'    => array(
-					'name' => __( 'Book Slider', 'rcno-reviews' ),
-					'desc' => __( 'Use the Rcno Book Slider widget?', 'rcno-reviews' ),
+					'name' => __( 'Book Slider', 'recencio-book-reviews' ),
+					'desc' => __( 'Use the Rcno Book Slider widget?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_book_grid_widget'      => array(
-					'name' => __( 'Book Grid', 'rcno-reviews' ),
-					'desc' => __( 'Use the Rcno Book Grid widget?', 'rcno-reviews' ),
+					'name' => __( 'Book Grid', 'recencio-book-reviews' ),
+					'desc' => __( 'Use the Rcno Book Grid widget?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_recent_reviews_widget' => array(
-					'name' => __( 'Recent Reviews', 'rcno-reviews' ),
-					'desc' => __( 'Use the Rcno Recent Reviews widget?', 'rcno-reviews' ),
+					'name' => __( 'Recent Reviews', 'recencio-book-reviews' ),
+					'desc' => __( 'Use the Rcno Recent Reviews widget?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_tag_cloud_widget'      => array(
-					'name' => __( 'Tag Cloud', 'rcno-reviews' ),
-					'desc' => __( 'Use the Rcno Tag Cloud widget?', 'rcno-reviews' ),
+					'name' => __( 'Tag Cloud', 'recencio-book-reviews' ),
+					'desc' => __( 'Use the Rcno Tag Cloud widget?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_taxonomy_list_widget'  => array(
-					'name' => __( 'Taxonomy List', 'rcno-reviews' ),
-					'desc' => __( 'Use the Rcno Taxonomy List widget?', 'rcno-reviews' ),
+					'name' => __( 'Taxonomy List', 'recencio-book-reviews' ),
+					'desc' => __( 'Use the Rcno Taxonomy List widget?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_currently_reading_widget'  => array(
-					'name' => __( 'Currently Reading', 'rcno-reviews' ),
-					'desc' => __( 'Use the Rcno Currently Reading widget?', 'rcno-reviews' ),
+					'name' => __( 'Currently Reading', 'recencio-book-reviews' ),
+					'desc' => __( 'Use the Rcno Currently Reading widget?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_review_calendar_widget'  => array(
-					'name' => __( 'Review Calendar', 'rcno-reviews' ),
-					'desc' => __( 'Use the Rcno Review Calendar widget?', 'rcno-reviews' ),
+					'name' => __( 'Review Calendar', 'recencio-book-reviews' ),
+					'desc' => __( 'Use the Rcno Review Calendar widget?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'spacer-7'                        => array(
@@ -443,36 +442,36 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'spacer',
 				),
 				'extras_tab_header_2'             => array(
-					'name' => '<strong>' . __( 'Index Pages', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Index Pages', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_reviews_index_headers'      => array(
-					'name' => __( 'Navigation headers', 'rcno-reviews' ),
-					'desc' => __( 'Display navigation header on index page?', 'rcno-reviews' ),
+					'name' => __( 'Navigation headers', 'recencio-book-reviews' ),
+					'desc' => __( 'Display navigation header on index page?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_show_book_covers_index'      => array(
-					'name' => __( 'Book covers', 'rcno-reviews' ),
-					'desc' => __( 'Book covers on review index page?', 'rcno-reviews' ),
+					'name' => __( 'Book covers', 'recencio-book-reviews' ),
+					'desc' => __( 'Book covers on review index page?', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_reviews_ignore_articles'          => array(
-					'name' => __( 'Ignore articles', 'rcno-reviews' ),
-					'desc' => __( 'Ignore articles when sorting titles. (e.g. "The", "A", "An")', 'rcno-reviews' ),
+					'name' => __( 'Ignore articles', 'recencio-book-reviews' ),
+					'desc' => __( 'Ignore articles when sorting titles. (e.g. "The", "A", "An")', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_reviews_ignored_articles_list'          => array(
-					'name' => __( 'Article List', 'rcno-reviews' ),
-					'desc' => __( 'The list of articles to ignore in your language', 'rcno-reviews' ),
+					'name' => __( 'Article List', 'recencio-book-reviews' ),
+					'desc' => __( 'The list of articles to ignore in your language', 'recencio-book-reviews' ),
 					'type' => 'text',
 					'std'  => 'The,A,An'
 				),
 				'rcno_reviews_sort_names'          => array(
-					'name'    => __( 'Sort author names', 'rcno-reviews' ),
-					'desc'    => __( 'Sort names by first-name or last-name', 'rcno-reviews' ),
+					'name'    => __( 'Sort author names', 'recencio-book-reviews' ),
+					'desc'    => __( 'Sort names by first-name or last-name', 'recencio-book-reviews' ),
 					'options' => array(
-						'last_name_first_name' => __( 'LastName, FirstName', 'rcno-reviews' ),
-						'first_name_last_name' => __( 'FirstName LastName', 'rcno-reviews' ),
+						'last_name_first_name' => __( 'LastName, FirstName', 'recencio-book-reviews' ),
+						'first_name_last_name' => __( 'FirstName LastName', 'recencio-book-reviews' ),
 					),
 					'type'    => 'radio',
 				),
@@ -487,42 +486,42 @@ class Rcno_Reviews_Settings_Definition {
 			'templates_tab'  => array(
 
 				'templates_tab_header_0'  => array(
-					'name' => '<strong>' . __( 'Review Templates', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Review Templates', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_review_template'    => array(
-					'name'    => __( 'Book review template', 'rcno-reviews' ),
-					'desc'    => __( 'Select how you want your book reviews to look.', 'rcno-reviews' ),
+					'name'    => __( 'Book review template', 'recencio-book-reviews' ),
+					'desc'    => __( 'Select how you want your book reviews to look.', 'recencio-book-reviews' ),
 					'options' => layout_list(),
 					'type'    => 'template',
 				),
 				'rcno_default_cover'      => array(
-					'name' => __( 'Default Book Cover', 'rcno-reviews' ),
-					'desc' => __( 'The default image to use when a book cover isn\'t uploaded', 'rcno-reviews' ),
+					'name' => __( 'Default Book Cover', 'recencio-book-reviews' ),
+					'desc' => __( 'The default image to use when a book cover isn\'t uploaded', 'recencio-book-reviews' ),
 					'type' => 'upload',
 				),
 				'rcno_excerpt_read_more'  => array(
-					'name' => __( 'Read more text', 'rcno-reviews' ),
-					'desc' => __( 'The review excerpt \'Read more\' tag.', 'rcno-reviews' ),
+					'name' => __( 'Read more text', 'recencio-book-reviews' ),
+					'desc' => __( 'The review excerpt \'Read more\' tag.', 'recencio-book-reviews' ),
 					'std'  => 'Read more',
 					'type' => 'text',
 				),
 				'rcno_excerpt_word_count' => array(
-					'name' => __( 'Review excerpt word count', 'rcno-reviews' ),
-					'desc' => __( 'Max: 500, Min: 20', 'rcno-reviews' ),
+					'name' => __( 'Review excerpt word count', 'recencio-book-reviews' ),
+					'desc' => __( 'Max: 500, Min: 20', 'recencio-book-reviews' ),
 					'max'  => 500,
 					'min'  => 20,
 					'step' => 1,
 					'type' => 'number',
 				),
 				'rcno_reviews_embedded_title_links'          => array(
-					'name' => __( 'Embedded Review Links', 'rcno-reviews' ),
-					'desc' => __( 'Enable clickable title links on embedded book reviews.', 'rcno-reviews' ),
+					'name' => __( 'Embedded Review Links', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable clickable title links on embedded book reviews.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_book_details_meta'  => array(
-					'name' => __( 'Book Detail Items', 'rcno-reviews' ),
-					'desc' => __( 'Book details that should appear in book reviews. You also rearrange their order here', 'rcno-reviews' ),
+					'name' => __( 'Book Detail Items', 'recencio-book-reviews' ),
+					'desc' => __( 'Book details that should appear in book reviews. You also rearrange their order here', 'recencio-book-reviews' ),
 					'std'  => implode( ',', self::$template->get_rcno_book_meta_keys( 'keys', 8 ) ),
 					'type' => 'text',
 				),
@@ -532,12 +531,12 @@ class Rcno_Reviews_Settings_Definition {
 				),
 				 // Custom stylesheet.
 				'templates_tab_header_1'  => array(
-					'name' => '<strong>' . __( 'Reviews Custom Styling', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Reviews Custom Styling', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_custom_styling'                   => array(
-					'name' => __( 'Custom styles', 'rcno-reviews' ),
-					'desc' => __( 'Add your custom CSS here to fine-tune the look of your book reviews', 'rcno-reviews' ),
+					'name' => __( 'Custom styles', 'recencio-book-reviews' ),
+					'desc' => __( 'Add your custom CSS here to fine-tune the look of your book reviews', 'recencio-book-reviews' ),
 					'type' => 'cssbox',
 				),
 				'spacer-9'                => array(
@@ -549,16 +548,16 @@ class Rcno_Reviews_Settings_Definition {
 			'advanced_tab'   => array(
 
 				'advanced_tab_header_0'  => array(
-					'name' => '<strong>' . __( 'Book APIs', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Book APIs', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_external_book_api' => array(
-					'name'    => __( 'External Book API', 'rcno-reviews' ),
-					'desc'    => __( 'Select which 3rd party API is used to fetch book data.' . '<br />' . 'The corresponding option must also be enabled below.', 'rcno-reviews' ),
+					'name'    => __( 'External Book API', 'recencio-book-reviews' ),
+					'desc'    => __( 'Select which 3rd party API is used to fetch book data.' . '<br />' . 'The corresponding option must also be enabled below.', 'recencio-book-reviews' ),
 					'options' => array(
-						'no-3rd-party' => __( 'None', 'rcno-reviews' ),
-						'google-books' => __( 'Google Books® API', 'rcno-reviews' ),
-						'good-reads'   => __( 'Goodreads® API', 'rcno-reviews' ),
+						'no-3rd-party' => __( 'None', 'recencio-book-reviews' ),
+						'google-books' => __( 'Google Books® API', 'recencio-book-reviews' ),
+						'good-reads'   => __( 'Goodreads® API', 'recencio-book-reviews' ),
 					),
 					'type'    => 'radio',
 				),
@@ -568,17 +567,17 @@ class Rcno_Reviews_Settings_Definition {
 				),
 
 				'advanced_tab_header_1'   => array(
-					'name' => '<strong>' . __( 'Google Books® Settings', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Google Books® Settings', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_enable_googlebooks' => array(
-					'name' => __( 'Enable Google Books®', 'rcno-reviews' ),
-					'desc' => __( 'Enable the external Google Books® API access.', 'rcno-reviews' ),
+					'name' => __( 'Enable Google Books®', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable the external Google Books® API access.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_googlebooks_key'    => array(
-					'name' => __( 'Google Books® API Key', 'rcno-reviews' ),
-					'desc' => __( 'Available at: ', 'rcno-reviews' ) . 'https://console.developers.google.com/apis/credentials',
+					'name' => __( 'Google Books® API Key', 'recencio-book-reviews' ),
+					'desc' => __( 'Available at: ', 'recencio-book-reviews' ) . 'https://console.developers.google.com/apis/credentials',
 					'type' => 'password',
 				),
 				'spacer-9'                => array(
@@ -587,22 +586,22 @@ class Rcno_Reviews_Settings_Definition {
 				),
 
 				'advanced_tab_header_2' => array(
-					'name' => '<strong>' . __( 'Goodreads® Settings', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Goodreads® Settings', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_enable_goodreads' => array(
-					'name' => __( 'Enable Goodreads®', 'rcno-reviews' ),
-					'desc' => __( 'Enable the external Goodreads® API access.', 'rcno-reviews' ),
+					'name' => __( 'Enable Goodreads®', 'recencio-book-reviews' ),
+					'desc' => __( 'Enable the external Goodreads® API access.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_goodreads_key'    => array(
-					'name' => __( 'Goodreads® API Key', 'rcno-reviews' ),
-					'desc' => __( 'Available at: ', 'rcno-reviews' ) . 'https://www.goodreads.com/api/keys',
+					'name' => __( 'Goodreads® API Key', 'recencio-book-reviews' ),
+					'desc' => __( 'Available at: ', 'recencio-book-reviews' ) . 'https://www.goodreads.com/api/keys',
 					'type' => 'password',
 				),
 				'rcno_goodreads_secret' => array(
-					'name' => __( 'Goodreads® API Secret', 'rcno-reviews' ),
-					'desc' => __( 'Available at: ', 'rcno-reviews' ) . 'https://www.goodreads.com/api/keys',
+					'name' => __( 'Goodreads® API Secret', 'recencio-book-reviews' ),
+					'desc' => __( 'Available at: ', 'recencio-book-reviews' ) . 'https://www.goodreads.com/api/keys',
 					'type' => 'password',
 				),
 				'spacer-10'             => array(
@@ -611,17 +610,17 @@ class Rcno_Reviews_Settings_Definition {
 				),
 
 				'advanced_tab_header_5' => array(
-					'name' => '<strong>' . __( 'JSON-LD Schemas', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'JSON-LD Schemas', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_disable_review_schema' => array(
-					'name' => __( 'Disable Review Schema', 'rcno-reviews' ),
-					'desc' => __( 'Disable the output of the review JSON-LD schema markup', 'rcno-reviews' ),
+					'name' => __( 'Disable Review Schema', 'recencio-book-reviews' ),
+					'desc' => __( 'Disable the output of the review JSON-LD schema markup', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'rcno_disable_book_schema' => array(
-					'name' => __( 'Disable Book Schema', 'rcno-reviews' ),
-					'desc' => __( 'Disable the output of the book JSON-LD schema markup', 'rcno-reviews' ),
+					'name' => __( 'Disable Book Schema', 'recencio-book-reviews' ),
+					'desc' => __( 'Disable the output of the book JSON-LD schema markup', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'spacer-13'             => array(
@@ -630,17 +629,17 @@ class Rcno_Reviews_Settings_Definition {
 				),
 
 				'advanced_tab_header_3' => array(
-					'name' => '<strong>' . __( 'Uncountable Words', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Uncountable Words', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_no_pluralization'      => array(
-					'name' => __( 'Word List', 'rcno-reviews' ),
-					'desc' => __( 'Create a list of words that have no plural or singular form e.g. "sheep, fish"', 'rcno-reviews' ),
+					'name' => __( 'Word List', 'recencio-book-reviews' ),
+					'desc' => __( 'Create a list of words that have no plural or singular form e.g. "sheep, fish"', 'recencio-book-reviews' ),
 					'type' => 'text',
 				),
 				'rcno_disable_pluralization' => array(
-					'name' => __( 'Disable Pluralization', 'rcno-reviews' ),
-					'desc' => __( 'Disable the automatic pluralization of words used in the settings', 'rcno-reviews' ),
+					'name' => __( 'Disable Pluralization', 'recencio-book-reviews' ),
+					'desc' => __( 'Disable the automatic pluralization of words used in the settings', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
 				'spacer-11'             => array(
@@ -649,18 +648,18 @@ class Rcno_Reviews_Settings_Definition {
 				),
 
 				'advanced_tab_header_4' => array(
-					'name' => '<strong>' . __( 'Import/Export Settings', 'rcno-reviews' ) . '</strong>',
+					'name' => '<strong>' . __( 'Import/Export Settings', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
 				'rcno_settings_import'      => array(
-					'name' => __( 'Import Settings', 'rcno-reviews' ),
-					'desc' => __( 'Import your previously saved plugin settings.', 'rcno-reviews' ),
+					'name' => __( 'Import Settings', 'recencio-book-reviews' ),
+					'desc' => __( 'Import your previously saved plugin settings.', 'recencio-book-reviews' ),
 					'type' => 'file',
 					'accept' => '.json',
 				),
 				'rcno_settings_export'      => array(
-					'name' => __( 'Export Settings', 'rcno-reviews' ),
-					'desc' => __( 'Save the plugin settings to a file on your computer.', 'rcno-reviews' ),
+					'name' => __( 'Export Settings', 'recencio-book-reviews' ),
+					'desc' => __( 'Save the plugin settings to a file on your computer.', 'recencio-book-reviews' ),
 					'type' => 'download',
 				),
 				'spacer-12'             => array(
@@ -700,31 +699,31 @@ class Rcno_Reviews_Settings_Definition {
 				'type' => 'header',
 			),
 			'rcno_' . $tax['slug'] . '_label'         => array(
-				'name' => __( 'Label', 'rcno-reviews' ),
-				'desc' => __( 'Place the label of the ' . $tax['label'] . ' taxonomy here, as it should display on the frontend.', 'rcno-reviews' ),
+				'name' => __( 'Label', 'recencio-book-reviews' ),
+				'desc' => __( 'Place the label of the ' . $tax['label'] . ' taxonomy here, as it should display on the frontend.', 'recencio-book-reviews' ),
 				'std'  =>  ucfirst( $tax['label'] ),
 				'type' => 'text',
 			),
 			'rcno_' . $tax['settings_key'] . '_slug'         => array(
-				'name' => __( 'Slug', 'rcno-reviews' ),
-				'desc' => __( 'Place the slug of the ' . $tax['slug'] . ' taxonomy here.', 'rcno-reviews' ),
+				'name' => __( 'Slug', 'recencio-book-reviews' ),
+				'desc' => __( 'Place the slug of the ' . $tax['slug'] . ' taxonomy here.', 'recencio-book-reviews' ),
 				'std'  => strtolower( $tax['slug'] ),
 				'type' => 'text',
 				'size' => '20'
 			),
 			'rcno_' . $tax['settings_key'] . '_hierarchical' => array(
-				'name' => __( 'Hierarchical', 'rcno-reviews' ),
-				'desc' => __( 'Is this custom taxonomy hierarchical?', 'rcno-reviews' ),
+				'name' => __( 'Hierarchical', 'recencio-book-reviews' ),
+				'desc' => __( 'Is this custom taxonomy hierarchical?', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
 			'rcno_' . $tax['settings_key'] . '_show'         => array(
-				'name' => __( 'Show in table', 'rcno-reviews' ),
-				'desc' => __( 'Show this custom taxonomy on the admin table', 'rcno-reviews' ),
+				'name' => __( 'Show in table', 'recencio-book-reviews' ),
+				'desc' => __( 'Show this custom taxonomy on the admin table', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
 			'rcno_' . $tax['settings_key'] . '_filter'         => array(
-				'name' => __( 'Show filter', 'rcno-reviews' ),
-				'desc' => __( 'Show a drop-down filter for this taxonomy on the admin table', 'rcno-reviews' ),
+				'name' => __( 'Show filter', 'recencio-book-reviews' ),
+				'desc' => __( 'Show a drop-down filter for this taxonomy on the admin table', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
 			'spacer' . $tax['settings_key']                 => array(

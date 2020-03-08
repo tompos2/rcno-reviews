@@ -570,7 +570,7 @@ class Rcno_Reviews_Public {
 	public function rcno_reviews_excerpt_more( $more ) {
 		return sprintf( ' <a class="read-more" href="%1$s">%2$s</a>',
 			get_permalink( get_the_ID() ),
-			__( Rcno_Reviews_Option::get_option( 'rcno_excerpt_read_more', 'Read more' ), 'rcno-reviews' )
+			__( Rcno_Reviews_Option::get_option( 'rcno_excerpt_read_more', 'Read more' ), 'recencio-book-reviews' )
 		);
 	}
 
