@@ -75,6 +75,19 @@ class Rcno_Reviews_Settings {
 	}
 
 	/**
+	 * A work-around to get i18n to work on the settings page
+	 *
+	 * @since 1.0.0
+	 *
+	 * @see https://github.com/wphuman/WordPress-Settings-Module/issues/9
+	 *
+	 * @return void
+	 */
+	public function set_settings(){
+		$this->registered_settings = Rcno_Reviews_Settings_Definition::get_settings();
+	}
+
+	/**
 	 * Register all settings sections and fields.
 	 *
 	 * @since    1.0.0

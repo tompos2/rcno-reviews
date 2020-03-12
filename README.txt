@@ -106,6 +106,7 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.41.0 =
 * Refactored the translation feature to better comply with WordPress' i18n standards
+* Fixed a long-running issue of translations not showing up on settings page
 * Thanks to @chrillebln for assisting with the DE translation
 
 = 1.40.0 =

@@ -253,6 +253,7 @@ class Rcno_Reviews {
 		$settings_sanitization = new Rcno_Reviews_Sanitization_Helper( $this->plugin_name );
 		$plugin_settings       = new Rcno_Reviews_Settings( $this->get_plugin_name(), $settings_callback, $settings_sanitization );
 		$this->loader->add_action( 'admin_init', $plugin_settings, 'register_settings' );
+		$this->loader->add_action( 'init' , $plugin_settings, 'set_settings' );
 
 		$plugin_meta_box = new Rcno_Reviews_Meta_Box( $this->get_plugin_name() );
 		$this->loader->add_action( 'load-toplevel_page_' . $this->get_plugin_name(), $plugin_meta_box, 'add_meta_boxes' );
