@@ -149,7 +149,7 @@ class Rcno_Template_Tags {
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
 
 		foreach ( $custom_taxonomies as $taxonomy ) {
-			$taxonomies['rcno_' . strtolower( $taxonomy )] = $taxonomy;
+			$taxonomies[ 'rcno_' . sanitize_title_with_dashes( strtolower( $taxonomy ) ) ] = $taxonomy;
 		}
 
 		if ( 'all' === $out ) {
@@ -350,7 +350,7 @@ class Rcno_Template_Tags {
 		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no title has been provided for this book', 'recencio-book-reviews' );
 
 		$out = '';
-		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ) ) . '" ';
+		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $og_book_src ?: $book_src ) ) . '" ';
 		$out .= 'title="' . $book_title . '" ';
 		$out .= 'alt="' . $book_alt . '" ';
 		$out .= 'class="rcno-book-cover ' . $size . '" ';
@@ -444,8 +444,8 @@ class Rcno_Template_Tags {
 		$counts    = get_the_terms( $review_id, $taxonomy );
 		$tax_label = $tax->labels->name;
 
-		if ( count( $counts ) === 1 ) { // If we have only 1 term singular-ize the label name.
-			$tax_label = Rcno_Pluralize_Helper::singularize( $tax_label );
+		if ( count( $counts ) === 1 ) { // If we have only 1 term use the singular label name.
+			$tax_label = $tax->labels->singular_name;
 		}
 
 		if ( ! $link && ! is_wp_error( $terms ) ) {
@@ -787,9 +787,9 @@ class Rcno_Template_Tags {
 
 		// We need to check this, or we'll get an infinite loop with embedded reviews.
 		if ( $this->is_review_embedded() ) {
-			$out .= wpautop( get_post_field( 'post_content', $review_id ) );
+			$out .= wpautop( wptexturize( get_post_field( 'post_content', $review_id ) ) );
 		} else {
-			$out .= wpautop( get_the_content( $read_more ) );
+			$out .= wpautop( wptexturize( get_the_content( $read_more ) ) );
 			// $out .= apply_filters( 'the_content', get_the_content() ); // TODO: look into this.
 		}
 

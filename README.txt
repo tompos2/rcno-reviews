@@ -4,7 +4,7 @@ Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
-Tested up to: 5.3
+Tested up to: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,19 +14,20 @@ It was designed with the book reviewer in mind and built to be fast, easy and cu
 
 == Description ==
 
-Recencio Book Reviews is a powerful and very flexible tool for managing your blog’s book review collection. It was designed with the book reviewer in mind and was built to be fast, easy and customizable.
+Recencio Book Reviews is a powerful and very flexible tool for managing your blog’s book review collection. It was designed with the book reviewer in mind and built to be fast, easy and customizable.
 The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
 
 This plugin adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
-Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. As creating new book taxonomies is easy it’s up to
-you, which and how many taxonomies you want. Use listings embedded in pages to make your book reviews accessible by title or taxonomy name. Or use one of
-the custom widgets to create tag clouds or top ten lists.
+Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. Creating new book
+taxonomies is so easy it’s up to you to decide which and how many taxonomies you want to add.
+
+Use listings embedded in pages to make your book reviews accessible by title or taxonomies such as series or author. Or use one of the custom widgets to create tag clouds or top ten lists.
 
 Of course, you can use all the WordPress goodies you know from posts on book reviews as well: images, videos and comments.
 Despite its simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t
 need can be deactivated and are hidden from the UI. You can even create your own book review template files to gain complete control the look and feel of book reviews.
 
-And, all the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
+Most importantly, all the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
 
 = Features =
 
@@ -104,6 +105,13 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.42.0 =
+* Rewrote the settings page to accept both the plural and singular form of labels, aimed at improved internationalization
+* Added a system to automatically flush the permalink on settings changes that affect public URLs
+* Added new options to the "Recent Reviews" widget
+* Fixed an issue where straight quotes where not being converted to curly quotes, see `wptexturize()`
+* Fixed a PHP deprecation warning message related to the `contextual_help` hook
+
 = 1.41.0 =
 * Refactored the translation feature to better comply with WordPress' i18n standards
 * Fixed a long-running issue of translations not showing up on settings page
@@ -159,7 +167,7 @@ Please open a new topic on the plugin's WordPress.org support page
 * Added a `rating` parameter to enable sorting reviews by star rating in the sortable grid shortcode i.e., `[rcno-sortable-grid rating=1]`
 
 = 1.31.0 =
-* Fixed PHP warning message in Taxonomy List widget.
+* Fixed PHP warning message in "Taxonomy List" widget.
 * Switched comparison function to use closure to avoid calling the same function twice.
 * Added the Hungarian translation provided by @gaborh
 
@@ -414,3 +422,8 @@ Please open a new topic on the plugin's WordPress.org support page
 
 = 1.0.0 =
 * Initial plugin release
+
+== Upgrade Notice ==
+
+= 1.42.0 =
+* After installing this update, please visit the "Taxonomy" tab on the Recencio settings page and click the "Save settings" button.

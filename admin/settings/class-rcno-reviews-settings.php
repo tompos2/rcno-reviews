@@ -124,20 +124,24 @@ class Rcno_Reviews_Settings {
 					'rcno_reviews_settings_' . $tab,
 					'rcno_reviews_settings_' . $tab,
 					array(
-						'id'      => $key,
-						'desc'    => ! empty( $option['desc'] ) ? $option['desc'] : '',
-						'name'    => $_name,
-						'section' => $tab,
-						'size'    => isset( $option['size'] ) ? $option['size'] : 'regular',
-						'options' => isset( $option['options'] ) ? $option['options'] : '',
-						'std'     => isset( $option['std'] ) ? $option['std'] : '',
-						'max'     => isset( $option['max'] ) ? $option['max'] : 999999,
-						'min'     => isset( $option['min'] ) ? $option['min'] : 0,
-						'step'    => isset( $option['step'] ) ? $option['step'] : 1,
-						'class'   => $key . ' rcno-table-' . $option['type'],
-						'accept'  => isset( $option['accept'] ) ? $option['accept'] : 'image/*',
-						'pattern' => isset( $option['pattern'] ) ? $option['pattern'] : '{2,}',
-						'title'   => isset( $option['title'] ) ? $option['title'] : __( 'Please enter 2 or more lower-case characters.', 'recencio-book-reviews' ),
+						'id'            => $key,
+						'desc'          => ! empty( $option['desc'] ) ? $option['desc'] : '',
+						'name'          => $_name,
+						'section'       => $tab,
+						'size'          => isset( $option['size'] ) ? $option['size'] : 'regular',
+						'options'       => isset( $option['options'] ) ? $option['options'] : '',
+						'std'           => isset( $option['std'] ) ? $option['std'] : '',
+						'max'           => isset( $option['max'] ) ? $option['max'] : 999999,
+						'min'           => isset( $option['min'] ) ? $option['min'] : 0,
+						'step'          => isset( $option['step'] ) ? $option['step'] : 1,
+						'class'         => $key . ' rcno-table-' . $option['type'],
+						'accept'        => isset( $option['accept'] ) ? $option['accept'] : 'image/*',
+						'pattern'       => isset( $option['pattern'] ) ? $option['pattern'] : '{2,}',
+						'title'         => isset( $option['title'] ) ? $option['title'] : __( 'Please enter 2 or more lower-case characters.', 'recencio-book-reviews' ),
+						'singular_desc' => isset( $option['singular_desc'] ) ? $option['singular_desc'] : __( 'The singular form of the label', 'recencio-book-reviews' ),
+						'plural_desc'   => isset( $option['plural_desc'] ) ? $option['plural_desc'] : __( 'The plural form of the label', 'recencio-book-reviews' ),
+						'singular_std'  => isset( $option['singular_std'] ) ? $option['singular_std'] : '',
+						'plural_std'    => isset( $option['plural_std'] ) ? $option['plural_std'] : '',
 					)
 				);
 			} // end foreach
@@ -150,5 +154,20 @@ class Rcno_Reviews_Settings {
 			'settings_sanitize'
 		) );
 
+	}
+
+	/**
+	 * Adds a flag to the options table used to
+	 * check if we need to flush the rewrite rules
+	 *
+	 * Usually called by the Settings class after a setting that affects the
+	 * rewrite rules has been called
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function flush_permalinks_on_update() {
+		update_option( 'rcno_flush_rewrite_rules', true, true );
 	}
 }

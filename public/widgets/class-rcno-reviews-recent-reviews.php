@@ -117,18 +117,32 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			$out .= $template->get_the_rcno_book_meta( $review->ID, 'rcno_book_publisher', 'div', true );
 
 			if ( 'synopsis' === $review_info ) {
-				$out .= '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_description( $review->ID, 200 ) ), true ), 0, $char_count ) .'</p>';
+				if ( apply_filters( 'rcno_recent_reviews_skip_sanitization', false ) ) {
+					$content = $template->get_the_rcno_book_description( $review->ID, 200 );
+				} else {
+					$content = '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_description( $review->ID, 200 ) ), true ), 0, $char_count ) .'</p>';
+				}
+
+				$out .= apply_filters( 'rcno_recent_reviews_content', $content, $review->ID );
 			}
 
 			if ( 'excerpt' === $review_info ) {
-				$out .= '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_excerpt( $review->ID, 5000 ) ), true ), 0, $char_count ) . '</p>';
+				if ( apply_filters( 'rcno_recent_reviews_skip_sanitization', false ) ) {
+					$content = $template->get_the_rcno_book_review_excerpt( $review->ID, 5000 );
+				} else {
+					$content = '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_excerpt( $review->ID, 5000 ) ), true ), 0, $char_count ) . '</p>';
+				}
+
+				$out .= apply_filters( 'rcno_recent_reviews_content', $content, $review->ID );
 			}
 
 			if ( apply_filters( 'rcno_recent_reviews_skip_sanitization', false ) ) {
-				$out .= mb_substr( $template->get_the_rcno_book_review_content( $review->ID ), 0, $char_count );
+				$content = $template->get_the_rcno_book_review_content( $review->ID );
 			} else {
-				$out .= '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_content( $review->ID ) ), true ), 0, $char_count ) . '</p>';
+				$content = '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_content( $review->ID ) ), true ), 0, $char_count ) . '</p>';
 			}
+
+			$out .= apply_filters( 'rcno_recent_reviews_content', $content, $review->ID );
 
 			$out .= '<div class="clear"></div>';
 			$out .= '</div>';

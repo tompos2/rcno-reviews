@@ -48,6 +48,7 @@ class Rcno_Reviews_Sanitization_Helper {
 		add_filter( 'rcno_reviews_settings_sanitize_checkbox', array( $this, 'sanitize_checkbox_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_url', array( $this, 'sanitize_url_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_cssbox', array( $this, 'sanitize_cssbox_field' ) );
+		add_filter( 'rcno_reviews_settings_sanitize_labels', array( $this, 'sanitize_labels_field' ) );
 	}
 
 	/**
@@ -298,6 +299,24 @@ class Rcno_Reviews_Sanitization_Helper {
 
 		return esc_url_raw( sanitize_text_field( rawurldecode( $input ) ), $allowed_protocols );
 
+	}
+
+	/**
+	 * Sanitize label fields
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param array $input The field value.
+	 *
+	 * @return array $input Sanitized value
+	 */
+	public function sanitize_labels_field( $input ) {
+
+		if ( is_array( $input) ) {
+			return array_map( 'sanitize_text_field', $input );
+		}
+
+		return $input;
 	}
 
 	/**

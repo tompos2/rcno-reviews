@@ -10,6 +10,8 @@
  * @subpackage Rcno_Reviews/admin
  */
 
+
+
 require_once __DIR__ . '/class-rcno-admin-description-meta.php';
 require_once __DIR__ . '/class-rcno-admin-isbn.php';
 require_once __DIR__ . '/class-rcno-admin-book-cover.php';
@@ -276,15 +278,16 @@ class Rcno_Reviews_Admin {
 
 		$cap_type = 'post';
 		$cpt_name = 'rcno_review';
-		$cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
-		$plural   = ucfirst( Rcno_Pluralize_Helper::pluralize( $cpt_slug ) );
-		$single   = ucfirst( Rcno_Pluralize_Helper::singularize( $cpt_slug ) );
+		$plural   = Rcno_Reviews_Option::get_option( 'rcno_review_labels', array( 'singular' => 'Review', 'plural' => 'Reviews' ) )['plural']
+			?: __( 'Reviews', 'recencio-book-reviews' );
+		$single   = Rcno_Reviews_Option::get_option( 'rcno_review_labels', array( 'singular' => 'Review', 'plural' => 'Reviews' ) )['singular']
+			?: __( 'Review', 'recencio-book-reviews' );
 
 		$opts['can_export']           = true;
 		$opts['capability_type']      = $cap_type;
 		$opts['description']          = '';
 		$opts['exclude_from_search']  = false;
-		$opts['has_archive']          = Rcno_Pluralize_Helper::pluralize( $cpt_slug );
+		$opts['has_archive']          = sanitize_title_with_dashes(  $plural );
 		$opts['hierarchical']         = false;
 		$opts['map_meta_cap']         = true;
 		$opts['menu_icon']            = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyMDYuNSAzMTQuNyIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjA2LjUgMzE0LjciIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwb2x5Z29uIGZpbGw9IiM4Mjg3OEMiIHBvaW50cz0iMCw4Ny40IDE2Mi41LDMzLjIgMTYyLjUsMTUuNCAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDE4Ni4zLDQ4LjggMTg2LjEsMzMuMiAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDEzOS41LDE4LjcgMTM5LjUsMCAiLz48Zz48cGF0aCBmaWxsPSIjODI4NzhDIiBkPSJNMC41LDg3Ljd2MjI3bDIwNi0zMS41VjUyLjdMMC41LDg3Ljd6IE0xODUuNSwyNTEuNGwtNDcuMSw2LjZsLTEuMy0wLjhjLTUuOC02LjEtMTMtMTYuNy0yMi0zMy4zYy01LjktMTAuOS0xMC4zLTE4LjEtMTMuMS0yMS41Yy0yLjYtMy4xLTUuMi01LjItNy44LTYuMmMtMS4zLTAuNS00LjYtMS0xMy42LTAuMXY0MS44YzAsNS41LDEuMSw5LjUsMy4zLDExLjZjMi4zLDIuMiw2LjUsMy4zLDEyLjUsMy4zbDMuMiwwdjEwLjRsLTc5LDExdi0xMC42bDMuNS0wLjdjMTAuNy0yLjMsMTUuNS03LjcsMTUuNS0xNy41VjE0NS40YzAtNy4yLTEuNC0xMC4xLTIuNy0xMS4zYy0xLjQtMS4yLTQuNi0yLjgtMTIuOC0zLjJsLTMuNS0wLjF2LTEwLjRsNzUuMS0xMC41YzE5LjEtMi43LDM0LjMtMS42LDQ0LjgsMy44YzExLDUuNywxNi41LDE0LjgsMTYuNSwyNy45YzAsOS4zLTIuOSwxNy45LTguNiwyNS40Yy00LjIsNS42LTkuOCwxMC4zLTE2LjcsMTQuM2MxLjksMS4zLDMuOCwzLDUuNyw1LjFjNC4yLDQuNSwxMC4xLDEzLjQsMTcuOSwyNi45YzcuMywxMi41LDEyLjYsMjAuNSwxNS44LDIzLjVjMi45LDIuNyw2LjYsNC4xLDExLjcsNC4ybDIuNywwLjFWMjUxLjR6Ii8+PHBhdGggZmlsbD0iIzgyODc4QyIgZD0iTTg2LjksMTI1LjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzExNC4yLDEzMC4zLDEwNS41LDEyMy4xLDg2LjksMTI1Ljd6Ii8+PC9nPjwvZz48cG9seWdvbiBmaWxsPSIjOURDMkUwIiBwb2ludHM9IjYyNywxMTMuNCA3ODkuNSw1OS4yIDc4OS41LDQxLjQgIi8+PHBvbHlnb24gZmlsbD0iIzlEQzJFMCIgcG9pbnRzPSI2MjcuNCwxMTMuNSA4MTMuMyw3NC44IDgxMy4xLDU5LjIgIi8+PHBvbHlnb24gZmlsbD0iIzJCNzRBNSIgcG9pbnRzPSI2MjcuNCwxMTMuNSA3NjYuNSw0NC43IDc2Ni41LDI2ICIvPjxnPjxwYXRoIGZpbGw9IiMzMDgyQzYiIGQ9Ik02MjcuNSwxMTMuN3YyMjdsMjA2LTMxLjVWNzguN0w2MjcuNSwxMTMuN3ogTTgxMi41LDI3Ny40bC00Ny4xLDYuNmwtMS4zLTAuOGMtNS44LTYuMS0xMy0xNi43LTIyLTMzLjNjLTUuOS0xMC45LTEwLjMtMTguMS0xMy4xLTIxLjVjLTIuNi0zLjEtNS4yLTUuMi03LjgtNi4yYy0xLjMtMC41LTQuNi0xLTEzLjYtMC4xdjQxLjhjMCw1LjUsMS4xLDkuNSwzLjMsMTEuNmMyLjMsMi4yLDYuNSwzLjMsMTIuNSwzLjNsMy4yLDB2MTAuNGwtNzksMTF2LTEwLjZsMy41LTAuN2MxMC43LTIuMywxNS41LTcuNywxNS41LTE3LjVWMTcxLjRjMC03LjItMS40LTEwLjEtMi43LTExLjNjLTEuNC0xLjItNC42LTIuOC0xMi44LTMuMmwtMy41LTAuMXYtMTAuNGw3NS4xLTEwLjVjMTkuMS0yLjcsMzQuMy0xLjYsNDQuOCwzLjhjMTEsNS43LDE2LjUsMTQuOCwxNi41LDI3LjljMCw5LjMtMi45LDE3LjktOC42LDI1LjRjLTQuMiw1LjYtOS44LDEwLjMtMTYuNywxNC4zYzEuOSwxLjMsMy44LDMsNS43LDUuMWM0LjIsNC41LDEwLjEsMTMuNCwxNy45LDI2LjljNy4zLDEyLjUsMTIuNiwyMC41LDE1LjgsMjMuNWMyLjksMi43LDYuNiw0LjEsMTEuNyw0LjJsMi43LDAuMVYyNzcuNHoiLz48cGF0aCBmaWxsPSIjMzA4MkM2IiBkPSJNNzEzLjksMTUxLjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzc0MS4yLDE1Ni4zLDczMi41LDE0OS4xLDcxMy45LDE1MS43eiIvPjwvZz48L3N2Zz4=';
@@ -348,12 +351,12 @@ class Rcno_Reviews_Admin {
 		$opts['rewrite']['ep_mask']    = EP_PERMALINK;
 		$opts['rewrite']['feeds']      = true;
 		$opts['rewrite']['pages']      = true;
-		$opts['rewrite']['slug']       = $cpt_slug;
+		$opts['rewrite']['slug']       = sanitize_title_with_dashes( $single );
 		$opts['rewrite']['with_front'] = false;
 
 		$opts = apply_filters( 'rcno_review_cpt_options', $opts );
 
-		register_post_type( strtolower( $cpt_name ), $opts );
+		register_post_type( $cpt_name, $opts );
 	}
 
 	/**
@@ -379,11 +382,13 @@ class Rcno_Reviews_Admin {
 		foreach ( $custom_taxonomies as $key ) {
 			$taxonomies[] = array(
 				'tax_settings' => array(
-					'settings_key'  => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_key', strtolower( $key ) ),
-					'label'         => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_label', $key ),
-					'slug'          => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_slug', strtolower( $key ) ),
-					'hierarchy'     => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_hierarchical', false ),
-					'show_in_table' => Rcno_Reviews_Option::get_option( 'rcno_' . strtolower( $key ) . '_show', true ),
+					'settings_key'   => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_key', strtolower( $key ) ),
+					'label'          => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_label', $key ),
+					'labels'         => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_labels', array() ),
+					'slug'           => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_slug', strtolower( $key ) ),
+					'hierarchy'      => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_hierarchical', false ),
+					'show_in_table'  => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_show', false ),
+					'show_in_filter' => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_filter', false ),
 				),
 			);
 		}
@@ -408,14 +413,18 @@ class Rcno_Reviews_Admin {
 		$custom_taxonomies = $this->rcno_get_custom_taxonomies();
 
 		foreach ( $custom_taxonomies as $tax ) {
-			$plural    = Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['label'] );
-			$single    = Rcno_Pluralize_Helper::singularize( $tax['tax_settings']['label'] );
-			$tax_name  = 'rcno_' . $tax['tax_settings']['slug'];
-			$_cpt_slug = Rcno_Reviews_Option::get_option( 'rcno_review_slug', 'review' );
-			$cpt_slug  = Rcno_Pluralize_Helper::pluralize( $_cpt_slug );
 
-			$opts['hierarchical'] = $tax['tax_settings']['hierarchy'];
-			//$opts['meta_box_cb'] 	   = array( $this, 'rcno_custom_taxonomy_metabox' ); // @TODO: Investigate how to update taxonomies.
+			$plural = ! empty( $tax['tax_settings']['labels']['plural'] )
+				? $tax['tax_settings']['labels']['plural']
+				: Rcno_Pluralize_Helper::pluralize( implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['tax_settings']['settings_key'] ) ) ) );
+			$single = ! empty( $tax['tax_settings']['labels']['singular'] )
+				? $tax['tax_settings']['labels']['singular']
+				: $tax['tax_settings']['settings_key'];
+			$tax_name  = 'rcno_' . sanitize_title_with_dashes( $single );
+			$cpt_slug  = sanitize_title_with_dashes( Rcno_Reviews_Option::get_option( 'rcno_review_labels', array( 'singular' => 'Review', 'plural' => 'Reviews' ) )['plural']
+				?: __( 'Reviews', 'recencio-book-reviews' ) );
+
+			$opts['hierarchical']      = $tax['tax_settings']['hierarchy'];
 			$opts['public']            = true;
 			$opts['query_var']         = $tax_name;
 			$opts['show_admin_column'] = $tax['tax_settings']['show_in_table'];
@@ -457,15 +466,8 @@ class Rcno_Reviews_Admin {
 
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
-
-			// If the CPT slug is uncountable don't prepend it to the custom taxonomy slug, else soft 404s
-			if ( $this->no_pluralize || in_array( $_cpt_slug, $this->uncountable, true ) ) {
-				$opts['rewrite']['slug'] = Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
-			} else {
-				$opts['rewrite']['slug'] = $cpt_slug . '/' . Rcno_Pluralize_Helper::pluralize( $tax['tax_settings']['slug'] );
-			}
-
-			$opts['rewrite']['with_front'] = false;
+			$opts['rewrite']['slug']         = $cpt_slug . '/' . sanitize_title_with_dashes( $plural );
+			$opts['rewrite']['with_front']   = false;
 
 			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );
 
@@ -635,14 +637,11 @@ class Rcno_Reviews_Admin {
 	 */
 	public function display_plugin_admin_page() {
 
-		$tabs = Rcno_Reviews_Settings_Definition::get_tabs();
-
+		$tabs        = Rcno_Reviews_Settings_Definition::get_tabs();
 		$default_tab = Rcno_Reviews_Settings_Definition::get_default_tab_slug();
-
-		$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : $default_tab;
+		$active_tab  = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : $default_tab;
 
 		include_once 'partials/admin-display.php';
-
 	}
 
 	/**
@@ -767,10 +766,9 @@ class Rcno_Reviews_Admin {
 	 * @return array
 	 */
 	public function rcno_sort_admin_columns( $columns ) {
-		$registered_taxonomies = get_object_taxonomies( 'rcno_review' );
-		$registered_taxonomies = array_diff( $registered_taxonomies, array( 'category', 'post_tag' ) );
+		$taxonomies = array_diff( get_object_taxonomies( 'rcno_review' ), array( 'category', 'post_tag' ) );
 
-		foreach ( $registered_taxonomies as $taxonomy ) {
+		foreach ( $taxonomies as $taxonomy ) {
 			$columns[ 'taxonomy-' . $taxonomy ] = 'taxonomy-' . $taxonomy;
 		}
 
@@ -879,17 +877,16 @@ SQL;
 
 	public function rcno_filter_post_type_by_taxonomy() {
 		global $typenow;
-		$taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
-		$taxonomies = explode( ',', $taxonomies );
+		$taxonomies = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection', array() ) );
 
 		if ( $typenow === 'rcno_review' ) {
 			foreach ( $taxonomies as $taxonomy ) {
-				$taxonomy = 'rcno_' . strtolower( $taxonomy );
+				$taxonomy = 'rcno_' . sanitize_title_with_dashes( strtolower( $taxonomy ) );
 				if ( Rcno_Reviews_Option::get_option( $taxonomy . '_filter' ) ) {
 					$selected      = isset( $_GET[ $taxonomy ] ) ? $_GET[ $taxonomy ] : '';
 					$info_taxonomy = get_taxonomy( $taxonomy );
 					wp_dropdown_categories( array(
-						'show_option_all' => __( "All {$info_taxonomy->label}", 'rcno-review' ),
+						'show_option_all' => sprintf( __( 'All %1$s', 'recencio-book-reviews' ), $info_taxonomy->label ),
 						'taxonomy'        => $taxonomy,
 						'name'            => $taxonomy,
 						'orderby'         => 'name',
@@ -910,12 +907,12 @@ SQL;
 
 		foreach ( $taxonomies as $taxonomy ) {
 			$q_vars    = &$query->query_vars;
-			$taxonomy = 'rcno_' . strtolower( $taxonomy );
+			$taxonomy = 'rcno_' . sanitize_title_with_dashes( strtolower( $taxonomy ) );
 			if ( $pagenow === 'edit.php' && isset( $q_vars['post_type'], $q_vars[ $taxonomy ] )
 			     && $q_vars['post_type'] === 'rcno_review'
 			     && is_numeric( $q_vars[ $taxonomy ] )
 			     && $q_vars[ $taxonomy ] !== 0 ) {
-				$term                = get_term_by( 'id', $q_vars[ $taxonomy ], $taxonomy );
+				$term = get_term_by( 'id', $q_vars[ $taxonomy ], $taxonomy );
 				if ( $term ) {
 					$q_vars[ $taxonomy ] = $term->slug;
 				}
@@ -956,10 +953,14 @@ SQL;
 			$published = (int) $num_reviews->publish;
 			$post_type = get_post_type_object( 'rcno_review' );
 
-			$text = Rcno_Pluralize_Helper::pluralize_if( $published, $post_type->labels->singular_name );
+			if ( ! $post_type ) {
+				return $items;
+			}
+
+			$text = $published <= 1 ? $post_type->labels->singular_name : $post_type->labels->name;
 
 			if ( $post_type && current_user_can( $post_type->cap->edit_posts ) ) {
-				$items[] = sprintf( '<a class="%1$s-count" href="edit.php?post_type=%1$s">%2$s</a>', 'rcno_review', $text ) . "\n";
+				$items[] = sprintf( '<a class="%1$s-count" href="edit.php?post_type=%1$s">%2$s %3$s</a>', 'rcno_review', $published, $text ) . "\n";
 			} else {
 				$items[] = sprintf( '<span class="%1$s-count">%2$s</span>', 'rcno_review', $text ) . "\n";
 			}
@@ -1057,8 +1058,8 @@ SQL;
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param $cpt
-	 * @param $wp_rewrite
+	 * @param string $cpt
+	 * @param WP_Rewrite $wp_rewrite
 	 *
 	 * @return array
 	 */
@@ -1133,69 +1134,90 @@ SQL;
 		}
 
 		// @TODO: I can refactor this to call the method in the activation class.
-		$default_options = array (
-			'rcno_settings_version' => '1.0.0',
-			'rcno_review_slug' => 'review',
-			'rcno_reviews_archive' => 'archive_display_excerpt',
-			'rcno_reviews_in_rss' => '1',
-			'rcno_taxonomy_selection' => 'Author,Genre,Series,Publisher',
-			'rcno_author_slug' => 'author',
-			'rcno_author_show' => '1',
-			'rcno_genre_slug' => 'genre',
-			'rcno_genre_hierarchical' => '1',
-			'rcno_genre_show' => '1',
-			'rcno_series_slug' => 'series',
-			'rcno_series_show' => '1',
-			'rcno_show_isbn' => '1',
-			'rcno_show_isbn13' => '1',
-			'rcno_show_asin' => '1',
-			'rcno_show_gr_id' => '1',
-			'rcno_show_gr_url' => '1',
-			'rcno_show_publisher' => '1',
-			'rcno_show_pub_date' => '1',
-			'rcno_show_pub_format' => '1',
-			'rcno_show_pub_edition' => '1',
-			'rcno_show_page_count' => '1',
-			'rcno_show_gr_rating' => '1',
-			'rcno_show_review_score_box' => '1',
-			'rcno_show_review_score_box_background' => '#ffffff',
-			'rcno_show_review_score_box_accent' => '#212121',
-			'rcno_show_book_slider_widget' => '1',
-			'rcno_show_recent_reviews_widget' => '1',
-			'rcno_show_tag_cloud_widget' => '1',
-			'rcno_show_taxonomy_list_widget' => '1',
-			'rcno_review_template' => 'rcno_default',
-			'rcno_excerpt_read_more' => 'Read more',
-			'rcno_excerpt_word_count' => '55',
-			'rcno_reviews_in_rest' => '1',
-			'rcno_publisher_show' => '1',
-			'rcno_show_illustrator' => '1',
-			'rcno_store_purchase_links_label' => 'Purchase on:',
-			'rcno_store_purchase_links' => 'Amazon,Barnes & Noble,Kobo,Booktopia,Nook',
-			'rcno_enable_purchase_links' => '1',
-			'rcno_store_purchase_link_text_color' => '#ffffff',
-			'rcno_store_purchase_link_background' => '#212121',
-			'rcno_enable_star_rating_box' => '1',
-			'rcno_star_rating_color' => '#ededed',
-			'rcno_star_background_color' => '#212121',
-			'rcno_show_review_score_box_accent_2' => '#ffffff',
-			'rcno_comment_rating_label' => 'Rate this review:',
-			'rcno_comment_rating_star_color' => '#212121',
-			'rcno_show_book_grid_widget' => '1',
-			'rcno_external_book_api' => 'good-reads',
-			'rcno_reviews_sort_names' => 'last_name_first_name',
-			'rcno_reviews_ignore_articles' => '1',
-			'rcno_enable_googlebooks' => '1',
-			'rcno_enable_goodreads' => '1',
-			'rcno_show_series_number' => '1',
-			'rcno_enable_comment_ratings' => '1',
-			'rcno_show_currently_reading_widget' => '1',
-			'rcno_show_review_calendar_widget' => '1',
-			'rcno_enable_builtin_taxonomy' => '1',
-			'rcno_publisher_slug' => 'publisher',
-			'rcno_no_pluralization' => '',
-			'rcno_reviews_on_homepage' => '1',
-			'rcno_reviews_index_headers' => '1',
+		$default_options = array(
+			'rcno_review_labels'                    =>
+				array(
+					'singular' => 'Review',
+					'plural'   => 'Reviews',
+				),
+			'rcno_reviews_on_homepage'              => '1',
+			'rcno_reviews_in_rss'                   => '1',
+			'rcno_reviews_archive'                  => 'archive_display_excerpt',
+			'rcno_taxonomy_selection'               => 'Author,Genre,Series,Publisher',
+			'rcno_enable_builtin_taxonomy'          => '1',
+			'rcno_author_labels'                    =>
+				array(
+					'singular' => 'Author',
+					'plural'   => 'Authors',
+				),
+			'rcno_author_show'                      => '1',
+			'rcno_author_filter'                    => '1',
+			'rcno_genre_labels'                     =>
+				array(
+					'singular' => 'Genre',
+					'plural'   => 'Genres',
+				),
+			'rcno_genre_show'                       => '1',
+			'rcno_genre_filter'                     => '1',
+			'rcno_series_labels'                    =>
+				array(
+					'singular' => 'Series',
+					'plural'   => 'Series',
+				),
+			'rcno_series_show'                      => '1',
+			'rcno_series_filter'                    => '1',
+			'rcno_publisher_labels'                 =>
+				array(
+					'singular' => 'Publisher',
+					'plural'   => 'Publishers',
+				),
+			'rcno_publisher_show'                   => '1',
+			'rcno_publisher_filter'                 => '1',
+			'rcno_show_isbn'                        => '1',
+			'rcno_show_isbn13'                      => '1',
+			'rcno_show_asin'                        => '1',
+			'rcno_show_gr_id'                       => '1',
+			'rcno_show_gr_url'                      => '1',
+			'rcno_show_illustrator'                 => '1',
+			'rcno_show_pub_date'                    => '1',
+			'rcno_show_pub_format'                  => '1',
+			'rcno_show_pub_edition'                 => '1',
+			'rcno_show_series_number'               => '1',
+			'rcno_show_page_count'                  => '1',
+			'rcno_show_gr_rating'                   => '1',
+			'rcno_show_book_cover_url'              => '1',
+			'rcno_enable_purchase_links'            => '1',
+			'rcno_store_purchase_links_label'       => 'Purchase on:',
+			'rcno_store_purchase_links'             => 'Amazon,Barnes & Noble,Kobo',
+			'rcno_store_purchase_link_text_color'   => 'rgba(23, 23, 23, 1)',
+			'rcno_store_purchase_link_background'   => 'rgba(237, 237, 237, 1)',
+			'rcno_enable_star_rating_box'           => '1',
+			'rcno_star_rating_color'                => 'rgba(255, 235, 59, 1)',
+			'rcno_star_background_color'            => 'rgba(255, 255, 255, 1)',
+			'rcno_show_review_score_box'            => '1',
+			'rcno_show_review_score_box_background' => 'rgba(240, 240, 240, 1)',
+			'rcno_show_review_score_box_accent'     => 'rgba(166, 166, 166, 1)',
+			'rcno_show_review_score_box_accent_2'   => 'rgba(59, 59, 59, 1)',
+			'rcno_custom_review_score_criteria'     => 'Plot,Characters,World',
+			'rcno_enable_comment_ratings'           => '1',
+			'rcno_comment_rating_label'             => 'Rate this review',
+			'rcno_comment_rating_star_color'        => 'rgba(255, 235, 59, 1)',
+			'rcno_show_book_slider_widget'          => '1',
+			'rcno_show_book_grid_widget'            => '1',
+			'rcno_show_recent_reviews_widget'       => '1',
+			'rcno_show_tag_cloud_widget'            => '1',
+			'rcno_show_taxonomy_list_widget'        => '1',
+			'rcno_show_currently_reading_widget'    => '1',
+			'rcno_show_review_calendar_widget'      => '1',
+			'rcno_reviews_index_headers'            => '1',
+			'rcno_show_book_covers_index'           => '1',
+			'rcno_reviews_ignore_articles'          => '1',
+			'rcno_reviews_ignored_articles_list'    => 'The,A,An',
+			'rcno_reviews_sort_names'               => 'last_name_first_name',
+			'rcno_review_template'                  => 'rcno_default',
+			'rcno_excerpt_read_more'                => 'Read more',
+			'rcno_book_details_meta'                => 'category,post_tag,rcno_author,rcno_genre,rcno_series,rcno_publisher,rcno_book_illustrator,rcno_book_pub_date',
+			'rcno_external_book_api'                => 'no-3rd-party',
 		);
 
 		// Set the options to the defaults from the '$default_options' array.
@@ -1539,6 +1561,68 @@ SQL;
 		}
 
 		wp_send_json_success( $data );
+	}
+
+	/**
+	 * Flush permalinks by checking if updating a setting sets a
+	 * `rcno_flush_rewrite_rules` flag to `true` in the `wp_options` table
+	 *
+	 * @since 1.0.0
+	 *
+	 * @void
+	 */
+	public function plugin_settings_update_flush_rewrite() {
+		if ( get_option( 'rcno_flush_rewrite_rules' ) ) {
+			flush_rewrite_rules();
+			update_option( 'rcno_flush_rewrite_rules', false, true );
+		}
+	}
+
+	/**
+	 * This function runs when WordPress completes its upgrade process
+	 * It iterates through each plugin updated to see if ours is included
+	 *
+	 * @param object $upgrader_object
+	 * @param array $options
+	 */
+	public function rcno_upgrade_completed( $upgrader_object, $options ) {
+
+		// The path to our plugin's main file
+		$our_plugin = RCNO_PLUGIN_BASENAME;
+		// If an update has taken place and the updated type is plugins and the plugin's element exists
+		if ( $options['action'] === 'update' && $options['type'] === 'plugin' && isset( $options['plugins'] ) ) {
+			// Iterate through the plugins being updated and check if ours is there
+			foreach ( $options['plugins'] as $plugin ) {
+				if ( $plugin === $our_plugin ) {
+					// Set a transient to record that our plugin has just been updated
+					set_transient(
+						'rcno_updated',
+						array(
+							'updated' => true,
+							'version' => $upgrader_object->skin->plugin_info['Version']
+						)
+					);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Show a notice to anyone who has just updated this plugin
+	 * This notice shouldn't display to anyone who has just installed the plugin for the first time
+	 */
+	public function rcno_display_update_notice() {
+
+		$transient = get_transient( 'rcno_updated' ) ?: null;
+
+		if ( $transient && $transient['updated'] && version_compare( $transient['version'], '1.41.0', '<=' ) ) {
+			echo '<div class="notice notice-success">'
+				 . __( 'This update has made some changes to how the Recencio Book Reviews plugin handles the generation of public URLs. 
+				 Please check the plugin setting page and verify then save the settings on the "General" and "Taxonomy" tabs.', 'recencio-book-reviews' )
+				 . '</div>';
+		}
+
+		delete_transient( 'rcno_updated' );
 	}
 
 }

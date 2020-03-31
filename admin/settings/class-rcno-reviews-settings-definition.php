@@ -97,20 +97,40 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '<strong>' . __( 'General Settings', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
-				'rcno_review_slug'              => array(
+				'spacer_0'                      => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
+				/*'rcno_review_slug'              => array(
 					'name'    => __( 'Slug', 'recencio-book-reviews' ),
-					'desc'    => __( 'Book reviews will be available at:', 'recencio-book-reviews' ) .
+					'desc'    => __( 'Book reviews will be available at', 'recencio-book-reviews' ) . ': ' .
 								' <i>' . get_site_url() . '/' . '<b>slug</b>' . '/' . 'a-book-review' . '</i>',
 					'std'     => 'review',
 					'type'    => 'text',
 					'pattern' => '{2,}',
 					'title'   => __( 'Please only use only 1 lower-case word', 'recencio-book-reviews' ),
+				),*/
+				'rcno_review_labels'         => array(
+					'name'          => __( 'Labels', 'recipepress-reloaded' ),
+					'singular_std'  => __( 'Review', 'recipepress-reloaded' ),
+					'plural_std'    => __( 'Reviews', 'recipepress-reloaded' ),
+					'singular_desc' => __( 'The singular form of the label', 'recipepress-reloaded' ),
+					'plural_desc'   => __( 'The plural form of the label', 'recipepress-reloaded' ),
+					'type'          => 'labels',
+					'size' => '25',
 				),
 				'rcno_review_slug_instructions' => array(
-					'name' => __( '404 errors', 'recencio-book-reviews' ),
-					'desc' => __( 'If you\'ve set up everything correctly here but now WordPress is giving you an 404 (not found) error,
-					 try flushing your permalink settings. Visit Settings -> Permalinks and just save without changing anything.', 'recencio-book-reviews' ),
+					'name' => '',
+					'desc' => sprintf(
+						__( 'Your book reviews will be located at <a href="%1$s">%1$s</a> and a single book review will be located at <a href="%2$s">%2$s</a> as an example.', 'recencio-book-reviews' ),
+						get_site_url( null, 'reviews/' ),
+						get_site_url( null, 'review/a-sample-book-review' )
+					),
 					'type' => 'instruction',
+				),
+				'spacer_1'                      => array(
+					'name' => '',
+					'type' => 'spacer',
 				),
 				'rcno_reviews_on_homepage'      => array(
 					'name' => __( 'Reviews on homepage?', 'recencio-book-reviews' ),
@@ -141,7 +161,7 @@ class Rcno_Reviews_Settings_Definition {
 					'desc' => __( 'Enables support for the new Gutenberg post editor.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
-				'spacer_0'                      => array(
+				'spacer_2'                      => array(
 					'name' => '',
 					'type' => 'spacer',
 				),
@@ -154,9 +174,13 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '<strong>' . __( 'Review Taxonomies', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
+				'spacer_0'                     => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
 				'rcno_taxonomy_selection'      => array(
 					'name' => __( 'Taxonomy Selection', 'recencio-book-reviews' ),
-					'desc' => __( 'Create and delete book review taxonomies here.', 'recencio-book-reviews' ),
+					'desc' => __( 'Create additional book review taxonomies here. Save the settings, then edit the labels in the corresponding section below.', 'recencio-book-reviews' ),
 					'std'  => 'Author',
 					'type' => 'text',
 				),
@@ -168,12 +192,16 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '<strong>' . __( 'Builtin Taxonomies', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
 				),
+				'spacer_2'                     => array(
+					'name' => '',
+					'type' => 'spacer',
+				),
 				'rcno_enable_builtin_taxonomy' => array(
 					'name' => __( 'Default WP Taxonomy', 'recencio-book-reviews' ),
 					'desc' => __( 'Enable the builtin \'category\' and \'tags\' taxonomies.', 'recencio-book-reviews' ),
 					'type' => 'checkbox',
 				),
-				'spacer_2'                     => array(
+				'spacer_3'                     => array(
 					'name' => '',
 					'type' => 'spacer',
 				),
@@ -694,39 +722,39 @@ class Rcno_Reviews_Settings_Definition {
 	public static function taxonomy_options( $tax ) {
 
 		$opts = array(
-			'rcno_' . $tax['settings_key'] . '_header'       => array(
-				'name' => '<strong>' . ucfirst( $tax['label'] ) . '</strong>',
+			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_header' => array(
+				'name' => '<strong>' . implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) . '</strong>',
 				'type' => 'header',
 			),
-			'rcno_' . $tax['slug'] . '_label'         => array(
-				'name' => __( 'Label', 'recencio-book-reviews' ),
-				'desc' => __( 'Place the label of the ' . $tax['label'] . ' taxonomy here, as it should display on the frontend.', 'recencio-book-reviews' ),
-				'std'  =>  ucfirst( $tax['label'] ),
-				'type' => 'text',
+			'spacer_' . $tax['settings_key'] . '_0' => array(
+				'name' => '',
+				'type' => 'spacer',
 			),
-			'rcno_' . $tax['settings_key'] . '_slug'         => array(
-				'name' => __( 'Slug', 'recencio-book-reviews' ),
-				'desc' => __( 'Place the slug of the ' . $tax['slug'] . ' taxonomy here.', 'recencio-book-reviews' ),
-				'std'  => strtolower( $tax['slug'] ),
-				'type' => 'text',
-				'size' => '20'
+			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_labels' => array(
+				'name'          => __( 'Labels', 'recencio-book-reviews' ),
+				'singular_std'  => ! empty( $tax['labels']['singular'] ) ? $tax['labels']['singular'] : implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ),
+				'plural_std'    => ! empty( $tax['labels']['plural'] ) ? $tax['labels']['plural'] : Rcno_Pluralize_Helper::pluralize( implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) ),
+				'singular_desc' => sprintf( __( 'The singular form of the <b>"%1$s"</b> taxonomy label', 'recencio-book-reviews' ), implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) ),
+				'plural_desc'   => sprintf( __( 'The plural form of the <b>"%1$s"</b> taxonomy label', 'recencio-book-reviews' ), implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) ),
+				'type'          => 'labels',
+				'size'          => '25',
 			),
-			'rcno_' . $tax['settings_key'] . '_hierarchical' => array(
+			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_hierarchical' => array(
 				'name' => __( 'Hierarchical', 'recencio-book-reviews' ),
 				'desc' => __( 'Is this custom taxonomy hierarchical?', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
-			'rcno_' . $tax['settings_key'] . '_show'         => array(
+			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_show' => array(
 				'name' => __( 'Show in table', 'recencio-book-reviews' ),
 				'desc' => __( 'Show this custom taxonomy on the admin table', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
-			'rcno_' . $tax['settings_key'] . '_filter'         => array(
+			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_filter' => array(
 				'name' => __( 'Show filter', 'recencio-book-reviews' ),
 				'desc' => __( 'Show a drop-down filter for this taxonomy on the admin table', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
-			'spacer' . $tax['settings_key']                 => array(
+			'spacer_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_1' => array(
 				'name' => '',
 				'type' => 'spacer',
 			),

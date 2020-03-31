@@ -692,4 +692,43 @@ class Rcno_Reviews_Callback_Helper {
 
 		echo $html;
 	}
+
+	/**
+	 * Labels Callback
+	 *
+	 * Renders 2 text fields to record the singular and plural forms of
+	 * a label
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $args Arguments passed by the setting.
+	 *
+	 * @return void
+	 */
+	public function labels_callback( $args ) {
+
+		$values = Rcno_Reviews_Option::get_option( $args['id'], array() );
+
+		$html  = '<div class="rcno inline-row">';
+		$html .= '<div class="rcno inline-inputs">';
+		$html .= '<input type="text" ';
+		$html .= $this->get_id_and_name_attributes( $args['id'] . '][' . 'singular' );
+		$html .= 'class="rcno text-' . $args['size'] . '" ';
+		$html .= 'value="' . esc_attr( stripslashes( ! empty( $values['singular'] ) ? $values['singular'] : $args['singular_std'] ) ) . '"/>';
+		$html .= '<br/>';
+		$html .= '<label class="rcno-settings-label" for="rcno_reviews_settings[' . $args['id'] . '][singular]"> ' . $args['singular_desc'] . '</label>';
+		$html .= '</div>';
+
+		$html .= '<div class="rcno inline-inputs">';
+		$html .= '<input type="text" ';
+		$html .= $this->get_id_and_name_attributes( $args['id'] . '][' . 'plural' );
+		$html .= 'class="rcno text-' . $args['size'] . '" ';
+		$html .= 'value="' . esc_attr( stripslashes( ! empty( $values['plural'] ) ? $values['plural'] : $args['plural_std'] ) ) . '"/>';
+		$html .= '<br/>';
+		$html .= '<label class="rcno-settings-label" for="rcno_reviews_settings[' . $args['id'] . '][plural]"> ' . $args['plural_desc'] . '</label>';
+		$html .= '</div>';
+		$html .= '</div>';
+
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
 }

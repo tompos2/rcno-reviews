@@ -224,6 +224,9 @@ class Rcno_Reviews {
 		// Creates the book review custom taxonomy.
 		$this->loader->add_action( 'init', $plugin_admin, 'rcno_custom_taxonomy' );
 
+		// Flush permalink is flag is set to `true`.
+		$this->loader->add_action( 'init', $plugin_admin, 'plugin_settings_update_flush_rewrite' );
+
 		// GDPR Support.
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'rcno_add_privacy_policy_content' );
 		$this->loader->add_filter( 'wp_privacy_personal_data_exporters', $plugin_admin, 'register_rcno_data_exporter', 10 );
@@ -254,6 +257,10 @@ class Rcno_Reviews {
 		$plugin_settings       = new Rcno_Reviews_Settings( $this->get_plugin_name(), $settings_callback, $settings_sanitization );
 		$this->loader->add_action( 'admin_init', $plugin_settings, 'register_settings' );
 		$this->loader->add_action( 'init' , $plugin_settings, 'set_settings' );
+
+		// Flush permalinks after an important slug has been updated. Action fired in the Rcno_Reviews_Settings class.
+		$this->loader->add_action( 'rcno_reviews_settings_on_change_general_tab', $plugin_settings, 'flush_permalinks_on_update' );
+		$this->loader->add_action( 'rcno_reviews_settings_on_change_taxonomy_tab', $plugin_settings, 'flush_permalinks_on_update' );
 
 		$plugin_meta_box = new Rcno_Reviews_Meta_Box( $this->get_plugin_name() );
 		$this->loader->add_action( 'load-toplevel_page_' . $this->get_plugin_name(), $plugin_meta_box, 'add_meta_boxes' );
@@ -296,7 +303,13 @@ class Rcno_Reviews {
 
 		// Add the help tab to the review editor screen.
 		$this->loader->add_filter( 'admin_head', $plugin_admin, 'rcno_reviews_help_tab' );
-		$this->loader->add_action( 'contextual_help', $plugin_admin, 'rcno_add_help_text', 10, 3 );
+
+		/**
+		 * This cause a deprecation PHP warning
+		 * @see "contextual_help is deprecated since version 3.3.0! Use get_current_screen()->add_help_tab(), get_current_screen()->remove_help_tab() instead."
+		 *
+		 * $this->loader->add_action( 'contextual_help', $plugin_admin, 'rcno_add_help_text', 10, 3 );
+		 */
 
 		$this->loader->add_filter( 'manage_rcno_review_posts_columns', $plugin_admin, 'rcno_add_remove_admin_columns' );
 		$this->loader->add_filter( 'manage_edit-rcno_review_sortable_columns', $plugin_admin, 'rcno_sort_admin_columns' );
@@ -325,6 +338,9 @@ class Rcno_Reviews {
 
 		// Enable or disable Gutenberg support.
 		$this->loader->add_filter( 'use_block_editor_for_post_type', $plugin_admin, 'rcno_enable_gutenberg_support', 10, 2 );
+
+		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'rcno_upgrade_completed', 10, 2 );
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'rcno_display_update_notice' );
 	}
 
 	/**
