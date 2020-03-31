@@ -25,7 +25,6 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
 	 */
 	public function __construct() {
 
@@ -63,21 +62,20 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		if ( ! Rcno_Reviews_Option::get_option( 'rcno_show_recent_reviews_widget' ) ) {
 			return false;
 		}
-		register_widget( 'Rcno_Reviews_Recent_Reviews' );
 
-		return true;
+		register_widget( 'Rcno_Reviews_Recent_Reviews' );
 	}
 
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
 	 *
-	 * @uses \mb_substr()
+	 * @uses mb_substr()
 	 * @see https://stackoverflow.com/questions/9087502/php-substr-function-with-utf-8-leaves-marks-at-the-end
 	 *
 	 * @param array $args
 	 * @param array $instance
 	 *
-	 * @since 0.6.0
+	 * @since 1.0.0
 	 */
 	public function widget( $args, $instance ) {
 
@@ -95,42 +93,50 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		}
 
 		// Begin frontend output.
-		$char_count     = isset( $instance['char_count'] ) ? (int) $instance['char_count'] : 150;
-		$query_args     = array(
-			'post_type'      => ( isset( $instance['regular_posts'] ) && true === $instance['regular_posts'] ) ? array( 'post', 'rcno_review' ) : 'rcno_review',
-			'posts_per_page' => isset( $instance['review_count'] ) ? (int) $instance['review_count'] : 5,
+		$out         = '';
+		$char_count  = ! empty( $instance['char_count'] ) ? (int) $instance['char_count'] : 150;
+		$review_info = ! empty( $instance['review_info'] ) ? $instance['review_info'] : 'truncated';
+		$query_args  = array(
+			'post_type'      => ( ! empty( $instance['regular_posts'] ) && $instance['regular_posts'] ) ? array( 'post', 'rcno_review' ) : 'rcno_review',
+			'posts_per_page' => ! empty( $instance['review_count'] ) ? (int) $instance['review_count'] : 5,
 		);
-		$recent_reviews = new WP_Query( $query_args );
+		$reviews     = get_posts( $query_args );
+		$template    = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
 
-		if ( $recent_reviews->have_posts() ) {
-			while ( $recent_reviews->have_posts() ) {
+		foreach ( $reviews as $review ) {
+			$out .= '<div class="rcno-recent-review">';
+			$out .= '<div class="widget-book-cover">';
+			$out .= $template->get_the_rcno_book_cover( $review->ID, 'rcno-book-cover-sm' );
+			$out .= $template->get_the_rcno_admin_book_rating( $review->ID );
+			$out .= '</div>';
+			$out .=	'<div class="widget-book-details">';
+			$out .= '<a href="' . get_the_permalink( $review->ID ) . '">';
+			$out .= '<h3>' . $review->post_title . '</h3>';
+			$out .= '</a>';
+			$out .= $template->get_the_rcno_taxonomy_terms( $review->ID, 'rcno_author', true );
+			$out .= $template->get_the_rcno_book_meta( $review->ID, 'rcno_book_publisher', 'div', true );
 
-				$recent_reviews->the_post(); ?>
-				<div class="rcno-recent-review">
+			if ( 'synopsis' === $review_info ) {
+				$out .= '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_description( $review->ID, 200 ) ), true ), 0, $char_count ) .'</p>';
+			}
 
-					<?php
-					$review_id = get_the_ID();
-					$review    = new Rcno_Template_Tags( 'recencio-book-reviews', '1.0.0' );
-					?>
+			if ( 'excerpt' === $review_info ) {
+				$out .= '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_excerpt( $review->ID, 5000 ) ), true ), 0, $char_count ) . '</p>';
+			}
 
-					<div class="widget-book-cover">
-						<?php $review->the_rcno_book_cover( $review_id, 'rcno-book-cover-sm' ); ?>
-						<?php $review->the_rcno_admin_book_rating( $review_id ); ?>
-					</div>
-					<div class="widget-book-details">
-						<a href="<?php the_permalink(); ?>"><h3><?php the_title(); ?></h3></a>
-						<?php $review->the_rcno_taxonomy_terms( $review_id, 'rcno_author', true ); ?>
-						<?php echo $review->get_the_rcno_book_meta( $review_id, 'rcno_book_publisher', 'div', true ); ?>
-						<?php echo '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $review->get_the_rcno_book_review_content( $review_id ) ), true ), 0, $char_count ) . '</p>'; ?>
-						<div class="clear"></div>
-					</div>
+			if ( apply_filters( 'rcno_recent_reviews_skip_sanitization', false ) ) {
+				$out .= mb_substr( $template->get_the_rcno_book_review_content( $review->ID ), 0, $char_count );
+			} else {
+				$out .= '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_content( $review->ID ) ), true ), 0, $char_count ) . '</p>';
+			}
 
-				</div>
-
-				<?php }
+			$out .= '<div class="clear"></div>';
+			$out .= '</div>';
+			$out .=	'</div>';
 		}
 
-		wp_reset_postdata();
+		// Print out output.
+		echo $out;
 
 		// Close the theme's widget wrapper.
 		echo $args['after_widget'];
@@ -139,7 +145,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 	/**
 	 * Updates the widget control options for the particular instance of the widget.
 	 *
-	 * @since 0.8.0
+	 * @since 1.0.0
 	 *
 	 * @param object $new_instance
 	 * @param object $old_instance
@@ -153,9 +159,10 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 
 		// Check and sanitize all inputs.
 		$instance['title']         = strip_tags( $new_instance['title'] );
-		$instance['review_count']  = absint( $new_instance['review_count'] );
-		$instance['char_count']    = isset( $new_instance['char_count'] ) ? (int) $new_instance['char_count'] : 150;
-		$instance['regular_posts'] = isset( $new_instance['regular_posts'] ) ? (bool) $new_instance['regular_posts'] : false;
+		$instance['review_count']  = (int) $new_instance['review_count'];
+		$instance['char_count']    = ! empty( $new_instance['char_count'] ) ? (int) $new_instance['char_count'] : 150;
+		$instance['regular_posts'] = ! empty( $new_instance['regular_posts'] ) ? (bool) $new_instance['regular_posts'] : false;
+		$instance['review_info']   = ! empty( $new_instance['review_info'] ) ? $new_instance['review_info'] : 'truncated';
 
 		// Now we return new values and WordPress do all work for you.
 		return $instance;
@@ -178,6 +185,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			'review_count'  => 5,
 			'char_count'    => 150,
 			'regular_posts' => false,
+			'review_info'   => 'truncated',
 		);
 
 		// Merge the user-selected arguments with the defaults.
@@ -188,6 +196,11 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		$review_count  = (int) $instance['review_count'];
 		$char_count    = (int) $instance['char_count'];
 		$regular_posts = (bool) $instance['regular_posts'];
+		$review_info   = array(
+			'truncated'  => esc_attr__( 'Review content', 'recencio-book-reviews' ),
+			'excerpt' => esc_attr__( 'Review excerpt', 'recencio-book-reviews' ),
+			'synopsis'  => esc_attr__( 'Book synopsis', 'recencio-book-reviews' ),
+		);
 
 		?>
 		<p>
@@ -215,7 +228,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			<input type="number" class="widefat" id="<?php echo $this->get_field_id( 'char_count' ); ?>"
 				   name="<?php echo $this->get_field_name( 'char_count' ); ?>"
 				   value="<?php echo esc_attr( $char_count ); ?>"
-				   style="width:50px;" min="50" max="1000" pattern="[0-9]"/>
+				   style="width:70px;" min="50" max="1000" pattern="[0-9]"/>
 		</p>
 
 		<p>
@@ -225,6 +238,18 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			<input type="checkbox" class="widefat" id="<?php echo $this->get_field_id( 'regular_posts' ); ?>"
 				name="<?php echo $this->get_field_name( 'regular_posts' ); ?>"
 				value="1" <?php checked( '1', $regular_posts ); ?> />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'review_info' ); ?>">
+				<?php _e( 'Display text', 'recencio-book-reviews' ); ?>:
+			</label>
+			<select class="widefat" id="<?php echo $this->get_field_id( 'review_info' ); ?>"
+					name="<?php echo $this->get_field_name( 'review_info' ); ?>" style="width:140px">
+				<?php foreach ( $review_info as $option_value => $option_label ) { ?>
+					<option value="<?php echo $option_value; ?>" <?php selected( $instance['review_info'], $option_value ); ?>><?php echo $option_label; ?></option>
+				<?php } ?>
+			</select>
 		</p>
 
 		<?php
