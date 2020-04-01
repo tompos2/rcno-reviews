@@ -52,7 +52,7 @@ class Rcno_Reviews_Rest_API {
 	public function rcno_enable_rest_support() {
 
 		// Disables the ISBN metabox displaying on review edit screen.
-		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_reviews_in_rest' ) ) {
+		if ( ! Rcno_Reviews_Option::get_option( 'rcno_reviews_in_rest', true ) ) {
 			return;
 		}
 
@@ -85,7 +85,7 @@ class Rcno_Reviews_Rest_API {
 		$post_type_name = 'rcno_review';
 		if ( isset( $wp_post_types[ $post_type_name ] ) ) {
 			$wp_post_types[ $post_type_name ]->show_in_rest          = true;
-			$wp_post_types[ $post_type_name ]->rest_base             = 'review';
+			$wp_post_types[ $post_type_name ]->rest_base             = 'rcno/' . sanitize_title_with_dashes( $wp_post_types['rcno_review']->labels->singular_name );
 			$wp_post_types[ $post_type_name ]->rest_controller_class = 'WP_REST_Posts_Controller';
 		}
 	}
@@ -104,13 +104,14 @@ class Rcno_Reviews_Rest_API {
 		$tax_name   = array();
 
 		foreach ( $taxonomies as $tax ) {
-			$tax_name[ strtolower( $tax ) ] = 'rcno_' . strtolower( $tax );
+			$tax = sanitize_title_with_dashes( $tax );
+			$tax_name[ $tax ] = 'rcno_' . $tax;
 		}
 
 		foreach ( $tax_name as $key => $value ) {
 			if ( isset( $wp_taxonomies[ $value ] ) ) {
 				$wp_taxonomies[ $value ]->show_in_rest          = true;
-				$wp_taxonomies[ $value ]->rest_base             = $key;
+				$wp_taxonomies[ $value ]->rest_base             = 'rcno/' . $key;
 				$wp_taxonomies[ $value ]->rest_controller_class = 'WP_REST_Terms_Controller';
 			}
 		}

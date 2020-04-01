@@ -136,13 +136,15 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 				$out .= apply_filters( 'rcno_recent_reviews_content', $content, $review->ID );
 			}
 
-			if ( apply_filters( 'rcno_recent_reviews_skip_sanitization', false ) ) {
-				$content = $template->get_the_rcno_book_review_content( $review->ID );
-			} else {
-				$content = '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_content( $review->ID ) ), true ), 0, $char_count ) . '</p>';
-			}
+			if ( 'truncated' === $review_info ) {
+				if ( apply_filters( 'rcno_recent_reviews_skip_sanitization', false ) ) {
+					$content = $template->get_the_rcno_book_review_content( $review->ID );
+				} else {
+					$content = '<p>' . mb_substr( wp_strip_all_tags( strip_shortcodes( $template->get_the_rcno_book_review_content( $review->ID ) ), true ), 0, $char_count ) . '</p>';
+				}
 
-			$out .= apply_filters( 'rcno_recent_reviews_content', $content, $review->ID );
+				$out .= apply_filters( 'rcno_recent_reviews_content', $content, $review->ID );
+			}
 
 			$out .= '<div class="clear"></div>';
 			$out .= '</div>';

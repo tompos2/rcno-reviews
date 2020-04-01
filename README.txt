@@ -105,6 +105,10 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.42.1 =
+* Fixed a warning message related to registering `author` as a REST base
+* Fixed a bug in the "Recent Reviews" widget
+
 = 1.42.0 =
 * Rewrote the settings page to accept both the plural and singular form of labels, aimed at improved internationalization
 * Added a system to automatically flush the permalink on settings changes that affect public URLs
