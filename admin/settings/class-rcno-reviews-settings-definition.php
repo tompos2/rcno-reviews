@@ -101,15 +101,6 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '',
 					'type' => 'spacer',
 				),
-				/*'rcno_review_slug'              => array(
-					'name'    => __( 'Slug', 'recencio-book-reviews' ),
-					'desc'    => __( 'Book reviews will be available at', 'recencio-book-reviews' ) . ': ' .
-								' <i>' . get_site_url() . '/' . '<b>slug</b>' . '/' . 'a-book-review' . '</i>',
-					'std'     => 'review',
-					'type'    => 'text',
-					'pattern' => '{2,}',
-					'title'   => __( 'Please only use only 1 lower-case word', 'recencio-book-reviews' ),
-				),*/
 				'rcno_review_labels'         => array(
 					'name'          => __( 'Labels', 'recipepress-reloaded' ),
 					'singular_std'  => __( 'Review', 'recipepress-reloaded' ),
@@ -723,7 +714,7 @@ class Rcno_Reviews_Settings_Definition {
 
 		$opts = array(
 			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_header' => array(
-				'name' => '<strong>' . implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) . '</strong>',
+				'name' => '<strong>' . $tax['label'] . '</strong>',
 				'type' => 'header',
 			),
 			'spacer_' . $tax['settings_key'] . '_0' => array(
@@ -732,10 +723,10 @@ class Rcno_Reviews_Settings_Definition {
 			),
 			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_labels' => array(
 				'name'          => __( 'Labels', 'recencio-book-reviews' ),
-				'singular_std'  => ! empty( $tax['labels']['singular'] ) ? $tax['labels']['singular'] : implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ),
-				'plural_std'    => ! empty( $tax['labels']['plural'] ) ? $tax['labels']['plural'] : Rcno_Pluralize_Helper::pluralize( implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) ),
-				'singular_desc' => sprintf( __( 'The singular form of the <b>"%1$s"</b> taxonomy label', 'recencio-book-reviews' ), implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) ),
-				'plural_desc'   => sprintf( __( 'The plural form of the <b>"%1$s"</b> taxonomy label', 'recencio-book-reviews' ), implode( ' ', array_map( 'ucfirst', explode( ' ', $tax['settings_key'] ) ) ) ),
+				'singular_std'  => ! empty( $tax['labels']['singular'] ) ? $tax['labels']['singular'] : Rcno_Pluralize_Helper::singularize( $tax['label'] ),
+				'plural_std'    => ! empty( $tax['labels']['plural'] ) ? $tax['labels']['plural'] : Rcno_Pluralize_Helper::pluralize( $tax['label'] ),
+				'singular_desc' => sprintf( __( 'The singular form of the <b>"%1$s"</b> taxonomy label', 'recencio-book-reviews' ), Rcno_Pluralize_Helper::singularize( $tax['label'] ) ),
+				'plural_desc'   => sprintf( __( 'The plural form of the <b>"%1$s"</b> taxonomy label', 'recencio-book-reviews' ), Rcno_Pluralize_Helper::pluralize( $tax['label']) ),
 				'type'          => 'labels',
 				'size'          => '25',
 			),

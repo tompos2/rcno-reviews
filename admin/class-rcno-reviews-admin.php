@@ -380,12 +380,14 @@ class Rcno_Reviews_Admin {
 		}
 
 		foreach ( $custom_taxonomies as $key ) {
+			$labels['singular'] = Rcno_Pluralize_Helper::singularize( $key );
+			$labels['plural']   = Rcno_Pluralize_Helper::pluralize( $key );
 			$taxonomies[] = array(
 				'tax_settings' => array(
-					'settings_key'   => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_key', strtolower( $key ) ),
+					'settings_key'   => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_key', sanitize_title_with_dashes( $key ) ),
 					'label'          => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_label', $key ),
-					'labels'         => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_labels', array() ),
-					'slug'           => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_slug', strtolower( $key ) ),
+					'labels'         => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_labels', $labels ),
+					'slug'           => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_slug', sanitize_title_with_dashes( $key ) ),
 					'hierarchy'      => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_hierarchical', false ),
 					'show_in_table'  => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_show', false ),
 					'show_in_filter' => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_filter', false ),
@@ -420,7 +422,7 @@ class Rcno_Reviews_Admin {
 			$single = ! empty( $tax['tax_settings']['labels']['singular'] )
 				? $tax['tax_settings']['labels']['singular']
 				: $tax['tax_settings']['settings_key'];
-			$tax_name  = 'rcno_' . sanitize_title_with_dashes( $single );
+			$tax_name  = 'rcno_' . implode( '-', explode( ' ', $tax['tax_settings']['settings_key'] ) );
 			$cpt_slug  = sanitize_title_with_dashes( Rcno_Reviews_Option::get_option( 'rcno_review_labels', array( 'singular' => 'Review', 'plural' => 'Reviews' ) )['plural']
 				?: __( 'Reviews', 'recencio-book-reviews' ) );
 

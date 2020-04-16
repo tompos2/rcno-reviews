@@ -18,14 +18,14 @@ Recencio Book Reviews is a powerful and very flexible tool for managing your blo
 The plugin even provides book reviewers the opportunity of earning residual income via adding their own book purchase affiliate links.
 
 This plugin adds a custom post type for book reviews to your site. You can publish book reviews as standalone posts or include them in your normal posts and pages.
-Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher. Creating new book
-taxonomies is so easy it’s up to you to decide which and how many taxonomies you want to add.
+Organize your book reviews in any way you like. The plugin comes with some basic predefined taxonomies such as book author, genre, series, and publisher.
+Creating new book taxonomies is so easy it’s up to you to decide which and how many taxonomies you want to add.
 
 Use listings embedded in pages to make your book reviews accessible by title or taxonomies such as series or author. Or use one of the custom widgets to create tag clouds or top ten lists.
 
 Of course, you can use all the WordPress goodies you know from posts on book reviews as well: images, videos and comments.
-Despite its simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t
-need can be deactivated and are hidden from the UI. You can even create your own book review template files to gain complete control the look and feel of book reviews.
+Despite its simplicity, it’s giving book reviewer, administrators, designers and developers all the freedom to adapt the plugin to their needs. Features you don’t need can be deactivated and are hidden from the UI.
+You can even create your own book review template files to gain complete control the look and feel of book reviews.
 
 Most importantly, all the above is SEO friendly by way of validated JSON-LD metadata for the 'Book' and 'Review' schema markup.
 
@@ -104,6 +104,11 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.42.2 =
+* Fixed an issue where book cover not displaying in the "Currently Reading" admin widget
+* Fixed an issue with YouTube URLs were not processed inside the review content
+* Made some adjustments to better work with Cyrillic languages
 
 = 1.42.1 =
 * Fixed a warning message related to registering `author` as a REST base

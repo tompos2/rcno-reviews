@@ -170,7 +170,7 @@ const AdminCurrentlyReading = {
             })
             .on('select', function () {
                 var attachment = cover_uploader.state().get('selection').first().toJSON();
-                this.curr_update.book_cover = attachment.sizes['rcno-book-cover-sm'].url;
+                this.curr_update.book_cover = attachment.url;
             }.bind(this))
             .open();
         }

@@ -726,12 +726,12 @@ class Rcno_Template_Tags {
 			return apply_filters( 'the_content', $review->post_excerpt );
 		}
 
-		$review_excerpt   = $review->post_content;
-		$review_excerpt   = strip_shortcodes( strip_tags( $review_excerpt, $tags ) );
-		$review_excerpt   = preg_split( '/\b/', $review_excerpt, $length * 2 + 1 );
-		$excerpt_waste    = array_pop( $review_excerpt );
-		$review_excerpt   = implode( $review_excerpt );
-		$review_excerpt   .= $extra;
+		$review_excerpt = $review->post_content;
+		$review_excerpt = strip_shortcodes( strip_tags( $review_excerpt, $tags ) );
+		$review_excerpt = preg_split( '/\b/', $review_excerpt, $length * 2 + 1 );
+		$excerpt_waste  = array_pop( $review_excerpt );
+		$review_excerpt = implode( $review_excerpt );
+		$review_excerpt .= $extra;
 
 		return apply_filters( 'the_content', $review_excerpt );
 	}
@@ -789,8 +789,8 @@ class Rcno_Template_Tags {
 		if ( $this->is_review_embedded() ) {
 			$out .= wpautop( wptexturize( get_post_field( 'post_content', $review_id ) ) );
 		} else {
-			$out .= wpautop( wptexturize( get_the_content( $read_more ) ) );
-			// $out .= apply_filters( 'the_content', get_the_content() ); // TODO: look into this.
+			// $out .= wpautop( wptexturize( get_the_content( $read_more ) ) );
+			$out .= apply_filters( 'the_content', get_the_content() ); // TODO: look into this.
 		}
 
 		$out .= '</div>';

@@ -181,8 +181,8 @@ class Rcno_Reviews_Public {
 						$this->rcno_add_review_to_query( $query );
 					}
 				}
-
 			}
+
 			// Every other page.
 			if ( is_category() || is_tag() || is_author() || is_date() ) {
 				$this->rcno_add_review_to_query( $query );

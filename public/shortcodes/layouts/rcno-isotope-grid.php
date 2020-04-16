@@ -40,7 +40,7 @@ if ( $posts && count( $posts ) > 0 ) {
 
 	$select = '';
 	if ( $options['selectors'] ) {
-		$exclude = explode( ',', strtolower( $options['exclude'] ) );
+		$exclude = explode( ',', sanitize_title_with_dashes( $options['exclude'] ) );
 		$select .= '<div class="rcno-isotope-grid-select-container">';
 
 		if ( $options['search'] ) {
@@ -49,13 +49,27 @@ if ( $posts && count( $posts ) > 0 ) {
 		}
 
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], $exclude );
+
 		foreach ( $taxonomies as $taxonomy ) {
-			$terms     = get_terms( 'rcno_' . strtolower( $taxonomy ), 'orderby=name&order=ASC&hide_empty=1' );
-			$_taxonomy = get_taxonomy( 'rcno_' . strtolower( $taxonomy ) ); // Using the label to avoid i18n issues.
+			$terms = get_terms(
+				array(
+					'taxonomy'   => 'rcno_' . sanitize_title_with_dashes( $taxonomy ),
+					'orderby'    => 'name',
+					'order'      => 'ASC',
+					'hide_empty' => true,
+				)
+			);
+
+			if ( is_wp_error( $terms) ) {
+				continue;
+			}
+
+			$_taxonomy = get_taxonomy( 'rcno_' . sanitize_title_with_dashes( $taxonomy ) ); // Using the label to avoid i18n issues.
 			$select   .= '<div class="rcno-isotope-grid-select-wrapper">';
-			$select   .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->label . '</label>';
+			$select   .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->labels->name . '</label>';
 			$select   .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
-			$select   .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'recencio-book-reviews' ), $_taxonomy->label ) . '</option>';
+			$select   .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'recencio-book-reviews' ), $_taxonomy->labels->singular_name ) . '</option>';
+
 			foreach ( $terms as $term ) {
 				if ( is_object( $term ) ) {
 					$select .= '<option value="' . '.' . $term->slug . '">' . $term->name . '</option>';
