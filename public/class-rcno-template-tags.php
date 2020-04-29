@@ -733,7 +733,7 @@ class Rcno_Template_Tags {
 		$review_excerpt = implode( $review_excerpt );
 		$review_excerpt .= $extra;
 
-		return apply_filters( 'the_content', $review_excerpt );
+		return apply_filters( 'rcno_content', $review_excerpt );
 	}
 
 	/**
@@ -782,17 +782,11 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_review_content( $review_id ) {
 
-		$out       = '<div class="rcno-book-review-content">';
 		$read_more = Rcno_Reviews_Option::get_option( 'rcno_excerpt_read_more' );
 
-		// We need to check this, or we'll get an infinite loop with embedded reviews.
-		if ( $this->is_review_embedded() ) {
-			$out .= wpautop( wptexturize( get_post_field( 'post_content', $review_id ) ) );
-		} else {
-			// $out .= wpautop( wptexturize( get_the_content( $read_more ) ) );
-			$out .= apply_filters( 'the_content', get_the_content() ); // TODO: look into this.
-		}
-
+		$out  = '<div class="rcno-book-review-content">';
+		// Using the `the_content` was causing to many issues, so we created our own filter.
+		$out .= apply_filters( 'rcno_content', get_the_content( $read_more, false, $review_id) );
 		$out .= '</div>';
 
 		return $out;

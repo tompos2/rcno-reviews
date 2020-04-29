@@ -51,8 +51,21 @@ class Rcno_Reviews_Public {
 	 */
 	public function __construct( $plugin_name, $version ) {
 
+		global $wp_embed;
+
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+
+		/**
+		 * @see https://www.billerickson.net/code/duplicate-the_content-filters/
+		 */
+		add_filter( 'rcno_content', array( $wp_embed, 'run_shortcode' ), 8 );
+		add_filter( 'rcno_content', array( $wp_embed, 'autoembed' ), 8 );
+		add_filter( 'rcno_content', 'wptexturize' );
+		add_filter( 'rcno_content', 'convert_chars' );
+		add_filter( 'rcno_content', 'wpautop' );
+		add_filter( 'rcno_content', 'shortcode_unautop' );
+		add_filter( 'rcno_content', 'do_shortcode' );
 	}
 
 	/**
@@ -270,7 +283,6 @@ class Rcno_Reviews_Public {
 
 			// Add the filter again.
 			add_filter( 'the_content', array( $this, 'rcno_get_review_content' ), 10 );
-
 		}
 
 		// Return the rendered content.

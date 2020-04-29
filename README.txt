@@ -105,6 +105,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.43.0 =
+* Fixed longstanding issues with the usage of the `the_content` filter
+
 = 1.42.2 =
 * Fixed an issue where book cover not displaying in the "Currently Reading" admin widget
 * Fixed an issue with YouTube URLs were not processed inside the review content
