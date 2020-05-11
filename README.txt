@@ -105,6 +105,13 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.44.0 =
+* Fixed a regression with non-Latin characters introduced in 1.42.0
+* Fixed bug in the "Currently Reading" widget
+* Added anchor tag to book covers in the "Recent Reviews" widget
+* Added new params to shortcodes
+* Refactored styling of the book information in reviews
+
 = 1.43.0 =
 * Fixed longstanding issues with the usage of the `the_content` filter
 

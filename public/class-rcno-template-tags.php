@@ -117,7 +117,26 @@ class Rcno_Template_Tags {
 		} else {
 			include_once plugin_dir_path( __FILE__ ) . 'templates/rcno_default/functions.php';
 		}
+	}
 
+	/**
+	 * @param $input
+	 *
+	 * @return string
+	 */
+	public function sanitize_string( $input ) {
+		$input = strip_tags( $input );
+		$input = str_replace( '%', '', $input );
+
+		if ( function_exists( 'mb_strtolower' ) && seems_utf8( $input ) ) {
+			$input = mb_strtolower( $input, 'UTF-8' );
+		}
+
+		$input = strtolower( $input );
+		$input = preg_replace( '/\s+/', '-', $input );
+		$input = trim( $input, '-' );
+
+		return $input;
 	}
 
 	/**
@@ -149,7 +168,7 @@ class Rcno_Template_Tags {
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
 
 		foreach ( $custom_taxonomies as $taxonomy ) {
-			$taxonomies[ 'rcno_' . sanitize_title_with_dashes( strtolower( $taxonomy ) ) ] = $taxonomy;
+			$taxonomies[ 'rcno_' . $this->sanitize_string( $taxonomy ) ] = $taxonomy;
 		}
 
 		if ( 'all' === $out ) {
@@ -209,6 +228,7 @@ class Rcno_Template_Tags {
 		$out .= $this->get_the_rcno_admin_book_rating( $review_id );
 		$out .= '</div>';
 
+		$out .= '<div class="rcno-full-book-content">';
 		$out .= '<div class="rcno-full-book-details">';
 
 		foreach ( $selected_meta as $key ) {
@@ -224,6 +244,7 @@ class Rcno_Template_Tags {
 		$out .= $this->get_the_rcno_book_description( $review_id );
 		$out .= '</div>';
 
+		$out .= '</div>';
 		$out .= '</div>';
 
 		return $out;

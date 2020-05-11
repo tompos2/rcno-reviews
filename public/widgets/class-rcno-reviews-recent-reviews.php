@@ -106,7 +106,9 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		foreach ( $reviews as $review ) {
 			$out .= '<div class="rcno-recent-review">';
 			$out .= '<div class="widget-book-cover">';
+			$out .= '<a href="' . get_the_permalink( $review->ID ) . '">';
 			$out .= $template->get_the_rcno_book_cover( $review->ID, 'rcno-book-cover-sm' );
+			$out .= '</a>';
 			$out .= $template->get_the_rcno_admin_book_rating( $review->ID );
 			$out .= '</div>';
 			$out .=	'<div class="widget-book-details">';

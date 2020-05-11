@@ -84,6 +84,7 @@ class Rcno_Isotope_Grid_Shortcode {
 				'height'    => 130,
 				'exclude'   => '',
 				'rating'    => 1,
+				'category'  => 0,
 			),
 			$options,
 			'rcno-sortable-grid'
@@ -115,18 +116,10 @@ class Rcno_Isotope_Grid_Shortcode {
 			'orderby'        => 'post_title',
 			'order'          => 'ASC',
 			'posts_per_page' => - 1,
+			'fields'         => 'ids', // Only get post IDs
 		);
-		$query = new WP_Query( $args );
-		$posts = array();
 
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				global $post;
-				$posts[] = $post;
-			}
-			wp_reset_postdata();
-		}
+		$posts = get_posts( $args );
 
 		// This will check for a template file inside the theme folder.
 		$template_path = get_query_template( 'rcno-isotope-grid' );

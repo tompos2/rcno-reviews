@@ -78,9 +78,15 @@ class Rcno_Grid_Shortcode {
 	public function do_masonry_grid_shortcode( $options ) {
 
 		// Set default values for options not set explicitly.
-		$options = shortcode_atts( array(
-			'rating' => 1,
-		), $options, 'rcno-reviews-grid' );
+		$options = shortcode_atts(
+			array(
+				'rating'   => 1,
+				'taxonomy' => '',
+				'terms'    => '',
+			),
+			$options,
+			'rcno-reviews-grid'
+		);
 
 		// The actual rendering is done by a special function.
 		$output = $this->render_masonry_grid( $options );
@@ -108,17 +114,23 @@ class Rcno_Grid_Shortcode {
 			'order'          => 'ASC',
 			'posts_per_page' => - 1,
 		);
-		$query = new WP_Query( $args );
-		$posts = array();
 
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				global $post;
-				$posts[] = $post;
-			}
-			wp_reset_postdata();
+		if ( $options['taxonomy'] && $options['terms'] ) {
+			$taxonomy = in_array( $options['taxonomy'], array( 'category', 'post_tag' ) )
+				? $options['taxonomy'] : 'rcno_' . $options['taxonomy'];
+			$terms    = explode( ',', $options['terms'] );
+
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => $taxonomy,
+					'field'    => 'name',
+					'terms'    => $terms,
+				),
+			);
 		}
+
+		$query = new WP_Query( $args );
+		$posts = $query->posts;
 
 		// Create an empty output variable.
 		$out = '';

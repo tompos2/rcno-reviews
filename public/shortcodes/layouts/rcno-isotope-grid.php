@@ -23,15 +23,15 @@ if ( $posts && count( $posts ) > 0 ) {
 	$books = array();
 
 	// Loop through each post, book title from post-meta and work on book title.
-	foreach ( $posts as $book ) {
-		$book_details   = get_post_custom( $book->ID );
+	foreach ( $posts as $book_ID ) {
+		$book_details   = get_post_custom( $book_ID );
 		$unsorted_title = $book_details['rcno_book_title'][0];
 		$sorted_title   = $unsorted_title;
 		if ( $this->variables['ignore_articles'] ) {
 			$sorted_title = preg_replace( '/^(' . $this->variables['articles_list'] . ') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
 		}
 		$books[] = array(
-			'ID'             => $book->ID,
+			'ID'             => $book_ID,
 			'sorted_title'   => $sorted_title,
 			'unsorted_title' => $unsorted_title,
 		);
@@ -40,7 +40,7 @@ if ( $posts && count( $posts ) > 0 ) {
 
 	$select = '';
 	if ( $options['selectors'] ) {
-		$exclude = explode( ',', sanitize_title_with_dashes( $options['exclude'] ) );
+		$exclude = explode( ',', $options['exclude'] );
 		$select .= '<div class="rcno-isotope-grid-select-container">';
 
 		if ( $options['search'] ) {
@@ -49,11 +49,19 @@ if ( $posts && count( $posts ) > 0 ) {
 		}
 
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], $exclude );
+		$taxonomies = array_map( static function ( $taxonomy ) {
+			return 'rcno_' . $taxonomy;
+		}, $taxonomies  );
+
+		if ( $options['category'] ) {
+			array_unshift( $taxonomies, 'category' );
+		}
+
 
 		foreach ( $taxonomies as $taxonomy ) {
 			$terms = get_terms(
 				array(
-					'taxonomy'   => 'rcno_' . sanitize_title_with_dashes( $taxonomy ),
+					'taxonomy'   => $taxonomy,
 					'orderby'    => 'name',
 					'order'      => 'ASC',
 					'hide_empty' => true,
@@ -64,7 +72,7 @@ if ( $posts && count( $posts ) > 0 ) {
 				continue;
 			}
 
-			$_taxonomy = get_taxonomy( 'rcno_' . sanitize_title_with_dashes( $taxonomy ) ); // Using the label to avoid i18n issues.
+			$_taxonomy = get_taxonomy( $taxonomy ); // Using the label to avoid i18n issues.
 			$select   .= '<div class="rcno-isotope-grid-select-wrapper">';
 			$select   .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->labels->name . '</label>';
 			$select   .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';

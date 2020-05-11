@@ -29,8 +29,9 @@ const AdminCurrentlyReading = {
             return this.all_updates.length > 1 || this.curr_update.progress_index >= 1;
         },
         percentage: function () {
-            return Math.round((this.all_updates[this.curr_index].current_page /
+            const value = Math.round((this.all_updates[this.curr_index].current_page /
                 this.all_updates[this.curr_index].num_of_pages) * 100);
+            return isNaN(value) ? 0 : value;
         },
         time_ago: function () {
             var time = this.curr_update.last_updated;
@@ -148,9 +149,12 @@ const AdminCurrentlyReading = {
                     _this.curr_update.progress_comment = '';
                     _this.curr_update.last_updated     = '';
                     _this.curr_update.finished_book    = false;
+
+                    return localStorage.removeItem('rcno_all_updates');
                 }
                 _this.message = currently_reading.strings.saved;
-                localStorage.removeItem('rcno_all_updates');
+                //localStorage.removeItem('rcno_all_updates');
+                localStorage.setItem('rcno_all_updates', JSON.stringify(res));
             })
             .fail(function (res) {
                 if (res.status !== 200) {

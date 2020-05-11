@@ -25,6 +25,26 @@ class Rcno_Reviews_Settings_Definition {
 	}
 
 	/**
+	 * @param $input
+	 *
+	 * @return string
+	 */
+	public static function sanitize_string( $input ) {
+		$input = strip_tags( $input );
+		$input = str_replace( '%', '', $input );
+
+		if ( function_exists( 'mb_strtolower' ) && seems_utf8( $input ) ) {
+			$input = mb_strtolower( $input, 'UTF-8' );
+		}
+
+		$input = strtolower( $input );
+		$input = preg_replace( '/\s+/', '-', $input );
+		$input = trim( $input, '-' );
+
+		return $input;
+	}
+
+	/**
 	 * [apply_tab_slug_filters description]
 	 *
 	 * @param  array $default_settings [description]
@@ -713,7 +733,7 @@ class Rcno_Reviews_Settings_Definition {
 	public static function taxonomy_options( $tax ) {
 
 		$opts = array(
-			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_header' => array(
+			'rcno_' . self::sanitize_string( $tax['settings_key'] ) . '_header' => array(
 				'name' => '<strong>' . $tax['label'] . '</strong>',
 				'type' => 'header',
 			),
@@ -721,7 +741,7 @@ class Rcno_Reviews_Settings_Definition {
 				'name' => '',
 				'type' => 'spacer',
 			),
-			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_labels' => array(
+			'rcno_' . self::sanitize_string( $tax['settings_key'] ) . '_labels' => array(
 				'name'          => __( 'Labels', 'recencio-book-reviews' ),
 				'singular_std'  => ! empty( $tax['labels']['singular'] ) ? $tax['labels']['singular'] : Rcno_Pluralize_Helper::singularize( $tax['label'] ),
 				'plural_std'    => ! empty( $tax['labels']['plural'] ) ? $tax['labels']['plural'] : Rcno_Pluralize_Helper::pluralize( $tax['label'] ),
@@ -730,22 +750,22 @@ class Rcno_Reviews_Settings_Definition {
 				'type'          => 'labels',
 				'size'          => '25',
 			),
-			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_hierarchical' => array(
+			'rcno_' . self::sanitize_string( $tax['settings_key'] ) . '_hierarchical' => array(
 				'name' => __( 'Hierarchical', 'recencio-book-reviews' ),
 				'desc' => __( 'Is this custom taxonomy hierarchical?', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
-			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_show' => array(
+			'rcno_' . self::sanitize_string( $tax['settings_key'] ) . '_show' => array(
 				'name' => __( 'Show in table', 'recencio-book-reviews' ),
 				'desc' => __( 'Show this custom taxonomy on the admin table', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
-			'rcno_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_filter' => array(
+			'rcno_' . self::sanitize_string( $tax['settings_key'] ) . '_filter' => array(
 				'name' => __( 'Show filter', 'recencio-book-reviews' ),
 				'desc' => __( 'Show a drop-down filter for this taxonomy on the admin table', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
-			'spacer_' . sanitize_title_with_dashes( $tax['settings_key'] ) . '_1' => array(
+			'spacer_' . self::sanitize_string( $tax['settings_key'] ) . '_1' => array(
 				'name' => '',
 				'type' => 'spacer',
 			),

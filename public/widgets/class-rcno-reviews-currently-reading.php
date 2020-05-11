@@ -145,11 +145,10 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 
 							<p v-if="is_loading" class="book-comment" key="default"><?php echo $most_recent['progress_comment']; ?></p>
 							<p v-else class="book-comment" key="update">{{ all_updates[curr_index].progress_comment }}</p>
-
-							<div class="book-progress-btn">
-								<span :disabled="curr_index == 0" @click="previous"><?php _e( 'Previous', 'recencio-book-reviews' ); ?></span> <> <span :disabled="curr_index == all_updates.length - 1" @click="next"><?php _e( 'Next', 'recencio-book-reviews' ); ?></span>
-							</div>
 						</div>
+					</div>
+					<div class="book-progress-btn">
+						<span :disabled="curr_index == 0" @click="previous"><?php _e( 'Previous', 'recencio-book-reviews' ); ?></span> <> <span :disabled="curr_index == all_updates.length - 1" @click="next"><?php _e( 'Next', 'recencio-book-reviews' ); ?></span>
 					</div>
 					<div class="rcno-review-coming-soon">
 						<p><?php echo sanitize_text_field( $instance['review_coming_soon'] ); ?></p>

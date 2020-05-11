@@ -144,6 +144,9 @@
 
 .rcno-full-book {
     margin: 0 0 1em 0;
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-column-gap: 10px;
 }
 
 .rcno-full-book:after {
@@ -160,12 +163,9 @@
 }
 
 .rcno-full-book-cover {
-    width: 200px;
     background: rgba(96, 125, 139, 0.36);
-    display: inline-block;
-    float: left;
-    margin: 0 10px 0 0;
     position: relative;
+    align-self: start;
 }
 
 .rcno-full-book-details .rcno-full-book-cover img {
@@ -176,17 +176,13 @@
     font-size: 14px;
     line-height: 1.6;
     margin: 0 0 10px 0;
-    clear: left;
-    display: inline-block;
-    width: 60%;
 }
 
 .rcno-full-book-description {
-    font-size: .8em;
+    font-size: .9rem;
     line-height: 1.5;
     clear: left;
     display: inline-block;
-    width: calc(100% - 220px);
     height: 13.5em;
     overflow: auto;
 }
@@ -338,15 +334,17 @@ ul.rcno-taxlist li {
     color: #FFC107;
 }
 
-@media (min-device-width : 320px) and (max-device-width : 480px) {
+@media (max-device-width: 640px) {
 
-    .rcno-full-book-description {
-        width: 100%;
+    .rcno-full-book {
+        grid-template-columns: 200px auto;
     }
+}
 
-    .rcno-full-book-cover {
-        width: 100%;
-        margin: 0 0 1em 0;
+@media (max-device-width: 480px) {
+
+    .rcno-full-book {
+        grid-template-columns: 1fr;
     }
 
     #rcno-review-score-box .review-summary .overall-score {

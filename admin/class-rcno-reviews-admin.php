@@ -160,6 +160,26 @@ class Rcno_Reviews_Admin {
 	}
 
 	/**
+	 * @param $input
+	 *
+	 * @return string
+	 */
+	public function sanitize_string( $input ) {
+		$input = strip_tags( $input );
+		$input = str_replace( '%', '', $input );
+
+		if ( function_exists( 'mb_strtolower' ) && seems_utf8( $input ) ) {
+			$input = mb_strtolower( $input, 'UTF-8' );
+		}
+
+		$input = strtolower( $input );
+		$input = preg_replace( '/\s+/', '-', $input );
+		$input = trim( $input, '-' );
+
+		return $input;
+	}
+
+	/**
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since  1.0.0
@@ -287,7 +307,7 @@ class Rcno_Reviews_Admin {
 		$opts['capability_type']      = $cap_type;
 		$opts['description']          = '';
 		$opts['exclude_from_search']  = false;
-		$opts['has_archive']          = sanitize_title_with_dashes(  $plural );
+		$opts['has_archive']          = $this->sanitize_string(  $plural );
 		$opts['hierarchical']         = false;
 		$opts['map_meta_cap']         = true;
 		$opts['menu_icon']            = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyMDYuNSAzMTQuNyIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjA2LjUgMzE0LjciIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwb2x5Z29uIGZpbGw9IiM4Mjg3OEMiIHBvaW50cz0iMCw4Ny40IDE2Mi41LDMzLjIgMTYyLjUsMTUuNCAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDE4Ni4zLDQ4LjggMTg2LjEsMzMuMiAiLz48cG9seWdvbiBmaWxsPSIjODI4NzhDIiBwb2ludHM9IjAuNCw4Ny41IDEzOS41LDE4LjcgMTM5LjUsMCAiLz48Zz48cGF0aCBmaWxsPSIjODI4NzhDIiBkPSJNMC41LDg3Ljd2MjI3bDIwNi0zMS41VjUyLjdMMC41LDg3Ljd6IE0xODUuNSwyNTEuNGwtNDcuMSw2LjZsLTEuMy0wLjhjLTUuOC02LjEtMTMtMTYuNy0yMi0zMy4zYy01LjktMTAuOS0xMC4zLTE4LjEtMTMuMS0yMS41Yy0yLjYtMy4xLTUuMi01LjItNy44LTYuMmMtMS4zLTAuNS00LjYtMS0xMy42LTAuMXY0MS44YzAsNS41LDEuMSw5LjUsMy4zLDExLjZjMi4zLDIuMiw2LjUsMy4zLDEyLjUsMy4zbDMuMiwwdjEwLjRsLTc5LDExdi0xMC42bDMuNS0wLjdjMTAuNy0yLjMsMTUuNS03LjcsMTUuNS0xNy41VjE0NS40YzAtNy4yLTEuNC0xMC4xLTIuNy0xMS4zYy0xLjQtMS4yLTQuNi0yLjgtMTIuOC0zLjJsLTMuNS0wLjF2LTEwLjRsNzUuMS0xMC41YzE5LjEtMi43LDM0LjMtMS42LDQ0LjgsMy44YzExLDUuNywxNi41LDE0LjgsMTYuNSwyNy45YzAsOS4zLTIuOSwxNy45LTguNiwyNS40Yy00LjIsNS42LTkuOCwxMC4zLTE2LjcsMTQuM2MxLjksMS4zLDMuOCwzLDUuNyw1LjFjNC4yLDQuNSwxMC4xLDEzLjQsMTcuOSwyNi45YzcuMywxMi41LDEyLjYsMjAuNSwxNS44LDIzLjVjMi45LDIuNyw2LjYsNC4xLDExLjcsNC4ybDIuNywwLjFWMjUxLjR6Ii8+PHBhdGggZmlsbD0iIzgyODc4QyIgZD0iTTg2LjksMTI1LjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzExNC4yLDEzMC4zLDEwNS41LDEyMy4xLDg2LjksMTI1Ljd6Ii8+PC9nPjwvZz48cG9seWdvbiBmaWxsPSIjOURDMkUwIiBwb2ludHM9IjYyNywxMTMuNCA3ODkuNSw1OS4yIDc4OS41LDQxLjQgIi8+PHBvbHlnb24gZmlsbD0iIzlEQzJFMCIgcG9pbnRzPSI2MjcuNCwxMTMuNSA4MTMuMyw3NC44IDgxMy4xLDU5LjIgIi8+PHBvbHlnb24gZmlsbD0iIzJCNzRBNSIgcG9pbnRzPSI2MjcuNCwxMTMuNSA3NjYuNSw0NC43IDc2Ni41LDI2ICIvPjxnPjxwYXRoIGZpbGw9IiMzMDgyQzYiIGQ9Ik02MjcuNSwxMTMuN3YyMjdsMjA2LTMxLjVWNzguN0w2MjcuNSwxMTMuN3ogTTgxMi41LDI3Ny40bC00Ny4xLDYuNmwtMS4zLTAuOGMtNS44LTYuMS0xMy0xNi43LTIyLTMzLjNjLTUuOS0xMC45LTEwLjMtMTguMS0xMy4xLTIxLjVjLTIuNi0zLjEtNS4yLTUuMi03LjgtNi4yYy0xLjMtMC41LTQuNi0xLTEzLjYtMC4xdjQxLjhjMCw1LjUsMS4xLDkuNSwzLjMsMTEuNmMyLjMsMi4yLDYuNSwzLjMsMTIuNSwzLjNsMy4yLDB2MTAuNGwtNzksMTF2LTEwLjZsMy41LTAuN2MxMC43LTIuMywxNS41LTcuNywxNS41LTE3LjVWMTcxLjRjMC03LjItMS40LTEwLjEtMi43LTExLjNjLTEuNC0xLjItNC42LTIuOC0xMi44LTMuMmwtMy41LTAuMXYtMTAuNGw3NS4xLTEwLjVjMTkuMS0yLjcsMzQuMy0xLjYsNDQuOCwzLjhjMTEsNS43LDE2LjUsMTQuOCwxNi41LDI3LjljMCw5LjMtMi45LDE3LjktOC42LDI1LjRjLTQuMiw1LjYtOS44LDEwLjMtMTYuNywxNC4zYzEuOSwxLjMsMy44LDMsNS43LDUuMWM0LjIsNC41LDEwLjEsMTMuNCwxNy45LDI2LjljNy4zLDEyLjUsMTIuNiwyMC41LDE1LjgsMjMuNWMyLjksMi43LDYuNiw0LjEsMTEuNyw0LjJsMi43LDAuMVYyNzcuNHoiLz48cGF0aCBmaWxsPSIjMzA4MkM2IiBkPSJNNzEzLjksMTUxLjdsLTYuNCwwLjl2NTMuOGMwLDAsMi42LTAuNCwzLjgtMC41YzEwLjgtMS41LDE4LjMtNC43LDIzLTkuN2M0LjYtNSw3LTEyLjUsNy0yMi4zQzc0MS4yLDE1Ni4zLDczMi41LDE0OS4xLDcxMy45LDE1MS43eiIvPjwvZz48L3N2Zz4=';
@@ -351,7 +371,7 @@ class Rcno_Reviews_Admin {
 		$opts['rewrite']['ep_mask']    = EP_PERMALINK;
 		$opts['rewrite']['feeds']      = true;
 		$opts['rewrite']['pages']      = true;
-		$opts['rewrite']['slug']       = sanitize_title_with_dashes( $single );
+		$opts['rewrite']['slug']       = $this->sanitize_string( $single );
 		$opts['rewrite']['with_front'] = false;
 
 		$opts = apply_filters( 'rcno_review_cpt_options', $opts );
@@ -384,13 +404,13 @@ class Rcno_Reviews_Admin {
 			$labels['plural']   = Rcno_Pluralize_Helper::pluralize( $key );
 			$taxonomies[] = array(
 				'tax_settings' => array(
-					'settings_key'   => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_key', sanitize_title_with_dashes( $key ) ),
-					'label'          => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_label', $key ),
-					'labels'         => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_labels', $labels ),
-					'slug'           => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_slug', sanitize_title_with_dashes( $key ) ),
-					'hierarchy'      => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_hierarchical', false ),
-					'show_in_table'  => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_show', false ),
-					'show_in_filter' => Rcno_Reviews_Option::get_option( 'rcno_' . sanitize_title_with_dashes( $key ) . '_filter', false ),
+					'settings_key'   => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_key', $this->sanitize_string( $key ) ),
+					'label'          => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_label', $key ),
+					'labels'         => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_labels', $labels ),
+					'slug'           => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_slug', $this->sanitize_string( $key ) ),
+					'hierarchy'      => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_hierarchical', false ),
+					'show_in_table'  => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_show', false ),
+					'show_in_filter' => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_filter', false ),
 				),
 			);
 		}
@@ -423,7 +443,7 @@ class Rcno_Reviews_Admin {
 				? $tax['tax_settings']['labels']['singular']
 				: $tax['tax_settings']['settings_key'];
 			$tax_name  = 'rcno_' . implode( '-', explode( ' ', $tax['tax_settings']['settings_key'] ) );
-			$cpt_slug  = sanitize_title_with_dashes( Rcno_Reviews_Option::get_option( 'rcno_review_labels', array( 'singular' => 'Review', 'plural' => 'Reviews' ) )['plural']
+			$cpt_slug  = $this->sanitize_string( Rcno_Reviews_Option::get_option( 'rcno_review_labels', array( 'singular' => 'Review', 'plural' => 'Reviews' ) )['plural']
 				?: __( 'Reviews', 'recencio-book-reviews' ) );
 
 			$opts['hierarchical']      = $tax['tax_settings']['hierarchy'];
@@ -468,7 +488,7 @@ class Rcno_Reviews_Admin {
 
 			$opts['rewrite']['ep_mask']      = EP_NONE;
 			$opts['rewrite']['hierarchical'] = false;
-			$opts['rewrite']['slug']         = $cpt_slug . '/' . sanitize_title_with_dashes( $plural );
+			$opts['rewrite']['slug']         = $cpt_slug . '/' . $this->sanitize_string( $plural );
 			$opts['rewrite']['with_front']   = false;
 
 			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );
@@ -883,7 +903,7 @@ SQL;
 
 		if ( $typenow === 'rcno_review' ) {
 			foreach ( $taxonomies as $taxonomy ) {
-				$taxonomy = 'rcno_' . sanitize_title_with_dashes( strtolower( $taxonomy ) );
+				$taxonomy = 'rcno_' . $this->sanitize_string( strtolower( $taxonomy ) );
 				if ( Rcno_Reviews_Option::get_option( $taxonomy . '_filter' ) ) {
 					$selected      = isset( $_GET[ $taxonomy ] ) ? $_GET[ $taxonomy ] : '';
 					$info_taxonomy = get_taxonomy( $taxonomy );
@@ -909,7 +929,7 @@ SQL;
 
 		foreach ( $taxonomies as $taxonomy ) {
 			$q_vars    = &$query->query_vars;
-			$taxonomy = 'rcno_' . sanitize_title_with_dashes( strtolower( $taxonomy ) );
+			$taxonomy = 'rcno_' . $this->sanitize_string( strtolower( $taxonomy ) );
 			if ( $pagenow === 'edit.php' && isset( $q_vars['post_type'], $q_vars[ $taxonomy ] )
 			     && $q_vars['post_type'] === 'rcno_review'
 			     && is_numeric( $q_vars[ $taxonomy ] )
