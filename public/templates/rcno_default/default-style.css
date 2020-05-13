@@ -27,23 +27,18 @@
 }
 
 #rcno-review-score-box .review-summary {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    margin: 0 0 5px 0;
+    display: grid;
+    margin: 0 0 10px 0;
+    grid-template-columns: 25% 75%;
+    grid-column-gap: 10px;
 }
 
 #rcno-review-score-box .review-summary .overall-score,
 .rcno-review-badge {
-    width: 120px;
-    height: 120px;
     background: green;
     padding: 5px;
     text-align: center;
-    display: inline-block;
     position: relative;
-    margin: 0 10px 10px 0;
-    flex: 1 1 auto;
 }
 
 #rcno-review-score-box .review-summary .review-text h2 {
@@ -51,8 +46,8 @@
 }
 
 #rcno-review-score-box .review-summary .review-text {
-    display: inline-block;
-    flex: 1 1 75%;
+    /* display: inline-block; */
+    /* flex: 1 1 75%; */
 }
 
 #rcno-review-score-box .review-summary .review-text p {
