@@ -370,15 +370,17 @@ class Rcno_Template_Tags {
 		$book_title = $book_title ? esc_attr( $book_title ) : __( 'Book Title Unavailable', 'recencio-book-reviews' );
 		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no title has been provided for this book', 'recencio-book-reviews' );
 
+		$book_cover_url = apply_filters( 'rcno_book_cover_url', esc_attr( $og_book_src ?: $book_src ) );
+
 		$out = '';
-		$out .= '<img src="' . apply_filters( 'rcno_book_cover_url', esc_attr( $og_book_src ?: $book_src ) ) . '" ';
+		$out .= '<img src="' . $book_cover_url . '" ';
 		$out .= 'title="' . $book_title . '" ';
 		$out .= 'alt="' . $book_alt . '" ';
 		$out .= 'class="rcno-book-cover ' . $size . '" ';
 		$out .= 'data-rcno-attachment-id="' . (int) $attachment_id . '"';
 		$out .= '>';
 
-		return $out;
+		return apply_filters( 'rcno_book_cover', $out, $book_cover_url, $attachment_id );
 	}
 
 	/**
@@ -1577,7 +1579,7 @@ class Rcno_Template_Tags {
 
 		$data['thumbnailUrl'] = $thumbnail;
 
-		$data = apply_filters( 'rcno_book_schema_data_filter', $data );
+		$data = apply_filters( 'rcno_book_schema_data_filter', $data, $review_id );
 
 		return wp_json_encode( $data );
 	}
@@ -1699,7 +1701,7 @@ class Rcno_Template_Tags {
 
 		$data['thumbnailUrl'] = $thumbnail;
 
-		$data = apply_filters( 'rcno_review_schema_data_filter', $data );
+		$data = apply_filters( 'rcno_review_schema_data_filter', $data, $review_id );
 
 		return wp_json_encode( $data );
 	}

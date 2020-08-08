@@ -69,6 +69,16 @@ button.button.reset-button {
     display: none;
 }
 
+.book-isbn-metabox {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.book-isbn-metabox input {
+    flex: 0 1 auto;
+    margin: 0 5px 0 0;
+}
+
 .book-isbn-metabox-error {
     background: #F44336;
     color: #fff;

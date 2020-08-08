@@ -133,10 +133,12 @@
 							book.publisher
 						);
 
-						var year = parseInt( book.publication_year );
-						var month = parseInt(book.publication_month );
-						var day = parseInt(book.publication_day );
-						pub_date.val( month + '/' + day + '/' + year );
+						let pubDate = [];
+						pubDate.push(parseInt(book.publication_month));
+						pubDate.push(parseInt(book.publication_day));
+						pubDate.push(parseInt(book.publication_year));
+						pubDate = pubDate.filter(function(item) {return ! isNaN(item);});
+						pub_date.val( pubDate.join('/') );
 
 						pub_fmt.val(
 							book.format

@@ -136,8 +136,15 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 	}
 }
 
-/* ucc_get_calendar() :: Extends get_calendar() by including custom post types.
+/** ucc_get_calendar() :: Extends get_calendar() by including custom post types.
  * Derived from get_calendar() code in /wp-includes/general-template.php.
+ *
+ * @param array $post_types
+ * @param bool  $initial
+ * @param bool  $echo
+ * @param bool  $regular_posts
+ *
+ * @return mixed|string|void
  */
 function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $regular_posts = false ) {
 	global $wpdb, $m, $monthnum, $year, $wp_locale, $posts;
@@ -189,7 +196,7 @@ function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $re
 
 	// Quick check. If we have no posts at all, abort!
 	if ( ! $posts ) {
-		$sql     = "SELECT 1 as test FROM $wpdb->posts WHERE post_type IN ( $post_types ) AND post_status = 'publish' LIMIT 1";
+		$sql     = "SELECT ID FROM $wpdb->posts WHERE post_type IN ( $post_types ) AND post_status = 'publish' LIMIT 1";
 		$gotsome = $wpdb->get_var( $sql );
 		if ( ! $gotsome ) {
 			$cache[ $key ] = '';

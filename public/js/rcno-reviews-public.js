@@ -77,8 +77,8 @@
 
   $(function() {
 
-    if (window.Isotope === undefined || window.imagesLoaded === undefined) {
-      return console.log('IsotopeJS or imagesLoaded did not load properly.');
+    if (window.Isotope === undefined || window.imagesLoaded === undefined || jQuery('.rcno-isotope-grid-container').length === 0) {
+      return;
     }
 
     var qsRegex;

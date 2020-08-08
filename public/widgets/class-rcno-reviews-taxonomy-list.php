@@ -111,7 +111,8 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 				'number'     => $instance['item_count'],
 			)
 		);
-		if ( count( $terms ) > 0 ) {
+
+		if ( ! is_wp_error( $terms ) && count( $terms ) > 0 ) {
 			echo '<ul class="taglist">';
 			foreach ( $terms as $term ) {
 				echo '<li>';

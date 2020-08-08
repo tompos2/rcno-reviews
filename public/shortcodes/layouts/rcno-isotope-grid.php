@@ -44,8 +44,9 @@ if ( $posts && count( $posts ) > 0 ) {
 		$select .= '<div class="rcno-isotope-grid-select-container">';
 
 		if ( $options['search'] ) {
-			$select .= '<input type="text" class="rcno-isotope-grid-search rcno-isotope-grid-select-wrapper" placeholder="'
-						. __( 'Search...', 'recencio-book-reviews' ) . '" />';
+			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
+			$select .= '<input type="text" class="rcno-isotope-grid-search" placeholder="' . __( 'Search...', 'recencio-book-reviews' ) . '" />';
+			$select .= '</div>';
 		}
 
 		$taxonomies = array_diff( $this->variables['custom_taxonomies'], $exclude );
@@ -76,7 +77,13 @@ if ( $posts && count( $posts ) > 0 ) {
 			$select   .= '<div class="rcno-isotope-grid-select-wrapper">';
 			$select   .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->labels->name . '</label>';
 			$select   .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
-			$select   .= '<option value="*">' . sprintf( '%s %s', __( 'Select', 'recencio-book-reviews' ), $_taxonomy->labels->singular_name ) . '</option>';
+			$select   .= '<option value="*">'
+						 . apply_filters(
+						 	'rcno_isotope_select_label',
+							sprintf( '%1$s %2$s', __( 'Select', 'recencio-book-reviews' ), $_taxonomy->labels->singular_name ),
+							 $_taxonomy->labels->singular_name
+						 )
+						 . '</option>';
 
 			foreach ( $terms as $term ) {
 				if ( is_object( $term ) ) {

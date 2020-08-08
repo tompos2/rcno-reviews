@@ -117,7 +117,7 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 			if ( 0 === $attach_id || is_wp_error( $attach_id ) ) {
 				return false;
 			}
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $image_url );
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $mirror['file'] );
 			wp_update_attachment_metadata( $attach_id, $attach_data );
 			update_post_meta( $review_id, 'rcno_reviews_gr_cover_url', $image_url );
 			update_post_meta( $review_id, 'rcno_reviews_book_cover_src', $mirror['url'] );

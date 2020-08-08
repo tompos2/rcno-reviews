@@ -233,20 +233,20 @@ var rcnoListingsSc;
             sel = $("input[name='rcno-modal-scl-mode']:checked");
             switch (sel.val()) {
                 case 'rcno-tax-list':
-                    out += "rcno-tax-list ";
-                    out += "tax=\"" + $("#rcno-modal-form-scl select option:selected").val() + "\"";
+                    out += 'rcno-tax-list ';
+                    out += 'tax="' + $('#rcno-modal-form-scl select option:selected').val() + '"';
                     break;
                 case 'rcno-reviews-index':
-                    out += "rcno-reviews-index";
+                    out += 'rcno-reviews-index';
                     break;
                 case 'rcno-reviews-grid':
-                    out += "rcno-reviews-grid";
+                    out += 'rcno-reviews-grid';
                     break;
-				case 'rcno-reviews-isotope':
-					out += "rcno-sortable-grid";
-					break;
+                case 'rcno-reviews-isotope':
+                    out += 'rcno-sortable-grid';
+                    break;
                 default:
-                    alert( 'Error:' + sel.val() );
+                    alert('Error:' + sel.val());
                     return;
             }
             out += "]<br/>";
@@ -255,7 +255,6 @@ var rcnoListingsSc;
             editor.focus();
 
             tinyMCE.activeEditor.execCommand('mceReplaceContent', false, out);
-
         },
 
         updateFields: function (e, li) {
