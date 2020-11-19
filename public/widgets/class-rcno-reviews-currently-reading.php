@@ -106,7 +106,8 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 
 		$progress    = get_option( 'rcno_currently_reading', array() );
 		$most_recent = end( $progress );
-		$percentage  = isset( $most_recent['num_of_pages'] ) ? round( ( $most_recent['current_page'] / $most_recent['num_of_pages'] ) * 100 ) : 0;
+		$percentage  = ( isset( $most_recent['num_of_pages'] ) && $most_recent['num_of_pages'] !== 0 )
+			? round( ( $most_recent['current_page'] / $most_recent['num_of_pages'] ) * 100 ) : 0;
 		?>
 
 		<?php if ( $most_recent && $most_recent['book_title'] && $most_recent['book_author'] ) : ?>

@@ -26,7 +26,7 @@ const AdminCurrentlyReading = {
     },
     computed: {
         disabled: function () {
-            return this.all_updates.length > 1 || this.curr_update.progress_index >= 1;
+            return this.curr_update.progress_index > 1;
         },
         percentage: function () {
             const value = Math.round((this.all_updates[this.curr_index].current_page /
@@ -68,7 +68,7 @@ const AdminCurrentlyReading = {
                 token = 'ago',
                 list_choice = 1;
 
-            if (Math.floor(seconds) == 0) {
+            if (Math.floor(seconds) === 0) {
                 return 'Just now'
             }
             if (seconds < 0) {

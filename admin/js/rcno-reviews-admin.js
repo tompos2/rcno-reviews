@@ -122,8 +122,7 @@
 		} );
 
 		// Disables end user editing certain plugin options
-		var author_tax = $(
-			'#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]' );
+		var author_tax = $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]\\[author\\]');
 
 		// The author taxonomy must always be enabled.
 		if ( author_tax.is( ':checked' ) ) {

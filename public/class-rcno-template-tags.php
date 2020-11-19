@@ -370,7 +370,7 @@ class Rcno_Template_Tags {
 		$book_title = $book_title ? esc_attr( $book_title ) : __( 'Book Title Unavailable', 'recencio-book-reviews' );
 		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no title has been provided for this book', 'recencio-book-reviews' );
 
-		$book_cover_url = apply_filters( 'rcno_book_cover_url', esc_attr( $og_book_src ?: $book_src ) );
+		$book_cover_url = apply_filters( 'rcno_book_cover_url', esc_attr( $og_book_src ?: $book_src ), $review_id );
 
 		$out = '';
 		$out .= '<img src="' . $book_cover_url . '" ';
@@ -380,7 +380,7 @@ class Rcno_Template_Tags {
 		$out .= 'data-rcno-attachment-id="' . (int) $attachment_id . '"';
 		$out .= '>';
 
-		return apply_filters( 'rcno_book_cover', $out, $book_cover_url, $attachment_id );
+		return apply_filters( 'rcno_book_cover', $out, $book_cover_url, $attachment_id, $review_id );
 	}
 
 	/**
@@ -471,7 +471,7 @@ class Rcno_Template_Tags {
 			$tax_label = $tax->labels->singular_name;
 		}
 
-		if ( ! $link && ! is_wp_error( $terms ) ) {
+		if ( ( ! $link && ! is_wp_error( $terms ) ) || apply_filters( 'rcno_taxonomy_strip_tags', false, $tax ) ) {
 			$terms = strip_tags( $terms );
 		}
 
@@ -746,7 +746,7 @@ class Rcno_Template_Tags {
 
 		if ( has_excerpt( $review->ID ) ) {
 
-			return apply_filters( 'the_content', $review->post_excerpt );
+			return apply_filters( 'rcno_content', $review->post_excerpt );
 		}
 
 		$review_excerpt = $review->post_content;

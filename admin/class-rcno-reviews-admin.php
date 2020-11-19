@@ -563,18 +563,16 @@ class Rcno_Reviews_Admin {
 
 		// Return early if we're not on a book review edit screen.
 		if ( $screen && 'rcno_review' !== $screen->post_type ) {
-			return;
+			// Setup help tab args.
+			$args = array(
+				'id'      => 'rcno_reviews_help',
+				'title'   => __( 'Reviews Help', 'recencio-book-reviews' ),
+				'content' => '<h3>Recencio Book Reviews</h3><p>Help content</p>',
+			);
+
+			// Add the help tab.
+			$screen->add_help_tab( $args );
 		}
-
-		// Setup help tab args.
-		$args = array(
-			'id'      => 'rcno_reviews_help',
-			'title'   => __( 'Reviews Help', 'recencio-book-reviews' ),
-			'content' => '<h3>Recencio Book Reviews</h3><p>Help content</p>',
-		);
-
-		// Add the help tab.
-		$screen->add_help_tab( $args );
 	}
 
 	/**

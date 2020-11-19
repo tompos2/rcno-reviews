@@ -66,6 +66,7 @@ class Rcno_Reviews_Public {
 		add_filter( 'rcno_content', 'wpautop' );
 		add_filter( 'rcno_content', 'shortcode_unautop' );
 		add_filter( 'rcno_content', 'do_shortcode' );
+		add_filter( 'rcno_content', 'wp_filter_content_tags' );
 	}
 
 	/**

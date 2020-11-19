@@ -105,6 +105,11 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.46.0 =
+* Fixed issues with the "Currently Reading" widget
+* Fixed issues with the filtering of images inside the review content
+* Added a filter `rcno_taxonomy_strip_tags` to strip tags from custom taxonomies
+
 = 1.45.0 =
 * Added a new template for reviews, called "Rcno Inverse"
 * Bug fixes and code cleanup
