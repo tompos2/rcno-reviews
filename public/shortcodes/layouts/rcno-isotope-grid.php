@@ -45,7 +45,10 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		if ( $options['search'] ) {
 			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
+			$select .= '<label>';
+			$select .= '<span class="screen-reader-text">' . __( 'Search for', 'recencio-book-reviews' ) . ':</span>';
 			$select .= '<input type="text" class="rcno-isotope-grid-search" placeholder="' . __( 'Search...', 'recencio-book-reviews' ) . '" />';
+			$select .= '</label>';
 			$select .= '</div>';
 		}
 
@@ -75,8 +78,8 @@ if ( $posts && count( $posts ) > 0 ) {
 
 			$_taxonomy = get_taxonomy( $taxonomy ); // Using the label to avoid i18n issues.
 			$select   .= '<div class="rcno-isotope-grid-select-wrapper">';
-			$select   .= '<label for="rcno-isotope-grid-select">' . $_taxonomy->labels->name . '</label>';
-			$select   .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
+			$select   .= '<label class="screen-reader-text" for="rcno-isotope-grid-select-' . $_taxonomy->name . '">' . $_taxonomy->labels->name . '</label>';
+			$select   .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select" id="rcno-isotope-grid-select-' . $_taxonomy->name . '">';
 			$select   .= '<option value="*">'
 						 . apply_filters(
 						 	'rcno_isotope_select_label',
@@ -96,8 +99,8 @@ if ( $posts && count( $posts ) > 0 ) {
 
 		if ( $options['rating'] ) {
 			$select .= '<div class="rcno-isotope-grid-select-wrapper">';
-			$select .= '<label for="rcno-isotope-grid-select">' . __( 'Rating', 'recencio-book-reviews' ) . '</label>';
-			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select">';
+			$select .= '<label class="screen-reader-text" for="rcno-isotope-grid-select-rating">' . __( 'Rating', 'recencio-book-reviews' ) . '</label>';
+			$select .= '<select class="rcno-isotope-grid-select" name="rcno-isotope-grid-select" id="rcno-isotope-grid-select-rating">';
 			$select .= '<option value="*">' . __( 'Select Rating', 'recencio-book-reviews' ) . '</option>';
 			$select .= '<option value=".1">' . __( '1 Star', 'recencio-book-reviews' ) . '</option>';
 			$select .= '<option value=".2">' . __( '2 Stars', 'recencio-book-reviews' ) . '</option>';

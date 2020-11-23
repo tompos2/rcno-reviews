@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Book Reviews "
 "Pot v1.0.0\n"
-"POT-Creation-Date: 2020-08-08 15:16-0500\n"
+"POT-Creation-Date: 2020-11-23 16:31-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your Name <you@example."
 "com>\n"
@@ -29,7 +29,7 @@ msgstr ""
 "__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "Language: en_US\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -62,8 +62,8 @@ msgid "5 Star Rating"
 msgstr ""
 
 #: admin/class-rcno-admin-review-score.php:65
-#: admin/class-rcno-reviews-admin.php:1405
-#: admin/class-rcno-reviews-admin.php:1410
+#: admin/class-rcno-reviews-admin.php:1403
+#: admin/class-rcno-reviews-admin.php:1408
 #: public/class-rcno-template-tags.php:1474
 msgid "Review Score"
 msgstr ""
@@ -94,7 +94,7 @@ msgstr ""
 
 #: admin/class-rcno-reviews-admin.php:302
 #: admin/class-rcno-reviews-admin.php:447
-#: admin/class-rcno-reviews-admin.php:619
+#: admin/class-rcno-reviews-admin.php:617
 #: admin/settings/class-rcno-reviews-settings-definition.php:127
 msgid "Reviews"
 msgstr ""
@@ -120,7 +120,7 @@ msgid "Add New %1$s"
 msgstr ""
 
 #: admin/class-rcno-reviews-admin.php:358
-#: admin/class-rcno-reviews-admin.php:911
+#: admin/class-rcno-reviews-admin.php:909
 #, php-format
 msgid "All %1$s"
 msgstr ""
@@ -247,25 +247,25 @@ msgid ""
 "table of book reviews you have created."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:572
+#: admin/class-rcno-reviews-admin.php:569
 msgid "Reviews Help"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:597
+#: admin/class-rcno-reviews-admin.php:595
 msgid "Book Cover LG"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:598
+#: admin/class-rcno-reviews-admin.php:596
 msgid "Book Cover SM"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:618
-#: admin/class-rcno-reviews-admin.php:627
+#: admin/class-rcno-reviews-admin.php:616
+#: admin/class-rcno-reviews-admin.php:625
 msgid "Book Reviews"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:628
-#: admin/class-rcno-reviews-admin.php:648
+#: admin/class-rcno-reviews-admin.php:626
+#: admin/class-rcno-reviews-admin.php:646
 #: extensions/rcno-author-box/includes/settings-page.php:6
 #: extensions/rcno-custom-user-metadata/includes/settings-page.php:6
 #: extensions/rcno-posts-to-reviews/includes/settings-page.php:6
@@ -275,56 +275,56 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:774
+#: admin/class-rcno-reviews-admin.php:772
 msgid "Cover"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1012
-#: admin/class-rcno-reviews-admin.php:1015
+#: admin/class-rcno-reviews-admin.php:1010
+#: admin/class-rcno-reviews-admin.php:1013
 msgid "Review updated."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1013
+#: admin/class-rcno-reviews-admin.php:1011
 msgid "Custom field updated."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1014
+#: admin/class-rcno-reviews-admin.php:1012
 msgid "Custom field deleted."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1017
+#: admin/class-rcno-reviews-admin.php:1015
 msgid "Review restored to revision from "
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1018
+#: admin/class-rcno-reviews-admin.php:1016
 msgid "Review published."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1019
+#: admin/class-rcno-reviews-admin.php:1017
 msgid "Review saved."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1020
+#: admin/class-rcno-reviews-admin.php:1018
 msgid "Review submitted."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1021
+#: admin/class-rcno-reviews-admin.php:1019
 msgid "Review scheduled for: "
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1022
+#: admin/class-rcno-reviews-admin.php:1020
 msgid "Review draft updated."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1028
+#: admin/class-rcno-reviews-admin.php:1026
 msgid "View review"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1034
+#: admin/class-rcno-reviews-admin.php:1032
 msgid "Preview review"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1347
+#: admin/class-rcno-reviews-admin.php:1345
 msgid ""
 "When you leave a review on this site, we "
 "will store your provided name, email\n"
@@ -340,12 +340,12 @@ msgid ""
 "search result pages."
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1490
-#: admin/class-rcno-reviews-admin.php:1507
+#: admin/class-rcno-reviews-admin.php:1488
+#: admin/class-rcno-reviews-admin.php:1505
 msgid "Recencio Book Reviews Plugin"
 msgstr ""
 
-#: admin/class-rcno-reviews-admin.php:1642
+#: admin/class-rcno-reviews-admin.php:1640
 msgid ""
 "This update has made some changes to how "
 "the Recencio Book Reviews plugin handles "
@@ -1955,7 +1955,7 @@ msgid ""
 msgstr ""
 
 #: public/shortcodes/class-rcno-grid-shortcode.php:184
-#: public/shortcodes/layouts/rcno-isotope-grid.php:153
+#: public/shortcodes/layouts/rcno-isotope-grid.php:156
 #: public/templates/rcno_default/reviews_grid.php:67
 #: public/templates/rcno_default/reviews_index.php:109
 #: public/templates/rcno_metamor/reviews_grid.php:67
@@ -2032,39 +2032,43 @@ msgid ""
 "Examples of the review score box shortcode"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:48
+#: public/shortcodes/layouts/rcno-isotope-grid.php:49
+msgid "Search for"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-grid.php:50
 msgid "Search..."
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:83
+#: public/shortcodes/layouts/rcno-isotope-grid.php:86
 msgid "Select"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:99
+#: public/shortcodes/layouts/rcno-isotope-grid.php:102
 msgid "Rating"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:101
+#: public/shortcodes/layouts/rcno-isotope-grid.php:104
 msgid "Select Rating"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:102
+#: public/shortcodes/layouts/rcno-isotope-grid.php:105
 msgid "1 Star"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:103
+#: public/shortcodes/layouts/rcno-isotope-grid.php:106
 msgid "2 Stars"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:104
+#: public/shortcodes/layouts/rcno-isotope-grid.php:107
 msgid "3 Stars"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:105
+#: public/shortcodes/layouts/rcno-isotope-grid.php:108
 msgid "4 Stars"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:106
+#: public/shortcodes/layouts/rcno-isotope-grid.php:109
 msgid "5 Stars"
 msgstr ""
 
@@ -2116,7 +2120,7 @@ msgstr ""
 
 #: public/widgets/class-rcno-reviews-book-grid.php:192
 #: public/widgets/class-rcno-reviews-book-slider.php:212
-#: public/widgets/class-rcno-reviews-currently-reading.php:282
+#: public/widgets/class-rcno-reviews-currently-reading.php:283
 #: public/widgets/class-rcno-reviews-recent-reviews.php:226
 #: public/widgets/class-rcno-reviews-search-bar.php:222
 #: public/widgets/class-rcno-reviews-taxonomy-list.php:211
@@ -2205,31 +2209,31 @@ msgstr ""
 msgid "completed"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-currently-reading.php:144
+#: public/widgets/class-rcno-reviews-currently-reading.php:145
 msgid "by"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-currently-reading.php:151
+#: public/widgets/class-rcno-reviews-currently-reading.php:152
 msgid "Previous"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-currently-reading.php:151
+#: public/widgets/class-rcno-reviews-currently-reading.php:152
 msgid "Next"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-currently-reading.php:276
+#: public/widgets/class-rcno-reviews-currently-reading.php:277
 msgid "No currently reading book right now."
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-currently-reading.php:277
+#: public/widgets/class-rcno-reviews-currently-reading.php:278
 msgid "Review coming soon!"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-currently-reading.php:289
+#: public/widgets/class-rcno-reviews-currently-reading.php:290
 msgid "No currently reading book"
 msgstr ""
 
-#: public/widgets/class-rcno-reviews-currently-reading.php:296
+#: public/widgets/class-rcno-reviews-currently-reading.php:297
 msgid "Review coming soon"
 msgstr ""
 
