@@ -341,6 +341,8 @@ class Rcno_Reviews {
 
 		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'rcno_upgrade_completed', 10, 2 );
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'rcno_display_update_notice' );
+
+        $this->loader->add_filter( 'post_row_actions', $plugin_admin, 'show_review_id', 10, 2 );
 	}
 
 	/**

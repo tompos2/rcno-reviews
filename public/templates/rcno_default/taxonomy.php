@@ -164,7 +164,8 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 
 		}
 		// Close the last list.
-		$out .= '</ul>';
+		$out .= '</div>';
+		$out .= '</div>';
 
 		// Output the rendered list.
 		echo '<a name="top"></a>';

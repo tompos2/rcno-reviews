@@ -1745,19 +1745,19 @@ class Rcno_Template_Tags {
 		// Start the list.
 		$out .= '<ul class="rcno-alphabet-navigation">';
 
-		foreach ( $alphabet as $a ) {
+		foreach ( $alphabet as $letter ) {
 			// loop through the alphabet.
 			if ( $letters ) {
-				if ( in_array( $a, $letters, true ) ) {
+				if ( in_array( $letter, $letters, true ) ) {
 					// active letter, so we should set a link in the nav menu.
-					$out .= '<li class="active"><a href="#' . $a . '">' . $a . '</a></li>';
+					$out .= '<li class="active"><a href="#' . $letter . '">' . $letter . '</a></li>';
 				} else {
 					// inactive letter, no link.
-					$out .= '<li class="inactive">' . $a . '</li>';
+					$out .= '<li class="inactive">' . $letter . '</li>';
 				}
 			} else {
 				// each letter active.
-				$out .= '<li class="active"><a href="#' . $a . '">' . $a . '</a></li>';
+				$out .= '<li class="active"><a href="#' . $letter . '">' . $letter . '</a></li>';
 			}
 		}
 

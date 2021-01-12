@@ -416,10 +416,12 @@ class Rcno_Reviews_Public {
 
 
 	/**
-	 * Render a list of all terms of a taxonomy using the templates's 'taxonomy.php' file.
+	 * Render a list of all terms of a taxonomy using the template's 'taxonomy.php' file.
 	 *
 	 * @since 1.0.0
 	 *
+     * @see Rcno_Reviews_Shortcodes::rcno_do_taxlist_shortcode()
+     *
 	 * @param string $taxonomy The custom taxonomy the list is being generated for.
 	 * @param bool   $headers  Whether or not to show a first letter navigation header before each item.
 	 * @param bool   $count    Whether or not to show the taxonomy item count.
@@ -445,6 +447,10 @@ class Rcno_Reviews_Public {
 		if ( 'n/a' !== $taxonomy && '' !== $taxonomy ) {
 			// Get the terms of the selected taxonomy.
 			$terms = get_terms( $taxonomy, array( 'orderby' => 'name', 'order' => 'ASC' ) );
+
+			if ( is_wp_error( $terms ) ) {
+                $terms = get_terms( 'rcno_' . $taxonomy, array( 'orderby' => 'name', 'order' => 'ASC' ) );
+            }
 		} else {
 			// Set $terms to false for the layout and it's error messages.
 			$terms = false;

@@ -74,6 +74,10 @@ For the following languages translations are partly available:
 Please help [translating](https://translate.wordpress.org/projects/wp-plugins/recencio-book-reviews/) the plugin.
 This is one of the best ways to contribute to the growth and development of this plugin.
 
+== Sponsors ==
+
+Thanks to JetBrains for providing a copy of their [PhpStorm](https://www.jetbrains.com/?from=recencio-book-reviews) software for developing this plugin.
+
 == Installation ==
 
 1. Upload `rcno-reviews` folder to your website's `/wp-content/plugins/` folder
@@ -104,6 +108,11 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.47.0 =
+* Fixed a bug with unclosed divs in the `[rcno-tax-list]` shortcode
+* Display the review ID on the WP admin review list table
+* Code cleanup
 
 = 1.46.1 =
 * Fixed missing A11y markup

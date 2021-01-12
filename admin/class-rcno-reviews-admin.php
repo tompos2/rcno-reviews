@@ -1645,4 +1645,21 @@ SQL;
 		delete_transient( 'rcno_updated' );
 	}
 
+    /**
+     * Display the review ID in the post action links
+     *
+     * @param array    $actions
+     * @param \WP_Post $review
+     *
+     * @return array
+     */
+    public function show_review_id( $actions, $review ) {
+
+        if ( 'rcno_review' === $review->post_type && current_user_can( 'edit_posts' ) ) {
+            $actions = array( 'rcno_id' => 'ID: ' .  $review->ID ) + $actions;
+        }
+
+        return $actions;
+    }
+
 }

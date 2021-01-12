@@ -380,3 +380,7 @@ tr.rcno-table-header td {
     /* stroke: #000; */
     stroke-linejoin: round;
 }
+
+table.wp-list-table .row-actions {
+    color: #565656;
+}
