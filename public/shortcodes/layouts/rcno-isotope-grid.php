@@ -4,9 +4,10 @@
  * Render a list of all book reviews as an Isotope grid
  *
  * Available variables:
- * array $posts
- * array $options
- * Rcno_Isotope_Grid_Shortcode $this
+ *
+ * @var array $posts
+ * @var array $options
+ * @var Rcno_Isotope_Grid_Shortcode $this
  *
  * Available functions:
  * sort_by_title()

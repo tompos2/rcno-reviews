@@ -312,14 +312,15 @@
 }
 
 .rcno-isotope-grid-select-wrapper {
-    /* flex: 0 1 25%; */
-    margin: 0 1em 1em 0;
+    flex: 1 0 auto;
+    margin: 0 10px 10px 0;
 }
 
 
 select.rcno-isotope-grid-select {
     font-size: 14px;
     padding: 5px;
+    width: 100%;
 }
 
 .rcno-isotope-grid-select.reset {

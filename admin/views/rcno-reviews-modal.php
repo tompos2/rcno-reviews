@@ -12,9 +12,8 @@
 <div id="rcno-modal-backdrop-scr" style="display: none"></div>
 <div id="rcno-modal-wrap-scr" class="wp-core-ui search-panel-visible" style="display: none">
     <form id="rcno-modal-form-scr" tabindex="-1">
-		<?php wp_nonce_field( 'rcno-ajax-nonce', 'rcno_ajax_nonce', false ); ?>
         <div id="rcno-modal-title-scr">
-			<?php _e( 'Insert book review', 'reviewpress-reloaded' ) ?>
+			<?php _e( 'Insert book review', 'recencio-book-reviews' ) ?>
             <button type="button" id="rcno-modal-close-scr"><span
                         class="screen-reader-text"><?php _e( 'Close' ); ?></span></button>
         </div>
@@ -22,7 +21,7 @@
             <input id="review-id-field" type="hidden" name="reviewid"/>
             <input id="review-title-field" type="hidden" name="reviewtitle"/>
 
-            <p class="howto"><?php _e( 'Choose the review you want to include from the list below or search for it.', 'reviewpress-reloaded' ); ?></p>
+            <p class="howto"><?php _e( 'Choose the review you want to include from the list below or search for it.', 'recencio-book-reviews' ); ?></p>
 
             <div class="link-search-wrapper">
                 <label>
@@ -48,17 +47,17 @@
                     <span class="spinner"></span>
                 </div>
             </div>
-            <!--<a id="rcno-modal-scr-options-link"><i class="fa fa-caret-right"></i><?php _e( "Display options", 'reviewpress-reloaded' ); ?> </a>-->
+            <!--<a id="rcno-modal-scr-options-link"><i class="fa fa-caret-right"></i><?php _e( "Display options", 'recencio-book-reviews' ); ?> </a>-->
             <div id="rcno-modal-scr-options-panel">
                 <b><?php _e( "Display options:", 'reviewpress-reloaded' ); ?></b>
                 <ul id="rcno-modal-scr-options-list">
                     <li>
                         <input type="checkbox" id="rcno-embed-excerpt" name="embed-excerpt" value="embed-excerpt"/>
-                        <label for="rcno-embed-excerpt"><span><?php _e( 'Embed excerpt only', 'reviewpress-reloaded' ); ?></span></label>
+                        <label for="rcno-embed-excerpt"><span><?php _e( 'Embed excerpt only', 'recencio-book-reviews' ); ?></span></label>
                     </li>
                     <li>
                         <input type="checkbox" id="rcno-embed-nodesc" name="embed-nodesc" value="embed-nodesc"/>
-                        <label for="rcno-embed-nodesc"><span><?php _e( 'Embed <b>without</b> description', 'reviewpress-reloaded' ); ?></span></label>
+                        <label for="rcno-embed-nodesc"><span><?php _e( 'Embed <b>without</b> description', 'recencio-book-reviews' ); ?></span></label>
                     </li>
                 </ul>
             </div>

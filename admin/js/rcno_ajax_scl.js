@@ -30,7 +30,7 @@ var rcnoListingsSc;
             inputs.close = $('#rcno-modal-close-scl');
             // URL
             inputs.id = $('#review-id-field');
-            inputs.nonce = $('#rcno_ajax_nonce');
+            inputs.nonce = window.rcno_vars.rcno_ajax_nonce; // $('#rcno_ajax_nonce');
             // Secondary options
             inputs.title = $('#review-title-field');
             // Advanced Options

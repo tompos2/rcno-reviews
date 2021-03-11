@@ -31,7 +31,6 @@
 
   $(function() {
     if (typeof owl_carousel_options !== 'undefined') {
-
       $('.rcno-book-slider-container.owl-carousel').owlCarousel({
         items: 1,
         autoplay: true,
@@ -39,7 +38,6 @@
         loop: true,
       });
     }
-
   });
 
   $(function() {
@@ -72,64 +70,6 @@
         readOnly: true,
       });
     });
-
-  });
-
-  $(function() {
-
-    if (window.Isotope === undefined || window.imagesLoaded === undefined || jQuery('.rcno-isotope-grid-container').length === 0) {
-      return;
-    }
-
-    var qsRegex;
-    var $grid = $('.rcno-isotope-grid-container').imagesLoaded(function() {
-      // init Isotope after all images have loaded
-      $grid.isotope({
-        itemSelector: '.rcno-isotope-grid-item',
-        layoutMode: 'masonry',
-      });
-    });
-
-    var select = $('.rcno-isotope-grid-select');
-    select.on('change', function() {
-      var filterValue = $(this).val();
-      $grid.isotope({filter: filterValue});
-      select.not($(this)).prop('selectedIndex', 0);
-    });
-
-    $('.rcno-isotope-grid-select.reset').on('click', function() {
-      $grid.isotope({filter: '*'});
-      select.each(function() {
-        $(this).prop('selectedIndex', 0);
-      });
-      $('.rcno-isotope-grid-search').val('');
-    });
-
-    var $search = $('.rcno-isotope-grid-search').keyup(debounce(function() {
-      qsRegex = new RegExp($search.val(), 'gi');
-      $grid.isotope({
-        filter: function() {
-          return qsRegex ? $(this).context.className.match(qsRegex) : true;
-        },
-      });
-    }, 200));
-
-    // Debounce so filtering doesn't happen every millisecond
-    function debounce(fn, threshold) {
-      var timeout;
-      threshold = threshold || 100;
-      return function debounced() {
-        clearTimeout(timeout);
-        var args = arguments;
-        var _this = this;
-
-        function delayed() {
-          fn.apply(_this, args);
-        }
-
-        timeout = setTimeout(delayed, threshold);
-      };
-    }
   });
 
 })(jQuery);

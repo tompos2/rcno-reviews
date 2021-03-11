@@ -61,12 +61,15 @@ class Rcno_Reviews_Public {
 		 */
 		add_filter( 'rcno_content', array( $wp_embed, 'run_shortcode' ), 8 );
 		add_filter( 'rcno_content', array( $wp_embed, 'autoembed' ), 8 );
-		add_filter( 'rcno_content', 'wptexturize' );
-		add_filter( 'rcno_content', 'convert_chars' );
+		add_filter( 'rcno_content', 'do_blocks' );
+        add_filter( 'rcno_content', 'wptexturize' );
+        add_filter( 'rcno_content', 'convert_smilies' );
+        add_filter( 'rcno_content', 'convert_chars' );
 		add_filter( 'rcno_content', 'wpautop' );
 		add_filter( 'rcno_content', 'shortcode_unautop' );
 		add_filter( 'rcno_content', 'do_shortcode' );
 		add_filter( 'rcno_content', 'wp_filter_content_tags' );
+		add_filter( 'rcno_content', 'wp_replace_insecure_home_url' );
 	}
 
 	/**
@@ -112,21 +115,23 @@ class Rcno_Reviews_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public.js', array( 'jquery' ), $this->version );
-		wp_enqueue_script( 'rcno-star-rating', plugin_dir_url( __FILE__ ) . 'js/rcno-star-rating.js', array( 'jquery' ), $this->version, true );
-		wp_localize_script(
-			'rcno-star-rating',
-			'rcno_star_rating_vars',
-			array(
-				'background_colour' => Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' ),
-				'star_colour'       => Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' ),
-			)
-		);
+
 
 		// We are only registering the script, not calling it.
 		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );
-		wp_register_script( 'images-loaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array(), '4.1.4', true );
-		wp_register_script( 'isotope-grid', plugin_dir_url( __FILE__ ) . 'js/isotope.pkgd.min.js', array(), '3.0.5', true );
+		wp_register_script( 'rcno-images-loaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array(), '4.1.4', true );
+		wp_register_script( 'rcno-isotope-grid', plugin_dir_url( __FILE__ ) . 'js/isotope.pkgd.min.js', array(), '3.0.5', true );
+        wp_enqueue_script( 'rcno-star-rating', plugin_dir_url( __FILE__ ) . 'js/rcno-star-rating.js', array( 'jquery', $this->plugin_name ), $this->version, true );
+
+        wp_localize_script(
+            'rcno-star-rating',
+            'rcno_star_rating_vars',
+            array(
+                'background_colour' => Rcno_Reviews_Option::get_option( 'rcno_star_background_color', 'transparent' ),
+                'star_colour'       => Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', 'transparent' ),
+            )
+        );
 
 		if ( Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
 

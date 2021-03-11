@@ -497,32 +497,35 @@ class Rcno_Reviews {
 	 */
 	private function define_shortcodes() {
 
-		$plugin_shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
+		$shortcodes = new Rcno_Reviews_Shortcodes( $this->get_plugin_name(), $this->get_version() );
 
-		add_shortcode( 'rcno-reviews', array( $plugin_shortcodes, 'rcno_do_review_shortcode' ) );
-		add_shortcode( 'rcno-tax-list', array( $plugin_shortcodes, 'rcno_do_taxlist_shortcode' ) );
-		add_shortcode( 'rcno-reviews-index', array( $plugin_shortcodes, 'rcno_do_reviews_index_shortcode' ) );
-		add_shortcode( 'rcno-book-series', array( $plugin_shortcodes, 'rcno_do_book_series_shortcode' ) );
+		add_shortcode( 'rcno-reviews', array( $shortcodes, 'rcno_do_review_shortcode' ) );
+		add_shortcode( 'rcno-tax-list', array( $shortcodes, 'rcno_do_taxlist_shortcode' ) );
+		add_shortcode( 'rcno-reviews-index', array( $shortcodes, 'rcno_do_reviews_index_shortcode' ) );
+		add_shortcode( 'rcno-book-series', array( $shortcodes, 'rcno_do_book_series_shortcode' ) );
 
-		$this->loader->add_action( 'admin_head', $plugin_shortcodes, 'rcno_reviews_shortcodes_tab' );
-		add_shortcode( 'rcno-book-list', array( $plugin_shortcodes->book_list, 'rcno_do_book_list_shortcode' ) );
-		add_shortcode( 'rcno-review-box', array( $plugin_shortcodes->review_box, 'rcno_do_review_box_shortcode' ) );
-		add_shortcode( 'rcno-score-box', array( $plugin_shortcodes->score_box, 'rcno_do_score_box_shortcode' ) );
-		add_shortcode( 'rcno-purchase-links', array( $plugin_shortcodes->purchase_links, 'rcno_do_purchase_links_shortcode' ) );
-		add_shortcode( 'rcno-sortable-grid', array( $plugin_shortcodes->isotope_grid, 'rcno_do_isotope_grid_shortcode' ) );
-		add_shortcode( 'rcno-reviews-grid', array( $plugin_shortcodes->masonry_grid, 'do_masonry_grid_shortcode' ) );
-		add_shortcode( 'rcno-book-listing', array( $plugin_shortcodes->book_listing, 'rcno_do_book_catalogue_shortcode' ) );
+		$this->loader->add_action( 'admin_head', $shortcodes, 'rcno_reviews_shortcodes_tab' );
+		add_shortcode( 'rcno-book-list', array( $shortcodes->book_list, 'rcno_do_book_list_shortcode' ) );
+		add_shortcode( 'rcno-review-box', array( $shortcodes->review_box, 'rcno_do_review_box_shortcode' ) );
+		add_shortcode( 'rcno-score-box', array( $shortcodes->score_box, 'rcno_do_score_box_shortcode' ) );
+		add_shortcode( 'rcno-purchase-links', array( $shortcodes->purchase_links, 'rcno_do_purchase_links_shortcode' ) );
+		add_shortcode( 'rcno-sortable-grid', array( $shortcodes->isotope_grid, 'rcno_do_isotope_grid_shortcode' ) );
+		add_shortcode( 'rcno-reviews-grid', array( $shortcodes->masonry_grid, 'do_masonry_grid_shortcode' ) );
+		add_shortcode( 'rcno-book-listing', array( $shortcodes->book_listing, 'rcno_do_book_catalogue_shortcode' ) );
 
-		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_review_button_scr' );
-		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scr' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scr' );
-		$this->loader->add_action( 'wp_ajax_rcno_get_results', $plugin_shortcodes, 'rcno_process_ajax_scr' );
+        $this->loader->add_action( 'wp_ajax_more_filtered_reviews', $shortcodes->isotope_grid, 'more_filtered_reviews' );
+        $this->loader->add_action( 'wp_ajax_nopriv_more_filtered_reviews', $shortcodes->isotope_grid, 'more_filtered_reviews' );
 
-		$this->loader->add_action( 'media_buttons', $plugin_shortcodes, 'rcno_add_button_scl' );
-		$this->loader->add_action( 'in_admin_footer', $plugin_shortcodes, 'rcno_load_in_admin_footer_scl' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_shortcodes, 'rcno_load_ajax_scripts_scl' );
+		$this->loader->add_action( 'media_buttons', $shortcodes, 'rcno_add_review_button_scr' );
+		$this->loader->add_action( 'in_admin_footer', $shortcodes, 'rcno_load_in_admin_footer_scr' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $shortcodes, 'rcno_load_ajax_scripts_scr' );
+		$this->loader->add_action( 'wp_ajax_rcno_get_results', $shortcodes, 'rcno_process_ajax_scr' );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_shortcodes, 'register_shortcode_styles' );
+		$this->loader->add_action( 'media_buttons', $shortcodes, 'rcno_add_button_scl' );
+		$this->loader->add_action( 'in_admin_footer', $shortcodes, 'rcno_load_in_admin_footer_scl' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $shortcodes, 'rcno_load_ajax_scripts_scl' );
+
+		$this->loader->add_action( 'wp_enqueue_scripts', $shortcodes, 'register_shortcode_styles' );
 	}
 
 	/**

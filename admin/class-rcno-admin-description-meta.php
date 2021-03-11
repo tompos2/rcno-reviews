@@ -77,7 +77,9 @@ class Rcno_Admin_Description_Meta {
 	 * @return void
 	 */
 	public function do_rcno_book_description_metabox( $review ) {
-		// @TODO: Are nonce necessary for wp_editor metaboxes?
+
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
 		$description              = get_post_meta( $review->ID, 'rcno_book_description', true );
 		$options                  = array(
 			'textarea_rows' => 8,
@@ -85,6 +87,7 @@ class Rcno_Admin_Description_Meta {
 		$options['media_buttons'] = false;
 		$options['teeny']         = true;
 		$options['quicktags']     = false;
+		$options['tinymce']       = ! ( $screen && $screen->is_block_editor );
 
 		wp_editor( $description, 'rcno_book_description', $options );
 	}

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Recencio Book Reviews "
 "Pot v1.0.0\n"
-"POT-Creation-Date: 2020-11-23 16:31-0500\n"
+"POT-Creation-Date: 2021-03-11 12:57-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your Name <you@example."
 "com>\n"
@@ -29,7 +29,7 @@ msgstr ""
 "__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "Language: en_US\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -1391,37 +1391,37 @@ msgstr ""
 msgid "Your book was not found on %s"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:17
+#: admin/views/rcno-reviews-listings-modal.php:16
 msgid "Insert book review listing"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:26
+#: admin/views/rcno-reviews-listings-modal.php:25
 msgid "Embed taxonomy index"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:28
+#: admin/views/rcno-reviews-listings-modal.php:27
 #: public/widgets/class-rcno-reviews-tag-cloud.php:232
 msgid "Taxonomy"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:44
+#: admin/views/rcno-reviews-listings-modal.php:43
 msgid "Embed book review index"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:49
+#: admin/views/rcno-reviews-listings-modal.php:48
 msgid "Embed book review grid"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:54
+#: admin/views/rcno-reviews-listings-modal.php:53
 msgid "Embed sortable book review grid"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:60
-#: admin/views/rcno-reviews-modal.php:79
+#: admin/views/rcno-reviews-listings-modal.php:59
+#: admin/views/rcno-reviews-modal.php:78
 msgid "Cancel"
 msgstr ""
 
-#: admin/views/rcno-reviews-listings-modal.php:64
+#: admin/views/rcno-reviews-listings-modal.php:63
 #: includes/class-rcno-reviews-shortcodes.php:389
 #: includes/class-rcno-reviews-shortcodes.php:390
 #: includes/class-rcno-reviews-shortcodes.php:511
@@ -1429,53 +1429,53 @@ msgstr ""
 msgid "Insert"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:17
+#: admin/views/rcno-reviews-modal.php:16
 msgid "Insert book review"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:19
+#: admin/views/rcno-reviews-modal.php:18
 msgid "Close"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:25
+#: admin/views/rcno-reviews-modal.php:24
 msgid ""
 "Choose the review you want to include "
 "from the list below or search for it."
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:29
+#: admin/views/rcno-reviews-modal.php:28
 msgid "Search"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:43
+#: admin/views/rcno-reviews-modal.php:42
 msgid ""
 "No search term specified. Showing recent "
 "items."
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:44
+#: admin/views/rcno-reviews-modal.php:43
 msgid ""
 "Search or use up and down arrow keys to "
 "select an item."
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:51
+#: admin/views/rcno-reviews-modal.php:50
 msgid "Display options"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:53
+#: admin/views/rcno-reviews-modal.php:52
 msgid "Display options:"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:57
+#: admin/views/rcno-reviews-modal.php:56
 msgid "Embed excerpt only"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:61
+#: admin/views/rcno-reviews-modal.php:60
 msgid "Embed <b>without</b> description"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:69
+#: admin/views/rcno-reviews-modal.php:68
 #, php-format
 msgid ""
 "%1sCreate a new review.%2s (This will "
@@ -1483,7 +1483,7 @@ msgid ""
 "return here for including the review)"
 msgstr ""
 
-#: admin/views/rcno-reviews-modal.php:82
+#: admin/views/rcno-reviews-modal.php:81
 msgid "Include Shortcut"
 msgstr ""
 
@@ -1955,7 +1955,8 @@ msgid ""
 msgstr ""
 
 #: public/shortcodes/class-rcno-grid-shortcode.php:184
-#: public/shortcodes/layouts/rcno-isotope-grid.php:156
+#: public/shortcodes/layouts/rcno-isotope-grid.php:157
+#: public/shortcodes/layouts/rcno-isotope-html.php:123
 #: public/templates/rcno_default/reviews_grid.php:67
 #: public/templates/rcno_default/reviews_index.php:109
 #: public/templates/rcno_metamor/reviews_grid.php:67
@@ -2032,44 +2033,58 @@ msgid ""
 "Examples of the review score box shortcode"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:49
+#: public/shortcodes/layouts/rcno-isotope-grid.php:50
+#: public/shortcodes/layouts/rcno-isotope-html.php:55
 msgid "Search for"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:50
+#: public/shortcodes/layouts/rcno-isotope-grid.php:51
+#: public/shortcodes/layouts/rcno-isotope-html.php:56
 msgid "Search..."
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:86
+#: public/shortcodes/layouts/rcno-isotope-grid.php:87
+#: public/shortcodes/layouts/rcno-isotope-html.php:71
 msgid "Select"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:102
+#: public/shortcodes/layouts/rcno-isotope-grid.php:103
+#: public/shortcodes/layouts/rcno-isotope-html.php:84
 msgid "Rating"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:104
+#: public/shortcodes/layouts/rcno-isotope-grid.php:105
+#: public/shortcodes/layouts/rcno-isotope-html.php:87
 msgid "Select Rating"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:105
+#: public/shortcodes/layouts/rcno-isotope-grid.php:106
+#: public/shortcodes/layouts/rcno-isotope-html.php:88
 msgid "1 Star"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:106
+#: public/shortcodes/layouts/rcno-isotope-grid.php:107
+#: public/shortcodes/layouts/rcno-isotope-html.php:89
 msgid "2 Stars"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:107
+#: public/shortcodes/layouts/rcno-isotope-grid.php:108
+#: public/shortcodes/layouts/rcno-isotope-html.php:90
 msgid "3 Stars"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:108
+#: public/shortcodes/layouts/rcno-isotope-grid.php:109
+#: public/shortcodes/layouts/rcno-isotope-html.php:91
 msgid "4 Stars"
 msgstr ""
 
-#: public/shortcodes/layouts/rcno-isotope-grid.php:109
+#: public/shortcodes/layouts/rcno-isotope-grid.php:110
+#: public/shortcodes/layouts/rcno-isotope-html.php:92
 msgid "5 Stars"
+msgstr ""
+
+#: public/shortcodes/layouts/rcno-isotope-html.php:119
+msgid "Load more"
 msgstr ""
 
 #: public/templates/rcno_default/reviews_index.php:50
@@ -2080,12 +2095,12 @@ msgid ""
 "ID %d"
 msgstr ""
 
-#: public/templates/rcno_default/taxonomy.php:179
+#: public/templates/rcno_default/taxonomy.php:180
 #: public/templates/rcno_metamor/taxonomy.php:180
 msgid "There are no terms in this taxonomy."
 msgstr ""
 
-#: public/templates/rcno_default/taxonomy.php:184
+#: public/templates/rcno_default/taxonomy.php:185
 #: public/templates/rcno_metamor/taxonomy.php:185
 msgid ""
 "Error: No taxonomy set for this list!"

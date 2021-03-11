@@ -38,8 +38,9 @@ class Rcno_Isotope_Grid_Shortcode {
 	 * @var      array $variables The current version of this plugin.
 	 */
 	private $variables;
+    private $options;
 
-	/**
+    /**
 	 * Rcno_Isotope_Grid_Shortcode constructor.
 	 *
 	 * @since 1.12.0
@@ -76,7 +77,7 @@ class Rcno_Isotope_Grid_Shortcode {
 	public function rcno_do_isotope_grid_shortcode( $options ) {
 
 		// Set default values for options not set explicitly.
-		$options = shortcode_atts(
+		$this->options = shortcode_atts(
 			array(
 				'selectors' => 1,
 				'search'    => 1,
@@ -85,17 +86,25 @@ class Rcno_Isotope_Grid_Shortcode {
 				'exclude'   => '',
 				'rating'    => 1,
 				'category'  => 0,
+				'count'     => 50,
+				'orderby'   => 'title',
+				'order'     => 'DESC',
 			),
 			$options,
 			'rcno-sortable-grid'
 		);
 
 		// The actual rendering is done by a special function.
-		$output = $this->rcno_render_isotope_grid( $options );
+		$output = $this->rcno_render_isotope_grid( $this->options );
 
 		// We are enqueuing the previously registered script.
-		wp_enqueue_script( 'images-loaded' );
-		wp_enqueue_script( 'isotope-grid' );
+		wp_enqueue_script( 'rcno-images-loaded' );
+		wp_enqueue_script( 'rcno-isotope-grid' );
+
+        $this->options['nonce']   = wp_create_nonce( 'rcno-isotope' );
+        $this->options['ajaxURL'] = admin_url( 'admin-ajax.php' );
+
+        wp_add_inline_script( 'rcno-isotope-grid', 'const rcnoIsotopeVars = ' . wp_json_encode( $this->options ) );
 
 		return do_shortcode( $output );
 	}
@@ -104,6 +113,7 @@ class Rcno_Isotope_Grid_Shortcode {
 	 * * Do the render of the shortcode contents via the template file.
 	 *
 	 * @since 1.12.0
+     *
 	 * @param $options
 	 * @return string
 	 */
@@ -115,18 +125,20 @@ class Rcno_Isotope_Grid_Shortcode {
 			'post_status'    => 'publish',
 			'orderby'        => 'post_title',
 			'order'          => 'ASC',
-			'posts_per_page' => - 1,
+			'posts_per_page' => $options['count'],
 			'fields'         => 'ids', // Only get post IDs
 		);
 
-		$posts = get_posts( $args );
+		$posts = ( new WP_Query( $args ) )->posts;
+
+        wp_reset_postdata();
 
 		// This will check for a template file inside the theme folder.
 		$template_path = get_query_template( 'rcno-isotope-grid' );
 
 		// If no such file exists, use the default template for the shortcode.
 		if ( empty( $template_path ) ) {
-			$template_path = __DIR__ . '/layouts/rcno-isotope-grid.php';
+			$template_path = __DIR__ . '/layouts/rcno-isotope-html.php';
 		}
 
 		ob_start();
@@ -156,4 +168,64 @@ class Rcno_Isotope_Grid_Shortcode {
 	protected function sort_by_title( $a, $b ) {
 		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
 	}
+
+    /**
+     * Sends more recipes via AJAX
+     *
+     * @since 2.0.0
+     *
+     * @return string
+     */
+    public function more_filtered_reviews() {
+        //  Nonce check
+        /*if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rpr-filterable' ) ) {
+            wp_die( __( 'Failed security check', 'recipepress-reloaded' ) );
+        }*/
+
+        $output = '';
+        $args = array(
+            'post_type' => 'rcno_review',
+            'posts_per_page' => isset( $_POST['count'] ) ? (int) $_POST['count'] : 20,
+            'orderby' => isset( $_POST['orderby'] ) ? sanitize_text_field( $_POST['orderby'] ) : 'date',
+            'order'   => isset( $_POST['order'] ) ? sanitize_text_field( $_POST['order'] ) : 'DESC',
+            'post_status' => 'publish'
+        );
+
+        $pagenum = isset( $_POST['page'] ) ? (int) $_POST['page'] : 1;
+        $args['offset'] = $pagenum > 1 ? $args['posts_per_page'] * ( $pagenum - 1 ) : 0;
+
+        $reviews = new \WP_Query( $args );
+
+        if ( $reviews->have_posts() ) {
+
+            $width  = isset( $_POST['width'] ) ? (int) $_POST['width'] : 85;
+            $height = isset( $_POST['height'] ) ? (int) $_POST['height'] : 120;
+
+            foreach( $reviews->posts as $review ) {
+                $output .= '<div class="rcno-isotope-grid-item ';
+                $output .= sanitize_title( $this->template->get_the_rcno_book_meta( $review->ID, 'rcno_book_title', '', false ) ) . ' ';
+                $output .= implode( ' ', $this->template->get_rcno_review_html_classes( $review->ID ) ) . '" ';
+                $output .= 'style="width:' . $width . 'px; height:' . $height . 'px;"';
+                $output .= '>';
+                if ( isset( $_POST['rating'] ) && (int) $_POST['rating'] ) {
+                    $output .= $this->template->get_the_rcno_admin_book_rating( $review->ID );
+                }
+                $output .= '<a href="' . get_permalink( $review->ID ) . '">';
+                // $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
+                if ( $width > 85 ) {
+                    $output .= $this->template->get_the_rcno_book_cover( $review->ID, 'rcno-book-cover-lg' );
+                } else {
+                    $output .= $this->template->get_the_rcno_book_cover( $review->ID, 'rcno-book-cover-sm' );
+                }
+                $output .= '</a>';
+                $output .= '</div>';
+            }
+
+            wp_reset_postdata();
+        }
+
+        echo $output;
+
+        wp_die();
+    }
 }

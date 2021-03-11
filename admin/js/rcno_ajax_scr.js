@@ -31,7 +31,7 @@ var rcnoReviewSc;
             inputs.close = $('#rcno-modal-close-scr');
             // URL
             inputs.id = $('#review-id-field');
-            inputs.nonce = $('#rcno_ajax_nonce');
+            inputs.nonce = window.rcno_vars.rcno_ajax_nonce; // $('#rcno_ajax_nonce');
             // Secondary options
             inputs.title = $('#retitle-title-field');
             // Advanced Options
@@ -570,7 +570,7 @@ var rcnoReviewSc;
                 query = {
                     action: 'rcno_get_results',
                     page: this.page,
-                    'rcno_ajax_nonce': inputs.nonce.val()
+                    'rcno_ajax_nonce': inputs.nonce
                 };
 
             if (this.search)

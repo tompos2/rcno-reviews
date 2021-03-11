@@ -12,7 +12,6 @@
 
 <div id="rcno-modal-wrap-scl" class="wp-core-ui search-panel-visible" style="display: none">
 	<form id="rcno-modal-form-scl" tabindex="-1">
-		<?php wp_nonce_field( 'rcno-ajax-nonce', 'rcno_ajax_nonce', false ); ?>
 		<div id="rcno-modal-title-scl">
 			<?php esc_html_e( 'Insert book review listing', 'recencio-book-reviews' ) ?>
 			<button type="button" id="rcno-modal-close-scl"><span
