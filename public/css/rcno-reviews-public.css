@@ -309,6 +309,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    overflow: hidden;
 }
 
 .rcno-isotope-grid-select-wrapper {

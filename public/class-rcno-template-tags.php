@@ -1192,7 +1192,7 @@ class Rcno_Template_Tags {
 					'title'      => get_the_title(),
 					'link'       => get_the_permalink(),
 					'series_num' => null !== $series_num ? (int) $series_num : 0,
-					'series'     => null !== $series[0]->slug ? $series[0]->slug : '',
+					'series'     => is_array( $series ) ? $series[0]->slug : '',
 				);
 				usort( $book_data, array( $this, 'series_integer_cmp' ) ); // Group books by series number,
 				usort( $book_data, array( $this, 'series_string_cmp' ) );  // then by series slug.
@@ -1713,13 +1713,13 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int $review_id	The post ID of the current review.
 	 *
-	 * @return false
+	 * @return void
 	 */
 	public function the_rcno_review_schema_data( $review_id ) {
 
 		// If we are on the homepage don't display this.
 		if ( ! is_single() || Rcno_Reviews_Option::get_option( 'rcno_disable_review_schema', false ) ) {
-			return false;
+			return;
 		}
 
 		echo '<script type="application/ld+json">' . $this->get_the_rcno_review_schema_data( $review_id ) . '</script>';

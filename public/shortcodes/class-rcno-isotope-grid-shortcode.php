@@ -123,8 +123,8 @@ class Rcno_Isotope_Grid_Shortcode {
 		$args  = array(
 			'post_type'      => 'rcno_review',
 			'post_status'    => 'publish',
-			'orderby'        => 'post_title',
-			'order'          => 'ASC',
+			'orderby'        => $options['orderby'],
+			'order'          => $options['order'],
 			'posts_per_page' => $options['count'],
 			'fields'         => 'ids', // Only get post IDs
 		);

@@ -109,6 +109,10 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.48.1 =
+* Fixed a bug with star ratings not showing on fetched reviews in the Isotope grid shortcode
+* The Isotope grid shortcode now filters using the `AND` operator
+
 = 1.48.0 =
 * Updated the CSSTidy library to v1.7.3 to resolve PHP warnings
 * Re-worked the "isotope" grid shortcode to support AJAX loading

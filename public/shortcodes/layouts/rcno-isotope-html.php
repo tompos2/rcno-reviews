@@ -33,7 +33,7 @@ if ( $posts && count( $posts ) > 0 ) {
             'sorted_title'   => $sorted_title,
             'unsorted_title' => $unsorted_title,
         );
-        usort( $books, array( $this, 'sort_by_title' ) );
+        //usort( $books, array( $this, 'sort_by_title' ) );
     }
 }
 
@@ -147,7 +147,7 @@ if ( $options['category'] ) {
             }
 
             let qsRegex;
-            const stars = $('.rcno-admin-rating .stars');
+            let stars = $('.rcno-admin-rating .stars');
 
             $.each(stars, function(index, star) {
                 $(star).starRating({
@@ -168,11 +168,22 @@ if ( $options['category'] ) {
                 });
             });
 
+            let previousValue = '';
+            let filterValues = [];
             const select = $('.rcno-isotope-grid-select');
-            select.on('change', function() {
-                const filterValue = $(this).val();
-                $grid.isotope({filter: filterValue});
-                select.not($(this)).prop('selectedIndex', 0);
+
+            select.on('focus', function () {
+                previousValue = $(this).val();
+            })
+            .on('change', function () {
+                const value = $(this).val();
+                filterValues = filterValues.filter(function (i) {
+                    return i !== previousValue
+                })
+                filterValues.push(value);
+                let currentValue = filterValues.join('');
+                $grid.isotope({filter: currentValue});
+                $(this).blur();
             });
 
             $('.rcno-isotope-grid-select.reset').on('click', function() {
@@ -181,6 +192,7 @@ if ( $options['category'] ) {
                     $(this).prop('selectedIndex', 0);
                 });
                 $('.rcno-isotope-grid-search').val('');
+                filterValues = [];
             });
 
             const $search = $('.rcno-isotope-grid-search').keyup(debounce(function () {
@@ -245,6 +257,7 @@ if ( $options['category'] ) {
                     const $items = $(res) // create new item elements
                     $grid.append($items).isotope('appended', $items) // append items to grid
 
+                    stars = $('.rcno-admin-rating .stars');
 
                     $.each(stars, function(index, star) {
                         $(star).starRating({
