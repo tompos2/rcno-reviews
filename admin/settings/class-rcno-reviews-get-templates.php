@@ -42,7 +42,8 @@ class Rcno_Reviews_Get_Templates {
 							$base_url = RCNO_PLUGIN_URI . 'public/templates/' . $file;
 							$local    = false;
 						} else {
-							$base_url = get_template_directory_uri() . '/rcno_templates/' . $file;
+							// $base_url = get_template_directory_uri() . '/rcno_templates/' . $file;
+							$base_url = get_theme_file_uri( '/rcno_templates/' . $file );
 							$local    = true;
 						}
 

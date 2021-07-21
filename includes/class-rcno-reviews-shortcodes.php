@@ -27,6 +27,7 @@ include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-purchase-links-shortcod
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-isotope-grid-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-grid-shortcode.php';
 include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-book-listing-shortcode.php';
+include RCNO_PLUGIN_PATH . 'public/shortcodes/class-rcno-table-shortcode.php';
 
 class Rcno_Reviews_Shortcodes {
 
@@ -111,6 +112,16 @@ class Rcno_Reviews_Shortcodes {
 	 */
 	public $book_listing;
 
+
+	/**
+	 * The object.
+	 *
+	 * @since    1.49.0
+	 * @access   public
+	 * @var      Rcno_Table_Shortcode $book_table The class instance.
+	 */
+	public $book_table;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -130,6 +141,7 @@ class Rcno_Reviews_Shortcodes {
 		$this->isotope_grid   = new Rcno_Isotope_Grid_Shortcode( $plugin_name, $version );
 		$this->masonry_grid   = new Rcno_Grid_Shortcode( $plugin_name, $version );
 		$this->book_listing   = new Rcno_Book_Listing_Shortcode( $plugin_name, $version );
+		$this->book_table     = new Rcno_Table_Shortcode( $plugin_name, $version );
 	}
 
 	public function register_shortcode_styles() {

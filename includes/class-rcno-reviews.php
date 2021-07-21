@@ -512,6 +512,7 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-sortable-grid', array( $shortcodes->isotope_grid, 'rcno_do_isotope_grid_shortcode' ) );
 		add_shortcode( 'rcno-reviews-grid', array( $shortcodes->masonry_grid, 'do_masonry_grid_shortcode' ) );
 		add_shortcode( 'rcno-book-listing', array( $shortcodes->book_listing, 'rcno_do_book_catalogue_shortcode' ) );
+		add_shortcode( 'rcno-table', array( $shortcodes->book_table, 'rcno_do_table_shortcode' ) );
 
         $this->loader->add_action( 'wp_ajax_more_filtered_reviews', $shortcodes->isotope_grid, 'more_filtered_reviews' );
         $this->loader->add_action( 'wp_ajax_nopriv_more_filtered_reviews', $shortcodes->isotope_grid, 'more_filtered_reviews' );
@@ -597,7 +598,7 @@ class Rcno_Reviews {
 		$this->loader->add_action( 'admin_enqueue_scripts', $extensions, 'rcno_extension_admin_scripts' );
 		$this->loader->add_action( 'wp_ajax_rcno_activate_extension_ajax', $extensions, 'rcno_activate_extension_ajax' );
 		$this->loader->add_action( 'wp_ajax_rcno_deactivate_extension_ajax', $extensions, 'rcno_deactivate_extension_ajax' );
-		$this->loader->add_action( 'wp_loaded', $extensions, 'rcno_load_extensions' );
+		$this->loader->add_action( 'init', $extensions, 'rcno_load_extensions' );
 	}
 
 	/**
@@ -607,7 +608,6 @@ class Rcno_Reviews {
 	 */
 	public function run() {
 		$this->loader->run();
-		do_action( 'rcno_reviews_loaded' );
 	}
 
 	/**

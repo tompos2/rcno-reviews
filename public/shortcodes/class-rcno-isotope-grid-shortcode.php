@@ -125,7 +125,7 @@ class Rcno_Isotope_Grid_Shortcode {
 			'post_status'    => 'publish',
 			'orderby'        => $options['orderby'],
 			'order'          => $options['order'],
-			'posts_per_page' => $options['count'],
+			'posts_per_page' => (int) $options['count'],
 			'fields'         => 'ids', // Only get post IDs
 		);
 

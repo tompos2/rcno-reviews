@@ -16,7 +16,7 @@
  * @subpackage Rcno_Reviews/public
  * @author     wzyMedia <wzy@outlook.com>
  */
-class Rcno_Reviews_Currently_Reading extends WP_Widget {
+class Rcno_Reviews_Currently_Reading extends \WP_Widget {
 
 	public $widget_options;
 	public $control_options;
@@ -60,6 +60,10 @@ class Rcno_Reviews_Currently_Reading extends WP_Widget {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
+		if ( ! is_active_widget( false, false, $this->id_base, true ) ) {
+		    return;
+        }
+
 		wp_enqueue_script( 'rcno-vuejs' );
 		wp_enqueue_script( 'rcno-currently-reading', RCNO_PLUGIN_URI . 'public/js/rcno-currently-reading.js', array( 'rcno-vuejs' ), '1.0.0', true );
 		wp_localize_script( 'rcno-currently-reading', 'rcno_currently_reading', array(

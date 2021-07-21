@@ -69,7 +69,10 @@ class Rcno_Reviews_Public {
 		add_filter( 'rcno_content', 'shortcode_unautop' );
 		add_filter( 'rcno_content', 'do_shortcode' );
 		add_filter( 'rcno_content', 'wp_filter_content_tags' );
-		add_filter( 'rcno_content', 'wp_replace_insecure_home_url' );
+
+		if ( function_exists( 'wp_replace_insecure_home_url' ) ) {
+			add_filter( 'rcno_content', 'wp_replace_insecure_home_url' );
+		}
 	}
 
 	/**
@@ -92,6 +95,7 @@ class Rcno_Reviews_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-public.css', array(), $this->version, 'all' );
+		wp_register_style( 'rcno-table-theme', plugin_dir_url( __FILE__ ) . 'css/mermaid.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -122,6 +126,9 @@ class Rcno_Reviews_Public {
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );
 		wp_register_script( 'rcno-images-loaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array(), '4.1.4', true );
 		wp_register_script( 'rcno-isotope-grid', plugin_dir_url( __FILE__ ) . 'js/isotope.pkgd.min.js', array(), '3.0.5', true );
+		//wp_register_script( 'rcno-gridjs', plugin_dir_url( __FILE__ ) . 'js/gridjs.umd.js', array(), '5.0.2', true );
+		wp_register_script( 'rcno-gridjs', 'https://unpkg.com/gridjs@5.0.2/dist/gridjs.umd.js', array(), '5.0.2', true );
+		wp_register_script( 'rcno-table', plugin_dir_url( __FILE__ ) . 'js/rcno-table.js', array( 'rcno-gridjs' ), '1.0.0', true );
         wp_enqueue_script( 'rcno-star-rating', plugin_dir_url( __FILE__ ) . 'js/rcno-star-rating.js', array( 'jquery', $this->plugin_name ), $this->version, true );
 
         wp_localize_script(
@@ -433,7 +440,7 @@ class Rcno_Reviews_Public {
 	 *
 	 * @return string $content
 	 */
-	public function rcno_render_taxlist( $taxonomy, $headers = false, $count ) {
+	public function rcno_render_taxlist( $taxonomy, $headers, $count ) {
 
 		// Create empty output variable.
 		$output = '';

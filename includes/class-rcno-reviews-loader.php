@@ -136,6 +136,8 @@ class Rcno_Reviews_Loader {
 			), $hook['priority'], $hook['accepted_args'] );
 		}
 
+        do_action( 'rcno_reviews_loaded' );
+
 	}
 
 }
