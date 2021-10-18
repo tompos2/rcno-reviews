@@ -269,14 +269,14 @@ class Rcno_Template_Tags {
 	 *******************************************************************************/
 
 	/**
-	 * Generates the private 5 star rating given by the reviewer.
+	 * Generates the private 5-star rating given by the reviewer.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param int $review_id	The current review's post ID.
 	 * @param bool $display	    Display the stars or return value.
 	 *
-	 * @return mixed
+	 * @return float|string
 	 */
 	public function get_the_rcno_admin_book_rating( $review_id, $display = true ) {
 
@@ -303,7 +303,7 @@ class Rcno_Template_Tags {
 	}
 
 	/**
-	 * Prints the private 5 star rating given by the reviewer.
+	 * Prints the private 5-star rating given by the reviewer.
 	 *
 	 * @since 1.0.0
 	 *

@@ -111,7 +111,7 @@ class Rcno_Reviews_Settings_Definition {
 		// $settings[] = array();
 
 		$settings = array(
-			// Begin the General Tab.
+			// General tab.
 			'general_tab'    => array(
 				'general_tab_header_0'          => array(
 					'name' => '<strong>' . __( 'General Settings', 'recencio-book-reviews' ) . '</strong>',
@@ -179,7 +179,7 @@ class Rcno_Reviews_Settings_Definition {
 
 			),
 
-			// Begin taxonomies tab.
+			// Taxonomies tab.
 			'taxonomy_tab'   => array(
 				'taxonomy_tab_header_0'        => array(
 					'name' => '<strong>' . __( 'Review Taxonomies', 'recencio-book-reviews' ) . '</strong>',
@@ -216,7 +216,6 @@ class Rcno_Reviews_Settings_Definition {
 					'name' => '',
 					'type' => 'spacer',
 				),
-
 			),
 
 			//Components tab.
@@ -332,7 +331,7 @@ class Rcno_Reviews_Settings_Definition {
 					'type' => 'spacer',
 				),
 
-				// 5 Star Rating box.
+				// 5-Star Rating box.
 				'components_tab_header_4'               => array(
 					'name' => '<strong>' . __( 'Book 5 Star Rating Box', 'recencio-book-reviews' ) . '</strong>',
 					'type' => 'header',
@@ -763,6 +762,11 @@ class Rcno_Reviews_Settings_Definition {
 			'rcno_' . self::sanitize_string( $tax['settings_key'] ) . '_filter' => array(
 				'name' => __( 'Show filter', 'recencio-book-reviews' ),
 				'desc' => __( 'Show a drop-down filter for this taxonomy on the admin table', 'recencio-book-reviews' ),
+				'type' => 'checkbox',
+			),
+			'rcno_' . self::sanitize_string( $tax['settings_key'] ) . '_posts' => array(
+				'name' => __( 'Use with posts', 'recencio-book-reviews' ),
+				'desc' => __( 'Use this taxonomy with regular WordPress posts', 'recencio-book-reviews' ),
 				'type' => 'checkbox',
 			),
 			'spacer_' . self::sanitize_string( $tax['settings_key'] ) . '_1' => array(

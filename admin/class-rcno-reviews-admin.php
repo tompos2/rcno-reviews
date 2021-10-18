@@ -411,6 +411,7 @@ class Rcno_Reviews_Admin {
 					'hierarchy'      => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_hierarchical', false ),
 					'show_in_table'  => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_show', false ),
 					'show_in_filter' => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_filter', false ),
+					'use_with_posts' => Rcno_Reviews_Option::get_option( 'rcno_' . $this->sanitize_string( $key ) . '_posts', false ),
 				),
 			);
 		}
@@ -493,7 +494,9 @@ class Rcno_Reviews_Admin {
 
 			$opts = apply_filters( 'rcno_review_taxonomy_options', $opts );
 
-			register_taxonomy( $tax_name, 'rcno_review', $opts );
+			$post_types = $tax['tax_settings']['use_with_posts'] ? ['post', 'rcno_review'] : ['rcno_review'];
+
+			register_taxonomy( $tax_name, apply_filters( 'rcno_taxonomy_posttypes', $post_types, $tax_name ), $opts );
 		}
 	}
 

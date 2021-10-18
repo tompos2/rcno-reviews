@@ -169,14 +169,25 @@ class Rcno_Table_Shortcode {
 	public function get_the_review_terms( $review_id ) {
 		$terms      = array();
 		$taxonomies = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' ) );
+		$taxonomies[] = 'category';
+		$taxonomies[] = 'post_tag';
 
 		foreach ( $taxonomies as $taxonomy ) {
 			$t =  get_the_terms( $review_id, 'rcno_' . strtolower( $taxonomy ) );
+
+			if ( false === $t || is_wp_error( $t ) ) {
+				$t =  get_the_terms( $review_id, strtolower( $taxonomy ) );
+			}
+
 			if ( is_array( $t ) ) {
 				foreach ( $t as $tax ) {
 					// $terms[] = array( $taxonomy => array( $tax->name => get_term_link( $tax, $tax->taxonomy ) ) );
-					$terms[strtolower( $taxonomy )] = $tax->name;
-					$terms[strtolower( $taxonomy ) . '_link'] = get_term_link( $tax, $tax->taxonomy );
+					//$terms[][strtolower( $taxonomy )] = $tax->name;
+					//$terms[][strtolower( $taxonomy ) . '_link'] = get_term_link( $tax, $tax->taxonomy );
+					$terms[] = array(
+						strtolower( $taxonomy ) => $tax->name,
+						'link' => get_term_link( $tax, $tax->taxonomy ),
+					);
 				}
 			}
 		}
