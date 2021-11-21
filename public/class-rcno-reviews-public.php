@@ -86,7 +86,7 @@ class Rcno_Reviews_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Rcno_Reviews_Loader as all of the hooks are defined
+		 * defined in Rcno_Reviews_Loader as all the hooks are defined
 		 * in that particular class.
 		 *
 		 * The Rcno_Reviews_Loader will then create the relationship
@@ -110,7 +110,7 @@ class Rcno_Reviews_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Rcno_Reviews_Loader as all of the hooks are defined
+		 * defined in Rcno_Reviews_Loader as all the hooks are defined
 		 * in that particular class.
 		 *
 		 * The Rcno_Reviews_Loader will then create the relationship
@@ -119,7 +119,6 @@ class Rcno_Reviews_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-public.js', array( 'jquery' ), $this->version );
-
 
 		// We are only registering the script, not calling it.
 		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
@@ -191,7 +190,7 @@ class Rcno_Reviews_Public {
 		}
 
 		// Check on all public pages.
-		if ( ! is_admin() && $query->is_main_query() ) {
+		if ( $query->is_main_query() ) {
 			// Post archive page.
 			if ( is_post_type_archive( 'rcno_review' ) ) {
 				// set post type to only reviews.

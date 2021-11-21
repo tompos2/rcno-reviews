@@ -4,7 +4,7 @@ Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
-Tested up to: 5.8.1
+Tested up to: 5.8.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -108,6 +108,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.50.1 =
+* Fix a JS bug with TinyMCE and Google Books
 
 = 1.50.0 =
 * Added an option to use custom review taxonomies with regular posts
