@@ -98,7 +98,7 @@ class Rcno_Currently_Reading {
 
 			wp_enqueue_script( 'rcno-vuejs' );
 			wp_enqueue_script( $this->widget_id, plugin_dir_url( __DIR__ ) . 'admin/js/rcno-currently-reading.js',
-			array( 'jquery', 'rcno-vuejs' ), '1.5.1', true );
+			array( 'jquery', 'rcno-vuejs' ), $this->version, true );
 			wp_localize_script( $this->widget_id, 'currently_reading', array(
 				'api'     => array(
 					'url'   => esc_url_raw( rest_url( 'rcno/v1/currently-reading' ) ),

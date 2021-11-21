@@ -90,7 +90,7 @@
                             book.items["0"].volumeInfo.canonicalVolumeLink
                         );
 
-                        if (typeof tinymce !== 'undefined') {
+                        if (typeof tinymce !== 'undefined' && tinymce.get('rcno_book_description')) {
                             tinymce.get('rcno_book_description').setContent(
                                 book.items["0"].volumeInfo.description
                             );

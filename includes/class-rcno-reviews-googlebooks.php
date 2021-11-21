@@ -84,7 +84,7 @@ class Rcno_Reviews_GoogleBooks_API {
 
 			if ( 'post-new.php' === $hook || 'post.php' === $hook ) {
 				if ( 'rcno_review' === $post->post_type ) {
-					wp_enqueue_script( 'googlebooks-script', plugin_dir_url( __FILE__ ) . '../admin/js/rcno-reviews-google-books.js', array( 'jquery' ), '1.0.0', false );
+					wp_enqueue_script( 'googlebooks-script', plugin_dir_url( __FILE__ ) . '../admin/js/rcno-reviews-google-books.js', array( 'jquery' ), $this->version, true );
 					wp_localize_script(
 						'googlebooks-script',
 						'gb_options',
