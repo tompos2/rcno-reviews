@@ -322,6 +322,10 @@ class Rcno_Reviews_Admin {
 		$opts['show_in_nav_menu']     = true;
 		$opts['show_ui']              = true;
 
+		$opts['show_in_rest']          = true;
+		$opts['rest_base']             = 'rcno/' . strtolower( $plural );
+		$opts['rest_controller_class'] = 'WP_REST_Posts_Controller';
+
 		$opts['supports'] = array(
 			'title',
 			'editor',
@@ -455,6 +459,10 @@ class Rcno_Reviews_Admin {
 			$opts['show_tag_cloud']    = true;
 			$opts['show_ui']           = true;
 			$opts['sort']              = '';
+
+			$opts['show_in_rest']          = true;
+			$opts['rest_base']             = 'rcno/' . strtolower( $plural );
+			$opts['rest_controller_class'] = 'WP_REST_Terms_Controller';
 
 			/**
 			 * Note: If you want to ensure that your custom taxonomy behaves like a tag,

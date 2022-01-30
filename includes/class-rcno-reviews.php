@@ -84,7 +84,7 @@ class Rcno_Reviews {
 		$this->define_template_hooks();
 		$this->define_widget_hooks();
 
-		$this->define_rest_hooks();
+		// $this->define_rest_hooks();
 		$this->define_external_hooks();
 
 		$this->define_shortcodes();
@@ -461,12 +461,12 @@ class Rcno_Reviews {
 	 */
 	private function define_rest_hooks() {
 
-		$plugin_rest = new Rcno_Reviews_Rest_API( $this->get_plugin_name(), $this->get_version() );
+		// $plugin_rest = new Rcno_Reviews_Rest_API( $this->get_plugin_name(), $this->get_version() );
 
 		// Registers the book reviews CPT and custom taxonomies with the WordPress REST API.
-		$this->loader->add_action( 'init', $plugin_rest, 'rcno_enable_rest_support', 25 );
+		// $this->loader->add_action( 'init', $plugin_rest, 'rcno_enable_rest_support', 25 );
 
-		$this->loader->add_action( 'rest_api_init', $plugin_rest, 'rcno_register_rest_fields' );
+		// $this->loader->add_action( 'rest_api_init', $plugin_rest, 'rcno_register_rest_fields' );
 	}
 
 
