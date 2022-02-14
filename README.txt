@@ -109,6 +109,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.60.1 =
+* Minor bug fix
+
 = 1.60.0 =
 * Fix a critical bug related to the Gutenberg post editor
 

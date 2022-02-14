@@ -843,7 +843,7 @@ class Rcno_Template_Tags {
 	 * @param int    $review_id		The current review's post ID.
 	 * @param string $meta_key		The predefined meta key we are requesting.
 	 * @param string $wrapper		The predefined HTML tag to wrap our content.
-	 * @param bool   $label			Whether or not to show a label.
+	 * @param bool   $label			Whether not to show a label.
 	 *
 	 * @return string|null
 	 */
@@ -910,8 +910,10 @@ class Rcno_Template_Tags {
 								. '</span>';
 					}
 
-				} else {
+				} elseif( '' !== $wrapper ) {
 					$out .= '<span class="rcno-meta-value">' . sanitize_text_field( $review[ $meta_key ][0] ) . '</span>';
+				} else {
+					$out .= sanitize_text_field( $review[ $meta_key ][0] );
 				}
 
 				if ( '' === $wrapper ) {
@@ -938,7 +940,7 @@ class Rcno_Template_Tags {
 	 * @param int    $review_id		The current review's post ID.
 	 * @param string $meta_key		The predefined meta key we are requesting.
 	 * @param string $wrapper		The predefined HTML tag to wrap our content.
-	 * @param bool   $label			Whether or not to show a label.
+	 * @param bool   $label			Whether not to show a label.
 	 *
 	 * @return void
 	 */
@@ -956,7 +958,7 @@ class Rcno_Template_Tags {
 	 * @since 1.0.0
 	 *
 	 * @param int  $review_id     The post ID of the book review.
-	 * @param bool $label         Displays the a label before the purchase links.
+	 * @param bool $label         Displays the label before the purchase links.
 	 *
 	 * @return string
 	 */
