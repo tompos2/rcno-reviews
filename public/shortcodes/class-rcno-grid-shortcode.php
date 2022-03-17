@@ -140,11 +140,6 @@ class Rcno_Grid_Shortcode {
 			// Create an empty array to take the book details.
 			$books = array();
 
-			// Used in 'usort' to sort alphabetically by book title.
-			function cmp( $a, $b ) {
-				return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
-			}
-
 			// Loop through each post, book title from post-meta and work on book title.
 			foreach ( $posts as $book ) {
 				$book_details   = get_post_custom( $book->ID );
@@ -158,7 +153,7 @@ class Rcno_Grid_Shortcode {
 					'sorted_title'   => $sorted_title,
 					'unsorted_title' => $unsorted_title,
 				);
-				usort( $books, 'cmp' );
+				usort( $books, array( $this, 'compare_titles' ) );
 			}
 
 			$out .= '<div id="macy-container" class="rcno-book-grid-index-container rcno-book-grid-index">';
@@ -193,6 +188,18 @@ class Rcno_Grid_Shortcode {
 	 * @return int
 	 */
 	protected function sort_by_title( $a, $b ) {
+		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
+	}
+
+	/**
+	 * Used in 'usort' to sort alphabetically by book title.
+	 *
+	 * @param $a
+	 * @param $b
+	 *
+	 * @return int
+	 */
+	protected function compare_titles( $a, $b ) {
 		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
 	}
 }

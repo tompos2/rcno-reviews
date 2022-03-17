@@ -23,10 +23,10 @@ if ( $posts && count( $posts ) > 0 ) {
     // Loop through each post, book title from post-meta and work on book title.
     foreach ( $posts as $book_ID ) {
         $book_details   = get_post_custom( $book_ID );
-        $unsorted_title = $book_details['rcno_book_title'][0];
+        $unsorted_title = isset( $book_details['rcno_book_title'] ) ? $book_details['rcno_book_title'][0] : '';
         $sorted_title   = $unsorted_title;
         if ( $this->variables['ignore_articles'] ) {
-            $sorted_title = preg_replace( '/^(' . $this->variables['articles_list'] . ') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
+            $sorted_title = preg_replace( '/^(' . $this->variables['articles_list'] . ') (.+)/', '$2, $1', $unsorted_title );
         }
         $books[] = array(
             'ID'             => $book_ID,
@@ -60,7 +60,9 @@ if ( $options['category'] ) {
 
         <?php foreach ( $taxonomies as $taxonomy ) {
             $terms = get_terms( array( 'taxonomy' => $taxonomy, 'orderby' => 'name', 'order' => 'ASC', 'hide_empty' => true, ) );
-            if ( is_wp_error( $terms) ) continue;
+            if ( is_wp_error( $terms) ) {
+	            continue;
+            }
             $tax = get_taxonomy( $taxonomy );
         ?>
             <div class="rcno-isotope-grid-select-wrapper">

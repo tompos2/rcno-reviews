@@ -161,8 +161,10 @@ class Rcno_Isotope_Grid_Shortcode {
 	 * Utility function used by `usort` to sort titles alphabetically
 	 *
 	 * @since 1.12.0
+	 *
 	 * @param $a
 	 * @param $b
+	 *
 	 * @return int
 	 */
 	protected function sort_by_title( $a, $b ) {
@@ -174,7 +176,7 @@ class Rcno_Isotope_Grid_Shortcode {
      *
      * @since 2.0.0
      *
-     * @return string
+     * @return void
      */
     public function more_filtered_reviews() {
         //  Nonce check

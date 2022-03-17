@@ -328,8 +328,8 @@ class Rcno_Template_Tags {
 	 * @since 1.0.0
 	 *
 	 * @param int    $review_id		The current review's post ID.
-	 * @param string $size 'thumbnail', 'medium', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
-	 * @param bool   $wrapper	Whether to add the image URL to an '<img />' HTML tag.
+	 * @param string $size 'thumbnail', 'medium', 'large', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
+	 * @param bool   $wrapper	Whether to add the image URL to an `img` HTML tag.
 	 * @param bool   $original	Whether to use the original uploaded image.
 	 *
 	 * @return bool|string
@@ -370,7 +370,7 @@ class Rcno_Template_Tags {
 		$book_title = $book_title ? esc_attr( $book_title ) : __( 'Book Title Unavailable', 'recencio-book-reviews' );
 		$book_alt   = $book_alt ? esc_attr( $book_alt ) : __( 'no title has been provided for this book', 'recencio-book-reviews' );
 
-		$book_cover_url = apply_filters( 'rcno_book_cover_url', esc_attr( $og_book_src ?: $book_src ), $review_id );
+		$book_cover_url = apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ?: $og_book_src ), $review_id );
 
 		$out = '';
 		$out .= '<img src="' . $book_cover_url . '" ';
