@@ -60,9 +60,11 @@ if ( $options['category'] ) {
 
         <?php foreach ( $taxonomies as $taxonomy ) {
             $terms = get_terms( array( 'taxonomy' => $taxonomy, 'orderby' => 'name', 'order' => 'ASC', 'hide_empty' => true, ) );
+
             if ( is_wp_error( $terms) ) {
 	            continue;
             }
+
             $tax = get_taxonomy( $taxonomy );
         ?>
             <div class="rcno-isotope-grid-select-wrapper">

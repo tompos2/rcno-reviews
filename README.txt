@@ -109,6 +109,9 @@ Please open a new topic on the plugin's WordPress.org support page
 
 == Changelog ==
 
+= 1.61.0 =
+* Fixed a bug with how book covers are resolved
+
 = 1.60.1 =
 * Minor bug fix
 

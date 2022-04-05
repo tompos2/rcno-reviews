@@ -188,6 +188,7 @@ class Rcno_Grid_Shortcode {
 	 * @return int
 	 */
 	protected function sort_by_title( $a, $b ) {
+
 		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
 	}
 
@@ -200,6 +201,7 @@ class Rcno_Grid_Shortcode {
 	 * @return int
 	 */
 	protected function compare_titles( $a, $b ) {
+
 		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
 	}
 }

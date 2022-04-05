@@ -447,9 +447,9 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int 	 $review_id	The current review's post ID.
 	 * @param string $taxonomy	The custom taxonomy to print the HTML tags for.
-	 * @param bool   $label		Whether or not to print the taxonomy label.
+	 * @param bool   $label		Whether not to print the taxonomy label.
 	 * @param string $sep		The separator used for multiple taxonomies.
-	 * @param bool   $link		Whether or not to create linkable taxonomy terms.
+	 * @param bool   $link		Whether not to create linkable taxonomy terms.
 	 *
 	 * @return null|string
 	 */
@@ -498,9 +498,9 @@ class Rcno_Template_Tags {
 	 *
 	 * @param int 	 $review_id	The current review's post ID.
 	 * @param string $taxonomy	The custom taxonomy to print the HTML tags for.
-	 * @param bool   $label		Whether or not to print the taxonomy label.
+	 * @param bool   $label		Whether not to print the taxonomy label.
 	 * @param string $sep		The separator used for multiple taxonomies.
-	 * @param bool   $link		Whether or not to create linkable taxonomy terms.
+	 * @param bool   $link		Whether not to create linkable taxonomy terms.
 	 *
 	 * @return void
 	 */
@@ -512,7 +512,7 @@ class Rcno_Template_Tags {
 	 * Generates a list of all the taxonomy and terms attached to a review post.
 	 *
 	 * @param int    $review_id The current review's post ID.
-	 * @param bool   $label     Whether or not to print the taxonomy label.
+	 * @param bool   $label     Whether not to print the taxonomy label.
 	 * @param string $sep       The separator used for multiple taxonomies.
 	 *
 	 * @return string
@@ -535,7 +535,7 @@ class Rcno_Template_Tags {
 	 * Prints a list of all the taxonomy and terms attached to a review post.
 	 *
 	 * @param int    $review_id The current review's post ID.
-	 * @param bool   $label     Whether or not to print the taxonomy label.
+	 * @param bool   $label     Whether not to print the taxonomy label.
 	 * @param string $sep       The separator used for multiple taxonomies.
 	 *
 	 * @return void
