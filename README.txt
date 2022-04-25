@@ -4,8 +4,8 @@ Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
-Tested up to: 5.9
-Stable tag: trunk
+Tested up to: 5.9.3
+Stable tag: 1.62.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,9 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.62.0 =
+* Start using WordPress' native responsive images feature with book covers
 
 = 1.61.0 =
 * Fixed a bug with how book covers are resolved
