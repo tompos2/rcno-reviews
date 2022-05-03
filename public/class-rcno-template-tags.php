@@ -327,8 +327,8 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $review_id		The current review's post ID.
-	 * @param string $size 'thumbnail', 'medium', 'large', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
+	 * @param int    $review_id	The current review's post ID.
+	 * @param string $size      'thumbnail', 'medium', 'large', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
 	 * @param bool   $wrapper	Whether to add the image URL to an `img` HTML tag.
 	 * @param bool   $original	Whether to use the original uploaded image.
 	 *
@@ -355,7 +355,8 @@ class Rcno_Template_Tags {
 		}
 
 		if ( ! $book_src ) {
-			$book_src = Rcno_Reviews_Option::get_option( 'rcno_default_cover', plugin_dir_url( __FILE__ ) . 'images/no-cover.jpg' );
+			$no_cover = Rcno_Reviews_Option::get_option( 'rcno_default_cover', plugin_dir_url( __FILE__ ) . 'images/no-cover.jpg' );
+			$book_src = apply_filters( 'rcno_no_book_cover_image', $no_cover, $review_id, $attachment_id );
 		}
 
 		if ( ! $wrapper ) {

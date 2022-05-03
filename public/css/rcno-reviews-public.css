@@ -37,6 +37,10 @@
     flex: 1 1 25%;
 }
 
+.rcno-recent-review .widget-book-cover img {
+    width: 100%;
+}
+
 .rcno-recent-review .widget-book-cover .rcno-admin-rating {
     position: absolute;
     bottom: 0;
@@ -196,6 +200,10 @@
     margin: 0 10px 10px 0;
 }
 
+.rcno-tax-container .rcno-tax-name .books-container .book-cover-container img {
+    width: 100%;
+}
+
 .rcno-tax-container .rcno-tax-name .titles-container {
     display: flex;
     flex-wrap: wrap;
@@ -292,6 +300,10 @@
 .rcno-isotope-grid-item {
     margin: 0 10px 10px 0;
     overflow: hidden;
+}
+
+.rcno-isotope-grid-item img {
+    width: 100%;
 }
 
 .rcno-isotope-grid-item p {
