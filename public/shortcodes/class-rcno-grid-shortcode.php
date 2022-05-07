@@ -143,10 +143,10 @@ class Rcno_Grid_Shortcode {
 			// Loop through each post, book title from post-meta and work on book title.
 			foreach ( $posts as $book ) {
 				$book_details   = get_post_custom( $book->ID );
-				$unsorted_title = $book_details['rcno_book_title'][0];
+				$unsorted_title = ! empty( $book_details['rcno_book_title'] ) ? $book_details['rcno_book_title'][0] : '';
 				$sorted_title   = $unsorted_title;
 				if ( $this->variables['ignore_articles'] ) {
-					$sorted_title = preg_replace( '/^(' . $this->variables['articles_list'] . ') (.+)/', '$2, $1', $book_details['rcno_book_title'] );
+					$sorted_title = preg_replace( '/^(' . $this->variables['articles_list'] . ') (.+)/', '$2, $1', $unsorted_title );
 				}
 				$books[] = array(
 					'ID'             => $book->ID,
@@ -189,7 +189,7 @@ class Rcno_Grid_Shortcode {
 	 */
 	protected function sort_by_title( $a, $b ) {
 
-		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
+		return strcasecmp( $a['sorted_title'], $b['sorted_title'] );
 	}
 
 	/**
@@ -202,6 +202,6 @@ class Rcno_Grid_Shortcode {
 	 */
 	protected function compare_titles( $a, $b ) {
 
-		return strcasecmp( $a['sorted_title'][0], $b['sorted_title'][0] );
+		return strcasecmp( $a['sorted_title'], $b['sorted_title'] );
 	}
 }

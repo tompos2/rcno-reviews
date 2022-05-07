@@ -198,6 +198,7 @@
 .rcno-tax-container .rcno-tax-name .books-container .book-cover-container {
     flex: 0 1 85px;
     margin: 0 10px 10px 0;
+    background-color: #efefef;
 }
 
 .rcno-tax-container .rcno-tax-name .books-container .book-cover-container img {

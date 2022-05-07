@@ -4,7 +4,7 @@ Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
-Tested up to: 5.9.3
+Tested up to: 6.0
 Stable tag: 1.62.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -113,6 +113,8 @@ Please open a new topic on the plugin's WordPress.org support page
 * Start using WordPress' native responsive images feature with book covers
 * Fixed bugs with the display of book cover images
 * Added a filter to override the "no cover" image
+* Increased WordPress compatibility to 6.0
+* Assorted bug fixes
 
 = 1.61.0 =
 * Fixed a bug with how book covers are resolved

@@ -327,6 +327,9 @@ class Rcno_Template_Tags {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @todo Replace `hw_string` with `wp_img_tag_add_width_and_height_attr()` in the future as this function
+	 *       was introduced in WP 5.5
+	 *
 	 * @param int    $review_id	The current review's post ID.
 	 * @param string $size      'thumbnail', 'medium', 'large', 'full', 'rcno-book-cover-sm', 'rcno-book-cover-lg'.
 	 * @param bool   $wrapper	Whether to add the image URL to an `img` HTML tag.
@@ -339,6 +342,7 @@ class Rcno_Template_Tags {
 		$review        = get_post_custom( $review_id );
 		$attachment_id = isset( $review['rcno_reviews_book_cover_id'] ) ? $review['rcno_reviews_book_cover_id'][0] : 0;
 		$size          = apply_filters( 'rcno_book_cover_size', $size );
+		$hw_string     = '';
 
 		if ( ! isset( $review['rcno_reviews_book_cover_src'] ) ) {
 			return false;
@@ -351,7 +355,9 @@ class Rcno_Template_Tags {
 			if ( 0 === $attachment_id ) {
 				$attachment_id = $this->better_attachment_url_to_post_id( $og_book_src );
 			}
-			$book_src = wp_get_attachment_image_url( $attachment_id, $size );
+			$book_src  = wp_get_attachment_image_url( $attachment_id, $size );
+			$image     = wp_get_attachment_image_src( $attachment_id, $size );
+			$hw_string = image_hwstring( $image[1], $image[2] );
 		}
 
 		if ( ! $book_src ) {
@@ -373,7 +379,7 @@ class Rcno_Template_Tags {
 
 		$book_cover_url = apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ?: $og_book_src ), $review_id );
 
-		$out = '<img src="' . $book_cover_url . '" ';
+		$out = '<img ' . $hw_string . ' src="' . $book_cover_url . '" ';
 		$out .= 'title="' . $book_title . '" ';
 		$out .= 'alt="' . $book_alt . '" ';
 		$out .= 'class="rcno-book-cover ' . $size . '" ';
