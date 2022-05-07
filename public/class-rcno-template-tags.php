@@ -355,9 +355,9 @@ class Rcno_Template_Tags {
 			if ( 0 === $attachment_id ) {
 				$attachment_id = $this->better_attachment_url_to_post_id( $og_book_src );
 			}
-			$book_src  = wp_get_attachment_image_url( $attachment_id, $size );
 			$image     = wp_get_attachment_image_src( $attachment_id, $size );
-			$hw_string = image_hwstring( $image[1], $image[2] );
+			$book_src  = $image ? $image[0] : false;
+			$hw_string = $image ? image_hwstring( $image[1], $image[2] ) : '';
 		}
 
 		if ( ! $book_src ) {
