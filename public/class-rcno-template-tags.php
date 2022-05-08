@@ -140,7 +140,7 @@ class Rcno_Template_Tags {
 	}
 
 	/**
-	 * Retrieves a list of all the metadata keys and taxonomy taxonomy slugs
+	 * Retrieves a list of all the metadata keys and taxonomy slugs
 	 * for a review.
 	 *
 	 * @since 1.11.0
