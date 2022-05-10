@@ -81,3 +81,12 @@ function run_rcno_reviews() {
 }
 
 run_rcno_reviews();
+
+/**
+ * Add the `Rcno_Template_Tags` class to globals for 3rd party ease of use
+ *
+ * @since 1.62.0
+ *
+ * @return \Rcno_Template_Tags
+ */
+$GLOBALS['RcnoTemplate'] = new Rcno_Template_Tags( RCNO_PLUGIN_NAME, RCNO_PLUGIN_VER );

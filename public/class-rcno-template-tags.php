@@ -38,34 +38,6 @@ class Rcno_Template_Tags {
 	 */
 	protected $version;
 
-
-	/**
-	 * The Public_Rating class.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      Rcno_Reviews_Public_Rating $public_rating An instance of the Public Rating class.
-	 */
-	protected $public_rating;
-
-	/**
-	 * The current version of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      array $private_score An array of all the private scoring criteria.
-	 */
-	protected $private_score;
-
-	/**
-	 * The book meta keys used by the plugin
-	 *
-	 * @since    1.15.0
-	 * @access   public
-	 * @var      array $meta_keys An array of all the meta keys.
-	 */
-	public $meta_keys;
-
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -77,24 +49,48 @@ class Rcno_Template_Tags {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
-		$this->meta_keys = array(
-			'rcno_book_illustrator'   => apply_filters( 'rcno_book_illustrator', __( 'Illustrator', 'recencio-book-reviews' ) ),
-			'rcno_book_pub_date'      => apply_filters( 'rcno_book_pub_date', __( 'Published', 'recencio-book-reviews' ) ),
-			'rcno_book_pub_format'    => apply_filters( 'rcno_book_pub_format', __( 'Format', 'recencio-book-reviews' ) ),
-			'rcno_book_pub_edition'   => apply_filters( 'rcno_book_pub_edition', __( 'Edition', 'recencio-book-reviews' ) ),
-			'rcno_book_page_count'    => apply_filters( 'rcno_book_page_count', __( 'Page Count', 'recencio-book-reviews' ) ),
-			'rcno_book_series_number' => apply_filters( 'rcno_book_series_number', __( 'Series Number', 'recencio-book-reviews' ) ),
-			'rcno_book_gr_review'     => apply_filters( 'rcno_book_gr_review', __( 'Goodreads Rating', 'recencio-book-reviews' ) ),
-			'rcno_book_gr_id'         => apply_filters( 'rcno_book_gr_id', __( 'Goodreads ID', 'recencio-book-reviews' ) ),
-			'rcno_book_isbn13'        => apply_filters( 'rcno_book_isbn13', __( 'ISBN13', 'recencio-book-reviews' ) ),
-			'rcno_book_isbn'          => apply_filters( 'rcno_book_isbn', __( 'ISBN', 'recencio-book-reviews' ) ),
-			'rcno_book_asin'          => apply_filters( 'rcno_book_asin', __( 'ASIN', 'recencio-book-reviews' ) ),
-			'rcno_book_gr_url'        => apply_filters( 'rcno_book_gr_url', __( 'Book URL', 'recencio-book-reviews' ) ),
-			'rcno_book_title'         => apply_filters( 'rcno_book_title', __( 'Title', 'recencio-book-reviews' ) ),
-		);
 	}
 
+	/**
+	 * Returns an instance of the \Rcno_Reviews_Public_Rating class
+	 *
+	 * @string 1.62.0
+	 *
+	 * @return \Rcno_Reviews_Public_Rating
+	 */
+	public function ratings() {
+
+		return new Rcno_Reviews_Public_Rating( $this->plugin_name, $this->version );
+	}
+
+	/**
+	 * Our default meta keys
+	 *
+	 * @since 1.62.0
+	 *
+	 * @return array
+	 */
+	public function meta_keys() {
+
+		return apply_filters(
+			'rcno_all_book_meta_keys',
+			array(
+				'rcno_book_illustrator'   => apply_filters( 'rcno_book_illustrator', __( 'Illustrator', 'recencio-book-reviews' ) ),
+				'rcno_book_pub_date'      => apply_filters( 'rcno_book_pub_date', __( 'Published', 'recencio-book-reviews' ) ),
+				'rcno_book_pub_format'    => apply_filters( 'rcno_book_pub_format', __( 'Format', 'recencio-book-reviews' ) ),
+				'rcno_book_pub_edition'   => apply_filters( 'rcno_book_pub_edition', __( 'Edition', 'recencio-book-reviews' ) ),
+				'rcno_book_page_count'    => apply_filters( 'rcno_book_page_count', __( 'Page Count', 'recencio-book-reviews' ) ),
+				'rcno_book_series_number' => apply_filters( 'rcno_book_series_number', __( 'Series Number', 'recencio-book-reviews' ) ),
+				'rcno_book_gr_review'     => apply_filters( 'rcno_book_gr_review', __( 'Goodreads Rating', 'recencio-book-reviews' ) ),
+				'rcno_book_gr_id'         => apply_filters( 'rcno_book_gr_id', __( 'Goodreads ID', 'recencio-book-reviews' ) ),
+				'rcno_book_isbn13'        => apply_filters( 'rcno_book_isbn13', __( 'ISBN13', 'recencio-book-reviews' ) ),
+				'rcno_book_isbn'          => apply_filters( 'rcno_book_isbn', __( 'ISBN', 'recencio-book-reviews' ) ),
+				'rcno_book_asin'          => apply_filters( 'rcno_book_asin', __( 'ASIN', 'recencio-book-reviews' ) ),
+				'rcno_book_gr_url'        => apply_filters( 'rcno_book_gr_url', __( 'Book URL', 'recencio-book-reviews' ) ),
+				'rcno_book_title'         => apply_filters( 'rcno_book_title', __( 'Title', 'recencio-book-reviews' ) ),
+			)
+		);
+	}
 
 	/**
 	 * Includes the 'functions file' to be used by the book review template.
@@ -163,7 +159,7 @@ class Rcno_Template_Tags {
 			);
 		}
 
-		$meta_keys         = apply_filters( 'rcno_all_book_meta_keys', $this->meta_keys );
+		$meta_keys         = $this->meta_keys();
 		$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 		$custom_taxonomies = explode( ',', $custom_taxonomies );
 
@@ -858,7 +854,7 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '', $label = true ) {
 
 		$review    = get_post_custom( $review_id );
-		$meta_keys = apply_filters( 'rcno_all_book_meta_keys', $this->meta_keys );
+		$meta_keys = $this->meta_keys();
 		$url = '@(http(s)?)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@';
 
 		$wrappers = array(

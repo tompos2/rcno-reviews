@@ -114,7 +114,7 @@ Please open a new topic on the plugin's WordPress.org support page
 * Fixed bugs with the display of book cover images
 * Added a filter to override the "no cover" image
 * Increased WordPress compatibility to 6.0
-* Assorted bug fixes
+* Assorted bug fixes and refactoring
 
 = 1.61.0 =
 * Fixed a bug with how book covers are resolved

@@ -258,12 +258,10 @@ class Rcno_Reviews_Admin {
 		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
 
 		// Enqueue assets needed by the code editor.
-		if ( 'toplevel_page_recencio-book-reviews' === $hook || 'rcno_review_page_rcno_extensions' === $hook ) {
-			wp_enqueue_code_editor( array(
-				'type' => 'text/css',
-			) );
+		if ( 'toplevel_page_recencio-book-reviews' === $hook || 'rcno_review_page_rcno_extensions' === $hook || 'widgets.php' === $hook ) {
+			wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
 			wp_enqueue_script( $this->plugin_name . '-minicolors-js', plugin_dir_url( __FILE__ ) . 'js/minicolors.min.js', array( 'jquery' ), '2.2.6', true );
-			wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.12.4', true );
+			wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery', $this->plugin_name ), '0.12.4', true );
 		}
 
 		wp_enqueue_script( 'xml2json', plugin_dir_url( __FILE__ ) . 'js/xml2json.js', array( 'jquery', 'recencio-book-reviews' ), '1.0.0', true );
