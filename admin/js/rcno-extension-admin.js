@@ -1,8 +1,6 @@
-document.addEventListener('DOMContentLoaded', function(){
-    MicroModal.init();
-}, false);
-
 (function($){
+
+	MicroModal.init();
 
 	$( document ).on( 'click', '.button-extension-activate', function( e ){
 		e.preventDefault();
@@ -23,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				},
 				success: function(resp) {
 					if( resp.success ) {
-						// On success, add the deactivate class and remove the activate class.
-						// Also remove the primary class so we have a gray button and not a blue one.
+						// On success, add a `deactivate` class and remove the `activate` class.
+						// Also remove the primary class so that we have a gray button and not a blue one.
 						$this.addClass('button-extension-deactivate')
 						.addClass('button-default')
 						.removeClass('button-extension-activate')

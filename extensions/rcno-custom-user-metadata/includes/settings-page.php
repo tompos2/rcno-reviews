@@ -23,10 +23,21 @@
                                id="settings-form-text-field"
                                value="<?php echo esc_attr( $this->get_setting( 'custom_user_metaboxes' ) ); ?>"
                         />
-                        <p>
-                            <?php _e( 'Please visit the "Templates" tab on the Recencio setting page,
-                             to add your new metadata entries to the frontend', 'recencio-book-reviews' ); ?>
-                        </p>
+                        <h3 style="font-size: 14px;">
+                            <?php _e( 'Usage Instructions', 'recencio-book-reviews' ); ?>
+                        </h3>
+                        <ol  style="font-size: 12px;">
+                            <li>
+	                            <?php _e( 'Create your new custom metadata fields in the extension, then save.', 'recencio-book-reviews' ); ?>
+                            </li>
+                            <li>
+		                        <?php _e( 'Go to the “Templates” tab on the plugin’s settings page, then to the “Book Detail Items” section. 
+		                        Look for your newly created custom metadata fields then add them to the list. Then save changes.', 'recencio-book-reviews' ); ?>
+                            </li>
+                            <li>
+		                        <?php _e( 'Now, when you create or edit new reviews, you will see your new metadata fields in the “General Information” section of the page and on the frontend.', 'recencio-book-reviews' ); ?>
+                            </li>
+                        </ol>
 
 					</div>
 					<footer class="modal__footer">

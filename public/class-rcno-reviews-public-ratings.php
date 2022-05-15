@@ -277,13 +277,14 @@ class Rcno_Reviews_Public_Rating {
 	 */
 	private function rcno_current_user() {
 		global $current_user;
+
 		if ( is_user_logged_in() ) {
 			wp_get_current_user();
 
 			return $current_user->user_login;
-		} else {
-			return $_COOKIE[ 'comment_author_' . COOKIEHASH ];
 		}
+
+		return $_COOKIE[ 'comment_author_' . COOKIEHASH ];
 	}
 
 
@@ -302,16 +303,12 @@ class Rcno_Reviews_Public_Rating {
 	 *
 	 * @param string $query
 	 *
-	 * @return bool|float|int|mixed
+	 * @return bool|float|int
 	 */
 	public function rcno_rating_info( $query ) {
 
 		// Get the review ID.
-		if ( isset( $GLOBALS['review_id'] ) && $GLOBALS['review_id'] !== '' ) {
-			$review_id = $GLOBALS['review_id'];
-		} else {
-			$review_id = get_post()->ID;
-		}
+		$review_id = ! empty( $GLOBALS['review_id'] ) ? (int) $GLOBALS['review_id'] : get_the_ID();
 
 		switch ( $query ) {
 
@@ -321,7 +318,6 @@ class Rcno_Reviews_Public_Rating {
 					return $this->rating = array_sum( $avg ) / count( $avg );
 				}
 				return 0;
-				break;
 
 			case 'count':
 				$count = $this->count_ratings_info( $review_id );
@@ -329,7 +325,6 @@ class Rcno_Reviews_Public_Rating {
 					return $this->comment_count = count( $count );
 				}
 				return 0;
-				break;
 
 			case 'min':
 				$min = $this->count_ratings_info( $review_id );
@@ -337,7 +332,6 @@ class Rcno_Reviews_Public_Rating {
 					return $this->min_rating = (int) min( $min );
 				}
 				return 0;
-				break;
 
 			case 'max':
 				$max = $this->count_ratings_info( $review_id );
@@ -345,7 +339,6 @@ class Rcno_Reviews_Public_Rating {
 					return $this->max_rating = (int) max( $max );
 				}
 				return 0;
-				break;
 
 			default:
 				return false;
@@ -378,7 +371,7 @@ class Rcno_Reviews_Public_Rating {
 			$karma_scores[] = get_comment_meta( $value, 'rcno_review_comment_rating', true );
 		}
 
-		return $karma_scores ? $karma_scores : null;
+		return $karma_scores ?: null;
 	}
 
 
@@ -388,7 +381,7 @@ class Rcno_Reviews_Public_Rating {
 	 * @param int  $id
 	 * @param bool $is_comment
 	 *
-	 * @return array|string
+	 * @return string
 	 */
 	public function rate_calculate( $id = 0, $is_comment = false ) {
 
@@ -454,9 +447,7 @@ class Rcno_Reviews_Public_Rating {
 			$stars[6] = '</ul></div>';
 		}
 
-		$stars = implode( '', $stars );
-
-		return $stars;
+		return implode( '', $stars );
 	}
 
 	/**
@@ -491,8 +482,7 @@ class Rcno_Reviews_Public_Rating {
 	public function rcno_display_comment_rating( $comment ) {
 
 		if ( $this->enable_rating && is_singular( 'rcno_review' ) && ! is_comment_feed() ) {
-			$out = '';
-			$out .= $this->the_comment_rating();
+			$out = $this->the_comment_rating();
 			$out .= $comment;
 
 			return $out;
