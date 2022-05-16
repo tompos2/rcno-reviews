@@ -366,7 +366,7 @@ class Rcno_Template_Tags {
 		}
 
 		// Use the book title because most users won't edit it from the file upload screen.
-		$book_title = $review['rcno_book_title'][0];
+		$book_title = ! empty( $review['rcno_book_title'] ) ? $review['rcno_book_title'][0] : '';
 		$book_alt   = ! empty( $review['rcno_reviews_book_cover_alt'][0] ) ?
 		$review['rcno_reviews_book_cover_alt'][0] : $book_title;
 
