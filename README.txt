@@ -113,8 +113,9 @@ Please open a new topic on the plugin's WordPress.org support page
 * Start using WordPress' native responsive images feature with book covers
 * Fixed bugs with the display of book cover images
 * Added a filter to override the "no cover" image
-* Increased WordPress compatibility to 6.0
+* Increased WordPress version compatibility to 6.0
 * Assorted bug fixes, code cleanup and refactoring
+* Bug fixes
 
 = 1.61.0 =
 * Fixed a bug with how book covers are resolved

@@ -571,7 +571,7 @@ class Rcno_Reviews_Admin {
 		$screen = get_current_screen();
 
 		// Return early if we're not on a book review edit screen.
-		if ( $screen && 'rcno_review' !== $screen->post_type ) {
+		if ( $screen && 'rcno_review' === $screen->post_type ) {
 			// Setup help tab args.
 			$args = array(
 				'id'      => 'rcno_reviews_help',
