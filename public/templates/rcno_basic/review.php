@@ -46,7 +46,9 @@ $review_score_position = get_post_meta( $review_id, 'rcno_review_score_position'
 		// Prints the book review content.
 		$template->the_rcno_book_review_content( $review_id );
 
-		$template->the_rcno_book_purchase_links( $review_id, true );
+		if ( ! apply_filters( 'rcno_book_purchase_links_in_details', false, $review_id ) ) {
+			$template->the_rcno_book_purchase_links( $review_id, true );
+		}
 		?>
 
 		<?php if ( true === $review_score_enable && 'bottom' === $review_score_position ) : ?>

@@ -25,17 +25,16 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+defined( 'WPINC' ) || exit;
+
+const RCNO_PLUGIN_VER = '1.63.0';
+const RCNO_PLUGIN_NAME = 'recencio-book-reviews';
 
 // Define our constants.
 define( 'RCNO_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 define( 'RCNO_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RCNO_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 define( 'RCNO_EXT_DIR', plugin_dir_path( __FILE__ ) . 'extensions/' );
-define( 'RCNO_PLUGIN_VER', '1.62.0' );
-define( 'RCNO_PLUGIN_NAME', 'recencio-book-reviews' );
 define( 'RCNO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**

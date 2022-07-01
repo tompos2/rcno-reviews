@@ -257,7 +257,7 @@
 		/* If a thumbnail URL has been associated with this image
 		 * Then we need to display the image and the reset link.
 		 */
-		if ( '' !== $.trim( $( '#rcno-reviews-book-cover-src' ).val() ) ) {
+		if ( '' !== $( '#rcno-reviews-book-cover-src' ).val()?.trim() ) {
 			$( '#rcno-reviews-book-cover-container' ).removeClass( 'hidden' );
 			$( '#rcno-add-book-cover' ).parent().hide();
 			$( '#rcno-remove-book-cover' ).parent().removeClass( 'hidden' );
@@ -311,9 +311,10 @@
             ]
         });
 	}
-
+	console.log('Before Selectize')
     // Adds selectize.js support to text boxes on settings page
     if ( 'undefined' !== typeof window.Selectize ) {
+			console.log('Selectize')
         $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]').selectize({
             create: true,
             plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']

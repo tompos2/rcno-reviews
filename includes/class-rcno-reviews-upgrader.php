@@ -63,10 +63,9 @@ class Rcno_Reviews_Upgrader {
 	 */
 	public function rcno_upgrade_function( $upgrader_object, $options ) {
 
-		if ( $options[ 'action' ] === 'update' && $options[ 'type' ] === 'plugin' ) {
+		if ( $options[ 'action' ] === 'update' && $options[ 'type' ] === 'plugin' && ! empty( $options['plugins'] ) ) {
 			foreach ( (array) $options['plugins'] as $each_plugin ) {
 				if ( $each_plugin === RCNO_PLUGIN_FILE ) {
-
 					$this->add_book_cover_id_to_reviews();
 				}
 			}

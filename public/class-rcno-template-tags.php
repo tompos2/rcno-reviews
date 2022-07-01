@@ -234,6 +234,12 @@ class Rcno_Template_Tags {
 			}
 		}
 
+		if ( apply_filters( 'rcno_book_purchase_links_in_details', false, $review_id ) ) {
+			$out .= $this->get_the_rcno_book_purchase_links( $review_id, true );
+		}
+
+		$out .= apply_filters( 'rcno_full_book_details', null, $review_id );
+
 		$out .= '</div>';
 
 		$out .= '<div class="rcno-full-book-description">';
@@ -974,7 +980,7 @@ class Rcno_Template_Tags {
 		}
 
 		// Disables the purchase links displaying on reviews.
-		if ( false === (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_purchase_links' ) ) {
+		if ( ! Rcno_Reviews_Option::get_option( 'rcno_enable_purchase_links' ) ) {
 			return false;
 		}
 
@@ -987,16 +993,14 @@ class Rcno_Template_Tags {
 		$links_label = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links_label' );
 		$background  = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_background' );
 		$txt_color   = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_link_text_color' );
-		$_stores     = Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links' );
-		$_stores     = explode( ',', $_stores );
+		$dflt_stores = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_store_purchase_links', '' ) );
 
 		$stores = array();
-		foreach ( $_stores as $store ) {
+		foreach ( $dflt_stores as $store ) {
 			$stores[ sanitize_title( $store ) ] = $store;
 		}
 
-		$links = '';
-		$links .= '<div class="rcno-purchase-links-container">';
+		$links = '<div class="rcno-purchase-links-container">';
 
 		if ( $label ) {
 			$links .= '<span class="buy-link-label">' . esc_html( $links_label ) . '</span> ';

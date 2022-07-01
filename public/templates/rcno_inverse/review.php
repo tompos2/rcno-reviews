@@ -40,7 +40,9 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 		$template->the_rcno_review_box( $review_id );
 	}
 
-	$template->the_rcno_book_purchase_links( $review_id, true );
+	if ( ! apply_filters( 'rcno_book_purchase_links_in_details', false, $review_id ) ) {
+		$template->the_rcno_book_purchase_links( $review_id, true );
+	}
 
 	if ( $review_score_enable && 'bottom' === $review_score_position ) {
 		$template->the_rcno_review_box( $review_id );

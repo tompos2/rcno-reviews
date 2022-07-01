@@ -384,3 +384,11 @@ tr.rcno-table-header td {
 table.wp-list-table .row-actions {
     color: #565656;
 }
+
+.settings-form .selectize-control {
+    width: 100%;
+}
+
+.form-table .selectize-control {
+    width: 65%;
+}

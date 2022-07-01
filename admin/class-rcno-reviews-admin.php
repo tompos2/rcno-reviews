@@ -188,26 +188,17 @@ class Rcno_Reviews_Admin {
 	 * @return void
 	 */
 	public function enqueue_styles() {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Rcno_Reviews_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Rcno_Reviews_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		if ( $screen && 'rcno_review' === $screen->post_type ) {
+			wp_enqueue_style( $this->plugin_name . 'minicolors-css', plugin_dir_url( __FILE__ ) . 'css/minicolors.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-modal.css', $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.default.css', '0.12.4', 'all' );
+		}
 
-		wp_enqueue_style( $this->plugin_name . 'minicolors-css', plugin_dir_url( __FILE__ ) . 'css/minicolors.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name . '-modal', plugin_dir_url( __FILE__ ) . 'css/rcno-reviews-modal.css', $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name . '-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.default.css', '0.12.4', 'all' );
 
 		if ( (bool) Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box', false ) ) {
-
 			// $star_color = Rcno_Reviews_Option::get_option( 'rcno_star_rating_color', '#CCCCCC' );
 			$star_color = '#ffd700'; // This is fixed and not affected by user settings.
 			$custom_css = '
@@ -243,42 +234,53 @@ class Rcno_Reviews_Admin {
 	 * @uses     wp_enqueue_script()
 	 * @uses     wp_localize_script()
 	 *
-	 * @param string $hook
-	 *
 	 * @return void
 	 */
-	public function enqueue_scripts( $hook ) {
+	public function enqueue_scripts() {
 		global $post;
+
+		$screen    = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 		$review_id = ( null !== $post ) ? $post->ID : '';
 		$template  = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 
-		// Add the media uploader.
-		wp_enqueue_media();
-
-		wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
-
-		// Enqueue assets needed by the code editor.
-		if ( 'toplevel_page_recencio-book-reviews' === $hook || 'rcno_review_page_rcno_extensions' === $hook || 'widgets.php' === $hook ) {
-			wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
-			wp_enqueue_script( $this->plugin_name . '-minicolors-js', plugin_dir_url( __FILE__ ) . 'js/minicolors.min.js', array( 'jquery' ), '2.2.6', true );
-			wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery', $this->plugin_name ), '0.12.4', true );
+		if ( $screen && 'dashboard' === $screen->base ) {
+			wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
 		}
 
-		wp_enqueue_script( 'xml2json', plugin_dir_url( __FILE__ ) . 'js/xml2json.js', array( 'jquery', 'recencio-book-reviews' ), '1.0.0', true );
-		wp_enqueue_script( 'star-rating-svg', plugin_dir_url( __FILE__ ) . 'js/star-rating-svg.js', array( 'jquery' ), '1.2.0', true );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js', array( 'jquery' ), $this->version, true );
+		if ( $screen && 'rcno_review' === $screen->post_type ) {
+			// Add the media uploader.
+			wp_enqueue_media();
 
-		wp_localize_script( $this->plugin_name, 'my_script_vars', array(
-			'reviewID'                     => $review_id,
-			'ajaxURL'                      => admin_url( 'admin-ajax.php' ),
-			'rcno_reset_nonce'             => wp_create_nonce( 'rcno-rest-nonce' ),
-			'rcno_settings_download_nonce' => wp_create_nonce( 'rcno-settings-download-nonce' ),
-			'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
-			'rcno_gr_remote_get_nonce'     => wp_create_nonce( 'rcno-gr-remote-get-nonce' ),
-			'rcno_admin_rating'            => get_post_meta( $review_id, 'rcno_admin_rating', true ),
-			'rcno_settings_reset_msg'      => __( 'Your settings have been reset, please reload the page to see them.', 'recencio-book-reviews' ),
-			'rcno_book_meta_keys'          => $template->get_rcno_book_meta_keys( 'all' ),
-		) );
+			wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
+			wp_enqueue_script( $this->plugin_name . '-minicolors-js', plugin_dir_url( __FILE__ ) . 'js/minicolors.min.js', array( 'jquery' ), '2.2.6', true );
+			wp_enqueue_script( 'selectize', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), '0.13.5', true );
+			wp_enqueue_script( 'xml2json', plugin_dir_url( __FILE__ ) . 'js/xml2json.js', array( 'jquery' ), '1.0.0', true );
+			wp_enqueue_script( 'star-rating-svg', plugin_dir_url( __FILE__ ) . 'js/star-rating-svg.js', array( 'jquery' ), '1.2.0', true );
+		}
+
+		wp_enqueue_script(
+			$this->plugin_name,
+			plugin_dir_url( __FILE__ ) . 'js/rcno-reviews-admin.js',
+			( $screen && 'rcno_review' === $screen->post_type ? array( 'jquery', 'selectize', 'xml2json' ) : array( 'jquery' ) ),
+			$this->version,
+			true
+		);
+
+		wp_localize_script(
+			$this->plugin_name,
+			'my_script_vars',
+			array(
+				'reviewID'                     => $review_id,
+				'ajaxURL'                      => admin_url( 'admin-ajax.php' ),
+				'rcno_reset_nonce'             => wp_create_nonce( 'rcno-rest-nonce' ),
+				'rcno_settings_download_nonce' => wp_create_nonce( 'rcno-settings-download-nonce' ),
+				'rcno_settings_import_nonce'   => wp_create_nonce( 'rcno-settings-import-nonce' ),
+				'rcno_gr_remote_get_nonce'     => wp_create_nonce( 'rcno-gr-remote-get-nonce' ),
+				'rcno_admin_rating'            => get_post_meta( $review_id, 'rcno_admin_rating', true ),
+				'rcno_settings_reset_msg'      => __( 'Your settings have been reset, please reload the page to see them.', 'recencio-book-reviews' ),
+				'rcno_book_meta_keys'          => $template->get_rcno_book_meta_keys(),
+			)
+		);
 	}
 
 

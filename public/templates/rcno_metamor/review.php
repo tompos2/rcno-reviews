@@ -69,7 +69,9 @@ $ratings  = new Rcno_Reviews_Public_Rating( $plugin_name, $version );
 		<h3><?php echo apply_filters( 'rcno_metamor_summary', __( 'Review', 'recencio-book-reviews' ) ); ?></h3>
 		<?php
 		$template->the_rcno_book_review_content( $review_id );
-		$template->the_rcno_book_purchase_links( $review_id, true );
+		if ( ! apply_filters( 'rcno_book_purchase_links_in_details', false, $review_id ) ) {
+			$template->the_rcno_book_purchase_links( $review_id, true );
+		}
 		$template->the_rcno_book_schema_data( $review_id );
 		$template->the_rcno_review_schema_data( $review_id );
 		echo '<!--- Recencio Book Reviews --->';

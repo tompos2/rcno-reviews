@@ -421,7 +421,7 @@ class Rcno_Reviews {
 	}
 
 	/**
-	 * Register all of the hooks related to the public-facing custom widgets.
+	 * Register all the hooks related to the public-facing custom widgets.
 	 *
 	 * @since    1.0.0
 	 * @access   private
