@@ -15,7 +15,7 @@
  * Plugin Name:       Recencio Book Reviews
  * Plugin URI:        https://recencio.com
  * Description:       A powerful and very flexible tool to manage your blog’s book review collection. Designed with the book reviewer in mind.
- * Version:           1.62.0
+ * Version:           1.63.0
  * Author:            wzy Media
  * Author URI:        https://wzymedia.com
  * License:           GPL-2.0+
