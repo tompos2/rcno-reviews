@@ -4,7 +4,7 @@ $author             = get_the_author();
 $author_description = wpautop( get_the_author_meta( 'description' ) );
 $author_url         = get_the_author_meta( 'url' );
 $author_archive     = get_author_posts_url( get_the_author_meta( 'ID' ) );
-$gravatar           = get_avatar_url( get_the_author_meta( 'user_email' ) );
+$gravatar           = apply_filters( 'rcno_author_box_gravatar', get_avatar_url( get_the_author_meta( 'user_email' ) ), (int) get_the_author_meta( 'ID' ) );
 
 $facebook_url = get_the_author_meta( 'facebook' );
 $twitter_url  = get_the_author_meta( 'twitter' );
@@ -16,7 +16,7 @@ $out = '';
 $out .= '<div class="' . $this->id . ' rcno-author-box-container">';
 
 $out .= '<div class="rcno-author-box-gravatar-container">';
-$out .= '<img class="rcno-author-box-gravatar" src="' . $gravatar . '">';
+$out .= '<img class="rcno-author-box-gravatar" src="' . $gravatar . '" alt="the gravatar profile photo">';
 $out .= '</div>'; // .rcno-author-box-gravatar-container
 
 $out .= '<div class="rcno-author-box-bio-container">';
