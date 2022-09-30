@@ -195,31 +195,17 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_full_book_details( $review_id, $size = 'medium' ) {
 
-		$book_cover_url = get_post_meta( $review_id, 'rcno_reviews_book_cover_url', true );
 		$default_meta   = implode( ',', $this->get_rcno_book_meta_keys( 'keys', 8 ) );
 		$selected_meta  = explode( ',', Rcno_Reviews_Option::get_option( 'rcno_book_details_meta', $default_meta ) );
 		$book_meta_keys = $this->get_rcno_book_meta_keys( 'keys' );
-		$custom_url     = ! empty( $book_cover_url ) ? $book_cover_url : '';
-		$enable_custom_link = apply_filters( 'rcno_book_cover_enable_custom_link', is_single() );
-		$rel_attributes     = apply_filters( 'rcno_custom_link_alt_tags', array( 'nofollow', 'noopener' ) );
 
 		if ( ! $selected_meta ) {
 			return false;
 		}
 
-		$out = '';
-		$out .= '<div class="rcno-full-book">';
+		$out = '<div class="rcno-full-book">';
 		$out .= '<div class="rcno-full-book-cover">';
-
-		if ( '' !== $custom_url && $enable_custom_link ) {
-			$out .= '<a href="' . esc_url( $custom_url ) . '" ';
-			$out .= 'target="_blank" rel="' . implode( ' ', $rel_attributes ) . '" ';
-			$out .= '/>';
-			$out .= $this->get_the_rcno_book_cover( $review_id, $size );
-			$out .= '</a>';
-		} else {
-			$out .= $this->get_the_rcno_book_cover( $review_id, $size );
-		}
+		$out .= $this->get_the_rcno_book_cover( $review_id, $size );
 
 		$out .= $this->get_the_rcno_admin_book_rating( $review_id );
 		$out .= '</div>';
@@ -342,6 +328,7 @@ class Rcno_Template_Tags {
 	public function get_the_rcno_book_cover( $review_id, $size = 'full', $wrapper = true, $original = false ) {
 
 		$review        = get_post_custom( $review_id );
+		$custom_url    = ! empty( $review['rcno_reviews_book_cover_url'] ) ? $review['rcno_reviews_book_cover_url'][0] : '';
 		$attachment_id = isset( $review['rcno_reviews_book_cover_id'] ) ? $review['rcno_reviews_book_cover_id'][0] : 0;
 		$size          = apply_filters( 'rcno_book_cover_size', $size );
 		$hw_string     = '';
@@ -381,14 +368,24 @@ class Rcno_Template_Tags {
 
 		$book_cover_url = apply_filters( 'rcno_book_cover_url', esc_attr( $book_src ?: $og_book_src ), $review_id );
 
-		$out = '<img ' . $hw_string . ' src="' . $book_cover_url . '" ';
-		$out .= 'title="' . $book_title . '" ';
-		$out .= 'alt="' . $book_alt . '" ';
-		$out .= 'class="rcno-book-cover ' . $size . '" ';
-		$out .= 'data-rcno-attachment-id="' . (int) $attachment_id . '"';
-		$out .= '>';
+		$cover = '<img ' . $hw_string . ' src="' . $book_cover_url . '" ';
+		$cover .= 'title="' . $book_title . '" ';
+		$cover .= 'alt="' . $book_alt . '" ';
+		$cover .= 'class="rcno-book-cover ' . $size . '" ';
+		$cover .= 'data-rcno-attachment-id="' . (int) $attachment_id . '"';
+		$cover .= '>';
 
-		$out = wp_image_add_srcset_and_sizes( $out, wp_get_attachment_metadata( $attachment_id ), $attachment_id );
+		$cover = wp_image_add_srcset_and_sizes( $cover, wp_get_attachment_metadata( $attachment_id ), $attachment_id );
+
+		$out = $cover;
+
+		if ( $custom_url && apply_filters( 'rcno_book_cover_enable_custom_link', is_single() ) ) {
+			$out = '<a href="' . esc_url( $custom_url ) . '" ';
+			$out .= 'target="_blank" rel="' . implode( ' ', apply_filters( 'rcno_custom_link_alt_tags', array( 'nofollow', 'noopener' ) ) ) . '" ';
+			$out .= '/>';
+			$out .= $cover;
+			$out .= '</a>';
+		}
 
 		return apply_filters( 'rcno_book_cover', $out, $book_cover_url, $attachment_id, $review_id );
 	}
@@ -1374,7 +1371,7 @@ class Rcno_Template_Tags {
 
 
 		$final_score = array_sum( $score_array );
-		$final_score /= $rating_criteria_count; // $final_score / $rating_criteria_count
+		$final_score /= $rating_criteria_count ?: 1; // $final_score / $rating_criteria_count
 		$final_score = number_format( $final_score, 1, '.', '' );
 
 
@@ -1545,16 +1542,16 @@ class Rcno_Template_Tags {
 
 		$book_title      = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) );
 		$book_fmt        = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_format', '', false ) );
-		$book_author     = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) );
+		$book_author     = $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) ? wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) ) : '';
 		$book_review_url = get_post_permalink( $review_id );
 		$book_pub_date   = strtotime( strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_date', '', false ) ) );
-		$book_genre      = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre', false ) );
-		$book_publisher  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) );
+		$book_genre      = $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre' ) ? wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_genre' ) ) : '';
+		$book_publisher  = $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) ? wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_publisher' ) ) : '';
 		$book_isbn       = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) );
 		$book_edtn       = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_pub_edition', '', false ) );
 		$book_pc         = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_page_count', '', false ) );
 		$book_ext_url    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_gr_url', '', false ) );
-		$thumbnail    = $this->get_the_rcno_book_cover( $review_id, 'full', false, false );
+		$thumbnail       = $this->get_the_rcno_book_cover( $review_id, 'full', false, false );
 
 		$book_aut_url = '';
 		$author_terms = get_the_terms( $review_id, 'rcno_author' );
@@ -1637,7 +1634,7 @@ class Rcno_Template_Tags {
 		$language     = get_bloginfo( 'language' );
 		$book_name    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) );
 		$book_isbn    = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_isbn', '', false ) );
-		$book_author  = wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author', false ) );
+		$book_author  = $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) ? wp_strip_all_tags( $this->get_the_rcno_taxonomy_terms( $review_id, 'rcno_author' ) ) : '';
 		$thumbnail    = $this->get_the_rcno_book_cover( $review_id, 'full', false, false );
 
 		$book_aut_url = '';

@@ -75,6 +75,7 @@ class Rcno_Table_Shortcode {
 		wp_enqueue_script( 'rcno-gridjs' );
 		wp_enqueue_script( 'rcno-table' );
 		wp_enqueue_style( 'rcno-table-theme' );
+		wp_enqueue_script( 'rcno-meter-discrete' );
 
         wp_add_inline_script( 'rcno-table', 'window.rcno = window.rcno || {}; rcno.rcnoTableShortcodeOptions = ' . wp_json_encode( $this->options ) );
 
@@ -99,7 +100,7 @@ class Rcno_Table_Shortcode {
 			'post_status'            => 'publish',
 			'orderby'                => $options['orderby'],
 			'order'                  => $options['order'],
-			'posts_per_page'         => - 1,
+			'posts_per_page'         => -1,
 			'no_found_rows'          => true,
 			'update_post_meta_cache' => false,
 			'update_post_term_cache' => false,
@@ -118,11 +119,17 @@ class Rcno_Table_Shortcode {
 		}
 
         wp_reset_postdata();
-
 		wp_add_inline_script( 'rcno-table', 'window.rcno = window.rcno || {}; rcno.rcnoTableShortcodeData = ' . wp_json_encode( $reviews ) );
-
-		// Return the rendered content.
-		return '<div id="rcno-table"></div>';
+		ob_start();
+		?>
+		<div id="rcno-table"></div>
+		<script>
+          window.rcno = window.rcno || {};
+          rcno.rcnoTableShortcodeOptions = <?php echo wp_json_encode( $this->options ); ?>;
+          rcno.rcnoTableShortcodeData = <?php echo wp_json_encode( $reviews ); ?>;
+		</script>
+	<?php
+		return ob_get_clean();
 	}
 
 	/**

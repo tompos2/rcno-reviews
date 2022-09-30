@@ -125,8 +125,9 @@ class Rcno_Reviews_Public {
 		wp_register_script( 'macy-masonary-grid', plugin_dir_url( __FILE__ ) . 'js/macy.min.js', array(), '2.3.0', true );
 		wp_register_script( 'rcno-images-loaded', plugin_dir_url( __FILE__ ) . 'js/imagesloaded.pkgd.min.js', array(), '4.1.4', true );
 		wp_register_script( 'rcno-isotope-grid', plugin_dir_url( __FILE__ ) . 'js/isotope.pkgd.min.js', array(), '3.0.5', true );
-		//wp_register_script( 'rcno-gridjs', plugin_dir_url( __FILE__ ) . 'js/gridjs.umd.js', array(), '5.0.2', true );
+		// wp_register_script( 'rcno-gridjs', plugin_dir_url( __FILE__ ) . 'js/gridjs.umd.js', array(), '5.0.2', true );
 		wp_register_script( 'rcno-gridjs', 'https://unpkg.com/gridjs@5.0.2/dist/gridjs.umd.js', array(), '5.0.2', true );
+		wp_register_script( 'rcno-meter-discrete', 'https://nudeui.com/meter-discrete/meter-discrete.js', array(), '1.0.0', false );
 		wp_register_script( 'rcno-table', plugin_dir_url( __FILE__ ) . 'js/rcno-table.js', array( 'rcno-gridjs' ), '1.0.0', true );
         wp_enqueue_script( 'rcno-star-rating', plugin_dir_url( __FILE__ ) . 'js/rcno-star-rating.js', array( 'jquery', $this->plugin_name ), $this->version, true );
 
@@ -434,8 +435,8 @@ class Rcno_Reviews_Public {
      * @see Rcno_Reviews_Shortcodes::rcno_do_taxlist_shortcode()
      *
 	 * @param string $taxonomy The custom taxonomy the list is being generated for.
-	 * @param bool   $headers  Whether or not to show a first letter navigation header before each item.
-	 * @param bool   $count    Whether or not to show the taxonomy item count.
+	 * @param bool   $headers  Whether to show a first letter navigation header before each item.
+	 * @param bool   $count    Whether to show the taxonomy item count.
 	 *
 	 * @return string $content
 	 */
@@ -636,6 +637,25 @@ class Rcno_Reviews_Public {
 			return $classes;
 		}
 		return $classes;
+	}
+
+	/**
+	 * @param  string  $tag
+	 * @param  string  $handle
+	 * @param string  $src
+	 *
+	 * @return string
+	 */
+	public function add_script_attribute( $tag, $handle, $src ) {
+		$scripts = array(
+			'rcno-meter-discrete'
+		);
+
+		if ( in_array( $handle, $scripts, true ) ) {
+			return '<script type="module" src="' . esc_url( $src ) . '"></script>';
+		}
+
+		return $tag;
 	}
 
 }

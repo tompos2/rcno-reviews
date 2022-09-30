@@ -96,8 +96,9 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		$out         = '';
 		$char_count  = ! empty( $instance['char_count'] ) ? (int) $instance['char_count'] : 150;
 		$review_info = ! empty( $instance['review_info'] ) ? $instance['review_info'] : 'truncated';
+		$cover_size  = ! empty( $instance['cover_size'] ) ? $instance['cover_size'] : 'rcno-book-cover-sm';
 		$query_args  = array(
-			'post_type'      => ( ! empty( $instance['regular_posts'] ) && $instance['regular_posts'] ) ? array( 'post', 'rcno_review' ) : 'rcno_review',
+			'post_type'      => ( ! empty( $instance['regular_posts'] ) ) ? array( 'post', 'rcno_review' ) : 'rcno_review',
 			'posts_per_page' => ! empty( $instance['review_count'] ) ? (int) $instance['review_count'] : 5,
 		);
 		$reviews     = get_posts( $query_args );
@@ -107,7 +108,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			$out .= '<div class="rcno-recent-review">';
 			$out .= '<div class="widget-book-cover">';
 			$out .= '<a href="' . get_the_permalink( $review->ID ) . '">';
-			$out .= $template->get_the_rcno_book_cover( $review->ID, 'rcno-book-cover-sm' );
+			$out .= $template->get_the_rcno_book_cover( $review->ID, $cover_size );
 			$out .= '</a>';
 			$out .= $template->get_the_rcno_admin_book_rating( $review->ID );
 			$out .= '</div>';
@@ -179,8 +180,9 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 		$instance['title']         = strip_tags( $new_instance['title'] );
 		$instance['review_count']  = (int) $new_instance['review_count'];
 		$instance['char_count']    = ! empty( $new_instance['char_count'] ) ? (int) $new_instance['char_count'] : 150;
-		$instance['regular_posts'] = ! empty( $new_instance['regular_posts'] ) ? (bool) $new_instance['regular_posts'] : false;
+		$instance['regular_posts'] = ! empty( $new_instance['regular_posts'] ) && (bool) $new_instance['regular_posts'];
 		$instance['review_info']   = ! empty( $new_instance['review_info'] ) ? $new_instance['review_info'] : 'truncated';
+		$instance['cover_size']    = ! empty( $new_instance['cover_size'] ) ? $new_instance['cover_size'] : 'rcno-book-cover-sm';
 
 		// Now we return new values and WordPress do all work for you.
 		return $instance;
@@ -204,6 +206,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			'char_count'    => 150,
 			'regular_posts' => false,
 			'review_info'   => 'truncated',
+            'cover_size'    => 'rcno-book-cover-sm' // 'rcno-book-cover-lg'
 		);
 
 		// Merge the user-selected arguments with the defaults.
@@ -219,6 +222,10 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			'excerpt' => esc_attr__( 'Review excerpt', 'recencio-book-reviews' ),
 			'synopsis'  => esc_attr__( 'Book synopsis', 'recencio-book-reviews' ),
 		);
+        $cover_size  = array(
+	        'rcno-book-cover-sm' => esc_attr__( 'Small', 'recencio-book-reviews' ),
+	        'rcno-book-cover-lg' => esc_attr__( 'Large', 'recencio-book-reviews' ),
+        );
 
 		?>
 		<p>
@@ -269,6 +276,18 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 				<?php } ?>
 			</select>
 		</p>
+
+        <p>
+            <label for="<?php echo $this->get_field_id( 'cover_size' ); ?>">
+				<?php _e( 'Cover size', 'recencio-book-reviews' ); ?>:
+            </label>
+            <select class="widefat" id="<?php echo $this->get_field_id( 'cover_size' ); ?>"
+                    name="<?php echo $this->get_field_name( 'cover_size' ); ?>" style="width:140px">
+				<?php foreach ( $cover_size as $option_value => $option_label ) { ?>
+                    <option value="<?php echo $option_value; ?>" <?php selected( $instance['cover_size'], $option_value ); ?>><?php echo $option_label; ?></option>
+				<?php } ?>
+            </select>
+        </p>
 
 		<?php
 	}

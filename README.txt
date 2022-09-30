@@ -5,7 +5,7 @@ Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
 Tested up to: 6.0
-Stable tag: 1.63.0
+Stable tag: 1.64.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,12 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.64.0 =
+* Add a "cover size" option to the "recent reviews" widget
+* Refactored the [rcno-table] shortcode to support multiple taxonomy terms
+* Refactored the book cover to support custom URLs in all templates
+* Code cleanup for PHP 8 compatibility
 
 = 1.63.0 =
 * Fixed a bug with the Selectize library not being initialized
