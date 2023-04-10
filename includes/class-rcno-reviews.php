@@ -515,6 +515,7 @@ class Rcno_Reviews {
 		add_shortcode( 'rcno-reviews-grid', array( $shortcodes->masonry_grid, 'do_masonry_grid_shortcode' ) );
 		add_shortcode( 'rcno-book-listing', array( $shortcodes->book_listing, 'rcno_do_book_catalogue_shortcode' ) );
 		add_shortcode( 'rcno-table', array( $shortcodes->book_table, 'rcno_do_table_shortcode' ) );
+		add_shortcode( 'rcno-book', array( $shortcodes->book_details, 'rcno_do_book_details_shortcode' ) );
 
         $this->loader->add_action( 'wp_ajax_more_filtered_reviews', $shortcodes->isotope_grid, 'more_filtered_reviews' );
         $this->loader->add_action( 'wp_ajax_nopriv_more_filtered_reviews', $shortcodes->isotope_grid, 'more_filtered_reviews' );

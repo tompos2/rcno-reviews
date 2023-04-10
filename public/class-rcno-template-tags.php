@@ -88,6 +88,7 @@ class Rcno_Template_Tags {
 				'rcno_book_asin'          => apply_filters( 'rcno_book_asin', __( 'ASIN', 'recencio-book-reviews' ) ),
 				'rcno_book_gr_url'        => apply_filters( 'rcno_book_gr_url', __( 'Book URL', 'recencio-book-reviews' ) ),
 				'rcno_book_title'         => apply_filters( 'rcno_book_title', __( 'Title', 'recencio-book-reviews' ) ),
+				'rcno_book_description'   => apply_filters( 'rcno_book_description', __( 'Book Description/Synopsis', 'recencio-book-reviews' ) ),
 			)
 		);
 	}
@@ -856,9 +857,9 @@ class Rcno_Template_Tags {
 	 */
 	public function get_the_rcno_book_meta( $review_id, $meta_key = '', $wrapper = '', $label = true ) {
 
-		$review    = get_post_custom( $review_id );
+		$review    = get_post_custom( (int) $review_id );
 		$meta_keys = $this->meta_keys();
-		$url = '@(http(s)?)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@';
+		$url       = '@(http(s)?)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@';
 
 		$wrappers = array(
 			'',
@@ -874,7 +875,7 @@ class Rcno_Template_Tags {
 		);
 
 		if ( '' === $meta_key || ! array_key_exists( $meta_key, $meta_keys ) || ! in_array( $wrapper, $wrappers, true ) ) {
-			return null;
+			return '';
 		}
 
 		if ( isset( $review[ $meta_key ] ) ) {
@@ -935,7 +936,7 @@ class Rcno_Template_Tags {
 			return '';
 		}
 
-		return null;
+		return '';
 	}
 
 
@@ -1156,6 +1157,17 @@ class Rcno_Template_Tags {
 			return false;
 		}
 
+		// This shortcode should only work inside a book review post.
+		if ( 'rcno_review' !== get_post_type( $review_id )  ) {
+			$out = '<div class="rcno-books-error">';
+			$out .= '<p>';
+			$out .= __( 'This shortcode will only work inside a book review', 'recencio-book-reviews' );
+			$out .= '</p>';
+			$out .= '</div>';
+
+			return $out;
+		}
+
 		$out = '';
 		$book_data = array();
 
@@ -1198,7 +1210,7 @@ class Rcno_Template_Tags {
 					'ID'         => get_the_ID(),
 					'title'      => get_the_title(),
 					'link'       => get_the_permalink(),
-					'series_num' => null !== $series_num ? (int) $series_num : 0,
+					'series_num' => $series_num ?: 0,
 					'series'     => is_array( $series ) ? $series[0]->slug : '',
 				);
 				usort( $book_data, array( $this, 'series_integer_cmp' ) ); // Group books by series number,

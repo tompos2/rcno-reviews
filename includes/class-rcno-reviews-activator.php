@@ -40,10 +40,10 @@ class Rcno_Reviews_Activator {
 	/**
 	 * Sets the plugins default options.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public static function setup_rcno_settings() {
-		$settings_version = get_option( 'rcno_reviews_settings', null );
+		$previous_version = get_option( 'rcno_reviews_settings' );
 
 		$default_options = array(
 			'rcno_review_labels'                    =>
@@ -131,16 +131,9 @@ class Rcno_Reviews_Activator {
 			'rcno_external_book_api'                => 'no-3rd-party',
 		);
 
-		if ( null !== $settings_version ) {
-			$settings_version = $settings_version['rcno_settings_version'];
+		if ( ! $previous_version ) {
+			update_option( 'rcno_reviews_settings', $default_options );
 		}
-
-		if ( '1.0.0' !== $settings_version ) {
-			// Set the options to the defaults from the '$default_options' array.
-			return update_option( 'rcno_reviews_settings', $default_options );
-		}
-
-		return true;
 	}
 
 }

@@ -284,6 +284,7 @@
 	} );
 
 	$( function() {
+		if ( typeof $().starRating !== 'function') return;
 		$( '#rcno-star-rating' ).starRating({
 			initialRating: parseFloat( my_script_vars.rcno_admin_rating ),
 			starSize: 25,
@@ -311,10 +312,10 @@
             ]
         });
 	}
-	console.log('Before Selectize')
+
     // Adds selectize.js support to text boxes on settings page
     if ( 'undefined' !== typeof window.Selectize ) {
-			console.log('Selectize')
+
         $('#rcno_reviews_settings\\[rcno_taxonomy_selection\\]').selectize({
             create: true,
             plugins: ['remove_button', 'restore_on_backspace', 'drag_drop']

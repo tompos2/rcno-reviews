@@ -4,8 +4,8 @@ Donate link: https://paypal.me/wzymedia
 Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
-Tested up to: 6.0
-Stable tag: 1.64.0
+Tested up to: 6.2
+Stable tag: 1.65.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,13 @@ Please open a new topic on the plugin's WordPress.org support page
 9. Book review post showing the criteria-based review score box
 
 == Changelog ==
+
+= 1.65.0 =
+* Fixed JS error on non-Recencio WP admin pages
+* Display notice if `[rcno-book-list]` is used outside of a book review
+* Add a new shortcode that displays specific details of a reviewed book `[rcno-book id=3723 detail="Book Description/Synopsis" wrapper="p" label="false"]`
+* Remove unnecessary settings check on plugin activation
+* Code cleanup
 
 = 1.64.0 =
 * Add a "cover size" option to the "recent reviews" widget

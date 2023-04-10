@@ -66,12 +66,8 @@ class Rcno_Book_List_Shortcode {
 	 * @param      string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version) {
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
-
 		$this->rcno_set_help_text();
-
-		$this->template = new Rcno_Template_Tags( $this->plugin_name, $this->version );
+		$this->template = new Rcno_Template_Tags( $plugin_name, $version );
 	}
 
 	/**
