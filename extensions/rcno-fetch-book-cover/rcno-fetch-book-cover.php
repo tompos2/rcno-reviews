@@ -33,7 +33,7 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 	 * @return int
 	 */
 	protected function the_review_id() {
-		return ( isset( $GLOBALS['review_id'] ) && '' !== $GLOBALS['review_id'] ) ? $GLOBALS['review_id'] : get_the_ID();
+		return ! empty( $GLOBALS['review_id'] ) ? (int) $GLOBALS['review_id'] : get_the_ID();
 	}
 
 	/**
@@ -42,15 +42,12 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 	public function load() {
 		$this->add_filters();
 		$this->add_actions();
-		return true;
 	}
 
 	/**
 	 * Add WordPress filters are called here.
 	 */
-	private function add_filters() {
-
-	}
+	private function add_filters() {}
 
 	/**
 	 * Add WordPress actions are called here.

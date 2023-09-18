@@ -244,6 +244,9 @@ class Rcno_Reviews_Admin {
 		$template  = new Rcno_Template_Tags( $this->plugin_name, $this->version );
 
 		if ( $screen && 'dashboard' === $screen->base ) {
+			// Add the media uploader.
+			wp_enqueue_media();
+
 			wp_register_script( 'rcno-vuejs', plugin_dir_url( __FILE__ ) . 'js/vue.min.js', array(), '2.5.17', true );
 		}
 
