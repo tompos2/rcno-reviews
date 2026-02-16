@@ -49,6 +49,7 @@ class Rcno_Reviews_Sanitization_Helper {
 		add_filter( 'rcno_reviews_settings_sanitize_url', array( $this, 'sanitize_url_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_cssbox', array( $this, 'sanitize_cssbox_field' ) );
 		add_filter( 'rcno_reviews_settings_sanitize_labels', array( $this, 'sanitize_labels_field' ) );
+		add_filter( 'rcno_reviews_settings_sanitize_color', array( $this, 'sanitize_color_field' ) );
 	}
 
 	/**
@@ -317,6 +318,49 @@ class Rcno_Reviews_Sanitization_Helper {
 		}
 
 		return $input;
+	}
+
+	/**
+	 * Sanitize color fields
+	 *
+	 * Accepts hex colors (#fff, #ffffff), rgb/rgba, hsl/hsla, and named CSS colors.
+	 * Returns empty string if the value does not match a valid CSS color format.
+	 *
+	 * @since 1.70.0
+	 *
+	 * @param string $input The field value.
+	 *
+	 * @return string Sanitized color value or empty string.
+	 */
+	public function sanitize_color_field( $input ) {
+
+		$input = trim( $input );
+
+		if ( '' === $input ) {
+			return '';
+		}
+
+		// Allow hex colors: #fff or #ffffff (with optional alpha: #ffffffff).
+		if ( preg_match( '/^#([0-9a-fA-F]{3,4}){1,2}$/', $input ) ) {
+			return $input;
+		}
+
+		// Allow rgb/rgba: rgb(0,0,0) or rgba(0,0,0,0.5) with flexible whitespace.
+		if ( preg_match( '/^rgba?\(\s*[\d.%]+(?:\s*,\s*[\d.%]+){2,3}\s*\)$/', $input ) ) {
+			return $input;
+		}
+
+		// Allow hsl/hsla: hsl(0,0%,0%) or hsla(0,0%,0%,0.5) with flexible whitespace.
+		if ( preg_match( '/^hsla?\(\s*[\d.]+(?:\s*,\s*[\d.%]+){2,3}\s*\)$/', $input ) ) {
+			return $input;
+		}
+
+		// Allow named CSS colors (alphabetic only, no special characters).
+		if ( preg_match( '/^[a-zA-Z]{3,20}$/', $input ) ) {
+			return $input;
+		}
+
+		return '';
 	}
 
 	/**
