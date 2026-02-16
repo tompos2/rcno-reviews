@@ -51,7 +51,7 @@ if ( $posts && count( $posts ) > 0 ) {
 		// Pick the 'medium' book cover size
 		$out .= $template->get_the_rcno_book_cover( $book['ID'], 'medium', true, true );
 
-		$out .= '<p>' . $book['unsorted_title'] . '</p>';
+		$out .= '<p>' . esc_html( $book['unsorted_title'] ) . '</p>';
 		$out .= '</a></div>';
 
 		// Increment the counter.

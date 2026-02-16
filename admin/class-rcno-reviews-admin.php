@@ -1580,6 +1580,13 @@ SQL;
 
 		check_ajax_referer( 'rcno-gr-remote-get-nonce', 'gr_nonce' );
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array(
+				'message' => 'Insufficient permissions.'
+			), 403 );
+			return;
+		}
+
 		if ( empty( $_POST['action'] ) || 'rcno_gr_remote_get' !== $_POST['action'] ) {
 			wp_send_json_error( array(
 				'message' => 'Invalid post action sent.'

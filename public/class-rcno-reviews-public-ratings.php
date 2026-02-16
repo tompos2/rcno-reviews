@@ -264,6 +264,22 @@ class Rcno_Reviews_Public_Rating {
 			wp_die( __( 'I don\'t know who you are', 'recencio-book-reviews' ) );
 		}
 
+		// Verify the requesting user owns the comment being rated.
+		$comment = get_comment( $comment_ID );
+		if ( ! $comment ) {
+			wp_die( __( 'Invalid comment.', 'recencio-book-reviews' ) );
+		}
+
+		if ( is_user_logged_in() ) {
+			if ( (int) $comment->user_id !== get_current_user_id() ) {
+				wp_die( __( 'You can only rate your own comments.', 'recencio-book-reviews' ) );
+			}
+		} else {
+			if ( $comment->comment_author !== $comment_author || $comment->comment_author_email !== $comment_author_email ) {
+				wp_die( __( 'You can only rate your own comments.', 'recencio-book-reviews' ) );
+			}
+		}
+
 		update_comment_meta( $comment_ID, 'rcno_review_comment_rating', $comment_karma );
 
 		wp_die();

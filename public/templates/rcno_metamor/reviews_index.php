@@ -85,7 +85,7 @@ if ( $posts && count( $posts ) > 0 ) {
 			$out .= $template->get_the_rcno_book_cover( $book['ID'], 'rcno-book-cover-sm', true, false );
 		}
 
-		$out .= '<p>' . $book['title'] . '</p>';
+		$out .= '<p>' . esc_html( $book['title'] ) . '</p>';
 		$out .= '</a></li>';
 
 		// increment the counter.
