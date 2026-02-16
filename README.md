@@ -1,10 +1,12 @@
+> **Note:** The original developer of this plugin, Kemory Grubb, passed away in early 2024. This fork exists solely to patch [CVE-2024-33648](https://www.cve.org/CVERecord?id=CVE-2024-33648) and 57 additional security vulnerabilities discovered through five iterative security audits using Claude Opus 4.6 via Claude Code. It is intended as a drop-in replacement for existing Recencio installations. All original functionality, data structures, and settings are preserved. See the `audit/` directory for the full security audit trail.
+
+*Everything below was written by Kemory Grubb.*
+
+---
+
 # Recencio Book Reviews
 
 **A powerful and flexible tool for managing your blog's book review collection.**
-
-> **Note:** The original developer of this plugin, Kemory Grubb, passed away in early 2024. This fork exists solely to patch [CVE-2024-33648](https://www.cve.org/CVERecord?id=CVE-2024-33648) and 57 additional security vulnerabilities discovered through five iterative security audits using Claude Opus 4.6 via Claude Code. It is intended as a drop-in replacement for existing Recencio installations. All original functionality, data structures, and settings are preserved. See the `audit/` directory for the full security audit trail.
-
----
 
 | Detail | Value |
 |---|---|
