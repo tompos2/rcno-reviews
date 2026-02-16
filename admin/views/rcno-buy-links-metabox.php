@@ -38,8 +38,8 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 
 			<thead>
 			<tr>
-				<th width="25%"><?php _e( 'Store', 'recencio-book-reviews' ); ?></th>
-				<th width="65%"><?php _e( 'Link', 'recencio-book-reviews' ); ?></th>
+				<th width="25%"><?php esc_html_e( 'Store', 'recencio-book-reviews' ); ?></th>
+				<th width="65%"><?php esc_html_e( 'Link', 'recencio-book-reviews' ); ?></th>
 				<th width="10%"></th>
 			</tr>
 			</thead>
@@ -63,7 +63,7 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 								echo esc_html( $field['link'] );
 							} ?>"/>
                         </td>
-						<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
+						<td><a class="button remove-link" href="#"><?php esc_html_e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
 					</tr>
 					<?php
 				}
@@ -79,7 +79,7 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 						</select>
 					</td>
 					<td><input type="text" class="widefat" name="link[]" title="Purchase Link"/></td>
-					<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
+					<td><a class="button remove-link" href="#"><?php esc_html_e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
 				</tr>
 				<tr>
 					<td>
@@ -90,7 +90,7 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 						</select>
 					</td>
 					<td><input type="text" class="widefat" name="link[]"/></td>
-					<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
+					<td><a class="button remove-link" href="#"><?php esc_html_e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
 				</tr>
 				<tr>
 					<td>
@@ -101,7 +101,7 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 						</select>
 					</td>
 					<td><input type="text" class="widefat" name="link[]"/></td>
-					<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
+					<td><a class="button remove-link" href="#"><?php esc_html_e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
 				</tr>
 			<?php endif; ?>
 
@@ -115,13 +115,13 @@ wp_nonce_field( 'rcno_buy_links_meta_box_nonce', 'rcno_buy_links_nonce' );
 					</select>
 				</td>
 				<td><input type="text" class="widefat" name="link[]"/></td>
-				<td><a class="button remove-link" href="#"><?php _e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
+				<td><a class="button remove-link" href="#"><?php esc_html_e( 'Remove', 'recencio-book-reviews' ); ?></a></td>
 			</tr>
 			</tbody>
 
 		</table>
-		<p style="margin:0;font-size:10px;text-align:right;"><?php _e( 'Select and enter your affiliate purchase links here.', 'recencio-book-reviews' ); ?></p>
-		<p><a id="add-link" class="button button-primary" href="#"><?php _e( 'Add New Link', 'recencio-book-reviews' ); ?></a></p>
+		<p style="margin:0;font-size:10px;text-align:right;"><?php esc_html_e( 'Select and enter your affiliate purchase links here.', 'recencio-book-reviews' ); ?></p>
+		<p><a id="add-link" class="button button-primary" href="#"><?php esc_html_e( 'Add New Link', 'recencio-book-reviews' ); ?></a></p>
 
 	</div>
 

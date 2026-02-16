@@ -108,7 +108,7 @@ class Rcno_Reviews_Callback_Helper {
 
 		$html = '';
 		$html .= '<p>';
-		$html .= $args['desc'];
+		$html .= wp_kses_post( $args['desc'] );
 		$html .= '</p>';
 
 		echo $html;
@@ -181,7 +181,7 @@ class Rcno_Reviews_Callback_Helper {
 			$html .= '<br/>';
 		}
 
-		$html .= '<p class="description">' . $args['desc'] . '</p>';
+		$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 		echo $html;
 	}
@@ -227,7 +227,7 @@ class Rcno_Reviews_Callback_Helper {
 
 		}
 
-		$html .= '<p class="description">' . $args['desc'] . '</p>';
+		$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 		echo $html;
 	}
 

@@ -42,35 +42,35 @@
 					<input type="hidden" id="rcno_currently_reading_upload_field">
 					<div @click="uploadCover" class="rcno_currently_upload_button book-upload-container">
 						<p class="dashicons dashicons-welcome-add-page"></p>
-						<p><?php _e( 'Book Cover', 'recencio-book-reviews' ); ?></p>
+						<p><?php esc_html_e( 'Book Cover', 'recencio-book-reviews' ); ?></p>
 					</div>
 				</div>
 			</div>
 			<div class="info">
 				<div class="form-field input-text-wrap">
 					<input v-model="curr_update.book_title" :disabled="disabled" type="text" id="rcno_currently_reading_book_title"
-						   placeholder="<?php _e( 'Book Title', 'recencio-book-reviews' ) ?>" required />
+						   placeholder="<?php esc_html_e( 'Book Title', 'recencio-book-reviews' ) ?>" required />
 					<input v-model="curr_update.book_author" :disabled="disabled" type="text" id="rcno_currently_reading_book_author"
-						   placeholder="<?php _e( 'Book Author', 'recencio-book-reviews' ) ?>" required />
+						   placeholder="<?php esc_html_e( 'Book Author', 'recencio-book-reviews' ) ?>" required />
 					<p class="rcno_current_page">
-						<strong><?php _e( 'Currently on page ', 'recencio-book-reviews' ) ?>
+						<strong><?php esc_html_e( 'Currently on page ', 'recencio-book-reviews' ) ?>
 							<input v-model="curr_update.current_page" type="number" id="rcno_current_page_number" min="1" > /
 							<input v-model="curr_update.num_of_pages" type="number" :disabled="disabled" id="rcno_current_num_pages" min="1" />
 						</strong>
 					</p>
 					<textarea v-model="curr_update.progress_comment" name="" id="rcno_currently_reading_book_comment" cols="30" rows="4" placeholder="<?php
-					_e( 'Comment on progress', 'recencio-book-reviews' ) ?>..." style="width: 100%" >
+					esc_html_e( 'Comment on progress', 'recencio-book-reviews' ) ?>..." style="width: 100%" >
 					</textarea>
 				</div>
 			</div>
 		</div>
 		<div class="finished">
 			<button class="button button-primary" id="rcno_currently_reading_update" style="margin-right: 10px;" >
-				<?php _e( 'Update Progress', 'recencio-book-reviews' ); ?>
+				<?php esc_html_e( 'Update Progress', 'recencio-book-reviews' ); ?>
 			</button>
 			<label for="rcno_currently_reading_finished">
 				<input v-model="curr_update.finished_book" name="rcno_currently_reading_finished" id="rcno_currently_reading_finished" type="checkbox" />
-				<?php _e( 'Finished', 'recencio-book-reviews' ) ?>
+				<?php esc_html_e( 'Finished', 'recencio-book-reviews' ) ?>
 			</label>
 				<span v-if="curr_update.last_updated" class="last-updated">
 					{{ time_ago }}

@@ -13,19 +13,19 @@
 <div id="rcno-modal-wrap-scr" class="wp-core-ui search-panel-visible" style="display: none">
     <form id="rcno-modal-form-scr" tabindex="-1">
         <div id="rcno-modal-title-scr">
-			<?php _e( 'Insert book review', 'recencio-book-reviews' ) ?>
+			<?php esc_html_e( 'Insert book review', 'recencio-book-reviews' ) ?>
             <button type="button" id="rcno-modal-close-scr"><span
-                        class="screen-reader-text"><?php _e( 'Close' ); ?></span></button>
+                        class="screen-reader-text"><?php esc_html_e( 'Close' ); ?></span></button>
         </div>
         <div id="rcno-modal-panel-scr">
             <input id="review-id-field" type="hidden" name="reviewid"/>
             <input id="review-title-field" type="hidden" name="reviewtitle"/>
 
-            <p class="howto"><?php _e( 'Choose the review you want to include from the list below or search for it.', 'recencio-book-reviews' ); ?></p>
+            <p class="howto"><?php esc_html_e( 'Choose the review you want to include from the list below or search for it.', 'recencio-book-reviews' ); ?></p>
 
             <div class="link-search-wrapper">
                 <label>
-                    <span class="search-label"><?php _e( 'Search' ); ?></span>
+                    <span class="search-label"><?php esc_html_e( 'Search' ); ?></span>
                     <input type="search" id="rcno-search-field" class="link-search-field" autocomplete="off"/>
                     <span class="spinner"></span>
                 </label>
@@ -39,8 +39,8 @@
             </div>
             <div id="rcno-most-recent-results" class="query-results" tabindex="0">
                 <div class="query-notice" id="query-notice-message">
-                    <em class="query-notice-default"><?php _e( 'No search term specified. Showing recent items.' ); ?></em>
-                    <em class="query-notice-hint screen-reader-text"><?php _e( 'Search or use up and down arrow keys to select an item.' ); ?></em>
+                    <em class="query-notice-default"><?php esc_html_e( 'No search term specified. Showing recent items.' ); ?></em>
+                    <em class="query-notice-hint screen-reader-text"><?php esc_html_e( 'Search or use up and down arrow keys to select an item.' ); ?></em>
                 </div>
                 <ul></ul>
                 <div class="river-waiting">
@@ -49,15 +49,15 @@
             </div>
             <!--<a id="rcno-modal-scr-options-link"><i class="fa fa-caret-right"></i><?php _e( "Display options", 'recencio-book-reviews' ); ?> </a>-->
             <div id="rcno-modal-scr-options-panel">
-                <b><?php _e( "Display options:", 'reviewpress-reloaded' ); ?></b>
+                <b><?php esc_html_e( "Display options:", 'reviewpress-reloaded' ); ?></b>
                 <ul id="rcno-modal-scr-options-list">
                     <li>
                         <input type="checkbox" id="rcno-embed-excerpt" name="embed-excerpt" value="embed-excerpt"/>
-                        <label for="rcno-embed-excerpt"><span><?php _e( 'Embed excerpt only', 'recencio-book-reviews' ); ?></span></label>
+                        <label for="rcno-embed-excerpt"><span><?php esc_html_e( 'Embed excerpt only', 'recencio-book-reviews' ); ?></span></label>
                     </li>
                     <li>
                         <input type="checkbox" id="rcno-embed-nodesc" name="embed-nodesc" value="embed-nodesc"/>
-                        <label for="rcno-embed-nodesc"><span><?php _e( 'Embed <b>without</b> description', 'recencio-book-reviews' ); ?></span></label>
+                        <label for="rcno-embed-nodesc"><span><?php echo wp_kses( __( 'Embed <b>without</b> description', 'recencio-book-reviews' ), array( 'b' => array() ) ); ?></span></label>
                     </li>
                 </ul>
             </div>
@@ -75,7 +75,7 @@
 
         <div class="submitbox">
             <div id="rcno-modal-cancel-scr">
-                <a class="submitdelete deletion" href="#"><?php _e( 'Cancel' ); ?></a>
+                <a class="submitdelete deletion" href="#"><?php esc_html_e( 'Cancel' ); ?></a>
             </div>
             <div id="rcno-modal-update-scr">
                 <input type="submit" value="<?php esc_attr_e( 'Include Shortcut', 'recencio-book-reviews' ); ?>"
