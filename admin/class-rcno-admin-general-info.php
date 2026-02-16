@@ -189,7 +189,7 @@ class Rcno_Admin_General_Info {
 		if ( isset( $data['rcno_book_gr_url'] )
 		     && wp_verify_nonce( $data['rcno_general_gr_url_nonce'], 'rcno_save_book_gr_url_metadata' )
 		) {
-			$book_gr_url = sanitize_text_field( $data['rcno_book_gr_url'] );
+			$book_gr_url = esc_url_raw( $data['rcno_book_gr_url'] );
 			update_post_meta( $review_id, 'rcno_book_gr_url', $book_gr_url );
 		}
 

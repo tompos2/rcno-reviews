@@ -898,13 +898,13 @@ class Rcno_Template_Tags {
 				if ( apply_filters( 'rcno_skip_url_conversion', true ) ) {
 					if ( false !== stripos( $review[ $meta_key ][0], 'goodreads' ) ) {
 						$out .= '<span class="rcno-meta-value">'
-								. '<a href="' . sanitize_text_field( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
+								. '<a href="' . esc_url( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
 								. __( 'GoodReads.com', 'recencio-book-reviews' )
 								. '</a>'
 								. '</span>';
 					} elseif( false !== stripos( $review[ $meta_key ][0], 'books.google' ) ) {
 						$out .= '<span class="rcno-meta-value">'
-								. '<a href="' . sanitize_text_field( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
+								. '<a href="' . esc_url( $review[ $meta_key ][0] ) . '" target="_blank" rel="noopener">'
 								. __( 'Google Books', 'recencio-book-reviews' )
 								. '</a>'
 								. '</span>';

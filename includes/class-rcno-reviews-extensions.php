@@ -231,6 +231,11 @@ class Rcno_Reviews_Extensions {
 	 */
 	public function rcno_activate_extension_ajax() {
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You do not have permission to do this.', 'recencio-book-reviews' ) ) );
+			die();
+		}
+
 		// Check if there is a nonce and if it is, verify it. Otherwise throw an error.
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rcno-extension-admin-nonce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'recencio-book-reviews' ) ) );
@@ -277,6 +282,12 @@ class Rcno_Reviews_Extensions {
 	 * @return void
 	 */
 	public function rcno_deactivate_extension_ajax() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You do not have permission to do this.', 'recencio-book-reviews' ) ) );
+			die();
+		}
+
 		// Check if there is a nonce and if it is, verify it. Otherwise, throw an error.
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rcno-extension-admin-nonce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Something went wrong!', 'recencio-book-reviews' ) ) );

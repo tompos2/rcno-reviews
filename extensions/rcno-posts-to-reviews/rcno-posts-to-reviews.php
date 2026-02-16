@@ -116,6 +116,10 @@ class Rcno_Posts_To_Reviews extends Abstract_Rcno_Extension {
 		check_admin_referer( 'convert-to-review', 'nonce' );
 
 		$post_id   = ! empty( $_POST['postID'] ) ? (int) $_POST['postID'] : 0;
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'You do not have permission to do this.', 'recencio-book-reviews' ) ) );
+		}
 		$post_type = ! empty( $_POST['postType'] ) ? sanitize_text_field( $_POST['postType'] ) : null;
 
 		if ( $post_id && 'post' === $post_type ) {

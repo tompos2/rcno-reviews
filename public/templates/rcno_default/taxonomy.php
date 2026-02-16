@@ -135,7 +135,7 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 			// Add the entry for the term.
 			$out .= '<div class="rcno-tax-name">';
 			$out .= '<a href="' . get_term_link( $value['ID'] ) . '">';
-			$out .= $title;
+			$out .= esc_html( $title );
 			$out .= $count ? '<span class="rcno-tax-count"> (' . count( $review_data ) . ')</span>' : '';
 			$out .= '</a>';
 

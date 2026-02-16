@@ -137,7 +137,7 @@ if ( $terms && ! is_wp_error( $terms ) ) {
 			// Add the entry for the term.
 			$out .= '<div class="rcno-tax-name">';
 			$out .= '<a href="' . get_term_link( $value['ID'] ) . '">';
-			$out .= $title;
+			$out .= esc_html( $title );
 			$out .= '</a>';
 
 			$out .= '<div class="' . ( empty( $book_covers ) ? 'titles-container' : 'books-container' ) . '">';
