@@ -6,7 +6,7 @@
 
 ---
 
-|  |  |
+| Detail | Value |
 |---|---|
 | **Contributors** | w33zy |
 | **Donate** | [paypal.me/wzymedia](https://paypal.me/wzymedia) |
