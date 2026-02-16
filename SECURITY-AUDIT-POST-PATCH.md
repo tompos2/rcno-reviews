@@ -15,12 +15,12 @@ All 48 original findings from SECURITY-AUDIT.md were re-verified against the pat
 |----------|-------|-------|---------|-------|
 | Critical | 4 | 4 | 0 | CVE root cause resolved |
 | High | 16 | 16 | 0 | |
-| Medium | 19 | 18 | 1 | M8: `$args['desc']` partial |
-| Low | 9 | 8 | 1 | L1: `_e()` vs `esc_html_e()` partial |
+| Medium | 19 | 19 | 0 | |
+| Low | 9 | 9 | 0 | |
 | Deprecation | 1 | 1 | 0 | |
-| **Total** | **49** | **47** | **2** | |
+| **Total** | **49** | **49** | **0** | |
 
-**CVE-2024-33648 Status: RESOLVED.** All Critical and High findings are fully patched. The two partial findings are Low/Medium severity defense-in-depth items that do not affect the CVE fix.
+**CVE-2024-33648 Status: RESOLVED.** All 49 findings are fully patched.
 
 ---
 
@@ -69,7 +69,7 @@ All 48 original findings from SECURITY-AUDIT.md were re-verified against the pat
 | M5 | `class-rcno-reviews-callback-helper.php:434` | **FIXED** | `esc_attr( $value )` |
 | M6 | `class-rcno-reviews-callback-helper.php:518,551` | **FIXED** | `esc_attr( $option )` + `esc_html( $option_name )` |
 | M7 | `class-rcno-reviews-callback-helper.php:273-283` | **FIXED** | `esc_url( $option['screenshot'] )` + `esc_html()` for title/author/version |
-| M8 | `class-rcno-reviews-callback-helper.php` | **PARTIAL** | `get_label_for()` uses `wp_kses_post( $desc )`, but `instruction_callback()`, `multicheck_callback()`, and `radio_callback()` still output `$args['desc']` raw. Low risk: these values come from plugin-defined settings registrations, not user input. |
+| M8 | `class-rcno-reviews-callback-helper.php` | **FIXED** | All `$args['desc']` outputs now use `wp_kses_post()` — both via `get_label_for()` and in `instruction_callback()`, `multicheck_callback()`, `radio_callback()`. |
 | M9 | `rcno-isotope-html.php:71-78` | **FIXED** | `esc_attr()` + `esc_html()` on taxonomy data |
 | M10 | `class-rcno-reviews-taxonomy-list.php:119-120` | **FIXED** | `esc_url()` + `esc_html()` |
 | M11 | `class-rcno-reviews-public.php:167-170` + `class-rcno-reviews-public-ratings.php:132-138` | **FIXED** | `esc_attr()` + `wp_strip_all_tags()` for inline styles |
@@ -88,7 +88,7 @@ All 48 original findings from SECURITY-AUDIT.md were re-verified against the pat
 
 | ID | File(s) | Status | Evidence |
 |----|---------|--------|----------|
-| L1 | Admin view files | **PARTIAL** | Many `_e()` calls converted to `esc_html_e()` in modified files. Some view files not in patch scope (e.g., `rcno-reviews-modal.php`, `rcno-buy-links-metabox.php`) still use `_e()`. Low risk: translation strings are developer-controlled. |
+| L1 | Admin view files | **FIXED** | All `_e()` calls converted to `esc_html_e()` across `rcno-reviews-modal.php`, `rcno-buy-links-metabox.php`, `rcno-currently-reading-dash-widget.php`, `rcno-review-score-metabox.php`. One translation string with intentional HTML (`<b>`) uses `wp_kses()` instead. |
 | L2 | `class-rcno-reviews-admin.php:829` | **FIXED** | `esc_url( $book_src )` |
 | L3 | `class-rcno-template-tags.php:1098,1229` | **FIXED** | `esc_html( $header )` in both locations |
 | L4 | `class-rcno-reviews-calendar.php:332` | **FIXED** | `sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) )` |
@@ -108,16 +108,6 @@ All 48 original findings from SECURITY-AUDIT.md were re-verified against the pat
 
 ---
 
-## Partial Fix Notes
-
-### M8 — `$args['desc']` in settings callbacks
-Three callback methods (`instruction_callback`, `multicheck_callback`, `radio_callback`) output `$args['desc']` without `wp_kses_post()`. However, these description strings originate from the plugin's own `register_setting()` calls and are not user-editable. The `get_label_for()` helper (used by most other callbacks) correctly applies `wp_kses_post()`. **Risk: Negligible** — would require a compromised plugin file to exploit.
-
-### L1 — `_e()` in admin views
-WordPress `_e()` outputs translated strings. An exploit would require a malicious `.po/.mo` translation file. The files where `_e()` remains are admin-only views not modified by this patch. **Risk: Negligible** in practice.
-
----
-
 ## Conclusion
 
-**CVE-2024-33648 is fully patched.** All 4 Critical and 16 High findings — which constitute the stored XSS attack surface — are confirmed fixed. The two partial findings are defense-in-depth items with negligible real-world risk. The patch is safe to release as v1.67.0.
+**CVE-2024-33648 is fully patched.** All 49 findings across all severity levels are confirmed fixed. The patch is safe to release as v1.67.0.
