@@ -1,4 +1,4 @@
-Note: The original developer of this plugin, Kemory Grubb, passed away in early 2024. This fork exists solely to patch CVE-2024-33648 and 57 additional security vulnerabilities discovered through five iterative security audits. It is intended as a drop-in replacement for existing Recencio installations. All original functionality, data structures, and settings are preserved. See the audit/ directory for the full security audit trail.
+Note: The original developer of this plugin, Kemory Grubb, passed away in early 2024. This fork exists solely to patch [CVE-2024-33648](https://www.cve.org/CVERecord?id=CVE-2024-33648) and 57 additional security vulnerabilities discovered through five iterative security audits. It is intended as a drop-in replacement for existing Recencio installations. All original functionality, data structures, and settings are preserved. See the audit/ directory for the full security audit trail.
 
 ORIGINAL README.md TEXT BY Kemory Grubb:
 
