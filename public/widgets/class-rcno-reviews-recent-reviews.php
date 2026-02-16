@@ -114,7 +114,7 @@ class Rcno_Reviews_Recent_Reviews extends WP_Widget {
 			$out .= '</div>';
 			$out .=	'<div class="widget-book-details">';
 			$out .= '<a href="' . get_the_permalink( $review->ID ) . '">';
-			$out .= '<h3>' . $review->post_title . '</h3>';
+			$out .= '<h3>' . esc_html( $review->post_title ) . '</h3>';
 			$out .= '</a>';
 			$out .= $template->get_the_rcno_taxonomy_terms( $review->ID, 'rcno_author', true );
 			$out .= $template->get_the_rcno_book_meta( $review->ID, 'rcno_book_publisher', 'div', true );

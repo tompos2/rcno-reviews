@@ -77,7 +77,7 @@ class Rcno_Reviews_Calendar extends WP_Widget {
 		echo $args['before_widget'];
 
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+			echo $args['before_title'] . esc_html( $title ) . $args['after_title'];
 		}
 	?>
         <div class="widget_calendar">
@@ -171,7 +171,7 @@ function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $re
 		$post_types = $my_post_types;
 	}
 	$post_types_key = implode( '', $post_types );
-	$post_types     = "'" . implode( "' , '", $post_types ) . "'";
+	$post_types     = "'" . implode( "' , '", array_map( 'esc_sql', $post_types ) ) . "'";
 
 	$cache = array();
 	$key   = md5( $m . $monthnum . $year . $post_types_key );
@@ -221,7 +221,7 @@ function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $re
 		// We need to get the month from MySQL
 		$thisyear  = '' . (int) substr( $m, 0, 4 );
 		$d         = ( ( $w - 1 ) * 7 ) + 6; //it seems MySQL's weeks disagree with PHP's.
-		$thismonth = $wpdb->get_var( "SELECT DATE_FORMAT( ( DATE_ADD( '${thisyear}0101' , INTERVAL $d DAY ) ) , '%m' ) " );
+		$thismonth = $wpdb->get_var( $wpdb->prepare( "SELECT DATE_FORMAT( ( DATE_ADD( %s, INTERVAL %d DAY ) ), '%%m' )", $thisyear . '0101', $d ) );
 	} elseif ( ! empty( $m ) ) {
 		$thisyear = '' . (int) substr( $m, 0, 4 );
 		if ( strlen( $m ) < 6 ) {
@@ -237,19 +237,20 @@ function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $re
 	$unixmonth = mktime( 0, 0, 0, $thismonth, 1, $thisyear );
 
 	// Get the next and previous month and year with at least one post
-	$previous = $wpdb->get_row( "SELECT DISTINCT MONTH( post_date ) AS month , YEAR( post_date ) AS year
+	$date_string = "$thisyear-$thismonth-01";
+	$previous = $wpdb->get_row( $wpdb->prepare( "SELECT DISTINCT MONTH( post_date ) AS month , YEAR( post_date ) AS year
     FROM $wpdb->posts
-    WHERE post_date < '$thisyear-$thismonth-01'
+    WHERE post_date < %s
     AND post_type IN ( $post_types ) AND post_status = 'publish'
       ORDER BY post_date DESC
-      LIMIT 1" );
-	$next     = $wpdb->get_row( "SELECT DISTINCT MONTH( post_date ) AS month, YEAR( post_date ) AS year
+      LIMIT 1", $date_string ) );
+	$next     = $wpdb->get_row( $wpdb->prepare( "SELECT DISTINCT MONTH( post_date ) AS month, YEAR( post_date ) AS year
     FROM $wpdb->posts
-    WHERE post_date > '$thisyear-$thismonth-01'
-    AND MONTH( post_date ) != MONTH( '$thisyear-$thismonth-01' )
+    WHERE post_date > %s
+    AND MONTH( post_date ) != MONTH( %s )
     AND post_type IN ( $post_types ) AND post_status = 'publish'
       ORDER  BY post_date ASC
-      LIMIT 1" );
+      LIMIT 1", $date_string, $date_string ) );
 
 	/* translators: Calendar caption: 1: month name, 2: 4-digit year */
 	$calendar_caption = _x( '%1$s %2$s', 'calendar caption' );
@@ -315,11 +316,11 @@ function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $re
   <tr>';
 
 	// Get days with posts
-	$dayswithposts = $wpdb->get_results( "SELECT DISTINCT DAYOFMONTH( post_date )
-    FROM $wpdb->posts WHERE MONTH( post_date ) = '$thismonth'
-    AND YEAR( post_date ) = '$thisyear'
+	$dayswithposts = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT DAYOFMONTH( post_date )
+    FROM $wpdb->posts WHERE MONTH( post_date ) = %s
+    AND YEAR( post_date ) = %s
     AND post_type IN ( $post_types ) AND post_status = 'publish'
-    AND post_date < '" . current_time( 'mysql' ) . '\'', ARRAY_N );
+    AND post_date < %s", $thismonth, $thisyear, current_time( 'mysql' ) ), ARRAY_N );
 	if ( $dayswithposts ) {
 		foreach ( (array) $dayswithposts as $daywith ) {
 			$daywithpost[] = $daywith[ 0 ];
@@ -328,19 +329,21 @@ function ucc_get_calendar( array $post_types, $initial = true, $echo = true, $re
 		$daywithpost = array();
 	}
 
-	if ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'MSIE' ) !== false || stripos( $_SERVER[ 'HTTP_USER_AGENT' ], 'camino' ) !== false || stripos( $_SERVER[ 'HTTP_USER_AGENT' ], 'safari' ) !== false ) {
+	$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
+	if ( strpos( $user_agent, 'MSIE' ) !== false || stripos( $user_agent, 'camino' ) !== false || stripos( $user_agent, 'safari' ) !== false ) {
 		$ak_title_separator = "\n";
 	} else {
 		$ak_title_separator = ', ';
 	}
 
 	$ak_titles_for_day = array();
-	$ak_post_titles    = $wpdb->get_results( "SELECT ID, post_title, DAYOFMONTH( post_date ) as dom "
+	$ak_post_titles    = $wpdb->get_results( $wpdb->prepare( "SELECT ID, post_title, DAYOFMONTH( post_date ) as dom "
 	                                         . "FROM $wpdb->posts "
-	                                         . "WHERE YEAR( post_date ) = '$thisyear' "
-	                                         . "AND MONTH( post_date ) = '$thismonth' "
-	                                         . "AND post_date < '" . current_time( 'mysql' ) . "' "
-	                                         . "AND post_type IN ( $post_types ) AND post_status = 'publish'"
+	                                         . "WHERE YEAR( post_date ) = %s "
+	                                         . "AND MONTH( post_date ) = %s "
+	                                         . "AND post_date < %s "
+	                                         . "AND post_type IN ( $post_types ) AND post_status = 'publish'",
+	                                         $thisyear, $thismonth, current_time( 'mysql' ) )
 	);
 	if ( $ak_post_titles ) {
 		foreach ( (array) $ak_post_titles as $ak_post_title ) {

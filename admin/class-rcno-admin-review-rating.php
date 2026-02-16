@@ -97,8 +97,11 @@ class Rcno_Admin_Review_Rating {
 	 */
 	public function rcno_save_book_review_rating_metadata( $review_id, $data, $review = null ) {
 
-		if ( isset( $data['rcno_admin_rating'] ) ) { //TODO: This needs a nonce check.
+		if ( ! isset( $data['rcno_review_rating_nonce'] ) || ! wp_verify_nonce( $data['rcno_review_rating_nonce'], 'rcno_review_rating_nonce' ) ) {
+			return;
+		}
 
+		if ( isset( $data['rcno_admin_rating'] ) ) {
 			$book_rating = sanitize_text_field( $data['rcno_admin_rating'] );
 			update_post_meta( $review_id, 'rcno_admin_rating', $book_rating );
 		}

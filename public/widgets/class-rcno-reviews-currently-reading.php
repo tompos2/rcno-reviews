@@ -130,7 +130,7 @@ class Rcno_Reviews_Currently_Reading extends \WP_Widget {
 						<div class="book-cover" :title="completed">
 							<?php if ( $most_recent['book_cover'] ) : ?>
 								<div class="progress-bar-container">
-									<img src="<?php echo $most_recent['book_cover']; ?>" alt="book-cover" />
+									<img src="<?php echo esc_url( $most_recent['book_cover'] ); ?>" alt="book-cover" />
 									<div v-if="is_loading" class="progress-bar foo" style="width: <?php echo $percentage; ?>%"></div>
 									<div v-else class="progress-bar" :style="{ width: percentage + '%' }"></div>
 								</div>
@@ -145,10 +145,10 @@ class Rcno_Reviews_Currently_Reading extends \WP_Widget {
 							<span v-else>{{ all_updates[curr_index].current_page + '/' + all_updates[curr_index].num_of_pages }}</span>
 						</div>
 						<div class="book-progress">
-							<h3 class="book-title"><?php echo $most_recent['book_title']; ?></h3>
-							<p class="book-author"><?php echo sprintf( '%s %s', __( 'by', 'recencio-book-reviews' ), $most_recent['book_author'] ); ?></p>
+							<h3 class="book-title"><?php echo esc_html( $most_recent['book_title'] ); ?></h3>
+							<p class="book-author"><?php echo sprintf( '%s %s', __( 'by', 'recencio-book-reviews' ), esc_html( $most_recent['book_author'] ) ); ?></p>
 
-							<p v-if="is_loading" class="book-comment" key="default"><?php echo $most_recent['progress_comment']; ?></p>
+							<p v-if="is_loading" class="book-comment" key="default"><?php echo esc_html( $most_recent['progress_comment'] ); ?></p>
 							<p v-else class="book-comment" key="update">{{ all_updates[curr_index].progress_comment }}</p>
 						</div>
 					</div>

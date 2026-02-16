@@ -120,7 +120,7 @@ class Rcno_Book_Listing_Shortcode {
 		$out  = '';
 		$ids  = explode( ',', $atts['ids'] );
 
-		$out .= '' !== $atts['heading'] ? sprintf( '<h3>%s</h3>', $atts['heading'] ) : '';
+		$out .= '' !== $atts['heading'] ? sprintf( '<h3>%s</h3>', esc_html( $atts['heading'] ) ) : '';
 
 		foreach ( $ids as $id ) {
 
@@ -140,7 +140,7 @@ class Rcno_Book_Listing_Shortcode {
 			$out .= $this->template->get_the_rcno_book_cover( $book->ID );
 			$out .= '</div>';
 			$out .= '<div class="rcno-book-listing-description">';
-			$out .= $book_title ? sprintf( '<h3>%s</h3>', $book_title ) : '<!-- missing title -->';
+			$out .= $book_title ? sprintf( '<h3>%s</h3>', esc_html( $book_title ) ) : '<!-- missing title -->';
 			$out .= $book_author ?: '<!-- missing author -->';
 			$out .= $publisher ?: '<!-- missing publisher -->';
 			$out .= $description ?: '<!-- missing description -->';

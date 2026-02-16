@@ -104,6 +104,10 @@ class Rcno_Admin_Review_Score {
 	 */
 	public function rcno_save_book_review_score_metadata( $review_id, $data, $review = null ) {
 
+		if ( ! isset( $data['rcno_repeatable_meta_box_nonce'] ) || ! wp_verify_nonce( $data['rcno_repeatable_meta_box_nonce'], 'rcno_repeatable_meta_box_nonce' ) ) {
+			return;
+		}
+
 		$old = get_post_meta( $review_id, 'rcno_review_score_criteria', true );
 		$new = array();
 
@@ -124,19 +128,18 @@ class Rcno_Admin_Review_Score {
 			delete_post_meta( $review_id, 'rcno_review_score_criteria', $old );
 		}
 
-		// @TODO: Below needs sanitization.
 		if ( isset( $data['rcno_review_score_type'] ) ) {
-			$review_score_type = $data['rcno_review_score_type'];
+			$review_score_type = sanitize_text_field( $data['rcno_review_score_type'] );
 			update_post_meta( $review_id, 'rcno_review_score_type', $review_score_type );
 		}
 
 		if ( isset( $data['rcno_review_score_position'] ) ) {
-			$review_score_position = $data['rcno_review_score_position'];
+			$review_score_position = sanitize_text_field( $data['rcno_review_score_position'] );
 			update_post_meta( $review_id, 'rcno_review_score_position', $review_score_position );
 		}
 
 		if ( isset( $data['rcno_review_score_enable'] ) ) {
-			$review_score_enable = $data['rcno_review_score_enable'];
+			$review_score_enable = sanitize_text_field( $data['rcno_review_score_enable'] );
 			update_post_meta( $review_id, 'rcno_review_score_enable', $review_score_enable );
 		}
 	}

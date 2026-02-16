@@ -89,6 +89,7 @@ class Rcno_Admin_Description_Meta {
 		$options['quicktags']     = false;
 		$options['tinymce']       = ! ( $screen && $screen->is_block_editor );
 
+		wp_nonce_field( 'rcno_book_description_nonce', 'rcno_book_description_nonce' );
 		wp_editor( $description, 'rcno_book_description', $options );
 	}
 
@@ -107,6 +108,10 @@ class Rcno_Admin_Description_Meta {
 	 * @return void
 	 */
 	public function rcno_save_book_description_metadata( $review_id, $data, $review = null ) {
+
+		if ( ! isset( $data['rcno_book_description_nonce'] ) || ! wp_verify_nonce( $data['rcno_book_description_nonce'], 'rcno_book_description_nonce' ) ) {
+			return;
+		}
 
 		if ( isset( $data['rcno_book_description'] ) ) {
 

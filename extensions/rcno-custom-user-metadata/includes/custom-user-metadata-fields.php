@@ -13,13 +13,13 @@
 						for="<?php echo 'rcno_' . sanitize_key( $custom_meta ) . '_meta' ?>"
 						class="<?php echo 'rcno_' . sanitize_key( $custom_meta ) . '_meta' ?>"
 				>
-					<?php echo $custom_meta; ?>
+					<?php echo esc_html( $custom_meta ); ?>
 				</label>
 				<input
 						type="text"
 						name="<?php echo 'rcno_' . sanitize_key( $custom_meta ) . '_meta' ?>"
 						id="<?php echo 'rcno_' . sanitize_key( $custom_meta ) . '_meta' ?>"
-						value="<?php echo get_post_meta( $this->the_review_id(), 'rcno_' . sanitize_key( $custom_meta ) . '_meta', true ); ?>"
+						value="<?php echo esc_attr( get_post_meta( $this->the_review_id(), 'rcno_' . sanitize_key( $custom_meta ) . '_meta', true ) ); ?>"
 						size="20" >
 
 			</div>

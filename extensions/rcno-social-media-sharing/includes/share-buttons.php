@@ -12,7 +12,7 @@ $out = '';
 $out .= '<div class="rcno-share-buttons">';
 if ( '' !== $this->get_setting( 'share_buttons_title' ) ) {
 	$out .= '<div class="share-this">';
-	$out .= '<p>' . $this->get_setting( 'share_buttons_title' ) . '</p>';
+	$out .= '<p>' . esc_html( $this->get_setting( 'share_buttons_title' ) ) . '</p>';
 	$out .= '</div>'; // .share-this
 }
 $out .=	'<div class="rcno-share-buttons-list">';
@@ -22,9 +22,9 @@ foreach ( $available_buttons as $key => $output ) {
 $out .=	'</div>'; // .rcno-share-buttons-list
 $out .= '</div>'; // .rcno-share-buttons
 
-$out .= '<style> #rcno-share-buttons-list div { 
-	background: ' . $this->get_setting( 'buttons_color' ) . '; 
-	border-color: '. $this->get_setting( 'buttons_color' ) .'; 
+$out .= '<style> #rcno-share-buttons-list div {
+	background: ' . esc_attr( $this->get_setting( 'buttons_color' ) ) . ';
+	border-color: '. esc_attr( $this->get_setting( 'buttons_color' ) ) .';
 	}
 </style>';
 

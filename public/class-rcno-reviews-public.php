@@ -164,10 +164,10 @@ class Rcno_Reviews_Public {
 			}
 			$custom_css  = '
 				.rcno-admin-rating span {
-				    color: ' . $star_color . '
+				    color: ' . esc_attr( $star_color ) . '
 				}
 			';
-			$custom_css .= $usr_custom_css;
+			$custom_css .= wp_strip_all_tags( $usr_custom_css );
 			$custom_css .= $covers_index_page;
 
 			wp_add_inline_style( $this->plugin_name, $custom_css );

@@ -3,7 +3,7 @@
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="settings-page-wrap-title" >
             <header class="modal__header">
                 <h2 id="settings-page-wrap-title" class="modal__title">
-                    <?php printf( '%s %s', $this->title, __( 'Settings', 'wzy-media' ) ); ?>
+                    <?php printf( '%s %s', esc_html( $this->title ), esc_html__( 'Settings', 'wzy-media' ) ); ?>
                 </h2>
                 <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
             </header>

@@ -90,7 +90,7 @@ if ( $posts && count( $posts ) > 0 ) {
 			$out .= '</div>';
 		}
 
-		$out .= '<p>' . $book['title'] . '</p>';
+		$out .= '<p>' . esc_html( $book['title'] ) . '</p>';
 		$out .= '</a></li>';
 
 		// increment the counter.

@@ -134,7 +134,9 @@ class Rcno_Reviews_Search_Bar extends WP_Widget {
 
 	public function send_results(  ) {
 
-		$search = $_POST['search'];
+		check_ajax_referer( 'search-bar', 'nonce' );
+
+		$search = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
 
 		// https://wordpress.stackexchange.com/questions/74581/using-wp-query-to-search-by-multiple-meta-fields
 		$meta_query = array();

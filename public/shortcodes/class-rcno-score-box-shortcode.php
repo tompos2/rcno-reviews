@@ -139,7 +139,7 @@ class Rcno_Score_Box_Shortcode {
 		$output .= '<div class="overall-score" style="background:' . esc_attr( $accent ) . ';" title="' . sprintf( '%s - %s out of 5', __( 'Overall Score', 'recencio-book-reviews' ),
 				$final_score ) . '">';
 		$output .= '<span class="overall">' . $this->template->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
-		$output .= '<span class="overall-text" style="background: ' . $accent_2 . ';">' . __( 'Overall Score', 'recencio-book-reviews' ) . '</span>';
+		$output .= '<span class="overall-text" style="background: ' . esc_attr( $accent_2 ) . ';">' . __( 'Overall Score', 'recencio-book-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '</div>';
 		$output .= '<ul>';
@@ -152,7 +152,7 @@ class Rcno_Score_Box_Shortcode {
 			}
 			$output .= '<div class="rcno-score-bar-container">';
 			$output .= '<div class="review-score-bar" style="width:' . esc_attr( $percentage_score ) . '%; background:' . esc_attr( $accent ) . '">';
-			$output .= '<span class="score-bar" title="' . sprintf( '%s - %s out of 5', $criteria['label'], $criteria['score']  ) . '">' . $criteria['label'] . '</span>';
+			$output .= '<span class="score-bar" title="' . esc_attr( sprintf( '%s - %s out of 5', $criteria['label'], $criteria['score'] ) ) . '">' . esc_html( $criteria['label'] ) . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';
 			$output .= $this->template->rcno_calc_review_score( $criteria['score'], $rating_type, true );

@@ -279,7 +279,7 @@ class Rcno_Template_Tags {
 		}
 
 		if ( $rating && Rcno_Reviews_Option::get_option( 'rcno_enable_star_rating_box' ) ) {
-			$output .= '<div class="rcno-admin-rating" style="background: ' . $background . '">';
+			$output .= '<div class="rcno-admin-rating" style="background: ' . esc_attr( $background ) . '">';
 			$output .= '<div class="stars rating-' . $review_id . '" ';
 			$output .= 'data-review-id="' . $review_id . '" ';
 			$output .= 'data-review-rating="' . esc_attr( $rating ) . '" ';
@@ -674,7 +674,7 @@ class Rcno_Template_Tags {
 		// Render the description only if it is not empty.
 		if ( '' !==  $book_description ) {
 			$out .= '<div class="rcno-book-description">';
-			$out .= apply_filters( 'rcno_book_description', $book_description, $review_id );
+			$out .= wp_kses_post( apply_filters( 'rcno_book_description', $book_description, $review_id ) );
 			$out .= '</div>';
 		}
 
@@ -1095,12 +1095,12 @@ class Rcno_Template_Tags {
 			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'recencio-book-reviews' ) . ': ';
 
 			$out .= '<div class="rcno-book-series-container">';
-			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
+			$out .= '<h5>' . esc_html( $header ) . '</h5>';
 			$out .= '<div class="rcno-book-series-wrapper">';
 			foreach ( $book_data as $_book_data ) {
 				if ( $_book_data[ 'ID' ] !== $review_id ) {
 					$out .= '<div class="rcno-book-series-book">';
-					$out .= '<a href="' . $_book_data[ 'link' ] . '">';
+					$out .= '<a href="' . esc_url( $_book_data[ 'link' ] ) . '">';
 					$out .= $this->get_the_rcno_book_cover( $_book_data['ID'], 'rcno-book-cover-sm' );
 					$out .= '</a>';
 					if ( $number ) {
@@ -1129,7 +1129,7 @@ class Rcno_Template_Tags {
 	 *
 	 * @return void
 	 */
-	public function the_rcno_books_in_series( $review_id, $taxonomy = 'rcno_series', $number = true, $header ) {
+	public function the_rcno_books_in_series( $review_id, $taxonomy = 'rcno_series', $number = true, $header = '' ) {
 		echo $this->get_the_rcno_books_in_series( $review_id, $taxonomy, $number, $header );
 	}
 
@@ -1226,7 +1226,7 @@ class Rcno_Template_Tags {
 			$header = ! empty( $header ) ? $header : __( 'Books in this series', 'recencio-book-reviews' ) . ': ';
 
 			$out .= '<div class="rcno-book-series-container">';
-			$out .= '<h5>' . esc_attr( $header ) . '</h5>';
+			$out .= '<h5>' . esc_html( $header ) . '</h5>';
 			$out .= '<div class="rcno-book-series-wrapper">';
 			foreach ( $book_data as $_book_data ) {
 				if ( $_book_data['ID'] !== $review_id ) {
@@ -1373,7 +1373,7 @@ class Rcno_Template_Tags {
 
 		$rating_criteria_count = count( $rating_criteria );
 		$review_summary        = $this->get_the_rcno_book_review_excerpt( $review_id );
-		$review_box_title      = strip_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) );
+		$review_box_title      = esc_html( wp_strip_all_tags( $this->get_the_rcno_book_meta( $review_id, 'rcno_book_title', '', false ) ) );
 
 		$score_array = array();
 
@@ -1392,7 +1392,7 @@ class Rcno_Template_Tags {
 		$output .= '<div class="review-summary">';
 		$output .= '<div class="overall-score" style="background:' . esc_attr( $accent ) . ';">';
 		$output .= '<span class="overall">' . $this->rcno_calc_review_score( $final_score, $rating_type, true ) . '</span>';
-		$output .= '<span class="overall-text" style="background: ' . $accent_2 . ';">' . __( 'Overall Score', 'recencio-book-reviews' ) . '</span>';
+		$output .= '<span class="overall-text" style="background: ' . esc_attr( $accent_2 ) . ';">' . __( 'Overall Score', 'recencio-book-reviews' ) . '</span>';
 		$output .= '</div>';
 		$output .= '<div class="review-text">';
 		$output .= '<h2 class="review-title">' . $review_box_title . '</h2>';
@@ -1408,7 +1408,7 @@ class Rcno_Template_Tags {
 			}
 			$output .= '<div class="rcno-review-score-bar-container">';
 			$output .= '<div class="review-score-bar" style="width:' . esc_attr( $percentage_score ) . '%; background:' . esc_attr( $accent ) . '">';
-			$output .= '<span class="score-bar">' . $criteria['label'] . '</span>';
+			$output .= '<span class="score-bar">' . esc_html( $criteria['label'] ) . '</span>';
 			$output .= '</div>';
 			$output .= '<span class="right">';
 			$output .= $this->rcno_calc_review_score( $criteria['score'], $rating_type, true );

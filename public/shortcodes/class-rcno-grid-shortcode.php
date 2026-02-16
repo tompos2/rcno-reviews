@@ -166,7 +166,7 @@ class Rcno_Grid_Shortcode {
 				// Pick the 'medium' book cover size
 				$out .= $this->template->get_the_rcno_book_cover( $book['ID'], 'medium', true, true );
 
-				$out .= '<p>' . $book['unsorted_title'] . '</p>';
+				$out .= '<p>' . esc_html( $book['unsorted_title'] ) . '</p>';
 				$out .= '</a></div>';
 			}
 			// Close the last list.

@@ -129,13 +129,13 @@ class Rcno_Reviews_Public_Rating {
 
 			$custom_css = '
 				.rating .whole .l, .rating .whole .r {
-				    background-color: ' . $this->star_color . '
+				    background-color: ' . esc_attr( $this->star_color ) . '
 				}
 				.rating .half .l, .rating .half .r {
-				    background-color: ' . $this->star_color . '
+				    background-color: ' . esc_attr( $this->star_color ) . '
 				}
 				.rating .rover .l, .rating .rover .r {
-				    background-color: ' . $this->star_color . '
+				    background-color: ' . esc_attr( $this->star_color ) . '
 				}
 			';
 
@@ -202,7 +202,7 @@ class Rcno_Reviews_Public_Rating {
 
 			return printf(
 				'<div class="rating-container"><p class="rating-label">%s</p><ul class="rating form-rating">%s</ul></div>',
-				$this->ratings_label,
+				esc_html( $this->ratings_label ),
 				str_repeat( $star, 5 )
 			);
 		}
@@ -226,9 +226,9 @@ class Rcno_Reviews_Public_Rating {
 		$comment_post_ID = isset( $_POST['comment_post_ID'] ) ? (int) $_POST['comment_post_ID'] : '';
 		$comment_karma   = isset( $_POST['rating'] ) ? (int) $_POST['rating'] : '' ;
 
-		$comment_author_cookie     = $_COOKIE[ 'comment_author_' . COOKIEHASH ];
-		$comment_author_e_cookie   = $_COOKIE[ 'comment_author_email_' . COOKIEHASH ];
-		$comment_author_url_cookie = $_COOKIE[ 'comment_author_url_' . COOKIEHASH ];
+		$comment_author_cookie     = isset( $_COOKIE[ 'comment_author_' . COOKIEHASH ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ 'comment_author_' . COOKIEHASH ] ) ) : '';
+		$comment_author_e_cookie   = isset( $_COOKIE[ 'comment_author_email_' . COOKIEHASH ] ) ? sanitize_email( wp_unslash( $_COOKIE[ 'comment_author_email_' . COOKIEHASH ] ) ) : '';
+		$comment_author_url_cookie = isset( $_COOKIE[ 'comment_author_url_' . COOKIEHASH ] ) ? esc_url_raw( wp_unslash( $_COOKIE[ 'comment_author_url_' . COOKIEHASH ] ) ) : '';
 
 
 		if ( is_user_logged_in() ) {

@@ -16,11 +16,11 @@ $out = '';
 $out .= '<div class="' . $this->id . ' rcno-author-box-container">';
 
 $out .= '<div class="rcno-author-box-gravatar-container">';
-$out .= '<img class="rcno-author-box-gravatar" src="' . $gravatar . '" alt="the gravatar profile photo">';
+$out .= '<img class="rcno-author-box-gravatar" src="' . esc_url( $gravatar ) . '" alt="the gravatar profile photo">';
 $out .= '</div>'; // .rcno-author-box-gravatar-container
 
 $out .= '<div class="rcno-author-box-bio-container">';
-$out .= '<h3>' . $this->get_setting( 'author_box_title' ) . ' ' . $author . '</h3>';
+$out .= '<h3>' . esc_html( $this->get_setting( 'author_box_title' ) ) . ' ' . esc_html( $author ) . '</h3>';
 $out .= $author_description;
 
 $out .= '<div class="rcno-author-social-icons">';
@@ -63,8 +63,8 @@ if ( '' !== $tumblr_url ) { // Tumblr
 $out .= '</div>'; // .rcno-author-archive-link
 
 $out .= '<div class="rcno-author-archive-link">';
-$out .= '<a href="' . $author_archive . '" rel="author">';
-$out .= sprintf( '%s %s &rarr;', __( 'View all reviews by', 'recencio-book-reviews' ), $author );
+$out .= '<a href="' . esc_url( $author_archive ) . '" rel="author">';
+$out .= sprintf( '%s %s &rarr;', __( 'View all reviews by', 'recencio-book-reviews' ), esc_html( $author ) );
 $out .= '</a>';
 $out .= '</div>'; // .rcno-author-archive-link
 

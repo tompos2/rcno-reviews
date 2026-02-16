@@ -99,7 +99,7 @@ class Rcno_Reviews_Tag_Cloud extends WP_Widget {
 
 		// If a title was input by the user, display it.
 		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
+			echo $args['before_title'] . esc_html( apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) ) . $args['after_title'];
 		}
 
 		// Get the tag cloud.

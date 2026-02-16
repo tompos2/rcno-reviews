@@ -179,10 +179,9 @@ class Rcno_Isotope_Grid_Shortcode {
      * @return void
      */
     public function more_filtered_reviews() {
-        //  Nonce check
-        /*if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rpr-filterable' ) ) {
-            wp_die( __( 'Failed security check', 'recipepress-reloaded' ) );
-        }*/
+        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rcno-isotope' ) ) {
+            wp_die( __( 'Failed security check', 'recencio-book-reviews' ) );
+        }
 
         $output = '';
         $args = array(

@@ -30,7 +30,7 @@
 								$custom_taxonomies = Rcno_Reviews_Option::get_option( 'rcno_taxonomy_selection' );
 								$keys              = explode( ',', $custom_taxonomies );
 								foreach ( $keys as $key ) { ?>
-									<option value="<?php echo 'rcno_' . strtolower( $key ) ?>"><?php echo esc_html(
+									<option value="<?php echo esc_attr( 'rcno_' . strtolower( $key ) ) ?>"><?php echo esc_html(
 									        $key ); ?></option>
 								<?php }
 							} ?>

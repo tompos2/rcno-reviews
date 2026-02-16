@@ -95,7 +95,7 @@ class Rcno_Fetch_Book_Cover extends Abstract_Rcno_Extension {
 			$_filename = ! empty( $data['rcno_book_title'] ) ? $data['rcno_book_title'] : $review_id . '-' . $data['rcno_book_isbn'];
 			$image_url = esc_url_raw( $data['rcno_reviews_gr_cover_url'] );
 			$file_name = sanitize_file_name( strtolower( $_filename ) ) . '.' . pathinfo( basename( $image_url ), PATHINFO_EXTENSION );
-			$get       = wp_remote_get( $image_url, array( 'user-agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36' ) );
+			$get       = wp_safe_remote_get( $image_url, array( 'user-agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36' ) );
 			$type      = wp_remote_retrieve_header( $get, 'content-type' );
 			$mirror    = wp_upload_bits( $file_name, null, wp_remote_retrieve_body( $get ) );
 

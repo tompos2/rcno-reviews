@@ -116,8 +116,8 @@ class Rcno_Reviews_Taxonomy_List extends WP_Widget {
 			echo '<ul class="taglist">';
 			foreach ( $terms as $term ) {
 				echo '<li>';
-				echo '<a href="' . esc_url_raw( get_term_link( $term, $instance['taxonomy'] ) ) . '">';
-				echo $term->name;
+				echo '<a href="' . esc_url( get_term_link( $term, $instance['taxonomy'] ) ) . '">';
+				echo esc_html( $term->name );
 
 				if ( true === $instance['show_count'] ) {
 					echo ' ';

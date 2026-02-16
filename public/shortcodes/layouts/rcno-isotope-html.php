@@ -68,14 +68,14 @@ if ( $options['category'] ) {
             $tax = get_taxonomy( $taxonomy );
         ?>
             <div class="rcno-isotope-grid-select-wrapper">
-                <label for="rcno-isotope-grid-select-<?php echo $tax->name; ?>" class="screen-reader-text">
-                    <?php echo $tax->labels->name; ?>
+                <label for="rcno-isotope-grid-select-<?php echo esc_attr( $tax->name ); ?>" class="screen-reader-text">
+                    <?php echo esc_html( $tax->labels->name ); ?>
                 </label>
-                <select name="rcno-isotope-grid-select" id="rcno-isotope-grid-select-<?php echo $tax->name; ?>" class="rcno-isotope-grid-select">
-                    <option value="*"><?php echo apply_filters( 'rcno_isotope_select_label', sprintf( '%1$s %2$s', __( 'Select', 'recencio-book-reviews' ), $tax->labels->singular_name ), $tax->labels->singular_name ); ?></option>
+                <select name="rcno-isotope-grid-select" id="rcno-isotope-grid-select-<?php echo esc_attr( $tax->name ); ?>" class="rcno-isotope-grid-select">
+                    <option value="*"><?php echo esc_html( apply_filters( 'rcno_isotope_select_label', sprintf( '%1$s %2$s', __( 'Select', 'recencio-book-reviews' ), $tax->labels->singular_name ), $tax->labels->singular_name ) ); ?></option>
                     <?php foreach ( $terms as $term ) { ?>
                         <?php if ( ! is_wp_error( $term ) ) { ?>
-                            <option value=".<?php echo $term->slug; ?>"><?php echo $term->name; ?></option>
+                            <option value=".<?php echo esc_attr( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></option>
                         <?php } ?>
                     <?php } ?>
                 </select>

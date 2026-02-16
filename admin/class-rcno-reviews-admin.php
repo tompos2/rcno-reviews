@@ -826,7 +826,7 @@ class Rcno_Reviews_Admin {
 
 		if ( $column_name === 'book_cover' ) {
 			if ( $book_src ) {
-				echo '<img src="' . $book_src . '" width="50px" />';
+				echo '<img src="' . esc_url( $book_src ) . '" width="50px" />';
 			} else {
 				echo '<div style="width: 50px; height: 75px; background-color: #f1f1f1"></div>';
 			}
@@ -862,7 +862,7 @@ LEFT OUTER JOIN {$wpdb->term_relationships} ON {$wpdb->posts}.ID={$wpdb->term_re
 LEFT OUTER JOIN {$wpdb->term_taxonomy} USING (term_taxonomy_id)
 LEFT OUTER JOIN {$wpdb->terms} USING (term_id)
 SQL;
-			$clauses['where']   .= "AND (taxonomy = '" . $taxonomy . "' OR taxonomy IS NULL)";
+			$clauses['where']   .= $wpdb->prepare( " AND (taxonomy = %s OR taxonomy IS NULL)", $taxonomy );
 			$clauses['groupby'] = 'object_id';
 			$clauses['orderby'] = "GROUP_CONCAT({$wpdb->terms}.name ORDER BY name ASC)";
 			if ( strtoupper( $wp_query->get( 'order' ) ) === 'ASC' ) {
@@ -879,7 +879,7 @@ SQL;
 		global $pagenow, $wpdb;
 
 		// I want the filter only when performing a search on edit page of Custom Post Type named "rcno_review".
-		if ( 'edit.php' === $pagenow  && 'rcno_review' === $_GET['post_type'] && ! empty( $_GET['s'] ) && is_admin() ) {
+		if ( 'edit.php' === $pagenow && isset( $_GET['post_type'] ) && 'rcno_review' === sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) && ! empty( $_GET['s'] ) && is_admin() ) {
 			$join .= 'LEFT JOIN ' . $wpdb->term_relationships . ' ON ' . $wpdb->posts . '.ID = ' . $wpdb->term_relationships . '.post_id ';
 		}
 
@@ -890,7 +890,7 @@ SQL;
 		global $pagenow, $wpdb;
 
 		// I want the filter only when performing a search on edit page of Custom Post Type named "rcno_review".
-		if ( 'edit.php' === $pagenow && 'rcno_review' === $_GET['post_type'] && ! empty( $_GET['s'] ) && is_admin() ) {
+		if ( 'edit.php' === $pagenow && isset( $_GET['post_type'] ) && 'rcno_review' === sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) && ! empty( $_GET['s'] ) && is_admin() ) {
 			$where = preg_replace(
 				"/\(\s*" . $wpdb->posts . ".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
 				"(" . $wpdb->posts . ".post_title LIKE $1) OR (" . $wpdb->term_relationships . ".term_taxonomy_id LIKE $1)", $where );
@@ -901,7 +901,7 @@ SQL;
 
 	public function rcno_add_taxonomy_to_admin_search_group( $groupby ) {
 		global $pagenow, $wpdb;
-		if ( is_admin() && $pagenow === 'edit.php' && $_GET['post_type'] === 'rcno_review' && $_GET['s'] !== '' ) {
+		if ( is_admin() && $pagenow === 'edit.php' && isset( $_GET['post_type'] ) && 'rcno_review' === sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) && isset( $_GET['s'] ) && '' !== sanitize_text_field( wp_unslash( $_GET['s'] ) ) ) {
 			$groupby = "$wpdb->posts.ID";
 		}
 
@@ -916,7 +916,7 @@ SQL;
 			foreach ( $taxonomies as $taxonomy ) {
 				$taxonomy = 'rcno_' . $this->sanitize_string( strtolower( $taxonomy ) );
 				if ( Rcno_Reviews_Option::get_option( $taxonomy . '_filter' ) ) {
-					$selected      = isset( $_GET[ $taxonomy ] ) ? $_GET[ $taxonomy ] : '';
+					$selected      = isset( $_GET[ $taxonomy ] ) ? sanitize_text_field( wp_unslash( $_GET[ $taxonomy ] ) ) : '';
 					$info_taxonomy = get_taxonomy( $taxonomy );
 					wp_dropdown_categories( array(
 						'show_option_all' => sprintf( __( 'All %1$s', 'recencio-book-reviews' ), $info_taxonomy->label ),
@@ -1328,6 +1328,7 @@ SQL;
 		$settings = (array) json_decode( $settings );
 
 		if ( isset( $settings['rcno_settings_version'] ) ) {
+			$settings = array_map( 'sanitize_text_field', $settings );
 			update_option( 'rcno_reviews_settings', $settings );
 			wp_send_json_success( array(
 				'message' => 'Settings updated.'

@@ -42,4 +42,5 @@ $gr_cover_url = get_post_meta( $review->ID, 'rcno_reviews_gr_cover_url', true );
 <input type="hidden" id="rcno-reviews-book-cover-id" name="rcno_reviews_book_cover_id"
 	value="<?php echo esc_attr( $cover_id ); ?>"/>
 
+<?php wp_nonce_field( 'rcno_book_cover_nonce', 'rcno_book_cover_nonce' ); ?>
 <?php do_action( 'rcno_book_cover_metabox_end' ); ?>

@@ -10,7 +10,7 @@ if ( in_array( 'facebook', $selected_buttons, true ) ) {
 	$facebook .= '<div class="rcno-facebook-button">';
 	$facebook .= '<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode( get_the_permalink() ) . '" ';
 	$facebook .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$facebook .= 'style="background: ' . $button_color . '">';
+	$facebook .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$facebook .= '<i class="facebook socicon-facebook"></i>';
 	$facebook .= '<p>' . __( 'Facebook', 'recencio-book-reviews' ) . '</p>';
 	$facebook .= '</a>';
@@ -26,7 +26,7 @@ if ( in_array( 'twitter', $selected_buttons, true ) ) {
 	$twitter .= '&text=' . apply_filters( 'rcno_social_twitter_text', urlencode( the_title_attribute( 'echo=0' ) ) );
 	$twitter .= '&via=' . esc_attr( $this->get_setting( 'twitter_username' ) ) . '" ';
 	$twitter .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$twitter .= 'style="background: ' . $button_color . '">';
+	$twitter .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$twitter .= '<i class="twitter socicon-twitter"></i>';
 	$twitter .= '<p>' . __( 'Twitter', 'recencio-book-reviews' ) . '</p>';
 	$twitter .= '</a>';
@@ -40,7 +40,7 @@ if ( in_array( 'google+', $selected_buttons, true ) ) {
 	$google .= '<div class="rcno-google-button">';
 	$google .= '<a target="_blank" href="https://plus.google.com/share?url=' . urlencode( get_the_permalink() ) . '" ';
 	$google .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$google .= 'style="background: ' . $button_color . '">';
+	$google .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$google .= '<i class="google socicon-google"></i>';
 	$google .= '<p>' . __( 'Google+', 'recencio-book-reviews' ) . '</p>';
 	$google .= '</a>';
@@ -56,7 +56,7 @@ if ( in_array( 'pinterest', $selected_buttons, true ) ) {
 	$pinterest .= '&media=' . $template->get_the_rcno_book_cover( $this->the_review_id(), 'full', false );
 	$pinterest .= '&description=' . the_title_attribute( 'echo=0' ) . '" ';
 	$pinterest .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$pinterest .= 'style="background: ' . $button_color . '">';
+	$pinterest .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$pinterest .= '<i class="pinterest socicon-pinterest"></i>';
 	$pinterest .= '<p>' . __( 'Pinterest', 'recencio-book-reviews' ) . '</p>';
 	$pinterest .= '</a>';
@@ -71,7 +71,7 @@ if ( in_array( 'stumbleupon', $selected_buttons, true ) ) {
 	$stumbleupon .= '<a href="https://www.stumbleupon.com/badge/?url=' . urlencode( get_the_permalink() );
 	$stumbleupon .= '&title=' . urlencode( the_title_attribute( 'echo=0' ) ) . '" ';
 	$stumbleupon .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$stumbleupon .= 'style="background: ' . $button_color . '">';
+	$stumbleupon .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$stumbleupon .= '<i class="stumbleupon socicon-stumbleupon"></i>';
 	$stumbleupon .= '<p>' . __( 'StumbleUpon', 'recencio-book-reviews' ) . '</p>';
 	$stumbleupon .= '</a>';
@@ -87,7 +87,7 @@ if ( in_array( 'tumblr', $selected_buttons, true ) ) {
 	$tumblr .= '&title=' . urlencode( the_title_attribute( 'echo=0' ) );
 	$tumblr .= '&caption=' . strip_tags( $template->get_the_rcno_book_meta( $this->the_review_id(), 'rcno_book_title', '', false ) ) . '" ';
 	$tumblr .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$tumblr .= 'style="background: ' . $button_color . '">';
+	$tumblr .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$tumblr .= '<i class="tumblr socicon-tumblr"></i>';
 	$tumblr .= '<p>' . __( 'Tumblr', 'recencio-book-reviews' ) . '</p>';
 	$tumblr .= '</a>';
@@ -102,7 +102,7 @@ if ( in_array( 'reddit', $selected_buttons, true ) ) {
 	$reddit .= '<a href="https://reddit.com/submit?url=' . urlencode( get_the_permalink() );
 	$reddit .= '&title=' . urlencode( the_title_attribute( 'echo=0' ) ) . '" ';
 	$reddit .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$reddit .= 'style="background: ' . $button_color . '">';
+	$reddit .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$reddit .= '<i class="reddit socicon-reddit" ></i>';
 	$reddit .= '<p>' . __( 'Reddit', 'recencio-book-reviews' ) . '</p>';
 	$reddit .= '</a>';
@@ -116,7 +116,7 @@ if ( in_array( 'pocket', $selected_buttons, true ) ) {
 	$pocket .= '<div class="rcno-pocket-button">';
 	$pocket .= '<a href="https://getpocket.com/edit?url=' . urlencode( get_the_permalink() ) . '" ';
 	$pocket .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$pocket .= 'style="background: ' . $button_color . '">';
+	$pocket .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$pocket .= '<i class="pocket socicon-pocket" ></i>';
 	$pocket .= '<p>' . __( 'Pocket', 'recencio-book-reviews' ) . '</p>';
 	$pocket .= '</a>';
@@ -130,7 +130,7 @@ if ( in_array( 'digg', $selected_buttons, true ) ) {
 	$digg .= '<div class="rcno-digg-button">';
 	$digg .= '<a href="http://digg.com/submit?url=' . urlencode( get_the_permalink() ) . '" ';
 	$digg .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$digg .= 'style="background: ' . $button_color . '">';
+	$digg .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$digg .= '<i class="digg socicon-digg" ></i>';
 	$digg .= '<p>' . __( 'Digg', 'recencio-book-reviews' ) . '</p>';
 	$digg .= '</a>';
@@ -146,7 +146,7 @@ if ( in_array( 'instapaper', $selected_buttons, true ) ) {
 	$instapaper .= '&title=' . urlencode( the_title_attribute( 'echo=0' ) );
 	$instapaper .= '&description=' . urlencode( $template->get_the_rcno_book_review_excerpt( $this->the_review_id() ) ) . '" ';
 	$instapaper .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$instapaper .= 'style="background: ' . $button_color . '">';
+	$instapaper .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$instapaper .= '<i class="instapaper socicon-instapaper" ></i>';
 	$instapaper .= '<p>' . __( 'InstaPaper', 'recencio-book-reviews' ) . '</p>';
 	$instapaper .= '</a>';
@@ -161,7 +161,7 @@ if ( in_array( 'buffer', $selected_buttons, true ) ) {
 	$buffer .= '<a href="https://buffer.com/add?text=' . urlencode( the_title_attribute( 'echo=0' ) );
 	$buffer .= '&url=' . urlencode( get_the_permalink() ) . '" ';
 	$buffer .= 'onclick="window.open(this.href, \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;" ';
-	$buffer .= 'style="background: ' . $button_color . '">';
+	$buffer .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$buffer .= '<i class="buffer socicon-buffer" ></i>';
 	$buffer .= '<p>' . __( 'Buffer', 'recencio-book-reviews' ) . '</p>';
 	$buffer .= '</a>';
@@ -174,7 +174,7 @@ if ( in_array( 'email', $selected_buttons, true ) ) {
 	$email  = '';
 	$email .= '<div class="rcno-email-button">';
 	$email .= '<a href="mailto:' . get_bloginfo( 'admin_email' ) . '" ';
-	$email .= 'style="background: ' . $button_color . '">';
+	$email .= 'style="background: ' . esc_attr( $button_color ) . '">';
 	$email .= '<i class="email socicon-mail" ></i>';
 	$email .= '<p>' . __( 'Email', 'recencio-book-reviews' ) . '</p>';
 	$email .= '</a>';

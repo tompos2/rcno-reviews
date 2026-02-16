@@ -126,7 +126,7 @@ class Rcno_GoodReads_API {
 	 * @return \SimpleXMLElement
 	 */
 	public function parseXML( $xml ) {
-		return simplexml_load_string( $xml );
+		return simplexml_load_string( $xml, 'SimpleXMLElement', LIBXML_NOENT | LIBXML_NONET );
 	}
 
 	/**
@@ -274,7 +274,7 @@ class Rcno_GoodReads_API {
 				if ( strpos( $child->getName(), '-' ) !== false ) {
 					$key            = str_replace( '-', '_', $child->getName() );
 					$search->{$key} = $child;
-					echo( $search->{$child->getName()} );
+					// Debug output removed for security.
 				}
 			}
 		}

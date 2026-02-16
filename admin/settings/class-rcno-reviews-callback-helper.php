@@ -45,7 +45,7 @@ class Rcno_Reviews_Callback_Helper {
 	}
 
 	private function get_label_for( $id, $desc ) {
-		return '<label for="rcno_reviews_settings[' . $id . ']"> ' . $desc . '</label>';
+		return '<label for="rcno_reviews_settings[' . esc_attr( $id ) . ']"> ' . wp_kses_post( $desc ) . '</label>';
 	}
 
 	/**
@@ -270,16 +270,16 @@ class Rcno_Reviews_Callback_Helper {
 
 			$html .= '<label for="rcno_reviews_settings[' . $args['id'] . '][' . $field_key . ']">';
 			$html .= '<div class="label-container">';
-			$html .= ' <img src="' . $option['screenshot'] . '"';
+			$html .= ' <img src="' . esc_url( $option['screenshot'] ) . '"';
 			$html .= ' class="template-label-image';
 			$html .= $checked ? ' checked' : '';
 			$html .= '"/>';
 
 			$html .= '<div class="template-label-info">';
 			$html .= '<div class="template-label-p">';
-			$html .= ' <p>Title: ' . $option['title'] . '</p>';
-			$html .= ' <p>Author: ' . $option['author'] . '</p>';
-			$html .= ' <p>Version: ' . $option['version'] . '</p>';
+			$html .= ' <p>Title: ' . esc_html( $option['title'] ) . '</p>';
+			$html .= ' <p>Author: ' . esc_html( $option['author'] ) . '</p>';
+			$html .= ' <p>Version: ' . esc_html( $option['version'] ) . '</p>';
 			$html .= '</div>';
 			$html .= '</div>';
 
@@ -431,7 +431,7 @@ class Rcno_Reviews_Callback_Helper {
 		$html .= 'step="' . $args['step'] . '" ';
 		$html .= 'max="' . $args['max'] . '" ';
 		$html .= 'min="' . $args['min'] . '" ';
-		$html .= 'value="' . $value . '"/>';
+		$html .= 'value="' . esc_attr( $value ) . '"/>';
 
 		$html .= '<br />';
 		$html .= $this->get_label_for( $args['id'], $args['desc'] );
@@ -515,7 +515,7 @@ class Rcno_Reviews_Callback_Helper {
 
 		foreach ( (array) $args['options'] as $option => $option_name ) {
 			$selected = selected( $option, $value, false );
-			$html     .= '<option value="' . $option . '" ' . $selected . '>' . $option_name . '</option>';
+			$html     .= '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( $option_name ) . '</option>';
 		}
 
 		$html .= '</select>';
@@ -548,7 +548,7 @@ class Rcno_Reviews_Callback_Helper {
 			} else {
 				$selected = '';
 			}
-			$html     .= '<option value="' . $option . '" ' . $selected . '>' . $option_name . '</option>';
+			$html     .= '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( $option_name ) . '</option>';
 		}
 
 		$html .= '</select>';

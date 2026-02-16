@@ -24,9 +24,9 @@ if ( 'google-books' === $external_api ) {
 
 <div class="book-isbn-metabox">
     <input type="text" name="rcno_book_isbn" id="rcno_book_isbn" size="20"
-           value="<?php echo sanitize_text_field( $isbn ); ?>"/>
+           value="<?php echo esc_attr( $isbn ); ?>"/>
 	<?php if ( 'no-3rd-party' !== $external_api ) : ?>
-        <button href="#" class="button rcno-isbn-fetch <?php echo $external_api; ?>" title="">Fetch <span class="rcno-ajax-loading"></span></button>
+        <button href="#" class="button rcno-isbn-fetch <?php echo esc_attr( $external_api ); ?>" title="">Fetch <span class="rcno-ajax-loading"></span></button>
 	<?php endif; ?>
 	<?php wp_nonce_field( 'rcno_save_book_isbn_metadata', 'rcno_isbn_nonce' ); ?>
     <div class="book-isbn-metabox-error">

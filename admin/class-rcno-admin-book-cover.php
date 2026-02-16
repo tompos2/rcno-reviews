@@ -91,6 +91,10 @@ class Rcno_Admin_Book_Cover {
 	 */
 	public function rcno_save_book_cover_metadata( $review_id, $data, $review = null ) {
 
+		if ( ! isset( $data['rcno_book_cover_nonce'] ) || ! wp_verify_nonce( $data['rcno_book_cover_nonce'], 'rcno_book_cover_nonce' ) ) {
+			return;
+		}
+
 		// Saving description not only to the post_meta field but also to excerpt and content.
 		if ( isset( $data['rcno_reviews_book_cover_src'] ) ) {
 			$cover_src = sanitize_text_field( $data['rcno_reviews_book_cover_src'] );
