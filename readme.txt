@@ -1,5 +1,5 @@
 === Recencio Book Reviews ===
-Contributors: w33zy
+Contributors: tomstayte, w33zy
 Tags: book reviews, reviews, book library, book ratings
 Requires at least: 3.0.1
 Requires PHP: 5.6.25
