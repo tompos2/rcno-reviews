@@ -7,7 +7,7 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://wzymedia.com
+ * @link              https://github.com/tompos2/rcno-reviews
  * @since             1.0.0
  * @package           Rcno_Reviews
  *
@@ -22,6 +22,9 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       recencio-book-reviews
  * Domain Path:       /languages
+ *
+ * Copyright 2014-2024 Kemory Grubb
+ * Copyright 2026 Tom Stayte
  */
 
 // If this file is called directly, abort.
